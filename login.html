@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="de-DE">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script type="module" src="./scripts/signUp.js" defer></script>
+    <script type="module" src="./scripts/login.js" defer></script>
+    <link rel="stylesheet" href="./css/login.css"/>
+    <title>Login</title>
+  </head>
+  <body >
+    <header>
+      <div class="join_logo">
+        <img src="./assets/icons/logo/joinSmall.svg" alt="Join Logo" />
+      </div>
+      <div class="sign_up">
+        <span>Not a Join user?</span>
+        <button id="signBtn">Sign up</button>
+      </div>
+    </header>
+    <div class="image_container">
+      <img class="join_image" src="./assets/icons/logo/joinLarge.png" alt="Join Logo" />
+    </div>
+
+    <div class="login_window">
+      <div class="login_title">
+        <h1>Log In</h1>
+        <div class="underline"></div>
+      </div>
+      <div>
+        <form id="loginForm" class="form_content" action="">
+          <label for="loginEmail"></label>
+          <input id="loginEmail" name="email" type="email" placeholder="Email" required />
+          <label for="loginPassword"></label>
+          <input id="loginPassword" name="password" type="password" placeholder="Password" required />
+          <span class="checkEmailPassword"></span>
+          <div class="form_btn">
+            <button id="login_btn" type="submit">Log in</button>
+            <button id="guest_log" type="submit">Guest Log in</button>
+          </div>
+        </form>
+      </div>
+    </div>
+      
+    <div class="sign_window" >
+      <div class="sign_up_content">
+        <div>
+          <img id="goBackArrow" src="./assets/icons/signUp/arrow.svg" alt="arrow">
+        </div>
+        <div class="sign_title">
+          <div class="center_title_and_underline">
+            <h1>Sign up</h1>
+            <div class="signUp_underline"></div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <form id="signUp" class="form_content" action="">
+          <label for="name"></label>
+          <input id="name" name="name" type="text" required placeholder="Name"  />
+
+          <label for="signUpEmail"></label>
+          <input id="signUpEmail" name="email" type="email" required placeholder="Email" />
+
+          <label for="signUppassword"></label>
+          <input id="signUppassword" name="password" type="password" required placeholder="Password" />
+
+          <label for="signUpconfirmPassword"></label>
+          <input id="signUpconfirmPassword" name="confirmPassword" type="password" required placeholder="Confirm Password" />
+          <span class="checkPassword"></span>
+
+          <div class="privacy_police_content">
+            <input type="checkbox" id="privacy_police" name="privacy_police" value="privacy_police" required>
+            <label for="privacy_police">I accept the <a href="">Privacy policy</a></label>
+          </div>
+      </div>
+      <div class="form_btn">
+          <button id="sign_btn" type="submit">Sign up</button>
+        </div>
+      </form>
+    </div>
+  </body>
+</html>

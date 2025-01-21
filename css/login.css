@@ -1,0 +1,305 @@
+@font-face {
+  font-family: FigTreeFont;
+  src: url(../assets/fonts/Figtree/static/Figtree-Bold.ttf) format("woff2"), url(../assets/fonts//Figtree/static/Figtree-Bold.ttf) format("woff");
+}
+
+@font-face {
+  font-family: InterBold;
+  src: url(..//assets/fonts/Inter/static/Inter_18pt-Bold.ttf) format("woff2"), url(../assets/fonts/Inter/static/Inter_18pt-ExtraBold.ttf) format("woff");
+}
+
+@font-face {
+  font-family: InterLight;
+  src: url(../assets/fonts/Inter/static/Inter_18pt-Light.ttf) format("woff2"), url(../assets/fonts/Inter/static/Inter_18pt-Light.ttf) format("woff");
+}
+
+body {
+  font-family: InterBold;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background-color: #f4f4f4;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.join_image {
+  object-fit: cover;
+  animation: moveShrinkFade 0.4s ease-in-out forwards;
+}
+
+@keyframes moveShrinkFade {
+  0% {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 1;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+  }
+
+  50% {
+    opacity: 0.5;
+  }
+
+  100% {
+    transform: translate(0, 0) scale(0.5);
+    opacity: 0;
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+}
+
+header {
+  width: 100%;
+  display: flex;
+  align-items: self-start;
+  justify-content: space-between;
+  padding: 35px;
+}
+
+.sign_up {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.sign_up button {
+  background-color: rgb(42, 54, 71);
+  color: white;
+  padding: 10px;
+  border: none;
+  border-radius: 10px;
+  font-family: FigTreeFont;
+  font-weight: 200;
+  cursor: pointer;
+  margin-left: 20px;
+}
+
+.login_window {
+  border: 1px transparent;
+  border-radius: 16px;
+  filter: drop-shadow(3px 3px 3px rgba(179, 179, 179, 0.9));
+  background-color: white;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-right: -50%;
+  transform: translate(-50%, -50%);
+  opacity: 0;
+  animation: fadeIn 3s forwards;
+  width: 415px;
+  height: 300px;
+  padding: 40px;
+}
+
+.login_title {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+h1 {
+  font-family: InterBold;
+  text-align: center;
+  font-weight: bolder;
+  font-size: 40px;
+  margin-bottom: 13px;
+  margin-top: 10px;
+}
+
+.underline {
+  border: 1px solid;
+  width: 60px;
+  height: 1px;
+  color: rgb(41, 171, 226);
+  background-color: rgb(41, 171, 226);
+  margin-bottom: 13px;
+}
+
+.signUp_underline {
+  border: 1px solid;
+  width: 90px;
+  height: 1px;
+  color: rgb(41, 171, 226);
+  background-color: rgb(41, 171, 226);
+  margin-bottom: 13px;
+}
+
+@keyframes fadeIn {
+  to {
+    opacity: 1;
+  }
+}
+
+.form_content {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 44px;
+}
+
+.form_btn {
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  margin-top: 30px;
+}
+
+.sign_btn {
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+}
+
+#loginEmail,
+#loginPassword,
+#name,
+#signUpEmail,
+#signUppassword,
+#signUpconfirmPassword {
+  border: 1px solid #ccc;
+  height: 36px;
+  border-radius: 12px;
+  padding-left: 16px;
+}
+
+#loginEmail {
+  background: url("../assets/icons/signUp/mail.svg") no-repeat right center;
+  background-repeat: no-repeat;
+  padding-left: 20px;
+  background-position: calc(100% - 10px);
+}
+
+#guest_log {
+  background-color: white;
+  color: rgb(42, 54, 71);
+  border: 1px solid;
+  border-color: rgb(42, 54, 71);
+  padding: 10px;
+  border-radius: 8px;
+  font-weight: bold;
+  width: 140px;
+  height: 40px;
+}
+
+#login_btn {
+  cursor: pointer;
+  background-color: rgb(42, 54, 71);
+  color: white;
+  border: none;
+  padding: 10px;
+  border-radius: 8px;
+  font-weight: 400;
+  width: 99px;
+  height: 40px;
+}
+
+.form_btn {
+  display: flex;
+  justify-content: center;
+}
+
+#sign_btn {
+  background-color: rgb(42, 54, 71);
+  color: white;
+  border: none;
+  padding: 10px;
+  border-radius: 8px;
+  font-weight: 400;
+  width: 99px;
+  height: 40px;
+}
+
+.checkPassword,
+.checkEmailPassword {
+  color: red;
+  font-family: InterLight;
+  font-size: 10px;
+}
+
+.privacy_police_content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  font-family: InterLight;
+  font-size: small;
+}
+
+.privacy_police_content a {
+  color: rgb(41, 171, 226);
+  text-decoration: none;
+}
+
+.sign_window {
+  display: none;
+  border: 1px transparent;
+  border-radius: 16px;
+  filter: drop-shadow(3px 3px 3px rgba(179, 179, 179, 0.9));
+  background-color: white;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-right: -50%;
+  transform: translate(-50%, -50%);
+  opacity: 1;
+  animation: fadeIn 2s forwards;
+  width: 415px;
+  height: 450px;
+  padding: 40px;
+}
+
+.center_title_and_underline {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.sign_up_content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.sign_title {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: auto;
+}
+
+#goBackArrow {
+  cursor: pointer;
+}
+
+.display_none {
+  display: none;
+}
+
+input[type="checkbox"] {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 19px;
+  height: 19px;
+  background-image: url(../assets/icons/checkbox/empty.png);
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+input[type="checkbox"]:checked {
+  background-image: url(../assets/icons/checkbox/check.svg);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+input[type="checkbox"]:hover {
+  background-image: url(../assets/icons/checkbox/check.svg);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
