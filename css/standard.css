@@ -6,43 +6,17 @@
 body {
   margin: 0 auto;
   padding: 0;
-  box-sizing: border-box;
   scroll-behavior: smooth;
-  font-family: FigTreeFont;
+  font-family: FigTreeFont, sans-serif;
+  font-weight: bold;
+  box-sizing: border-box;
 }
 
 ::-webkit-scrollbar {
   display: none;
 }
 
-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background-color: white;
-  position: relative;
-  padding: 20px 40px 20px 348px;
-  box-shadow: -2px 0px 6px 0px rgb(0, 0, 0, 0.2);
-  left: 0;
-  height: 96px;
-}
-
-header img {
-  width: 24px;
-  height: 24px;
-}
-
-main {
-  background-color: rgb(246, 247, 248);
-  height: calc(100vh - 146px);
-}
-
-aside {
-  position: absolute;
-  left: 0;
-  width: 232px;
-  height: 100vh;
-  background-color: rgb(42, 54, 71);
-  color: rgb(168, 168, 168);
-  z-index: 2;
+a {
+  text-decoration: none;
+  cursor: pointer;
 }

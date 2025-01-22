@@ -1,0 +1,38 @@
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: white;
+  position: relative;
+  padding: 0 40px 0 348px;
+  box-shadow: -2px 0px 6px 0px rgb(0, 0, 0, 0.2);
+  left: 0;
+  height: 96px;
+}
+
+header h1 {
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 24px;
+}
+
+header img {
+  width: 24px;
+  height: 24px;
+}
+
+.question_marker_account_img_position {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.question_marker {
+  width: 32px;
+  height: 32px;
+}
+
+.account_img {
+  width: 56px;
+  height: 56px;
+}
