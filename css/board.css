@@ -1,0 +1,11 @@
+.title_and_searchbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 50px 50px 0px 50px;
+}
+
+.search_bar {
+  display: flex;
+  gap: 20px;
+}
