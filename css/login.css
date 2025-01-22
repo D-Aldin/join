@@ -189,7 +189,7 @@ h1 {
 #guest_log:hover {
   color: rgb(41, 171, 226);
   border-color: rgb(41, 171, 226);
-  box-shadow: 0 3px 3px 0 rgba(104, 104, 104, 0.19), 0 3px 3px 0 rgba(104, 104, 104, 0.19);
+  box-shadow: 0 3px 3px 0 rgba(104, 104, 104, 0.19);
 }
 
 #login_btn {
@@ -206,12 +206,12 @@ h1 {
 
 #login_btn:hover {
   background-color: rgb(41, 171, 226);
-  box-shadow: 0 3px 3px 0 rgba(104, 104, 104, 0.19), 0 3px 3px 0 rgba(104, 104, 104, 0.19);
+  box-shadow: 0 3px 3px 0 rgba(104, 104, 104, 0.19);
 }
 
 #signBtn:hover {
   background-color: rgb(41, 171, 226);
-  box-shadow: 0 3px 3px 0 rgba(104, 104, 104, 0.19), 0 3px 3px 0 rgba(104, 104, 104, 0.19);
+  box-shadow: 0 3px 3px 0 rgba(104, 104, 104, 0.19);
 }
 
 .form_btn {
@@ -232,7 +232,7 @@ h1 {
 
 #sign_btn:hover {
   background-color: rgb(41, 171, 226);
-  box-shadow: 0 3px 3px 0 rgba(104, 104, 104, 0.19), 0 3px 3px 0 rgba(104, 104, 104, 0.19);
+  box-shadow: 0 3px 3px 0 rgba(104, 104, 104, 0.19);
 }
 
 .checkPassword,
