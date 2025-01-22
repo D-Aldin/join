@@ -1,5 +1,6 @@
-.title {
+.privacy {
   display: flex;
+  background-color: rgb(246, 247, 248);
 }
 
 .content {
