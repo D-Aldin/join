@@ -186,6 +186,12 @@ h1 {
   height: 40px;
 }
 
+#guest_log:hover {
+  color: rgb(41, 171, 226);
+  border-color: rgb(41, 171, 226);
+  box-shadow: 0 3px 3px 0 rgba(104, 104, 104, 0.19), 0 3px 3px 0 rgba(104, 104, 104, 0.19);
+}
+
 #login_btn {
   cursor: pointer;
   background-color: rgb(42, 54, 71);
@@ -196,6 +202,16 @@ h1 {
   font-weight: 400;
   width: 99px;
   height: 40px;
+}
+
+#login_btn:hover {
+  background-color: rgb(41, 171, 226);
+  box-shadow: 0 3px 3px 0 rgba(104, 104, 104, 0.19), 0 3px 3px 0 rgba(104, 104, 104, 0.19);
+}
+
+#signBtn:hover {
+  background-color: rgb(41, 171, 226);
+  box-shadow: 0 3px 3px 0 rgba(104, 104, 104, 0.19), 0 3px 3px 0 rgba(104, 104, 104, 0.19);
 }
 
 .form_btn {
@@ -212,6 +228,11 @@ h1 {
   font-weight: 400;
   width: 99px;
   height: 40px;
+}
+
+#sign_btn:hover {
+  background-color: rgb(41, 171, 226);
+  box-shadow: 0 3px 3px 0 rgba(104, 104, 104, 0.19), 0 3px 3px 0 rgba(104, 104, 104, 0.19);
 }
 
 .checkPassword,
