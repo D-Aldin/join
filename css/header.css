@@ -32,7 +32,20 @@ header img {
   height: 32px;
 }
 
+.question_marker:hover {
+  width: 32px;
+  height: 32px;
+  content: url(../assets/icons/imgs/questionMarkerHover.svg);
+}
+
 .account_img {
   width: 56px;
   height: 56px;
+}
+
+.account_img:hover {
+  cursor: pointer;
+  width: 56px;
+  height: 56px;
+  content: url(../assets/icons/imgs/guestImgHover.svg);
 }
