@@ -1,0 +1,72 @@
+.task {
+    display: flex;
+    background-color: rgb(246, 247, 248);
+}
+      
+.task-wrapper {
+    display: inline-block;
+    margin: 100px 90px 0px 100px;
+    gap: 24px;
+    font-size: 16px
+}
+
+.flex-container {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 32px;
+}
+
+.color-red {
+    color: red;
+}
+
+.display-flex {
+    display: flex;
+}
+    
+.h1-content-titles {
+    font-size: 61px;
+    font-weight: 700;
+    margin: 0px;
+}
+
+p {
+    margin: 0;
+}
+
+.pixelbar {
+    background-color: rgba(209, 209, 209, 1);
+    width: 1px;
+    height: 424px;
+}
+
+.input-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 8px;
+}
+
+.inputfield-title-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+}
+
+.inputfield {
+    border: solid 1px rgba(209, 209, 209, 1);
+    border-radius: 10px;
+    height: 48px;
+    width: 440px;
+}
+
+.textareafield {
+    height: 120px;
+    width: 440px;
+    border: solid 1px rgba(209, 209, 209, 1);
+    border-radius: 10px;
+}
+ 
