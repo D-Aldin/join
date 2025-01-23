@@ -71,6 +71,7 @@
   height: 168px;
   border-radius: 30px;
   gap: 18px;
+  box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.1);
 }
 
 .box_to_do:hover {
@@ -81,6 +82,7 @@
   width: 282.5px;
   height: 184px;
   margin-left: -4px;
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
 }
 
 .box_done {
@@ -92,6 +94,7 @@
   height: 168px;
   border-radius: 30px;
   gap: 18px;
+  box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.1);
 }
 
 .box_done:hover {
@@ -102,6 +105,7 @@
   width: 282.5px;
   height: 184px;
   margin-right: -4px;
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
 }
 
 .box_to_do:hover .dashboard_img_size_pen {
@@ -138,6 +142,7 @@
   border-radius: 30px;
   margin-top: 28px;
   margin-bottom: 28px;
+  box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.1);
 }
 
 .urgency_summary:hover {
@@ -150,6 +155,7 @@
   margin-left: -8px;
   width: 576px;
   height: 184px;
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
 }
 
 .box_urgency_summary {
@@ -201,6 +207,7 @@
   height: 168px;
   border-radius: 30px;
   background-color: rgb(255, 255, 255);
+  box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.1);
 }
 
 .box_tasks_in_board:hover {
@@ -212,6 +219,7 @@
   height: 184px;
   margin-right: -16px;
   margin-top: -16px;
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
 }
 
 .box_tasks_in_progress {
@@ -223,6 +231,7 @@
   height: 168px;
   border-radius: 30px;
   background-color: rgb(255, 255, 255);
+  box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.1);
 }
 
 .box_tasks_in_progress:hover {
@@ -233,6 +242,7 @@
   width: 184px;
   height: 184px;
   margin-top: -16px;
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
 }
 
 .box_awating_feedback {
@@ -244,6 +254,7 @@
   height: 168px;
   border-radius: 30px;
   background-color: rgb(255, 255, 255);
+  box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.1);
 }
 
 .box_awating_feedback:hover {
@@ -255,4 +266,5 @@
   height: 184px;
   margin-top: -16px;
   margin-left: -16px;
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
 }
