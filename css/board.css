@@ -1,11 +1,122 @@
+h1 {
+  font-size: 61px;
+}
+
 .title_and_searchbar {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 50px 50px 0px 50px;
+  margin-bottom: 40px;
 }
 
 .search_bar {
   display: flex;
-  gap: 20px;
+  gap: 4rem;
+}
+
+#searchbar {
+  border: 1px solid;
+  border-color: rgba(168, 168, 168);
+  border-radius: 10px;
+  height: 48px;
+  width: 300px;
+  background-image: url(../assets/icons/board/magnifying.svg);
+  background-repeat: no-repeat;
+  background-position: center right;
+  padding-right: 40px;
+}
+
+input::placeholder {
+  font-size: larger;
+  padding: 10px;
+}
+
+.add_btn {
+  background-image: url(../assets/icons/board/add.png);
+  background-repeat: no-repeat;
+  background-position: center right;
+  padding-right: 40px;
+  width: 160px;
+  background-color: rgb(42, 54, 71);
+  color: white;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+  font-size: large;
+  font-weight: bold;
+}
+
+.add_btn:hover {
+  background-color: rgb(41, 171, 226);
+  box-shadow: 0 7px 7px 0 rgba(104, 104, 104, 0.301);
+  transform: scale(1);
+}
+
+.board_container {
+  display: flex;
+  flex-direction: column;
+  padding: 120px;
+}
+
+.board_content {
+  display: flex;
+  justify-content: space-between;
+  gap: 2rem;
+}
+
+.board_column {
+  display: flex;
+  align-items: center;
+  width: 20rem;
+  white-space: nowrap;
+}
+
+.banner {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.to_do {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.progress {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.feedback {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.done {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.card {
+  background-color: white;
+  border: 1px, transparent;
+  box-shadow: 1px 1px 6px #838282;
+  border-radius: 12px;
+  height: 15rem;
+  width: 100%;
+}
+
+.no_task {
+  background-color: rgba(231, 231, 231, 0.432);
+  border: 1.8px solid;
+  border-style: dashed;
+  border-color: rgb(154, 148, 163);
+  box-shadow: 1px 1px 6px #838282;
+  border-radius: 12px;
+  height: 4rem;
+  width: 100%;
 }
