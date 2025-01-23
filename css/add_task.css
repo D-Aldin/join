@@ -69,4 +69,8 @@ p {
     border: solid 1px rgba(209, 209, 209, 1);
     border-radius: 10px;
 }
+
+.datalist {
+    width: 120px;
+}
  
