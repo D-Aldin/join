@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="de-DE">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="shortcut icon" href="./assets/icons/logo/joinLarge.png" type="image/x-icon" />
+    <script src="./scripts/script.js" defer></script>
+
+    <link rel="stylesheet" href="./css/aside.css" />
+    <link rel="stylesheet" href="./css/header.css" />
+    <link rel="stylesheet" href="./css/main.css" />
+    <link rel="stylesheet" href="./css/standard.css" />
+    <link rel="stylesheet" href="./css/add_task.css" />
+    <title>JOIN Summary</title>
+  </head>
+  <body>
+    <aside>
+      <div class="logo_position">
+        <img class="join_logo" src="./assets/icons/aside/joinLogo.svg" alt="Join_Logo" />
+      </div>
+      <div class="nav_position">
+        <a href=""><img src="./assets/icons/aside/summary.svg" alt="Summary" />Summary</a>
+        <a href=""><img src="./assets/icons/aside/addTask.svg" alt="Add Task" />Add Task</a>
+        <a href=""><img src="./assets/icons/aside/contacts.svg" alt="Contacts" />Board</a>
+        <a href=""><img src="./assets/icons/aside/board.svg" alt="JoinLogo" />Contacts</a>
+      </div>
+      <div class="legal_notes_position">
+        <a href="">Privacy Policy</a>
+        <a href="">Legal notice</a>
+      </div>
+    </aside>
+    <header>
+      <div>
+        <h1>Kanban Project Managment Tool</h1>
+      </div>
+      <div class="question_marker_account_img_position">
+        <img class="question_marker" src="./assets/icons/imgs/questionMarker.svg" alt="" />
+        <img class="account_img" src="./assets/icons/imgs/guestImg.svg" alt="" />
+      </div>
+    </header>
+    <main>
+        <div class="task">
+            <div class="task-wrapper">
+                <h1 class=".h1-content-titles">Add Task</h1>
+                <div class="flex-container">
+                    <div class="input-container">
+                        <div class="inputfield-title-container">
+                            <p class="display-flex">Title<p class="color-red">*</p></p>
+                            <input class="inputfield" placeholder="Enter a title" type="text">
+                        </div>
+                        <div class="inputfield-title-container">
+                            <p>description</p>
+                            <textarea class="textareafield" placeholder="Create a contact form and imprint page" name="" id="">
+                                
+                            </textarea>
+                            
+                        </div>
+                        <div class="inputfield-title-container">
+                            <p>Assigned to</p>
+                            <input class="inputfield" placeholder="select contacts to assign" type="">
+                        </div>
+                    </div>
+                    <div class="pixelbar"></div>
+                    <div class="input-container">
+                        <div class="inputfield-title-container">
+                            <p>Due date<p class="color-red">*</p></p>
+                            <input class="inputfield" type="date">
+                        </div>
+                        <div class="inputfield-title-container">
+                            <p>Prio</p>
+                            <div>
+                                <input placeholder="Urgent" type="button" name="" id="">
+                                <input type="button" value="">
+                                <input type="button" value="">
+                            </div>
+                            <p>Category*</p>
+                            <input class="inputfield" placeholder="Select task category" type="text" list="category">
+                            <datalist class="datalist" id="category">
+                                <option class="datalist" value="Technical Task">
+                                <option value="User Story">
+                            </datalist>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </main>
+  </body>
+</html>

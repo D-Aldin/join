@@ -1,0 +1,9 @@
+.privacy {
+  display: flex;
+  background-color: rgb(246, 247, 248);
+}
+
+.content {
+  display: inline-block;
+  margin: 100px 90px 0px 100px;
+}

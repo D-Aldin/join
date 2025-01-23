@@ -85,3 +85,12 @@ aside {
   padding: 8px;
   font-weight: bolder;
 }
+
+/* Parent class for the privacy_policy.html  */
+.privacy_policy .nav_position {
+  height: 390px;
+}
+
+.privacy_policy aside {
+  position: fixed;
+}
