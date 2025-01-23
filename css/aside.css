@@ -42,7 +42,7 @@ aside {
   gap: 15px;
   height: 46px;
   width: 100%;
-  transition: 0.125ms ease-in-out;
+  /* transition: 0.125ms ease-in-out; Probleme mit positionierung */
 }
 
 /* test hover effect color (42, 61, 89), color for active click (9, 25, 49) */
