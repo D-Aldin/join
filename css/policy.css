@@ -6,4 +6,10 @@
 .content {
   display: inline-block;
   margin: 100px 90px 0px 100px;
+  gap: 24px;
+}
+
+.subsection {
+  font-size: 16px;
+  gap: 16px;
 }
