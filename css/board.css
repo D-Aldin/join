@@ -2,6 +2,14 @@ h1 {
   font-size: 61px;
 }
 
+h3 {
+  color: rgb(66, 82, 110);
+}
+
+h5 {
+  margin: 13px 0px 13px;
+}
+
 .title_and_searchbar {
   display: flex;
   align-items: center;
@@ -78,11 +86,23 @@ input::placeholder {
 .banner {
   display: flex;
   justify-content: space-between;
+  align-items: center;
   width: 100%;
 }
 
-.banner img {
+.plus_button {
+  background-image: url(../assets/icons/board/plus_button.svg);
+  background-repeat: no-repeat;
+  width: 23px;
+  height: 23px;
+  background-size: cover;
+  background-position: center;
   cursor: pointer;
+  border: none;
+}
+
+.plus_button:hover {
+  background-image: url(../assets/icons/board/plus_button_hover.svg);
 }
 
 .to_do {
