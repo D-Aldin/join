@@ -49,3 +49,7 @@ header img {
   height: 56px;
   content: url(../assets/icons/imgs/guestImgHover.svg);
 }
+
+.active {
+  content: url(../assets/icons/imgs/guestImgHover.svg);
+}
