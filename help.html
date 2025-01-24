@@ -4,13 +4,14 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="shortcut icon" href="./assets/icons/logo/joinLarge.png" type="image/x-icon" />
-    <script src="./scripts/script.js" defer></script>
+    <script src="./scripts/submenu.js" defer></script>
 
     <link rel="stylesheet" href="./css/aside.css" />
     <link rel="stylesheet" href="./css/header.css" />
     <link rel="stylesheet" href="./css/main.css" />
     <link rel="stylesheet" href="./css/standard.css" />
     <link rel="stylesheet" href="./css/help.css" />
+    <link rel="stylesheet" href="./css/submenu.css" />
     <title>Help</title>
   </head>
   <body>
@@ -34,10 +35,21 @@
         <h1>Kanban Project Managment Tool</h1>
       </div>
       <div class="question_marker_account_img_position">
-        <img class="question_marker" src="./assets/icons/imgs/questionMarker.svg" alt="" />
-        <img class="account_img" src="./assets/icons/imgs/guestImg.svg" alt="" />
+        <a href="help.html"><img class="question_marker" src="./assets/icons/imgs/questionMarker.svg" alt="" /></a>
+        <img onclick="toggleShowSubmenu()" class="account_img" src="./assets/icons/imgs/guestImg.svg" alt="" />
       </div>
     </header>
+    <div id="submenu_position" class="d_none">
+      <div class="submenu_section">
+        <a class="submenu_links_design link_legal_notice_hover" href="./legal_notice.html">Legal Notice</a>
+      </div>
+      <div class="submenu_section">
+        <a class="submenu_links_design link_privacy_policy_hover" href="./privacy_policy.html">Privacy Policy</a>
+      </div>
+      <div class="submenu_section">
+        <a class="submenu_links_design link_login_hover" href="./login.html">Log out</a>
+      </div>
+    </div>
     <main>
       <div>
         <div class="help_header">
