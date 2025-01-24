@@ -73,7 +73,7 @@
         </section>
 
         <div class="board_content">
-          <section class="to_do board_column">
+          <section id="toDo" ondrop="dropPoint(event)" ondragover="allowDrop()" class="to_do board_column">
             <div class="board_column">
               <div class="banner">
                 <h3>To do</h3>
@@ -83,14 +83,14 @@
             <article class="no_task" draggable="true"></article>
           </section>
 
-          <section class="progress">
+          <section id="progress" ondrop="dropPoint(event)" ondragover="allowDrop()" class="progress">
             <div class="board_column">
               <div class="banner">
                 <h3>In progress</h3>
                 <button class="plus_button"></button>
               </div>
             </div>
-            <article class="card" draggable="true">
+            <article id="1" ondragstart="draggedElementID(event)" class="card" draggable="true">
               <div class="category">User Story</div>
               <div class="card_title">
                 <h4 id="title">Kochwelt Page & Recipe Recommender</h4>
@@ -116,17 +116,17 @@
             </article>
           </section>
 
-          <section class="feedback board_column">
+          <section id="feedback" ondrop="dropPoint(event)" ondragover="allowDrop()" class="feedback board_column">
             <div class="board_column">
               <div class="banner">
                 <h3>Await feedback</h3>
                 <button class="plus_button"></button>
               </div>
             </div>
-            <article class="card" draggable="true"></article>
+            <article id="2" class="card" draggable="true"></article>
           </section>
 
-          <section class="done board_column">
+          <section id="done" ondrop="dropPoint(event)" ondragover="allowDrop()" class="done board_column">
             <div class="board_column">
               <h3>Done</h3>
             </div>
