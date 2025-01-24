@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="shortcut icon" href="./assets/icons/logo/joinLarge.png" type="image/x-icon" />
     <script src="./scripts/submenu.js" defer></script>
+    <script src="./scripts/draggable.js" defer></script>
 
     <link rel="stylesheet" href="./css/aside.css" />
     <link rel="stylesheet" href="./css/header.css" />
@@ -48,6 +49,7 @@
         <img onclick="toggleShowSubmenu()" class="account_img" src="./assets/icons/imgs/guestImg.svg" alt="" />
       </div>
     </header>
+
     <div id="submenu_position" class="d_none">
       <div class="submenu_section">
         <a class="submenu_links_design link_legal_notice_hover" href="./legal_notice.html">Legal Notice</a>
@@ -78,7 +80,7 @@
                 <button class="plus_button"></button>
               </div>
             </div>
-            <article class="no_task"></article>
+            <article class="no_task" draggable="true"></article>
           </section>
 
           <section class="progress">
@@ -88,26 +90,29 @@
                 <button class="plus_button"></button>
               </div>
             </div>
-            <article class="card">
+            <article class="card" draggable="true">
               <div class="category">User Story</div>
               <div class="card_title">
-                <h5>Kochwelt Page & Recipe Recommender</h5>
+                <h4 id="title">Kochwelt Page & Recipe Recommender</h4>
               </div>
               <div class="discription">
-                <h5>Build start page with recipe recommedation</h5>
+                <h5 id="discription">Build start page with recipe recommedation</h5>
               </div>
               <div class="progress_indicator">
                 <div class="progress_container">
                   <div class="progress_bar" style="width: 20%"></div>
                 </div>
-                <span>1/2 Subtasks</span>
+                <span id="subtasks">1/2 Subtasks</span>
               </div>
-
-              <div class="person">
-                <div class="circle">AM</div>
-                <div class="circle" style="transform: translateX(-50%); background-color: rgb(31, 215, 193)">DN</div>
+              <div class="profile_prio_container">
+                <div class="profile">
+                  <div class="circle">AM</div>
+                  <div class="circle" style="transform: translateX(-50%); background-color: rgb(31, 215, 193)">DN</div>
+                </div>
+                <div class="prio">
+                  <img src="./assets/icons/board/urgent.svg" alt="" />
+                </div>
               </div>
-              <div class="prio"></div>
             </article>
           </section>
 
@@ -118,14 +123,14 @@
                 <button class="plus_button"></button>
               </div>
             </div>
-            <article class="card"></article>
+            <article class="card" draggable="true"></article>
           </section>
 
           <section class="done board_column">
             <div class="board_column">
               <h3>Done</h3>
             </div>
-            <article class="card"></article>
+            <article class="card" draggable="true"></article>
           </section>
         </div>
       </div>
