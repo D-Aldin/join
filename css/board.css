@@ -11,6 +11,7 @@ h1 {
 
 .search_bar {
   display: flex;
+
   gap: 4rem;
 }
 
@@ -22,13 +23,16 @@ h1 {
   width: 300px;
   background-image: url(../assets/icons/board/magnifying.svg);
   background-repeat: no-repeat;
-  background-position: center right;
-  padding-right: 40px;
+  background-position: right 10px center;
+  box-sizing: border-box;
 }
 
 input::placeholder {
   font-size: larger;
   padding: 10px;
+  background-image: url(../assets/icons/board/vector.svg);
+  background-repeat: no-repeat;
+  background-position: left 224px center;
 }
 
 .add_btn {
@@ -77,6 +81,10 @@ input::placeholder {
   width: 100%;
 }
 
+.banner img {
+  cursor: pointer;
+}
+
 .to_do {
   display: flex;
   flex-direction: column;
@@ -108,6 +116,7 @@ input::placeholder {
   border-radius: 12px;
   height: 15rem;
   width: 100%;
+  padding: 12px;
 }
 
 .no_task {

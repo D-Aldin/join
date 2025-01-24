@@ -1,0 +1,63 @@
+.category {
+  width: 7rem;
+  height: 1.6rem;
+  border: 1px transparent;
+  border-radius: 5px;
+  background-color: rgb(0, 56, 255);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 10px;
+}
+
+.card_title {
+}
+
+.discription {
+  color: rgb(168, 168, 168);
+}
+
+.progress_indicator {
+  display: flex;
+  justify-content: space-between;
+}
+
+.progress_container {
+  width: 80%;
+  max-width: 180px;
+  height: 10px;
+  background-color: rgb(244, 244, 244);
+  border-radius: 15px;
+  overflow: hidden;
+}
+
+.progress_bar {
+  height: 100%;
+  background-color: #007bff; /* Blue color */
+  color: white;
+  text-align: center;
+  line-height: 30px;
+  font-weight: bold;
+  border-radius: 15px 0 0 15px;
+  transition: width 0.3s ease;
+}
+
+.person {
+  display: flex;
+  align-items: center;
+}
+
+.circle {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgb(255, 122, 0);
+  color: white;
+  border: 2px solid;
+  border-color: white;
+  border-radius: 50%;
+  height: 2.2rem;
+  width: 2.2rem;
+  text-align: center;
+}
