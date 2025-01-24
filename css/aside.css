@@ -24,8 +24,7 @@ aside {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  align-items: flex-start;
-  padding-left: 52px;
+  align-items: center;
   height: 229px;
   width: 232px;
 }
@@ -35,6 +34,27 @@ aside {
   height: 30px;
 }
 
+.link_nav_summary,
+.link_nav_add_task,
+.link_nav_board,
+.link_nav_contacts {
+  display: flex;
+  padding-left: 116px;
+  width: 232px;
+}
+
+.link_nav_summary:hover,
+.link_nav_add_task:hover,
+.link_nav_board:hover,
+.link_nav_contacts:hover {
+  transition: 125ms ease-in-out;
+  background-color: rgb(42, 61, 89);
+}
+
+.active {
+  background-color: rgb(9, 25, 49);
+}
+
 .nav_position a {
   color: rgb(224, 226, 229);
   display: flex;
@@ -42,17 +62,6 @@ aside {
   gap: 15px;
   height: 46px;
   width: 100%;
-  /* transition: 0.125ms ease-in-out; */
-}
-
-/* test hover effect color (42, 61, 89), color for active click (9, 25, 49) */
-.nav_position a:hover {
-  background-color: rgb(42, 61, 89);
-  height: 46px;
-  width: 232px;
-  left: -52px;
-  padding-left: 52px;
-  position: relative;
 }
 
 .logo_position {

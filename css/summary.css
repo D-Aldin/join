@@ -75,7 +75,7 @@
 }
 
 .box_to_do:hover {
-  transition: ease-in-out 100ms;
+  transition: ease-in-out 125ms;
   cursor: pointer;
   color: rgb(255, 255, 255);
   background-color: rgb(42, 54, 71);
@@ -98,7 +98,7 @@
 }
 
 .box_done:hover {
-  transition: ease-in-out 100ms;
+  transition: ease-in-out 125ms;
   cursor: pointer;
   color: rgb(255, 255, 255);
   background-color: rgb(42, 54, 71);
@@ -146,7 +146,7 @@
 }
 
 .urgency_summary:hover {
-  transition: ease-in-out 100ms;
+  transition: ease-in-out 125ms;
   cursor: pointer;
   color: rgb(255, 255, 255);
   background-color: rgb(42, 54, 71);
@@ -211,7 +211,7 @@
 }
 
 .box_tasks_in_board:hover {
-  transition: ease-in-out 100ms;
+  transition: ease-in-out 125ms;
   cursor: pointer;
   color: rgb(255, 255, 255);
   background-color: rgb(42, 54, 71);
@@ -235,7 +235,7 @@
 }
 
 .box_tasks_in_progress:hover {
-  transition: ease-in-out 100ms;
+  transition: ease-in-out 125ms;
   cursor: pointer;
   color: rgb(255, 255, 255);
   background-color: rgb(42, 54, 71);
@@ -258,7 +258,7 @@
 }
 
 .box_awating_feedback:hover {
-  transition: ease-in-out 100ms;
+  transition: ease-in-out 125ms;
   cursor: pointer;
   color: rgb(255, 255, 255);
   background-color: rgb(42, 54, 71);

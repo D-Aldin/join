@@ -5,12 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="shortcut icon" href="./assets/icons/logo/joinLarge.png" type="image/x-icon" />
     <script src="./scripts/submenu.js" defer></script>
+    <script src="./scripts/summary.js" defer></script>
 
     <link rel="stylesheet" href="./css/aside.css" />
     <link rel="stylesheet" href="./css/header.css" />
     <link rel="stylesheet" href="./css/main.css" />
     <link rel="stylesheet" href="./css/standard.css" />
-    <link rel="stylesheet" href="./css/style.css" />
     <link rel="stylesheet" href="./css/summary.css" />
     <link rel="stylesheet" href="./css/submenu.css" />
     <title>Summary</title>
@@ -21,16 +21,25 @@
         <img class="join_logo" src="./assets/icons/aside/joinLogo.svg" alt="Join_Logo" />
       </div>
       <div class="nav_position">
-        <a href="./summary.html"><img src="./assets/icons/aside/summary.svg" alt="Summary" />Summary</a>
-        <a href="./add_task.html"><img src="./assets/icons/aside/addTask.svg" alt="Add Task" />Add Task</a>
-        <a href="./board.html"><img src="./assets/icons/aside/board.svg" alt="Contacts" />Board</a>
-        <a href="./contacts.html"><img src="./assets/icons/aside/contacts.svg" alt="JoinLogo" />Contacts</a>
+        <div class="link_nav_summary">
+          <a href="./summary.html"><img src="./assets/icons/aside/summary.svg" alt="Summary" />Summary</a>
+        </div>
+        <div class="link_nav_add_task">
+          <a href="./add_task.html"><img src="./assets/icons/aside/addTask.svg" alt="Add Task" />Add Task</a>
+        </div>
+        <div class="link_nav_board">
+          <a href="./board.html"><img src="./assets/icons/aside/board.svg" alt="Board" />Board</a>
+        </div>
+        <div class="link_nav_contacts">
+          <a href="./contacts.html"><img src="./assets/icons/aside/contacts.svg" alt="Contacts" />Contacts</a>
+        </div>
       </div>
       <div class="legal_notes_position">
         <a href="">Privacy Policy</a>
         <a href="">Legal notice</a>
       </div>
     </aside>
+
     <header>
       <div>
         <h1>Kanban Project Managment Tool</h1>
@@ -40,6 +49,7 @@
         <img onclick="toggleShowSubmenu()" class="account_img" src="./assets/icons/imgs/guestImg.svg" alt="" />
       </div>
     </header>
+
     <div id="submenu_position" class="d_none">
       <div class="submenu_section">
         <a class="submenu_links_design link_legal_notice_hover" href="./legal_notice.html">Legal Notice</a>
@@ -51,6 +61,7 @@
         <a class="submenu_links_design link_login_hover" href="./login.html">Log out</a>
       </div>
     </div>
+
     <main>
       <div>
         <div class="summary_header">
