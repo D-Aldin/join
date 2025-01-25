@@ -37,9 +37,11 @@ async function addTaskToFireBase(path = "", card) {
 }
 
 async function writeToBoard() {
-  let x = await seeTasks("tasks");
+  let x = await fetchTasks("tasks");
   for (const key in x) {
     const element = x[key];
+    console.log(element);
+
     if (element.status == "toDO") {
       toDo.innerHTML += renderCard(element.id, element.category, element.title, element.discription, element.subtask, element.assigned, element.prio);
     }
@@ -48,3 +50,6 @@ async function writeToBoard() {
     }
   }
 }
+
+fetchTasks("tasks");
+writeToBoard();
