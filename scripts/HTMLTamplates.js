@@ -1,6 +1,6 @@
-function renderCard(category, title, discription, subtasks, contact) {
+function renderCard(id, category, title, discription, subtasks, contact, prio) {
   return ` 
-              <article class="card" draggable="true">
+              <article id=${id} ondragstart="draggedElementID(event)" class="card" draggable="true">
                 <div class="category">${category}</div>
                 <div class="card_title">
                   <h4 id="title">${title}</h4>
@@ -20,7 +20,7 @@ function renderCard(category, title, discription, subtasks, contact) {
                     <div class="circle" style="transform: translateX(-50%); background-color: rgb(31, 215, 193)">DN</div>
                   </div>
                   <div class="prio">
-                    <img src="./assets/icons/board/urgent.svg" alt="" />
+                    <img src="./assets/icons/board/${prio}.svg" alt="" />
                   </div>
                 </div>
               </article>
