@@ -71,30 +71,33 @@
         </div>
 
         <div class="dashboard">
-          <div class="to_do_and_done">
+          <div class="to_do_and_done" onclick="window.location.href = './board.html'">
             <div class="box_to_do">
               <img class="dashboard_img_size_pen" src="./assets/icons/summary/pen.svg" alt="" />
               <div class="column">
-                <div class="box_number_size">1</div>
+                <!-- Number of tasks in to-do list from board / use the id to update the number -->
+                <div class="box_number_size" id="current_number_to_do">1</div>
                 <div class="box_text_size">To-do</div>
               </div>
             </div>
 
-            <div class="box_done">
+            <div class="box_done" onclick="window.location.href = './board.html'">
               <img class="dashboard_img_size_hook" src="./assets/icons/summary/hook.svg" alt="" />
               <div class="column">
-                <div class="box_number_size">1</div>
+                <!-- Number of tasks in done list from board / use the id to update the number -->
+                <div class="box_number_size" id="current_number_done">1</div>
                 <div class="box_text_size">Done</div>
               </div>
             </div>
           </div>
 
-          <div class="urgency_summary">
+          <div class="urgency_summary" onclick="window.location.href = './board.html'">
             <div class="box_urgency_summary">
               <div class="img_and_text_summary">
                 <img class="dashboard_img_size" src="./assets/icons/summary/urgent.svg" alt="" />
                 <div class="column">
-                  <div class="box_number_size">1</div>
+                  <!-- Number of urgent tasks from board / use the id to update the number -->
+                  <div class="box_number_size" id="current_number_urgent">1</div>
                   <div class="box_text_size">Urgent</div>
                 </div>
               </div>
@@ -106,22 +109,25 @@
             </div>
           </div>
 
-          <div class="tasks_info">
+          <div class="tasks_info" onclick="window.location.href = './board.html'">
             <div class="box_tasks_in_board">
               <div class="column">
-                <div class="box_number_size">5</div>
+                <!-- Number of tasks in tasks in board list from board / use the id to update the number -->
+                <div class="box_number_size" id="current_number_tasks_in_board">5</div>
                 <div class="box_text_size">Tasks in<br />Board</div>
               </div>
             </div>
             <div class="box_tasks_in_progress">
               <div class="column">
-                <div class="box_number_size">2</div>
+                <!-- Number of tasks in tasks in progress list from board / use the id to update the number -->
+                <div class="box_number_size" id="current_number_tasks_in_progress">2</div>
                 <div class="box_text_size">Tasks in<br />Progress</div>
               </div>
             </div>
             <div class="box_awating_feedback">
               <div class="column">
-                <div class="box_number_size">2</div>
+                <!-- Number of tasks in awaiting feedback list from board / use the id to update the number -->
+                <div class="box_number_size" id="current_number_awaiting_feedback">2</div>
                 <div class="box_text_size">Awaiting<br />Feedback</div>
               </div>
             </div>
