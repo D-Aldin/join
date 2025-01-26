@@ -4,6 +4,14 @@ let feedback = document.querySelector("#feedback");
 function draggedElementID(event) {
   const elementID = event.target;
   console.log(elementID.id);
+
+  event.target.addEventListener("dragstart", () => {
+    event.target.classList.add("rotate");
+  });
+
+  event.target.addEventListener("dragend", () => {
+    event.target.classList.remove("rotate");
+  });
   event.dataTransfer.setData("text", event.target.id);
 }
 

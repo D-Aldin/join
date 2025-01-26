@@ -74,3 +74,8 @@
   width: 2.2rem;
   text-align: center;
 }
+
+.rotate {
+  rotate: 4deg;
+  transition: transform 0.3s;
+}
