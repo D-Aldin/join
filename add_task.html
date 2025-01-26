@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="shortcut icon" href="./assets/icons/logo/joinLarge.png" type="image/x-icon" />
     <script src="./scripts/submenu.js" defer></script>
+    <script src="./scripts/add_task.js"></script>
 
     <link rel="stylesheet" href="./css/aside.css" />
     <link rel="stylesheet" href="./css/header.css" />
@@ -57,7 +58,7 @@
                 <div class="flex-container">
                     <div class="input-container">
                         <div class="inputfield-title-container">
-                            <p class="display-flex">Title<p class="color-red">*</p></p>
+                            <span class="display-flex"><p class="display-flex">Title</p><p class="color-red">*</p></span>
                             <input class="inputfield" placeholder="Enter a title" type="text">
                         </div>
                         <div class="inputfield-title-container">
@@ -70,31 +71,48 @@
                         <div class="inputfield-title-container">
                             <p>Assigned to</p>
                             <input class="inputfield" placeholder="select contacts to assign" type="">
+                            <datalist id="contact-list"></datalist>
                         </div>
                     </div>
                     <div class="pixelbar"></div>
                     <div class="input-container">
                         <div class="inputfield-title-container">
-                            <p>Due date<p class="color-red">*</p></p>
+                            <span class="display-flex"><p>Due date</p><p class="color-red">*</p></span>
                             <input class="inputfield" type="date">
                         </div>
                         <div class="inputfield-title-container">
                             <p>Prio</p>
-                            <div>
-                                <input placeholder="Urgent" type="button" name="" id="">
-                                <input type="button" value="">
-                                <input type="button" value="">
+                            <div class="button-container">
+                                <button onclick="setPrio('urgent')" id="urgent" class="urgentbutton">Urgent<img src="" alt=""></button>
+                                <button onclick="setPrio('medium')" id="medium" class="urgentbutton">Medium<img src="" alt=""></button>
+                                <button onclick="setPrio('low')" id="low" class="urgentbutton">Low<img src="" alt=""></button>
                             </div>
-                            <p>Category*</p>
+                        </div>
+                        <div class="inputfield-title-container">
+                          <span class="display-flex"><p>Category</p><p class="color-red">*</p></span>
+                          <input class="inputfield" placeholder="Select task category" type="text" list="category" role="combobox" autocomplete="off">
+                            <datalist id="category" placeholder="Select task category">
+                                <option value="Technical Task">Technical Task</option>
+                                <option value="User Story">User Story</option>
+                            </datalist>
+                        </div>
+                        <div class="inputfield-title-container">
+                          <p>Subtasks</p>
                             <input class="inputfield" placeholder="Select task category" type="text" list="category">
-                            <datalist class="datalist" id="category">
-                                <option class="datalist" value="Technical Task">
+                            <datalist role="listbox" id="category">
+                                <option value="Technical Task">
                                 <option value="User Story">
                             </datalist>
                         </div>
                     </div>
                 </div>
-
+                <div class="footer-container">
+                  <span class="display-flex"><p class="color-red">*</p><p></p>This field is required</p></span>
+                  <div class="button-container">
+                    <button class="clear-button" onclick="clear()">Clear <img src="assets/icons/addTask/iconoir_cancel.svg" alt=""></button>
+                    <Button class="great-button" onclick="CreateTask()">Creat Task <img src="assets/icons/addTask/check.svg" alt=""></Button>
+                  </div>
+                </div>
             </div>
         </div>
     </main>
