@@ -1,4 +1,8 @@
-const BASE_URL = "https://dv-join-bbc2e-default-rtdb.europe-west1.firebasedatabase.app/";
+BASE_URL = "https://dv-join-bbc2e-default-rtdb.europe-west1.firebasedatabase.app/";
+const toDo = document.querySelector("#toDo");
+const progress = document.querySelector("#progress");
+const feedback = document.querySelector("#feedback");
+const done = document.querySelector("#done");
 
 function taskTemplate(id, title, description, assigned, date, prio, category, subtask, status) {
   return {
@@ -36,20 +40,30 @@ async function addTaskToFireBase(path = "", card) {
   return responseToJSON;
 }
 
-async function writeToBoard() {
-  let x = await fetchTasks("tasks");
-  for (const key in x) {
-    const element = x[key];
-    console.log(element);
+async function displayCardOnBoard() {
+  let taskFromFireBase = await fetchTasks("tasks");
+  console.log(taskFromFireBase);
 
-    if (element.status == "toDO") {
-      toDo.innerHTML += renderCard(element.id, element.category, element.title, element.discription, element.subtask, element.assigned, element.prio);
+  for (const key in taskFromFireBase) {
+    const element = taskFromFireBase[key];
+    if (element.status == "toDo") {
+      toDo.innerHTML += renderCard(element.id, element.category, element.title, element.description, element.subtask, element.assigned, element.prio);
     }
-    if (element.status === "feedback") {
-      feedback.innerHTML += renderCard(element.id, element.category, element.title, element.discription, element.subtask, element.assigned, element.prio);
+    if (element.status == "progress") {
+      progress.innerHTML += renderCard(element.id, element.category, element.title, element.description, element.subtask, element.assigned, element.prio);
+    }
+    if (element.status == "feedback") {
+      feedback.innerHTML += renderCard(element.id, element.category, element.title, element.description, element.subtask, element.assigned, element.prio);
+    }
+    if (element.status == "done") {
+      done.innerHTML += renderCard(element.id, element.category, element.title, element.description, element.subtask, element.assigned, element.prio);
     }
   }
 }
 
-fetchTasks("tasks");
-writeToBoard();
+// fetchTasks("tasks");
+displayCardOnBoard();
+
+const today = taskTemplate(0, "Task2", "This is a new Test Test Test", "TL", "26.01.2036", "Medium", "User Task", "Subtask", "progress");
+
+// addTaskToFireBase("tasks", today);
