@@ -1,5 +1,17 @@
+main {
+  overflow: auto;
+}
+
 h1 {
   font-size: 61px;
+}
+
+h3 {
+  color: rgb(66, 82, 110);
+}
+
+h5 {
+  margin: 13px 0px 13px;
 }
 
 .title_and_searchbar {
@@ -11,6 +23,7 @@ h1 {
 
 .search_bar {
   display: flex;
+
   gap: 4rem;
 }
 
@@ -22,13 +35,16 @@ h1 {
   width: 300px;
   background-image: url(../assets/icons/board/magnifying.svg);
   background-repeat: no-repeat;
-  background-position: center right;
-  padding-right: 40px;
+  background-position: right 10px center;
+  box-sizing: border-box;
 }
 
 input::placeholder {
   font-size: larger;
   padding: 10px;
+  background-image: url(../assets/icons/board/vector.svg);
+  background-repeat: no-repeat;
+  background-position: left 224px center;
 }
 
 .add_btn {
@@ -48,7 +64,7 @@ input::placeholder {
 
 .add_btn:hover {
   background-color: rgb(41, 171, 226);
-  box-shadow: 0 7px 7px 0 rgba(104, 104, 104, 0.301);
+  box-shadow: 0 5px 5px 0 rgba(104, 104, 104, 0.301);
   transform: scale(1);
 }
 
@@ -74,7 +90,23 @@ input::placeholder {
 .banner {
   display: flex;
   justify-content: space-between;
+  align-items: center;
   width: 100%;
+}
+
+.plus_button {
+  background-image: url(../assets/icons/board/plus_button.svg);
+  background-repeat: no-repeat;
+  width: 23px;
+  height: 23px;
+  background-size: cover;
+  background-position: center;
+  cursor: pointer;
+  border: none;
+}
+
+.plus_button:hover {
+  background-image: url(../assets/icons/board/plus_button_hover.svg);
 }
 
 .to_do {
@@ -99,15 +131,18 @@ input::placeholder {
   display: flex;
   flex-direction: column;
   align-items: center;
+  height: 100vh;
 }
 
 .card {
   background-color: white;
   border: 1px, transparent;
   box-shadow: 1px 1px 6px #838282;
-  border-radius: 12px;
+  border-radius: 18px;
   height: 15rem;
   width: 100%;
+  padding: 18px;
+  margin-bottom: 10px;
 }
 
 .no_task {
@@ -115,7 +150,7 @@ input::placeholder {
   border: 1.8px solid;
   border-style: dashed;
   border-color: rgb(154, 148, 163);
-  box-shadow: 1px 1px 6px #838282;
+  box-shadow: 0 3px 3px 0 rgba(104, 104, 104, 0.048);
   border-radius: 12px;
   height: 4rem;
   width: 100%;

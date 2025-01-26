@@ -43,4 +43,6 @@ function getDataFromLogin(event) {
   loginUser(email);
 }
 
-refLoginButton.addEventListener("click", getDataFromLogin);
+document.querySelector("#guest_log").onclick = function () {
+  window.location.href = "summary.html";
+};

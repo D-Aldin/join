@@ -5,6 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="shortcut icon" href="./assets/icons/logo/joinLarge.png" type="image/x-icon" />
     <script src="./scripts/submenu.js" defer></script>
+    <script src="./scripts/draggable.js" defer></script>
+    <script src="./scripts/HTMLTamplates.js"></script>
+    <script src="./scripts/tasks.js" defer></script>
 
     <link rel="stylesheet" href="./css/aside.css" />
     <link rel="stylesheet" href="./css/header.css" />
@@ -12,6 +15,7 @@
     <link rel="stylesheet" href="./css/standard.css" />
     <link rel="stylesheet" href="./css/submenu.css" />
     <link rel="stylesheet" href="./css/board.css" />
+    <link rel="stylesheet" href="./css/card.css" />
     <title>Board</title>
   </head>
   <body>
@@ -20,10 +24,18 @@
         <img class="join_logo" src="./assets/icons/aside/joinLogo.svg" alt="Join_Logo" />
       </div>
       <div class="nav_position">
-        <a href="./summary.html"><img src="./assets/icons/aside/summary.svg" alt="Summary" />Summary</a>
-        <a href="./add_task.html"><img src="./assets/icons/aside/addTask.svg" alt="Add Task" />Add Task</a>
-        <a href="./board.html"><img src="./assets/icons/aside/board.svg" alt="Board" />Board</a>
-        <a href="./contacts.html"><img src="./assets/icons/aside/contacts.svg" alt="Contacts" />Contacts</a>
+        <div class="link_nav_summary">
+          <a href="./summary.html"><img src="./assets/icons/aside/summary.svg" alt="Summary" />Summary</a>
+        </div>
+        <div class="link_nav_add_task">
+          <a href="./add_task.html"><img src="./assets/icons/aside/addTask.svg" alt="Add Task" />Add Task</a>
+        </div>
+        <div class="link_nav_board">
+          <a href="./board.html"><img src="./assets/icons/aside/board.svg" alt="Board" />Board</a>
+        </div>
+        <div class="link_nav_contacts">
+          <a href="./contacts.html"><img src="./assets/icons/aside/contacts.svg" alt="Contacts" />Contacts</a>
+        </div>
       </div>
       <div class="legal_notes_position">
         <a href="">Privacy Policy</a>
@@ -39,6 +51,7 @@
         <img onclick="toggleShowSubmenu()" class="account_img" src="./assets/icons/imgs/guestImg.svg" alt="" />
       </div>
     </header>
+
     <div id="submenu_position" class="d_none">
       <div class="submenu_section">
         <a class="submenu_links_design link_legal_notice_hover" href="./legal_notice.html">Legal Notice</a>
@@ -62,41 +75,63 @@
         </section>
 
         <div class="board_content">
-          <section class="to_do board_column">
+          <section id="toDo" ondrop="dropPoint(event)" ondragover="allowDrop()" class="to_do board_column">
             <div class="board_column">
               <div class="banner">
                 <h3>To do</h3>
-                <img src="./assets/icons/board/plus_button.svg" alt="add" />
+                <button class="plus_button"></button>
               </div>
             </div>
-            <article class="no_task"></article>
+            <article class="no_task" draggable="true"></article>
           </section>
 
-          <section class="progress">
+          <section id="progress" ondrop="dropPoint(event)" ondragover="allowDrop()" class="progress">
             <div class="board_column">
               <div class="banner">
                 <h3>In progress</h3>
-                <img src="./assets/icons/board/plus_button.svg" alt="add" />
+                <button class="plus_button"></button>
               </div>
             </div>
-            <article class="card"></article>
+            <article id="4" ondragstart="draggedElementID(event)" class="card" draggable="true">
+              <div class="category">User Story</div>
+              <div class="card_title">
+                <h4 id="title">Kochwelt Page & Recipe Recommender</h4>
+              </div>
+              <div class="discription">
+                <h5 id="discription">Build start page with recipe recommedation</h5>
+              </div>
+              <div class="progress_indicator">
+                <div class="progress_container">
+                  <div class="progress_bar" style="width: 20%"></div>
+                </div>
+                <span id="subtasks">1/2 Subtasks</span>
+              </div>
+              <div class="profile_prio_container">
+                <div class="profile">
+                  <div class="circle">AM</div>
+                  <div class="circle" style="transform: translateX(-50%); background-color: rgb(31, 215, 193)">DN</div>
+                </div>
+                <div class="prio">
+                  <img src="./assets/icons/board/urgent.svg" alt="" />
+                </div>
+              </div>
+            </article>
           </section>
 
-          <section class="feedback board_column">
+          <section id="feedback" ondrop="dropPoint(event)" ondragover="allowDrop()" class="feedback board_column">
             <div class="board_column">
               <div class="banner">
                 <h3>Await feedback</h3>
-                <img src="./assets/icons/board/plus_button.svg" alt="add" />
+                <button class="plus_button"></button>
               </div>
             </div>
-            <article class="card"></article>
           </section>
 
-          <section class="done board_column">
+          <section id="done" ondrop="dropPoint(event)" ondragover="allowDrop()" class="done board_column">
             <div class="board_column">
               <h3>Done</h3>
             </div>
-            <article class="card"></article>
+            <article class="card" draggable="true"></article>
           </section>
         </div>
       </div>
