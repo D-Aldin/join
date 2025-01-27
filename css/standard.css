@@ -23,3 +23,27 @@ a {
 .d_none {
   display: none;
 }
+
+/* standart Position vom header? */
+.header_standard_position {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+  padding-top: 110px;
+  padding-left: 96px;
+}
+
+.header_standard_size h1 {
+  font-size: 61px;
+  margin: 0;
+}
+
+.header_standard_size h2 {
+  font-size: 27px;
+  font-weight: 400;
+}
+
+.line {
+  border-left: 3px solid rgb(41, 171, 226);
+  height: 59px;
+}

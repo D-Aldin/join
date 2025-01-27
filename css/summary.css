@@ -1,26 +1,3 @@
-.summary_header {
-  display: flex;
-  align-items: center;
-  gap: 30px;
-  padding-top: 110px;
-  padding-left: 96px;
-}
-
-.summary_header h1 {
-  font-size: 61px;
-  margin: 0;
-}
-
-.line {
-  border-left: 3px solid rgb(41, 171, 226);
-  height: 59px;
-}
-
-.summary_header h2 {
-  font-size: 27px;
-  font-weight: 400;
-}
-
 .greetings_position {
   position: absolute;
   width: 385px;
