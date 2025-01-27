@@ -17,14 +17,19 @@ function draggedElementID(event) {
 }
 
 function dropPoint(event) {
-  const category = event.target;
-  let data = event.dataTransfer.getData("text");
-  event.target.appendChild(document.getElementById(data));
-  let newStatus = event.target.id;
-  let statusUpdate = {
-    status: newStatus,
-  };
-  updateStatusInDB("tasks", cardID, statusUpdate);
+  event.preventDefault();
+  console.log(event.target.id);
+  if (event.target.id == "toDo" || event.target.id == "progress" || event.target.id == "feedback") {
+    let data = event.dataTransfer.getData("text");
+
+    event.target.appendChild(document.getElementById(data));
+    let newStatus = event.target.id;
+    let statusUpdate = {
+      status: newStatus,
+    };
+
+    updateStatusInDB("tasks", cardID, statusUpdate);
+  }
 }
 
 function allowDrop() {
@@ -101,6 +106,6 @@ async function displayCardOnBoard() {
 }
 
 displayCardOnBoard();
-const today = taskTemplate(0, "Task2", "This is a new Test Test Test", "TL", "26.01.2036", "Medium", "User Task", "Subtask", "progress"); // Test Data
+const today = taskTemplate(1, "Task3", "TESTTESTTEST", "TL", "21.01.2036", "Low", "User Task", "Subtask", "progress"); // Test Data
 
-console.log(progress);
+// addTaskToFireBase("tasks", today)

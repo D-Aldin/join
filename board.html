@@ -74,38 +74,42 @@
         </section>
 
         <div class="board_content">
-          <section id="toDo" ondrop="dropPoint(event)" ondragover="allowDrop()" class="to_do board_column">
+          <section class="to_do board_column">
             <div class="board_column">
               <div class="banner">
                 <h3>To do</h3>
                 <button class="plus_button"></button>
               </div>
             </div>
+            <div id="toDo" ondrop="dropPoint(event)" ondragover="allowDrop()"></div>
             <article class="no_task" draggable="true"></article>
           </section>
 
-          <section id="progress" ondrop="dropPoint(event)" ondragover="allowDrop()" class="progress">
+          <section class="progress">
             <div class="board_column">
               <div class="banner">
                 <h3>In progress</h3>
                 <button class="plus_button"></button>
               </div>
             </div>
+            <div id="progress" ondrop="dropPoint(event)" ondragover="allowDrop()"></div>
           </section>
 
-          <section id="feedback" ondrop="dropPoint(event)" ondragover="allowDrop()" class="feedback board_column">
+          <section class="feedback board_column">
             <div class="board_column">
               <div class="banner">
                 <h3>Await feedback</h3>
                 <button class="plus_button"></button>
               </div>
             </div>
+            <div id="feedback" ondrop="dropPoint(event)" ondragover="allowDrop()"></div>
           </section>
 
-          <section id="done" ondrop="dropPoint(event)" ondragover="allowDrop()" class="done board_column">
+          <section class="done board_column">
             <div class="board_column">
               <h3>Done</h3>
             </div>
+            <div id="done" ondrop="dropPoint(event)" ondragover="allowDrop()"></div>
           </section>
         </div>
       </div>
