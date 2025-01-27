@@ -149,11 +149,15 @@ input::placeholder {
   background-color: rgba(231, 231, 231, 0.432);
   border: 1.8px solid;
   border-style: dashed;
-  border-color: rgb(154, 148, 163);
+  border-color: rgb(168, 168, 168);
+  color: rgb(168, 168, 168);
   box-shadow: 0 3px 3px 0 rgba(104, 104, 104, 0.048);
   border-radius: 12px;
   height: 4rem;
   width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 #toDo,
@@ -162,4 +166,8 @@ input::placeholder {
 #done {
   width: 100%;
   height: 100vh;
+}
+
+.display_none {
+  display: none;
 }

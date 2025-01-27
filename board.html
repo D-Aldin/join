@@ -17,7 +17,7 @@
     <link rel="stylesheet" href="./css/card.css" />
     <title>Board</title>
   </head>
-  <body>
+  <body onload="noTaskToDo()">
     <aside>
       <div class="logo_position">
         <img class="join_logo" src="./assets/icons/aside/joinLogo.svg" alt="Join_Logo" />
@@ -81,8 +81,8 @@
                 <button class="plus_button"></button>
               </div>
             </div>
+            <div id="placeholderToDo"></div>
             <div id="toDo" ondrop="dropPoint(event)" ondragover="allowDrop()"></div>
-            <article class="no_task" draggable="true"></article>
           </section>
 
           <section class="progress">
@@ -92,6 +92,7 @@
                 <button class="plus_button"></button>
               </div>
             </div>
+            <div id="placeholderProgress"></div>
             <div id="progress" ondrop="dropPoint(event)" ondragover="allowDrop()"></div>
           </section>
 
@@ -102,6 +103,7 @@
                 <button class="plus_button"></button>
               </div>
             </div>
+            <div id="placeholderFeedback"></div>
             <div id="feedback" ondrop="dropPoint(event)" ondragover="allowDrop()"></div>
           </section>
 
@@ -109,6 +111,7 @@
             <div class="board_column">
               <h3>Done</h3>
             </div>
+            <div id="placeholderDone"></div>
             <div id="done" ondrop="dropPoint(event)" ondragover="allowDrop()"></div>
           </section>
         </div>
