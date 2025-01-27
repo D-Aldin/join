@@ -102,3 +102,5 @@ async function displayCardOnBoard() {
 
 displayCardOnBoard();
 const today = taskTemplate(0, "Task2", "This is a new Test Test Test", "TL", "26.01.2036", "Medium", "User Task", "Subtask", "progress"); // Test Data
+
+console.log(progress);

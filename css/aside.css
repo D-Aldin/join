@@ -61,7 +61,7 @@ aside {
   align-items: center;
   gap: 15px;
   height: 46px;
-  width: 100%;
+  /* width: 100%; */
 }
 
 .logo_position {
