@@ -1,0 +1,9 @@
+section {
+  position: absolute;
+  top: 96px;
+  left: 232px;
+  width: 456px;
+  height: calc(100vh - 96px);
+  background-color: rgb(255, 255, 255);
+  box-shadow: 4px 0px 6px 0px #00000014;
+}
