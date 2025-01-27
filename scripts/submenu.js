@@ -11,3 +11,7 @@ function toggleShowSubmenu() {
     accountImg.classList.remove("active");
   }
 }
+
+// function stopBubbling(event) {
+//   event.stopPropagation();
+// }

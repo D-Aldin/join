@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="shortcut icon" href="./assets/icons/logo/joinLarge.png" type="image/x-icon" />
     <script src="./scripts/submenu.js" defer></script>
+    <script src="./scripts/contacts.js" defer></script>
 
     <link rel="stylesheet" href="./css/aside.css" />
     <link rel="stylesheet" href="./css/header.css" />
@@ -38,6 +39,7 @@
         <a href="">Legal notice</a>
       </div>
     </aside>
+
     <header>
       <div>
         <h1>Kanban Project Managment Tool</h1>
@@ -47,6 +49,7 @@
         <img onclick="toggleShowSubmenu()" class="account_img" src="./assets/icons/imgs/guestImg.svg" alt="" />
       </div>
     </header>
+
     <div id="submenu_position" class="d_none">
       <div class="submenu_section">
         <a class="submenu_links_design link_legal_notice_hover" href="./legal_notice.html">Legal Notice</a>
@@ -58,6 +61,7 @@
         <a class="submenu_links_design link_login_hover" href="./login.html">Log out</a>
       </div>
     </div>
+
     <main>
       <div class="contact_headline header_standard_size">
         <h1>Contacts</h1>
@@ -66,7 +70,7 @@
       </div>
       <section>
         <div class="content_width_contacts">
-          <button class="add_contact_btn" onclick="">
+          <button class="add_contact_btn" onclick="openOverlayBackground()">
             Add new contact
             <img src="./assets/icons/contacts/person_add.svg" alt="add_contact" />
           </button>
@@ -77,5 +81,11 @@
         </div>
       </section>
     </main>
+
+    <div id="overlay_add_contacts_background"></div>
+
+    <div id="overlay_add_contact_card" class="d_none">
+      <button onclick="closeOverlayBackground()">X</button>
+    </div>
   </body>
 </html>
