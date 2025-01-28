@@ -115,8 +115,9 @@ function noTaskToDo() {
     progress.lastElementChild == null ? (noTaskInProgress.classList.add("no_task"), (noTaskInProgress.innerHTML = "No Tasks In Progress")) : (noTaskInProgress.classList.remove("no_task"), (noTaskInProgress.innerHTML = ""));
     feedback.lastElementChild == null ? (noTaskAwaitFeedback.classList.add("no_task"), (noTaskAwaitFeedback.innerHTML = "No Tasks Await feedback")) : (noTaskAwaitFeedback.classList.remove("no_task"), (noTaskAwaitFeedback.innerHTML = ""));
     done.lastElementChild == null ? (noTaskDone.classList.add("no_task"), (noTaskDone.innerHTML = "No Tasks Done")) : (noTaskDone.classList.remove("no_task"), (noTaskDone.innerHTML = ""));
-  }, "200");
+  }, 130);
 }
 
 displayCardOnBoard();
 // const today = taskTemplate(1, "Task3", "TESTTESTTEST", "TL", "21.01.2036", "Low", "User Task", "Subtask", "progress"); // Test Data
+noTaskToDo();

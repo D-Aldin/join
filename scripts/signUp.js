@@ -28,6 +28,10 @@ function goBack() {
   refLoginWindow.style.display = "inline";
   refSignUpSegment.style.display = "inline";
   refSignWindow.style.display = "none";
+  document.querySelector("#name").value = "";
+  document.querySelector("#signUpEmail").value = "";
+  document.querySelector("#signUppassword").value = "";
+  document.querySelector("#signUpconfirmPassword").value = "";
 }
 
 /**
@@ -105,7 +109,7 @@ async function ifUserAlreadyExists(path = "", email = "") {
   if (result === null && pswConfirm.style.borderColor != "red") {
     console.log("User Dont Exists");
     addUsersToDataBase("users", newUser);
-    console.log(newUser);
+    window.location.href = "summary.html";
   } else {
     console.log("User Exists");
   }
@@ -122,15 +126,18 @@ function passwordMatch() {
   const confitmPassword = pswConfirm.value;
   const confirmMsg = document.querySelector(".checkPassword");
 
-  if (confitmPassword !== password) {
-    pswConfirm.style.borderColor = "red";
-    confirmMsg.innerHTML = "Your passwords don't match. Please try again.";
-  } else if (password == confitmPassword) {
-    pswConfirm.style.borderColor = "#ccc";
+  if (password.length == confitmPassword.length || password.length < confitmPassword.length) {
+    if (confitmPassword !== password) {
+      pswConfirm.style.borderColor = "red";
+      confirmMsg.innerHTML = "Your passwords don't match. Please try again.";
+    } else if (password == confitmPassword) {
+      pswConfirm.style.borderColor = "#ccc";
+      confirmMsg.innerHTML = "";
+      document.getElementById("signUp").addEventListener("submit", getDataFromSignUp);
+    }
   }
 }
 
 signBtn.addEventListener("click", openSignUpModal);
 refBackButton.addEventListener("click", goBack);
-document.getElementById("signUp").addEventListener("submit", getDataFromSignUp);
 pswConfirm.addEventListener("input", passwordMatch);
