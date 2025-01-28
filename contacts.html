@@ -85,7 +85,33 @@
     <div id="overlay_add_contacts_background"></div>
 
     <div id="overlay_add_contact_card" class="d_none">
-      <button onclick="closeOverlayBackground()">X</button>
+      <div class="overlay_add_contact_left_side">
+        <div class="overlay_logo_position">
+          <img src="./assets/icons/logo/logo_white.svg" alt="logo" />
+        </div>
+        <div class="overlay_headline_add_contact">
+          <h1>Add contact</h1>
+          <h2>Tasks are better with a team!</h2>
+          <div class="line_contact"></div>
+        </div>
+      </div>
+      <div class="overlay_add_contact_right_side">
+        <div class="overlay_account_icon_position">
+          <img src="./assets/icons/contacts/account_icon.svg" alt="account_icon" />
+        </div>
+        <div class="overlay_close_btn_position">
+          <img onclick="closeOverlayBackground()" src="./assets/icons/contacts/Close.svg" alt="close_button" />
+        </div>
+        <form action class="form_input_fields_position">
+          <input id="add_name" type="text" placeholder="Name" />
+          <input id="add_email" type="email" placeholder="Email" />
+          <input id="add_phone" type="tel" placeholder="Phone" />
+        </form>
+        <div class="overlay_btn_position">
+          <button class="btn_cancel">Cancel <img src="./assets/icons/contacts/Close.svg" class="cancel_icon" alt="Cancel" /></button>
+          <button class="btn_create_contact">Create contact <img src="./assets/icons/contacts/check.svg" alt="check" /></button>
+        </div>
+      </div>
     </div>
   </body>
 </html>
