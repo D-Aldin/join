@@ -69,6 +69,8 @@ async function addUsersToDataBase(path = "", data) {
     body: JSON.stringify(data),
   });
   let responseToJSON = response.json();
+  // youSignedUp();
+  window.location.href = "summary.html";
   return responseToJSON;
 }
 
@@ -109,7 +111,6 @@ async function ifUserAlreadyExists(path = "", email = "") {
   if (result === null && pswConfirm.style.borderColor != "red") {
     console.log("User Dont Exists");
     addUsersToDataBase("users", newUser);
-    window.location.href = "summary.html";
   } else {
     console.log("User Exists");
   }
@@ -126,7 +127,7 @@ function passwordMatch() {
   const confitmPassword = pswConfirm.value;
   const confirmMsg = document.querySelector(".checkPassword");
 
-  if (password.length == confitmPassword.length || password.length < confitmPassword.length) {
+  if (password.length == confitmPassword.length || password.length < confitmPassword.length || password.length > confitmPassword.length) {
     if (confitmPassword !== password) {
       pswConfirm.style.borderColor = "red";
       confirmMsg.innerHTML = "Your passwords don't match. Please try again.";
@@ -141,3 +142,7 @@ function passwordMatch() {
 signBtn.addEventListener("click", openSignUpModal);
 refBackButton.addEventListener("click", goBack);
 pswConfirm.addEventListener("input", passwordMatch);
+
+function youSignedUp() {
+  document.body.style.opacity = "0.2";
+}
