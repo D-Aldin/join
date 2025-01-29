@@ -103,3 +103,7 @@ aside {
 .privacy_policy_legal_notice_login aside {
   position: fixed;
 }
+
+.privacy_policy aside {
+  position: fixed;
+}
