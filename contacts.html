@@ -110,12 +110,13 @@
           <img onclick="closeOverlay()" src="./assets/icons/contacts/Close.svg" alt="close_button" />
         </div>
         <form action class="form_input_fields_position">
-          <input id="add_name" type="text" placeholder="Name" />
-          <input id="add_email" type="email" placeholder="Email" />
-          <input id="add_phone" type="tel" placeholder="Phone" />
+          <input id="add_name" type="text" placeholder="Name" required />
+          <input id="add_email" type="email" placeholder="Email" required />
+          <input id="add_phone" type="tel" placeholder="Phone" required />
+          <!-- add the button below inside the form -->
         </form>
         <div class="overlay_btn_position">
-          <button class="btn_cancel">Cancel <img src="./assets/icons/contacts/Close.svg" class="cancel_icon" alt="Cancel" /></button>
+          <button class="btn_cancel" onclick="closeOverlay()">Cancel <img src="./assets/icons/contacts/Close.svg" class="cancel_icon" alt="Cancel" /></button>
           <button class="btn_create_contact">Create contact <img src="./assets/icons/contacts/check.svg" alt="check" /></button>
         </div>
       </div>
