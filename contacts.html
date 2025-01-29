@@ -70,7 +70,7 @@
       </div>
       <section>
         <div class="content_width_contacts">
-          <button class="add_contact_btn" onclick="openOverlayBackground()">
+          <button class="add_contact_btn" onclick="openOverlay()">
             Add new contact
             <img src="./assets/icons/contacts/person_add.svg" alt="add_contact" />
           </button>
@@ -78,6 +78,13 @@
             <div class="first_letter">A</div>
           </div>
           <div class="line_bottom"></div>
+          <div id="contact" class="contact_list hover_contact_list" onclick="toggleOverlayContactInfos()">
+            <img class="contact_img" src="./assets/icons/contacts/as_account_icon.svg" alt="account_icon" />
+            <div class="account_info">
+              <p>Anton Mayer</p>
+              <span>anton@gmail.com</span>
+            </div>
+          </div>
         </div>
       </section>
     </main>
@@ -100,7 +107,7 @@
           <img src="./assets/icons/contacts/account_icon.svg" alt="account_icon" />
         </div>
         <div class="overlay_close_btn_position">
-          <img onclick="closeOverlayBackground()" src="./assets/icons/contacts/Close.svg" alt="close_button" />
+          <img onclick="closeOverlay()" src="./assets/icons/contacts/Close.svg" alt="close_button" />
         </div>
         <form action class="form_input_fields_position">
           <input id="add_name" type="text" placeholder="Name" />
@@ -113,5 +120,7 @@
         </div>
       </div>
     </div>
+
+    <div id="overlay_contact_infos" class="d_none"></div>
   </body>
 </html>

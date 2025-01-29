@@ -97,6 +97,86 @@ section::-webkit-scrollbar-track {
   margin-bottom: 8px;
 }
 
+.contact_list {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  width: 328px;
+  height: 78px;
+  padding-left: 24px;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.hover_contact_list:hover {
+  transition: ease-in-out 125ms;
+  background-color: rgb(249, 249, 249);
+}
+
+.contact_active {
+  background-color: rgba(42, 54, 71, 1);
+  color: rgba(255, 255, 255);
+}
+
+.contact_img {
+  width: 42px;
+  height: 42px;
+}
+
+.account_info {
+  display: flex;
+  flex-direction: column;
+  width: 156px;
+  height: 48px;
+  gap: 5px;
+  margin-left: 35px;
+  padding: 15px 24px 15px 24px;
+}
+
+.account_info p {
+  font-size: 20px;
+  font-weight: 400;
+  margin: 0;
+}
+
+.account_info span {
+  font-size: 16px;
+  font-weight: 400;
+  color: rgb(0, 124, 238);
+}
+
+#overlay_contact_infos {
+  position: absolute;
+  top: 311px;
+  left: 750px;
+  width: 461px;
+  height: 364px;
+  background-color: rosybrown;
+  z-index: 3;
+}
+
+@keyframes slideInFromRightContactInfos {
+  from {
+    top: 311px;
+    left: 150%;
+  }
+  to {
+    top: 311px;
+    right: 50%;
+  }
+}
+
+@keyframes slideOutToRightContactInfos {
+  from {
+    top: 311px;
+    left: 50%;
+  }
+  to {
+    top: 311px;
+    left: 150%;
+  }
+}
+
 .overlay_background {
   position: absolute;
   width: 100%;
@@ -108,7 +188,7 @@ section::-webkit-scrollbar-track {
   transition: background-color 0.3s;
 }
 
-@keyframes slideInFromRight {
+@keyframes slideInFromRightAddContact {
   from {
     top: 50%;
     left: 150%;
@@ -119,7 +199,7 @@ section::-webkit-scrollbar-track {
   }
 }
 
-@keyframes slideOutToRight {
+@keyframes slideOutToRightAddContact {
   from {
     top: 50%;
     left: 50%;
