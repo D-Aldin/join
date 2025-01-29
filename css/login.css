@@ -371,3 +371,49 @@ footer {
   color: rgb(41, 171, 226);
   transform: scale(1.1);
 }
+
+#overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.445);
+  z-index: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.5s ease-out, visibility 0.5s ease-out;
+}
+
+.overlay_msg {
+  border: 1px transparent;
+  border-radius: 20px;
+  width: 312px;
+  height: 74px;
+  background-color: rgb(42, 54, 71);
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  flex-direction: column-reverse;
+  text-align: center;
+  position: absolute;
+  top: 60%;
+  left: 50%;
+  transform: translate(-50%, 100%);
+  opacity: 0;
+  transition: transform 0.5s ease-out, opacity 0.5s ease-out;
+}
+
+#overlay.show {
+  opacity: 1;
+  visibility: visible;
+}
+
+#overlay.show .overlay_msg {
+  transform: translate(-50%, -50%);
+  opacity: 1;
+}

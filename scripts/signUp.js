@@ -70,7 +70,6 @@ async function addUsersToDataBase(path = "", data) {
   });
   let responseToJSON = response.json();
   // youSignedUp();
-  window.location.href = "summary.html";
   return responseToJSON;
 }
 
@@ -111,6 +110,7 @@ async function ifUserAlreadyExists(path = "", email = "") {
   if (result === null && pswConfirm.style.borderColor != "red") {
     console.log("User Dont Exists");
     addUsersToDataBase("users", newUser);
+    showOverlay();
   } else {
     console.log("User Exists");
   }
@@ -143,6 +143,13 @@ signBtn.addEventListener("click", openSignUpModal);
 refBackButton.addEventListener("click", goBack);
 pswConfirm.addEventListener("input", passwordMatch);
 
-function youSignedUp() {
-  document.body.style.opacity = "0.2";
+function showOverlay() {
+  let overlay = document.getElementById("overlay");
+  overlay.classList.add("show");
+  setTimeout(() => {
+    overlay.classList.remove("show");
+    setTimeout(() => {
+      window.location.href = "login.html";
+    }, 500);
+  }, 1000);
 }
