@@ -151,7 +151,6 @@ section::-webkit-scrollbar-track {
   left: 750px;
   width: 461px;
   height: 364px;
-  background-color: rosybrown;
   z-index: 3;
 }
 
@@ -175,6 +174,83 @@ section::-webkit-scrollbar-track {
     top: 311px;
     left: 150%;
   }
+}
+
+.overlay_contact_info_header {
+  display: flex;
+  align-items: center;
+  width: 461px;
+  height: 120px;
+  gap: 54px;
+}
+
+.overlay_contact_info_header h2 {
+  font-size: 47px;
+  font-weight: 500;
+  margin: 0;
+  margin-bottom: 8px;
+}
+
+.account_icon {
+  width: 120px;
+  height: 120px;
+}
+
+.btn_position {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  height: 24px;
+  width: 159px;
+}
+
+.btn_position img {
+  cursor: pointer;
+}
+
+.edit_hover:hover {
+  content: url(../assets/icons/contacts/edit_hover.svg);
+}
+
+.delete_hover:hover {
+  content: url(../assets/icons/contacts/delete_hover.svg);
+}
+
+.headline_contact_info {
+  display: flex;
+  align-items: center;
+  width: 207px;
+  height: 74px;
+  margin-top: 21px;
+  font-size: 20px;
+  font-weight: 400;
+}
+
+.headline_contact_info p {
+  margin: 0;
+}
+
+.contact_info {
+  display: flex;
+  flex-direction: column;
+  width: 140px;
+  height: 128px;
+}
+
+.contact_info span {
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.email_design {
+  font-size: 16px;
+  font-weight: 400;
+  color: rgba(0, 124, 238, 1);
+}
+
+.number_design {
+  font-size: 16px;
+  font-weight: 400;
 }
 
 .overlay_background {
