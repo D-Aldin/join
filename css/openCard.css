@@ -1,0 +1,113 @@
+.category_box {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.content_box {
+}
+
+.open_card_category {
+  width: 8rem;
+  height: 1.9rem;
+  border: 1px transparent;
+  border-radius: 7px;
+  background-color: rgb(0, 56, 255);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 10px;
+}
+
+.open_card_title {
+  font-size: 61px;
+  margin-bottom: 30px;
+}
+.open_card_discription {
+  display: flex;
+  margin-bottom: 30px;
+}
+.open_card_date {
+  display: flex;
+  gap: 90px;
+}
+.open_card_priority {
+  display: flex;
+  align-items: center;
+  gap: 90px;
+}
+
+.prio_box {
+  display: flex;
+  align-items: center;
+}
+.open_card_assigned {
+  display: flex;
+  margin-bottom: 30px;
+}
+
+.assigned_box {
+  display: flex;
+}
+
+.profiles {
+  display: flex;
+  flex-direction: column;
+  margin-top: 30px;
+  margin-left: -85px;
+  gap: 20px;
+}
+
+.profile_names {
+  display: flex;
+  align-items: center;
+}
+.open_card_subtasks {
+  display: flex;
+  flex-direction: column;
+  align-items: baseline;
+  margin-bottom: 30px;
+  gap: 10px;
+}
+
+.subtasks_box {
+  padding-left: 16px;
+}
+
+.edit_delete_box {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.deleteBtn,
+.editBtn,
+.closeBtn {
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+}
+
+.delete_edit_btn_box {
+  display: flex;
+  justify-content: flex-end;
+}
+
+table {
+  margin-bottom: 30px;
+}
+
+td,
+th {
+  text-align: left;
+  padding-right: 50px;
+}
+
+#priority {
+  display: flex;
+  align-items: center;
+}
+
+.space {
+  height: 30px;
+}

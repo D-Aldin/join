@@ -143,6 +143,7 @@ input::placeholder {
   width: 100%;
   padding: 18px;
   margin-bottom: 10px;
+  cursor: pointer;
 }
 
 .no_task {
@@ -170,4 +171,32 @@ input::placeholder {
 
 .display_none {
   display: none;
+}
+
+#box {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 380px;
+  height: 750px;
+  background-color: white;
+  color: rgb(0, 0, 0);
+  padding: 35px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+  text-align: center;
+  border-radius: 25px;
+  z-index: 999;
+}
+
+#overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.123);
+  z-index: 1;
+  cursor: pointer;
 }
