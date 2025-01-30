@@ -1,3 +1,29 @@
+BASE_URL = "https://dv-join-bbc2e-default-rtdb.europe-west1.firebasedatabase.app/";
+
+async function addContactToDataBase() {
+  let counterResponse = await fetch(BASE_URL + "contactCounter.json");
+  let counterData = await counterResponse.json();
+  let newIndex = (counterData || 0) + 1;
+  let name = document.getElementById('add_name').value;
+  let email = document.getElementById('add_email').value;
+  let phone = document.getElementById('add_phone').value;
+  let response = await fetch(BASE_URL + `contacts/contact_${newIndex}.json`, {
+    method: "PUT",
+    body: JSON.stringify({
+      name: name,
+      email: email,
+      phone: phone
+    }),
+  });
+  let contactData = await response.json();
+  await fetch(BASE_URL + "contactCounter.json", {
+    method: "PUT",
+    body: JSON.stringify(newIndex),
+  });
+  closeOverlayAddContact();
+  return contactData;
+}
+
 function openOverlay() {
   let overlayRef = document.getElementById('overlay_add_contacts_background');
   let overlayCardRef = document.getElementById('overlay_add_contact_card');
