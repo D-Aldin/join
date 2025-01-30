@@ -119,5 +119,6 @@ function noTaskToDo() {
 }
 
 displayCardOnBoard();
-// const today = taskTemplate(1, "Task3", "TESTTESTTEST", "TL", "21.01.2036", "Low", "User Task", "Subtask", "progress"); // Test Data
+const today = taskTemplate(0, "Task3", "TESTTESTTEST", "TL", "21.01.2036", "Low", "User Task", "Subtask", "progress"); // Test Data
+// addTaskToFireBase("tasks", today);
 noTaskToDo();
