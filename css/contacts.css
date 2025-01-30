@@ -286,7 +286,8 @@ section::-webkit-scrollbar-track {
   }
 }
 
-.overlay_add_contact_card {
+.overlay_add_contact_card,
+.overlay_edit_contact_card {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -294,7 +295,7 @@ section::-webkit-scrollbar-track {
   width: 1212px;
   height: 592px;
   border-radius: 30px;
-  z-index: 3;
+  z-index: 4;
 
   display: flex;
   justify-content: center;
@@ -451,7 +452,8 @@ input[type="tel"]:focus {
   font-weight: 400;
 }
 
-.btn_cancel:hover {
+.btn_cancel:hover,
+.btn_delete:hover {
   transition: ease-in-out 125ms;
   border: 1px solid rgba(41, 171, 226);
   color: rgba(41, 171, 226);
@@ -486,8 +488,40 @@ input[type="tel"]:focus {
   font-weight: 700;
 }
 
-.btn_create_contact:hover {
+.btn_create_contact:hover,
+.btn_save:hover {
   transition: ease-in-out 125ms;
   background-color: rgba(41, 171, 226);
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+}
+
+.btn_delete {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 113px;
+  height: 55px;
+  border-radius: 8px;
+  border: 1px solid rgba(42, 54, 71);
+  background-color: rgba(255, 255, 255);
+  font-size: 21px;
+  font-weight: 400;
+}
+
+.btn_save {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  width: 111px;
+  height: 57px;
+  border: none;
+  border-radius: 10px;
+  background-color: rgba(42, 54, 71, 1);
+  color: rgba(255, 255, 255);
+  font-size: 21px;
+  font-weight: 700;
 }
