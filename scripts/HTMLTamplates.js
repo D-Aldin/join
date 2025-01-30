@@ -16,8 +16,7 @@ function renderCard(id, category, title, discription, subtasks, contact, prio) {
                 </div>
                 <div class="profile_prio_container">
                   <div class="profile">
-                    <div class="circle">${contact}</div>
-                    <div class="circle" style="transform: translateX(-50%); background-color: rgb(31, 215, 193)">DN</div>
+                    
                   </div>
                   <div class="prio">
                     <img src="./assets/icons/board/${prio}.svg" alt="" />
@@ -25,6 +24,11 @@ function renderCard(id, category, title, discription, subtasks, contact, prio) {
                 </div>
               </article>
       `;
+}
+
+function contactTamplate(contact, color) {
+  return `
+            <div class="circle" style="transform: translateX(0%); background-color: ${color}">${contact}</div>`;
 }
 
 // TODO add more param to the function

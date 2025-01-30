@@ -3,6 +3,7 @@ const toDo = document.querySelector("#toDo");
 const progress = document.querySelector("#progress");
 const feedback = document.querySelector("#feedback");
 const done = document.querySelector("#done");
+const refProfile = document.getElementsByClassName("profile");
 let cardID;
 
 function draggedElementID(event) {
@@ -88,8 +89,13 @@ async function addTaskToFireBase(path = "", card) {
 //TODO  reduce lines of code
 async function displayCardOnBoard() {
   let taskFromFireBase = await fetchTasks("tasks");
+
   for (const key in taskFromFireBase) {
     const element = taskFromFireBase[key];
+    console.log(key);
+
+    console.log(element.assigned);
+
     if (element.status == "toDo") {
       toDo.innerHTML += renderCard(element.id, element.category, element.title, element.description, element.subtask, element.assigned, element.prio);
     }
@@ -101,6 +107,18 @@ async function displayCardOnBoard() {
     }
     if (element.status == "done") {
       done.innerHTML += renderCard(element.id, element.category, element.title, element.description, element.subtask, element.assigned, element.prio);
+    }
+    addProfilesToCard(key, element.assigned);
+  }
+  noTaskToDo();
+}
+
+function addProfilesToCard(id, obj) {
+  for (const key in obj) {
+    if (Object.prototype.hasOwnProperty.call(obj, key)) {
+      const name = obj[key];
+      const color = key;
+      document.getElementById(id).lastElementChild.firstElementChild.innerHTML += contactTamplate(name, color);
     }
   }
 }
@@ -118,7 +136,13 @@ function noTaskToDo() {
   }, 130);
 }
 
+// TEST LIST
+let contacts = {
+  red: "Dobric Aldin",
+  green: "Robby Runge",
+  yellow: "Simon Burlet",
+};
+
 displayCardOnBoard();
-const today = taskTemplate(0, "Task3", "TESTTESTTEST", "TL", "21.01.2036", "Low", "User Task", "Subtask", "progress"); // Test Data
+const today = taskTemplate(0, "TEST1", "TESTTESTTEST", contacts, "21.01.2036", "Low", "User Task", "Subtask", "progress"); // Test Data
 // addTaskToFireBase("tasks", today);
-noTaskToDo();
