@@ -31,6 +31,7 @@ async function addContactToDataBase() {
   return contactData;
 }
 
+// test
 async function getContactsFromDataBase() {
   let response = await fetch(BASE_URL + "contacts.json");
   let data = await response.json();
@@ -50,6 +51,7 @@ async function getContactsFromDataBase() {
   }
 }
 
+// test
 function renderContacts() {
   let contactList = document.getElementById('contact_list');
   contactList = '';
