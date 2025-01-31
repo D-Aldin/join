@@ -1,4 +1,4 @@
-function renderCard(id, category, title, discription, subtasks, contact, prio) {
+function renderCard(id, category, title, discription, subtasks, prio) {
   return ` 
               <article id=${id} onclick="overlayOn(), getData(event)" ondragstart="draggedElementID(event)" class="card" draggable="true">
                 <div class="category">${category}</div>
@@ -26,9 +26,9 @@ function renderCard(id, category, title, discription, subtasks, contact, prio) {
       `;
 }
 
-function contactTamplate(contact, color) {
+function contactTamplate(contact, color, translateX) {
   return `
-            <div class="circle" style="transform: translateX(0%); background-color: ${color}">${contact}</div>`;
+            <div class="circle" style="transform: translateX(-${translateX}%); background-color: ${color}">${contact}</div>`;
 }
 
 // TODO add more param to the function

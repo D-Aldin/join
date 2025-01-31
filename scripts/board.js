@@ -19,7 +19,6 @@ function draggedElementID(event) {
 
 function dropPoint(event) {
   event.preventDefault();
-  console.log(event.target.id);
   if (event.target.id == "toDo" || event.target.id == "progress" || event.target.id == "feedback" || event.target.id == "done") {
     let data = event.dataTransfer.getData("text");
 
@@ -92,10 +91,6 @@ async function displayCardOnBoard() {
 
   for (const key in taskFromFireBase) {
     const element = taskFromFireBase[key];
-    console.log(key);
-
-    console.log(element.assigned);
-
     if (element.status == "toDo") {
       toDo.innerHTML += renderCard(element.id, element.category, element.title, element.description, element.subtask, element.assigned, element.prio);
     }
@@ -114,13 +109,24 @@ async function displayCardOnBoard() {
 }
 
 function addProfilesToCard(id, obj) {
+  let transX = 0;
   for (const key in obj) {
     if (Object.prototype.hasOwnProperty.call(obj, key)) {
-      const name = obj[key];
+      const name = initials(obj[key]);
       const color = key;
-      document.getElementById(id).lastElementChild.firstElementChild.innerHTML += contactTamplate(name, color);
+      document.getElementById(id).lastElementChild.firstElementChild.innerHTML += contactTamplate(name, color, transX);
+      transX += 30;
+      overlappingProfileImg(refProfile);
     }
   }
+}
+
+function initials(name) {
+  let fullName = name.split(" ");
+  let firstName = fullName[0].slice(0, 1);
+  let secondName = fullName[1].slice(0, 1);
+  let initials = firstName + secondName;
+  return initials;
 }
 
 function noTaskToDo() {
@@ -146,3 +152,10 @@ let contacts = {
 displayCardOnBoard();
 const today = taskTemplate(0, "TEST1", "TESTTESTTEST", contacts, "21.01.2036", "Low", "User Task", "Subtask", "progress"); // Test Data
 // addTaskToFireBase("tasks", today);
+
+function overlappingProfileImg(refProfileContainer) {
+  for (let index = 0; index < refProfileContainer.length; index++) {
+    const element = refProfileContainer[index];
+    return element;
+  }
+}
