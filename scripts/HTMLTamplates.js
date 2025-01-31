@@ -92,3 +92,14 @@ function HTMLForOpenCard(category, title, discription, date, prio) {
                   </div>
                 </div>`;
 }
+
+function getTemplateOfRenderContacts (contacts) {
+  return `    
+    <div class="first_letter">A</div>
+    </div>
+    <div class="line_bottom"></div>
+    <div id="contact" class="contact_list hover_contact_lisonclick="toggleOverlayContactInfos()"> <img class="contact_img" src="./assets/icons/contacts/am_account_icon.svalt="account_icon" />
+    <div class="account_info">
+      <p>hallo</p>
+      <span>Hallo</span>`;
+}

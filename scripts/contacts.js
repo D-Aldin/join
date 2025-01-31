@@ -1,5 +1,12 @@
 BASE_URL = "https://dv-join-bbc2e-default-rtdb.europe-west1.firebasedatabase.app/";
 
+let arrayOfContacts = [];
+
+async function init() {
+  await getContactsFromDataBase();
+  renderContacts();
+}
+
 async function addContactToDataBase() {
   let counterResponse = await fetch(BASE_URL + "contactCounter.json");
   let counterData = await counterResponse.json();
@@ -24,7 +31,35 @@ async function addContactToDataBase() {
   return contactData;
 }
 
-function openOverlay() {
+async function getContactsFromDataBase() {
+  let response = await fetch(BASE_URL + "contacts.json");
+  let data = await response.json();
+  try {
+    for (let key in data) {
+      let contact = {
+        name: data[key].name,
+        email: data[key].email,
+        phone: data[key].phone
+      };
+      arrayOfContacts.push(contact);
+    }
+    console.log(arrayOfContacts);
+    return arrayOfContacts;
+  } catch (error) {
+    console.error('Fehler beim Laden der Kontakte:', error); 
+  }
+}
+
+function renderContacts() {
+  let contactList = document.getElementById('contact_list');
+  contactList = '';
+  for (let i = 0; i < arrayOfContacts.length; i++) {
+    const contacts = arrayOfContacts[i];
+    contactList.innerHTML += getTemplateOfRenderContacts(contacts);
+  }
+}
+
+function openOverlayAddContact() {
   let overlayRef = document.getElementById('overlay_add_contacts_background');
   let overlayCardRef = document.getElementById('overlay_add_contact_card');
   overlayRef.classList.add('overlay_background');
@@ -62,7 +97,6 @@ function closeOverlayAddContact() {
     overlayCardRef.style.animation = '';
     overlayRef.style.backgroundColor = '';
     deleteInputs();
-    overlayContactSuccessfullyCreated();
   }, { once: true });
 }
 
@@ -74,6 +108,12 @@ function overlayContactSuccessfullyCreated() {
   setTimeout(() => {
     overlayRef.style.animation = 'slideOutToRightContactSuccessfullyCreated 0.3s forwards';
   }, 800);
+}
+
+function setTimeoutSuccessfullyOverlay() {
+  setTimeout(() => {
+    overlayContactSuccessfullyCreated();
+  }, 400);
 }
 
 function closeOverlayEditContact() {

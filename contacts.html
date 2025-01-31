@@ -6,6 +6,7 @@
     <link rel="shortcut icon" href="./assets/icons/logo/joinLarge.png" type="image/x-icon" />
     <script src="./scripts/submenu.js" defer></script>
     <script src="./scripts/contacts.js" defer></script>
+    <script src="./scripts/HTMLTamplates.js" defer></script>
 
     <link rel="stylesheet" href="./css/aside.css" />
     <link rel="stylesheet" href="./css/header.css" />
@@ -15,7 +16,7 @@
     <link rel="stylesheet" href="./css/submenu.css" />
     <title>Contacts</title>
   </head>
-  <body>
+  <body onload="init()">
     <aside>
       <div class="logo_position">
         <img class="join_logo" src="./assets/icons/aside/joinLogo.svg" alt="Join_Logo" />
@@ -67,25 +68,14 @@
         <h1>Contacts</h1>
         <div class="line"></div>
         <h2>Better with a Team</h2>
-        <!-- <button onclick="overlayContactSuccessfullyCreated()">X</button> -->
       </div>
       <section>
         <div class="content_width_contacts">
-          <button class="add_contact_btn" onclick="openOverlay()">
+          <button class="add_contact_btn" onclick="openOverlayAddContact()">
             Add new contact
             <img src="./assets/icons/contacts/person_add.svg" alt="add_contact" />
           </button>
-          <div class="contacts_list">
-            <div class="first_letter">A</div>
-          </div>
-          <div class="line_bottom"></div>
-          <div id="contact" class="contact_list hover_contact_list" onclick="toggleOverlayContactInfos()">
-            <img class="contact_img" src="./assets/icons/contacts/am_account_icon.svg" alt="account_icon" />
-            <div class="account_info">
-              <p>Anton Mayer</p>
-              <span>anton@gmail.com</span>
-            </div>
-          </div>
+          <div id="contact_list" class="contacts_list"></div>
         </div>
       </section>
     </main>
@@ -118,7 +108,7 @@
         </form>
         <div class="overlay_btn_position">
           <button class="btn_cancel" onclick="closeOverlayAddContact()">Cancel <img src="./assets/icons/contacts/Close.svg" class="cancel_icon" alt="Cancel" /></button>
-          <button class="btn_create_contact" onclick="addContactToDataBase()">Create contact <img src="./assets/icons/contacts/check.svg" alt="check" /></button>
+          <button class="btn_create_contact" onclick="addContactToDataBase(), setTimeoutSuccessfullyOverlay()">Create contact <img src="./assets/icons/contacts/check.svg" alt="check" /></button>
         </div>
       </div>
     </div>
