@@ -54,7 +54,6 @@ function deleteInputs() {
 function closeOverlayAddContact() {
   let overlayRef = document.getElementById('overlay_add_contacts_background');
   let overlayCardRef = document.getElementById('overlay_add_contact_card');
-  let inputs = document.querySelectorAll('input');
   overlayRef.style.backgroundColor = 'transparent';
   overlayCardRef.style.animation = 'slideOutToRightAddContact 0.3s forwards';
   overlayCardRef.addEventListener('animationend', () => {
@@ -63,7 +62,18 @@ function closeOverlayAddContact() {
     overlayCardRef.style.animation = '';
     overlayRef.style.backgroundColor = '';
     deleteInputs();
+    overlayContactSuccessfullyCreated();
   }, { once: true });
+}
+
+function overlayContactSuccessfullyCreated() {
+  let overlayRef = document.getElementById('contact_successfully_created');
+  overlayRef.classList.remove('d_none');
+  overlayRef.classList.add('overlay_contact_successfully_created');
+  overlayRef.style.animation = 'slideInFromRightContactSuccessfullyCreated 0.3s forwards';
+  setTimeout(() => {
+    overlayRef.style.animation = 'slideOutToRightContactSuccessfullyCreated 0.3s forwards';
+  }, 800);
 }
 
 function closeOverlayEditContact() {
