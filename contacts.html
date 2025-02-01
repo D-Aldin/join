@@ -6,6 +6,7 @@
     <link rel="shortcut icon" href="./assets/icons/logo/joinLarge.png" type="image/x-icon" />
     <script src="./scripts/submenu.js" defer></script>
     <script src="./scripts/contacts.js" defer></script>
+    <script src="./scripts/HTMLTamplates.js" defer></script>
 
     <link rel="stylesheet" href="./css/aside.css" />
     <link rel="stylesheet" href="./css/header.css" />
@@ -15,7 +16,7 @@
     <link rel="stylesheet" href="./css/submenu.css" />
     <title>Contacts</title>
   </head>
-  <body>
+  <body onload="init()">
     <aside>
       <div class="logo_position">
         <img class="join_logo" src="./assets/icons/aside/joinLogo.svg" alt="Join_Logo" />
@@ -67,25 +68,14 @@
         <h1>Contacts</h1>
         <div class="line"></div>
         <h2>Better with a Team</h2>
-        <!-- <button onclick="overlayContactSuccessfullyCreated()">X</button> -->
       </div>
       <section>
         <div class="content_width_contacts">
-          <button class="add_contact_btn" onclick="openOverlay()">
+          <button class="add_contact_btn" onclick="openOverlayAddContact()">
             Add new contact
             <img src="./assets/icons/contacts/person_add.svg" alt="add_contact" />
           </button>
-          <div class="contacts_list">
-            <div class="first_letter">A</div>
-          </div>
-          <div class="line_bottom"></div>
-          <div id="contact" class="contact_list hover_contact_list" onclick="toggleOverlayContactInfos()">
-            <img class="contact_img" src="./assets/icons/contacts/am_account_icon.svg" alt="account_icon" />
-            <div class="account_info">
-              <p>Anton Mayer</p>
-              <span>anton@gmail.com</span>
-            </div>
-          </div>
+          <div id="contact_list"></div>
         </div>
       </section>
     </main>
@@ -118,62 +108,14 @@
         </form>
         <div class="overlay_btn_position">
           <button class="btn_cancel" onclick="closeOverlayAddContact()">Cancel <img src="./assets/icons/contacts/Close.svg" class="cancel_icon" alt="Cancel" /></button>
-          <button class="btn_create_contact" onclick="addContactToDataBase()">Create contact <img src="./assets/icons/contacts/check.svg" alt="check" /></button>
+          <button class="btn_create_contact" onclick="addContactToDataBase(), setTimeoutSuccessfullyOverlay()">Create contact <img src="./assets/icons/contacts/check.svg" alt="check" /></button>
         </div>
       </div>
     </div>
 
-    <div id="overlay_contact_infos" class="d_none">
-      <div class="overlay_contact_info_header">
-        <img class="account_icon" src="./assets/icons/contacts/am_account_icon.svg" alt="account_icon" />
-        <div>
-          <h2>Anton Meyer</h2>
-          <div class="btn_position">
-            <img onclick="openOverlayEditContact()" class="edit_hover" src="./assets/icons/contacts/edit.svg" alt="edit" />
-            <img class="delete_hover" src="./assets/icons/contacts/delete.svg" alt="delete" />
-          </div>
-        </div>
-      </div>
-      <div class="headline_contact_info">
-        <p>Contact Information</p>
-      </div>
-      <div class="contact_info">
-        <span>Email</span>
-        <p class="email_design">anton@gmail.com</p>
-        <span>Phone</span>
-        <p class="number_design">+49 1111 111 11 1</p>
-      </div>
-    </div>
+    <div id="overlay_contact_infos" class="d_none"></div>
 
-    <div id="overlay_edit_contact_card" class="d_none">
-      <div class="overlay_add_contact_left_side">
-        <div class="overlay_logo_position">
-          <img src="./assets/icons/logo/logo_white.svg" alt="logo" />
-        </div>
-        <div class="overlay_headline_add_contact">
-          <h1>Edit contact</h1>
-          <div class="line_contact"></div>
-        </div>
-      </div>
-      <div class="overlay_add_contact_right_side">
-        <div class="overlay_account_icon_position">
-          <img src="./assets/icons/contacts/account_icon.svg" alt="account_icon" />
-        </div>
-        <div class="overlay_close_btn_position">
-          <img onclick="closeOverlayEditContact()" src="./assets/icons/contacts/Close.svg" alt="close_button" />
-        </div>
-        <form action class="form_input_fields_position">
-          <input id="add_name" type="text" placeholder="Name" required />
-          <input id="add_email" type="email" placeholder="Email" required />
-          <input id="add_phone" type="tel" placeholder="Phone" required />
-          <!-- add the button below inside the form -->
-        </form>
-        <div class="overlay_btn_position">
-          <button class="btn_delete" onclick="deleteInputs()">Delete</button>
-          <button class="btn_save" onclick="saveChangesContact()">Save <img src="./assets/icons/contacts/check.svg" alt="check" /></button>
-        </div>
-      </div>
-    </div>
+    <div id="overlay_edit_contact_card" class="d_none"></div>
 
     <div id="contact_successfully_created" class="d_none">Contact successfully created</div>
   </body>

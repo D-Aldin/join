@@ -75,7 +75,7 @@ section::-webkit-scrollbar-track {
   color: rgba(255, 255, 255);
 }
 
-.contacts_list {
+.contacts_list_test {
   display: flex;
   justify-content: flex-start;
   align-items: center;
@@ -461,15 +461,17 @@ input[type="tel"]:focus {
 }
 
 /* hier nochmal nachschauen, ob es eine besser Variante gibt */
-.btn_cancel:hover img {
+.btn_cancel:hover img,
+.btn_delete:hover img {
   transition: ease-in-out 125ms;
   filter: invert(41%) sepia(100%) saturate(1000%) hue-rotate(170deg) brightness(100%) contrast(100%);
 }
 
 .btn_cancel img,
-.btn_create_contact img {
-  width: 24px;
-  height: 24px;
+.btn_create_contact img,
+.cancel_icon {
+  width: 32px;
+  height: 32px;
 }
 
 .btn_create_contact {
@@ -500,7 +502,7 @@ input[type="tel"]:focus {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 10px;
+  /* gap: 10px; */
   width: 113px;
   height: 55px;
   border-radius: 8px;
