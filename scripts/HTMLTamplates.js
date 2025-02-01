@@ -39,11 +39,11 @@ function contactTamplateForOpenCard(contact, color, fullName) {
           </div>  `;
 }
 
-function subtasksTamplate(task) {
+function subtasksTamplate(task, id) {
   return `
           <div>
-            <input id="subtasks" type="checkbox" />
-            <label for="subtasks">${task}</label>
+            <input type="checkbox" id="subtasks${id}" name="subtasks${id}" value="task${id}" />
+            <label for="subtasks${id}">${task}</label>
           </div>`;
 }
 
@@ -78,9 +78,9 @@ function HTMLForOpenCard(category, title, discription, date, prio, name) {
                   </div>
                   <div class="open_card_subtasks">
                     <div>Subtasks</div>
-                    <div id="subtasks_container">
+                    <form id="subtasks_container">
                       
-                    </div>
+                    </form>
                   </div>
                   <div class="delete_edit_btn_box">
                     <button class="deleteBtn"><img src="./assets/icons/board/delete.svg" alt="" /></button>

@@ -54,7 +54,24 @@ async function managenSubtasks(id) {
   for (const key in refSubtasks) {
     if (Object.prototype.hasOwnProperty.call(refSubtasks, key)) {
       const task = refSubtasks[key];
-      refSubtaskContainer.innerHTML += subtasksTamplate(task);
+      const taskID = key;
+      refSubtaskContainer.innerHTML += subtasksTamplate(task, taskID);
     }
   }
+  checkCheckBox();
 }
+
+function checkCheckBox() {
+  let refTask;
+  let refCheckBoxes = document.querySelectorAll("input[type='checkbox']");
+  for (let index = 0; index < refCheckBoxes.length; index++) {
+    const element = refCheckBoxes[index];
+    element.addEventListener("change", () => {
+      if (element.checked) {
+        console.log(element.id);
+        element.setAttribute("checked", true);
+      }
+    });
+  }
+}
+checkCheckBox();
