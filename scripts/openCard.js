@@ -59,6 +59,7 @@ async function renderSubtasks(id) {
     }
   }
   managenCheckBoxes(id);
+  setCheckboxAttributes(id);
 }
 
 async function managenCheckBoxes(id) {
@@ -94,4 +95,16 @@ async function updateSubtaskState(path = "", taskID, subtaskID, state) {
   const responseData = await response.json();
 }
 
-async function setCheckboxAttributes() {}
+async function setCheckboxAttributes(id) {
+  let response = await fetchCardDetails("tasks", id);
+  let refToSubtask = response[id].subtask;
+  for (let index = 0; index < refToSubtask.length; index++) {
+    const element = refToSubtask[index];
+    if (element.state == false) {
+      document.getElementById(`subtask${index}`).removeAttribute("checked");
+    }
+    if (element.state) {
+      document.getElementById(`subtask${index}`).setAttribute("checked", true);
+    }
+  }
+}

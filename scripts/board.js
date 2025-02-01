@@ -152,14 +152,13 @@ let contacts = {
 };
 
 let subtaskList = {
-  0: { task: "test1", state: false },
-  1: { task: "test2", state: false },
-  2: { task: "test3", state: false },
+  0: { task: "NewTask1", state: false },
+  1: { task: "NewTask2", state: false },
 };
 
 displayCardOnBoard();
-const today = taskTemplate(0, "TEST1", "TESTTESTTEST", contacts, "21.01.2036", "Low", "User Task", subtaskList, "progress"); // Test Data
-// addTaskToFireBase("tasks", today);
+const today = taskTemplate(1, "TEST2", "Work in progress", contacts, "01.02.2025", "Medium", "User Task", subtaskList, "progress"); // Test Data
+addTaskToFireBase("tasks", today);
 
 // function overlappingProfileImg(refProfileContainer) {
 //   for (let index = 0; index < refProfileContainer.length; index++) {
