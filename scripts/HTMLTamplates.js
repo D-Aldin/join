@@ -12,7 +12,7 @@ function renderCard(id, category, title, discription, subtasks, prio) {
                   <div class="progress_container">
                     <div class="progress_bar" style="width: 20%"></div>
                   </div>
-                  <span id="subtasks">${subtasks}</span>
+                  <span id="subtasks">${subtasks} Subtasks</span>
                 </div>
                 <div class="profile_prio_container">
                   <div class="profile">

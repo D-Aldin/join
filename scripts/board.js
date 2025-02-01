@@ -91,17 +91,19 @@ async function displayCardOnBoard() {
 
   for (const key in taskFromFireBase) {
     const element = taskFromFireBase[key];
+    console.log(element.subtask);
+
     if (element.status == "toDo") {
-      toDo.innerHTML += renderCard(element.id, element.category, element.title, element.description, element.subtask, element.assigned, element.prio);
+      toDo.innerHTML += renderCard(element.id, element.category, element.title, element.description, element.subtask.length, element.assigned, element.prio);
     }
     if (element.status == "progress") {
-      progress.innerHTML += renderCard(element.id, element.category, element.title, element.description, element.subtask, element.assigned, element.prio);
+      progress.innerHTML += renderCard(element.id, element.category, element.title, element.description, element.subtask.length, element.assigned, element.prio);
     }
     if (element.status == "feedback") {
-      feedback.innerHTML += renderCard(element.id, element.category, element.title, element.description, element.subtask, element.assigned, element.prio);
+      feedback.innerHTML += renderCard(element.id, element.category, element.title, element.description, element.subtask.length, element.assigned, element.prio);
     }
     if (element.status == "done") {
-      done.innerHTML += renderCard(element.id, element.category, element.title, element.description, element.subtask, element.assigned, element.prio);
+      done.innerHTML += renderCard(element.id, element.category, element.title, element.description, element.subtask.length, element.assigned, element.prio);
     }
     addProfilesToCard(key, element.assigned);
   }
@@ -120,6 +122,8 @@ function addProfilesToCard(id, obj) {
     }
   }
 }
+
+function manageSubtasks(params) {}
 
 function initials(name) {
   let fullName = name.split(" ");
@@ -149,8 +153,14 @@ let contacts = {
   yellow: "Simon Burlet",
 };
 
+let subtaskList = {
+  0: "test1",
+  1: "test2",
+  2: "test3",
+};
+
 displayCardOnBoard();
-const today = taskTemplate(0, "TEST1", "TESTTESTTEST", contacts, "21.01.2036", "Low", "User Task", "Subtask", "progress"); // Test Data
+const today = taskTemplate(0, "TEST1", "TESTTESTTEST", contacts, "21.01.2036", "Low", "User Task", subtaskList, "progress"); // Test Data
 // addTaskToFireBase("tasks", today);
 
 function overlappingProfileImg(refProfileContainer) {
