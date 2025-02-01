@@ -115,35 +115,7 @@
 
     <div id="overlay_contact_infos" class="d_none"></div>
 
-    <div id="overlay_edit_contact_card" class="d_none">
-      <div class="overlay_add_contact_left_side">
-        <div class="overlay_logo_position">
-          <img src="./assets/icons/logo/logo_white.svg" alt="logo" />
-        </div>
-        <div class="overlay_headline_add_contact">
-          <h1>Edit contact</h1>
-          <div class="line_contact"></div>
-        </div>
-      </div>
-      <div class="overlay_add_contact_right_side">
-        <div class="overlay_account_icon_position">
-          <img src="./assets/icons/contacts/account_icon.svg" alt="account_icon" />
-        </div>
-        <div class="overlay_close_btn_position">
-          <img onclick="closeOverlayEditContact()" src="./assets/icons/contacts/Close.svg" alt="close_button" />
-        </div>
-        <form action class="form_input_fields_position">
-          <input id="add_name" type="text" placeholder="Name" required />
-          <input id="add_email" type="email" placeholder="Email" required />
-          <input id="add_phone" type="tel" placeholder="Phone" required />
-          <!-- add the button below inside the form -->
-        </form>
-        <div class="overlay_btn_position">
-          <button class="btn_delete" onclick="deleteInputs()">Delete</button>
-          <button class="btn_save" onclick="saveChangesContact()">Save <img src="./assets/icons/contacts/check.svg" alt="check" /></button>
-        </div>
-      </div>
-    </div>
+    <div id="overlay_edit_contact_card" class="d_none"></div>
 
     <div id="contact_successfully_created" class="d_none">Contact successfully created</div>
   </body>

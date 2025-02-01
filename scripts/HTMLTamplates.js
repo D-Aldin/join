@@ -93,12 +93,29 @@ function HTMLForOpenCard(category, title, discription, date, prio) {
                 </div>`;
 }
 
-function getTemplateOfRenderContacts(contact, index) {
-  return `    
+function getLetterTemplate(letter) {
+  return `
     <div class="contacts_list_test">
-      <div class="first_letter">${contact.name.charAt(0)}</div>
+      <div class="first_letter">${letter}</div>
     </div>
     <div class="line_bottom"></div>
+  `;
+}
+
+function getContactTemplate(contact, index) {
+  return `
+    <div id="contact_${index}" class="contact_list hover_contact_list" onclick="toggleOverlayContactInfos(${index})">
+      <img class="contact_img" src="./assets/icons/contacts/am_account_icon.svg" />
+      <div class="account_info">
+        <p>${contact.name}</p>
+        <span>${contact.email}</span>
+      </div>
+    </div>
+  `;
+}
+
+function getTemplateOfRenderContacts(contact, index) {
+  return `    
     <div id="contact_${index}" class="contact_list hover_contact_list" onclick="toggleOverlayContactInfos(${index})">
       <img class="contact_img" src="./assets/icons/contacts/am_account_icon.svg" />
       <div class="account_info">
@@ -115,7 +132,7 @@ function getTemplateOfContactInfo(contact) {
     <div>
       <h2>${contact.name}</h2>
       <div class="btn_position">
-        <img onclick="openOverlayEditContact()" class="edit_hover" src="./assets/icons/contacts/edit.svg" alt="edit" />
+        <img onclick="openOverlayEditContact('${contact.id}')" class="edit_hover" src="./assets/icons/contacts/edit.svg" alt="edit" />
         <img onclick="deleteContactFromList('${contact.id}')" class="delete_hover" src="./assets/icons/contacts/delete.svg" alt="delete" />
       </div>
     </div>
@@ -129,4 +146,34 @@ function getTemplateOfContactInfo(contact) {
     <span>Phone</span>
     <p class="number_design">${contact.phone}</p>
   </div>`;
+}
+
+function getTemplateOfContactEdit(contact) {
+  return `
+    <div class="overlay_add_contact_left_side">
+      <div class="overlay_logo_position">
+        <img src="./assets/icons/logo/logo_white.svg" alt="logo" />
+      </div>
+      <div class="overlay_headline_add_contact">
+        <h1>Edit contact</h1>
+        <div class="line_contact"></div>
+      </div>
+    </div>
+    <div class="overlay_add_contact_right_side">
+      <div class="overlay_account_icon_position">
+        <img src="./assets/icons/contacts/account_icon.svg" alt="account_icon" />
+      </div>
+      <div class="overlay_close_btn_position">
+        <img onclick="closeOverlayEditContact()" src="./assets/icons/contacts/Close.svg" alt="close_button" />
+      </div>
+      <form action class="form_input_fields_position">
+        <input id="edit_name" type="text" placeholder="Name" value="${contact.name}" required />
+        <input id="edit_email" type="email" placeholder="Email" value="${contact.email}" required />
+        <input id="edit_phone" type="tel" placeholder="Phone" value="${contact.phone}" required />
+      </form>
+      <div class="overlay_btn_position">
+        <button class="btn_delete" onclick="deleteContactFromList('${contact.id}')">Delete <img src="./assets/icons/contacts/Close.svg" class="cancel_icon" alt="Cancel" /></button>
+        <button class="btn_save" onclick="saveChangesContact('${contact.id}')">Save <img src="./assets/icons/contacts/check.svg" alt="check" /></button>
+      </div>
+    </div>`;
 }
