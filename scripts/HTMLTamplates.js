@@ -31,6 +31,14 @@ function contactTamplate(contact, color, translateX) {
             <div class="circle" style="transform: translateX(-${translateX}%); background-color: ${color}">${contact}</div>`;
 }
 
+function contactTamplateForOpenCard(contact, color) {
+  return `
+          <div class="profile_names">
+            <div class="circle" style="background-color: ${color}">${contact}</div>
+            <span>${contact}</span>
+          </div>  `;
+}
+
 // TODO add more param to the function
 function HTMLForOpenCard(category, title, discription, date, prio, name) {
   return `     
@@ -57,10 +65,7 @@ function HTMLForOpenCard(category, title, discription, date, prio, name) {
                   <div class="open_card_assigned">
                     <div class="assigned_box">
                       <div>Assigned To:</div>
-                      <div class="profiles">
-                        
-                        </div>
-                      </div>
+                      <div class="profiles"></div>
                     </div>
                   </div>
                   <div class="open_card_subtasks">

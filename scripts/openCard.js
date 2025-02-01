@@ -19,6 +19,7 @@ async function getData(event) {
   const refersToCard = fetchDetails[id];
   // console.log(refersToCard);
   refCardBox.innerHTML = HTMLForOpenCard(refersToCard.category, refersToCard.title, refersToCard.description, refersToCard.data, refersToCard.prio);
+  managenProfilesWhenCardOpen(id);
   managenSubtasks(id);
 }
 
@@ -29,6 +30,21 @@ async function fetchCardDetails(path = "", id) {
   let responseToJSON = response.json();
   let result = await responseToJSON;
   return result;
+}
+
+async function managenProfilesWhenCardOpen(id) {
+  const dataFromFireBase = await fetchCardDetails("tasks", id);
+  const refAssignedObject = dataFromFireBase[id].assigned;
+  let refProfileContainer = document.querySelector(".profiles");
+  console.log(refProfileContainer);
+
+  for (const key in refAssignedObject) {
+    if (Object.prototype.hasOwnProperty.call(refAssignedObject, key)) {
+      const name = initials(refAssignedObject[key]);
+      const color = key;
+      refProfileContainer.innerHTML += contactTamplateForOpenCard(name, color);
+    }
+  }
 }
 
 async function managenSubtasks(id) {

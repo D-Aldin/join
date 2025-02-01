@@ -118,12 +118,10 @@ function addProfilesToCard(id, obj) {
       const color = key;
       document.getElementById(id).lastElementChild.firstElementChild.innerHTML += contactTamplate(name, color, transX);
       transX += 30;
-      overlappingProfileImg(refProfile);
+      // overlappingProfileImg(refProfile);
     }
   }
 }
-
-// function managenSubtasks(params) {}
 
 function initials(name) {
   let fullName = name.split(" ");
@@ -146,7 +144,7 @@ function noTaskToDo() {
   }, 130);
 }
 
-// TEST LIST
+// ------------------------- TEST LIST
 let contacts = {
   red: "Dobric Aldin",
   green: "Robby Runge",
@@ -163,9 +161,9 @@ displayCardOnBoard();
 const today = taskTemplate(0, "TEST1", "TESTTESTTEST", contacts, "21.01.2036", "Low", "User Task", subtaskList, "progress"); // Test Data
 // addTaskToFireBase("tasks", today);
 
-function overlappingProfileImg(refProfileContainer) {
-  for (let index = 0; index < refProfileContainer.length; index++) {
-    const element = refProfileContainer[index];
-    return element;
-  }
-}
+// function overlappingProfileImg(refProfileContainer) {
+//   for (let index = 0; index < refProfileContainer.length; index++) {
+//     const element = refProfileContainer[index];
+//     return element;
+//   }
+// }
