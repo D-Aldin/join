@@ -36,24 +36,25 @@ async function managenProfilesWhenCardOpen(id) {
   const dataFromFireBase = await fetchCardDetails("tasks", id);
   const refAssignedObject = dataFromFireBase[id].assigned;
   let refProfileContainer = document.querySelector(".profiles");
-  console.log(refProfileContainer);
 
   for (const key in refAssignedObject) {
     if (Object.prototype.hasOwnProperty.call(refAssignedObject, key)) {
+      const fullName = refAssignedObject[key];
       const name = initials(refAssignedObject[key]);
       const color = key;
-      refProfileContainer.innerHTML += contactTamplateForOpenCard(name, color);
+      refProfileContainer.innerHTML += contactTamplateForOpenCard(name, color, fullName);
     }
   }
 }
 
 async function managenSubtasks(id) {
   let dataFromFireBase = await fetchCardDetails("tasks", id);
+  let refSubtaskContainer = document.querySelector("#subtasks_container");
   const refSubtasks = dataFromFireBase[id].subtask;
   for (const key in refSubtasks) {
     if (Object.prototype.hasOwnProperty.call(refSubtasks, key)) {
-      const element = refSubtasks[key];
-      console.log(element);
+      const task = refSubtasks[key];
+      refSubtaskContainer.innerHTML += subtasksTamplate(task);
     }
   }
 }

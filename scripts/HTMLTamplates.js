@@ -31,12 +31,20 @@ function contactTamplate(contact, color, translateX) {
             <div class="circle" style="transform: translateX(-${translateX}%); background-color: ${color}">${contact}</div>`;
 }
 
-function contactTamplateForOpenCard(contact, color) {
+function contactTamplateForOpenCard(contact, color, fullName) {
   return `
           <div class="profile_names">
             <div class="circle" style="background-color: ${color}">${contact}</div>
-            <span>${contact}</span>
+            <span>${fullName}</span>
           </div>  `;
+}
+
+function subtasksTamplate(task) {
+  return `
+          <div>
+            <input id="subtasks" type="checkbox" />
+            <label for="subtasks">${task}</label>
+          </div>`;
 }
 
 // TODO add more param to the function
@@ -70,15 +78,8 @@ function HTMLForOpenCard(category, title, discription, date, prio, name) {
                   </div>
                   <div class="open_card_subtasks">
                     <div>Subtasks</div>
-                    <div class="">
-                      <div>
-                        <input id="subtasks" type="checkbox" />
-                        <label for="subtasks">Implement JS function for openCard</label>
-                      </div>
-                      <div>
-                        <input id="subtasks" type="checkbox" />
-                        <label for="subtasks">Implement JS function for openCard</label>
-                      </div>
+                    <div id="subtasks_container">
+                      
                     </div>
                   </div>
                   <div class="delete_edit_btn_box">
