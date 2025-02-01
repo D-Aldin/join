@@ -32,7 +32,7 @@ function contactTamplate(contact, color, translateX) {
 }
 
 // TODO add more param to the function
-function HTMLForOpenCard(category, title, discription, date, prio) {
+function HTMLForOpenCard(category, title, discription, date, prio, name) {
   return `     
                 <div class="category_box">
                   <div class="open_card_category">${category}</div>
@@ -58,17 +58,7 @@ function HTMLForOpenCard(category, title, discription, date, prio) {
                     <div class="assigned_box">
                       <div>Assigned To:</div>
                       <div class="profiles">
-                        <div class="profile_names">
-                          <div class="circle">RR</div>
-                          <span>Robby Runge</span>
-                        </div>
-                        <div class="profile_names">
-                          <div class="circle">SB</div>
-                          <span>Simon Burlet</span>
-                        </div>
-                        <div class="profile_names">
-                          <div class="circle">AD</div>
-                          <span>Aldin Dobric</span>
+                        
                         </div>
                       </div>
                     </div>

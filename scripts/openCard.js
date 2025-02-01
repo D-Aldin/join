@@ -17,13 +17,9 @@ async function getData(event) {
   let id = event.currentTarget.id;
   const fetchDetails = await fetchCardDetails("tasks", id);
   const refersToCard = fetchDetails[id];
-  console.log(refersToCard);
-
+  // console.log(refersToCard);
   refCardBox.innerHTML = HTMLForOpenCard(refersToCard.category, refersToCard.title, refersToCard.description, refersToCard.data, refersToCard.prio);
-
-  // for (const data of cardDetails) {
-  //   console.log(element);
-  // }
+  managenSubtasks(id);
 }
 
 async function fetchCardDetails(path = "", id) {
@@ -35,4 +31,13 @@ async function fetchCardDetails(path = "", id) {
   return result;
 }
 
-// fetchCardDetails("tasks");
+async function managenSubtasks(id) {
+  let dataFromFireBase = await fetchCardDetails("tasks", id);
+  const refSubtasks = dataFromFireBase[id].subtask;
+  for (const key in refSubtasks) {
+    if (Object.prototype.hasOwnProperty.call(refSubtasks, key)) {
+      const element = refSubtasks[key];
+      console.log(element);
+    }
+  }
+}

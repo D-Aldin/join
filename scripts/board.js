@@ -91,7 +91,7 @@ async function displayCardOnBoard() {
 
   for (const key in taskFromFireBase) {
     const element = taskFromFireBase[key];
-    console.log(element.subtask);
+    // console.log(element.subtask);
 
     if (element.status == "toDo") {
       toDo.innerHTML += renderCard(element.id, element.category, element.title, element.description, element.subtask.length, element.assigned, element.prio);
@@ -123,7 +123,7 @@ function addProfilesToCard(id, obj) {
   }
 }
 
-function manageSubtasks(params) {}
+// function managenSubtasks(params) {}
 
 function initials(name) {
   let fullName = name.split(" ");
