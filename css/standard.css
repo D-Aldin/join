@@ -27,7 +27,6 @@ a {
   display: none;
 }
 
-/* standart Position vom header? */
 .header_standard_position {
   display: flex;
   align-items: center;
@@ -49,4 +48,8 @@ a {
 .line {
   border-left: 3px solid rgb(41, 171, 226);
   height: 59px;
+}
+
+.cursor_pointer {
+  cursor: pointer;
 }
