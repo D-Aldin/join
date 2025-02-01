@@ -27,11 +27,12 @@ async function addContactToDataBase() {
     method: "PUT",
     body: JSON.stringify(newIndex),
   });
+  arrayOfContacts.push(contactData);
+  renderContacts();
   closeOverlayAddContact();
   return contactData;
 }
 
-// test
 async function getContactsFromDataBase() {
   let response = await fetch(BASE_URL + "contacts.json");
   let data = await response.json();
@@ -51,13 +52,12 @@ async function getContactsFromDataBase() {
   }
 }
 
-// test
 function renderContacts() {
   let contactList = document.getElementById('contact_list');
-  contactList = '';
+  contactList.innerHTML = '';
   for (let i = 0; i < arrayOfContacts.length; i++) {
     const contacts = arrayOfContacts[i];
-    contactList.innerHTML += getTemplateOfRenderContacts(contacts);
+    contactList.innerHTML += getTemplateOfRenderContacts(contacts, i);
   }
 }
 

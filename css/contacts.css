@@ -75,7 +75,7 @@ section::-webkit-scrollbar-track {
   color: rgba(255, 255, 255);
 }
 
-.contacts_list {
+.contacts_list_test {
   display: flex;
   justify-content: flex-start;
   align-items: center;
