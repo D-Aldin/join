@@ -17,10 +17,9 @@ async function getData(event) {
   let id = event.currentTarget.id;
   const fetchDetails = await fetchCardDetails("tasks", id);
   const refersToCard = fetchDetails[id];
-  // console.log(refersToCard);
   refCardBox.innerHTML = HTMLForOpenCard(refersToCard.category, refersToCard.title, refersToCard.description, refersToCard.data, refersToCard.prio);
   managenProfilesWhenCardOpen(id);
-  managenSubtasks(id);
+  renderSubtasks(id);
 }
 
 async function fetchCardDetails(path = "", id) {
@@ -47,31 +46,52 @@ async function managenProfilesWhenCardOpen(id) {
   }
 }
 
-async function managenSubtasks(id) {
+async function renderSubtasks(id) {
   let dataFromFireBase = await fetchCardDetails("tasks", id);
   let refSubtaskContainer = document.querySelector("#subtasks_container");
   const refSubtasks = dataFromFireBase[id].subtask;
   for (const key in refSubtasks) {
     if (Object.prototype.hasOwnProperty.call(refSubtasks, key)) {
-      const task = refSubtasks[key];
+      const task = refSubtasks[key].task;
+      const state = refSubtasks[key].state;
       const taskID = key;
       refSubtaskContainer.innerHTML += subtasksTamplate(task, taskID);
     }
   }
-  checkCheckBox();
+  managenCheckBoxes(id);
 }
 
-function checkCheckBox() {
-  let refTask;
+async function managenCheckBoxes(id) {
   let refCheckBoxes = document.querySelectorAll("input[type='checkbox']");
   for (let index = 0; index < refCheckBoxes.length; index++) {
     const element = refCheckBoxes[index];
     element.addEventListener("change", () => {
       if (element.checked) {
-        console.log(element.id);
+        let newState = {
+          state: true,
+        };
         element.setAttribute("checked", true);
+        updateSubtaskState("tasks", id, index, newState);
+      }
+      if (element.checked === false) {
+        let newState = {
+          state: false,
+        };
+        updateSubtaskState("tasks", id, index, newState);
       }
     });
   }
 }
-checkCheckBox();
+
+async function updateSubtaskState(path = "", taskID, subtaskID, state) {
+  let response = await fetch(`${BASE_URL}/${path}/${taskID}/subtask/${subtaskID}.json`, {
+    method: "PATCH",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(state),
+  });
+  const responseData = await response.json();
+}
+
+async function setCheckboxAttributes() {}

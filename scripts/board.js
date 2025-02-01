@@ -153,8 +153,8 @@ let contacts = {
 
 let subtaskList = {
   0: { task: "test1", state: false },
-  1: { task: "test1", state: false },
-  2: { task: "test1", state: false },
+  1: { task: "test2", state: false },
+  2: { task: "test3", state: false },
 };
 
 displayCardOnBoard();
