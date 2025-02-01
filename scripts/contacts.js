@@ -59,9 +59,19 @@ async function deleteContactFromList(id) {
     });
     arrayOfContacts = arrayOfContacts.filter(contact => contact.id !== id);
     renderContacts();
+    closeOverlayContactInfoAfterDelete();
   } catch (error) {
     console.error('Fehler beim Löschen des Kontakts:', error);
   }
+}
+
+function closeOverlayContactInfoAfterDelete() {
+  let overlay = document.getElementById('overlay_contact_infos');
+  overlay.style.animation = 'slideOutToRightContactInfos 0.3s forwards';
+  overlay.addEventListener('animationend', () => {
+    overlay.classList.add('d_none');
+    overlay.style.animation = '';
+  }, { once: true });
 }
 
 function deleteInputs() {
