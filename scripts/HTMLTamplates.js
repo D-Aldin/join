@@ -93,15 +93,40 @@ function HTMLForOpenCard(category, title, discription, date, prio) {
                 </div>`;
 }
 
-function getTemplateOfRenderContacts(contacts) {
+function getTemplateOfRenderContacts(contact, index) {
   return `    
     <div class="contacts_list_test">
-      <div class="first_letter">A</div>
+      <div class="first_letter">${contact.name.charAt(0)}</div>
     </div>
     <div class="line_bottom"></div>
-    <div id="contact" class="contact_list hover_contact_list" onclick="toggleOverlayContactInfos()"><img class="contact_img" src="./assets/icons/contacts/am_account_icon.svg" />
-    <div class="account_info">
-      <p>${contacts.name}</p>
-      <span>${contacts.email}</span>
+    <div id="contact_${index}" class="contact_list hover_contact_list" onclick="toggleOverlayContactInfos(${index})">
+      <img class="contact_img" src="./assets/icons/contacts/am_account_icon.svg" />
+      <div class="account_info">
+        <p>${contact.name}</p>
+        <span>${contact.email}</span>
+      </div>
     </div>`;
+}
+
+function getTemplateOfContactInfo(contact) {
+  return `
+    <div class="overlay_contact_info_header">
+    <img class="account_icon" src="./assets/icons/contacts/am_account_icon.svg" alt="account_icon" />
+    <div>
+      <h2>${contact.name}</h2>
+      <div class="btn_position">
+        <img onclick="openOverlayEditContact()" class="edit_hover" src="./assets/icons/contacts/edit.svg" alt="edit" />
+        <img onclick="deleteContactFromList('${contact.id}')" class="delete_hover" src="./assets/icons/contacts/delete.svg" alt="delete" />
+      </div>
+    </div>
+  </div>
+  <div class="headline_contact_info">
+    <p>Contact Information</p>
+  </div>
+  <div class="contact_info">
+    <span>Email</span>
+    <p class="email_design">${contact.email}</p>
+    <span>Phone</span>
+    <p class="number_design">${contact.phone}</p>
+  </div>`;
 }

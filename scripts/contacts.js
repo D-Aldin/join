@@ -8,56 +8,79 @@ async function init() {
 }
 
 async function addContactToDataBase() {
-  let counterResponse = await fetch(BASE_URL + "contactCounter.json");
-  let counterData = await counterResponse.json();
-  let newIndex = (counterData || 0) + 1;
   let name = document.getElementById('add_name').value;
   let email = document.getElementById('add_email').value;
   let phone = document.getElementById('add_phone').value;
-  let response = await fetch(BASE_URL + `contacts/contact_${newIndex}.json`, {
-    method: "PUT",
-    body: JSON.stringify({
-      name: name,
-      email: email,
-      phone: phone
-    }),
-  });
-  let contactData = await response.json();
-  await fetch(BASE_URL + "contactCounter.json", {
-    method: "PUT",
-    body: JSON.stringify(newIndex),
-  });
-  arrayOfContacts.push(contactData);
-  renderContacts();
-  closeOverlayAddContact();
-  return contactData;
+  const uniqueKey = `contact_${Date.now()}`;
+  try {
+    let response = await fetch(BASE_URL + `contacts/${uniqueKey}.json`, {
+      method: "PUT",
+      body: JSON.stringify({
+        name: name,
+        email: email,
+        phone: phone
+      }),
+    });
+    let contactData = await response.json();
+    arrayOfContacts.push({ id: uniqueKey, ...contactData });
+    renderContacts();
+    closeOverlayAddContact();
+    deleteInputs();
+    return contactData;
+  } catch (error) {
+    console.error('Fehler:', error);
+  }
 }
 
 async function getContactsFromDataBase() {
   let response = await fetch(BASE_URL + "contacts.json");
   let data = await response.json();
+  arrayOfContacts = [];
   try {
     for (let key in data) {
       let contact = {
+        id: key,
         name: data[key].name,
         email: data[key].email,
         phone: data[key].phone
       };
       arrayOfContacts.push(contact);
     }
-    console.log(arrayOfContacts);
     return arrayOfContacts;
   } catch (error) {
     console.error('Fehler beim Laden der Kontakte:', error); 
   }
 }
 
+async function deleteContactFromList(id) {
+  try {
+    const response = await fetch(BASE_URL + `contacts/${id}.json`, {
+      method: "DELETE",
+    });
+    arrayOfContacts = arrayOfContacts.filter(contact => contact.id !== id);
+    renderContacts();
+  } catch (error) {
+    console.error('Fehler beim Löschen des Kontakts:', error);
+  }
+}
+
+function deleteInputs() {
+  let inputs = document.querySelectorAll('input');
+  for (let i = 0; i < inputs.length; i++) {
+    inputs[i].value = '';
+  }
+}
+
+// function saveChangesContact() {
+  
+// }
+
 function renderContacts() {
   let contactList = document.getElementById('contact_list');
   contactList.innerHTML = '';
   for (let i = 0; i < arrayOfContacts.length; i++) {
-    const contacts = arrayOfContacts[i];
-    contactList.innerHTML += getTemplateOfRenderContacts(contacts, i);
+    const contact = arrayOfContacts[i];
+    contactList.innerHTML += getTemplateOfRenderContacts(contact, i);
   }
 }
 
@@ -76,17 +99,6 @@ function openOverlayEditContact() {
   overlayEditCardRef.classList.add('overlay_edit_contact_card');
   overlayEditCardRef.style.animation = 'slideInFromRightAddContact 0.3s forwards';
 }
-
-function deleteInputs() {
-  let inputs = document.querySelectorAll('input');
-  for (let i = 0; i < inputs.length; i++) {
-    inputs[i].value = '';
-  }
-}
-
-// function saveChangesContact() {
-  
-// }
 
 function closeOverlayAddContact() {
   let overlayRef = document.getElementById('overlay_add_contacts_background');
@@ -131,21 +143,23 @@ function closeOverlayEditContact() {
   }, { once: true });
 }
 
-function toggleOverlayContactInfos() {
-  let overlayCardRef = document.getElementById('overlay_contact_infos');
-  let contact = document.getElementById('contact');
-  if (overlayCardRef.classList.contains('d_none')) {
-    contact.classList.add('contact_active');
-    contact.classList.remove('hover_contact_list');
-    overlayCardRef.classList.remove('d_none');
-    overlayCardRef.style.animation = 'slideInFromRightContactInfos 0.3s forwards';
+function toggleOverlayContactInfos(index) {
+  let overlay = document.getElementById('overlay_contact_infos');
+  let contactElement = document.getElementById(`contact_${index}`);
+  let contact = arrayOfContacts[index];
+  overlay.innerHTML = getTemplateOfContactInfo(contact, index);
+  if (overlay.classList.contains('d_none')) {
+    overlay.classList.remove('d_none');
+    overlay.style.animation = 'slideInFromRightContactInfos 0.3s forwards';
+    contactElement.classList.add('contact_active');
+    contactElement.classList.remove('hover_contact_list');
   } else {
-    overlayCardRef.style.animation = 'slideOutToRightContactInfos 0.3s forwards';
-    contact.classList.remove('contact_active');
-    contact.classList.add('hover_contact_list');
-    overlayCardRef.addEventListener('animationend', () => {
-      overlayCardRef.classList.add('d_none');
-      overlayCardRef.style.animation = '';
+    overlay.style.animation = 'slideOutToRightContactInfos 0.3s forwards';
+    contactElement.classList.remove('contact_active');
+    contactElement.classList.add('hover_contact_list');
+    overlay.addEventListener('animationend', () => {
+      overlay.classList.add('d_none');
+      overlay.style.animation = '';
     }, { once: true });
   }
 }
