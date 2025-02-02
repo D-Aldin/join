@@ -1,5 +1,6 @@
 let card;
 let refCardBox = document.getElementById("box");
+const refCloseBtn = document.getElementsByClassName("closeBtn");
 
 function overlayOn() {
   document.getElementById("overlay").style.display = "block";
@@ -7,6 +8,7 @@ function overlayOn() {
 
 function overlayOff() {
   document.getElementById("overlay").style.display = "none";
+  refreshPageOnButtonClose();
 }
 
 function stopEventBubbel(event) {
@@ -71,7 +73,6 @@ async function managenCheckBoxes(id) {
         let newState = {
           state: true,
         };
-        element.setAttribute("checked", true);
         updateSubtaskState("tasks", id, index, newState);
       }
       if (element.checked === false) {
@@ -103,8 +104,16 @@ async function setCheckboxAttributes(id) {
     if (element.state == false) {
       document.getElementById(`subtask${index}`).removeAttribute("checked");
     }
-    if (element.state) {
+    if (element.state == true) {
       document.getElementById(`subtask${index}`).setAttribute("checked", true);
     }
   }
+}
+
+function refreshPageOnButtonClose() {
+  toDo.innerHTML = "";
+  progress.innerHTML = "";
+  feedback.innerHTML = "";
+  done.innerHTML = "";
+  displayCardOnBoard();
 }

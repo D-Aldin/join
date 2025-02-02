@@ -1,4 +1,4 @@
-function renderCard(id, category, title, discription, subtasks, prio) {
+function renderCard(id, category, title, discription, xxx, subtasks, prio) {
   return ` 
               <article id=${id} onclick="overlayOn(), getData(event)" ondragstart="draggedElementID(event)" class="card" draggable="true">
                 <div class="category">${category}</div>
@@ -12,7 +12,7 @@ function renderCard(id, category, title, discription, subtasks, prio) {
                   <div class="progress_container">
                     <div class="progress_bar" style="width: 20%"></div>
                   </div>
-                  <span id="subtasks">${subtasks} Subtasks</span>
+                  <span id="subtasks${id}">${xxx}/${subtasks} Subtasks</span>
                 </div>
                 <div class="profile_prio_container">
                   <div class="profile">
@@ -52,7 +52,7 @@ function HTMLForOpenCard(category, title, discription, date, prio, name) {
   return `     
                 <div class="category_box">
                   <div class="open_card_category">${category}</div>
-                  <button class="closeBtn"><img src="./assets/icons/board/close.svg" alt="close" /></button>
+                  <button class="closeBtn"><img onclick="overlayOff()" src="./assets/icons/board/close.svg" alt="close" /></button>
                 </div>
                 <div class="content_box">
                   <div class="open_card_title">${title}</div>
