@@ -8,9 +8,9 @@ async function init() {
 }
 
 async function addContactToDataBase() {
-  let name = document.getElementById('add_name').value;
-  let email = document.getElementById('add_email').value;
-  let phone = document.getElementById('add_phone').value;
+  let name = document.getElementById("add_name").value;
+  let email = document.getElementById("add_email").value;
+  let phone = document.getElementById("add_phone").value;
   const uniqueKey = `contact_${Date.now()}`;
   try {
     let response = await fetch(BASE_URL + `contacts/${uniqueKey}.json`, {
@@ -18,7 +18,7 @@ async function addContactToDataBase() {
       body: JSON.stringify({
         name: name,
         email: email,
-        phone: phone
+        phone: phone,
       }),
     });
     let contactData = await response.json();
@@ -28,7 +28,7 @@ async function addContactToDataBase() {
     deleteInputs();
     return contactData;
   } catch (error) {
-    console.error('Fehler:', error);
+    console.error("Fehler:", error);
   }
 }
 
@@ -42,13 +42,13 @@ async function getContactsFromDataBase() {
         id: key,
         name: data[key].name,
         email: data[key].email,
-        phone: data[key].phone
+        phone: data[key].phone,
       };
       arrayOfContacts.push(contact);
     }
     return arrayOfContacts;
   } catch (error) {
-    console.error('Fehler beim Laden der Kontakte:', error); 
+    console.error("Fehler beim Laden der Kontakte:", error);
   }
 }
 
@@ -57,60 +57,64 @@ async function deleteContactFromList(id) {
     const response = await fetch(BASE_URL + `contacts/${id}.json`, {
       method: "DELETE",
     });
-    arrayOfContacts = arrayOfContacts.filter(contact => contact.id !== id);
+    arrayOfContacts = arrayOfContacts.filter((contact) => contact.id !== id);
     renderContacts();
     closeOverlayEditContact();
     closeOverlayContactInfoAfterDelete();
   } catch (error) {
-    console.error('Fehler beim Löschen des Kontakts:', error);
+    console.error("Fehler beim Löschen des Kontakts:", error);
   }
 }
 
 function closeOverlayContactInfoAfterDelete() {
-  let overlay = document.getElementById('overlay_contact_infos');
-  overlay.style.animation = 'slideOutToRightContactInfos 0.3s forwards';
-  overlay.addEventListener('animationend', () => {
-    overlay.classList.add('d_none');
-    overlay.style.animation = '';
-  }, { once: true });
+  let overlay = document.getElementById("overlay_contact_infos");
+  overlay.style.animation = "slideOutToRightContactInfos 0.3s forwards";
+  overlay.addEventListener(
+    "animationend",
+    () => {
+      overlay.classList.add("d_none");
+      overlay.style.animation = "";
+    },
+    { once: true }
+  );
 }
 
 function deleteInputs() {
-  let inputs = document.querySelectorAll('input');
+  let inputs = document.querySelectorAll("input");
   for (let i = 0; i < inputs.length; i++) {
-    inputs[i].value = '';
+    inputs[i].value = "";
   }
 }
 
 async function saveChangesContact(id) {
-  let name = document.getElementById('edit_name').value;
-  let email = document.getElementById('edit_email').value;
-  let phone = document.getElementById('edit_phone').value;
+  let name = document.getElementById("edit_name").value;
+  let email = document.getElementById("edit_email").value;
+  let phone = document.getElementById("edit_phone").value;
   try {
     let response = await fetch(BASE_URL + `contacts/${id}.json`, {
       method: "PUT",
       body: JSON.stringify({
         name: name,
         email: email,
-        phone: phone
+        phone: phone,
       }),
     });
     let contactData = await response.json();
-    let index = arrayOfContacts.findIndex(contact => contact.id === id);
+    let index = arrayOfContacts.findIndex((contact) => contact.id === id);
     arrayOfContacts[index] = { id: id, ...contactData };
     renderContacts();
     closeOverlayEditContact();
     closeOverlayContactInfoAfterDelete();
     return contactData;
   } catch (error) {
-    console.error('Fehler:', error);
+    console.error("Fehler:", error);
   }
 }
 
 function renderContacts() {
-  let contactList = document.getElementById('contact_list');
-  contactList.innerHTML = '';
-  arrayOfContacts.sort(function(a, b) {
+  let contactList = document.getElementById("contact_list");
+  contactList.innerHTML = "";
+  arrayOfContacts.sort(function (a, b) {
     return a.name.localeCompare(b.name);
   });
   let renderedLetters = [];
@@ -126,44 +130,48 @@ function renderContacts() {
 }
 
 function openOverlayAddContact() {
-  let overlayRef = document.getElementById('overlay_add_contacts_background');
-  let overlayCardRef = document.getElementById('overlay_add_contact_card');
-  overlayRef.classList.add('overlay_background');
-  overlayCardRef.classList.add('overlay_add_contact_card');
-  overlayCardRef.style.animation = 'slideInFromRightAddContact 0.3s forwards';
+  let overlayRef = document.getElementById("overlay_add_contacts_background");
+  let overlayCardRef = document.getElementById("overlay_add_contact_card");
+  overlayRef.classList.add("overlay_background");
+  overlayCardRef.classList.add("overlay_add_contact_card");
+  overlayCardRef.style.animation = "slideInFromRightAddContact 0.3s forwards";
 }
 
 function openOverlayEditContact(contactId) {
-  let contact = arrayOfContacts.find(c => c.id === contactId);
-  let overlayRef = document.getElementById('overlay_add_contacts_background');
-  let overlayEditCardRef = document.getElementById('overlay_edit_contact_card');
+  let contact = arrayOfContacts.find((c) => c.id === contactId);
+  let overlayRef = document.getElementById("overlay_add_contacts_background");
+  let overlayEditCardRef = document.getElementById("overlay_edit_contact_card");
   overlayEditCardRef.innerHTML = getTemplateOfContactEdit(contact);
-  overlayRef.classList.add('overlay_background');
-  overlayEditCardRef.classList.add('overlay_edit_contact_card');
-  overlayEditCardRef.style.animation = 'slideInFromRightAddContact 0.3s forwards';
+  overlayRef.classList.add("overlay_background");
+  overlayEditCardRef.classList.add("overlay_edit_contact_card");
+  overlayEditCardRef.style.animation = "slideInFromRightAddContact 0.3s forwards";
 }
 
 function closeOverlayAddContact() {
-  let overlayRef = document.getElementById('overlay_add_contacts_background');
-  let overlayCardRef = document.getElementById('overlay_add_contact_card');
-  overlayRef.style.backgroundColor = 'transparent';
-  overlayCardRef.style.animation = 'slideOutToRightAddContact 0.3s forwards';
-  overlayCardRef.addEventListener('animationend', () => {
-    overlayRef.classList.remove('overlay_background');
-    overlayCardRef.classList.remove('overlay_add_contact_card');
-    overlayCardRef.style.animation = '';
-    overlayRef.style.backgroundColor = '';
-    deleteInputs();
-  }, { once: true });
+  let overlayRef = document.getElementById("overlay_add_contacts_background");
+  let overlayCardRef = document.getElementById("overlay_add_contact_card");
+  overlayRef.style.backgroundColor = "transparent";
+  overlayCardRef.style.animation = "slideOutToRightAddContact 0.3s forwards";
+  overlayCardRef.addEventListener(
+    "animationend",
+    () => {
+      overlayRef.classList.remove("overlay_background");
+      overlayCardRef.classList.remove("overlay_add_contact_card");
+      overlayCardRef.style.animation = "";
+      overlayRef.style.backgroundColor = "";
+      deleteInputs();
+    },
+    { once: true }
+  );
 }
 
 function overlayContactSuccessfullyCreated() {
-  let overlayRef = document.getElementById('contact_successfully_created');
-  overlayRef.classList.remove('d_none');
-  overlayRef.classList.add('overlay_contact_successfully_created');
-  overlayRef.style.animation = 'slideInFromRightContactSuccessfullyCreated 0.3s forwards';
+  let overlayRef = document.getElementById("contact_successfully_created");
+  overlayRef.classList.remove("d_none");
+  overlayRef.classList.add("overlay_contact_successfully_created");
+  overlayRef.style.animation = "slideInFromRightContactSuccessfullyCreated 0.3s forwards";
   setTimeout(() => {
-    overlayRef.style.animation = 'slideOutToRightContactSuccessfullyCreated 0.3s forwards';
+    overlayRef.style.animation = "slideOutToRightContactSuccessfullyCreated 0.3s forwards";
   }, 800);
 }
 
@@ -174,35 +182,79 @@ function setTimeoutSuccessfullyOverlay() {
 }
 
 function closeOverlayEditContact() {
-  let overlayRef = document.getElementById('overlay_add_contacts_background');
-  let overlayCardRef = document.getElementById('overlay_edit_contact_card');
-  overlayRef.style.backgroundColor = 'transparent';
-  overlayCardRef.style.animation = 'slideOutToRightAddContact 0.3s forwards';
-  overlayCardRef.addEventListener('animationend', () => {
-    overlayRef.classList.remove('overlay_background');
-    overlayCardRef.classList.remove('overlay_edit_contact_card');
-    overlayCardRef.style.animation = '';
-    overlayRef.style.backgroundColor = '';
-  }, { once: true });
+  let overlayRef = document.getElementById("overlay_add_contacts_background");
+  let overlayCardRef = document.getElementById("overlay_edit_contact_card");
+  overlayRef.style.backgroundColor = "transparent";
+  overlayCardRef.style.animation = "slideOutToRightAddContact 0.3s forwards";
+  overlayCardRef.addEventListener(
+    "animationend",
+    () => {
+      overlayRef.classList.remove("overlay_background");
+      overlayCardRef.classList.remove("overlay_edit_contact_card");
+      overlayCardRef.style.animation = "";
+      overlayRef.style.backgroundColor = "";
+    },
+    { once: true }
+  );
 }
 
 function toggleOverlayContactInfos(index) {
-  let overlay = document.getElementById('overlay_contact_infos');
+  let overlay = document.getElementById("overlay_contact_infos");
   let contactElement = document.getElementById(`contact_${index}`);
   let contact = arrayOfContacts[index];
-  overlay.innerHTML = getTemplateOfContactInfo(contact);
-  if (overlay.classList.contains('d_none')) {
-    overlay.classList.remove('d_none');
-    overlay.style.animation = 'slideInFromRightContactInfos 0.3s forwards';
-    contactElement.classList.add('contact_active');
-    contactElement.classList.remove('hover_contact_list');
+  if (contactElement.classList.contains("contact_active")) {
+    ifContactElementContainsContactActive(overlay, contactElement);
   } else {
-    overlay.style.animation = 'slideOutToRightContactInfos 0.3s forwards';
-    contactElement.classList.remove('contact_active');
-    contactElement.classList.add('hover_contact_list');
-    overlay.addEventListener('animationend', () => {
-      overlay.classList.add('d_none');
-      overlay.style.animation = '';
-    }, { once: true });
+    removeActiveClassFromContacts();
+    elseContactElementContainsContactActive(overlay, contactElement, contact);
   }
+}
+
+function removeActiveClassFromContacts() {
+  const activeContacts = document.querySelectorAll(".contact_active");
+  for (let i = 0; i < activeContacts.length; i++) {
+    activeContacts[i].classList.remove("contact_active");
+    activeContacts[i].classList.add("hover_contact_list");
+  }
+}
+
+function ifContactElementContainsContactActive(overlay, contactElement) {
+  contactElement.classList.remove("contact_active");
+  contactElement.classList.add("hover_contact_list");
+  overlay.style.animation = "slideOutToRightContactInfos 0.3s forwards";
+  overlay.addEventListener(
+    "animationend",
+    () => {
+      overlay.classList.add("d_none");
+      overlay.style.animation = "";
+    },
+    { once: true }
+  );
+}
+
+function elseContactElementContainsContactActive(overlay, contactElement, contact) {
+  contactElement.classList.add("contact_active");
+  contactElement.classList.remove("hover_contact_list");
+  overlay.innerHTML = getTemplateOfContactInfo(contact);
+  if (overlay.classList.contains("d_none")) {
+    overlay.classList.remove("d_none");
+    overlay.style.animation = "slideInFromRightContactInfos 0.3s forwards";
+  } else {
+    elseOverlayContactInfosGoOut(overlay, contact);
+  }
+}
+
+function elseOverlayContactInfosGoOut(overlay, contact) {
+  overlay.style.animation = "slideOutToRightContactInfos 0.3s forwards";
+  overlay.addEventListener(
+    "animationend",
+    () => {
+      overlay.classList.add("d_none");
+      overlay.style.animation = "";
+      overlay.innerHTML = getTemplateOfContactInfo(contact);
+      overlay.classList.remove("d_none");
+      overlay.style.animation = "slideInFromRightContactInfos 0.3s forwards";
+    },
+    { once: true }
+  );
 }

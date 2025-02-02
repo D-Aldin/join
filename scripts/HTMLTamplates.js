@@ -91,7 +91,7 @@ function HTMLForOpenCard(category, title, discription, date, prio, name) {
 
 function getLetterTemplate(letter) {
   return `
-    <div class="contacts_list_test">
+    <div class="contacts_list_first_letter">
       <div class="first_letter">${letter}</div>
     </div>
     <div class="line_bottom"></div>

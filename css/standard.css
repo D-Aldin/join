@@ -12,10 +12,7 @@ body {
   padding: 0;
   font-family: Inter, sans-serif;
   box-sizing: border-box;
-}
-
-::-webkit-scrollbar {
-  display: none;
+  overflow-x: hidden;
 }
 
 a {

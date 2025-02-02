@@ -42,6 +42,10 @@ body {
   overflow-y: scroll;
 }
 
+.scroll_layout::-webkit-scrollbar {
+  display: none;
+}
+
 .layout h2 {
   font-size: 27px;
   font-weight: 700;
