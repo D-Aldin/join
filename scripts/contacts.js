@@ -212,10 +212,10 @@ function toggleOverlayContactInfos(index) {
 
 function removeActiveClassFromContacts() {
   const activeContacts = document.querySelectorAll(".contact_active");
-  activeContacts.forEach((contact) => {
-    contact.classList.remove("contact_active");
-    contact.classList.add("hover_contact_list");
-  });
+  for (let i = 0; i < activeContacts.length; i++) {
+    activeContacts[i].classList.remove("contact_active");
+    activeContacts[i].classList.add("hover_contact_list");
+  }
 }
 
 function ifContactElementContainsContactActive(overlay, contactElement) {
