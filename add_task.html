@@ -15,7 +15,7 @@
     <link rel="stylesheet" href="./css/submenu.css" />
     <title>Add Task</title>
   </head>
-  <body>
+  <body onload="render()">
     <aside>
       <div class="logo_position">
         <img class="join_logo" src="./assets/icons/aside/joinLogo.svg" alt="Join_Logo" />
@@ -67,58 +67,56 @@
                     <div class="input-container">
                         <div class="inputfield-title-container">
                             <span class="display-flex"><p class="display-flex">Title</p><p class="color-red">*</p></span>
-                            <input class="inputfield" placeholder="Enter a title" type="text">
+                            <input class="inputfield" id="title" placeholder="Enter a title" type="text">
                         </div>
                         <div class="inputfield-title-container">
-                            <p>description</p>
-                            <textarea class="textareafield" placeholder="Create a contact form and imprint page" name="" id="">
-                                
+                            <p>Description</p>
+                            <textarea class="textareafield" id="description" placeholder="Enter a Description" name="Description">
+                              
                             </textarea>
                             
                         </div>
                         <div class="inputfield-title-container">
                             <p>Assigned to</p>
-                            <input class="inputfield" placeholder="select contacts to assign" type="">
-                            <datalist id="contact-list"></datalist>
+                            <select class="inputfield" id="contact-list" placeholder="select contacts to assign"></select>
                         </div>
+                        <div class="assigned-contact-wrapper" id="assigned"></div>
                     </div>
                     <div class="pixelbar"></div>
                     <div class="input-container">
                         <div class="inputfield-title-container">
                             <span class="display-flex"><p>Due date</p><p class="color-red">*</p></span>
-                            <input class="inputfield" type="date">
+                            <input class="inputfield" id="date" type="date">
                         </div>
                         <div class="inputfield-title-container">
                             <p>Prio</p>
                             <div class="button-container">
-                                <button onclick="setPrio('urgent')" id="urgent" class="urgentbutton">Urgent<img src="" alt=""></button>
-                                <button onclick="setPrio('medium')" id="medium" class="urgentbutton">Medium<img src="" alt=""></button>
-                                <button onclick="setPrio('low')" id="low" class="urgentbutton">Low<img src="" alt=""></button>
+                                <button onclick="setPrio('urgent')" id="urgent" class="urgentbutton">Urgent <div id="iconurgent" class="prio_icon"><img src="assets/icons/addTask/icon_urgent.svg" alt=""></div></button>
+                                <button onclick="setPrio('medium')" id="medium" class="urgentbutton">Medium<div id="iconmedium" class="prio_icon"><img src="assets/icons/addTask/icon_medium.svg" alt=""></div></button>
+                                <button onclick="setPrio('low')" id="low" class="urgentbutton">Low<div id="iconlow" class="prio_icon"><img src="assets/icons/addTask/icon_low.svg" alt=""></div></button>
                             </div>
                         </div>
                         <div class="inputfield-title-container">
                           <span class="display-flex"><p>Category</p><p class="color-red">*</p></span>
-                          <input class="inputfield" placeholder="Select task category" type="text" list="category" role="combobox" autocomplete="off">
-                            <datalist id="category" placeholder="Select task category">
+                            <select class="inputfield" id="category" placeholder="Select task category">
                                 <option value="Technical Task">Technical Task</option>
                                 <option value="User Story">User Story</option>
-                            </datalist>
+                            </select>
                         </div>
                         <div class="inputfield-title-container">
                           <p>Subtasks</p>
-                            <input class="inputfield" placeholder="Select task category" type="text" list="category">
-                            <datalist role="listbox" id="category">
-                                <option value="Technical Task">
-                                <option value="User Story">
-                            </datalist>
+                            <select class="inputfield" role="listbox" id="subtask">
+                                <option value="Technical Task"></option>
+                                <option value="User Story"></option>
+                            </select>
                         </div>
                     </div>
                 </div>
                 <div class="footer-container">
                   <span class="display-flex"><p class="color-red">*</p><p></p>This field is required</p></span>
                   <div class="button-container">
-                    <button class="clear-button" onclick="clear()">Clear <img src="assets/icons/addTask/iconoir_cancel.svg" alt=""></button>
-                    <Button class="great-button" onclick="CreateTask()">Creat Task <img src="assets/icons/addTask/check.svg" alt=""></Button>
+                    <button class="clear-button" onclick="clear()">Clear <div class="icon-box"></div></button>
+                    <button class="great-button" onclick="CreateTask()">Creat Task <img src="assets/icons/addTask/check.svg" alt=""></button>
                   </div>
                 </div>
             </div>

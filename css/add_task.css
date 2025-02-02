@@ -1,3 +1,26 @@
+input {
+    width: 100%;
+    box-sizing: border-box;
+    padding-left: 12px;
+    padding-right: 12px;
+    font-size: 21px;
+}
+
+select {
+    width: 100%;
+    box-sizing: border-box;
+    padding-left: 12px;
+    font-size: 21px;
+}
+
+textarea {
+    color: black;
+    width: 100%;
+    box-sizing: border-box;
+    padding-left: 12px;
+    font-size: 21px;
+}
+
 .task {
     display: flex;
     background-color: rgb(246, 247, 248);
@@ -54,6 +77,7 @@ p {
     flex-direction: column;
     align-items: flex-start;
     gap: 8px;
+    width: 440px;
 }
 
 .inputfield {
@@ -65,32 +89,24 @@ p {
 
 .textareafield {
     height: 120px;
-    width: 440px;
     border: solid 1px rgba(209, 209, 209, 1);
     border-radius: 10px;
 }
 
+.assigned-contact-wrapper {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 8px;
+}
 
-datalist {
-    position: absolute;
-    background-color: white;
-    border: 1px solid blue;
-    border-radius: 0 0 5px 5px;
-    border-top: none;
-    font-family: sans-serif;
-    width: 350px;
-    padding: 5px;
-  
-  }
-  
-  option {
-    background-color: white;
-    padding: 4px;
-    color: blue;
-    margin-bottom: 1px;
-     font-size: 18px;
-    cursor: pointer;
-  }
+.contact-icons {
+    border: solid 2px white;
+    width: 42px;
+    height: 42px;
+    border-radius: 21px;
+}
 
 .button-container {
     display: flex;
@@ -108,26 +124,68 @@ datalist {
     background-color: white;
     cursor: pointer;
     font-size: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    font-weight: 400;
 }
 
 .urgentbutton:hover {
     box-shadow: 1px 4px rgba(0, 0, 0, 0.1);
 }
 
-.backgroundcolorurgent {
-    background-color: red;
-    color: white;
+.prio_icon {
+    width: 20px;
+    height: auto;
+}
 
+.backgroundcolorurgent {
+    background-color: rgba(255, 61, 0, 1);
+    border: none;
+    color: white;
+    border-radius: 10px;
+    height: 56px;
+    width: 136px;
+    cursor: pointer;
+    font-size: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    font-weight: 400;
 }
 
 .backgroundcolormedium {
     background-color: rgba(255, 168, 0, 1);
+    border: none;
     color: white;
+    border-radius: 10px;
+    height: 56px;
+    width: 136px;
+    cursor: pointer;
+    font-size: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    font-weight: 400;
 }
 
 .backgroundcolorlow {
-    background-color: green;
+    background-color: rgba(122, 226, 41, 1);
+    border: none;
     color: white;
+    border-radius: 10px;
+    height: 56px;
+    width: 136px;
+    cursor: pointer;
+    font-size: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    font-weight: 400;
 }
 
 .footer-container  {
@@ -173,6 +231,16 @@ datalist {
     align-items: center;
     justify-content: center;
     cursor: pointer;
+}
+
+.icon-box {
+    height: 24px;
+    width: auto;
+    content: url("../assets/icons/addTask/iconoir_cancel.svg");
+}
+
+.clear-button:hover .icon-box {
+    content: url("../assets/icons/addTask/iconoir_cancel_hover.svg");
 }
 
 .clear-button:hover {
