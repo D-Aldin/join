@@ -19,27 +19,31 @@ section {
   background-color: rgb(255, 255, 255);
   box-shadow: 4px 0px 6px 0px #00000014;
   overflow-y: scroll;
+  overflow-x: hidden;
 }
 
 section::-webkit-scrollbar {
-  width: 24px;
+  width: 8px;
 }
 
 section::-webkit-scrollbar-thumb {
   height: 53px;
-  background-color: rgba(42, 54, 71, 0.8);
+  background-color: rgba(168, 168, 168);
   border-radius: 12px;
 }
 
 section::-webkit-scrollbar-track {
-  background-color: rgba(0, 0, 0, 0.1);
-  border-radius: 12px;
+  background-color: rgba(255, 255, 255);
+}
+
+section::-webkit-scrollbar-thumb:hover {
+  cursor: pointer;
+  background-color: rgba(168, 168, 168);
 }
 
 .content_width_contacts {
   position: relative;
   width: 400px;
-  height: 1188px;
   margin-left: 52px;
 }
 
@@ -73,6 +77,11 @@ section::-webkit-scrollbar-track {
   width: 32px;
   height: 32px;
   color: rgba(255, 255, 255);
+}
+
+.contact_list_scrollbar {
+  width: 352px;
+  height: calc(100vh - 96px - 120px);
 }
 
 .contacts_list_first_letter {
