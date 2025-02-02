@@ -120,3 +120,33 @@ th {
 .space {
   height: 30px;
 }
+
+.check_box {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+input[type="checkbox"] {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 19px;
+  height: 19px;
+  background-image: url(../assets/icons/card/check_button.svg);
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+input[type="checkbox"]:checked {
+  background-image: url(../assets/icons/card/check_button_check.svg);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+/* input[type="checkbox"]:hover {
+  background-image: url(../assets/icons/card/check_button_check.svg);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+} */

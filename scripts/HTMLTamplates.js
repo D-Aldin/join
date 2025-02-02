@@ -41,7 +41,7 @@ function contactTamplateForOpenCard(contact, color, fullName) {
 
 function subtasksTamplate(task, id, state) {
   return `
-          <div>
+          <div class="check_box">
             <input type="checkbox" id="subtask${id}" name="subtask${id}" value="task${id}"/>
             <label for="subtask${id}">${task}</label>
           </div>`;
