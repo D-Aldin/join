@@ -123,8 +123,12 @@ th {
 
 .check_box {
   display: flex;
-  justify-content: center;
+  /* justify-content: center; */
   align-items: center;
+}
+
+.check_box label {
+  margin-left: 12px;
 }
 
 input[type="checkbox"] {
@@ -143,10 +147,3 @@ input[type="checkbox"]:checked {
   background-position: center;
   background-repeat: no-repeat;
 }
-
-/* input[type="checkbox"]:hover {
-  background-image: url(../assets/icons/card/check_button_check.svg);
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-} */
