@@ -5,6 +5,8 @@
 }
 
 .content_box {
+  position: relative;
+  height: 100%;
 }
 
 .open_card_category {
@@ -95,6 +97,9 @@
 .delete_edit_btn_box {
   display: flex;
   justify-content: flex-end;
+  position: absolute;
+  bottom: 40px;
+  left: 55%;
 }
 
 table {
