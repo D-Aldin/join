@@ -75,13 +75,13 @@ section::-webkit-scrollbar-track {
   color: rgba(255, 255, 255);
 }
 
-.contacts_list_test {
+.contacts_list_first_letter {
   display: flex;
   justify-content: flex-start;
   align-items: center;
   width: 352px;
   height: 58px;
-  padding-left: 36px;
+  padding-left: 39px;
 }
 
 .first_letter {
@@ -126,7 +126,6 @@ section::-webkit-scrollbar-track {
 .account_info {
   display: flex;
   flex-direction: column;
-  width: 156px;
   height: 48px;
   gap: 5px;
   margin-left: 35px;
