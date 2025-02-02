@@ -15,7 +15,7 @@
     <link rel="stylesheet" href="./css/submenu.css" />
     <title>Summary</title>
   </head>
-  <body>
+  <body onload="init()">
     <aside>
       <div class="logo_position">
         <img class="join_logo" src="./assets/icons/aside/joinLogo.svg" alt="Join_Logo" />
@@ -136,8 +136,8 @@
 
         <div class="greetings_position">
           <p>
-            Good morning, <br />
-            <span>Guest</span>
+            <span id="time_message"></span> <br />
+            <span class="account_name">Guest</span>
           </p>
         </div>
       </div>
