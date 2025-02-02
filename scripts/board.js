@@ -174,5 +174,3 @@ let subtaskList = {
 displayCardOnBoard();
 const today = taskTemplate(2, "TEST3", "Work in progress", contacts, "02.02.2025", "Low", "User Task", subtaskList, "progress"); // Test Data
 // addTaskToFireBase("tasks", today);
-
-// percentageCalSubtask();
