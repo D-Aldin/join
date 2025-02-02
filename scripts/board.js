@@ -91,7 +91,7 @@ async function displayCardOnBoard() {
 
   for (const key in taskFromFireBase) {
     const element = taskFromFireBase[key];
-    const subtasksCompleted = await percentageCalSubtask(element.subtask);
+    const subtasksCompleted = await countCompletedSubtasks(element.subtask);
 
     if (element.status == "toDo") {
       toDo.innerHTML += renderCard(element.id, element.category, element.title, element.description, subtasksCompleted, element.subtask.length, element.assigned, element.prio);
@@ -106,6 +106,7 @@ async function displayCardOnBoard() {
       done.innerHTML += renderCard(element.id, element.category, element.title, element.description, subtasksCompleted, element.subtask.length, element.assigned, element.prio);
     }
     addProfilesToCard(key, element.assigned);
+    calPercentageOfCompletedSubtasks(element.subtask.length, subtasksCompleted);
   }
   noTaskToDo();
 }
@@ -143,7 +144,7 @@ function noTaskToDo() {
   }, 130);
 }
 
-async function percentageCalSubtask(subtask) {
+async function countCompletedSubtasks(subtask) {
   let countTrue = 0;
   for (let index = 0; index < subtask.length; index++) {
     const element = subtask[index];
@@ -152,6 +153,11 @@ async function percentageCalSubtask(subtask) {
     }
   }
   return countTrue;
+}
+
+function calPercentageOfCompletedSubtasks(numberOfSubtasks, completedSubtasks) {
+  const result = (completedSubtasks / numberOfSubtasks) * 100;
+  document.querySelector(".progress_bar").style.width = `${result}%`;
 }
 
 // ------------------------- TEST LIST

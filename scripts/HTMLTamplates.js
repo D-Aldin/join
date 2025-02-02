@@ -1,4 +1,4 @@
-function renderCard(id, category, title, discription, xxx, subtasks, prio) {
+function renderCard(id, category, title, discription, completedSubtasks, subtasks, prio) {
   return ` 
               <article id=${id} onclick="overlayOn(), getData(event)" ondragstart="draggedElementID(event)" class="card" draggable="true">
                 <div class="category">${category}</div>
@@ -12,7 +12,7 @@ function renderCard(id, category, title, discription, xxx, subtasks, prio) {
                   <div class="progress_container">
                     <div class="progress_bar" style="width: 20%"></div>
                   </div>
-                  <span id="subtasks${id}">${xxx}/${subtasks} Subtasks</span>
+                  <span id="subtasks${id}">${completedSubtasks}/${subtasks} Subtasks</span>
                 </div>
                 <div class="profile_prio_container">
                   <div class="profile">
