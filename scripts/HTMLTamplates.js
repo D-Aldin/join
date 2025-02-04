@@ -34,7 +34,7 @@ function contactTamplate(contact, color, translateX) {
 function contactTamplateForOpenCard(contact, color, fullName) {
   return `
           <div class="profile_names">
-            <div class="circle" style="background-color: ${color}">${contact}</div>
+            <div class="circle circle_profile_names" style="background-color: ${color}">${contact}</div>
             <span>${fullName}</span>
           </div>  `;
 }
@@ -55,8 +55,8 @@ function HTMLForOpenCard(category, title, discription, date, prio, name) {
                   <button class="closeBtn"><img onclick="overlayOff()" src="./assets/icons/board/close.svg" alt="close" /></button>
                 </div>
                 <div class="content_box">
-                  <div class="open_card_title">${title}</div>
-                  <div class="open_card_discription">${discription}</div>
+                  <h1 class="open_card_title">${title}</h1>
+                  <p class="open_card_discription">${discription}</p>
                   <div class="open_card_date">
                     <table>
                       <tr>
@@ -72,12 +72,12 @@ function HTMLForOpenCard(category, title, discription, date, prio, name) {
                   </div>
                   <div class="open_card_assigned">
                     <div class="assigned_box">
-                      <div>Assigned To:</div>
+                      <h5>Assigned To:</h5>
                       <div class="profiles"></div>
                     </div>
                   </div>
                   <div class="open_card_subtasks">
-                    <div>Subtasks</div>
+                    <h5>Subtasks</h5>
                     <form id="subtasks_container">
                       
                     </form>

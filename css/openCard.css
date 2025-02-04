@@ -23,8 +23,8 @@
 }
 
 .open_card_title {
-  font-size: 61px;
   margin-bottom: 30px;
+  margin-block-start: 0.3em;
 }
 .open_card_discription {
   display: flex;
@@ -51,6 +51,15 @@
 
 .assigned_box {
   display: flex;
+  width: 100%;
+}
+
+h5 {
+  display: block;
+  font-size: 16px;
+  color: rgb(125, 136, 156);
+  font-weight: lighter;
+  margin-block-start: 0.5em;
 }
 
 .profiles {
@@ -58,12 +67,21 @@
   flex-direction: column;
   margin-top: 30px;
   margin-left: -85px;
-  gap: 10px;
 }
 
 .profile_names {
   display: flex;
   align-items: center;
+  width: 350px;
+  height: 50px;
+}
+
+.profile_names:hover {
+  background-color: rgb(238, 238, 238);
+  border: 1px transparent;
+  border-radius: 12px;
+  border-width: 100%;
+  width: 100%;
 }
 
 .profile_names span {
@@ -106,7 +124,7 @@
   display: flex;
   justify-content: flex-end;
   position: absolute;
-  bottom: 40px;
+  bottom: 45px;
   left: 55%;
 }
 
@@ -118,6 +136,15 @@ td,
 th {
   text-align: left;
   padding-right: 50px;
+}
+
+td {
+  color: rgb(125, 136, 156);
+}
+
+#date,
+#priority {
+  color: black;
 }
 
 #priority {
@@ -135,6 +162,10 @@ th {
   align-items: center;
 }
 
+.check_box:hover {
+  background-color: rgb(238, 238, 238);
+}
+
 .check_box label {
   margin-left: 12px;
 }
@@ -144,13 +175,14 @@ input[type="checkbox"] {
   -webkit-appearance: none;
   width: 19px;
   height: 19px;
-  background-image: url(../assets/icons/card/check_button.svg);
+  background-image: url(../assets/icons/checkbox/openCardCheck.svg);
   background-repeat: no-repeat;
   background-position: center;
+  margin-left: 18px;
 }
 
 input[type="checkbox"]:checked {
-  background-image: url(../assets/icons/card/check_button_check.svg);
+  background-image: url(../assets/icons/checkbox/openCardRectangle.svg);
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;

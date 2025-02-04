@@ -76,6 +76,10 @@
   text-align: center;
 }
 
+.circle_profile_names {
+  margin-left: 12px;
+}
+
 .rotate {
   rotate: 4deg;
   transition: transform 0.3s;
