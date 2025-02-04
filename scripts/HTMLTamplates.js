@@ -82,9 +82,17 @@ function HTMLForOpenCard(category, title, discription, date, prio, name) {
                       
                     </form>
                   </div>
-                  <div class="delete_edit_btn_box">
-                    <button class="deleteBtn"><img src="./assets/icons/board/delete.svg" alt="" /></button>
-                    <button class="editBtn"><img src="./assets/icons/board/edit.svg" alt="" /></button>
+                  <div class="edit_button_box">
+                    <div class="position_delete">
+                      <div class="trash_img"></div>
+                      <button class="delete_button">Delete</button>
+                    </div>
+                    <div class="vector"></div>
+                    <div class="position_edit">
+                      <div class="edit_img"></div>
+                      <button class="edit_button">Edit</button>
+                    </div>
+                    
                   </div>
                 </div>`;
 }

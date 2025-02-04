@@ -8,7 +8,7 @@ function overlayOn() {
 
 function overlayOff() {
   document.getElementById("overlay").style.display = "none";
-  refreshPageOnButtonClose();
+  refreshPageWhenOverlayOff();
 }
 
 function stopEventBubbel(event) {
@@ -110,7 +110,7 @@ async function setCheckboxAttributes(id) {
   }
 }
 
-function refreshPageOnButtonClose() {
+function refreshPageWhenOverlayOff() {
   toDo.innerHTML = "";
   progress.innerHTML = "";
   feedback.innerHTML = "";

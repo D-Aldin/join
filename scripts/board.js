@@ -160,7 +160,7 @@ function calPercentageOfCompletedSubtasks(numberOfSubtasks, completedSubtasks) {
   document.querySelector(".progress_bar").style.width = `${result}%`;
 }
 
-// ------------------------- TEST LIST
+// ------------------------- TEST LIST --------------------------------
 let contacts = {
   red: "Dobric Aldin",
   green: "Robby Runge",

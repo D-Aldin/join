@@ -99,37 +99,101 @@ h5 {
   padding-left: 16px;
 }
 
-.edit_delete_box {
-  display: flex;
-  justify-content: flex-end;
-}
-
-.deleteBtn,
-.editBtn,
 .closeBtn {
   border: none;
   background-color: transparent;
   cursor: pointer;
+  display: flex;
+  align-items: center;
 }
 
 .closeBtn img:hover {
   background-color: rgb(238, 238, 238);
   border: 1px transparent;
   border-radius: 50%;
-  /* width: 100%; */
-  /* height: 100%; */
 }
 
-.delete_edit_btn_box {
+.edit_button_box {
   display: flex;
   justify-content: flex-end;
   position: absolute;
   bottom: 45px;
   left: 55%;
+  gap: 8px;
 }
 
-table {
-  margin-bottom: 30px;
+.edit_button_box button {
+  display: flex;
+  align-items: center;
+  border: 1px, transparent;
+  background-color: white;
+  cursor: pointer;
+}
+
+.trash_img {
+  background-image: url(../assets/icons/board/delete.svg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  min-width: 22px;
+  min-height: 22px;
+}
+
+.edit_img {
+  background-image: url(../assets/icons/board/edit.svg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  min-width: 22px;
+  min-height: 22px;
+}
+
+.vector {
+  background-image: url(../assets/icons/board/vector.svg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  min-width: 3px;
+  min-height: 1px;
+  display: none;
+}
+
+.position_delete {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.position_edit {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  margin-left: 10px;
+}
+
+.position_delete:hover .trash_img {
+  background-image: url(../assets/icons/board/delete_hover.svg);
+  color: rgb(41, 171, 226);
+}
+
+.position_edit:hover .edit_img {
+  background-image: url(../assets/icons/board/edit_hover.svg);
+  color: rgb(41, 171, 226);
+}
+
+.position_delete:hover .delete_button {
+  color: rgb(41, 171, 226);
+}
+
+.position_edit:hover .edit_button {
+  color: rgb(41, 171, 226);
+}
+
+.edit_button_box:hover .vector {
+  display: inline-block;
+}
+
+.delete_button {
+}
+
+.edit_button {
 }
 
 td,
@@ -175,14 +239,14 @@ input[type="checkbox"] {
   -webkit-appearance: none;
   width: 19px;
   height: 19px;
-  background-image: url(../assets/icons/checkbox/openCardCheck.svg);
+  background-image: url(../assets/icons/checkbox/openCardRectangle.svg);
   background-repeat: no-repeat;
   background-position: center;
   margin-left: 18px;
 }
 
 input[type="checkbox"]:checked {
-  background-image: url(../assets/icons/checkbox/openCardRectangle.svg);
+  background-image: url(../assets/icons/checkbox/openCardCheck.svg);
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
