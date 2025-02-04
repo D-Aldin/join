@@ -109,7 +109,7 @@ function getLetterTemplate(letter) {
 function getContactTemplate(contact, index) {
   return `
     <div id="contact_${index}" class="contact_list hover_contact_list" onclick="toggleOverlayContactInfos(${index})">
-      <img class="contact_img" src="./assets/icons/contacts/am_account_icon.svg" />
+      <div class="circle" id="circle_${index}"></div>
       <div class="account_info">
         <p>${contact.name}</p>
         <span>${contact.email}</span>
@@ -121,7 +121,7 @@ function getContactTemplate(contact, index) {
 function getTemplateOfRenderContacts(contact, index) {
   return `    
     <div id="contact_${index}" class="contact_list hover_contact_list" onclick="toggleOverlayContactInfos(${index})">
-      <img class="contact_img" src="./assets/icons/contacts/am_account_icon.svg" />
+      <div class="circle" id="circle_${index}"></div>
       <div class="account_info">
         <p>${contact.name}</p>
         <span>${contact.email}</span>
@@ -177,7 +177,7 @@ function getTemplateOfContactEdit(contact) {
       </form>
       <div class="overlay_btn_position">
         <button class="btn_delete" onclick="deleteContactFromList('${contact.id}')">Delete <img src="./assets/icons/contacts/Close.svg" class="cancel_icon" alt="Cancel" /></button>
-        <button class="btn_save" onclick="saveChangesContact('${contact.id}')">Save <img src="./assets/icons/contacts/check.svg" alt="check" /></button>
+        <button class="btn_save" onclick="updateContactInDataBase('${contact.id}')">Save <img src="./assets/icons/contacts/check.svg" alt="check" /></button>
       </div>
     </div>`;
 }

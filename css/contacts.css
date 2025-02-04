@@ -1,3 +1,16 @@
+.random_color {
+  background-color: rgb(255, 122, 0);
+  background-color: rgb(147, 39, 255);
+  background-color: rgb(110, 82, 255);
+  background-color: rgb(252, 113, 255);
+  background-color: rgb(255, 187, 43);
+  background-color: rgb(31, 215, 193);
+  background-color: rgb(70, 47, 138);
+  background-color: rgb(255, 70, 70);
+  background-color: rgb(0, 190, 232);
+  background-color: rgb(255, 122, 0);
+}
+
 .contact_headline {
   position: absolute;
   height: 73px;
@@ -127,9 +140,17 @@ section::-webkit-scrollbar-thumb:hover {
   color: rgba(255, 255, 255);
 }
 
-.contact_img {
-  width: 42px;
-  height: 42px;
+.circle {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  border: 2px solid;
+  border-color: white;
+  border-radius: 50%;
+  height: 2.2rem;
+  width: 2.2rem;
+  text-align: center;
 }
 
 .account_info {
@@ -187,7 +208,7 @@ section::-webkit-scrollbar-thumb:hover {
 .overlay_contact_info_header {
   display: flex;
   align-items: center;
-  width: 461px;
+  width: 600px;
   height: 120px;
   gap: 54px;
 }
