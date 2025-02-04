@@ -47,8 +47,6 @@ async function updateStatusInDB(path = "", idNumber, status) {
   noTaskToDo();
 }
 
-async function changeData(path = "") {}
-
 function taskTemplate(id, title, description, assigned, date, prio, category, subtask, status) {
   return {
     [id]: {
@@ -91,6 +89,8 @@ async function displayCardOnBoard() {
 
   for (const key in taskFromFireBase) {
     const element = taskFromFireBase[key];
+
+    if (!element) continue;
     const subtasksCompleted = await countCompletedSubtasks(element.subtask);
 
     if (element.status == "toDo") {
@@ -105,9 +105,10 @@ async function displayCardOnBoard() {
     if (element.status == "done") {
       done.innerHTML += renderCard(element.id, element.category, element.title, element.description, subtasksCompleted, element.subtask.length, element.assigned, element.prio);
     }
+    calPercentageOfCompletedSubtasks(element.subtask.length, subtasksCompleted, element.id);
     addProfilesToCard(key, element.assigned);
-    calPercentageOfCompletedSubtasks(element.subtask.length, subtasksCompleted);
   }
+
   noTaskToDo();
 }
 
@@ -152,25 +153,28 @@ async function countCompletedSubtasks(subtask) {
       countTrue += 1;
     }
   }
+
   return countTrue;
 }
 
-function calPercentageOfCompletedSubtasks(numberOfSubtasks, completedSubtasks) {
+function calPercentageOfCompletedSubtasks(numberOfSubtasks, completedSubtasks, id) {
+  // const refProgressBar = document.querySelectorAll(`"#subtasks${id}"`);
   const result = (completedSubtasks / numberOfSubtasks) * 100;
-  document.querySelector(".progress_bar").style.width = `${result}%`;
+  document.getElementById("progress_bar" + id).style.width = `${result}%`;
+  // console.log(refProgressBar);
 }
 
 // ------------------------- TEST LIST --------------------------------
 let contacts = {
-  red: "Dobric Aldin",
-  green: "Robby Runge",
-  yellow: "Simon Burlet",
+  blue: "Dobric Aldin",
+  orange: "Dobric Ajla",
 };
 
 let subtaskList = {
   0: { task: "NewTask1", state: false },
+  1: { task: "NewTask2", state: false },
 };
 
 displayCardOnBoard();
-const today = taskTemplate(2, "TEST3", "Work in progress", contacts, "02.02.2025", "Low", "User Task", subtaskList, "progress"); // Test Data
+const today = taskTemplate(1, "Mark Twain", "Wer glaubt gut zu sein, hat aufgehört besser zu werden.", contacts, "05.02.2025", "Low", "User Task", subtaskList, "progress"); // Test Data
 // addTaskToFireBase("tasks", today);

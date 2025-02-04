@@ -1,6 +1,6 @@
 function renderCard(id, category, title, discription, completedSubtasks, subtasks, prio) {
   return ` 
-              <article id=${id} onclick="overlayOn(), getData(event)" ondragstart="draggedElementID(event)" class="card" draggable="true">
+              <article id=${id} onclick="overlayOn(event), getData(event)" ondragstart="draggedElementID(event)" class="card" draggable="true">
                 <div class="category">${category}</div>
                 <div class="card_title">
                   <h4 id="title">${title}</h4>
@@ -10,7 +10,7 @@ function renderCard(id, category, title, discription, completedSubtasks, subtask
                 </div>
                 <div class="progress_indicator">
                   <div class="progress_container">
-                    <div class="progress_bar" style="width: 20%"></div>
+                    <div id="progress_bar${id}" class="progress_bar" style="width: 0%"></div>
                   </div>
                   <span id="subtasks${id}">${completedSubtasks}/${subtasks} Subtasks</span>
                 </div>
@@ -48,7 +48,7 @@ function subtasksTamplate(task, id, state) {
 }
 
 // TODO add more param to the function
-function HTMLForOpenCard(category, title, discription, date, prio, name) {
+function HTMLForOpenCard(category, title, discription, date, prio, id) {
   return `     
                 <div class="category_box">
                   <div class="open_card_category">${category}</div>
@@ -83,7 +83,7 @@ function HTMLForOpenCard(category, title, discription, date, prio, name) {
                     </form>
                   </div>
                   <div class="edit_button_box">
-                    <div class="position_delete">
+                    <div onclick="deleteButton()" class="position_delete">
                       <div class="trash_img"></div>
                       <button class="delete_button">Delete</button>
                     </div>

@@ -23,6 +23,8 @@
   color: rgb(168, 168, 168);
   height: 80px;
   font-family: InterLight;
+  white-space: normal;
+  word-break: break-word;
 }
 
 .progress_indicator {
