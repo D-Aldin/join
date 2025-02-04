@@ -70,11 +70,13 @@
         <h2>Better with a Team</h2>
       </div>
       <section>
-        <div class="content_width_contacts">
+        <div class="add_contact_btn_position">
           <button class="add_contact_btn" onclick="openOverlayAddContact()">
             Add new contact
             <img src="./assets/icons/contacts/person_add.svg" alt="add_contact" />
           </button>
+        </div>
+        <div class="content_width_contacts">
           <div id="contact_list" class="contact_list_scrollbar"></div>
         </div>
       </section>
@@ -100,16 +102,15 @@
         <div class="overlay_close_btn_position">
           <img onclick="closeOverlayAddContact()" src="./assets/icons/contacts/Close.svg" alt="close_button" />
         </div>
-        <form action class="form_input_fields_position">
+        <form class="form_input_fields_position" onsubmit="addContactToDataBase(); setTimeoutSuccessfullyOverlay(); return false;">
           <input id="add_name" type="text" placeholder="Name" required />
           <input id="add_email" type="email" placeholder="Email" required />
-          <input id="add_phone" type="tel" placeholder="Phone" required />
-          <!-- add the button below inside the form -->
+          <input id="add_phone" type="tel" placeholder="Phone" onkeypress="" required />
+          <div class="overlay_btn_position">
+            <button class="btn_cancel" type="button" onclick="closeOverlayAddContact()">Cancel <img src="./assets/icons/contacts/Close.svg" class="cancel_icon" alt="Cancel" /></button>
+            <button class="btn_create_contact" type="submit">Create contact <img src="./assets/icons/contacts/check.svg" alt="check" /></button>
+          </div>
         </form>
-        <div class="overlay_btn_position">
-          <button class="btn_cancel" onclick="closeOverlayAddContact()">Cancel <img src="./assets/icons/contacts/Close.svg" class="cancel_icon" alt="Cancel" /></button>
-          <button class="btn_create_contact" onclick="addContactToDataBase(), setTimeoutSuccessfullyOverlay()">Create contact <img src="./assets/icons/contacts/check.svg" alt="check" /></button>
-        </div>
       </div>
     </div>
 

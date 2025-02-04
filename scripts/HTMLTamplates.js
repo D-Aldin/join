@@ -175,10 +175,10 @@ function getTemplateOfContactEdit(contact) {
         <input id="edit_name" type="text" placeholder="Name" value="${contact.name}" required />
         <input id="edit_email" type="email" placeholder="Email" value="${contact.email}" required />
         <input id="edit_phone" type="tel" placeholder="Phone" value="${contact.phone}" required />
+        <div class="overlay_btn_position">
+          <button class="btn_delete" onclick="deleteContactFromList('${contact.id}')">Delete <img src="./assets/icons/contacts/Close.svg" class="cancel_icon" alt="Cancel" /></button>
+          <button class="btn_save" onclick="updateContactInDataBase('${contact.id}')">Save <img src="./assets/icons/contacts/check.svg" alt="check" /></button>
+        </div>
       </form>
-      <div class="overlay_btn_position">
-        <button class="btn_delete" onclick="deleteContactFromList('${contact.id}')">Delete <img src="./assets/icons/contacts/Close.svg" class="cancel_icon" alt="Cancel" /></button>
-        <button class="btn_save" onclick="updateContactInDataBase('${contact.id}')">Save <img src="./assets/icons/contacts/check.svg" alt="check" /></button>
-      </div>
     </div>`;
 }
