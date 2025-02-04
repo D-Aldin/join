@@ -109,7 +109,7 @@ function getLetterTemplate(letter) {
 function getContactTemplate(contact, index) {
   return `
     <div id="contact_${index}" class="contact_list hover_contact_list" onclick="toggleOverlayContactInfos(${index})">
-      <img class="contact_img" src="./assets/icons/contacts/am_account_icon.svg" />
+      <div class="circle" id="circle_${index}"></div>
       <div class="account_info">
         <p>${contact.name}</p>
         <span>${contact.email}</span>
@@ -121,7 +121,7 @@ function getContactTemplate(contact, index) {
 function getTemplateOfRenderContacts(contact, index) {
   return `    
     <div id="contact_${index}" class="contact_list hover_contact_list" onclick="toggleOverlayContactInfos(${index})">
-      <img class="contact_img" src="./assets/icons/contacts/am_account_icon.svg" />
+      <div class="circle" id="circle_${index}"></div>
       <div class="account_info">
         <p>${contact.name}</p>
         <span>${contact.email}</span>
@@ -130,9 +130,10 @@ function getTemplateOfRenderContacts(contact, index) {
 }
 
 function getTemplateOfContactInfo(contact) {
+  const initials = getInitials(contact.name);
   return `
     <div class="overlay_contact_info_header">
-    <img class="account_icon" src="./assets/icons/contacts/am_account_icon.svg" alt="account_icon" />
+    <div class="circle_contact_img" style="background-color:${contact.color}">${initials}</div>
     <div>
       <h2>${contact.name}</h2>
       <div class="btn_position">
@@ -174,10 +175,10 @@ function getTemplateOfContactEdit(contact) {
         <input id="edit_name" type="text" placeholder="Name" value="${contact.name}" required />
         <input id="edit_email" type="email" placeholder="Email" value="${contact.email}" required />
         <input id="edit_phone" type="tel" placeholder="Phone" value="${contact.phone}" required />
+        <div class="overlay_btn_position">
+          <button class="btn_delete" onclick="deleteContactFromList('${contact.id}')">Delete <img src="./assets/icons/contacts/Close.svg" class="cancel_icon" alt="Cancel" /></button>
+          <button class="btn_save" onclick="updateContactInDataBase('${contact.id}')">Save <img src="./assets/icons/contacts/check.svg" alt="check" /></button>
+        </div>
       </form>
-      <div class="overlay_btn_position">
-        <button class="btn_delete" onclick="deleteContactFromList('${contact.id}')">Delete <img src="./assets/icons/contacts/Close.svg" class="cancel_icon" alt="Cancel" /></button>
-        <button class="btn_save" onclick="saveChangesContact('${contact.id}')">Save <img src="./assets/icons/contacts/check.svg" alt="check" /></button>
-      </div>
     </div>`;
 }

@@ -1,3 +1,16 @@
+.random_color {
+  background-color: rgb(255, 122, 0);
+  background-color: rgb(147, 39, 255);
+  background-color: rgb(110, 82, 255);
+  background-color: rgb(252, 113, 255);
+  background-color: rgb(255, 187, 43);
+  background-color: rgb(31, 215, 193);
+  background-color: rgb(70, 47, 138);
+  background-color: rgb(255, 70, 70);
+  background-color: rgb(0, 190, 232);
+  background-color: rgb(255, 122, 0);
+}
+
 .contact_headline {
   position: absolute;
   height: 73px;
@@ -18,33 +31,18 @@ section {
   height: calc(100vh - 96px);
   background-color: rgb(255, 255, 255);
   box-shadow: 4px 0px 6px 0px #00000014;
-  overflow-y: scroll;
-  overflow-x: hidden;
-}
-
-section::-webkit-scrollbar {
-  width: 8px;
-}
-
-section::-webkit-scrollbar-thumb {
-  height: 53px;
-  background-color: rgba(168, 168, 168);
-  border-radius: 12px;
-}
-
-section::-webkit-scrollbar-track {
-  background-color: rgba(255, 255, 255);
-}
-
-section::-webkit-scrollbar-thumb:hover {
-  cursor: pointer;
-  background-color: rgba(168, 168, 168);
 }
 
 .content_width_contacts {
   position: relative;
   width: 400px;
   margin-left: 52px;
+}
+
+.add_contact_btn_position {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .add_contact_btn {
@@ -57,7 +55,6 @@ section::-webkit-scrollbar-thumb:hover {
   gap: 16px;
   margin-top: 22.5px;
   margin-bottom: 8px;
-  margin-right: 52px;
   border-radius: 10px;
   border: 1px solid rgba(42, 54, 71);
   background-color: rgba(42, 54, 71);
@@ -81,7 +78,29 @@ section::-webkit-scrollbar-thumb:hover {
 
 .contact_list_scrollbar {
   width: 352px;
-  height: calc(100vh - 96px - 120px);
+  height: calc(100vh - 96px - 100px);
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding-right: 52px;
+}
+
+.contact_list_scrollbar::-webkit-scrollbar {
+  width: 8px;
+}
+
+.contact_list_scrollbar::-webkit-scrollbar-thumb {
+  height: 53px;
+  background-color: rgba(168, 168, 168);
+  border-radius: 12px;
+}
+
+.contact_list_scrollbar::-webkit-scrollbar-track {
+  background-color: rgba(255, 255, 255);
+}
+
+.contact_list_scrollbar::-webkit-scrollbar-thumb:hover {
+  cursor: pointer;
+  background-color: rgba(168, 168, 168);
 }
 
 .contacts_list_first_letter {
@@ -127,9 +146,32 @@ section::-webkit-scrollbar-thumb:hover {
   color: rgba(255, 255, 255);
 }
 
-.contact_img {
-  width: 42px;
-  height: 42px;
+.circle {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  border: 2px solid;
+  border-color: white;
+  border-radius: 50%;
+  height: 2.2rem;
+  width: 2.2rem;
+  text-align: center;
+}
+
+.circle_contact_img {
+  width: 120px;
+  height: 120px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  border: 2px solid;
+  border-color: white;
+  border-radius: 50%;
+  text-align: center;
+  font-size: 47px;
+  font-weight: 500;
 }
 
 .account_info {
@@ -187,7 +229,7 @@ section::-webkit-scrollbar-thumb:hover {
 .overlay_contact_info_header {
   display: flex;
   align-items: center;
-  width: 461px;
+  width: 600px;
   height: 120px;
   gap: 54px;
 }
@@ -437,9 +479,6 @@ input[type="tel"]:focus {
 
 .overlay_btn_position {
   display: flex;
-  position: absolute;
-  top: 400px;
-  left: 742px;
   width: 364px;
   height: 57px;
   gap: 24px;
@@ -451,6 +490,7 @@ input[type="tel"]:focus {
   align-items: center;
   justify-content: center;
   gap: 4px;
+  padding-left: 14px;
   width: 126px;
   height: 56px;
   border-radius: 10px;
@@ -480,6 +520,8 @@ input[type="tel"]:focus {
 .cancel_icon {
   width: 32px;
   height: 32px;
+  margin: 0;
+  padding: 0;
 }
 
 .btn_create_contact {
@@ -488,6 +530,7 @@ input[type="tel"]:focus {
   align-items: center;
   justify-content: center;
   gap: 4px;
+  padding-left: 12px;
   width: 214px;
   height: 57px;
   border: none;
@@ -510,9 +553,9 @@ input[type="tel"]:focus {
   display: flex;
   align-items: center;
   justify-content: center;
-  /* gap: 10px; */
   width: 113px;
-  height: 55px;
+  height: 57px;
+  padding-left: 14px;
   border-radius: 8px;
   border: 1px solid rgba(42, 54, 71);
   background-color: rgba(255, 255, 255);
@@ -526,6 +569,7 @@ input[type="tel"]:focus {
   align-items: center;
   justify-content: center;
   gap: 4px;
+  padding-left: 10px;
   width: 111px;
   height: 57px;
   border: none;
