@@ -130,9 +130,10 @@ function getTemplateOfRenderContacts(contact, index) {
 }
 
 function getTemplateOfContactInfo(contact) {
+  const initials = getInitials(contact.name);
   return `
     <div class="overlay_contact_info_header">
-    <img class="account_icon" src="./assets/icons/contacts/am_account_icon.svg" alt="account_icon" />
+    <div class="circle_contact_img" style="background-color:${contact.color}">${initials}</div>
     <div>
       <h2>${contact.name}</h2>
       <div class="btn_position">

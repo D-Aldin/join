@@ -153,6 +153,21 @@ section::-webkit-scrollbar-thumb:hover {
   text-align: center;
 }
 
+.circle_contact_img {
+  width: 120px;
+  height: 120px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  border: 2px solid;
+  border-color: white;
+  border-radius: 50%;
+  text-align: center;
+  font-size: 47px;
+  font-weight: 500;
+}
+
 .account_info {
   display: flex;
   flex-direction: column;
