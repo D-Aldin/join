@@ -38,6 +38,12 @@ textarea {
   border-radius: 10px;
 }
 
+.button_container {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
 .prio_button {
   cursor: pointer;
   width: 120px;
@@ -46,6 +52,14 @@ textarea {
   background-color: white;
   border-radius: 10px;
   margin-bottom: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.prio_button:hover {
+  filter: drop-shadow(1px 4px 1px rgba(193, 193, 193, 0.247));
 }
 
 select {

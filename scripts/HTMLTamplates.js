@@ -109,13 +109,13 @@ function HTMLTamplateForTheEditFunk() {
                   <label for="editDescription">Description</label>
                   <textarea name="description" id="editDescription"></textarea><br /> 
                   <label for="editDate">Due date</label>
-                  <input name="date" id="editDate" type="date" class="inputfield dimensions"/>
+                  <input data-date-format="dd mm yy" name="date" id="editDate" type="date" class="inputfield dimensions"/>
                 </form>
                 <h3>Priority</h3>
-                <div>
-                  <button class="prio_button">Urgent</button>
-                  <button class="prio_button">Medium</button>
-                  <button class="prio_button">Low</button>
+                <div class="button_container">
+                  <button id="urgent" class="prio_button">Urgent <img id="urgentImageEditBtn" src="./assets/icons/board/forEditUrgent.svg" alt="urgent"></button>
+                  <button id="medium" class="prio_button">Medium <img id="mediumImageEditBtn" src="./assets/icons/board/forEditMedium.svg" alt="medium"></button>
+                  <button id="low" class="prio_button">Low <img id="lowImageEditBtn" src="./assets/icons/board/forEditLow.svg" alt="low"></button>
                 </div>
                 <form action="">
                   <label for="editAssigned">Assigned to</label><br>

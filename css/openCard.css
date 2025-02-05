@@ -254,7 +254,6 @@ input[type="checkbox"] {
 
 input[type="checkbox"]:checked {
   background-image: url(../assets/icons/checkbox/openCardCheck.svg);
-  background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
 }

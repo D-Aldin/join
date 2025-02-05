@@ -139,7 +139,36 @@ function renderEditMenu() {
 
 async function editFunction() {
   let dataFromFireBase = await fetchCardDetails(taskPath, storeTheID);
-  let title = dataFromFireBase[storeTheID].title;
-  let description = dataFromFireBase.description;
-  console.log(title);
+  let refTitleInputField = (document.querySelector("#editTitle").value = dataFromFireBase[storeTheID].title);
+  let refDescriptionField = (document.querySelector("#editDescription").value = dataFromFireBase[storeTheID].description);
+  let refDateField = (document.querySelector("#editDate").value = dataFromFireBase[storeTheID].data);
+  editPriority(dataFromFireBase[storeTheID].prio);
+  console.log(dataFromFireBase);
+}
+
+function editPriority(data) {
+  let urgent = document.getElementById("urgent");
+  let medinu = document.getElementById("medium");
+  let low = document.getElementById("low");
+  switch (data) {
+    case "urgent":
+      {
+        urgent.style.backgroundColor = "rgb(255, 61, 0)";
+        urgent.style.color = "white";
+        document.getElementById("urgentImageEditBtn").src = "./assets/icons/addTask/icon_clicket_urgent.svg";
+      }
+      break;
+    case "medium":
+      {
+        medinu.style.backgroundColor = "rgb(255, 168, 0)";
+        medinu.style.color = "white";
+        document.getElementById("mediumImageEditBtn").src = "./assets/icons/addTask/icon_clicket_medium.svg";
+      }
+      break;
+    case "Low": {
+      low.style.backgroundColor = "rgb(122, 226, 41)";
+      low.style.color = "white";
+      document.getElementById("lowImageEditBtn").src = "./assets/icons/addTask/icon_clicket_low.svg";
+    }
+  }
 }
