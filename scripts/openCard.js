@@ -4,6 +4,9 @@ const taskPath = "tasks";
 let refCardBox = document.getElementById("box");
 const refCloseBtn = document.getElementsByClassName("closeBtn");
 const refEditButton = document.querySelector(".position_edit");
+let urgent = document.getElementById("urgent");
+let medinu = document.getElementById("medium");
+let low = document.getElementById("low");
 
 function overlayOn(event) {
   document.getElementById("overlay").style.display = "block";
@@ -147,15 +150,13 @@ async function editFunction() {
 }
 
 function editPriority(data) {
-  let urgent = document.getElementById("urgent");
-  let medinu = document.getElementById("medium");
-  let low = document.getElementById("low");
   switch (data) {
     case "urgent":
       {
         urgent.style.backgroundColor = "rgb(255, 61, 0)";
         urgent.style.color = "white";
         document.getElementById("urgentImageEditBtn").src = "./assets/icons/addTask/icon_clicket_urgent.svg";
+        urgent.classList.add("no_hover");
       }
       break;
     case "medium":
@@ -163,12 +164,14 @@ function editPriority(data) {
         medinu.style.backgroundColor = "rgb(255, 168, 0)";
         medinu.style.color = "white";
         document.getElementById("mediumImageEditBtn").src = "./assets/icons/addTask/icon_clicket_medium.svg";
+        medinu.classList.add("no_hover");
       }
       break;
     case "Low": {
       low.style.backgroundColor = "rgb(122, 226, 41)";
       low.style.color = "white";
       document.getElementById("lowImageEditBtn").src = "./assets/icons/addTask/icon_clicket_low.svg";
+      low.classList.add("no_hover");
     }
   }
 }
