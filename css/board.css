@@ -143,15 +143,60 @@ input::placeholder {
   width: 100%;
   padding: 18px;
   margin-bottom: 10px;
+  cursor: pointer;
 }
 
 .no_task {
   background-color: rgba(231, 231, 231, 0.432);
   border: 1.8px solid;
   border-style: dashed;
-  border-color: rgb(154, 148, 163);
+  border-color: rgb(168, 168, 168);
+  color: rgb(168, 168, 168);
   box-shadow: 0 3px 3px 0 rgba(104, 104, 104, 0.048);
   border-radius: 12px;
   height: 4rem;
   width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#toDo,
+#progress,
+#feedback,
+#done {
+  width: 100%;
+  height: 100vh;
+}
+
+.display_none {
+  display: none;
+}
+
+#box {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 380px;
+  height: 750px;
+  background-color: white;
+  color: rgb(0, 0, 0);
+  padding: 35px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+  text-align: center;
+  border-radius: 25px;
+  z-index: 999;
+}
+
+#overlay {
+  display: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.3);
+  z-index: 1;
+  cursor: pointer;
 }

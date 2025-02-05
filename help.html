@@ -20,22 +20,22 @@
         <img class="join_logo" src="./assets/icons/aside/joinLogo.svg" alt="Join_Logo" />
       </div>
       <div class="nav_position">
-        <div class="link_nav_summary">
+        <div class="link_nav_summary cursor_pointer" onclick="window.location.href='./summary.html'">
           <a href="./summary.html"><img src="./assets/icons/aside/summary.svg" alt="Summary" />Summary</a>
         </div>
-        <div class="link_nav_add_task">
+        <div class="link_nav_add_task cursor_pointer" onclick="window.location.href='./add_task.html'">
           <a href="./add_task.html"><img src="./assets/icons/aside/addTask.svg" alt="Add Task" />Add Task</a>
         </div>
-        <div class="link_nav_board">
+        <div class="link_nav_board cursor_pointer" onclick="window.location.href='./board.html'">
           <a href="./board.html"><img src="./assets/icons/aside/board.svg" alt="Board" />Board</a>
         </div>
-        <div class="link_nav_contacts">
+        <div class="link_nav_contacts cursor_pointer" onclick="window.location.href='./contacts.html'">
           <a href="./contacts.html"><img src="./assets/icons/aside/contacts.svg" alt="Contacts" />Contacts</a>
         </div>
       </div>
       <div class="legal_notes_position">
-        <a href="">Privacy Policy</a>
-        <a href="">Legal notice</a>
+        <a href="privacy_policy_login.html">Privacy Policy</a>
+        <a href="legal_notice_login.html">Legal notice</a>
       </div>
     </aside>
     <header>
@@ -44,15 +44,15 @@
       </div>
       <div class="question_marker_account_img_position">
         <a href="help.html"><img class="question_marker" src="./assets/icons/imgs/questionMarker.svg" alt="" /></a>
-        <img onclick="toggleShowSubmenu()" class="account_img" src="./assets/icons/imgs/guestImg.svg" alt="" />
+        <img onclick="toggleShowSubmenu(event)" class="account_img" src="./assets/icons/imgs/guestImg.svg" alt="" />
       </div>
     </header>
     <div id="submenu_position" class="d_none">
       <div class="submenu_section">
-        <a class="submenu_links_design link_legal_notice_hover" href="./legal_notice.html">Legal Notice</a>
+        <a class="submenu_links_design link_legal_notice_hover" href="./legal_notice_login.html">Legal Notice</a>
       </div>
       <div class="submenu_section">
-        <a class="submenu_links_design link_privacy_policy_hover" href="./privacy_policy.html">Privacy Policy</a>
+        <a class="submenu_links_design link_privacy_policy_hover" href="./privacy_policy_login.html">Privacy Policy</a>
       </div>
       <div class="submenu_section">
         <a class="submenu_links_design link_login_hover" href="./login.html">Log out</a>

@@ -7,6 +7,7 @@
     <script src="./scripts/submenu.js" defer></script>
     <script src="./scripts/HTMLTamplates.js" defer></script>
     <script src="./scripts/board.js" defer></script>
+    <script src="./scripts/openCard.js" defer></script>
 
     <link rel="stylesheet" href="./css/aside.css" />
     <link rel="stylesheet" href="./css/header.css" />
@@ -15,32 +16,35 @@
     <link rel="stylesheet" href="./css/submenu.css" />
     <link rel="stylesheet" href="./css/board.css" />
     <link rel="stylesheet" href="./css/card.css" />
+    <link rel="stylesheet" href="./css/openCard.css" />
+
     <title>Board</title>
   </head>
-  <body>
+  <body onload="noTaskToDo()">
     <aside>
       <div class="logo_position">
         <img class="join_logo" src="./assets/icons/aside/joinLogo.svg" alt="Join_Logo" />
       </div>
       <div class="nav_position">
-        <div class="link_nav_summary">
+        <div class="link_nav_summary cursor_pointer" onclick="window.location.href='./summary.html'">
           <a href="./summary.html"><img src="./assets/icons/aside/summary.svg" alt="Summary" />Summary</a>
         </div>
-        <div class="link_nav_add_task">
+        <div class="link_nav_add_task cursor_pointer" onclick="window.location.href='./add_task.html'">
           <a href="./add_task.html"><img src="./assets/icons/aside/addTask.svg" alt="Add Task" />Add Task</a>
         </div>
-        <div class="link_nav_board">
+        <div class="link_nav_board cursor_pointer" onclick="window.location.href='./board.html'">
           <a href="./board.html"><img src="./assets/icons/aside/board.svg" alt="Board" />Board</a>
         </div>
-        <div class="link_nav_contacts">
+        <div class="link_nav_contacts cursor_pointer" onclick="window.location.href='./contacts.html'">
           <a href="./contacts.html"><img src="./assets/icons/aside/contacts.svg" alt="Contacts" />Contacts</a>
         </div>
       </div>
       <div class="legal_notes_position">
-        <a href="">Privacy Policy</a>
-        <a href="">Legal notice</a>
+        <a href="./privacy_policy_login.html">Privacy Policy</a>
+        <a href="./legal_notice_login.html">Legal notice</a>
       </div>
     </aside>
+
     <header>
       <div>
         <h1>Kanban Project Managment Tool</h1>
@@ -52,17 +56,22 @@
     </header>
 
     <div id="submenu_position" class="d_none">
-      <div class="submenu_section">
-        <a class="submenu_links_design link_legal_notice_hover" href="./legal_notice.html">Legal Notice</a>
+      <div class="submenu_section" onclick="window.location.href='./legal_notice_login.html'">
+        <a href="./legal_notice_login.html" class="submenu_links_design link_legal_notice_hover">Legal Notice</a>
       </div>
-      <div class="submenu_section">
-        <a class="submenu_links_design link_privacy_policy_hover" href="./privacy_policy.html">Privacy Policy</a>
+      <div class="submenu_section" onclick="window.location.href='./privacy_policy_login.html'">
+        <a href="./privacy_policy_login.html" class="submenu_links_design link_privacy_policy_hover">Privacy Policy</a>
       </div>
-      <div class="submenu_section">
+      <div class="submenu_section" onclick="window.location.href='./login.html'">
         <a class="submenu_links_design link_login_hover" href="./login.html">Log out</a>
       </div>
     </div>
+
     <main>
+      <div id="overlay" onclick="overlayOff()">
+        <div id="box" onclick="stopEventBubbel(event)"></div>
+      </div>
+
       <div class="board_container">
         <section class="title_and_searchbar">
           <h1>Board</h1>
@@ -74,39 +83,45 @@
         </section>
 
         <div class="board_content">
-          <section id="toDo" ondrop="dropPoint(event)" ondragover="allowDrop()" class="to_do board_column">
+          <section class="to_do board_column">
             <div class="board_column">
               <div class="banner">
                 <h3>To do</h3>
                 <button class="plus_button"></button>
               </div>
             </div>
-            <article class="no_task" draggable="true"></article>
+            <div id="placeholderToDo"></div>
+            <div id="toDo" ondrop="dropPoint(event)" ondragover="allowDrop()"></div>
           </section>
 
-          <section id="progress" ondrop="dropPoint(event)" ondragover="allowDrop()" class="progress">
+          <section class="progress">
             <div class="board_column">
               <div class="banner">
                 <h3>In progress</h3>
                 <button class="plus_button"></button>
               </div>
             </div>
+            <div id="placeholderProgress"></div>
+            <div id="progress" ondrop="dropPoint(event)" ondragover="allowDrop()"></div>
           </section>
 
-          <section id="feedback" ondrop="dropPoint(event)" ondragover="allowDrop()" class="feedback board_column">
+          <section class="feedback board_column">
             <div class="board_column">
               <div class="banner">
                 <h3>Await feedback</h3>
                 <button class="plus_button"></button>
               </div>
             </div>
+            <div id="placeholderFeedback"></div>
+            <div id="feedback" ondrop="dropPoint(event)" ondragover="allowDrop()"></div>
           </section>
 
-          <section id="done" ondrop="dropPoint(event)" ondragover="allowDrop()" class="done board_column">
+          <section class="done board_column">
             <div class="board_column">
               <h3>Done</h3>
             </div>
-            <article class="card" draggable="true"></article>
+            <div id="placeholderDone"></div>
+            <div id="done" ondrop="dropPoint(event)" ondragover="allowDrop()"></div>
           </section>
         </div>
       </div>

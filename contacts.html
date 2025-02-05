@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="shortcut icon" href="./assets/icons/logo/joinLarge.png" type="image/x-icon" />
     <script src="./scripts/submenu.js" defer></script>
+    <script src="./scripts/contacts.js" defer></script>
+    <script src="./scripts/HTMLTamplates.js" defer></script>
 
     <link rel="stylesheet" href="./css/aside.css" />
     <link rel="stylesheet" href="./css/header.css" />
@@ -14,30 +16,31 @@
     <link rel="stylesheet" href="./css/submenu.css" />
     <title>Contacts</title>
   </head>
-  <body>
+  <body onload="init()">
     <aside>
       <div class="logo_position">
         <img class="join_logo" src="./assets/icons/aside/joinLogo.svg" alt="Join_Logo" />
       </div>
       <div class="nav_position">
-        <div class="link_nav_summary">
+        <div class="link_nav_summary cursor_pointer" onclick="window.location.href='./summary.html'">
           <a href="./summary.html"><img src="./assets/icons/aside/summary.svg" alt="Summary" />Summary</a>
         </div>
-        <div class="link_nav_add_task">
+        <div class="link_nav_add_task cursor_pointer" onclick="window.location.href='./add_task.html'">
           <a href="./add_task.html"><img src="./assets/icons/aside/addTask.svg" alt="Add Task" />Add Task</a>
         </div>
-        <div class="link_nav_board">
+        <div class="link_nav_board cursor_pointer" onclick="window.location.href='./board.html'">
           <a href="./board.html"><img src="./assets/icons/aside/board.svg" alt="Board" />Board</a>
         </div>
-        <div class="link_nav_contacts">
+        <div class="link_nav_contacts cursor_pointer" onclick="window.location.href='./contacts.html'">
           <a href="./contacts.html"><img src="./assets/icons/aside/contacts.svg" alt="Contacts" />Contacts</a>
         </div>
       </div>
       <div class="legal_notes_position">
-        <a href="">Privacy Policy</a>
-        <a href="">Legal notice</a>
+        <a href="./privacy_policy_login.html">Privacy Policy</a>
+        <a href="./legal_notice_login.html">Legal notice</a>
       </div>
     </aside>
+
     <header>
       <div>
         <h1>Kanban Project Managment Tool</h1>
@@ -47,17 +50,19 @@
         <img onclick="toggleShowSubmenu()" class="account_img" src="./assets/icons/imgs/guestImg.svg" alt="" />
       </div>
     </header>
+
     <div id="submenu_position" class="d_none">
-      <div class="submenu_section">
-        <a class="submenu_links_design link_legal_notice_hover" href="./legal_notice.html">Legal Notice</a>
+      <div class="submenu_section" onclick="window.location.href='./legal_notice_login.html'">
+        <a href="./legal_notice_login.html" class="submenu_links_design link_legal_notice_hover">Legal Notice</a>
       </div>
-      <div class="submenu_section">
-        <a class="submenu_links_design link_privacy_policy_hover" href="./privacy_policy.html">Privacy Policy</a>
+      <div class="submenu_section" onclick="window.location.href='./privacy_policy_login.html'">
+        <a href="./privacy_policy_login.html" class="submenu_links_design link_privacy_policy_hover">Privacy Policy</a>
       </div>
-      <div class="submenu_section">
+      <div class="submenu_section" onclick="window.location.href='./login.html'">
         <a class="submenu_links_design link_login_hover" href="./login.html">Log out</a>
       </div>
     </div>
+
     <main>
       <div class="contact_headline header_standard_size">
         <h1>Contacts</h1>
@@ -66,16 +71,52 @@
       </div>
       <section>
         <div class="content_width_contacts">
-          <button class="add_contact_btn" onclick="">
+          <button class="add_contact_btn" onclick="openOverlayAddContact()">
             Add new contact
             <img src="./assets/icons/contacts/person_add.svg" alt="add_contact" />
           </button>
-          <div class="contacts_list">
-            <div class="first_letter">A</div>
-          </div>
-          <div class="line_bottom"></div>
+          <div id="contact_list" class="contact_list_scrollbar"></div>
         </div>
       </section>
     </main>
+
+    <div id="overlay_add_contacts_background"></div>
+
+    <div id="overlay_add_contact_card" class="d_none">
+      <div class="overlay_add_contact_left_side">
+        <div class="overlay_logo_position">
+          <img src="./assets/icons/logo/logo_white.svg" alt="logo" />
+        </div>
+        <div class="overlay_headline_add_contact">
+          <h1>Add contact</h1>
+          <h2>Tasks are better with a team!</h2>
+          <div class="line_contact"></div>
+        </div>
+      </div>
+      <div class="overlay_add_contact_right_side">
+        <div class="overlay_account_icon_position">
+          <img src="./assets/icons/contacts/account_icon.svg" alt="account_icon" />
+        </div>
+        <div class="overlay_close_btn_position">
+          <img onclick="closeOverlayAddContact()" src="./assets/icons/contacts/Close.svg" alt="close_button" />
+        </div>
+        <form action class="form_input_fields_position">
+          <input id="add_name" type="text" placeholder="Name" required />
+          <input id="add_email" type="email" placeholder="Email" required />
+          <input id="add_phone" type="tel" placeholder="Phone" required />
+          <!-- add the button below inside the form -->
+        </form>
+        <div class="overlay_btn_position">
+          <button class="btn_cancel" onclick="closeOverlayAddContact()">Cancel <img src="./assets/icons/contacts/Close.svg" class="cancel_icon" alt="Cancel" /></button>
+          <button class="btn_create_contact" onclick="addContactToDataBase(), setTimeoutSuccessfullyOverlay()">Create contact <img src="./assets/icons/contacts/check.svg" alt="check" /></button>
+        </div>
+      </div>
+    </div>
+
+    <div id="overlay_contact_infos" class="d_none"></div>
+
+    <div id="overlay_edit_contact_card" class="d_none"></div>
+
+    <div id="contact_successfully_created" class="d_none">Contact successfully created</div>
   </body>
 </html>

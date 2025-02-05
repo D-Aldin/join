@@ -61,7 +61,7 @@ aside {
   align-items: center;
   gap: 15px;
   height: 46px;
-  width: 100%;
+  /* width: 100%; */
 }
 
 .logo_position {
@@ -98,6 +98,10 @@ aside {
 /* Parent class for the privacy_policy.html  */
 .privacy_policy .nav_position {
   height: 390px;
+}
+
+.privacy_policy_legal_notice_login aside {
+  position: fixed;
 }
 
 .privacy_policy aside {

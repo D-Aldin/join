@@ -2,8 +2,23 @@
   display: flex;
   background-color: rgb(246, 247, 248);
 }
-
 .content {
   display: inline-block;
-  margin: 100px 90px 0px 100px;
+  padding-top: 110px;
+  padding-left: 96px;
+  font-size: 16px;
+}
+
+h1 {
+  font-size: 61px;
+  margin: 0;
+}
+
+h2 {
+  font-size: 27px;
+  font-weight: 400;
+}
+
+a {
+  color: rgba(41, 171, 226, 1);
 }

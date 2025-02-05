@@ -48,7 +48,6 @@ function creatTask() {
 
 function clear() {
     console.log('hello');
-    
     resetPrioButton();
     document.getElementById('title').value = '';
     document.getElementById('description').value = '';

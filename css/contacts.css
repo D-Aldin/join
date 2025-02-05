@@ -19,27 +19,31 @@ section {
   background-color: rgb(255, 255, 255);
   box-shadow: 4px 0px 6px 0px #00000014;
   overflow-y: scroll;
+  overflow-x: hidden;
 }
 
 section::-webkit-scrollbar {
-  width: 24px;
+  width: 8px;
 }
 
 section::-webkit-scrollbar-thumb {
   height: 53px;
-  background-color: rgba(42, 54, 71, 0.8);
+  background-color: rgba(168, 168, 168);
   border-radius: 12px;
 }
 
 section::-webkit-scrollbar-track {
-  background-color: rgba(0, 0, 0, 0.1);
-  border-radius: 12px;
+  background-color: rgba(255, 255, 255);
+}
+
+section::-webkit-scrollbar-thumb:hover {
+  cursor: pointer;
+  background-color: rgba(168, 168, 168);
 }
 
 .content_width_contacts {
   position: relative;
   width: 400px;
-  height: 1188px;
   margin-left: 52px;
 }
 
@@ -75,13 +79,18 @@ section::-webkit-scrollbar-track {
   color: rgba(255, 255, 255);
 }
 
-.contacts_list {
+.contact_list_scrollbar {
+  width: 352px;
+  height: calc(100vh - 96px - 120px);
+}
+
+.contacts_list_first_letter {
   display: flex;
   justify-content: flex-start;
   align-items: center;
   width: 352px;
   height: 58px;
-  padding-left: 36px;
+  padding-left: 39px;
 }
 
 .first_letter {
@@ -95,4 +104,476 @@ section::-webkit-scrollbar-track {
   width: 352px;
   margin-top: 8px;
   margin-bottom: 8px;
+}
+
+.contact_list {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  width: 328px;
+  height: 78px;
+  padding-left: 24px;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.hover_contact_list:hover {
+  transition: ease-in-out 125ms;
+  background-color: rgb(249, 249, 249);
+}
+
+.contact_active {
+  background-color: rgba(42, 54, 71, 1);
+  color: rgba(255, 255, 255);
+}
+
+.contact_img {
+  width: 42px;
+  height: 42px;
+}
+
+.account_info {
+  display: flex;
+  flex-direction: column;
+  height: 48px;
+  gap: 5px;
+  margin-left: 35px;
+  padding: 15px 24px 15px 24px;
+}
+
+.account_info p {
+  font-size: 20px;
+  font-weight: 400;
+  margin: 0;
+}
+
+.account_info span {
+  font-size: 16px;
+  font-weight: 400;
+  color: rgb(0, 124, 238);
+}
+
+#overlay_contact_infos {
+  position: absolute;
+  top: 311px;
+  left: 750px;
+  width: 461px;
+  height: 364px;
+  z-index: 3;
+}
+
+@keyframes slideInFromRightContactInfos {
+  from {
+    top: 311px;
+    left: 150%;
+  }
+  to {
+    top: 311px;
+    right: 50%;
+  }
+}
+
+@keyframes slideOutToRightContactInfos {
+  from {
+    top: 311px;
+    left: 50%;
+  }
+  to {
+    top: 311px;
+    left: 150%;
+  }
+}
+
+.overlay_contact_info_header {
+  display: flex;
+  align-items: center;
+  width: 461px;
+  height: 120px;
+  gap: 54px;
+}
+
+.overlay_contact_info_header h2 {
+  font-size: 47px;
+  font-weight: 500;
+  margin: 0;
+  margin-bottom: 8px;
+}
+
+.account_icon {
+  width: 120px;
+  height: 120px;
+}
+
+.btn_position {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  height: 24px;
+  width: 159px;
+}
+
+.btn_position img {
+  cursor: pointer;
+}
+
+.edit_hover:hover {
+  content: url(../assets/icons/contacts/edit_hover.svg);
+}
+
+.delete_hover:hover {
+  content: url(../assets/icons/contacts/delete_hover.svg);
+}
+
+.headline_contact_info {
+  display: flex;
+  align-items: center;
+  width: 207px;
+  height: 74px;
+  margin-top: 21px;
+  font-size: 20px;
+  font-weight: 400;
+}
+
+.headline_contact_info p {
+  margin: 0;
+}
+
+.contact_info {
+  display: flex;
+  flex-direction: column;
+  width: 140px;
+  height: 128px;
+}
+
+.contact_info span {
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.email_design {
+  font-size: 16px;
+  font-weight: 400;
+  color: rgba(0, 124, 238, 1);
+}
+
+.number_design {
+  font-size: 16px;
+  font-weight: 400;
+}
+
+.overlay_background {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.3);
+  z-index: 2;
+  transition: background-color 0.3s;
+}
+
+@keyframes slideInFromRightAddContact {
+  from {
+    top: 50%;
+    left: 150%;
+  }
+  to {
+    top: 50%;
+    right: 50%;
+  }
+}
+
+@keyframes slideOutToRightAddContact {
+  from {
+    top: 50%;
+    left: 50%;
+  }
+  to {
+    top: 50%;
+    left: 150%;
+  }
+}
+
+.overlay_add_contact_card,
+.overlay_edit_contact_card {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 1212px;
+  height: 592px;
+  border-radius: 30px;
+  z-index: 4;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.overlay_add_contact_left_side {
+  background: rgba(42, 54, 71, 1);
+  width: 467px;
+  height: 592px;
+  border-radius: 30px 0px 0px 30px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.overlay_logo_position {
+  position: absolute;
+  top: 154px;
+  left: 46.9px;
+  width: 55.6px;
+  height: 66.48px;
+}
+
+.overlay_headline_add_contact {
+  width: 371px;
+  height: 129px;
+  margin: 66px 48px 66px 48px;
+  margin-bottom: 16px;
+}
+
+.overlay_headline_add_contact h1 {
+  font-size: 61px;
+  font-weight: 700;
+  color: rgba(255, 255, 255);
+  margin-top: 0;
+  margin-bottom: 16px;
+}
+
+.overlay_headline_add_contact h2 {
+  font-size: 27px;
+  font-weight: 400;
+  color: rgba(255, 255, 255);
+  margin-top: 0;
+  margin-bottom: 16px;
+}
+
+.line_contact {
+  border: 3px solid rgba(41, 171, 226, 1);
+  width: 90px;
+}
+
+.overlay_add_contact_right_side {
+  background-color: rgb(255, 255, 255);
+  width: 745px;
+  height: 592px;
+  border-radius: 0px 30px 30px 0px;
+}
+
+.overlay_account_icon_position {
+  position: absolute;
+  top: 204px;
+  left: 550px;
+  width: 120px;
+  height: 120px;
+}
+
+.overlay_close_btn_position img {
+  position: absolute;
+  top: 48px;
+  left: 1132px;
+  cursor: pointer;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  z-index: 4;
+}
+
+.overlay_close_btn_position img:hover {
+  border-radius: 50%;
+  background: rgba(238, 238, 238);
+  transition: ease-in-out 125ms;
+}
+
+.form_input_fields_position {
+  position: absolute;
+  top: 137px;
+  left: 742px;
+  width: 422px;
+  height: 215px;
+  gap: 32px;
+  display: flex;
+  flex-direction: column;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="tel"] {
+  cursor: pointer;
+  height: 50px;
+  border-radius: 10px;
+  border: 1px solid rgba(209, 209, 209, 1);
+  padding: 13px 21px 13px 21px;
+  outline: none;
+  font-size: 20px;
+  font-weight: 400;
+}
+
+::placeholder {
+  color: rgba(209, 209, 209, 1);
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="tel"]:focus {
+  border: 1px solid rgb(41, 171, 226);
+}
+
+#add_name {
+  background: url(../assets/icons/signUp/person.svg) no-repeat right 21px center;
+}
+
+#add_email {
+  background: url(../assets/icons/signUp/mail.svg) no-repeat right 21px center;
+}
+
+#add_phone {
+  background: url(../assets/icons/contacts/call.svg) no-repeat right 21px center;
+}
+
+.overlay_btn_position {
+  display: flex;
+  position: absolute;
+  top: 400px;
+  left: 742px;
+  width: 364px;
+  height: 57px;
+  gap: 24px;
+}
+
+.btn_cancel {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  width: 126px;
+  height: 56px;
+  border-radius: 10px;
+  border: 1px solid rgba(42, 54, 71);
+  background-color: rgba(255, 255, 255);
+  font-size: 20px;
+  font-weight: 400;
+}
+
+.btn_cancel:hover,
+.btn_delete:hover {
+  transition: ease-in-out 125ms;
+  border: 1px solid rgba(41, 171, 226);
+  color: rgba(41, 171, 226);
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+}
+
+/* hier nochmal nachschauen, ob es eine besser Variante gibt */
+.btn_cancel:hover img,
+.btn_delete:hover img {
+  transition: ease-in-out 125ms;
+  filter: invert(41%) sepia(100%) saturate(1000%) hue-rotate(170deg) brightness(100%) contrast(100%);
+}
+
+.btn_cancel img,
+.btn_create_contact img,
+.cancel_icon {
+  width: 32px;
+  height: 32px;
+}
+
+.btn_create_contact {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  width: 214px;
+  height: 57px;
+  border: none;
+  border-radius: 10px;
+  background-color: rgba(42, 54, 71, 1);
+  color: rgba(255, 255, 255);
+  font-size: 21px;
+  font-weight: 700;
+}
+
+.btn_create_contact:hover,
+.btn_save:hover {
+  transition: ease-in-out 125ms;
+  background-color: rgba(41, 171, 226);
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+}
+
+.btn_delete {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* gap: 10px; */
+  width: 113px;
+  height: 55px;
+  border-radius: 8px;
+  border: 1px solid rgba(42, 54, 71);
+  background-color: rgba(255, 255, 255);
+  font-size: 21px;
+  font-weight: 400;
+}
+
+.btn_save {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  width: 111px;
+  height: 57px;
+  border: none;
+  border-radius: 10px;
+  background-color: rgba(42, 54, 71, 1);
+  color: rgba(255, 255, 255);
+  font-size: 21px;
+  font-weight: 700;
+}
+
+.overlay_contact_successfully_created {
+  position: absolute;
+  top: 85%;
+  left: 914px;
+  transform: translate(-50%, -50%);
+  width: 326px;
+  height: 74px;
+  border-radius: 30px;
+  z-index: 1;
+  background-color: rgba(42, 54, 71, 1);
+  box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.1);
+  color: rgb(255, 255, 255);
+  font-size: 20px;
+  font-weight: 400;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@keyframes slideInFromRightContactSuccessfullyCreated {
+  from {
+    top: 85%;
+    left: 150%;
+  }
+  to {
+    top: 85%;
+    left: 914px;
+  }
+}
+
+@keyframes slideOutToRightContactSuccessfullyCreated {
+  from {
+    top: 85%;
+    left: 914px;
+  }
+  to {
+    top: 85%;
+    left: 150%;
+  }
 }
