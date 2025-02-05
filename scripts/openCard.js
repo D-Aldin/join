@@ -136,3 +136,10 @@ function renderEditMenu() {
   refCardBox.innerHTML = "";
   refCardBox.innerHTML += HTMLTamplateForTheEditFunk();
 }
+
+async function editFunction() {
+  let dataFromFireBase = await fetchCardDetails(taskPath, storeTheID);
+  let title = dataFromFireBase[storeTheID].title;
+  let description = dataFromFireBase.description;
+  console.log(title);
+}

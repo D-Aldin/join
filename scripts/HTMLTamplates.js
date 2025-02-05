@@ -81,6 +81,7 @@ function HTMLForOpenCard(category, title, discription, date, prio, id) {
                     <form id="subtasks_container">
                       
                     </form>
+                  </div>  
                   </div>
                   <div class="edit_button_box">
                     <div onclick="deleteButton()" class="position_delete">
@@ -90,44 +91,39 @@ function HTMLForOpenCard(category, title, discription, date, prio, id) {
                     <div class="vector"></div>
                     <div class="position_edit">
                       <div class="edit_img"></div>
-                      <button onclick="renderEditMenu()" class="edit_button">Edit</button>
+                      <button onclick="renderEditMenu(), editFunction()" class="edit_button">Edit</button>
                     </div>
-                    
-                  </div>
                 </div>`;
 }
 
 function HTMLTamplateForTheEditFunk() {
   return `
             <div>
-            <button>close</button>
-            <div>
-              <form action="">
-                <label for="editTitle">Title</label><br />
-                <input type="text" id="editTitle" name="title" /><br /><br />
-
-                <label for="editDescription">Description</label><br />
-                <textarea name="description" id="editDescription"></textarea><br />
-
-                <label for="editDate">Date</label>
-                <input name="date" id="editDate" type="date" />
-              </form>
-
-              <h3>Priority</h3>
-              <div>
-                <button>Urgent</button>
-                <button>Medium</button>
-                <button>Low</button>
+              <div class=close_button>
+                <button  class="closeBtn"><img onclick="overlayOff()" src="./assets/icons/board/close.svg" alt="close"></button>
               </div>
-              <form action="">
-                <label for="editAssigned"></label>
-                <select name="assigned" id="editAssigned">
-                  <option value="volvo">Volvo</option>
-                </select>
-                <br /><br />
-                <input type="submit" value="Submit" />
-              </form>
-
+              <div>
+                <form class="title_description_date" action="">
+                  <label for="editTitle">Title</label>
+                  <input type="text" id="editTitle" name="title" class="inputfield dimensions" /><br>
+                  <label for="editDescription">Description</label>
+                  <textarea name="description" id="editDescription"></textarea><br /> 
+                  <label for="editDate">Due date</label>
+                  <input name="date" id="editDate" type="date" class="inputfield dimensions"/>
+                </form>
+                <h3>Priority</h3>
+                <div>
+                  <button class="prio_button">Urgent</button>
+                  <button class="prio_button">Medium</button>
+                  <button class="prio_button">Low</button>
+                </div>
+                <form action="">
+                  <label for="editAssigned">Assigned to</label><br>
+                  <select name="assigned" id="editAssigned">
+                    <option value="volvo">Volvo</option>
+                  </select><br/><br />
+                  <input type="submit" value="Submit" />
+                </form>
               </div>`;
 }
 

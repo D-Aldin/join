@@ -167,14 +167,19 @@ function calPercentageOfCompletedSubtasks(numberOfSubtasks, completedSubtasks, i
 // ------------------------- TEST LIST --------------------------------
 let contacts = {
   blue: "Dobric Aldin",
-  orange: "Dobric Ajla",
+  orange: "Marita Haupt",
+  red: "Adele Dorn",
+  core: "Ewald Thun",
 };
 
 let subtaskList = {
   0: { task: "NewTask1", state: false },
   1: { task: "NewTask2", state: false },
+  2: { task: "NewTask3", state: false },
+  3: { task: "NewTask4", state: false },
+  4: { task: "NewTask5", state: false },
 };
 
 displayCardOnBoard();
-const today = taskTemplate(1, "Mark Twain", "Wer glaubt gut zu sein, hat aufgehört besser zu werden.", contacts, "05.02.2025", "Low", "User Task", subtaskList, "progress"); // Test Data
+const today = taskTemplate(1, "Boris Pasternak", "Was wir heute tun, entscheidet, wie die Welt morgen aussieht.", contacts, "05.02.2025", "Low", "User Task", subtaskList, "toDo"); // Test Data
 // addTaskToFireBase("tasks", today);

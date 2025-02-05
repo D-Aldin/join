@@ -1,0 +1,56 @@
+.close_button {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 30px;
+}
+
+.title_description_date {
+  display: flex;
+  justify-content: flex-start;
+  flex-direction: column;
+  margin-bottom: 30px;
+}
+
+label {
+  display: flex;
+}
+
+h3 {
+  display: flex;
+  font-size: 16px;
+  font-family: Inter;
+  font-weight: lighter;
+}
+
+#editAssigned {
+  display: flex;
+}
+
+.dimensions {
+  width: 100%;
+  height: 35px;
+}
+
+textarea {
+  width: 100%;
+  height: 80px;
+  border: solid 1px rgba(209, 209, 209, 1);
+  border-radius: 10px;
+}
+
+.prio_button {
+  cursor: pointer;
+  width: 120px;
+  height: 50px;
+  border: solid 1px rgba(209, 209, 209, 0.37);
+  background-color: white;
+  border-radius: 10px;
+  margin-bottom: 30px;
+}
+
+select {
+  width: 100%;
+  height: 35px;
+  border: solid 1px rgba(209, 209, 209, 1);
+  border-radius: 10px;
+}
