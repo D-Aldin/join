@@ -1,7 +1,7 @@
 function render() {
 }
 
-function loadContact() {
+async function loadContact() {
     for (let i = 0; i < contacts.length; i++) {
         const contact = contacts[i];
         let name = contact.name;
@@ -16,6 +16,8 @@ function loadContact() {
 }
 
 selectedButton = '';
+
+let subtasks = [];
 
 function setPrio(x) {
     resetPrioButton()
@@ -46,7 +48,7 @@ function creatTask() {
     let category = document.getElementById('').value;
 }
 
-function clear() {
+function clearAllTasks() {
     console.log('hello');
     resetPrioButton();
     document.getElementById('title').value = '';
@@ -56,3 +58,29 @@ function clear() {
     document.getElementById('category').value = '';
     document.getElementById('subtask').value = '';
 }
+
+function setSubtask() {
+    let subtask = document.getElementById('subtask').value  
+    subtasks.push(subtask);
+    console.log(subtasks);
+    subtask.value = '';
+    renderSubtasks();
+}
+
+function renderSubtasks() {
+    let tasks = document.getElementById('tasks-wrapper').innerHTML;
+    tasks.innerHTML = '';
+    for (let i = 0; i < subtasks.length; i++) {
+        const element = subtasks[i];
+        tasks.innerHTML += /*html*/`
+            <div>
+                <p>${element}</p>  
+                <div>
+                    <button><img src="assets/icons/addTask/delete.svg" alt=""></button>
+                    <button><img src="assets/icons/addTask/done.svg" alt=""></button>
+                </div>
+            </div>
+        `
+    }
+}
+

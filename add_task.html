@@ -69,18 +69,18 @@
                 <div class="flex-container">
                     <div class="input-container">
                         <div class="inputfield-title-container">
-                            <span class="display-flex"><p class="display-flex">Title</p><p class="color-red">*</p></span>
+                            <span class="display-flex"><p class="display-flex tasktitles">Title</p><p class="color-red tasktitles">*</p></span>
                             <input class="inputfield" id="title" placeholder="Enter a title" type="text">
                         </div>
                         <div class="inputfield-title-container">
-                            <p>Description</p>
+                            <p class="tasktitles">Description</p>
                             <textarea class="textareafield" id="description" placeholder="Enter a Description" name="Description">
                               
                             </textarea>
                             
                         </div>
                         <div class="inputfield-title-container">
-                            <p>Assigned to</p>
+                            <p class="tasktitles">Assigned to</p>
                             <select class="inputfield" id="contact-list" placeholder="select contacts to assign"></select>
                         </div>
                         <div class="assigned-contact-wrapper" id="assigned"></div>
@@ -88,11 +88,11 @@
                     <div class="pixelbar"></div>
                     <div class="input-container">
                         <div class="inputfield-title-container">
-                            <span class="display-flex"><p>Due date</p><p class="color-red">*</p></span>
+                            <span class="display-flex"><p class="tasktitles">Due date</p><p class="color-red tasktitles">*</p></span>
                             <input class="inputfield" id="date" type="date">
                         </div>
                         <div class="inputfield-title-container">
-                            <p>Prio</p>
+                            <p class="tasktitles">Prio</p>
                             <div class="button-container">
                                 <button onclick="setPrio('urgent')" id="urgent" class="urgentbutton">Urgent <div id="iconurgent" class="prio_icon"><img src="assets/icons/addTask/icon_urgent.svg" alt=""></div></button>
                                 <button onclick="setPrio('medium')" id="medium" class="urgentbutton">Medium<div id="iconmedium" class="prio_icon"><img src="assets/icons/addTask/icon_medium.svg" alt=""></div></button>
@@ -100,25 +100,29 @@
                             </div>
                         </div>
                         <div class="inputfield-title-container">
-                          <span class="display-flex"><p>Category</p><p class="color-red">*</p></span>
+                          <span class="display-flex"><p class="tasktitles">Category</p><p class="color-red tasktitles">*</p></span>
                             <select class="inputfield" id="category" placeholder="Select task category">
                                 <option value="Technical Task">Technical Task</option>
                                 <option value="User Story">User Story</option>
                             </select>
                         </div>
                         <div class="inputfield-title-container">
-                          <p>Subtasks</p>
-                            <select class="inputfield" role="listbox" id="subtask">
-                                <option value="Technical Task"></option>
-                                <option value="User Story"></option>
-                            </select>
+                          <p class="tasktitles">Subtasks</p>
+                          <div class="subtask-inputfield">
+                            <input id="subtask" class="subtask-inputfield-text " type="text">
+                            <button class="subtask-inputfield-button" onclick="setSubtask()">
+                              <img src="assets/icons/addTask/subtasks_icons.svg" alt="">
+                            </button>
+                          </div>
+                          <div id="tasks-wrapper" class="subtask-wrapper">
+                          </div>
                         </div>
                     </div>
                 </div>
                 <div class="footer-container">
                   <span class="display-flex"><p class="color-red">*</p><p></p>This field is required</p></span>
                   <div class="button-container">
-                    <button class="clear-button" onclick="clear()">Clear <div class="icon-box"></div></button>
+                    <button class="clear-button" onclick="clearAllTasks()">Clear <div class="icon-box"></div></button>
                     <button class="great-button" onclick="CreateTask()">Creat Task <img src="assets/icons/addTask/check.svg" alt=""></button>
                   </div>
                 </div>

@@ -1,8 +1,8 @@
 input {
     width: 100%;
     box-sizing: border-box;
-    padding-left: 12px;
-    padding-right: 12px;
+    padding-left: 16px;
+    padding-right: 16px;
     font-size: 21px;
 }
 
@@ -58,6 +58,10 @@ p {
     margin: 0;
 }
 
+.tasktitles {
+    font-size: 20px;
+}
+
 .pixelbar {
     background-color: rgba(209, 209, 209, 1);
     width: 1px;
@@ -85,6 +89,11 @@ p {
     border-radius: 10px;
     height: 48px;
     width: 440px;
+    width: 100%;
+    box-sizing: border-box;
+    padding-left: 16px;
+    padding-right: 16px;
+    font-size: 20px;
 }
 
 .textareafield {
@@ -113,12 +122,14 @@ p {
     align-items: center;
     justify-content: space-between;
     width: 440px;
+    height: 56px;
     gap: 16px;
 }
 
 .urgentbutton {
     border: solid 1px rgba(209, 209, 209, 1);
     border-radius: 10px;
+    box-sizing: border-box;
     height: 56px;
     width: 136px;
     background-color: white;
@@ -247,4 +258,47 @@ p {
     border: solid 1px rgba(41, 171, 226, 1);
     box-shadow: 1px 4px rgba(0, 0, 0, 0.1);
     color: rgba(41, 171, 226, 1);
+}
+
+.subtask-inputfield {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-sizing: border-box;
+    width: 440px;
+    height: 48px;
+    border-radius: 10px;
+    border: solid 1px rgba(209, 209, 209, 1);
+    background-color:white;
+    padding-right: 16px;
+}
+
+.subtask-inputfield-text {
+    border: none;
+}
+
+.subtask-inputfield-text:focus {
+    outline: none;
+  }
+
+.subtask-inputfield-button {
+    cursor: pointer;
+    border: none;
+    background-color: white;
+    height: 30px;
+    width: 30px;
+    border-radius: 15px;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+}
+
+.subtask-inputfield-button:hover {
+    background-color: rgba(209, 209, 209, 1);
+}
+
+.subtask-wrapper {
+    width: 440px;
+    display: flex;
+    flex-direction: column;
 }
