@@ -3,6 +3,7 @@ let storeTheID;
 const taskPath = "tasks";
 let refCardBox = document.getElementById("box");
 const refCloseBtn = document.getElementsByClassName("closeBtn");
+const refEditButton = document.querySelector(".position_edit");
 
 function overlayOn(event) {
   document.getElementById("overlay").style.display = "block";
@@ -129,4 +130,9 @@ async function deleteButton() {
     },
   });
   const responseData = await response.json();
+}
+
+function renderEditMenu() {
+  refCardBox.innerHTML = "";
+  refCardBox.innerHTML += HTMLTamplateForTheEditFunk();
 }

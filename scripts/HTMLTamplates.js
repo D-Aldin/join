@@ -90,11 +90,45 @@ function HTMLForOpenCard(category, title, discription, date, prio, id) {
                     <div class="vector"></div>
                     <div class="position_edit">
                       <div class="edit_img"></div>
-                      <button class="edit_button">Edit</button>
+                      <button onclick="renderEditMenu()" class="edit_button">Edit</button>
                     </div>
                     
                   </div>
                 </div>`;
+}
+
+function HTMLTamplateForTheEditFunk() {
+  return `
+            <div>
+            <button>close</button>
+            <div>
+              <form action="">
+                <label for="editTitle">Title</label><br />
+                <input type="text" id="editTitle" name="title" /><br /><br />
+
+                <label for="editDescription">Description</label><br />
+                <textarea name="description" id="editDescription"></textarea><br />
+
+                <label for="editDate">Date</label>
+                <input name="date" id="editDate" type="date" />
+              </form>
+
+              <h3>Priority</h3>
+              <div>
+                <button>Urgent</button>
+                <button>Medium</button>
+                <button>Low</button>
+              </div>
+              <form action="">
+                <label for="editAssigned"></label>
+                <select name="assigned" id="editAssigned">
+                  <option value="volvo">Volvo</option>
+                </select>
+                <br /><br />
+                <input type="submit" value="Submit" />
+              </form>
+
+              </div>`;
 }
 
 function getLetterTemplate(letter) {
