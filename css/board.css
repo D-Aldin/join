@@ -11,7 +11,7 @@ h3 {
 }
 
 h5 {
-  margin: 13px 0px 13px;
+  margin: 13px 0px 3px;
 }
 
 .title_and_searchbar {
@@ -140,7 +140,7 @@ input::placeholder {
   box-shadow: 1px 1px 6px #838282;
   border-radius: 18px;
   height: 15rem;
-  width: 100%;
+  width: 300px;
   padding: 18px;
   margin-bottom: 10px;
   cursor: pointer;
@@ -179,7 +179,7 @@ input::placeholder {
   left: 50%;
   transform: translate(-50%, -50%);
   width: 380px;
-  height: 750px;
+  height: 700px;
   background-color: white;
   color: rgb(0, 0, 0);
   padding: 35px;
@@ -198,5 +198,4 @@ input::placeholder {
   height: 100%;
   background-color: rgba(0, 0, 0, 0.3);
   z-index: 1;
-  cursor: pointer;
 }

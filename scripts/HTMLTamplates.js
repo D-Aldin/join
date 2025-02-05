@@ -1,6 +1,6 @@
-function renderCard(id, category, title, discription, subtasks, prio) {
+function renderCard(id, category, title, discription, completedSubtasks, subtasks, prio) {
   return ` 
-              <article id=${id} onclick="overlayOn(), getData(event)" ondragstart="draggedElementID(event)" class="card" draggable="true">
+              <article id=${id} onclick="overlayOn(event), getData(event)" ondragstart="draggedElementID(event)" class="card" draggable="true">
                 <div class="category">${category}</div>
                 <div class="card_title">
                   <h4 id="title">${title}</h4>
@@ -10,9 +10,9 @@ function renderCard(id, category, title, discription, subtasks, prio) {
                 </div>
                 <div class="progress_indicator">
                   <div class="progress_container">
-                    <div class="progress_bar" style="width: 20%"></div>
+                    <div id="progress_bar${id}" class="progress_bar" style="width: 0%"></div>
                   </div>
-                  <span id="subtasks">${subtasks} Subtasks</span>
+                  <span id="subtasks${id}">${completedSubtasks}/${subtasks} Subtasks</span>
                 </div>
                 <div class="profile_prio_container">
                   <div class="profile">
@@ -34,29 +34,29 @@ function contactTamplate(contact, color, translateX) {
 function contactTamplateForOpenCard(contact, color, fullName) {
   return `
           <div class="profile_names">
-            <div class="circle" style="background-color: ${color}">${contact}</div>
+            <div class="circle circle_profile_names" style="background-color: ${color}">${contact}</div>
             <span>${fullName}</span>
           </div>  `;
 }
 
 function subtasksTamplate(task, id, state) {
   return `
-          <div>
+          <div class="check_box">
             <input type="checkbox" id="subtask${id}" name="subtask${id}" value="task${id}"/>
             <label for="subtask${id}">${task}</label>
           </div>`;
 }
 
 // TODO add more param to the function
-function HTMLForOpenCard(category, title, discription, date, prio, name) {
+function HTMLForOpenCard(category, title, discription, date, prio, id) {
   return `     
                 <div class="category_box">
                   <div class="open_card_category">${category}</div>
-                  <button class="closeBtn"><img src="./assets/icons/board/close.svg" alt="close" /></button>
+                  <button class="closeBtn"><img onclick="overlayOff()" src="./assets/icons/board/close.svg" alt="close" /></button>
                 </div>
                 <div class="content_box">
-                  <div class="open_card_title">${title}</div>
-                  <div class="open_card_discription">${discription}</div>
+                  <h1 class="open_card_title">${title}</h1>
+                  <p class="open_card_discription">${discription}</p>
                   <div class="open_card_date">
                     <table>
                       <tr>
@@ -72,21 +72,59 @@ function HTMLForOpenCard(category, title, discription, date, prio, name) {
                   </div>
                   <div class="open_card_assigned">
                     <div class="assigned_box">
-                      <div>Assigned To:</div>
+                      <h5>Assigned To:</h5>
                       <div class="profiles"></div>
                     </div>
                   </div>
                   <div class="open_card_subtasks">
-                    <div>Subtasks</div>
+                    <h5>Subtasks</h5>
                     <form id="subtasks_container">
                       
                     </form>
+                  </div>  
                   </div>
-                  <div class="delete_edit_btn_box">
-                    <button class="deleteBtn"><img src="./assets/icons/board/delete.svg" alt="" /></button>
-                    <button class="editBtn"><img src="./assets/icons/board/edit.svg" alt="" /></button>
-                  </div>
+                  <div class="edit_button_box">
+                    <div onclick="deleteButton()" class="position_delete">
+                      <div class="trash_img"></div>
+                      <button class="delete_button">Delete</button>
+                    </div>
+                    <div class="vector"></div>
+                    <div class="position_edit">
+                      <div class="edit_img"></div>
+                      <button onclick="renderEditMenu(), editFunction()" class="edit_button">Edit</button>
+                    </div>
                 </div>`;
+}
+
+function HTMLTamplateForTheEditFunk() {
+  return `
+            <div>
+              <div class=close_button>
+                <button  class="closeBtn"><img onclick="overlayOff()" src="./assets/icons/board/close.svg" alt="close"></button>
+              </div>
+              <div>
+                <form class="title_description_date" action="">
+                  <label for="editTitle">Title</label>
+                  <input type="text" id="editTitle" name="title" class="inputfield dimensions" /><br>
+                  <label for="editDescription">Description</label>
+                  <textarea name="description" id="editDescription"></textarea><br /> 
+                  <label for="editDate">Due date</label>
+                  <input name="date" id="editDate" type="date" class="inputfield dimensions"/>
+                </form>
+                <h3>Priority</h3>
+                <div>
+                  <button class="prio_button">Urgent</button>
+                  <button class="prio_button">Medium</button>
+                  <button class="prio_button">Low</button>
+                </div>
+                <form action="">
+                  <label for="editAssigned">Assigned to</label><br>
+                  <select name="assigned" id="editAssigned">
+                    <option value="volvo">Volvo</option>
+                  </select><br/><br />
+                  <input type="submit" value="Submit" />
+                </form>
+              </div>`;
 }
 
 function getLetterTemplate(letter) {
@@ -101,7 +139,7 @@ function getLetterTemplate(letter) {
 function getContactTemplate(contact, index) {
   return `
     <div id="contact_${index}" class="contact_list hover_contact_list" onclick="toggleOverlayContactInfos(${index})">
-      <img class="contact_img" src="./assets/icons/contacts/am_account_icon.svg" />
+      <div class="circle" id="circle_${index}"></div>
       <div class="account_info">
         <p>${contact.name}</p>
         <span>${contact.email}</span>
@@ -113,7 +151,7 @@ function getContactTemplate(contact, index) {
 function getTemplateOfRenderContacts(contact, index) {
   return `    
     <div id="contact_${index}" class="contact_list hover_contact_list" onclick="toggleOverlayContactInfos(${index})">
-      <img class="contact_img" src="./assets/icons/contacts/am_account_icon.svg" />
+      <div class="circle" id="circle_${index}"></div>
       <div class="account_info">
         <p>${contact.name}</p>
         <span>${contact.email}</span>
@@ -122,9 +160,10 @@ function getTemplateOfRenderContacts(contact, index) {
 }
 
 function getTemplateOfContactInfo(contact) {
+  const initials = getInitials(contact.name);
   return `
     <div class="overlay_contact_info_header">
-    <img class="account_icon" src="./assets/icons/contacts/am_account_icon.svg" alt="account_icon" />
+    <div class="circle_contact_img" style="background-color:${contact.color}">${initials}</div>
     <div>
       <h2>${contact.name}</h2>
       <div class="btn_position">
@@ -166,10 +205,10 @@ function getTemplateOfContactEdit(contact) {
         <input id="edit_name" type="text" placeholder="Name" value="${contact.name}" required />
         <input id="edit_email" type="email" placeholder="Email" value="${contact.email}" required />
         <input id="edit_phone" type="tel" placeholder="Phone" value="${contact.phone}" required />
+        <div class="overlay_btn_position">
+          <button class="btn_delete" onclick="deleteContactFromList('${contact.id}')">Delete <img src="./assets/icons/contacts/Close.svg" class="cancel_icon" alt="Cancel" /></button>
+          <button class="btn_save" onclick="updateContactInDataBase('${contact.id}')">Save <img src="./assets/icons/contacts/check.svg" alt="check" /></button>
+        </div>
       </form>
-      <div class="overlay_btn_position">
-        <button class="btn_delete" onclick="deleteContactFromList('${contact.id}')">Delete <img src="./assets/icons/contacts/Close.svg" class="cancel_icon" alt="Cancel" /></button>
-        <button class="btn_save" onclick="saveChangesContact('${contact.id}')">Save <img src="./assets/icons/contacts/check.svg" alt="check" /></button>
-      </div>
     </div>`;
 }

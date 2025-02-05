@@ -22,40 +22,40 @@ textarea {
 }
 
 .task {
-    display: flex;
-    background-color: rgb(246, 247, 248);
+  display: flex;
+  background-color: rgb(246, 247, 248);
 }
-      
+
 .task-wrapper {
-    display: inline-block;
-    margin: 100px 90px 0px 100px;
-    gap: 24px;
-    font-size: 16px
+  display: inline-block;
+  margin: 100px 90px 0px 100px;
+  gap: 24px;
+  font-size: 16px;
 }
 
 .flex-container {
-    display: flex;
-    align-items: flex-start;
-    justify-content: space-between;
-    gap: 32px;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 32px;
 }
 
 .color-red {
-    color: red;
+  color: red;
 }
 
 .display-flex {
-    display: flex;
+  display: flex;
 }
-    
+
 .h1-content-titles {
-    font-size: 61px;
-    font-weight: 700;
-    margin: 0px;
+  font-size: 61px;
+  font-weight: 700;
+  margin: 0px;
 }
 
 p {
-    margin: 0;
+  margin: 0;
 }
 
 .tasktitles {
@@ -63,17 +63,17 @@ p {
 }
 
 .pixelbar {
-    background-color: rgba(209, 209, 209, 1);
-    width: 1px;
-    height: 424px;
+  background-color: rgba(209, 209, 209, 1);
+  width: 1px;
+  height: 424px;
 }
 
 .input-container {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    justify-content: space-between;
-    gap: 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 8px;
 }
 
 .inputfield-title-container {
@@ -143,7 +143,7 @@ p {
 }
 
 .urgentbutton:hover {
-    box-shadow: 1px 4px rgba(0, 0, 0, 0.1);
+  box-shadow: 1px 4px rgba(0, 0, 0, 0.1);
 }
 
 .prio_icon {
@@ -199,49 +199,50 @@ p {
     font-weight: 400;
 }
 
-.footer-container  {
-    display: flex;
-    align-items: flex-end;
-    justify-content: space-between;
-    width: 100%;
+.footer-container {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  width: 100%;
 }
 
 .button-container {
-    display: flex;
-    gap: 16px;
-    width: 309px;
+  display: flex;
+  gap: 16px;
+  width: 309px;
 }
 
 .great-button {
-    background-color: rgba(42, 54, 71, 1);
-    color: white;
-    border-radius: 10px;
-    width: 183px;
-    height: 56px;
-    display: flex;
-    gap: 4px;
-    align-items: center;
-    justify-content: center;    cursor: pointer;
-    font-size: 21px;
-    border: none;
+  background-color: rgba(42, 54, 71, 1);
+  color: white;
+  border-radius: 10px;
+  width: 183px;
+  height: 56px;
+  display: flex;
+  gap: 4px;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 21px;
+  border: none;
 }
 
-.great-button:hover  {
-    background-color: rgba(41, 171, 226, 1);
-    box-shadow: 1px 4px rgba(0, 0, 0, 0.1);
+.great-button:hover {
+  background-color: rgba(41, 171, 226, 1);
+  box-shadow: 1px 4px rgba(0, 0, 0, 0.1);
 }
 
 .clear-button {
-    border: solid 1px rgba(42, 54, 71, 1);
-    border-radius: 10px;
-    height: 56px;
-    width: 110px;
-    font-size: 20px;
-    display: flex;
-    gap: 4px;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
+  border: solid 1px rgba(42, 54, 71, 1);
+  border-radius: 10px;
+  height: 56px;
+  width: 110px;
+  font-size: 20px;
+  display: flex;
+  gap: 4px;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
 }
 
 .icon-box {

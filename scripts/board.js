@@ -47,8 +47,6 @@ async function updateStatusInDB(path = "", idNumber, status) {
   noTaskToDo();
 }
 
-async function changeData(path = "") {}
-
 function taskTemplate(id, title, description, assigned, date, prio, category, subtask, status) {
   return {
     [id]: {
@@ -91,22 +89,26 @@ async function displayCardOnBoard() {
 
   for (const key in taskFromFireBase) {
     const element = taskFromFireBase[key];
-    // console.log(element.subtask);
+
+    if (!element) continue;
+    const subtasksCompleted = await countCompletedSubtasks(element.subtask);
 
     if (element.status == "toDo") {
-      toDo.innerHTML += renderCard(element.id, element.category, element.title, element.description, element.subtask.length, element.assigned, element.prio);
+      toDo.innerHTML += renderCard(element.id, element.category, element.title, element.description, subtasksCompleted, element.subtask.length, element.assigned, element.prio);
     }
     if (element.status == "progress") {
-      progress.innerHTML += renderCard(element.id, element.category, element.title, element.description, element.subtask.length, element.assigned, element.prio);
+      progress.innerHTML += renderCard(element.id, element.category, element.title, element.description, subtasksCompleted, element.subtask.length, element.assigned, element.prio);
     }
     if (element.status == "feedback") {
-      feedback.innerHTML += renderCard(element.id, element.category, element.title, element.description, element.subtask.length, element.assigned, element.prio);
+      feedback.innerHTML += renderCard(element.id, element.category, element.title, element.description, subtasksCompleted, element.subtask.length, element.assigned, element.prio);
     }
     if (element.status == "done") {
-      done.innerHTML += renderCard(element.id, element.category, element.title, element.description, element.subtask.length, element.assigned, element.prio);
+      done.innerHTML += renderCard(element.id, element.category, element.title, element.description, subtasksCompleted, element.subtask.length, element.assigned, element.prio);
     }
+    calPercentageOfCompletedSubtasks(element.subtask.length, subtasksCompleted, element.id);
     addProfilesToCard(key, element.assigned);
   }
+
   noTaskToDo();
 }
 
@@ -118,7 +120,6 @@ function addProfilesToCard(id, obj) {
       const color = key;
       document.getElementById(id).lastElementChild.firstElementChild.innerHTML += contactTamplate(name, color, transX);
       transX += 30;
-      // overlappingProfileImg(refProfile);
     }
   }
 }
@@ -144,25 +145,41 @@ function noTaskToDo() {
   }, 130);
 }
 
-// ------------------------- TEST LIST
+async function countCompletedSubtasks(subtask) {
+  let countTrue = 0;
+  for (let index = 0; index < subtask.length; index++) {
+    const element = subtask[index];
+    if (element.state === true) {
+      countTrue += 1;
+    }
+  }
+
+  return countTrue;
+}
+
+function calPercentageOfCompletedSubtasks(numberOfSubtasks, completedSubtasks, id) {
+  // const refProgressBar = document.querySelectorAll(`"#subtasks${id}"`);
+  const result = (completedSubtasks / numberOfSubtasks) * 100;
+  document.getElementById("progress_bar" + id).style.width = `${result}%`;
+  // console.log(refProgressBar);
+}
+
+// ------------------------- TEST LIST --------------------------------
 let contacts = {
-  red: "Dobric Aldin",
-  green: "Robby Runge",
-  yellow: "Simon Burlet",
+  blue: "Dobric Aldin",
+  orange: "Marita Haupt",
+  red: "Adele Dorn",
+  core: "Ewald Thun",
 };
 
 let subtaskList = {
   0: { task: "NewTask1", state: false },
   1: { task: "NewTask2", state: false },
+  2: { task: "NewTask3", state: false },
+  3: { task: "NewTask4", state: false },
+  4: { task: "NewTask5", state: false },
 };
 
 displayCardOnBoard();
-const today = taskTemplate(1, "TEST2", "Work in progress", contacts, "01.02.2025", "Medium", "User Task", subtaskList, "progress"); // Test Data
-addTaskToFireBase("tasks", today);
-
-// function overlappingProfileImg(refProfileContainer) {
-//   for (let index = 0; index < refProfileContainer.length; index++) {
-//     const element = refProfileContainer[index];
-//     return element;
-//   }
-// }
+const today = taskTemplate(1, "Boris Pasternak", "Was wir heute tun, entscheidet, wie die Welt morgen aussieht.", contacts, "05.02.2025", "Low", "User Task", subtaskList, "toDo"); // Test Data
+// addTaskToFireBase("tasks", today);

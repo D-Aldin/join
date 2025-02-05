@@ -1,6 +1,7 @@
 BASE_URL = "https://dv-join-bbc2e-default-rtdb.europe-west1.firebasedatabase.app/";
 
 let arrayOfContacts = [];
+const colors = ["rgb(255, 122, 0)", "rgb(147, 39, 255)", "rgb(110, 82, 255)", "rgb(252, 113, 255)", "rgb(255, 187, 43)", "rgb(31, 215, 193)", "rgb(70, 47, 138)", "rgb(255, 70, 70)", "rgb(0, 190, 232)", "rgb(255, 122, 0)"];
 
 async function init() {
   await getContactsFromDataBase();
@@ -11,6 +12,7 @@ async function addContactToDataBase() {
   let name = document.getElementById("add_name").value;
   let email = document.getElementById("add_email").value;
   let phone = document.getElementById("add_phone").value;
+  let color = getRandomColor();
   const uniqueKey = `contact_${Date.now()}`;
   try {
     let response = await fetch(BASE_URL + `contacts/${uniqueKey}.json`, {
@@ -19,6 +21,7 @@ async function addContactToDataBase() {
         name: name,
         email: email,
         phone: phone,
+        color: color,
       }),
     });
     let contactData = await response.json();
@@ -43,12 +46,41 @@ async function getContactsFromDataBase() {
         name: data[key].name,
         email: data[key].email,
         phone: data[key].phone,
+        color: data[key].color,
       };
       arrayOfContacts.push(contact);
     }
     return arrayOfContacts;
   } catch (error) {
     console.error("Fehler beim Laden der Kontakte:", error);
+  }
+}
+
+async function updateContactInDataBase(id) {
+  let name = document.getElementById("edit_name").value;
+  let email = document.getElementById("edit_email").value;
+  let phone = document.getElementById("edit_phone").value;
+  let contact = arrayOfContacts.find((c) => c.id === id);
+  let color = contact.color;
+  try {
+    let response = await fetch(BASE_URL + `contacts/${id}.json`, {
+      method: "PATCH",
+      body: JSON.stringify({
+        name: name,
+        email: email,
+        phone: phone,
+        color: color,
+      }),
+    });
+    let contactData = await response.json();
+    let index = arrayOfContacts.findIndex((contact) => contact.id === id);
+    arrayOfContacts[index] = { id: id, ...contactData };
+    renderContacts();
+    closeOverlayEditContact();
+    closeOverlayContactInfoAfterDelete();
+    return contactData;
+  } catch (error) {
+    console.error("Fehler:", error);
   }
 }
 
@@ -86,29 +118,9 @@ function deleteInputs() {
   }
 }
 
-async function saveChangesContact(id) {
-  let name = document.getElementById("edit_name").value;
-  let email = document.getElementById("edit_email").value;
-  let phone = document.getElementById("edit_phone").value;
-  try {
-    let response = await fetch(BASE_URL + `contacts/${id}.json`, {
-      method: "PUT",
-      body: JSON.stringify({
-        name: name,
-        email: email,
-        phone: phone,
-      }),
-    });
-    let contactData = await response.json();
-    let index = arrayOfContacts.findIndex((contact) => contact.id === id);
-    arrayOfContacts[index] = { id: id, ...contactData };
-    renderContacts();
-    closeOverlayEditContact();
-    closeOverlayContactInfoAfterDelete();
-    return contactData;
-  } catch (error) {
-    console.error("Fehler:", error);
-  }
+function getRandomColor() {
+  const randomIndex = Math.floor(Math.random() * colors.length);
+  return colors[randomIndex];
 }
 
 function renderContacts() {
@@ -126,7 +138,21 @@ function renderContacts() {
       renderedLetters.push(firstLetter);
     }
     contactList.innerHTML += getContactTemplate(contact, i);
+    let initials = getInitials(contact.name);
+    let circleElement = document.getElementById(`circle_${i}`);
+    circleElement.innerText = initials;
+    circleElement.style.backgroundColor = contact.color;
   }
+}
+
+function getInitials(name) {
+  let words = name.split(" ");
+  let initialsArray = words.map(function (word) {
+    let firstLetter = word.charAt(0).toUpperCase();
+    return firstLetter;
+  });
+  let initials = initialsArray.join("");
+  return initials;
 }
 
 function openOverlayAddContact() {

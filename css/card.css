@@ -23,6 +23,8 @@
   color: rgb(168, 168, 168);
   height: 80px;
   font-family: InterLight;
+  white-space: normal;
+  word-break: break-word;
 }
 
 .progress_indicator {
@@ -67,13 +69,17 @@
   justify-content: center;
   align-items: center;
   background-color: rgb(255, 122, 0);
-  color: rgb(0, 0, 0);
+  color: white;
   border: 2px solid;
   border-color: white;
   border-radius: 50%;
   height: 2.2rem;
   width: 2.2rem;
   text-align: center;
+}
+
+.circle_profile_names {
+  margin-left: 12px;
 }
 
 .rotate {

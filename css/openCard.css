@@ -5,6 +5,14 @@
 }
 
 .content_box {
+  position: relative;
+  height: 86%;
+  overflow-y: auto;
+  /* overflow: hidden; */
+}
+
+.content_box::-webkit-scrollbar {
+  display: none;
 }
 
 .open_card_category {
@@ -21,8 +29,8 @@
 }
 
 .open_card_title {
-  font-size: 61px;
   margin-bottom: 30px;
+  margin-block-start: 0.3em;
 }
 .open_card_discription {
   display: flex;
@@ -49,6 +57,15 @@
 
 .assigned_box {
   display: flex;
+  width: 100%;
+}
+
+h5 {
+  display: block;
+  font-size: 16px;
+  color: rgb(125, 136, 156);
+  font-weight: lighter;
+  margin-block-start: 0.5em;
 }
 
 .profiles {
@@ -56,12 +73,21 @@
   flex-direction: column;
   margin-top: 30px;
   margin-left: -85px;
-  gap: 10px;
 }
 
 .profile_names {
   display: flex;
   align-items: center;
+  width: 350px;
+  height: 50px;
+}
+
+.profile_names:hover {
+  background-color: rgb(238, 238, 238);
+  border: 1px transparent;
+  border-radius: 12px;
+  border-width: 100%;
+  width: 100%;
 }
 
 .profile_names span {
@@ -79,32 +105,116 @@
   padding-left: 16px;
 }
 
-.edit_delete_box {
-  display: flex;
-  justify-content: flex-end;
-}
-
-.deleteBtn,
-.editBtn,
 .closeBtn {
   border: none;
   background-color: transparent;
   cursor: pointer;
+  display: flex;
+  align-items: center;
 }
 
-.delete_edit_btn_box {
+.closeBtn img:hover {
+  background-color: rgb(238, 238, 238);
+  border: 1px transparent;
+  border-radius: 50%;
+}
+
+.edit_button_box {
   display: flex;
   justify-content: flex-end;
+  position: absolute;
+  bottom: 30px;
+  left: 55%;
+  gap: 8px;
 }
 
-table {
-  margin-bottom: 30px;
+.edit_button_box button {
+  display: flex;
+  align-items: center;
+  border: 1px, transparent;
+  background-color: white;
+  cursor: pointer;
+}
+
+.trash_img {
+  background-image: url(../assets/icons/board/delete.svg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  min-width: 22px;
+  min-height: 22px;
+}
+
+.edit_img {
+  background-image: url(../assets/icons/board/edit.svg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  min-width: 22px;
+  min-height: 22px;
+}
+
+.vector {
+  background-image: url(../assets/icons/board/vector.svg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  min-width: 3px;
+  min-height: 1px;
+  display: none;
+}
+
+.position_delete {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.position_edit {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  margin-left: 10px;
+}
+
+.position_delete:hover .trash_img {
+  background-image: url(../assets/icons/board/delete_hover.svg);
+  color: rgb(41, 171, 226);
+}
+
+.position_edit:hover .edit_img {
+  background-image: url(../assets/icons/board/edit_hover.svg);
+  color: rgb(41, 171, 226);
+}
+
+.position_delete:hover .delete_button {
+  color: rgb(41, 171, 226);
+}
+
+.position_edit:hover .edit_button {
+  color: rgb(41, 171, 226);
+}
+
+.edit_button_box:hover .vector {
+  display: inline-block;
+}
+
+.delete_button {
+}
+
+.edit_button {
 }
 
 td,
 th {
   text-align: left;
   padding-right: 50px;
+}
+
+td {
+  color: rgb(125, 136, 156);
+}
+
+#date,
+#priority {
+  color: black;
 }
 
 #priority {
@@ -114,4 +224,37 @@ th {
 
 .space {
   height: 30px;
+}
+
+.check_box {
+  display: flex;
+  align-items: center;
+}
+
+.check_box:hover {
+  background-color: rgb(238, 238, 238);
+  border-radius: 8px;
+  padding-right: 20px;
+}
+
+.check_box label {
+  margin-left: 12px;
+}
+
+input[type="checkbox"] {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 19px;
+  height: 19px;
+  background-image: url(../assets/icons/checkbox/openCardRectangle.svg);
+  background-repeat: no-repeat;
+  background-position: center;
+  margin-left: 18px;
+}
+
+input[type="checkbox"]:checked {
+  background-image: url(../assets/icons/checkbox/openCardCheck.svg);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
 }

@@ -1,12 +1,18 @@
 let card;
+let storeTheID;
+const taskPath = "tasks";
 let refCardBox = document.getElementById("box");
+const refCloseBtn = document.getElementsByClassName("closeBtn");
+const refEditButton = document.querySelector(".position_edit");
 
-function overlayOn() {
+function overlayOn(event) {
   document.getElementById("overlay").style.display = "block";
+  storeTheID = event.currentTarget.id;
 }
 
 function overlayOff() {
   document.getElementById("overlay").style.display = "none";
+  refreshPageWhenOverlayOff();
 }
 
 function stopEventBubbel(event) {
@@ -15,9 +21,9 @@ function stopEventBubbel(event) {
 
 async function getData(event) {
   let id = event.currentTarget.id;
-  const fetchDetails = await fetchCardDetails("tasks", id);
+  const fetchDetails = await fetchCardDetails(taskPath, id);
   const refersToCard = fetchDetails[id];
-  refCardBox.innerHTML = HTMLForOpenCard(refersToCard.category, refersToCard.title, refersToCard.description, refersToCard.data, refersToCard.prio);
+  refCardBox.innerHTML = HTMLForOpenCard(refersToCard.category, refersToCard.title, refersToCard.description, refersToCard.data, refersToCard.prio, id);
   managenProfilesWhenCardOpen(id);
   renderSubtasks(id);
 }
@@ -32,7 +38,7 @@ async function fetchCardDetails(path = "", id) {
 }
 
 async function managenProfilesWhenCardOpen(id) {
-  const dataFromFireBase = await fetchCardDetails("tasks", id);
+  const dataFromFireBase = await fetchCardDetails(taskPath, id);
   const refAssignedObject = dataFromFireBase[id].assigned;
   let refProfileContainer = document.querySelector(".profiles");
 
@@ -47,7 +53,7 @@ async function managenProfilesWhenCardOpen(id) {
 }
 
 async function renderSubtasks(id) {
-  let dataFromFireBase = await fetchCardDetails("tasks", id);
+  let dataFromFireBase = await fetchCardDetails(taskPath, id);
   let refSubtaskContainer = document.querySelector("#subtasks_container");
   const refSubtasks = dataFromFireBase[id].subtask;
   for (const key in refSubtasks) {
@@ -71,14 +77,13 @@ async function managenCheckBoxes(id) {
         let newState = {
           state: true,
         };
-        element.setAttribute("checked", true);
-        updateSubtaskState("tasks", id, index, newState);
+        updateSubtaskState(taskPath, id, index, newState);
       }
       if (element.checked === false) {
         let newState = {
           state: false,
         };
-        updateSubtaskState("tasks", id, index, newState);
+        updateSubtaskState(taskPath, id, index, newState);
       }
     });
   }
@@ -96,15 +101,45 @@ async function updateSubtaskState(path = "", taskID, subtaskID, state) {
 }
 
 async function setCheckboxAttributes(id) {
-  let response = await fetchCardDetails("tasks", id);
+  let response = await fetchCardDetails(taskPath, id);
   let refToSubtask = response[id].subtask;
   for (let index = 0; index < refToSubtask.length; index++) {
     const element = refToSubtask[index];
     if (element.state == false) {
       document.getElementById(`subtask${index}`).removeAttribute("checked");
     }
-    if (element.state) {
+    if (element.state == true) {
       document.getElementById(`subtask${index}`).setAttribute("checked", true);
     }
   }
+}
+
+function refreshPageWhenOverlayOff() {
+  toDo.innerHTML = "";
+  progress.innerHTML = "";
+  feedback.innerHTML = "";
+  done.innerHTML = "";
+  displayCardOnBoard();
+}
+
+async function deleteButton() {
+  let response = await fetch(`${BASE_URL}/${taskPath}/${storeTheID}.json`, {
+    method: "DELETE",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+  const responseData = await response.json();
+}
+
+function renderEditMenu() {
+  refCardBox.innerHTML = "";
+  refCardBox.innerHTML += HTMLTamplateForTheEditFunk();
+}
+
+async function editFunction() {
+  let dataFromFireBase = await fetchCardDetails(taskPath, storeTheID);
+  let title = dataFromFireBase[storeTheID].title;
+  let description = dataFromFireBase.description;
+  console.log(title);
 }
