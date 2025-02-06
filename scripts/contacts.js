@@ -62,6 +62,7 @@ async function updateContactInDataBase(id) {
   let phone = document.getElementById("edit_phone").value;
   let contact = arrayOfContacts.find((c) => c.id === id);
   let color = contact.color;
+  // console.log(BASE_URL + `contacts/${id}.json`);
   try {
     let response = await fetch(BASE_URL + `contacts/${id}.json`, {
       method: "PATCH",
