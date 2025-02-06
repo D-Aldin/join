@@ -9,6 +9,7 @@
     <script src="./scripts/board.js" defer></script>
     <script src="./scripts/openCard.js" defer></script>
     <script src="./scripts/drop_down_menu.js" defer></script>
+    <script src="./scripts/aside.js" defer></script>
 
     <link rel="stylesheet" href="./css/aside.css" />
     <link rel="stylesheet" href="./css/header.css" />
@@ -24,30 +25,6 @@
     <title>Board</title>
   </head>
   <body onload="noTaskToDo()">
-    <aside>
-      <div class="logo_position">
-        <img class="join_logo" src="./assets/icons/aside/joinLogo.svg" alt="Join_Logo" />
-      </div>
-      <div class="nav_position">
-        <div class="link_nav_summary cursor_pointer" onclick="window.location.href='./summary.html'">
-          <a href="./summary.html"><img src="./assets/icons/aside/summary.svg" alt="Summary" />Summary</a>
-        </div>
-        <div class="link_nav_add_task cursor_pointer" onclick="window.location.href='./add_task.html'">
-          <a href="./add_task.html"><img src="./assets/icons/aside/addTask.svg" alt="Add Task" />Add Task</a>
-        </div>
-        <div class="link_nav_board cursor_pointer" onclick="window.location.href='./board.html'">
-          <a href="./board.html"><img src="./assets/icons/aside/board.svg" alt="Board" />Board</a>
-        </div>
-        <div class="link_nav_contacts cursor_pointer" onclick="window.location.href='./contacts.html'">
-          <a href="./contacts.html"><img src="./assets/icons/aside/contacts.svg" alt="Contacts" />Contacts</a>
-        </div>
-      </div>
-      <div class="legal_notes_position">
-        <a href="./privacy_policy_login.html">Privacy Policy</a>
-        <a href="./legal_notice_login.html">Legal notice</a>
-      </div>
-    </aside>
-
     <header>
       <div>
         <h1>Kanban Project Managment Tool</h1>
@@ -57,6 +34,30 @@
         <img onclick="toggleShowSubmenu()" class="account_img" src="./assets/icons/imgs/guestImg.svg" alt="" />
       </div>
     </header>
+
+    <aside id="aside">
+      <div class="logo_position">
+        <img class="join_logo" src="./assets/icons/aside/joinLogo.svg" alt="Join_Logo" />
+      </div>
+      <div class="nav_position">
+        <div class="link_nav_summary cursor_pointer aside_links" window.location.href="./summary.html">
+          <a href="./summary.html"><img src="./assets/icons/aside/summary.svg" alt="Summary" />Summary</a>
+        </div>
+        <div class="link_nav_add_task cursor_pointer aside_links" window.location.href="./add_task.html">
+          <a href="./add_task.html"><img src="./assets/icons/aside/addTask.svg" alt="Add Task" />Add Task</a>
+        </div>
+        <div class="link_nav_board cursor_pointer aside_links" window.location.href="./board.html">
+          <a href="./board.html"><img src="./assets/icons/aside/board.svg" alt="Board" />Board</a>
+        </div>
+        <div class="link_nav_contacts cursor_pointer aside_links" window.location.href="./contacts.html">
+          <a href="./contacts.html"><img src="./assets/icons/aside/contacts.svg" alt="Contacts" />Contacts</a>
+        </div>
+      </div>
+      <div class="legal_notes_position">
+        <a class="aside_links" href="./privacy_policy_login.html">Privacy Policy</a>
+        <a class="aside_links" href="./legal_notice_login.html">Legal notice</a>
+      </div>
+    </aside>
 
     <div id="submenu_position" class="d_none">
       <div class="submenu_section" onclick="window.location.href='./legal_notice_login.html'">
