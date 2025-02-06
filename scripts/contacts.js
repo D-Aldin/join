@@ -202,10 +202,42 @@ function overlayContactSuccessfullyCreated() {
   }, 800);
 }
 
-function setTimeoutSuccessfullyOverlay() {
+function overlayContactSuccessfullyEdited() {
+  let overlayRef = document.getElementById("contact_successfully_edit");
+  overlayRef.classList.remove("d_none");
+  overlayRef.classList.add("overlay_contact_successfully_created");
+  overlayRef.style.animation = "slideInFromRightContactSuccessfullyCreated 0.3s forwards";
+  setTimeout(() => {
+    overlayRef.style.animation = "slideOutToRightContactSuccessfullyCreated 0.3s forwards";
+  }, 800);
+}
+
+function overlayContactSuccessfullyDelete() {
+  let overlayRef = document.getElementById("contact_successfully_deleted");
+  overlayRef.classList.remove("d_none");
+  overlayRef.classList.add("overlay_contact_successfully_created");
+  overlayRef.style.animation = "slideInFromRightContactSuccessfullyCreated 0.3s forwards";
+  setTimeout(() => {
+    overlayRef.style.animation = "slideOutToRightContactSuccessfullyCreated 0.3s forwards";
+  }, 800);
+}
+
+function setTimeoutSuccessfullyOverlayAddContact() {
   setTimeout(() => {
     overlayContactSuccessfullyCreated();
-  }, 400);
+  }, 200);
+}
+
+function setTimeoutSuccessfullyOverlayEdit() {
+  setTimeout(() => {
+    overlayContactSuccessfullyEdited();
+  }, 200);
+}
+
+function setTimeoutDeleteOverlayContact() {
+  setTimeout(() => {
+    overlayContactSuccessfullyDelete();
+  }, 200);
 }
 
 function closeOverlayEditContact() {

@@ -102,7 +102,7 @@
         <div class="overlay_close_btn_position">
           <img onclick="closeOverlayAddContact()" src="./assets/icons/contacts/Close.svg" alt="close_button" />
         </div>
-        <form class="form_input_fields_position" onsubmit="addContactToDataBase(); setTimeoutSuccessfullyOverlay(); return false;">
+        <form class="form_input_fields_position" onsubmit="addContactToDataBase(); setTimeoutSuccessfullyOverlayAddContact(); return false;">
           <input id="add_name" type="text" placeholder="Name" required />
           <input id="add_email" type="email" placeholder="Email" required />
           <input id="add_phone" type="tel" placeholder="Phone" onkeypress="" required />
@@ -119,5 +119,9 @@
     <div id="overlay_edit_contact_card" class="d_none"></div>
 
     <div id="contact_successfully_created" class="d_none">Contact successfully created</div>
+
+    <div id="contact_successfully_edit" class="d_none">Contact successfully edited</div>
+
+    <div id="contact_successfully_deleted" class="d_none">Contact successfully deleted</div>
   </body>
 </html>

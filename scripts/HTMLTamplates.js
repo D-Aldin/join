@@ -171,7 +171,7 @@ function getTemplateOfContactInfo(contact) {
       <h2>${contact.name}</h2>
       <div class="btn_position">
         <img onclick="openOverlayEditContact('${contact.id}')" class="edit_hover" src="./assets/icons/contacts/edit.svg" alt="edit" />
-        <img onclick="deleteContactFromList('${contact.id}')" class="delete_hover" src="./assets/icons/contacts/delete.svg" alt="delete" />
+        <img onclick="deleteContactFromList('${contact.id}'); setTimeoutDeleteOverlayContact()" class="delete_hover" src="./assets/icons/contacts/delete.svg" alt="delete" />
       </div>
     </div>
   </div>
@@ -204,12 +204,12 @@ function getTemplateOfContactEdit(contact) {
       <div class="overlay_close_btn_position">
         <img onclick="closeOverlayEditContact()" src="./assets/icons/contacts/Close.svg" alt="close_button" />
       </div>
-      <form action class="form_input_fields_position" onsubmit="updateContactInDataBase('${contact.id}'); return false;">
+      <form action class="form_input_fields_position" onsubmit="updateContactInDataBase('${contact.id}'); setTimeoutSuccessfullyOverlayEdit(); return false;">
         <input id="edit_name" type="text" placeholder="Name" value="${contact.name}" required />
         <input id="edit_email" type="email" placeholder="Email" value="${contact.email}" required />
         <input id="edit_phone" type="tel" placeholder="Phone" value="${contact.phone}" required />
         <div class="overlay_btn_position">
-          <button class="btn_delete" onclick="deleteContactFromList('${contact.id}')">Delete <img src="./assets/icons/contacts/Close.svg" class="cancel_icon" alt="Cancel" /></button>
+          <button class="btn_delete" onclick="deleteContactFromList('${contact.id}'); setTimeoutDeleteOverlayContact()">Delete <img src="./assets/icons/contacts/Close.svg" class="cancel_icon" alt="Cancel" /></button>
           <button type="submit" class="btn_save">Save <img src="./assets/icons/contacts/check.svg" alt="check" /></button>
         </div>
       </form>
