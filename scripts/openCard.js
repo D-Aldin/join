@@ -4,9 +4,6 @@ const taskPath = "tasks";
 let refCardBox = document.getElementById("box");
 const refCloseBtn = document.getElementsByClassName("closeBtn");
 const refEditButton = document.querySelector(".position_edit");
-let urgent = document.getElementById("urgent");
-let medinu = document.getElementById("medium");
-let low = document.getElementById("low");
 
 function overlayOn(event) {
   document.getElementById("overlay").style.display = "block";
@@ -145,13 +142,22 @@ async function editFunction() {
   let refTitleInputField = (document.querySelector("#editTitle").value = dataFromFireBase[storeTheID].title);
   let refDescriptionField = (document.querySelector("#editDescription").value = dataFromFireBase[storeTheID].description);
   let refDateField = (document.querySelector("#editDate").value = dataFromFireBase[storeTheID].data);
+  manageAssignedMenuEditing();
   editPriority(dataFromFireBase[storeTheID].prio);
-  console.log(dataFromFireBase);
+  for (const key in dataFromFireBase[storeTheID].assigned) {
+    if (Object.prototype.hasOwnProperty.call(dataFromFireBase[storeTheID].assigned, key)) {
+      const profile = initials(dataFromFireBase[storeTheID].assigned[key]);
+      document.querySelector(".assigned_to").innerHTML += `<div class="circle circle_profile_names spacing" style="background-color: ${key}">${profile}</div>`;
+    }
+  }
 }
 
 function editPriority(data) {
+  let urgent = document.getElementById("urgent");
+  let medinu = document.getElementById("medium");
+  let low = document.getElementById("low");
   switch (data) {
-    case "urgent":
+    case "Urgent":
       {
         urgent.style.backgroundColor = "rgb(255, 61, 0)";
         urgent.style.color = "white";
@@ -159,7 +165,7 @@ function editPriority(data) {
         urgent.classList.add("no_hover");
       }
       break;
-    case "medium":
+    case "Medium":
       {
         medinu.style.backgroundColor = "rgb(255, 168, 0)";
         medinu.style.color = "white";
@@ -174,4 +180,9 @@ function editPriority(data) {
       low.classList.add("no_hover");
     }
   }
+}
+
+async function manageAssignedMenuEditing() {
+  let dataFromFireBase = await fetchCardDetails("contacts", storeTheID);
+  console.log(dataFromFireBase);
 }

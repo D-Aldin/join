@@ -121,7 +121,11 @@ function HTMLTamplateForTheEditFunk() {
                   <label for="editAssigned">Assigned to</label><br>
                   <select name="assigned" id="editAssigned">
                     <option value="volvo">Volvo</option>
+                    <option value="bmw">bmw</option>
+                    <option value="mercedes">mercedes</option>
                   </select><br/><br />
+                  <div class="assigned_to">
+                  </div>
                   <input type="submit" value="Submit" />
                 </form>
               </div>`;
