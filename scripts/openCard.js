@@ -139,7 +139,56 @@ function renderEditMenu() {
 
 async function editFunction() {
   let dataFromFireBase = await fetchCardDetails(taskPath, storeTheID);
-  let title = dataFromFireBase[storeTheID].title;
-  let description = dataFromFireBase.description;
-  console.log(title);
+  let refTitleInputField = (document.querySelector("#editTitle").value = dataFromFireBase[storeTheID].title);
+  let refDescriptionField = (document.querySelector("#editDescription").value = dataFromFireBase[storeTheID].description);
+  let refDateField = (document.querySelector("#editDate").value = dataFromFireBase[storeTheID].data);
+  manageAssignedMenuEditing();
+  editPriority(dataFromFireBase[storeTheID].prio);
+  for (const key in dataFromFireBase[storeTheID].assigned) {
+    if (Object.prototype.hasOwnProperty.call(dataFromFireBase[storeTheID].assigned, key)) {
+      const profile = initials(dataFromFireBase[storeTheID].assigned[key]);
+      document.querySelector(".assigned_to").innerHTML += `<div class="circle circle_profile_names spacing" style="background-color: ${key}">${profile}</div>`;
+    }
+  }
+}
+
+function editPriority(data) {
+  let urgent = document.getElementById("urgent");
+  let medinu = document.getElementById("medium");
+  let low = document.getElementById("low");
+  switch (data) {
+    case "Urgent":
+      {
+        urgent.style.backgroundColor = "rgb(255, 61, 0)";
+        urgent.style.color = "white";
+        document.getElementById("urgentImageEditBtn").src = "./assets/icons/addTask/icon_clicket_urgent.svg";
+        urgent.classList.add("no_hover");
+      }
+      break;
+    case "Medium":
+      {
+        medinu.style.backgroundColor = "rgb(255, 168, 0)";
+        medinu.style.color = "white";
+        document.getElementById("mediumImageEditBtn").src = "./assets/icons/addTask/icon_clicket_medium.svg";
+        medinu.classList.add("no_hover");
+      }
+      break;
+    case "Low": {
+      low.style.backgroundColor = "rgb(122, 226, 41)";
+      low.style.color = "white";
+      document.getElementById("lowImageEditBtn").src = "./assets/icons/addTask/icon_clicket_low.svg";
+      low.classList.add("no_hover");
+    }
+  }
+}
+
+async function manageAssignedMenuEditing() {
+  let dataFromFireBase = await fetchCardDetails("contacts", storeTheID);
+  for (const key in dataFromFireBase) {
+    if (Object.prototype.hasOwnProperty.call(dataFromFireBase, key)) {
+      const profile = dataFromFireBase[key];
+      const profileInitials = initials(profile.name);
+      document.querySelector(".content").innerHTML += `<div class="align_items" id_value=${key}><div class="circle circle_profile_names spacing" style="background-color: ${profile.color}">${profileInitials}</div>${profile.name}</div>`;
+    }
+  }
 }
