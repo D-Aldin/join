@@ -68,6 +68,12 @@ p {
   height: 424px;
 }
 
+.pixelbar-mini {
+  background-color: rgba(209, 209, 209, 1);
+  width: 1px;
+  height: 30px;
+}
+
 .input-container {
   display: flex;
   flex-direction: column;
@@ -280,7 +286,14 @@ p {
 
 .subtask-inputfield-text:focus {
     outline: none;
-  }
+}
+
+.subtask-button-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+}
 
 .subtask-inputfield-button {
     cursor: pointer;
@@ -302,4 +315,12 @@ p {
     width: 440px;
     display: flex;
     flex-direction: column;
+}
+
+.subtask-list {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 16px;
+  font-weight: 400px;
 }

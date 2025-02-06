@@ -109,10 +109,12 @@
                         <div class="inputfield-title-container">
                           <p class="tasktitles">Subtasks</p>
                           <div class="subtask-inputfield">
-                            <input id="subtask" class="subtask-inputfield-text " type="text">
-                            <button class="subtask-inputfield-button" onclick="setSubtask()">
-                              <img src="assets/icons/addTask/subtasks_icons.svg" alt="">
-                            </button>
+                            <input id="subtask" class="subtask-inputfield-text" oninput="writeSubtask()" type="text">
+                            <div id="subtaskbuttons" class="subtask-button-container">
+                              <button class="subtask-inputfield-button">
+                                <img src="assets/icons/addTask/subtasks_icons.svg" alt="">
+                              </button>
+                            </div>
                           </div>
                           <div id="tasks-wrapper" class="subtask-wrapper">
                           </div>
