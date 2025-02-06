@@ -35,3 +35,21 @@
   transition: 0.125ms ease-in-out;
   background-color: rgb(42, 61, 89);
 }
+
+@keyframes slideInFromRightSubmenu {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideOutToRightSubmenu {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(100%);
+  }
+}
