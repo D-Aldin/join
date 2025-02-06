@@ -1,0 +1,30 @@
+.dropdown_menu {
+  position: relative;
+  display: inline-block;
+  width: 100%;
+  height: 35px;
+}
+
+.dropdown_button {
+  border: solid 1px rgba(209, 209, 209, 1);
+  width: 100%;
+  height: 35px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.content {
+  display: none;
+  position: absolute;
+  width: 100%;
+  border: solid 1px rgba(209, 209, 209, 1);
+  z-index: 999;
+  left: 0px;
+  background-color: white;
+}
+
+.align_items {
+  display: flex;
+  align-items: center;
+}

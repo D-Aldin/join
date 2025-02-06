@@ -184,5 +184,11 @@ function editPriority(data) {
 
 async function manageAssignedMenuEditing() {
   let dataFromFireBase = await fetchCardDetails("contacts", storeTheID);
-  console.log(dataFromFireBase);
+  for (const key in dataFromFireBase) {
+    if (Object.prototype.hasOwnProperty.call(dataFromFireBase, key)) {
+      const profile = dataFromFireBase[key];
+      const profileInitials = initials(profile.name);
+      document.querySelector(".content").innerHTML += `<div class="align_items" id_value=${key}><div class="circle circle_profile_names spacing" style="background-color: ${profile.color}">${profileInitials}</div>${profile.name}</div>`;
+    }
+  }
 }

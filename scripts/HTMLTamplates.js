@@ -117,17 +117,16 @@ function HTMLTamplateForTheEditFunk() {
                   <button id="medium" class="prio_button">Medium <img id="mediumImageEditBtn" src="./assets/icons/board/forEditMedium.svg" alt="medium"></button>
                   <button id="low" class="prio_button">Low <img id="lowImageEditBtn" src="./assets/icons/board/forEditLow.svg" alt="low"></button>
                 </div>
-                <form action="">
-                  <label for="editAssigned">Assigned to</label><br>
-                  <select name="assigned" id="editAssigned">
-                    <option value="volvo">Volvo</option>
-                    <option value="bmw">bmw</option>
-                    <option value="mercedes">mercedes</option>
-                  </select><br/><br />
-                  <div class="assigned_to">
-                  </div>
+                <div>
+                  <div class="dropdown_menu">
+                    <div class="dropdown_button" onclick="openMenu(), manageAssignedMenuEditing()">Select contacts to assign</div>
+                    <div class="content"></div>
+                  </div>  
+                    <div class="assigned_to">
+                    </div>
                   <input type="submit" value="Submit" />
-                </form>
+                  </form>
+                </div>;
               </div>`;
 }
 
