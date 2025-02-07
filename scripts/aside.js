@@ -1,7 +1,7 @@
 document.addEventListener("DOMContentLoaded", function () {
   activeLink();
   addContainerClickListeners();
-  addLegalNotesClickListeners();
+  // addLegalNotesClickListeners();
 });
 
 function activeLink() {

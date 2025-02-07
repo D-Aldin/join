@@ -86,10 +86,8 @@ async function addTaskToFireBase(path = "", card) {
 //TODO  reduce lines of code
 async function displayCardOnBoard() {
   let taskFromFireBase = await fetchTasks("tasks");
-
   for (const key in taskFromFireBase) {
     const element = taskFromFireBase[key];
-
     if (!element) continue;
     const subtasksCompleted = await countCompletedSubtasks(element.subtask);
 
@@ -116,10 +114,8 @@ function addProfilesToCard(id, obj) {
   let transX = 0;
   for (const key in obj) {
     if (Object.prototype.hasOwnProperty.call(obj, key)) {
-      const name = initials(obj[key]);
-      const color = key;
-      console.log(obj);
-
+      let name = initials(obj[key].name);
+      let color = obj[key].color;
       document.getElementById(id).lastElementChild.firstElementChild.innerHTML += contactTamplate(name, color, transX);
       transX += 30;
     }
@@ -155,7 +151,6 @@ async function countCompletedSubtasks(subtask) {
       countTrue += 1;
     }
   }
-
   return countTrue;
 }
 
@@ -164,9 +159,9 @@ function calPercentageOfCompletedSubtasks(numberOfSubtasks, completedSubtasks, i
   document.getElementById("progress_bar" + id).style.width = `${result}%`;
 }
 
-// ------------------------- TEST LIST --------------------------------
+// -------------------------------------------------------------------- TEST LIST TEST TEST TEST TEST --------------------------------
 
-let assigContacts = ["contact_1738925775163", "contact_1738925916964", "contact_1738925952890"];
+let assigContacts = ["contact_1738946637904", "contact_1738946682578", "contact_1738946802579", "contact_1738948441461"];
 
 let subtaskList = {
   0: { task: "NewTask1", state: false },
@@ -181,7 +176,7 @@ async function getContacts(list) {
   for (let index = 0; index < list.length; index++) {
     const dataFromFireBase = await fetchTasks(`contacts/${list[index]}`);
     temporarilyObject = {
-      [dataFromFireBase.uniKey]: {
+      [list[index]]: {
         color: dataFromFireBase.color,
         name: dataFromFireBase.name,
       },

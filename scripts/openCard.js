@@ -44,9 +44,9 @@ async function managenProfilesWhenCardOpen(id) {
 
   for (const key in refAssignedObject) {
     if (Object.prototype.hasOwnProperty.call(refAssignedObject, key)) {
-      const fullName = refAssignedObject[key];
-      const name = initials(refAssignedObject[key]);
-      const color = key;
+      const fullName = refAssignedObject[key].name;
+      const name = initials(refAssignedObject[key].name);
+      const color = refAssignedObject[key].color;
       refProfileContainer.innerHTML += contactTamplateForOpenCard(name, color, fullName);
     }
   }
@@ -188,16 +188,7 @@ async function displayContactsInDropdownMenu() {
     if (Object.prototype.hasOwnProperty.call(dataFromFireBase, key)) {
       const profile = dataFromFireBase[key];
       const profileInitials = initials(profile.name);
-      document.querySelector(".content").innerHTML += `<div class="align_items" id_value=${key}>
-                                                            <div class="icon_name_container">
-                                                              <div class="circle circle_profile_names spacing" style="background-color: ${profile.color}">${profileInitials}</div>
-                                                              ${profile.name}
-                                                            </div>
-                                                            <div>
-                                                              <img src="./assets/icons/checkbox/openCardRectangle.svg" alt="" srcset="">
-                                                            </div>
-                                                        </div> 
-                                                         `;
+      document.querySelector(".content").innerHTML += HTMLTamplateForDropdownProfiles(key, profile.color, profileInitials, profile.name);
     }
   }
 }

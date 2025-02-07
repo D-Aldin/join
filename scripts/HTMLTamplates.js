@@ -130,3 +130,13 @@ function HTMLTamplateForTheEditFunk() {
                 </div>;
               </div>`;
 }
+
+function HTMLTamplateForDropdownProfiles(key, color, initials, name) {
+  return `<div class="align_items" id_value=${key}>
+            <div class="icon_name_container">
+            <div class="circle circle_profile_names spacing" style="background-color: ${color}">${initials}</div>${name}</div>
+            <div>
+              <img src="./assets/icons/checkbox/openCardRectangle.svg" alt="" srcset="">
+            </div>
+          </div>`;
+}
