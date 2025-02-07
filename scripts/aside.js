@@ -1,7 +1,11 @@
 document.addEventListener("DOMContentLoaded", function () {
   activeLink();
   addContainerClickListeners();
+<<<<<<< HEAD
   // addLegalNotesClickListeners();
+=======
+  addLegalAndPolicyClickListeners();
+>>>>>>> cdd30cc71a61daa998ef1db665cd7b156caab3f1
 });
 
 function activeLink() {
@@ -9,26 +13,26 @@ function activeLink() {
     .split("/")
     .pop()
     .replace(/\.html$/, "");
-  console.log(currentPath);
-  const links = document.querySelectorAll(".nav_position a");
-  updateActiveLinks(links, currentPath);
+  const navLinks = document.querySelectorAll(".nav_position a");
+  const legalLinks = document.querySelectorAll(".legal_and_policy_position a");
+  updateActiveLinks(navLinks, currentPath);
+  updateActiveLinks(legalLinks, currentPath);
 }
 
 function updateActiveLinks(links, currentPath) {
-  for (let i = 0; i < links.length; i++) {
-    const link = links[i];
+  links.forEach((link) => {
     const linkPath = link
       .getAttribute("href")
       .split("/")
       .pop()
       .replace(/\.html$/, "");
-
+    const parent = link.closest("div");
     if (currentPath === linkPath) {
-      link.parentElement.classList.add("active_background_color");
+      parent.classList.add("active_background_color");
     } else {
-      link.parentElement.classList.remove("active_background_color");
+      parent.classList.remove("active_background_color");
     }
-  }
+  });
 }
 
 function addContainerClickListeners() {
@@ -43,14 +47,14 @@ function addContainerClickListeners() {
   }
 }
 
-// nochmal anschauen
-
-// function addLegalNotesClickListeners() {
-//   const legalNotesLinks = document.querySelectorAll(".legal_notes_position a");
-//   for (let i = 0; i < legalNotesLinks.length; i++) {
-//     legalNotesLinks[i].addEventListener("click", function (event) {
-//       event.preventDefault();
-//       window.location.href = this.getAttribute("href");
-//     });
-//   }
-// }
+function addLegalAndPolicyClickListeners() {
+  const containers = document.querySelectorAll(".privacy_policy_login, .legal_notice_login");
+  containers.forEach((container) => {
+    container.addEventListener("click", function () {
+      const link = container.querySelector("a");
+      if (link) {
+        window.location.href = link.getAttribute("href");
+      }
+    });
+  });
+}
