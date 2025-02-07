@@ -1,23 +1,22 @@
 .legal {
-display: flex;
-background-color: rgb(246, 247, 248);
+  display: flex;
+  background-color: rgb(246, 247, 248);
 }
-  
+
 .legal-content {
-display: inline-block;
-margin: 100px 90px 0px 100px;
-gap: 24px;
-font-size: 16px
+  display: inline-block;
+  margin: 100px 90px 0px 100px;
+  gap: 24px;
+  font-size: 16px;
 }
 
 .h1-content-titles {
-    font-size: 61px;
-    font-weight: 700;
-    margin: 0;
+  font-size: 61px;
+  font-weight: 700;
+  margin: 0;
 }
 
 .links {
-    color: rgba(41, 171, 226, 1);
-    text-decoration: none;
+  color: rgba(41, 171, 226, 1);
+  text-decoration: none;
 }
-  

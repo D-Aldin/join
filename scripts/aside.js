@@ -1,11 +1,7 @@
 document.addEventListener("DOMContentLoaded", function () {
   activeLink();
   addContainerClickListeners();
-<<<<<<< HEAD
-  // addLegalNotesClickListeners();
-=======
   addLegalAndPolicyClickListeners();
->>>>>>> cdd30cc71a61daa998ef1db665cd7b156caab3f1
 });
 
 function activeLink() {
