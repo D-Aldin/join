@@ -191,5 +191,4 @@ function init() {
   // getContacts(assigContacts);
   displayCardOnBoard();
 }
-
 init();

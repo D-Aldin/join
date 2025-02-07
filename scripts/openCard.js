@@ -143,16 +143,19 @@ async function editFunction() {
   let refDescriptionField = (document.querySelector("#editDescription").value = dataFromFireBase[storeTheID].description);
   let refDateField = (document.querySelector("#editDate").value = dataFromFireBase[storeTheID].data);
   displayContactsInDropdownMenu();
-  editPriority(dataFromFireBase[storeTheID].prio);
+  displaySelectedPriority(dataFromFireBase[storeTheID].prio);
   for (const key in dataFromFireBase[storeTheID].assigned) {
     if (Object.prototype.hasOwnProperty.call(dataFromFireBase[storeTheID].assigned, key)) {
-      const profile = initials(dataFromFireBase[storeTheID].assigned[key]);
-      document.querySelector(".assigned_to").innerHTML += `<div class="circle circle_profile_names spacing" style="background-color: ${key}">${profile}</div>`;
+      const profile = initials(dataFromFireBase[storeTheID].assigned[key].name);
+      const color = dataFromFireBase[storeTheID].assigned[key].color;
+      // console.log(profile);
+
+      document.querySelector(".assigned_to").innerHTML += `<div class="circle circle_profile_names spacing" style="background-color: ${color}">${profile}</div>`;
     }
   }
 }
 
-function editPriority(data) {
+function displaySelectedPriority(data) {
   let urgent = document.getElementById("urgent");
   let medinu = document.getElementById("medium");
   let low = document.getElementById("low");
@@ -191,6 +194,30 @@ async function displayContactsInDropdownMenu() {
       document.querySelector(".content").innerHTML += HTMLTamplateForDropdownProfiles(key, profile.color, profileInitials, profile.name);
     }
   }
+  checkSelectedContacts(storeTheID);
 }
 
-async function editingContacts(event) {}
+async function checkSelectedContacts(id) {
+  let dataFromFireBase = await fetchCardDetails("tasks", id);
+  const allContactsInDropdownMenu = document.querySelectorAll(".align_items");
+  for (let index = 0; index < allContactsInDropdownMenu.length; index++) {
+    const contact = allContactsInDropdownMenu[index].getAttributeNode("id_value").value;
+    const keyNames = Object.keys(dataFromFireBase[id].assigned);
+    keyNames.forEach((element) => {
+      if (contact === element) {
+        allContactsInDropdownMenu[index].classList.add("selected_contact");
+      }
+    });
+    // console.log(allContactsInDropdownMenu[index]);
+
+    // findIDs(keyNames, contact);
+  }
+}
+
+function findIDs(arr, contactID) {
+  for (const id of arr) {
+    if (id === contactID) {
+      // console.log(id + " is the same " + contactID);
+    }
+  }
+}

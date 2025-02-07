@@ -98,7 +98,7 @@ function HTMLForOpenCard(category, title, discription, date, prio, id) {
 
 function HTMLTamplateForTheEditFunk() {
   return `
-            <div>
+            <div class="scrollbar">
               <div class=close_button>
                 <button  class="closeBtn"><img onclick="overlayOff()" src="./assets/icons/board/close.svg" alt="close"></button>
               </div>
@@ -119,7 +119,7 @@ function HTMLTamplateForTheEditFunk() {
                 </div>
                 <div>
                   <div class="dropdown_menu">
-                    <div class="dropdown_button" onclick="openMenu(), manageAssignedMenuEditing()">Select contacts to assign
+                    <div class="dropdown_button" onclick="openMenu()">Select contacts to assign
                     <img id="arrow" src="./assets/icons/board/arrow_drop_down.svg" alt="arrow" /></div>
                     <div class="content"></div>
                   </div>  

@@ -1,3 +1,11 @@
+.scrollbar {
+  overflow-y: auto;
+}
+
+.scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
 .close_button {
   display: flex;
   justify-content: flex-end;

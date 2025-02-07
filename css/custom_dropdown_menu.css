@@ -50,3 +50,9 @@
   border-radius: 10px;
   background-color: rgb(238, 238, 238);
 }
+
+.selected_contact {
+  border: 1px transparent;
+  border-radius: 10px;
+  background-color: rgb(41, 52, 69);
+}
