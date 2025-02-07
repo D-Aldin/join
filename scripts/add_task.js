@@ -1,23 +1,37 @@
-function render() {
-}
-
-async function loadContact() {
-    for (let i = 0; i < contacts.length; i++) {
-        const contact = contacts[i];
-        let name = contact.name;
-        let img = contact.img;
-        let contactlist = document.getElementById('contact-list');
-        contactlist.innerHTML = /*html*/`
-            <option class="datalist" value="">
-                <img src="" alt=""><p></p><input type="checkbox">
-            </option>
-        `
-    }
-}
+BASE_URL = "https://dv-join-bbc2e-default-rtdb.europe-west1.firebasedatabase.app/";
 
 selectedButton = '';
 
 let subtasks = [];
+
+function render() {
+}
+
+async function renderContacts() {
+    let contacts = await fetch(BASE_URL.contact)
+    console.log(contacts);
+    try {
+        for (let i = 0; i < contacts.length; i++) {
+            const contact = contacts[i];
+            let name = contact.name;
+            let color = contact.color;
+            console.log(contact);
+            console.log(color);
+            console.log(name);        
+        }
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+function contactTemplate(name, color) {
+    let contactlist = document.getElementById('contact-list');
+        contactlist.innerHTML = /*html*/`
+            <option class="datalist" value="">
+                ${name},
+            </option>
+        `  
+}
 
 function setPrio(x) {
     resetPrioButton()
@@ -59,27 +73,68 @@ function clearAllTasks() {
     document.getElementById('subtask').value = '';
 }
 
-function setSubtask() {
+function writeSubtask() {
     let subtask = document.getElementById('subtask').value  
-    subtasks.push(subtask);
+    if (subtask.length < 1) {
+        setStandardButton();
+    }
+    if (subtask.length >= 1) {
+        setdubbleButton();
+    }
+}
+
+function setStandardButton() {
+    document.getElementById('subtaskbuttons').innerHTML = /*html*/`
+            <button class="subtask-inputfield-button">
+                <img src="assets/icons/addTask/subtasks_icons.svg" alt="">
+            </button>
+        `
+}
+
+function setdubbleButton() {
+    document.getElementById('subtaskbuttons').innerHTML = /*html*/`
+            <button class="subtask-inputfield-button">
+                <img onclick="clearsubtask()" src="assets/icons/addTask/cross.svg" alt="">
+            </button>
+            <div class="pixelbar-mini"></div>
+            <button class="subtask-inputfield-button">    
+                <img onclick="setSubtask()" src="assets/icons/addTask/done.svg" alt="">
+            </button>
+        `
+}
+
+function submitSubtask(subtask) {
     console.log(subtasks);
     subtask.value = '';
     renderSubtasks();
 }
 
+function clearsubtask() {
+    document.getElementById('subtask').value = '';
+    setStandardButton();
+}
+
+function setSubtask() {
+    let subtask = document.getElementById('subtask').value
+    subtasks.push(subtask);
+    renderSubtasks();
+}
+
 function renderSubtasks() {
-    let tasks = document.getElementById('tasks-wrapper').innerHTML;
+    let tasks = document.getElementById('tasks-wrapper');
     tasks.innerHTML = '';
     for (let i = 0; i < subtasks.length; i++) {
         const element = subtasks[i];
         tasks.innerHTML += /*html*/`
-            <div>
-                <p>${element}</p>  
-                <div>
-                    <button><img src="assets/icons/addTask/delete.svg" alt=""></button>
-                    <button><img src="assets/icons/addTask/done.svg" alt=""></button>
+        <ul>
+            <div class="subtask-list">
+                <li>${element}</li>   
+                <div class="subtask-button-container">
+                    <button class="subtask-inputfield-button"><img src="assets/icons/addTask/delete.svg" alt=""></button>
+                    <button class="subtask-inputfield-button"><img src="assets/icons/addTask/done.svg" alt=""></button>
                 </div>
             </div>
+        </ul>
         `
     }
 }

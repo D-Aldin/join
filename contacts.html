@@ -6,7 +6,9 @@
     <link rel="shortcut icon" href="./assets/icons/logo/joinLarge.png" type="image/x-icon" />
     <script src="./scripts/submenu.js" defer></script>
     <script src="./scripts/contacts.js" defer></script>
-    <script src="./scripts/HTMLTamplates.js" defer></script>
+    <script src="./scripts/contact_template.js" defer></script>
+    <script src="./scripts/contact_overlay_animations.js"></script>
+    <script src="./scripts/aside.js" defer></script>
 
     <link rel="stylesheet" href="./css/aside.css" />
     <link rel="stylesheet" href="./css/header.css" />
@@ -17,30 +19,6 @@
     <title>Contacts</title>
   </head>
   <body onload="init()">
-    <aside>
-      <div class="logo_position">
-        <img class="join_logo" src="./assets/icons/aside/joinLogo.svg" alt="Join_Logo" />
-      </div>
-      <div class="nav_position">
-        <div class="link_nav_summary cursor_pointer" onclick="window.location.href='./summary.html'">
-          <a href="./summary.html"><img src="./assets/icons/aside/summary.svg" alt="Summary" />Summary</a>
-        </div>
-        <div class="link_nav_add_task cursor_pointer" onclick="window.location.href='./add_task.html'">
-          <a href="./add_task.html"><img src="./assets/icons/aside/addTask.svg" alt="Add Task" />Add Task</a>
-        </div>
-        <div class="link_nav_board cursor_pointer" onclick="window.location.href='./board.html'">
-          <a href="./board.html"><img src="./assets/icons/aside/board.svg" alt="Board" />Board</a>
-        </div>
-        <div class="link_nav_contacts cursor_pointer" onclick="window.location.href='./contacts.html'">
-          <a href="./contacts.html"><img src="./assets/icons/aside/contacts.svg" alt="Contacts" />Contacts</a>
-        </div>
-      </div>
-      <div class="legal_notes_position">
-        <a href="./privacy_policy_login.html">Privacy Policy</a>
-        <a href="./legal_notice_login.html">Legal notice</a>
-      </div>
-    </aside>
-
     <header>
       <div>
         <h1>Kanban Project Managment Tool</h1>
@@ -50,6 +28,30 @@
         <img onclick="toggleShowSubmenu()" class="account_img" src="./assets/icons/imgs/guestImg.svg" alt="" />
       </div>
     </header>
+
+    <aside id="aside">
+      <div class="logo_position">
+        <img class="join_logo" src="./assets/icons/aside/joinLogo.svg" alt="Join_Logo" />
+      </div>
+      <div class="nav_position">
+        <div class="link_nav_summary cursor_pointer aside_links" window.location.href="./summary.html">
+          <a href="./summary.html"><img src="./assets/icons/aside/summary.svg" alt="Summary" />Summary</a>
+        </div>
+        <div class="link_nav_add_task cursor_pointer aside_links" window.location.href="./add_task.html">
+          <a href="./add_task.html"><img src="./assets/icons/aside/addTask.svg" alt="Add Task" />Add Task</a>
+        </div>
+        <div class="link_nav_board cursor_pointer aside_links" window.location.href="./board.html">
+          <a href="./board.html"><img src="./assets/icons/aside/board.svg" alt="Board" />Board</a>
+        </div>
+        <div class="link_nav_contacts cursor_pointer aside_links" window.location.href="./contacts.html">
+          <a href="./contacts.html"><img src="./assets/icons/aside/contacts.svg" alt="Contacts" />Contacts</a>
+        </div>
+      </div>
+      <div class="legal_notes_position">
+        <a class="aside_links" href="./privacy_policy_login.html">Privacy Policy</a>
+        <a class="aside_links" href="./legal_notice_login.html">Legal notice</a>
+      </div>
+    </aside>
 
     <div id="submenu_position" class="d_none">
       <div class="submenu_section" onclick="window.location.href='./legal_notice_login.html'">
@@ -102,7 +104,7 @@
         <div class="overlay_close_btn_position">
           <img onclick="closeOverlayAddContact()" src="./assets/icons/contacts/Close.svg" alt="close_button" />
         </div>
-        <form class="form_input_fields_position" onsubmit="addContactToDataBase(); setTimeoutSuccessfullyOverlay(); return false;">
+        <form class="form_input_fields_position" onsubmit="addContactToDataBase(); setTimeoutSuccessfullyOverlayAddContact(); return false;">
           <input id="add_name" type="text" placeholder="Name" required />
           <input id="add_email" type="email" placeholder="Email" required />
           <input id="add_phone" type="tel" placeholder="Phone" onkeypress="" required />
@@ -119,7 +121,9 @@
     <div id="overlay_edit_contact_card" class="d_none"></div>
 
     <div id="contact_successfully_created" class="d_none">Contact successfully created</div>
+
+    <div id="contact_successfully_edit" class="d_none">Contact successfully edited</div>
+
+    <div id="contact_successfully_deleted" class="d_none">Contact successfully deleted</div>
   </body>
 </html>
-
-<!-- Test up.bat -->

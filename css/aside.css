@@ -1,5 +1,6 @@
 aside {
   position: absolute;
+  top: 0;
   left: 0;
   width: 232px;
   height: calc(100vh - 128px);
@@ -51,7 +52,15 @@ aside {
   background-color: rgb(42, 61, 89);
 }
 
-.active_link {
+.link_nav_summary.active_background_color:hover,
+.link_nav_add_task.active_background_color:hover,
+.link_nav_board.active_background_color:hover,
+.link_nav_contacts.active_background_color:hover {
+  background-color: rgb(9, 25, 49);
+}
+
+.active_background_color {
+  transition: 125ms ease-in-out;
   background-color: rgb(9, 25, 49);
 }
 
@@ -61,7 +70,6 @@ aside {
   align-items: center;
   gap: 15px;
   height: 46px;
-  /* width: 100%; */
 }
 
 .logo_position {
