@@ -148,8 +148,6 @@ async function editFunction() {
     if (Object.prototype.hasOwnProperty.call(dataFromFireBase[storeTheID].assigned, key)) {
       const profile = initials(dataFromFireBase[storeTheID].assigned[key].name);
       const color = dataFromFireBase[storeTheID].assigned[key].color;
-      // console.log(profile);
-
       document.querySelector(".assigned_to").innerHTML += `<div class="circle circle_profile_names spacing" style="background-color: ${color}">${profile}</div>`;
     }
   }
@@ -194,10 +192,10 @@ async function displayContactsInDropdownMenu() {
       document.querySelector(".content").innerHTML += HTMLTamplateForDropdownProfiles(key, profile.color, profileInitials, profile.name);
     }
   }
-  checkSelectedContacts(storeTheID);
+  whichContactIsAssigned(storeTheID);
 }
 
-async function checkSelectedContacts(id) {
+async function whichContactIsAssigned(id) {
   let dataFromFireBase = await fetchCardDetails("tasks", id);
   const allContactsInDropdownMenu = document.querySelectorAll(".align_items");
   for (let index = 0; index < allContactsInDropdownMenu.length; index++) {
@@ -206,18 +204,29 @@ async function checkSelectedContacts(id) {
     keyNames.forEach((element) => {
       if (contact === element) {
         allContactsInDropdownMenu[index].classList.add("selected_contact");
+        allContactsInDropdownMenu[index].lastElementChild.lastElementChild.src = "./assets/icons/checkbox/check_white.svg";
+        allContactsInDropdownMenu[index].addEventListener("click", function (event) {
+          retractContactFromCard(event);
+          allContactsInDropdownMenu[index].classList.remove("selected_contact");
+          allContactsInDropdownMenu[index].lastElementChild.lastElementChild.src = "./assets/icons/checkbox/openCardRectangle.svg";
+        });
       }
     });
-    // console.log(allContactsInDropdownMenu[index]);
-
-    // findIDs(keyNames, contact);
   }
 }
 
-function findIDs(arr, contactID) {
-  for (const id of arr) {
-    if (id === contactID) {
-      // console.log(id + " is the same " + contactID);
-    }
-  }
+function assignNewContacts(event) {
+  const contact = event.currentTarget.getAttributeNode("id_value").value;
+  // retractContactFromCard(contact);
+}
+
+async function retractContactFromCard(event) {
+  const contact = event.currentTarget.getAttributeNode("id_value").value;
+  let response = await fetch(`${BASE_URL}/tasks/${storeTheID}/assigned/${contact}.json`, {
+    method: "DELETE",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+  const responseData = await response.json();
 }

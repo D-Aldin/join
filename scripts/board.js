@@ -184,11 +184,10 @@ async function getContacts(list) {
     Object.assign(contactObject, temporarilyObject);
   }
   const today = taskTemplate(1, "Boris Pasternak", "Was wir heute tun, entscheidet, wie die Welt morgen aussieht.", contactObject, "05.02.2025", "Low", "User Task", subtaskList, "toDo");
-  addTaskToFireBase("tasks", today);
+  // addTaskToFireBase("tasks", today);
 }
 
 function init() {
-  // getContacts(assigContacts);
   displayCardOnBoard();
 }
 init();

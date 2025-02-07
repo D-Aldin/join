@@ -102,7 +102,7 @@ function HTMLTamplateForTheEditFunk() {
               <div class=close_button>
                 <button  class="closeBtn"><img onclick="overlayOff()" src="./assets/icons/board/close.svg" alt="close"></button>
               </div>
-              <div>
+              <div class="content_height">
                 <form class="title_description_date" action="">
                   <label for="editTitle">Title</label>
                   <input type="text" id="editTitle" name="title" class="inputfield dimensions" /><br>
@@ -132,7 +132,7 @@ function HTMLTamplateForTheEditFunk() {
 }
 
 function HTMLTamplateForDropdownProfiles(key, color, initials, name) {
-  return `<div class="align_items" id_value=${key}>
+  return `<div onclick="assignNewContacts(event)" class="align_items" id_value=${key}>
             <div class="icon_name_container">
             <div class="circle circle_profile_names spacing" style="background-color: ${color}">${initials}</div>${name}</div>
             <div>
