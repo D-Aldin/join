@@ -47,7 +47,9 @@ aside {
 .link_nav_summary:hover,
 .link_nav_add_task:hover,
 .link_nav_board:hover,
-.link_nav_contacts:hover {
+.link_nav_contacts:hover,
+.privacy_policy_login:hover,
+.legal_notice_login:hover {
   transition: 125ms ease-in-out;
   background-color: rgb(42, 61, 89);
 }
@@ -55,7 +57,9 @@ aside {
 .link_nav_summary.active_background_color:hover,
 .link_nav_add_task.active_background_color:hover,
 .link_nav_board.active_background_color:hover,
-.link_nav_contacts.active_background_color:hover {
+.link_nav_contacts.active_background_color:hover,
+.privacy_policy_login.active_background_color:hover,
+.legal_notice_login.active_background_color:hover {
   background-color: rgb(9, 25, 49);
 }
 
@@ -78,32 +82,42 @@ aside {
   align-items: center;
 }
 
-.legal_notes_position {
+.legal_and_policy_position {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  padding-left: 52px;
   gap: 8px;
 }
 
-.legal_notes_position a {
+.privacy_policy_login,
+.legal_notice_login {
   display: flex;
-  align-items: center;
-  justify-content: center;
-  color: rgb(144, 147, 150);
-  padding: 8px;
+  width: 232px;
 }
 
-.legal_notes_position a:hover {
+.legal_and_policy_position a {
   display: flex;
   align-items: center;
-  justify-content: center;
-  color: rgb(11, 140, 233);
+  justify-content: flex-start;
+  color: rgb(144, 147, 150);
   padding: 8px;
+  padding-left: 58px;
+  width: 232px;
+}
+
+.legal_and_policy_position a:hover {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  color: rgb(11, 140, 233);
+  transition: 125ms ease-in-out;
+  background-color: rgb(42, 61, 89);
+  width: 232px;
+  padding: 8px;
+  padding-left: 58px;
   font-weight: bolder;
 }
 
-/* Parent class for the privacy_policy.html  */
 .privacy_policy .nav_position {
   height: 390px;
 }

@@ -15,29 +15,6 @@
     <title>Help</title>
   </head>
   <body>
-    <aside>
-      <div class="logo_position">
-        <img class="join_logo" src="./assets/icons/aside/joinLogo.svg" alt="Join_Logo" />
-      </div>
-      <div class="nav_position">
-        <div class="link_nav_summary cursor_pointer" onclick="window.location.href='./summary.html'">
-          <a href="./summary.html"><img src="./assets/icons/aside/summary.svg" alt="Summary" />Summary</a>
-        </div>
-        <div class="link_nav_add_task cursor_pointer" onclick="window.location.href='./add_task.html'">
-          <a href="./add_task.html"><img src="./assets/icons/aside/addTask.svg" alt="Add Task" />Add Task</a>
-        </div>
-        <div class="link_nav_board cursor_pointer" onclick="window.location.href='./board.html'">
-          <a href="./board.html"><img src="./assets/icons/aside/board.svg" alt="Board" />Board</a>
-        </div>
-        <div class="link_nav_contacts cursor_pointer" onclick="window.location.href='./contacts.html'">
-          <a href="./contacts.html"><img src="./assets/icons/aside/contacts.svg" alt="Contacts" />Contacts</a>
-        </div>
-      </div>
-      <div class="legal_notes_position">
-        <a href="privacy_policy_login.html">Privacy Policy</a>
-        <a href="legal_notice_login.html">Legal notice</a>
-      </div>
-    </aside>
     <header>
       <div>
         <h1>Kanban Project Managment Tool</h1>
@@ -47,6 +24,35 @@
         <img onclick="toggleShowSubmenu(event)" class="account_img" src="./assets/icons/imgs/guestImg.svg" alt="" />
       </div>
     </header>
+
+    <aside id="aside">
+      <div class="logo_position">
+        <img class="join_logo" src="./assets/icons/aside/joinLogo.svg" alt="Join_Logo" />
+      </div>
+      <div class="nav_position">
+        <div class="link_nav_summary cursor_pointer">
+          <a href="./summary.html"><img src="./assets/icons/aside/summary.svg" alt="Summary" />Summary</a>
+        </div>
+        <div class="link_nav_add_task cursor_pointer">
+          <a href="./add_task.html"><img src="./assets/icons/aside/addTask.svg" alt="Add Task" />Add Task</a>
+        </div>
+        <div class="link_nav_board cursor_pointer">
+          <a href="./board.html"><img src="./assets/icons/aside/board.svg" alt="Board" />Board</a>
+        </div>
+        <div class="link_nav_contacts cursor_pointer">
+          <a href="./contacts.html"><img src="./assets/icons/aside/contacts.svg" alt="Contacts" />Contacts</a>
+        </div>
+      </div>
+      <div class="legal_and_policy_position">
+        <div class="privacy_policy_login cursor_pointer">
+          <a href="./privacy_policy_login.html">Privacy Policy</a>
+        </div>
+        <div class="legal_notice_login cursor_pointer">
+          <a href="./legal_notice_login.html">Legal notice</a>
+        </div>
+      </div>
+    </aside>
+
     <div id="submenu_position" class="d_none">
       <div class="submenu_section">
         <a class="submenu_links_design link_legal_notice_hover" href="./legal_notice_login.html">Legal Notice</a>
