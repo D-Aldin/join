@@ -188,6 +188,7 @@ async function getContacts(list) {
 }
 
 function init() {
+  getContacts(assigContacts);
   displayCardOnBoard();
 }
 init();

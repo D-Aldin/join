@@ -1,6 +1,7 @@
 let card;
 let storeTheID;
 const taskPath = "tasks";
+let assignNewContList = [];
 let refCardBox = document.getElementById("box");
 const refCloseBtn = document.getElementsByClassName("closeBtn");
 const refEditButton = document.querySelector(".position_edit");
@@ -215,18 +216,23 @@ async function whichContactIsAssigned(id) {
   }
 }
 
-function assignNewContacts(event) {
+async function assignNewContacts(event) {
   const contact = event.currentTarget.getAttributeNode("id_value").value;
-  // retractContactFromCard(contact);
+  let dataFromFireBase = await fetchCardDetails(taskPath, storeTheID);
+  if (!(contact in dataFromFireBase[storeTheID].assigned || assignNewContList.includes(contact))) {
+    assignNewContList.push(contact);
+  }
 }
 
 async function retractContactFromCard(event) {
   const contact = event.currentTarget.getAttributeNode("id_value").value;
-  let response = await fetch(`${BASE_URL}/tasks/${storeTheID}/assigned/${contact}.json`, {
+  let response = await fetch(`${BASE_URL}/${taskPath}/${storeTheID}/assigned/${contact}.json`, {
     method: "DELETE",
     headers: {
       "Content-Type": "application/json",
     },
   });
   const responseData = await response.json();
+  document.querySelector(".assigned_to").innerHTML = "";
+  editFunction();
 }
