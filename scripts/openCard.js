@@ -142,7 +142,7 @@ async function editFunction() {
   let refTitleInputField = (document.querySelector("#editTitle").value = dataFromFireBase[storeTheID].title);
   let refDescriptionField = (document.querySelector("#editDescription").value = dataFromFireBase[storeTheID].description);
   let refDateField = (document.querySelector("#editDate").value = dataFromFireBase[storeTheID].data);
-  manageAssignedMenuEditing();
+  displayContactsInDropdownMenu();
   editPriority(dataFromFireBase[storeTheID].prio);
   for (const key in dataFromFireBase[storeTheID].assigned) {
     if (Object.prototype.hasOwnProperty.call(dataFromFireBase[storeTheID].assigned, key)) {
@@ -182,13 +182,24 @@ function editPriority(data) {
   }
 }
 
-async function manageAssignedMenuEditing() {
+async function displayContactsInDropdownMenu() {
   let dataFromFireBase = await fetchCardDetails("contacts", storeTheID);
   for (const key in dataFromFireBase) {
     if (Object.prototype.hasOwnProperty.call(dataFromFireBase, key)) {
       const profile = dataFromFireBase[key];
       const profileInitials = initials(profile.name);
-      document.querySelector(".content").innerHTML += `<div class="align_items" id_value=${key}><div class="circle circle_profile_names spacing" style="background-color: ${profile.color}">${profileInitials}</div>${profile.name}</div>`;
+      document.querySelector(".content").innerHTML += `<div class="align_items" id_value=${key}>
+                                                            <div class="icon_name_container">
+                                                              <div class="circle circle_profile_names spacing" style="background-color: ${profile.color}">${profileInitials}</div>
+                                                              ${profile.name}
+                                                            </div>
+                                                            <div>
+                                                              <img src="./assets/icons/checkbox/openCardRectangle.svg" alt="" srcset="">
+                                                            </div>
+                                                        </div> 
+                                                         `;
     }
   }
 }
+
+async function editingContacts(event) {}

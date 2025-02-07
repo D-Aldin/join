@@ -22,6 +22,7 @@ async function addContactToDataBase() {
         email: email,
         phone: phone,
         color: color,
+        uniKey: uniqueKey,
       }),
     });
     let contactData = await response.json();

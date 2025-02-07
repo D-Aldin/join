@@ -108,16 +108,18 @@ async function displayCardOnBoard() {
     calPercentageOfCompletedSubtasks(element.subtask.length, subtasksCompleted, element.id);
     addProfilesToCard(key, element.assigned);
   }
-
   noTaskToDo();
 }
 
 function addProfilesToCard(id, obj) {
+  getContacts(assigContacts);
   let transX = 0;
   for (const key in obj) {
     if (Object.prototype.hasOwnProperty.call(obj, key)) {
       const name = initials(obj[key]);
       const color = key;
+      console.log(obj);
+
       document.getElementById(id).lastElementChild.firstElementChild.innerHTML += contactTamplate(name, color, transX);
       transX += 30;
     }
@@ -158,19 +160,13 @@ async function countCompletedSubtasks(subtask) {
 }
 
 function calPercentageOfCompletedSubtasks(numberOfSubtasks, completedSubtasks, id) {
-  // const refProgressBar = document.querySelectorAll(`"#subtasks${id}"`);
   const result = (completedSubtasks / numberOfSubtasks) * 100;
   document.getElementById("progress_bar" + id).style.width = `${result}%`;
-  // console.log(refProgressBar);
 }
 
 // ------------------------- TEST LIST --------------------------------
-let contacts = {
-  blue: "Dobric Aldin",
-  orange: "Marita Haupt",
-  red: "Adele Dorn",
-  core: "Ewald Thun",
-};
+
+let assigContacts = ["contact_1738925775163", "contact_1738925916964", "contact_1738925952890"];
 
 let subtaskList = {
   0: { task: "NewTask1", state: false },
@@ -180,6 +176,25 @@ let subtaskList = {
   4: { task: "NewTask5", state: false },
 };
 
-displayCardOnBoard();
-const today = taskTemplate(1, "Boris Pasternak", "Was wir heute tun, entscheidet, wie die Welt morgen aussieht.", contacts, "05.02.2025", "Low", "User Task", subtaskList, "toDo"); // Test Data
-// addTaskToFireBase("tasks", today);
+async function getContacts(list) {
+  let contactObject = {};
+  for (let index = 0; index < list.length; index++) {
+    const dataFromFireBase = await fetchTasks(`contacts/${list[index]}`);
+    temporarilyObject = {
+      [dataFromFireBase.uniKey]: {
+        color: dataFromFireBase.color,
+        name: dataFromFireBase.name,
+      },
+    };
+    Object.assign(contactObject, temporarilyObject);
+  }
+  const today = taskTemplate(1, "Boris Pasternak", "Was wir heute tun, entscheidet, wie die Welt morgen aussieht.", contactObject, "05.02.2025", "Low", "User Task", subtaskList, "toDo");
+  addTaskToFireBase("tasks", today);
+}
+
+function init() {
+  // getContacts(assigContacts);
+  displayCardOnBoard();
+}
+
+init();

@@ -119,7 +119,8 @@ function HTMLTamplateForTheEditFunk() {
                 </div>
                 <div>
                   <div class="dropdown_menu">
-                    <div class="dropdown_button" onclick="openMenu(), manageAssignedMenuEditing()">Select contacts to assign</div>
+                    <div class="dropdown_button" onclick="openMenu(), manageAssignedMenuEditing()">Select contacts to assign
+                    <img id="arrow" src="./assets/icons/board/arrow_drop_down.svg" alt="arrow" /></div>
                     <div class="content"></div>
                   </div>  
                     <div class="assigned_to">
