@@ -16,19 +16,19 @@ function activeLink() {
 }
 
 function updateActiveLinks(links, currentPath) {
-  for (let i = 0; i < links.length; i++) {
-    const link = links[i];
+  links.forEach((link) => {
     const linkPath = link
       .getAttribute("href")
       .split("/")
       .pop()
       .replace(/\.html$/, "");
+    const parent = link.closest("div");
     if (currentPath === linkPath) {
-      link.parentElement.classList.add("active_background_color");
+      parent.classList.add("active_background_color");
     } else {
-      link.parentElement.classList.remove("active_background_color");
+      parent.classList.remove("active_background_color");
     }
-  }
+  });
 }
 
 function addContainerClickListeners() {
@@ -45,12 +45,12 @@ function addContainerClickListeners() {
 
 function addLegalAndPolicyClickListeners() {
   const containers = document.querySelectorAll(".privacy_policy_login, .legal_notice_login");
-  for (let i = 0; i < containers.length; i++) {
-    containers[i].addEventListener("click", function () {
-      const link = this.querySelector("a");
+  containers.forEach((container) => {
+    container.addEventListener("click", function () {
+      const link = container.querySelector("a");
       if (link) {
         window.location.href = link.getAttribute("href");
       }
     });
-  }
+  });
 }

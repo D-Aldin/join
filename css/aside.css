@@ -44,23 +44,14 @@ aside {
   width: 232px;
 }
 
-.link_nav_summary:hover,
-.link_nav_add_task:hover,
-.link_nav_board:hover,
-.link_nav_contacts:hover,
-.privacy_policy_login:hover,
-.legal_notice_login:hover {
+.link_nav_summary:hover:not(.active_background_color),
+.link_nav_add_task:hover:not(.active_background_color),
+.link_nav_board:hover:not(.active_background_color),
+.link_nav_contacts:hover:not(.active_background_color),
+.legal_notice_login:hover:not(.active_background_color),
+.privacy_policy_login:hover:not(.active_background_color) {
   transition: 125ms ease-in-out;
   background-color: rgb(42, 61, 89);
-}
-
-.link_nav_summary.active_background_color:hover,
-.link_nav_add_task.active_background_color:hover,
-.link_nav_board.active_background_color:hover,
-.link_nav_contacts.active_background_color:hover,
-.privacy_policy_login.active_background_color:hover,
-.legal_notice_login.active_background_color:hover {
-  background-color: rgb(9, 25, 49);
 }
 
 .active_background_color {
@@ -89,12 +80,6 @@ aside {
   gap: 8px;
 }
 
-.privacy_policy_login,
-.legal_notice_login {
-  display: flex;
-  width: 232px;
-}
-
 .legal_and_policy_position a {
   display: flex;
   align-items: center;
@@ -105,13 +90,16 @@ aside {
   width: 232px;
 }
 
-.legal_and_policy_position a:hover {
+.privacy_policy_login,
+.legal_notice_login {
   display: flex;
-  align-items: center;
-  justify-content: flex-start;
+  width: 232px;
+}
+
+.legal_notice_login:hover:not(.active_background_color) .privacy_policy_login:hover:not(.active_background_color) {
   color: rgb(11, 140, 233);
-  transition: 125ms ease-in-out;
   background-color: rgb(42, 61, 89);
+  transition: 125ms ease-in-out;
   width: 232px;
   padding: 8px;
   padding-left: 58px;
