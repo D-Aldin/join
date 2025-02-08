@@ -41,7 +41,7 @@ section {
   height: 56px;
   gap: 16px;
   margin-top: 22.5px;
-  margin-bottom: 8px;
+  margin-bottom: 16px;
   border-radius: 10px;
   border: 1px solid rgba(42, 54, 71);
   background-color: rgba(42, 54, 71);
@@ -64,11 +64,14 @@ section {
 }
 
 .contact_list_scrollbar {
+  display: flex;
+  flex-direction: column;
   width: 352px;
   height: calc(100vh - 96px - 100px);
   overflow-y: auto;
   overflow-x: hidden;
   padding-right: 52px;
+  gap: 8px;
 }
 
 .contact_list_scrollbar::-webkit-scrollbar {
@@ -96,7 +99,8 @@ section {
   align-items: center;
   width: 352px;
   height: 58px;
-  padding-left: 39px;
+  padding-left: 38px;
+  padding-top: 16px;
 }
 
 .first_letter {

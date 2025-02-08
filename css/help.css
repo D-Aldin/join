@@ -29,6 +29,7 @@ body {
   gap: 24px;
   margin: 110px 0 110px 96px;
   overflow-y: scroll;
+  width: 1014px;
 }
 
 .scroll_layout::-webkit-scrollbar {
