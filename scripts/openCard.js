@@ -218,10 +218,16 @@ async function whichContactIsAssigned(id) {
 
 async function assignNewContacts(event) {
   const contact = event.currentTarget.getAttributeNode("id_value").value;
+  console.log(event.currentTarget);
+
   let dataFromFireBase = await fetchCardDetails(taskPath, storeTheID);
   if (!(contact in dataFromFireBase[storeTheID].assigned || assignNewContList.includes(contact))) {
     assignNewContList.push(contact);
+    console.log(contact);
   }
+  let newContact = await getContacts(assignNewContList);
+
+  addDataToFireBase(`${taskPath}/${storeTheID}/assigned`, newContact);
 }
 
 async function retractContactFromCard(event) {

@@ -71,7 +71,7 @@ async function fetchTasks(path = "") {
   return responseToJSON;
 }
 
-async function addTaskToFireBase(path = "", card) {
+async function addDataToFireBase(path = "", card) {
   let response = await fetch(BASE_URL + path + ".json", {
     method: "PATCH",
     headers: {
@@ -159,18 +159,6 @@ function calPercentageOfCompletedSubtasks(numberOfSubtasks, completedSubtasks, i
   document.getElementById("progress_bar" + id).style.width = `${result}%`;
 }
 
-// -------------------------------------------------------------------- TEST LIST TEST TEST TEST TEST --------------------------------
-
-let assigContacts = ["contact_1738946637904", "contact_1738946682578", "contact_1738946802579", "contact_1738948441461"];
-
-let subtaskList = {
-  0: { task: "NewTask1", state: false },
-  1: { task: "NewTask2", state: false },
-  2: { task: "NewTask3", state: false },
-  3: { task: "NewTask4", state: false },
-  4: { task: "NewTask5", state: false },
-};
-
 async function getContacts(list) {
   let contactObject = {};
   for (let index = 0; index < list.length; index++) {
@@ -183,12 +171,25 @@ async function getContacts(list) {
     };
     Object.assign(contactObject, temporarilyObject);
   }
-  const today = taskTemplate(1, "Boris Pasternak", "Was wir heute tun, entscheidet, wie die Welt morgen aussieht.", contactObject, "05.02.2025", "Low", "User Task", subtaskList, "toDo");
-  // addTaskToFireBase("tasks", today);
+  return contactObject;
 }
 
-function init() {
-  getContacts(assigContacts);
+// -------------------------------------------------------------------- TEST LIST TEST TEST TEST TEST --------------------------------
+
+let assigContacts = ["contact_1738946637904", "contact_1738946682578", "contact_1738946802579", "contact_1738948441461"];
+
+let subtaskList = {
+  0: { task: "NewTask1", state: false },
+  1: { task: "NewTask2", state: false },
+  2: { task: "NewTask3", state: false },
+  3: { task: "NewTask4", state: false },
+  4: { task: "NewTask5", state: false },
+};
+
+async function init() {
+  let test = await getContacts(assigContacts);
+  const today = taskTemplate(1, "Boris Pasternak", "Was wir heute tun, entscheidet, wie die Welt morgen aussieht.", test, "05.02.2025", "Low", "User Task", subtaskList, "toDo");
+  // addTaskToFireBase("tasks", today);
   displayCardOnBoard();
 }
 init();
