@@ -14,11 +14,11 @@ select {
 }
 
 textarea {
-    color: black;
     width: 100%;
     box-sizing: border-box;
-    padding-left: 12px;
-    font-size: 21px;
+    padding-left: 16px;
+    padding-right: 16px;
+    padding-top: 18px;
 }
 
 .task {
@@ -102,10 +102,22 @@ p {
     font-size: 20px;
 }
 
+.inputfield:focus {
+  outline: none;
+  border: solid 1px rgba(41, 171, 226, 1) !important;
+}
+
 .textareafield {
     height: 120px;
     border: solid 1px rgba(209, 209, 209, 1);
     border-radius: 10px;
+    font-size: 20px;
+    font-weight: 20px;
+}
+
+.textareafield:focus {
+  outline: none;
+  border: solid 1px rgba(41, 171, 226, 1) !important;
 }
 
 .assigned-contact-wrapper {
@@ -127,8 +139,8 @@ p {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    width: 440px;
-    height: 56px;
+    width: 440px !important;
+    height: 56px !important;
     gap: 16px;
 }
 
@@ -136,8 +148,8 @@ p {
     border: solid 1px rgba(209, 209, 209, 1);
     border-radius: 10px;
     box-sizing: border-box;
-    height: 56px;
-    width: 136px;
+    height: 56px !important;
+    width: 136px !important;
     background-color: white;
     cursor: pointer;
     font-size: 20px;
@@ -212,7 +224,7 @@ p {
   width: 100%;
 }
 
-.button-container {
+.button-container-clear-creat {
   display: flex;
   gap: 16px;
   width: 309px;
@@ -278,6 +290,11 @@ p {
     border: solid 1px rgba(209, 209, 209, 1);
     background-color:white;
     padding-right: 16px;
+}
+
+.subtask-inputfield:focus {
+  outline: none;
+  border: solid 1px rgba(41, 171, 226, 1);
 }
 
 .subtask-inputfield-text {

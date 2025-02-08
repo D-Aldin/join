@@ -121,8 +121,8 @@ function renderSubtasks() {
     for (let i = 0; i < subtasks.length; i++) {
         const element = subtasks[i];
         tasks.innerHTML += /*html*/`
-        <div id="${i}" class="subtask-list">
-            <ul>
+        <div id="${i}" class="subtask-list" >
+            <ul ondblclick="editSubtask(${i})">
                 <li>${element}</li>   
             </ul>
             <div class="subtask-list-button-container">
@@ -154,6 +154,13 @@ function editSubtask(x) {
     `
     currentsubtask = document.getElementById('current-subtask'+x);
     currentsubtask.value = subtasks[x];
+    
+    document.addEventListener("click", function outsideClick(event) {
+        if (!currentcontainer.contains(event.target)) {
+            setEditSubtask(x);
+            document.removeEventListener("click", outsideClick);
+        }
+    });
 }
 
 function setEditSubtask(x) {
