@@ -38,7 +38,27 @@ header img {
   content: url(../assets/icons/imgs/questionMarkerHover.svg);
 }
 
-.account_img {
+.account_circle {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 3px solid rgba(42, 54, 71, 1);
+  border-color: black;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  text-align: center;
+  color: rgb(41, 171, 226);
+  font-size: 20px;
+}
+
+.account_circle:hover {
+  cursor: pointer;
+  background-color: rgba(12, 46, 98, 0.12);
+  transition: 125ms ease-in-out;
+}
+
+/* .account_img {
   width: 56px;
   height: 56px;
 }
@@ -48,8 +68,8 @@ header img {
   width: 56px;
   height: 56px;
   content: url(../assets/icons/imgs/guestImgHover.svg);
-}
+} */
 
 .active {
-  content: url(../assets/icons/imgs/guestImgHover.svg);
+  background-color: rgba(12, 46, 98, 0.12);
 }

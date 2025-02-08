@@ -1,5 +1,5 @@
 let submenuRef = document.getElementById("submenu_position");
-let accountImg = document.querySelector(".account_img");
+let accountImg = document.querySelector(".account_circle");
 
 function toggleShowSubmenu() {
   if (submenuRef.classList.contains("d_none")) {
