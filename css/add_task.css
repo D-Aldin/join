@@ -315,12 +315,95 @@ p {
     width: 440px;
     display: flex;
     flex-direction: column;
+    height: auto;
 }
 
 .subtask-list {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  box-sizing: border-box;
   font-size: 16px;
   font-weight: 400px;
+  height: 32px;
+  border-radius: 16px;
+  padding-right: 16px;
+  cursor: pointer;
 }
+
+.subtask-list:hover {
+  background-color:  rgba(209, 209, 209, 1);
+}
+
+.subtask-list-button-container {
+  display: none;
+}
+
+.subtask-list-button {
+  background-color: white;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 24px;
+  width: 24px;
+  cursor: pointer;
+}
+
+.subtask-list:hover .subtask-list-button-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+}
+
+.pixelbar-subtask {
+  background-color: rgba(209, 209, 209, 1);
+  width: 1px;
+  height: 24px;
+}
+
+ul {
+  margin: 0;
+}
+
+.subtask-list:hover .pixelbar-subtask {
+  background-color:black;
+}
+
+.subtask-list:hover .subtask-list-button {
+  background-color:  rgba(209, 209, 209, 1);
+}
+
+.subtask-list-button:hover {
+  height: 26px;
+}
+
+.subtask-edit-inputfield {
+  border: none;
+  flex: 1;
+}
+
+.subtask-edit-inputfield:focus {
+  outline: none;
+}
+
+.subtask-list-button-container-by-edit {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+}
+
+.subtask-list-by-edit {
+  background-color: white;
+  border: black;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-sizing: border-box;
+  width: 100% !important;
+  height: 32px !important;
+  padding-right: 16px;
+}
+
