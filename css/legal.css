@@ -1,11 +1,43 @@
+.nav_position_login {
+  position: relative;
+  bottom: 180px;
+  left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.nav_position_login a {
+  color: rgb(205, 205, 205);
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  height: 46px;
+}
+
+.nav_position_login:hover {
+  transition: 125ms ease-in-out;
+  background-color: rgb(42, 61, 89);
+}
+
+.scroll_layout {
+  gap: 24px;
+  margin: 110px 0 110px 96px;
+  overflow-y: scroll;
+}
+
+.scroll_layout::-webkit-scrollbar {
+  display: none;
+}
+
 .legal {
   display: flex;
   background-color: rgb(246, 247, 248);
+  width: 1014px;
 }
 
 .legal-content {
-  display: inline-block;
-  margin: 100px 90px 0px 100px;
   gap: 24px;
   font-size: 16px;
 }
@@ -19,4 +51,14 @@
 .links {
   color: rgba(41, 171, 226, 1);
   text-decoration: none;
+}
+
+h1 {
+  font-size: 61px;
+  margin: 0;
+}
+
+h2 {
+  font-size: 27px;
+  font-weight: 400;
 }
