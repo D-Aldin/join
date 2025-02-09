@@ -3,14 +3,6 @@ const refLoginButton = document.querySelector("#login_btn");
 let email;
 let password;
 
-/**
- * Function to handle user login. It checks the provided email and password
- * against the data stored in Firebase Realtime Database.
- * If the credentials match, the user is redirected to 'index.html'.
- * If not, it displays an error message and highlights the input fields in red.
- *
- * @param {string} email - The email entered by the user in the login form.
- */
 async function loginUser(email) {
   let response = await fetch(BASE_URL + ".json", {
     method: "GET",
@@ -31,12 +23,6 @@ async function loginUser(email) {
   }
 }
 
-/**
- * Function to retrieve the email and password from the login form and
- * call the loginUser function to check the credentials.
- *
- * @param {Event} event - The event triggered when the login button is clicked.
- */
 function getDataFromLogin(event) {
   event.preventDefault();
   let email = document.getElementById("loginEmail").value;

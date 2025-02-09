@@ -27,13 +27,3 @@ window.addEventListener("click", function (event) {
     }, 125);
   }
 });
-
-function getInitials(name) {
-  let words = name.split(" ");
-  let initialsArray = words.map(function (word) {
-    let firstLetter = word.charAt(0).toUpperCase();
-    return firstLetter;
-  });
-  let initials = initialsArray.join("");
-  return initials;
-}
