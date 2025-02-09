@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="shortcut icon" href="./assets/icons/logo/joinLarge.png" type="image/x-icon" />
-    <script src="./scripts/submenu.js" defer></script>
+    <script src="./scripts/submenu.js"></script>
     <script src="./scripts/add_task.js"></script>
     <script src="./scripts/aside.js" defer></script>
     <script src="./scripts/submenu_initials.js" defer></script>
@@ -77,7 +77,7 @@
                     <div class="input-container">
                         <div class="inputfield-title-container">
                             <span class="display-flex"><p class="display-flex tasktitles">Title</p><p class="color-red tasktitles">*</p></span>
-                            <input class="inputfield" id="title" placeholder="Enter a title" type="text">
+                            <input class="inputfield" id="title" placeholder="Enter a title" type="text" >
                         </div>
                         <div class="inputfield-title-container">
                             <p class="tasktitles">Description</p>
@@ -96,7 +96,7 @@
                     <div class="input-container">
                         <div class="inputfield-title-container">
                             <span class="display-flex"><p class="tasktitles">Due date</p><p class="color-red tasktitles">*</p></span>
-                            <input class="inputfield" id="date" type="date">
+                            <input class="inputfield" id="date" type="date" required>
                         </div>
                         <div class="inputfield-title-container">
                             <p class="tasktitles">Prio</p>
@@ -108,7 +108,7 @@
                         </div>
                         <div class="inputfield-title-container">
                           <span class="display-flex"><p class="tasktitles">Category</p><p class="color-red tasktitles">*</p></span>
-                            <select class="inputfield" id="category" placeholder="Select task category">
+                            <select class="inputfield" id="category" placeholder="Select task category" required>
                                 <option value="Technical Task">Technical Task</option>
                                 <option value="User Story">User Story</option>
                             </select>
@@ -130,7 +130,7 @@
                 </div>
                 <div class="footer-container">
                   <span class="display-flex"><p class="color-red">*</p><p></p>This field is required</p></span>
-                  <div class="button-container">
+                  <div class="button-container-clear-creat">
                     <button class="clear-button" onclick="clearAllTasks()">Clear <div class="icon-box"></div></button>
                     <button class="great-button" onclick="CreateTask()">Creat Task <img src="assets/icons/addTask/check.svg" alt=""></button>
                   </div>

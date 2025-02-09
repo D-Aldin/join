@@ -103,12 +103,6 @@ function setdubbleButton() {
         `
 }
 
-function submitSubtask(subtask) {
-    console.log(subtasks);
-    subtask.value = '';
-    renderSubtasks();
-}
-
 function clearsubtask() {
     document.getElementById('subtask').value = '';
     setStandardButton();
@@ -118,6 +112,7 @@ function setSubtask() {
     let subtask = document.getElementById('subtask').value
     subtasks.push(subtask);
     renderSubtasks();
+    clearsubtask();
 }
 
 function renderSubtasks() {
@@ -126,16 +121,51 @@ function renderSubtasks() {
     for (let i = 0; i < subtasks.length; i++) {
         const element = subtasks[i];
         tasks.innerHTML += /*html*/`
-        <ul>
-            <div class="subtask-list">
+        <div id="${i}" class="subtask-list" >
+            <ul ondblclick="editSubtask(${i})">
                 <li>${element}</li>   
-                <div class="subtask-button-container">
-                    <button class="subtask-inputfield-button"><img src="assets/icons/addTask/delete.svg" alt=""></button>
-                    <button class="subtask-inputfield-button"><img src="assets/icons/addTask/done.svg" alt=""></button>
-                </div>
+            </ul>
+            <div class="subtask-list-button-container">
+                <button onclick="editSubtask(${i})" class="subtask-list-button"><img src="assets/icons/addTask/pen.svg" alt=""></button>
+                <div class="pixelbar-subtask"></div>
+                <button onclick="deleteSubtask(${i})" class="subtask-list-button"><img src="assets/icons/addTask/delete.svg" alt=""></button>
             </div>
-        </ul>
+        </div>
         `
     }
 }
 
+function deleteSubtask(x) {
+    subtasks.splice(x, 1);
+    renderSubtasks();
+}
+
+function editSubtask(x) {
+    currentcontainer = document.getElementById(x);
+    currentcontainer.classList.remove('subtask-list');
+    currentcontainer.classList.add('subtask-list-by-edit');
+    document.getElementById(x).innerHTML = /*html*/`
+        <input class="subtask-edit-inputfield" id="current-subtask${x}" type="text">
+        <div class="subtask-list-button-container-by-edit">
+                <button onclick="setEditSubtask(${x})" class="subtask-list-button"><img src="assets/icons/addTask/done.svg" alt=""></button>
+                <div class="pixelbar-subtask"></div>
+                <button onclick="deleteSubtask(${x})" class="subtask-list-button"><img src="assets/icons/addTask/delete.svg" alt=""></button>
+        </div>
+    `
+    currentsubtask = document.getElementById('current-subtask'+x);
+    currentsubtask.value = subtasks[x];
+    
+    document.addEventListener("click", function outsideClick(event) {
+        if (!currentcontainer.contains(event.target)) {
+            setEditSubtask(x);
+            document.removeEventListener("click", outsideClick);
+        }
+    });
+}
+
+function setEditSubtask(x) {
+    subtasks.splice(x, 1);
+    let subtask = document.getElementById('current-subtask'+x).value
+    subtasks.splice(x, 0, subtask);
+    renderSubtasks();
+}
