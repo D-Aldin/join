@@ -1,8 +1,11 @@
+BASE_URL = "https://dv-join-bbc2e-default-rtdb.europe-west1.firebasedatabase.app/";
+
 function init() {
   setGreeting();
+  setAccountInitialsSubmenu();
 }
 
-function setGreeting() {
+async function setGreeting() {
   let hour = new Date().getHours();
   let greeting;
   if (hour < 10) {
@@ -15,4 +18,6 @@ function setGreeting() {
     greeting = "Good night,";
   }
   document.getElementById("time_message").innerHTML = greeting;
+  let userName = await getUserName();
+  document.querySelector(".account_name").innerHTML = userName;
 }

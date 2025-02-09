@@ -21,6 +21,7 @@ async function loginUser(email) {
     const emailFormDataBase = responseToJSON[key].email;
     const passwordFromDB = responseToJSON[key].password;
     if (emailFormDataBase == email && passwordFromDB == password) {
+      localStorage.setItem("userId", key);
       window.location.href = "summary.html";
     } else {
       document.querySelector("#loginEmail").style.borderColor = "red";
@@ -44,6 +45,8 @@ function getDataFromLogin(event) {
 }
 
 document.querySelector("#guest_log").onclick = function () {
+  localStorage.removeItem("userId");
   window.location.href = "summary.html";
 };
+
 refLoginButton.addEventListener("click", getDataFromLogin);
