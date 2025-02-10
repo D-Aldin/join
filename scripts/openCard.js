@@ -264,8 +264,6 @@ async function editSubtask(event) {
   const refSubtaskID = event.currentTarget.getAttributeNode("id_subtask").value;
   const refTaskElement = event.currentTarget;
   const refButtons = refTaskElement.lastElementChild;
-  // console.log(refTaskElement);
-
   const dataFromFireBase = await fetchCardDetails(`${taskPath}/${storeTheID}/subtask/${refSubtaskID}`, storeTheID);
   console.log(dataFromFireBase);
 
@@ -280,9 +278,20 @@ async function editSubtask(event) {
                               
                               </div>`;
 
-  document.getElementById(`editInputField${refSubtaskID}`).value = dataFromFireBase.task;
+  const inputField = (document.getElementById(`editInputField${refSubtaskID}`).value = dataFromFireBase.task);
   document.querySelector(".subtask_box_items").classList.add("under_line");
   document.querySelector(".subtask_box_items").classList.remove("subtask_box_items");
+  document.querySelector(`#editInputField${refSubtaskID}`).addEventListener("change", function (event) {
+    saveNewSubtask(refSubtaskID, event.target.value);
+  });
+}
+
+async function saveNewSubtask(subtaskID, newValue) {
+  let response = await fetch(`${BASE_URL}/${taskPath}/${storeTheID}/subtask/${subtaskID}.json`, {
+    method: "PATCH",
+    body: JSON.stringify({ task: newValue }),
+    headers: { "Content-Type": "application/json" },
+  });
 }
 
 function writeEditSubtask() {
@@ -294,7 +303,3 @@ function writeEditSubtask() {
     setdubbleButton();
   }
 }
-
-// function displayInputField(item) {
-//   item.classList.add("display_none");
-// }
