@@ -90,3 +90,51 @@ select {
 .spacing {
   margin-left: 2px;
 }
+
+.subtask_input {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-sizing: border-box;
+  width: 100%;
+  height: 35px;
+  border-radius: 10px;
+  border: solid 1px rgba(209, 209, 209, 1);
+  background-color: white;
+  padding-right: 16px;
+}
+
+.subtask_box {
+  display: flex;
+  flex-direction: column;
+}
+
+.subtask_box_items {
+  display: flex;
+  justify-content: space-between;
+}
+
+.subtask_edit_buttons {
+  display: none;
+}
+
+.pen,
+.trash {
+  cursor: pointer;
+}
+
+.subtask_box_items:hover {
+  background-color: rgba(215, 215, 215, 0.432);
+  border-radius: 8px;
+}
+
+.subtask_box_items:hover .subtask_edit_buttons {
+  display: inline;
+}
+
+.editTask {
+  display: flex;
+  margin: 3px 0 3px 0;
+  cursor: pointer;
+  /* width: 40%; */
+}

@@ -125,6 +125,18 @@ function HTMLTamplateForTheEditFunk() {
                   </div>  
                     <div class="assigned_to">
                     </div>
+                  <h3>Subtasks</h3>
+                  <div class="subtask_input">
+                    <input id="editSubtask" class="subtask-inputfield-text" oninput="writeEditSubtask()" type="text">
+                    <div id="subtaskbuttons" class="subtask-button-container">
+                      <button class="subtask-inputfield-button">
+                        <img src="assets/icons/addTask/subtasks_icons.svg" alt="">
+                      </button>
+                    </div>
+                  </div><br>
+                  <div class="subtasks_box">
+
+                  </div>
                   <input type="submit" value="Submit" />
                   </form>
                 </div>;
@@ -139,4 +151,24 @@ function HTMLTamplateForDropdownProfiles(key, color, initials, name) {
               <img src="./assets/icons/checkbox/openCardRectangle.svg" alt="" srcset="">
             </div>
           </div>`;
+}
+
+function setStandardButton() {
+  document.getElementById("subtaskbuttons").innerHTML = /*html*/ `
+          <button class="subtask-inputfield-button">
+              <img src="assets/icons/addTask/subtasks_icons.svg" alt="">
+          </button>
+      `;
+}
+
+function setdubbleButton() {
+  document.getElementById("subtaskbuttons").innerHTML = /*html*/ `
+          <button class="subtask-inputfield-button">
+              <img onclick="clearsubtask()" src="assets/icons/addTask/cross.svg" alt="">
+          </button>
+          <div class="pixelbar-mini"></div>
+          <button class="subtask-inputfield-button">    
+              <img onclick="setSubtask()" src="assets/icons/addTask/done.svg" alt="">
+          </button>
+      `;
 }

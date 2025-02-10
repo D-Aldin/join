@@ -176,7 +176,7 @@ async function getContacts(list) {
 
 // -------------------------------------------------------------------- TEST LIST TEST TEST TEST TEST --------------------------------
 
-let assigContacts = ["contact_1738946637904", "contact_1738946682578", "contact_1738946802579", "contact_1738948441461"];
+let assigContacts = ["contact_1738946637904"];
 
 let subtaskList = {
   0: { task: "NewTask1", state: false },
@@ -188,8 +188,9 @@ let subtaskList = {
 
 async function init() {
   let test = await getContacts(assigContacts);
-  const today = taskTemplate(1, "Boris Pasternak", "Was wir heute tun, entscheidet, wie die Welt morgen aussieht.", test, "05.02.2025", "Low", "User Task", subtaskList, "toDo");
-  // addTaskToFireBase("tasks", today);
+  const today = taskTemplate(0, "Boris Pasternak", "Was wir heute tun, entscheidet, wie die Welt morgen aussieht.", test, "05.02.2025", "Low", "User Task", subtaskList, "toDo");
+  // addDataToFireBase("tasks", today);
   displayCardOnBoard();
 }
+
 init();

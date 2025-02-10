@@ -136,6 +136,7 @@ async function deleteButton() {
 function renderEditMenu() {
   refCardBox.innerHTML = "";
   refCardBox.innerHTML += HTMLTamplateForTheEditFunk();
+  displaySubtasksInTheEditMenu();
 }
 
 async function editFunction() {
@@ -218,16 +219,18 @@ async function whichContactIsAssigned(id) {
 
 async function assignNewContacts(event) {
   const contact = event.currentTarget.getAttributeNode("id_value").value;
-  console.log(event.currentTarget);
-
   let dataFromFireBase = await fetchCardDetails(taskPath, storeTheID);
   if (!(contact in dataFromFireBase[storeTheID].assigned || assignNewContList.includes(contact))) {
     assignNewContList.push(contact);
-    console.log(contact);
+    let newContact = await getContacts(assignNewContList);
+    addDataToFireBase(`${taskPath}/${storeTheID}/assigned`, newContact);
+    let clicked_element = document.querySelector(`[id_value="${contact}"]`);
+    clicked_element.classList.add("selected_contact");
+    clicked_element.lastElementChild.lastElementChild.src = "./assets/icons/checkbox/check_white.svg";
+    document.querySelector(".assigned_to").innerHTML = "";
+    editFunction();
+    addDataToFireBase(`${taskPath}/${storeTheID}/assigned`, newContact);
   }
-  let newContact = await getContacts(assignNewContList);
-
-  addDataToFireBase(`${taskPath}/${storeTheID}/assigned`, newContact);
 }
 
 async function retractContactFromCard(event) {
@@ -241,4 +244,30 @@ async function retractContactFromCard(event) {
   const responseData = await response.json();
   document.querySelector(".assigned_to").innerHTML = "";
   editFunction();
+}
+
+async function displaySubtasksInTheEditMenu() {
+  const dataFromFireBase = await fetchCardDetails(`${taskPath}/${storeTheID}/subtask`, storeTheID);
+
+  for (const element of dataFromFireBase) {
+    document.querySelector(".subtasks_box").innerHTML += `  <div class=subtask_box_items>
+                                                              <div class="editTask"><p>&bull; ${element.task}</p></div>
+                                                              <div class="subtask_edit_buttons">
+                                                                <img class="pen" src="./assets/icons/board/subtasks_pen.svg" alt="edit">
+                                                                <img src="./assets/icons/board/vector_line_for_subtask_edit.svg" alt="line"/>
+                                                                <img class="trash" src="./assets/icons/board/subtasks_trash.svg" alt="delete">
+                                                              </div>
+                                                            </div>`;
+    console.log(element.task);
+  }
+}
+
+function writeEditSubtask() {
+  let subtask = document.getElementById("editSubtask").value;
+  if (subtask.length < 1) {
+    setStandardButton();
+  }
+  if (subtask.length >= 1) {
+    setdubbleButton();
+  }
 }
