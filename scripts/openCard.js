@@ -248,18 +248,41 @@ async function retractContactFromCard(event) {
 
 async function displaySubtasksInTheEditMenu() {
   const dataFromFireBase = await fetchCardDetails(`${taskPath}/${storeTheID}/subtask`, storeTheID);
-
-  for (const element of dataFromFireBase) {
-    document.querySelector(".subtasks_box").innerHTML += `  <div class=subtask_box_items>
-                                                              <div class="editTask"><p>&bull; ${element.task}</p></div>
+  for (const element in dataFromFireBase) {
+    document.querySelector(".subtasks_box").innerHTML += `  <div class="subtask_box_items" onclick="editSubtask(event)" id_subtask="${element}" >
+                                                              <div class="editTask"><p>&bull; ${dataFromFireBase[element].task}</p></div>
                                                               <div class="subtask_edit_buttons">
                                                                 <img class="pen" src="./assets/icons/board/subtasks_pen.svg" alt="edit">
                                                                 <img src="./assets/icons/board/vector_line_for_subtask_edit.svg" alt="line"/>
                                                                 <img class="trash" src="./assets/icons/board/subtasks_trash.svg" alt="delete">
                                                               </div>
                                                             </div>`;
-    console.log(element.task);
   }
+}
+
+async function editSubtask(event) {
+  const refSubtaskID = event.currentTarget.getAttributeNode("id_subtask").value;
+  const refTaskElement = event.currentTarget;
+  const refButtons = refTaskElement.lastElementChild;
+  // console.log(refTaskElement);
+
+  const dataFromFireBase = await fetchCardDetails(`${taskPath}/${storeTheID}/subtask/${refSubtaskID}`, storeTheID);
+  console.log(dataFromFireBase);
+
+  refTaskElement.innerHTML = `<div  class="edit_subtask_input_field">
+                                <label for="editInputField"></label>
+                                <input onclick="stopEventBubbel(event)" type="text" id="editInputField${refSubtaskID}" />
+                                <div class="buttons">
+                                  <img src="./assets/icons/board/subtasks_trash.svg" alt="trash" />
+                                  <img src="./assets/icons/board/vector_line_for_subtask_edit.svg" alt="trash" />
+                                  <img src="./assets/icons/board/confirm.svg" alt="trash" />
+                                </div>
+                              
+                              </div>`;
+
+  document.getElementById(`editInputField${refSubtaskID}`).value = dataFromFireBase.task;
+  document.querySelector(".subtask_box_items").classList.add("under_line");
+  document.querySelector(".subtask_box_items").classList.remove("subtask_box_items");
 }
 
 function writeEditSubtask() {
@@ -271,3 +294,7 @@ function writeEditSubtask() {
     setdubbleButton();
   }
 }
+
+// function displayInputField(item) {
+//   item.classList.add("display_none");
+// }

@@ -179,11 +179,8 @@ async function getContacts(list) {
 let assigContacts = ["contact_1738946637904"];
 
 let subtaskList = {
-  0: { task: "NewTask1", state: false },
-  1: { task: "NewTask2", state: false },
-  2: { task: "NewTask3", state: false },
-  3: { task: "NewTask4", state: false },
-  4: { task: "NewTask5", state: false },
+  0: { task: "write function 1", state: false },
+  1: { task: "write function 2", state: false },
 };
 
 async function init() {

@@ -104,9 +104,15 @@ select {
   padding-right: 16px;
 }
 
-.subtask_box {
+.subtasks_box {
   display: flex;
   flex-direction: column;
+}
+
+.subtasks_box input {
+  border: 0;
+  outline: 0;
+  /* border-bottom: 1px solid rgba(133, 192, 217); */
 }
 
 .subtask_box_items {
@@ -128,13 +134,41 @@ select {
   border-radius: 8px;
 }
 
+.disable_box_items_hover {
+  background-color: white;
+}
+
 .subtask_box_items:hover .subtask_edit_buttons {
   display: inline;
+}
+
+.display {
+  display: flex;
+  justify-content: flex-end;
+  background-color: white;
 }
 
 .editTask {
   display: flex;
   margin: 3px 0 3px 0;
   cursor: pointer;
-  /* width: 40%; */
+}
+
+.edit_subtask_input_field {
+  display: flex;
+}
+
+.under_line {
+  border-bottom: 1px solid rgba(133, 192, 217);
+}
+
+.buttons {
+  display: flex;
+
+  height: 1.4rem;
+  /* border: 1px solid; */
+}
+
+#editInputField {
+  width: 100%;
 }
