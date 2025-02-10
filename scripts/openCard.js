@@ -254,7 +254,7 @@ async function displaySubtasksInTheEditMenu() {
                                                               <div class="subtask_edit_buttons">
                                                                 <img class="pen" src="./assets/icons/board/subtasks_pen.svg" alt="edit">
                                                                 <img src="./assets/icons/board/vector_line_for_subtask_edit.svg" alt="line"/>
-                                                                <img class="trash" src="./assets/icons/board/subtasks_trash.svg" alt="delete">
+                                                                <img class="trash" onclick="deleteSubtask(event)" src="./assets/icons/board/subtasks_trash.svg" alt="delete">
                                                               </div>
                                                             </div>`;
   }
@@ -263,7 +263,6 @@ async function displaySubtasksInTheEditMenu() {
 async function editSubtask(event) {
   const refSubtaskID = event.currentTarget.getAttributeNode("id_subtask").value;
   const refTaskElement = event.currentTarget;
-  const refButtons = refTaskElement.lastElementChild;
   const dataFromFireBase = await fetchCardDetails(`${taskPath}/${storeTheID}/subtask/${refSubtaskID}`, storeTheID);
   console.log(dataFromFireBase);
 
@@ -271,9 +270,9 @@ async function editSubtask(event) {
                                 <label for="editInputField"></label>
                                 <input onclick="stopEventBubbel(event)" type="text" id="editInputField${refSubtaskID}" />
                                 <div class="buttons">
-                                  <img src="./assets/icons/board/subtasks_trash.svg" alt="trash" />
-                                  <img src="./assets/icons/board/vector_line_for_subtask_edit.svg" alt="trash" />
-                                  <img src="./assets/icons/board/confirm.svg" alt="trash" />
+                                  <img class="trash" onclick="deleteSubtask(event)" src="./assets/icons/board/subtasks_trash.svg" alt="trash" />
+                                  <img src="./assets/icons/board/vector_line_for_subtask_edit.svg" alt="line" />
+                                  <img class="confirm" src="./assets/icons/board/confirm.svg" alt="confirm" />
                                 </div>
                               
                               </div>`;
@@ -284,14 +283,56 @@ async function editSubtask(event) {
   document.querySelector(`#editInputField${refSubtaskID}`).addEventListener("change", function (event) {
     saveNewSubtask(refSubtaskID, event.target.value);
   });
+  document.querySelector(".confirm").addEventListener("click", function (event) {
+    saveNewSubtask(refSubtaskID, event.target.value);
+    document.querySelector(".subtasks_box").innerHTML = " ";
+    displaySubtasksInTheEditMenu();
+  });
 }
 
 async function saveNewSubtask(subtaskID, newValue) {
-  let response = await fetch(`${BASE_URL}/${taskPath}/${storeTheID}/subtask/${subtaskID}.json`, {
+  await fetch(`${BASE_URL}/${taskPath}/${storeTheID}/subtask/${subtaskID}.json`, {
     method: "PATCH",
     body: JSON.stringify({ task: newValue }),
     headers: { "Content-Type": "application/json" },
   });
+}
+
+async function deleteSubtask(event) {
+  const refTrashButton = event.currentTarget;
+  const refSubtaskID = refTrashButton.parentElement.parentElement.getAttributeNode("id_subtask").value;
+
+  await fetch(`${BASE_URL}/${taskPath}/${storeTheID}/subtask/${refSubtaskID}.json`, {
+    method: "DELETE",
+    headers: { "Content-Type": "application/json" },
+  });
+  reorderSubtasks();
+  displayCardOnBoard();
+}
+
+async function reorderSubtasks() {
+  try {
+    const response = await fetch(`${BASE_URL}/tasks/${storeTheID}/subtask.json`);
+    const subtasks = await response.json();
+    if (!subtasks) {
+      console.log("No subtasks found.");
+      return;
+    }
+    console.log("Original subtasks:", subtasks);
+    let subtaskArray = Array.isArray(subtasks) ? subtasks.filter((subtask) => subtask !== null) : Object.values(subtasks).filter((subtask) => subtask !== null);
+    let reorderedSubtasks = subtaskArray.map((subtask, index) => ({ ...subtask }));
+
+    console.log("Reordered subtasks:", reorderedSubtasks);
+    const updateResponse = await fetch(`${BASE_URL}/tasks/${storeTheID}/subtask.json`, {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(reorderedSubtasks),
+    });
+    if (!updateResponse.ok) throw new Error("Failed to update Firebase");
+    console.log("Subtasks reordered successfully!");
+  } catch (error) {
+    console.error("Error reordering subtasks:", error);
+  }
 }
 
 function writeEditSubtask() {

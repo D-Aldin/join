@@ -147,6 +147,9 @@ async function countCompletedSubtasks(subtask) {
   let countTrue = 0;
   for (let index = 0; index < subtask.length; index++) {
     const element = subtask[index];
+    if (element === null) {
+      continue;
+    }
     if (element.state === true) {
       countTrue += 1;
     }
@@ -181,6 +184,9 @@ let assigContacts = ["contact_1738946637904"];
 let subtaskList = {
   0: { task: "write function 1", state: false },
   1: { task: "write function 2", state: false },
+  2: { task: "write function 3", state: false },
+  3: { task: "write function 4", state: false },
+  4: { task: "write function 5", state: false },
 };
 
 async function init() {

@@ -125,7 +125,8 @@ select {
 }
 
 .pen,
-.trash {
+.trash,
+.confirm {
   cursor: pointer;
 }
 
