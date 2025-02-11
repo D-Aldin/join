@@ -1,0 +1,105 @@
+.overlay_background {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.3);
+  z-index: 2;
+  transition: background-color 0.3s;
+}
+
+@keyframes slideInFromRightAddContact {
+  from {
+    top: 50%;
+    left: 150%;
+  }
+  to {
+    top: 50%;
+    right: 50%;
+  }
+}
+
+@keyframes slideOutToRightAddContact {
+  from {
+    top: 50%;
+    left: 50%;
+  }
+  to {
+    top: 50%;
+    left: 150%;
+  }
+}
+
+.overlay_contact_successfully_created {
+  position: absolute;
+  top: 85%;
+  left: 914px;
+  transform: translate(-50%, -50%);
+  width: 326px;
+  height: 74px;
+  border-radius: 30px;
+  z-index: 1;
+  background-color: rgba(42, 54, 71, 1);
+  box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.1);
+  color: rgb(255, 255, 255);
+  font-size: 20px;
+  font-weight: 400;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@keyframes slideInFromRightContactSuccessfullyCreated {
+  from {
+    top: 85%;
+    left: 150%;
+  }
+  to {
+    top: 85%;
+    left: 914px;
+  }
+}
+
+@keyframes slideOutToRightContactSuccessfullyCreated {
+  from {
+    top: 85%;
+    left: 914px;
+  }
+  to {
+    top: 85%;
+    left: 150%;
+  }
+}
+
+#overlay_contact_infos {
+  position: absolute;
+  top: 311px;
+  left: 750px;
+  width: 461px;
+  height: 364px;
+  z-index: 3;
+}
+
+@keyframes slideInFromRightContactInfos {
+  from {
+    top: 311px;
+    left: 150%;
+  }
+  to {
+    top: 311px;
+    right: 50%;
+  }
+}
+
+@keyframes slideOutToRightContactInfos {
+  from {
+    top: 311px;
+    left: 50%;
+  }
+  to {
+    top: 311px;
+    left: 150%;
+  }
+}
