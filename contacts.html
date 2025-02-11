@@ -109,16 +109,16 @@
         <div class="overlay_close_btn_position">
           <img onclick="closeOverlayAddContact()" src="./assets/icons/contacts/Close.svg" alt="close_button" />
         </div>
-        <form class="form_input_fields_position" onsubmit="addContactToDataBase(); return false;">
+        <form action class="form_input_fields_position" onsubmit="addContactToDataBase(); return false;">
           <input type="text" id="add_name" placeholder="Name" />
           <div id="name_error" class="error-message name_error_position"></div>
           <input type="email" id="add_email" placeholder="Email" />
           <div id="email_error" class="error-message email_error_position"></div>
-          <input type="tel" id="add_phone" placeholder="Phone" />
+          <input type="number" id="add_phone" placeholder="Phone" />
           <div id="phone_error" class="error-message phone_error_position"></div>
           <div class="overlay_btn_position">
             <button class="btn_cancel" type="button" onclick="closeOverlayAddContact()">Cancel <img src="./assets/icons/contacts/Close.svg" class="cancel_icon" alt="Cancel" /></button>
-            <button class="btn_create_contact" type="submit">Create contact <img src="./assets/icons/contacts/check.svg" alt="check" /></button>
+            <button id="create_contact_enter" class="btn_create_contact" type="submit">Create contact <img src="./assets/icons/contacts/check.svg" alt="check" /></button>
           </div>
         </form>
       </div>

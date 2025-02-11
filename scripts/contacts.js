@@ -8,6 +8,14 @@ async function init() {
   renderContacts();
 }
 
+let input = document.querySelector("input");
+input.addEventListener("keypress", function (event) {
+  if (event.key === "Enter") {
+    event.preventDefault();
+    document.getElementById("create_contact_enter").click();
+  }
+});
+
 async function addContactToDataBase() {
   let name = document.getElementById("add_name").value;
   let email = document.getElementById("add_email").value;
