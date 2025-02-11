@@ -292,7 +292,7 @@ async function deleteSubtask(event) {
     headers: { "Content-Type": "application/json" },
   });
   reorderSubtasks();
-  displayCardOnBoard();
+  displaySubtasksInTheEditMenu();
 }
 
 async function reorderSubtasks() {
@@ -321,23 +321,31 @@ async function reorderSubtasks() {
 }
 
 async function addNewSubtask(event) {
+  let setIndex;
+  let newTaskObj;
   let response = await fetch(`${BASE_URL}/tasks/${idOfcurrentElement}/subtask.json`, {
     method: "GET",
   });
   let subtasks = await response.json();
+  if (subtasks === null) {
+    setIndex = 0;
+  } else {
+    setIndex = subtasks.length;
+  }
   let theNewTask = document.querySelector("#editSubtask").value;
-  const setIndex = subtasks.length;
-  let newTaskObj = {
+  newTaskObj = {
     [setIndex]: {
       task: theNewTask,
       state: false,
     },
   };
+
   await fetch(`${BASE_URL}/${taskPath}/${idOfcurrentElement}/subtask.json`, {
     method: "PATCH",
     body: JSON.stringify(newTaskObj),
     headers: { "Content-Type": "application/json" },
   });
+  document.querySelector("#editSubtask").value = "";
   setStandardButtonInOpenCard();
   document.querySelector(".subtasks_box").innerHTML = " ";
   displaySubtasksInTheEditMenu();
