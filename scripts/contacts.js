@@ -12,38 +12,13 @@ async function addContactToDataBase() {
   let name = document.getElementById("add_name").value;
   let email = document.getElementById("add_email").value;
   let phone = document.getElementById("add_phone").value;
-  document.getElementById("name_error").innerText = "";
-  document.getElementById("email_error").innerText = "";
-  document.getElementById("phone_error").innerText = "";
-  let hasError = false;
-  if (!name) {
-    document.getElementById("name_error").innerText = "Please enter your first and last name here.";
-    hasError = true;
-  }
-  if (!email) {
-    document.getElementById("email_error").innerText = "Please enter your email address here.";
-    hasError = true;
-  }
-  if (!phone) {
-    document.getElementById("phone_error").innerText = "Please enter your phone number here.";
-    hasError = true;
-  }
-
-  if (hasError) {
-    return;
-  }
-
+  if (validateContactInputs(name, email, phone)) return;
   let color = getRandomColor();
   const uniqueKey = `contact_${Date.now()}`;
   try {
     let response = await fetch(BASE_URL + `contacts/${uniqueKey}.json`, {
       method: "PUT",
-      body: JSON.stringify({
-        name: name,
-        email: email,
-        phone: phone,
-        color: color,
-      }),
+      body: JSON.stringify({ name, email, phone, color }),
     });
     let contactData = await response.json();
     arrayOfContacts.push({ id: uniqueKey, ...contactData });
@@ -57,14 +32,21 @@ async function addContactToDataBase() {
   }
 }
 
-function clearErrorMessages() {
-  document.getElementById("name_error").innerText = "";
-  document.getElementById("email_error").innerText = "";
-  document.getElementById("phone_error").innerText = "";
+function validateContactInputs(name, email, phone) {
+  const inputs = { name, email, phone };
+  const errors = {
+    name: "Please enter your first and last name here.",
+    email: "Please enter your email address here.",
+    phone: "Please enter your phone number here.",
+  };
+  let hasError = false;
+  for (const key in inputs) {
+    const value = inputs[key];
+    document.getElementById(`${key}_error`).innerText = value ? "" : errors[key];
+    if (!value) hasError = true;
+  }
+  return hasError;
 }
-
-document.querySelector(".btn_cancel").addEventListener("click", clearErrorMessages);
-document.querySelector(".overlay_close_btn_position img").addEventListener("click", clearErrorMessages);
 
 function clearErrorMessages() {
   document.getElementById("name_error").innerText = "";
