@@ -89,8 +89,6 @@ async function displayCardOnBoard() {
   for (const key in taskFromFireBase) {
     const element = taskFromFireBase[key];
     if (!element) continue;
-
-    // Ensure element.subtask is an array before using .length
     const subtaskArray = Array.isArray(element.subtask) ? element.subtask : [];
     const subtasksCompleted = await countCompletedSubtasks(subtaskArray);
     const totalSubtasks = subtaskArray.length;
@@ -129,12 +127,12 @@ function addProfilesToCard(id, obj) {
 
 function initials(name) {
   if (typeof name !== "string" || name.trim() === "") {
-    return ""; // Return an empty string if the input is invalid
+    return "";
   }
 
   let fullName = name.trim().split(" ");
   if (fullName.length < 2) {
-    return fullName[0]?.slice(0, 1) || ""; // Return the first letter if only one word exists
+    return fullName[0]?.slice(0, 1) || "";
   }
 
   let firstName = fullName[0].slice(0, 1);
