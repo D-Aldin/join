@@ -6,8 +6,9 @@
     <link rel="shortcut icon" href="./assets/icons/logo/joinLarge.png" type="image/x-icon" />
     <script type="module" src="./scripts/signUp.js" defer></script>
     <script type="module" src="./scripts/login.js" defer></script>
-    
-    <link rel="stylesheet" href="./css/login.css"/>
+
+    <link rel="stylesheet" href="./css/login.css" />
+    <link rel="stylesheet" href="./css/standard.css" />
     <title>JOIN Login</title>
   </head>
   <body>
@@ -42,16 +43,16 @@
           <span class="checkEmailPassword"></span>
           <div class="form_btn">
             <button id="login_btn" type="submit">Log in</button>
-            <button id="guest_log" type="submit" onclick="linkGuestBtn()">Guest Log in</button>
+            <button id="guest_log" class="cursor_pointer" type="submit" onclick="linkGuestBtn()">Guest Log in</button>
           </div>
         </form>
       </div>
     </div>
-      
-    <div class="sign_window" >
+
+    <div class="sign_window">
       <div class="sign_up_content">
         <div>
-          <img id="goBackArrow" src="./assets/icons/signUp/arrow.svg" alt="arrow">
+          <img id="goBackArrow" src="./assets/icons/signUp/arrow.svg" alt="arrow" />
         </div>
         <div class="sign_title">
           <div class="center_title_and_underline">
@@ -63,7 +64,7 @@
       <div>
         <form id="signUp" class="form_content" action="">
           <label for="name"></label>
-          <input id="name" name="name" type="text" required placeholder="Name"  />
+          <input id="name" name="name" type="text" required placeholder="Name" />
 
           <label for="signUpEmail"></label>
           <input id="signUpEmail" name="email" type="email" required placeholder="Email" />
@@ -76,22 +77,20 @@
           <span class="checkPassword"></span>
 
           <div class="privacy_police_content">
-            <input type="checkbox" id="privacy_police" name="privacy_police" value="privacy_police" required>
-            <label for="privacy_police">I accept the <a href="">Privacy policy</a></label>
+            <input class="cursor_pointer" type="checkbox" id="privacy_police" name="privacy_police" value="privacy_police" required />
+            <label for="privacy_police">I accept the <a href="./privacy_policy.html">Privacy policy</a></label>
           </div>
+        </form>
       </div>
       <div class="form_btn">
-          <button id="sign_btn" type="submit">Sign up</button>
-        </div>
-      </form>
+        <button id="sign_btn" class="cursor_pointer" type="submit">Sign up</button>
+      </div>
     </div>
     <footer>
       <div class="terms_conditions">
         <a href="./privacy_policy.html">Privacy Policy</a>
         <a href="./legal_notice.html">Legal Notice</a>
       </div>
-     
     </footer>
   </body>
 </html>
-
