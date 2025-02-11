@@ -338,9 +338,12 @@ async function addNewSubtask(event) {
     body: JSON.stringify(newTaskObj),
     headers: { "Content-Type": "application/json" },
   });
+  setStandardButtonInOpenCard();
+  document.querySelector(".subtasks_box").innerHTML = " ";
+  displaySubtasksInTheEditMenu();
 }
 
-function focusInputField(event) {
+function focusOnInputField(event) {
   const newTaskInputField = document.querySelector("#editSubtask").focus();
 }
 
