@@ -1,5 +1,5 @@
 let card;
-let storeTheID;
+let idOfcurrentElement;
 const taskPath = "tasks";
 let assignNewContList = [];
 let refCardBox = document.getElementById("box");
@@ -8,7 +8,7 @@ const refEditButton = document.querySelector(".position_edit");
 
 function overlayOn(event) {
   document.getElementById("overlay").style.display = "block";
-  storeTheID = event.currentTarget.id;
+  idOfcurrentElement = event.currentTarget.id;
 }
 
 function overlayOff() {
@@ -103,14 +103,19 @@ async function updateSubtaskState(path = "", taskID, subtaskID, state) {
 
 async function setCheckboxAttributes(id) {
   let response = await fetchCardDetails(taskPath, id);
-  let refToSubtask = response[id].subtask;
+  let refToSubtask = Array.isArray(response[id]?.subtask) ? response[id].subtask : [];
+
   for (let index = 0; index < refToSubtask.length; index++) {
     const element = refToSubtask[index];
-    if (element.state == false) {
-      document.getElementById(`subtask${index}`).removeAttribute("checked");
+    const checkbox = document.getElementById(`subtask${index}`);
+
+    if (!checkbox) continue; // Ensure the checkbox exists before modifying it
+
+    if (element.state === false) {
+      checkbox.removeAttribute("checked");
     }
-    if (element.state == true) {
-      document.getElementById(`subtask${index}`).setAttribute("checked", true);
+    if (element.state === true) {
+      checkbox.setAttribute("checked", "true");
     }
   }
 }
@@ -124,7 +129,7 @@ function refreshPageWhenOverlayOff() {
 }
 
 async function deleteButton() {
-  let response = await fetch(`${BASE_URL}/${taskPath}/${storeTheID}.json`, {
+  let response = await fetch(`${BASE_URL}/${taskPath}/${idOfcurrentElement}.json`, {
     method: "DELETE",
     headers: {
       "Content-Type": "application/json",
@@ -140,16 +145,16 @@ function renderEditMenu() {
 }
 
 async function editFunction() {
-  let dataFromFireBase = await fetchCardDetails(taskPath, storeTheID);
-  let refTitleInputField = (document.querySelector("#editTitle").value = dataFromFireBase[storeTheID].title);
-  let refDescriptionField = (document.querySelector("#editDescription").value = dataFromFireBase[storeTheID].description);
-  let refDateField = (document.querySelector("#editDate").value = dataFromFireBase[storeTheID].data);
+  let dataFromFireBase = await fetchCardDetails(taskPath, idOfcurrentElement);
+  let refTitleInputField = (document.querySelector("#editTitle").value = dataFromFireBase[idOfcurrentElement].title);
+  let refDescriptionField = (document.querySelector("#editDescription").value = dataFromFireBase[idOfcurrentElement].description);
+  let refDateField = (document.querySelector("#editDate").value = dataFromFireBase[idOfcurrentElement].data);
   displayContactsInDropdownMenu();
-  displaySelectedPriority(dataFromFireBase[storeTheID].prio);
-  for (const key in dataFromFireBase[storeTheID].assigned) {
-    if (Object.prototype.hasOwnProperty.call(dataFromFireBase[storeTheID].assigned, key)) {
-      const profile = initials(dataFromFireBase[storeTheID].assigned[key].name);
-      const color = dataFromFireBase[storeTheID].assigned[key].color;
+  displaySelectedPriority(dataFromFireBase[idOfcurrentElement].prio);
+  for (const key in dataFromFireBase[idOfcurrentElement].assigned) {
+    if (Object.prototype.hasOwnProperty.call(dataFromFireBase[idOfcurrentElement].assigned, key)) {
+      const profile = initials(dataFromFireBase[idOfcurrentElement].assigned[key].name);
+      const color = dataFromFireBase[idOfcurrentElement].assigned[key].color;
       document.querySelector(".assigned_to").innerHTML += `<div class="circle circle_profile_names spacing" style="background-color: ${color}">${profile}</div>`;
     }
   }
@@ -186,7 +191,7 @@ function displaySelectedPriority(data) {
 }
 
 async function displayContactsInDropdownMenu() {
-  let dataFromFireBase = await fetchCardDetails("contacts", storeTheID);
+  let dataFromFireBase = await fetchCardDetails("contacts", idOfcurrentElement);
   for (const key in dataFromFireBase) {
     if (Object.prototype.hasOwnProperty.call(dataFromFireBase, key)) {
       const profile = dataFromFireBase[key];
@@ -194,7 +199,7 @@ async function displayContactsInDropdownMenu() {
       document.querySelector(".content").innerHTML += HTMLTamplateForDropdownProfiles(key, profile.color, profileInitials, profile.name);
     }
   }
-  whichContactIsAssigned(storeTheID);
+  whichContactIsAssigned(idOfcurrentElement);
 }
 
 async function whichContactIsAssigned(id) {
@@ -219,23 +224,23 @@ async function whichContactIsAssigned(id) {
 
 async function assignNewContacts(event) {
   const contact = event.currentTarget.getAttributeNode("id_value").value;
-  let dataFromFireBase = await fetchCardDetails(taskPath, storeTheID);
-  if (!(contact in dataFromFireBase[storeTheID].assigned || assignNewContList.includes(contact))) {
+  let dataFromFireBase = await fetchCardDetails(taskPath, idOfcurrentElement);
+  if (!(contact in dataFromFireBase[idOfcurrentElement].assigned || assignNewContList.includes(contact))) {
     assignNewContList.push(contact);
     let newContact = await getContacts(assignNewContList);
-    addDataToFireBase(`${taskPath}/${storeTheID}/assigned`, newContact);
+    addDataToFireBase(`${taskPath}/${idOfcurrentElement}/assigned`, newContact);
     let clicked_element = document.querySelector(`[id_value="${contact}"]`);
     clicked_element.classList.add("selected_contact");
     clicked_element.lastElementChild.lastElementChild.src = "./assets/icons/checkbox/check_white.svg";
     document.querySelector(".assigned_to").innerHTML = "";
     editFunction();
-    addDataToFireBase(`${taskPath}/${storeTheID}/assigned`, newContact);
+    addDataToFireBase(`${taskPath}/${idOfcurrentElement}/assigned`, newContact);
   }
 }
 
 async function retractContactFromCard(event) {
   const contact = event.currentTarget.getAttributeNode("id_value").value;
-  let response = await fetch(`${BASE_URL}/${taskPath}/${storeTheID}/assigned/${contact}.json`, {
+  let response = await fetch(`${BASE_URL}/${taskPath}/${idOfcurrentElement}/assigned/${contact}.json`, {
     method: "DELETE",
     headers: {
       "Content-Type": "application/json",
@@ -247,36 +252,17 @@ async function retractContactFromCard(event) {
 }
 
 async function displaySubtasksInTheEditMenu() {
-  const dataFromFireBase = await fetchCardDetails(`${taskPath}/${storeTheID}/subtask`, storeTheID);
+  const dataFromFireBase = await fetchCardDetails(`${taskPath}/${idOfcurrentElement}/subtask`, idOfcurrentElement);
   for (const element in dataFromFireBase) {
-    document.querySelector(".subtasks_box").innerHTML += `  <div class="subtask_box_items" onclick="editSubtask(event)" id_subtask="${element}" >
-                                                              <div class="editTask"><p>&bull; ${dataFromFireBase[element].task}</p></div>
-                                                              <div class="subtask_edit_buttons">
-                                                                <img class="pen" src="./assets/icons/board/subtasks_pen.svg" alt="edit">
-                                                                <img src="./assets/icons/board/vector_line_for_subtask_edit.svg" alt="line"/>
-                                                                <img class="trash" onclick="deleteSubtask(event)" src="./assets/icons/board/subtasks_trash.svg" alt="delete">
-                                                              </div>
-                                                            </div>`;
+    document.querySelector(".subtasks_box").innerHTML += HTMLTamplateForSubtasksInTheEditMenu(element, dataFromFireBase[element].task);
   }
 }
 
 async function editSubtask(event) {
   const refSubtaskID = event.currentTarget.getAttributeNode("id_subtask").value;
   const refTaskElement = event.currentTarget;
-  const dataFromFireBase = await fetchCardDetails(`${taskPath}/${storeTheID}/subtask/${refSubtaskID}`, storeTheID);
-  console.log(dataFromFireBase);
-
-  refTaskElement.innerHTML = `<div  class="edit_subtask_input_field">
-                                <label for="editInputField"></label>
-                                <input onclick="stopEventBubbel(event)" type="text" id="editInputField${refSubtaskID}" />
-                                <div class="buttons">
-                                  <img class="trash" onclick="deleteSubtask(event)" src="./assets/icons/board/subtasks_trash.svg" alt="trash" />
-                                  <img src="./assets/icons/board/vector_line_for_subtask_edit.svg" alt="line" />
-                                  <img class="confirm" src="./assets/icons/board/confirm.svg" alt="confirm" />
-                                </div>
-                              
-                              </div>`;
-
+  const dataFromFireBase = await fetchCardDetails(`${taskPath}/${idOfcurrentElement}/subtask/${refSubtaskID}`, idOfcurrentElement);
+  refTaskElement.innerHTML = HTMLTamplateForEditSubtask(refSubtaskID);
   const inputField = (document.getElementById(`editInputField${refSubtaskID}`).value = dataFromFireBase.task);
   document.querySelector(".subtask_box_items").classList.add("under_line");
   document.querySelector(".subtask_box_items").classList.remove("subtask_box_items");
@@ -291,7 +277,7 @@ async function editSubtask(event) {
 }
 
 async function saveNewSubtask(subtaskID, newValue) {
-  await fetch(`${BASE_URL}/${taskPath}/${storeTheID}/subtask/${subtaskID}.json`, {
+  await fetch(`${BASE_URL}/${taskPath}/${idOfcurrentElement}/subtask/${subtaskID}.json`, {
     method: "PATCH",
     body: JSON.stringify({ task: newValue }),
     headers: { "Content-Type": "application/json" },
@@ -301,8 +287,7 @@ async function saveNewSubtask(subtaskID, newValue) {
 async function deleteSubtask(event) {
   const refTrashButton = event.currentTarget;
   const refSubtaskID = refTrashButton.parentElement.parentElement.getAttributeNode("id_subtask").value;
-
-  await fetch(`${BASE_URL}/${taskPath}/${storeTheID}/subtask/${refSubtaskID}.json`, {
+  await fetch(`${BASE_URL}/${taskPath}/${idOfcurrentElement}/subtask/${refSubtaskID}.json`, {
     method: "DELETE",
     headers: { "Content-Type": "application/json" },
   });
@@ -312,7 +297,7 @@ async function deleteSubtask(event) {
 
 async function reorderSubtasks() {
   try {
-    const response = await fetch(`${BASE_URL}/tasks/${storeTheID}/subtask.json`);
+    const response = await fetch(`${BASE_URL}/tasks/${idOfcurrentElement}/subtask.json`);
     const subtasks = await response.json();
     if (!subtasks) {
       console.log("No subtasks found.");
@@ -323,7 +308,7 @@ async function reorderSubtasks() {
     let reorderedSubtasks = subtaskArray.map((subtask, index) => ({ ...subtask }));
 
     console.log("Reordered subtasks:", reorderedSubtasks);
-    const updateResponse = await fetch(`${BASE_URL}/tasks/${storeTheID}/subtask.json`, {
+    const updateResponse = await fetch(`${BASE_URL}/tasks/${idOfcurrentElement}/subtask.json`, {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(reorderedSubtasks),
@@ -334,6 +319,16 @@ async function reorderSubtasks() {
     console.error("Error reordering subtasks:", error);
   }
 }
+
+// async function addNewSubtask(event) {
+//   let response = await fetch(`${BASE_URL}/tasks/${idOfcurrentElement}/subtask.json`, {
+//     method: "GET",
+//   });
+//   let subtasks = await response.json();
+//   let inputField = document.querySelector("#editSubtask");
+//   let saveInput = inputField.value;
+//   console.log(sub);
+// }
 
 function writeEditSubtask() {
   let subtask = document.getElementById("editSubtask").value;

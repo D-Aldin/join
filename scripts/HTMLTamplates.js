@@ -47,7 +47,6 @@ function subtasksTamplate(task, id, state) {
           </div>`;
 }
 
-// TODO add more param to the function
 function HTMLForOpenCard(category, title, discription, date, prio, id) {
   return `     
                 <div class="category_box">
@@ -168,7 +167,32 @@ function setdubbleButton() {
           </button>
           <div class="pixelbar-mini"></div>
           <button class="subtask-inputfield-button">    
-              <img onclick="setSubtask()" src="assets/icons/addTask/done.svg" alt="">
+              <img id="confirmBtn" onclick="addNewSubtask(event)" src="assets/icons/addTask/done.svg" alt="">
           </button>
       `;
+}
+
+function HTMLTamplateForSubtasksInTheEditMenu(id, task) {
+  return ` 
+            <div class="subtask_box_items" onclick="editSubtask(event)" id_subtask="${id}" >
+              <div class="editTask"><p>&bull; ${task}</p></div>
+              <div class="subtask_edit_buttons">
+                <img class="pen" src="./assets/icons/board/subtasks_pen.svg" alt="edit">
+                <img src="./assets/icons/board/vector_line_for_subtask_edit.svg" alt="line"/>
+                <img class="trash" onclick="deleteSubtask(event)" src="./assets/icons/board/subtasks_trash.svg" alt="delete">
+              </div>
+            </div>`;
+}
+
+function HTMLTamplateForEditSubtask(id) {
+  return `
+          <div  class="edit_subtask_input_field">
+            <label for="editInputField"></label>
+            <input onclick="stopEventBubbel(event)" type="text" id="editInputField${id}" />
+            <div class="buttons">
+              <img class="trash" onclick="deleteSubtask(event)" src="./assets/icons/board/subtasks_trash.svg" alt="trash" />
+              <img src="./assets/icons/board/vector_line_for_subtask_edit.svg" alt="line" />
+              <img class="confirm" src="./assets/icons/board/confirm.svg" alt="confirm" />
+            </div>            
+          </div>`;
 }

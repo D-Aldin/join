@@ -89,21 +89,26 @@ async function displayCardOnBoard() {
   for (const key in taskFromFireBase) {
     const element = taskFromFireBase[key];
     if (!element) continue;
-    const subtasksCompleted = await countCompletedSubtasks(element.subtask);
+
+    // Ensure element.subtask is an array before using .length
+    const subtaskArray = Array.isArray(element.subtask) ? element.subtask : [];
+    const subtasksCompleted = await countCompletedSubtasks(subtaskArray);
+    const totalSubtasks = subtaskArray.length;
 
     if (element.status == "toDo") {
-      toDo.innerHTML += renderCard(element.id, element.category, element.title, element.description, subtasksCompleted, element.subtask.length, element.assigned, element.prio);
+      toDo.innerHTML += renderCard(element.id, element.category, element.title, element.description, subtasksCompleted, totalSubtasks, element.assigned, element.prio);
     }
     if (element.status == "progress") {
-      progress.innerHTML += renderCard(element.id, element.category, element.title, element.description, subtasksCompleted, element.subtask.length, element.assigned, element.prio);
+      progress.innerHTML += renderCard(element.id, element.category, element.title, element.description, subtasksCompleted, totalSubtasks, element.assigned, element.prio);
     }
     if (element.status == "feedback") {
-      feedback.innerHTML += renderCard(element.id, element.category, element.title, element.description, subtasksCompleted, element.subtask.length, element.assigned, element.prio);
+      feedback.innerHTML += renderCard(element.id, element.category, element.title, element.description, subtasksCompleted, totalSubtasks, element.assigned, element.prio);
     }
     if (element.status == "done") {
-      done.innerHTML += renderCard(element.id, element.category, element.title, element.description, subtasksCompleted, element.subtask.length, element.assigned, element.prio);
+      done.innerHTML += renderCard(element.id, element.category, element.title, element.description, subtasksCompleted, totalSubtasks, element.assigned, element.prio);
     }
-    calPercentageOfCompletedSubtasks(element.subtask.length, subtasksCompleted, element.id);
+
+    calPercentageOfCompletedSubtasks(totalSubtasks, subtasksCompleted, element.id);
     addProfilesToCard(key, element.assigned);
   }
   noTaskToDo();
@@ -123,11 +128,18 @@ function addProfilesToCard(id, obj) {
 }
 
 function initials(name) {
-  let fullName = name.split(" ");
+  if (typeof name !== "string" || name.trim() === "") {
+    return ""; // Return an empty string if the input is invalid
+  }
+
+  let fullName = name.trim().split(" ");
+  if (fullName.length < 2) {
+    return fullName[0]?.slice(0, 1) || ""; // Return the first letter if only one word exists
+  }
+
   let firstName = fullName[0].slice(0, 1);
   let secondName = fullName[1].slice(0, 1);
-  let initials = firstName + secondName;
-  return initials;
+  return firstName.toUpperCase() + secondName.toUpperCase();
 }
 
 function noTaskToDo() {
@@ -144,6 +156,10 @@ function noTaskToDo() {
 }
 
 async function countCompletedSubtasks(subtask) {
+  if (!Array.isArray(subtask) || subtask.length === undefined) {
+    return 0;
+  }
+
   let countTrue = 0;
   for (let index = 0; index < subtask.length; index++) {
     const element = subtask[index];
@@ -179,19 +195,16 @@ async function getContacts(list) {
 
 // -------------------------------------------------------------------- TEST LIST TEST TEST TEST TEST --------------------------------
 
-let assigContacts = ["contact_1738946637904"];
+let assigContacts = ["contact_1738946637904", "contact_1738946802579"];
 
 let subtaskList = {
   0: { task: "write function 1", state: false },
   1: { task: "write function 2", state: false },
-  2: { task: "write function 3", state: false },
-  3: { task: "write function 4", state: false },
-  4: { task: "write function 5", state: false },
 };
 
 async function init() {
   let test = await getContacts(assigContacts);
-  const today = taskTemplate(0, "Boris Pasternak", "Was wir heute tun, entscheidet, wie die Welt morgen aussieht.", test, "05.02.2025", "Low", "User Task", subtaskList, "toDo");
+  const today = taskTemplate(1, "Test 1", "Was wir heute tun, entscheidet, wie die Welt morgen aussieht.", test, "05.02.2025", "Low", "User Task", subtaskList, "toDo");
   // addDataToFireBase("tasks", today);
   displayCardOnBoard();
 }
