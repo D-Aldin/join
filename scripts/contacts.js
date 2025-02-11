@@ -12,6 +12,27 @@ async function addContactToDataBase() {
   let name = document.getElementById("add_name").value;
   let email = document.getElementById("add_email").value;
   let phone = document.getElementById("add_phone").value;
+  document.getElementById("name_error").innerText = "";
+  document.getElementById("email_error").innerText = "";
+  document.getElementById("phone_error").innerText = "";
+  let hasError = false;
+  if (!name) {
+    document.getElementById("name_error").innerText = "Please enter your first and last name here.";
+    hasError = true;
+  }
+  if (!email) {
+    document.getElementById("email_error").innerText = "Please enter your email address here.";
+    hasError = true;
+  }
+  if (!phone) {
+    document.getElementById("phone_error").innerText = "Please enter your phone number here.";
+    hasError = true;
+  }
+
+  if (hasError) {
+    return;
+  }
+
   let color = getRandomColor();
   const uniqueKey = `contact_${Date.now()}`;
   try {
@@ -29,11 +50,30 @@ async function addContactToDataBase() {
     renderContacts();
     closeOverlayAddContact();
     deleteInputs();
+    setTimeoutSuccessfullyOverlayAddContact();
     return contactData;
   } catch (error) {
     console.error("Fehler:", error);
   }
 }
+
+function clearErrorMessages() {
+  document.getElementById("name_error").innerText = "";
+  document.getElementById("email_error").innerText = "";
+  document.getElementById("phone_error").innerText = "";
+}
+
+document.querySelector(".btn_cancel").addEventListener("click", clearErrorMessages);
+document.querySelector(".overlay_close_btn_position img").addEventListener("click", clearErrorMessages);
+
+function clearErrorMessages() {
+  document.getElementById("name_error").innerText = "";
+  document.getElementById("email_error").innerText = "";
+  document.getElementById("phone_error").innerText = "";
+}
+
+document.querySelector(".btn_cancel").addEventListener("click", clearErrorMessages);
+document.querySelector(".overlay_close_btn_position img").addEventListener("click", clearErrorMessages);
 
 async function getContactsFromDataBase() {
   let response = await fetch(BASE_URL + "contacts.json");

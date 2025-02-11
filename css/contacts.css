@@ -456,6 +456,32 @@ input[type="tel"]:focus {
   border: 1px solid rgb(41, 171, 226);
 }
 
+.error-message {
+  position: absolute;
+  color: red;
+  font-size: 12px;
+  margin: 0;
+  padding: 0;
+  top: 100%;
+  left: 0;
+  width: 100%;
+}
+
+.name_error_position {
+  position: absolute;
+  top: 53px;
+}
+
+.email_error_position {
+  position: absolute;
+  top: 137px;
+}
+
+.phone_error_position {
+  position: absolute;
+  top: 220px;
+}
+
 #add_name {
   background: url(../assets/icons/signUp/person.svg) no-repeat right 21px center;
 }

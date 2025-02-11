@@ -77,7 +77,7 @@ function getTemplateOfContactEdit(contact) {
         <input id="edit_email" type="email" placeholder="Email" value="${contact.email}" required />
         <input id="edit_phone" type="tel" placeholder="Phone" value="${contact.phone}" required />
         <div class="overlay_btn_position">
-          <button class="btn_delete" onclick="deleteContactFromList('${contact.id}'); setTimeoutDeleteOverlayContact()">Delete <img src="./assets/icons/contacts/Close.svg" class="cancel_icon" alt="Cancel" /></button>
+          <button type="button" class="btn_delete" onclick="deleteContactFromList('${contact.id}'); setTimeoutDeleteOverlayContact()">Delete <img src="./assets/icons/contacts/Close.svg" class="cancel_icon" alt="Cancel" /></button>
           <button type="submit" class="btn_save">Save <img src="./assets/icons/contacts/check.svg" alt="check" /></button>
         </div>
       </form>
