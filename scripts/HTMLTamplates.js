@@ -126,10 +126,10 @@ function HTMLTamplateForTheEditFunk() {
                     </div>
                   <h3>Subtasks</h3>
                   <div class="subtask_input">
-                    <input id="editSubtask" class="subtask-inputfield-text" oninput="writeEditSubtask()" type="text">
+                    <input id="editSubtask" class="subtask-inputfield-text" oninput="writeEditSubtask()" type="text" placeholder="Add new subtask">
                     <div id="subtaskbuttons" class="subtask-button-container">
-                      <button class="subtask-inputfield-button">
-                        <img src="assets/icons/addTask/subtasks_icons.svg" alt="">
+                      <button onclick="focusOnInputField(event)" class="subtask-inputfield-button">
+                        <img id="plusBtn" src="assets/icons/addTask/subtasks_icons.svg" alt="">
                       </button>
                     </div>
                   </div><br>
@@ -152,7 +152,7 @@ function HTMLTamplateForDropdownProfiles(key, color, initials, name) {
           </div>`;
 }
 
-function setStandardButton() {
+function setStandardButtonInOpenCard() {
   document.getElementById("subtaskbuttons").innerHTML = /*html*/ `
           <button class="subtask-inputfield-button">
               <img src="assets/icons/addTask/subtasks_icons.svg" alt="">
@@ -160,7 +160,7 @@ function setStandardButton() {
       `;
 }
 
-function setdubbleButton() {
+function setdubbleButtonInOpenCard() {
   document.getElementById("subtaskbuttons").innerHTML = /*html*/ `
           <button class="subtask-inputfield-button">
               <img onclick="clearsubtask()" src="assets/icons/addTask/cross.svg" alt="">
@@ -174,7 +174,7 @@ function setdubbleButton() {
 
 function HTMLTamplateForSubtasksInTheEditMenu(id, task) {
   return ` 
-            <div class="subtask_box_items" onclick="editSubtask(event)" id_subtask="${id}" >
+            <div class="subtask_box_items" onclick="editSubtaskFunk(event)" id_subtask="${id}" >
               <div class="editTask"><p>&bull; ${task}</p></div>
               <div class="subtask_edit_buttons">
                 <img class="pen" src="./assets/icons/board/subtasks_pen.svg" alt="edit">

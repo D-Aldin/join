@@ -258,7 +258,7 @@ async function displaySubtasksInTheEditMenu() {
   }
 }
 
-async function editSubtask(event) {
+async function editSubtaskFunk(event) {
   const refSubtaskID = event.currentTarget.getAttributeNode("id_subtask").value;
   const refTaskElement = event.currentTarget;
   const dataFromFireBase = await fetchCardDetails(`${taskPath}/${idOfcurrentElement}/subtask/${refSubtaskID}`, idOfcurrentElement);
@@ -320,22 +320,36 @@ async function reorderSubtasks() {
   }
 }
 
-// async function addNewSubtask(event) {
-//   let response = await fetch(`${BASE_URL}/tasks/${idOfcurrentElement}/subtask.json`, {
-//     method: "GET",
-//   });
-//   let subtasks = await response.json();
-//   let inputField = document.querySelector("#editSubtask");
-//   let saveInput = inputField.value;
-//   console.log(sub);
-// }
+async function addNewSubtask(event) {
+  let response = await fetch(`${BASE_URL}/tasks/${idOfcurrentElement}/subtask.json`, {
+    method: "GET",
+  });
+  let subtasks = await response.json();
+  let theNewTask = document.querySelector("#editSubtask").value;
+  const setIndex = subtasks.length;
+  let newTaskObj = {
+    [setIndex]: {
+      task: theNewTask,
+      state: false,
+    },
+  };
+  await fetch(`${BASE_URL}/${taskPath}/${idOfcurrentElement}/subtask.json`, {
+    method: "PATCH",
+    body: JSON.stringify(newTaskObj),
+    headers: { "Content-Type": "application/json" },
+  });
+}
+
+function focusInputField(event) {
+  const newTaskInputField = document.querySelector("#editSubtask").focus();
+}
 
 function writeEditSubtask() {
   let subtask = document.getElementById("editSubtask").value;
   if (subtask.length < 1) {
-    setStandardButton();
+    setStandardButtonInOpenCard();
   }
   if (subtask.length >= 1) {
-    setdubbleButton();
+    setdubbleButtonInOpenCard();
   }
 }

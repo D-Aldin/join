@@ -173,3 +173,8 @@ select {
 #editInputField {
   width: 100%;
 }
+
+#editSubtask::placeholder {
+  font-size: 17px;
+  opacity: 0.5;
+}

@@ -202,7 +202,7 @@ let subtaskList = {
 
 async function init() {
   let test = await getContacts(assigContacts);
-  const today = taskTemplate(1, "Test 1", "Was wir heute tun, entscheidet, wie die Welt morgen aussieht.", test, "05.02.2025", "Low", "User Task", subtaskList, "toDo");
+  const today = taskTemplate(0, "Test 1", "Was wir heute tun, entscheidet, wie die Welt morgen aussieht.", test, "05.02.2025", "Low", "User Task", subtaskList, "toDo");
   // addDataToFireBase("tasks", today);
   displayCardOnBoard();
 }
