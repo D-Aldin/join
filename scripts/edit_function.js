@@ -267,14 +267,14 @@ function focusOnInputField(event) {
   const newTaskInputField = document.querySelector("#editSubtask").focus();
 }
 
-// async function okBtnFunk() {
-//   let id = idOfcurrentElement;
-//   const fetchDetails = await fetchCardDetails(taskPath, id);
-//   const refersToCard = fetchDetails[id];
-//   refCardBox.innerHTML = HTMLForOpenCard(refersToCard.category, refersToCard.title, refersToCard.description, refersToCard.data, refersToCard.prio, id);
-//   managenProfilesWhenCardOpen(id);
-//   renderSubtasks(id);
-// }
+async function okBtnFunk() {
+  let id = idOfcurrentElement;
+  const fetchDetails = await fetchCardDetails(taskPath, id);
+  const refersToCard = fetchDetails[id];
+  refCardBox.innerHTML = HTMLForOpenCard(refersToCard.category, refersToCard.title, refersToCard.description, refersToCard.data, refersToCard.prio, id);
+  managenProfilesWhenCardOpen(id);
+  renderSubtasks(id);
+}
 
 function writeEditSubtask() {
   let subtask = document.getElementById("editSubtask").value;

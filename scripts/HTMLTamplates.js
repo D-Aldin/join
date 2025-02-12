@@ -96,11 +96,11 @@ function HTMLForOpenCard(category, title, discription, date, prio, id) {
 }
 
 function HTMLTamplateForTheEditFunk() {
-  return `
-            <div class="scrollbar">
-              <div class=close_button>
+  return `  
+            <div class=close_button>
                 <button  class="closeBtn"><img onclick="overlayOff()" src="./assets/icons/board/close.svg" alt="close"></button>
-              </div>
+            </div>
+            <div class="scrollbar">
               <div class="content_height">
                 <form class="title_description_date" action="">
                   <label for="editTitle">Title</label>
@@ -135,8 +135,8 @@ function HTMLTamplateForTheEditFunk() {
                   </div><br>
                   <div class="subtasks_box">
                   </div>
-                  <button onclick="getData(event)" id="okBtn">Ok<img src="./assets/icons/board/check_white_okBtn.svg" alt="" /></button>
-                </form>
+                  <button onclick="okBtnFunk()" id="okBtn">Ok<img src="./assets/icons/board/check_white_okBtn.svg" alt="" /></button>
+                </div>
               </div>
             </div>`;
 }
