@@ -178,3 +178,27 @@ select {
   font-size: 17px;
   opacity: 0.5;
 }
+
+#okBtn {
+  width: 89px;
+  height: 56px;
+  background-color: rgb(42, 54, 71);
+  color: white;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+  font-size: large;
+  font-weight: bold;
+  position: absolute;
+  right: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+#okBtn:hover {
+  background-color: rgb(41, 171, 226);
+  box-shadow: 0 5px 5px 0 rgba(104, 104, 104, 0.301);
+  transform: scale(1);
+}

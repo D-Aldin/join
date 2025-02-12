@@ -134,12 +134,11 @@ function HTMLTamplateForTheEditFunk() {
                     </div>
                   </div><br>
                   <div class="subtasks_box">
-
                   </div>
-                  <input type="submit" value="Submit" />
-                  </form>
-                </div>;
-              </div>`;
+                  <button id="okBtn">Ok<img src="./assets/icons/board/check_white_okBtn.svg" alt="" /></button>
+                </form>
+              </div>
+            </div>`;
 }
 
 function HTMLTamplateForDropdownProfiles(key, color, initials, name) {
