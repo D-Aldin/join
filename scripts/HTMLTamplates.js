@@ -162,7 +162,7 @@ function setStandardButtonInOpenCard() {
 function setdubbleButtonInOpenCard() {
   document.getElementById("subtaskbuttons").innerHTML = /*html*/ `
           <button class="subtask-inputfield-button">
-              <img onclick="clearsubtask()" src="assets/icons/addTask/cross.svg" alt="">
+              <img onclick="clearEditSubtask(event)" src="assets/icons/addTask/cross.svg" alt="">
           </button>
           <div class="pixelbar-mini"></div>
           <button class="subtask-inputfield-button">    

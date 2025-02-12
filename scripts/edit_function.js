@@ -285,3 +285,8 @@ function writeEditSubtask() {
     setdubbleButtonInOpenCard();
   }
 }
+
+function clearEditSubtask(event) {
+  document.getElementById("editSubtask").value = "";
+  setStandardButtonInOpenCard();
+}
