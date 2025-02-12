@@ -112,9 +112,9 @@ function HTMLTamplateForTheEditFunk() {
                 </form>
                 <h3>Priority</h3>
                 <div class="button_container">
-                  <button id="urgent" class="prio_button">Urgent <img id="urgentImageEditBtn" src="./assets/icons/board/forEditUrgent.svg" alt="urgent"></button>
-                  <button id="medium" class="prio_button">Medium <img id="mediumImageEditBtn" src="./assets/icons/board/forEditMedium.svg" alt="medium"></button>
-                  <button id="low" class="prio_button">Low <img id="lowImageEditBtn" src="./assets/icons/board/forEditLow.svg" alt="low"></button>
+                  <button onclick="urgent(event)" id="urgent" class="prio_button">Urgent <img id="urgentImageEditBtn" src="./assets/icons/board/forEditUrgent.svg" alt="urgent"></button>
+                  <button onclick="medium(event)" id="medium" class="prio_button">Medium <img id="mediumImageEditBtn" src="./assets/icons/board/forEditMedium.svg" alt="medium"></button>
+                  <button onclick="low(event)" id="low" class="prio_button">Low <img id="lowImageEditBtn" src="./assets/icons/board/forEditLow.svg" alt="low"></button>
                 </div>
                 <div>
                   <div class="dropdown_menu">
@@ -135,7 +135,7 @@ function HTMLTamplateForTheEditFunk() {
                   </div><br>
                   <div class="subtasks_box">
                   </div>
-                  <button id="okBtn">Ok<img src="./assets/icons/board/check_white_okBtn.svg" alt="" /></button>
+                  <button onclick="getData(event)" id="okBtn">Ok<img src="./assets/icons/board/check_white_okBtn.svg" alt="" /></button>
                 </form>
               </div>
             </div>`;

@@ -1,7 +1,21 @@
+const refUrgentBtn = document.getElementById("urgent");
+const refMediumBtn = document.getElementById("medium");
+const refLowBtn = document.getElementById("low");
+
 function renderEditMenu() {
   refCardBox.innerHTML = "";
   refCardBox.innerHTML += HTMLTamplateForTheEditFunk();
   displaySubtasksInTheEditMenu();
+  changeTitleAndDescription();
+  //   okBtnFunk();
+}
+
+async function saveDataToFire(section, newValue) {
+  await fetch(`${BASE_URL}/${taskPath}/${idOfcurrentElement}.json`, {
+    method: "PATCH",
+    body: JSON.stringify({ [section]: newValue }),
+    headers: { "Content-Type": "application/json" },
+  });
 }
 
 async function editFunction() {
@@ -18,6 +32,17 @@ async function editFunction() {
       document.querySelector(".assigned_to").innerHTML += `<div class="circle circle_profile_names spacing" style="background-color: ${color}">${profile}</div>`;
     }
   }
+}
+
+async function changeTitleAndDescription() {
+  let refTitle = document.querySelector("#editTitle");
+  let refDescriptionField = document.querySelector("#editDescription");
+  refTitle.addEventListener("change", function () {
+    saveDataToFire("title", refTitle.value);
+  });
+  refDescriptionField.addEventListener("change", function () {
+    saveDataToFire("description", refDescriptionField.value);
+  });
 }
 
 function displaySelectedPriority(data) {
@@ -48,6 +73,33 @@ function displaySelectedPriority(data) {
       low.classList.add("no_hover");
     }
   }
+}
+
+async function urgent(event) {
+  saveDataToFire("prio", "Urgent");
+  document.querySelector(".assigned_to").innerHTML = " ";
+  let dataFromFireBase = await fetchCardDetails(taskPath, idOfcurrentElement);
+  displaySelectedPriority(dataFromFireBase[idOfcurrentElement].prio);
+  renderEditMenu();
+  editFunction();
+}
+
+async function medium(event) {
+  saveDataToFire("prio", "Medium");
+  document.querySelector(".assigned_to").innerHTML = " ";
+  let dataFromFireBase = await fetchCardDetails(taskPath, idOfcurrentElement);
+  displaySelectedPriority(dataFromFireBase[idOfcurrentElement].prio);
+  renderEditMenu();
+  editFunction();
+}
+
+async function low(event) {
+  saveDataToFire("prio", "Low");
+  document.querySelector(".assigned_to").innerHTML = " ";
+  let dataFromFireBase = await fetchCardDetails(taskPath, idOfcurrentElement);
+  displaySelectedPriority(dataFromFireBase[idOfcurrentElement].prio);
+  renderEditMenu();
+  editFunction();
 }
 
 async function displayContactsInDropdownMenu() {
@@ -123,7 +175,7 @@ async function editSubtaskFunk(event) {
   const refTaskElement = event.currentTarget;
   const dataFromFireBase = await fetchCardDetails(`${taskPath}/${idOfcurrentElement}/subtask/${refSubtaskID}`, idOfcurrentElement);
   refTaskElement.innerHTML = HTMLTamplateForEditSubtask(refSubtaskID);
-  const inputField = (document.getElementById(`editInputField${refSubtaskID}`).value = dataFromFireBase.task);
+  document.getElementById(`editInputField${refSubtaskID}`).value = dataFromFireBase.task;
   document.querySelector(".subtask_box_items").classList.add("under_line");
   document.querySelector(".subtask_box_items").classList.remove("subtask_box_items");
   document.querySelector(`#editInputField${refSubtaskID}`).addEventListener("change", function (event) {
@@ -214,6 +266,15 @@ async function addNewSubtask(event) {
 function focusOnInputField(event) {
   const newTaskInputField = document.querySelector("#editSubtask").focus();
 }
+
+// async function okBtnFunk() {
+//   let id = idOfcurrentElement;
+//   const fetchDetails = await fetchCardDetails(taskPath, id);
+//   const refersToCard = fetchDetails[id];
+//   refCardBox.innerHTML = HTMLForOpenCard(refersToCard.category, refersToCard.title, refersToCard.description, refersToCard.data, refersToCard.prio, id);
+//   managenProfilesWhenCardOpen(id);
+//   renderSubtasks(id);
+// }
 
 function writeEditSubtask() {
   let subtask = document.getElementById("editSubtask").value;
