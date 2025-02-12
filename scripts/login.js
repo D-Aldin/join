@@ -1,25 +1,28 @@
-const BASE_URL = "https://dv-join-bbc2e-default-rtdb.europe-west1.firebasedatabase.app/users";
+const BASE_URL = "https://dv-join-bbc2e-default-rtdb.europe-west1.firebasedatabase.app/";
 const refLoginButton = document.querySelector("#login_btn");
 let email;
 let password;
 
 async function loginUser(email) {
-  let response = await fetch(BASE_URL + ".json", {
+  let response = await fetch(BASE_URL + "contacts.json", {
     method: "GET",
   });
   let responseToJSON = await response.json();
-
+  let userFound = false;
   for (const key in responseToJSON) {
-    const emailFormDataBase = responseToJSON[key].email;
+    const emailFromDatabase = responseToJSON[key].email;
     const passwordFromDB = responseToJSON[key].password;
-    if (emailFormDataBase == email && passwordFromDB == password) {
+    if (emailFromDatabase === email && passwordFromDB === password) {
       localStorage.setItem("userId", key);
       window.location.href = "summary.html";
-    } else {
-      document.querySelector("#loginEmail").style.borderColor = "red";
-      document.querySelector("#loginPassword").style.borderColor = "red";
-      document.querySelector(".checkEmailPassword").innerHTML = "Check your email and password. Plase try again.";
+      userFound = true;
+      break;
     }
+  }
+  if (!userFound) {
+    document.querySelector("#loginEmail").style.borderColor = "red";
+    document.querySelector("#loginPassword").style.borderColor = "red";
+    document.querySelector(".checkEmailPassword").innerHTML = "Check your email and password. Please try again.";
   }
 }
 

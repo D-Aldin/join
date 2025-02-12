@@ -1,5 +1,3 @@
-const BASE_URL = "https://dv-join-bbc2e-default-rtdb.europe-west1.firebasedatabase.app/";
-
 async function setAccountInitialsSubmenu() {
   let userName = await getUserName();
   let initials = getInitialsSubmenu(userName);
@@ -9,7 +7,7 @@ async function setAccountInitialsSubmenu() {
 async function getUserName() {
   let userId = localStorage.getItem("userId");
   if (!userId) return "Guest";
-  let response = await fetch(`${BASE_URL}users/${userId}.json`);
+  let response = await fetch(`${BASE_URL}contacts/${userId}.json`);
   let userData = await response.json();
   return userData.name || "Guest";
 }
