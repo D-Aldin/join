@@ -12,6 +12,7 @@
     <script src="./scripts/aside.js" defer></script>
     <script src="./scripts/submenu_initials.js" defer></script>
     <script src="./scripts/edit_function.js" defer></script>
+    <script src="./scripts/search_function.js" defer></script>
 
     <link rel="stylesheet" href="./css/aside.css" />
     <link rel="stylesheet" href="./css/header.css" />
@@ -85,11 +86,12 @@
       <div class="board_container">
         <section class="title_and_searchbar">
           <h1>Board</h1>
-          <div class="search_bar">
+          <form id="search_form" class="search_bar">
             <label for="" name="search"></label>
-            <input type="search" id="searchbar" name="searchbar" placeholder="Find Task" />
+            <input list="temp" type="search" id="searchbar" name="searchbar" placeholder="Find Task" />
+            <datalist id="temp"></datalist>
             <button class="add_btn">Add task</button>
-          </div>
+          </from>
         </section>
 
         <div class="board_content">

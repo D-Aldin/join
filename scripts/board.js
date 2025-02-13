@@ -198,11 +198,12 @@ let assigContacts = ["contact_1738946637904", "contact_1738946802579"];
 let subtaskList = {
   0: { task: "write function 1", state: false },
   1: { task: "write function 2", state: false },
+  2: { task: "write function 3", state: false },
 };
 
 async function init() {
   let test = await getContacts(assigContacts);
-  const today = taskTemplate(0, "Test 1", "Was wir heute tun, entscheidet, wie die Welt morgen aussieht.", test, "05.02.2025", "Low", "User Task", subtaskList, "toDo");
+  const today = taskTemplate(1, "Test 2", "Was wir heute tun, entscheidet, wie die Welt morgen aussieht.", test, "05.02.2025", "Low", "User Task", subtaskList, "toDo");
   // addDataToFireBase("tasks", today);
   displayCardOnBoard();
 }
