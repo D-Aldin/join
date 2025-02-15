@@ -8,32 +8,62 @@ async function init() {
   renderContacts();
 }
 
+let input = document.querySelector("input");
+input.addEventListener("keypress", function (event) {
+  if (event.key === "Enter") {
+    event.preventDefault();
+    document.getElementById("create_contact_enter").click();
+  }
+});
+
 async function addContactToDataBase() {
   let name = document.getElementById("add_name").value;
   let email = document.getElementById("add_email").value;
   let phone = document.getElementById("add_phone").value;
+  if (validateContactInputs(name, email, phone)) return;
   let color = getRandomColor();
   const uniqueKey = `contact_${Date.now()}`;
   try {
     let response = await fetch(BASE_URL + `contacts/${uniqueKey}.json`, {
       method: "PUT",
-      body: JSON.stringify({
-        name: name,
-        email: email,
-        phone: phone,
-        color: color,
-      }),
+      body: JSON.stringify({ name, email, phone, color }),
     });
     let contactData = await response.json();
     arrayOfContacts.push({ id: uniqueKey, ...contactData });
     renderContacts();
     closeOverlayAddContact();
     deleteInputs();
+    setTimeoutSuccessfullyOverlayAddContact();
     return contactData;
   } catch (error) {
     console.error("Fehler:", error);
   }
 }
+
+function validateContactInputs(name, email, phone) {
+  const inputs = { name, email, phone };
+  const errors = {
+    name: "Please enter your first and last name here.",
+    email: "Please enter your email address here.",
+    phone: "Please enter your phone number here.",
+  };
+  let hasError = false;
+  for (const key in inputs) {
+    const value = inputs[key];
+    document.getElementById(`${key}_error`).innerText = value ? "" : errors[key];
+    if (!value) hasError = true;
+  }
+  return hasError;
+}
+
+function clearErrorMessages() {
+  document.getElementById("name_error").innerText = "";
+  document.getElementById("email_error").innerText = "";
+  document.getElementById("phone_error").innerText = "";
+}
+
+document.querySelector(".btn_cancel").addEventListener("click", clearErrorMessages);
+document.querySelector(".overlay_close_btn_position img").addEventListener("click", clearErrorMessages);
 
 async function getContactsFromDataBase() {
   let response = await fetch(BASE_URL + "contacts.json");

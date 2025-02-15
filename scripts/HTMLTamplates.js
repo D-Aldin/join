@@ -16,7 +16,6 @@ function renderCard(id, category, title, discription, completedSubtasks, subtask
                 </div>
                 <div class="profile_prio_container">
                   <div class="profile">
-                    
                   </div>
                   <div class="prio">
                     <img src="./assets/icons/board/${prio}.svg" alt="" />
@@ -47,7 +46,6 @@ function subtasksTamplate(task, id, state) {
           </div>`;
 }
 
-// TODO add more param to the function
 function HTMLForOpenCard(category, title, discription, date, prio, id) {
   return `     
                 <div class="category_box">
@@ -97,11 +95,11 @@ function HTMLForOpenCard(category, title, discription, date, prio, id) {
 }
 
 function HTMLTamplateForTheEditFunk() {
-  return `
-            <div class="scrollbar">
-              <div class=close_button>
+  return `  
+            <div class=close_button>
                 <button  class="closeBtn"><img onclick="overlayOff()" src="./assets/icons/board/close.svg" alt="close"></button>
-              </div>
+            </div>
+            <div class="scrollbar">
               <div class="content_height">
                 <form class="title_description_date" action="">
                   <label for="editTitle">Title</label>
@@ -113,9 +111,9 @@ function HTMLTamplateForTheEditFunk() {
                 </form>
                 <h3>Priority</h3>
                 <div class="button_container">
-                  <button id="urgent" class="prio_button">Urgent <img id="urgentImageEditBtn" src="./assets/icons/board/forEditUrgent.svg" alt="urgent"></button>
-                  <button id="medium" class="prio_button">Medium <img id="mediumImageEditBtn" src="./assets/icons/board/forEditMedium.svg" alt="medium"></button>
-                  <button id="low" class="prio_button">Low <img id="lowImageEditBtn" src="./assets/icons/board/forEditLow.svg" alt="low"></button>
+                  <button onclick="urgent(event)" id="urgent" class="prio_button">Urgent <img id="urgentImageEditBtn" src="./assets/icons/board/forEditUrgent.svg" alt="urgent"></button>
+                  <button onclick="medium(event)" id="medium" class="prio_button">Medium <img id="mediumImageEditBtn" src="./assets/icons/board/forEditMedium.svg" alt="medium"></button>
+                  <button onclick="low(event)" id="low" class="prio_button">Low <img id="lowImageEditBtn" src="./assets/icons/board/forEditLow.svg" alt="low"></button>
                 </div>
                 <div>
                   <div class="dropdown_menu">
@@ -125,10 +123,21 @@ function HTMLTamplateForTheEditFunk() {
                   </div>  
                     <div class="assigned_to">
                     </div>
-                  <input type="submit" value="Submit" />
-                  </form>
-                </div>;
-              </div>`;
+                  <h3>Subtasks</h3>
+                  <div class="subtask_input">
+                    <input id="editSubtask" class="subtask-inputfield-text" oninput="writeEditSubtask()" type="text" placeholder="Add new subtask">
+                    <div id="subtaskbuttons" class="subtask-button-container">
+                      <button onclick="focusOnInputField(event)" class="subtask-inputfield-button">
+                        <img id="plusBtn" src="assets/icons/addTask/subtasks_icons.svg" alt="">
+                      </button>
+                    </div>
+                  </div><br>
+                  <div class="subtasks_box">
+                  </div>
+                  <button onclick="okBtnFunk()" id="okBtn">Ok<img src="./assets/icons/board/check_white_okBtn.svg" alt="" /></button>
+                </div>
+              </div>
+            </div>`;
 }
 
 function HTMLTamplateForDropdownProfiles(key, color, initials, name) {
@@ -138,5 +147,50 @@ function HTMLTamplateForDropdownProfiles(key, color, initials, name) {
             <div>
               <img src="./assets/icons/checkbox/openCardRectangle.svg" alt="" srcset="">
             </div>
+          </div>`;
+}
+
+function setStandardButtonInOpenCard() {
+  document.getElementById("subtaskbuttons").innerHTML = /*html*/ `
+          <button class="subtask-inputfield-button">
+              <img src="assets/icons/addTask/subtasks_icons.svg" alt="">
+          </button>
+      `;
+}
+
+function setdubbleButtonInOpenCard() {
+  document.getElementById("subtaskbuttons").innerHTML = /*html*/ `
+          <button class="subtask-inputfield-button">
+              <img onclick="clearEditSubtask(event)" src="assets/icons/addTask/cross.svg" alt="">
+          </button>
+          <div class="pixelbar-mini"></div>
+          <button class="subtask-inputfield-button">    
+              <img id="confirmBtn" onclick="addNewSubtask(event)" src="assets/icons/addTask/done.svg" alt="">
+          </button>
+      `;
+}
+
+function HTMLTamplateForSubtasksInTheEditMenu(id, task) {
+  return ` 
+            <div class="subtask_box_items" onclick="editSubtaskFunk(event)" id_subtask="${id}" >
+              <div class="editTask"><p>&bull; ${task}</p></div>
+              <div class="subtask_edit_buttons">
+                <img class="pen" src="./assets/icons/board/subtasks_pen.svg" alt="edit">
+                <img src="./assets/icons/board/vector_line_for_subtask_edit.svg" alt="line"/>
+                <img class="trash" onclick="deleteSubtask(event)" src="./assets/icons/board/subtasks_trash.svg" alt="delete">
+              </div>
+            </div>`;
+}
+
+function HTMLTamplateForEditSubtask(id) {
+  return `
+          <div  class="edit_subtask_input_field">
+            <label for="editInputField"></label>
+            <input onclick="stopEventBubbel(event)" type="text" id="editInputField${id}" />
+            <div class="buttons">
+              <img class="trash" onclick="deleteSubtask(event)" src="./assets/icons/board/subtasks_trash.svg" alt="trash" />
+              <img src="./assets/icons/board/vector_line_for_subtask_edit.svg" alt="line" />
+              <img class="confirm" src="./assets/icons/board/confirm.svg" alt="confirm" />
+            </div>            
           </div>`;
 }

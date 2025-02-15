@@ -10,6 +10,10 @@
     <script src="./scripts/openCard.js" defer></script>
     <script src="./scripts/drop_down_menu.js" defer></script>
     <script src="./scripts/aside.js" defer></script>
+    <script src="./scripts/submenu_initials.js" defer></script>
+    <script src="./scripts/edit_function.js" defer></script>
+    <script src="./scripts/search_function.js" defer></script>
+    <script src="./scripts/count_tasks.js" defer></script>
 
     <link rel="stylesheet" href="./css/aside.css" />
     <link rel="stylesheet" href="./css/header.css" />
@@ -24,15 +28,14 @@
     <link rel="stylesheet" href="./css/custom_dropdown_menu.css" />
     <title>Board</title>
   </head>
-  <body onload="noTaskToDo()">
+  <body onload="noTaskToDo(), setAccountInitialsSubmenu()">
     <header>
       <div>
         <h1>Kanban Project Managment Tool</h1>
       </div>
       <div class="question_marker_account_img_position">
         <a href="help.html"><img class="question_marker" src="./assets/icons/imgs/questionMarker.svg" alt="" /></a>
-        <!-- <img class="account_img" src="./assets/icons/imgs/guestImg.svg" alt="" /> -->
-        <div class="account_circle" id="account_icon" onclick="toggleShowSubmenu()">RR</div>
+        <div class="account_circle" id="account_icon" onclick="toggleShowSubmenu()"></div>
       </div>
     </header>
 
@@ -84,11 +87,12 @@
       <div class="board_container">
         <section class="title_and_searchbar">
           <h1>Board</h1>
-          <div class="search_bar">
+          <form onsubmit="event.preventDefault()" id="search_form" class="search_bar">
             <label for="" name="search"></label>
-            <input type="search" id="searchbar" name="searchbar" placeholder="Find Task" />
+            <input list="temp" type="search" id="searchbar" name="searchbar" placeholder="Find Task" />
+            <datalist id="temp"></datalist>
             <button class="add_btn">Add task</button>
-          </div>
+          </from>
         </section>
 
         <div class="board_content">

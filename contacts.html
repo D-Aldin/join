@@ -9,24 +9,26 @@
     <script src="./scripts/contact_template.js" defer></script>
     <script src="./scripts/contact_overlay_animations.js"></script>
     <script src="./scripts/aside.js" defer></script>
+    <script src="./scripts/submenu_initials.js" defer></script>
 
     <link rel="stylesheet" href="./css/aside.css" />
     <link rel="stylesheet" href="./css/header.css" />
     <link rel="stylesheet" href="./css/main.css" />
     <link rel="stylesheet" href="./css/standard.css" />
     <link rel="stylesheet" href="./css/contacts.css" />
+    <link rel="stylesheet" href="./css/contact_list.css" />
+    <link rel="stylesheet" href="./css/contact_overlay_animation.css" />
     <link rel="stylesheet" href="./css/submenu.css" />
     <title>Contacts</title>
   </head>
-  <body onload="init()">
+  <body onload="init(), setAccountInitialsSubmenu()">
     <header>
       <div>
         <h1>Kanban Project Managment Tool</h1>
       </div>
       <div class="question_marker_account_img_position">
         <a href="help.html"><img class="question_marker" src="./assets/icons/imgs/questionMarker.svg" alt="" /></a>
-        <!-- <img class="account_img" src="./assets/icons/imgs/guestImg.svg" alt="" /> -->
-        <div class="account_circle" id="account_icon" onclick="toggleShowSubmenu()">RR</div>
+        <div class="account_circle" id="account_icon" onclick="toggleShowSubmenu()"></div>
       </div>
     </header>
 
@@ -109,13 +111,16 @@
         <div class="overlay_close_btn_position">
           <img onclick="closeOverlayAddContact()" src="./assets/icons/contacts/Close.svg" alt="close_button" />
         </div>
-        <form class="form_input_fields_position" onsubmit="addContactToDataBase(); setTimeoutSuccessfullyOverlayAddContact(); return false;">
-          <input id="add_name" type="text" placeholder="Name" required />
-          <input id="add_email" type="email" placeholder="Email" required />
-          <input id="add_phone" type="tel" placeholder="Phone" onkeypress="" required />
+        <form action class="form_input_fields_position" onsubmit="addContactToDataBase(); return false;">
+          <input type="text" id="add_name" placeholder="Name" />
+          <div id="name_error" class="error-message name_error_position"></div>
+          <input type="email" id="add_email" placeholder="Email" />
+          <div id="email_error" class="error-message email_error_position"></div>
+          <input type="number" id="add_phone" placeholder="Phone" />
+          <div id="phone_error" class="error-message phone_error_position"></div>
           <div class="overlay_btn_position">
             <button class="btn_cancel" type="button" onclick="closeOverlayAddContact()">Cancel <img src="./assets/icons/contacts/Close.svg" class="cancel_icon" alt="Cancel" /></button>
-            <button class="btn_create_contact" type="submit">Create contact <img src="./assets/icons/contacts/check.svg" alt="check" /></button>
+            <button id="create_contact_enter" class="btn_create_contact" type="submit">Create contact <img src="./assets/icons/contacts/check.svg" alt="check" /></button>
           </div>
         </form>
       </div>

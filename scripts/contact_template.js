@@ -50,7 +50,7 @@ function getTemplateOfContactInfo(contact) {
     <span>Email</span>
     <p class="email_design">${contact.email}</p>
     <span>Phone</span>
-    <p class="number_design">${contact.phone}</p>
+    <p class="number_design"><a href="tel:${contact.phone}">${contact.phone}</a></p>
   </div>`;
 }
 
@@ -75,9 +75,9 @@ function getTemplateOfContactEdit(contact) {
       <form action class="form_input_fields_position" onsubmit="updateContactInDataBase('${contact.id}'); setTimeoutSuccessfullyOverlayEdit(); return false;">
         <input id="edit_name" type="text" placeholder="Name" value="${contact.name}" required />
         <input id="edit_email" type="email" placeholder="Email" value="${contact.email}" required />
-        <input id="edit_phone" type="tel" placeholder="Phone" value="${contact.phone}" required />
+        <input id="edit_phone" type="number" placeholder="Phone" value="${contact.phone}" required />
         <div class="overlay_btn_position">
-          <button class="btn_delete" onclick="deleteContactFromList('${contact.id}'); setTimeoutDeleteOverlayContact()">Delete <img src="./assets/icons/contacts/Close.svg" class="cancel_icon" alt="Cancel" /></button>
+          <button type="button" class="btn_delete" onclick="deleteContactFromList('${contact.id}'); setTimeoutDeleteOverlayContact()">Delete <img src="./assets/icons/contacts/Close.svg" class="cancel_icon" alt="Cancel" /></button>
           <button type="submit" class="btn_save">Save <img src="./assets/icons/contacts/check.svg" alt="check" /></button>
         </div>
       </form>

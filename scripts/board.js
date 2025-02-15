@@ -54,7 +54,7 @@ function taskTemplate(id, title, description, assigned, date, prio, category, su
       title: title,
       description: description,
       assigned: assigned,
-      data: date,
+      date: date,
       prio: prio,
       category: category,
       subtask: subtask,
@@ -89,21 +89,23 @@ async function displayCardOnBoard() {
   for (const key in taskFromFireBase) {
     const element = taskFromFireBase[key];
     if (!element) continue;
-    const subtasksCompleted = await countCompletedSubtasks(element.subtask);
-
+    const subtaskArray = Array.isArray(element.subtask) ? element.subtask : [];
+    const subtasksCompleted = await countCompletedSubtasks(subtaskArray);
+    const totalSubtasks = subtaskArray.length;
     if (element.status == "toDo") {
-      toDo.innerHTML += renderCard(element.id, element.category, element.title, element.description, subtasksCompleted, element.subtask.length, element.assigned, element.prio);
+      toDo.innerHTML += renderCard(element.id, element.category, element.title, element.description, subtasksCompleted, totalSubtasks, element.prio);
     }
     if (element.status == "progress") {
-      progress.innerHTML += renderCard(element.id, element.category, element.title, element.description, subtasksCompleted, element.subtask.length, element.assigned, element.prio);
+      progress.innerHTML += renderCard(element.id, element.category, element.title, element.description, subtasksCompleted, totalSubtasks, element.prio);
     }
     if (element.status == "feedback") {
-      feedback.innerHTML += renderCard(element.id, element.category, element.title, element.description, subtasksCompleted, element.subtask.length, element.assigned, element.prio);
+      feedback.innerHTML += renderCard(element.id, element.category, element.title, element.description, subtasksCompleted, totalSubtasks, element.prio);
     }
     if (element.status == "done") {
-      done.innerHTML += renderCard(element.id, element.category, element.title, element.description, subtasksCompleted, element.subtask.length, element.assigned, element.prio);
+      done.innerHTML += renderCard(element.id, element.category, element.title, element.description, subtasksCompleted, totalSubtasks, element.prio);
     }
-    calPercentageOfCompletedSubtasks(element.subtask.length, subtasksCompleted, element.id);
+
+    calPercentageOfCompletedSubtasks(totalSubtasks, subtasksCompleted, element.id);
     addProfilesToCard(key, element.assigned);
   }
   noTaskToDo();
@@ -123,11 +125,18 @@ function addProfilesToCard(id, obj) {
 }
 
 function initials(name) {
-  let fullName = name.split(" ");
+  if (typeof name !== "string" || name.trim() === "") {
+    return "";
+  }
+
+  let fullName = name.trim().split(" ");
+  if (fullName.length < 2) {
+    return fullName[0]?.slice(0, 1) || "";
+  }
+
   let firstName = fullName[0].slice(0, 1);
   let secondName = fullName[1].slice(0, 1);
-  let initials = firstName + secondName;
-  return initials;
+  return firstName.toUpperCase() + secondName.toUpperCase();
 }
 
 function noTaskToDo() {
@@ -144,9 +153,15 @@ function noTaskToDo() {
 }
 
 async function countCompletedSubtasks(subtask) {
+  if (!Array.isArray(subtask) || subtask.length === undefined) {
+    return 0;
+  }
   let countTrue = 0;
   for (let index = 0; index < subtask.length; index++) {
     const element = subtask[index];
+    if (element === null) {
+      continue;
+    }
     if (element.state === true) {
       countTrue += 1;
     }
@@ -174,22 +189,24 @@ async function getContacts(list) {
   return contactObject;
 }
 
+const totalNumberOfTasks = document.querySelector("#current_number_tasks_in_board");
+console.log(totalNumberOfTasks);
+
 // -------------------------------------------------------------------- TEST LIST TEST TEST TEST TEST --------------------------------
 
-let assigContacts = ["contact_1738946637904", "contact_1738946682578", "contact_1738946802579", "contact_1738948441461"];
+let assigContacts = ["contact_1738946637904", "contact_1738946802579"];
 
 let subtaskList = {
-  0: { task: "NewTask1", state: false },
-  1: { task: "NewTask2", state: false },
-  2: { task: "NewTask3", state: false },
-  3: { task: "NewTask4", state: false },
-  4: { task: "NewTask5", state: false },
+  0: { task: "write function 1", state: false },
+  1: { task: "write function 2", state: false },
+  2: { task: "write function 3", state: false },
 };
 
-async function init() {
+async function initialize() {
   let test = await getContacts(assigContacts);
-  const today = taskTemplate(1, "Boris Pasternak", "Was wir heute tun, entscheidet, wie die Welt morgen aussieht.", test, "05.02.2025", "Low", "User Task", subtaskList, "toDo");
-  // addTaskToFireBase("tasks", today);
+  const today = taskTemplate(1, "Join", "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of", test, "05.02.2025", "low", "User Task", subtaskList, "progress");
+  // addDataToFireBase("tasks", today);
   displayCardOnBoard();
 }
-init();
+
+initialize();

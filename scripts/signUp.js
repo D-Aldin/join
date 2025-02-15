@@ -9,6 +9,12 @@ const psw = document.querySelector("#signUppassword");
 let refToUnderLineClass = document.querySelector(".under_line");
 let user = [];
 let newUser;
+const colors = ["rgb(255, 122, 0)", "rgb(147, 39, 255)", "rgb(110, 82, 255)", "rgb(252, 113, 255)", "rgb(255, 187, 43)", "rgb(31, 215, 193)", "rgb(70, 47, 138)", "rgb(255, 70, 70)", "rgb(0, 190, 232)", "rgb(255, 122, 0)"];
+
+function getRandomColor() {
+  const randomIndex = Math.floor(Math.random() * colors.length);
+  return colors[randomIndex];
+}
 
 /**
  * Function to display the sign-up modal and hide the login modal.
@@ -47,28 +53,28 @@ function getDataFromSignUp(event) {
   const userEmail = form.email.value;
   const userName = form.name.value;
   const userPassword = form.password.value;
-  const id = userEmail.split("@")[0].replace(".", "");
+  const id = userEmail.split("@")[0].replace(".", "") + "user";
   newUser = userData(id, userEmail, userName, userPassword);
-  ifUserAlreadyExists("users", "/" + id);
+  ifUserAlreadyExists(userEmail);
 }
 
 /**
  * Function to add new user data to the Firebase Realtime Database.
  *
  * @async
- * @param {string} path - The path in the database where the data will be stored.
  * @param {Object} data - The user data to be added.
  * @returns {Promise<Object>} The response object from the Firebase request.
  */
-async function addUsersToDataBase(path = "", data) {
-  let response = await fetch(BASE_URL + path + ".json", {
-    method: "PATCH",
+async function addUsersToDataBase(data) {
+  const uniqueKey = `user_${Date.now()}`;
+  let response = await fetch(BASE_URL + `contacts/${uniqueKey}.json`, {
+    method: "PUT",
     headers: {
       "Content-Type": "application/json",
     },
     body: JSON.stringify(data),
   });
-  let responseToJSON = response.json();
+  let responseToJSON = await response.json();
   // youSignedUp();
   return responseToJSON;
 }
@@ -84,32 +90,29 @@ async function addUsersToDataBase(path = "", data) {
  */
 function userData(id, email, name, password) {
   return {
-    [id]: {
-      email: email,
-      name: name,
-      password: password,
-    },
+    name: name,
+    email: email,
+    password: password,
+    phone: "",
+    color: getRandomColor(),
   };
 }
 
-/**
- * Function to check if a user already exists in the Firebase database by their ID.
- * If the user does not exist, the new user is added to the database.
- *
- * @async
- * @param {string} path - The path in the database where user data is stored.
- * @param {string} email - The ID of the user to check.
- * @returns {void}
- */
-async function ifUserAlreadyExists(path = "", email = "") {
-  let response = await fetch(BASE_URL + path + email + ".json", {
+async function ifUserAlreadyExists(email) {
+  let response = await fetch(BASE_URL + `contacts.json`, {
     method: "GET",
   });
-  let responseToJSON = response.json();
-  let result = await responseToJSON;
-  if (result === null && pswConfirm.style.borderColor != "red") {
-    console.log("User Dont Exists");
-    addUsersToDataBase("users", newUser);
+  let responseToJSON = await response.json();
+  let userExists = false;
+  for (const key in responseToJSON) {
+    if (responseToJSON[key].email === email) {
+      userExists = true;
+      break;
+    }
+  }
+  if (!userExists && pswConfirm.style.borderColor != "red") {
+    console.log("User Don't Exist");
+    await addUsersToDataBase(newUser);
     showOverlay();
   } else {
     console.log("User Exists");
