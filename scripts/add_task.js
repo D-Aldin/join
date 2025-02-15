@@ -56,10 +56,12 @@ function resetPrioButton() {
 }
 
 function creatTask() {
-    let title = document.getElementById('').value;
-    let discription = document.getElementById('').value;
-    let date = document.getElementById('').value;
-    let category = document.getElementById('').value;
+    let title = document.getElementById('title').value;
+    let discription = document.getElementById('description').value;
+    let date = document.getElementById('date').value;
+    let category = document.getElementById('category').value;
+    console.log(title, discription, date, category);
+    clearAllTasks();
 }
 
 function clearAllTasks() {
@@ -154,13 +156,15 @@ function editSubtask(x) {
     `
     currentsubtask = document.getElementById('current-subtask'+x);
     currentsubtask.value = subtasks[x];
-    
+    /* führt noch zu störungen !!
+
     document.addEventListener("click", function outsideClick(event) {
         if (!currentcontainer.contains(event.target)) {
             setEditSubtask(x);
             document.removeEventListener("click", outsideClick);
         }
     });
+    */
 }
 
 function setEditSubtask(x) {
