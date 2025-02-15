@@ -203,7 +203,7 @@ let subtaskList = {
 
 async function init() {
   let test = await getContacts(assigContacts);
-  const today = taskTemplate(1, "Test 2", "Was wir heute tun, entscheidet, wie die Welt morgen aussieht.", test, "05.02.2025", "Low", "User Task", subtaskList, "toDo");
+  const today = taskTemplate(2, "HTML", "The HTMLStyleElement.disabled property can be used to get and set whether the stylesheet is disabled (true) or not (false).", test, "05.02.2025", "Urgent", "User Task", subtaskList, "toDo");
   // addDataToFireBase("tasks", today);
   displayCardOnBoard();
 }

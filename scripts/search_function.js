@@ -1,35 +1,29 @@
-const listOfTasks = [];
-const found = [];
 const searchFiled = document.querySelector("#searchbar");
 const temporaryList = document.querySelector("#temp");
+const listOfTasks = [];
 
 function collectTasks() {
-  setTimeout(() => {
-    const refAllTasks = document.querySelectorAll("article");
-    console.log(refAllTasks);
-    refAllTasks.forEach((element) => {
-      let id = element.getAttribute("id");
-      let title = element.childNodes[3].innerText.toLowerCase();
-      let discription = element.childNodes[5].innerText.toLowerCase();
-      let createObject = { id: id, title: title, discription: discription };
-      listOfTasks.push(createObject);
-    });
-  }, "100");
+  const cards = document.querySelectorAll("article");
+  cards.forEach((element) => {
+    let card = element;
+    let title = element.firstElementChild.nextElementSibling.innerText;
+    let description = element.firstElementChild.nextElementSibling.nextElementSibling.innerText;
+    listOfTasks.push({ card, title, description });
+  });
+  return listOfTasks;
 }
 
-function search() {
+function searchFunk() {
   searchFiled.addEventListener("input", function () {
-    const refAllTasks = document.querySelectorAll("article");
-    refAllTasks.forEach((element) => {
-      element.style.display = "none";
-      if (listOfTasks.find((task) => task.title.slice(0, 3) === searchFiled.value || task.title === searchFiled.value)) {
-        element.style.display = "block";
-      }
+    let userInput = searchFiled.value.toLowerCase();
+    listOfTasks.forEach((element) => {
+      let isVisible = element.title.toLowerCase().includes(userInput) || element.description.toLowerCase().includes(userInput);
+      element.card.classList.toggle("hide", !isVisible);
     });
   });
 }
 
-document.addEventListener("DOMContentLoaded", () => {
-  collectTasks();
-  search();
+document.addEventListener("DOMContentLoaded", function () {
+  setTimeout(collectTasks, 500);
+  searchFunk();
 });
