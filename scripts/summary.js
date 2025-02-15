@@ -1,4 +1,13 @@
 const BASE_URL = "https://dv-join-bbc2e-default-rtdb.europe-west1.firebasedatabase.app/";
+let tasksInBoard = document.querySelector("#current_number_tasks_in_board");
+let tasksInProgress = document.querySelector("#current_number_tasks_in_progress");
+let tasksInFeedback = document.querySelector("#current_number_awaiting_feedback");
+let tasksInToDo = document.querySelector("#current_number_to_do");
+let tasksDone = document.querySelector("#current_number_done");
+let progressCount = 0;
+let feedbackCount = 0;
+let toDoCount = 0;
+let doneCount = 0;
 
 function init() {
   setGreeting();
@@ -21,3 +30,47 @@ async function setGreeting() {
   let userName = await getUserName();
   document.querySelector(".account_name").innerHTML = userName;
 }
+
+async function fetchTasks(path = "") {
+  let response = await fetch(BASE_URL + path + ".json", {
+    method: "GET",
+  });
+  let responseToJSON = await response.json();
+  return responseToJSON;
+}
+
+async function totalNumberOfTasks() {
+  const dataFromFireBase = await fetchTasks("tasks");
+  tasksInBoard.innerHTML = dataFromFireBase.length;
+}
+
+async function countTasks() {
+  const dataFromFireBase = await fetchTasks("tasks");
+  dataFromFireBase.forEach((element) => {
+    switch (element.status) {
+      case "progress": {
+        progressCount += 1;
+        break;
+      }
+      case "feedback": {
+        feedbackCount += 1;
+        break;
+      }
+      case "toDo": {
+        toDoCount += 1;
+        break;
+      }
+      case "done": {
+        doneCount += 1;
+        break;
+      }
+    }
+    tasksInProgress.innerHTML = progressCount;
+    tasksInFeedback.innerHTML = feedbackCount;
+    tasksInToDo.innerHTML = toDoCount;
+    tasksDone.innerHTML = doneCount;
+  });
+}
+
+totalNumberOfTasks();
+countTasks();

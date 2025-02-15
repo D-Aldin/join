@@ -54,7 +54,7 @@ function taskTemplate(id, title, description, assigned, date, prio, category, su
       title: title,
       description: description,
       assigned: assigned,
-      data: date,
+      date: date,
       prio: prio,
       category: category,
       subtask: subtask,
@@ -92,18 +92,17 @@ async function displayCardOnBoard() {
     const subtaskArray = Array.isArray(element.subtask) ? element.subtask : [];
     const subtasksCompleted = await countCompletedSubtasks(subtaskArray);
     const totalSubtasks = subtaskArray.length;
-
     if (element.status == "toDo") {
-      toDo.innerHTML += renderCard(element.id, element.category, element.title, element.description, subtasksCompleted, totalSubtasks, element.assigned, element.prio);
+      toDo.innerHTML += renderCard(element.id, element.category, element.title, element.description, subtasksCompleted, totalSubtasks, element.prio);
     }
     if (element.status == "progress") {
-      progress.innerHTML += renderCard(element.id, element.category, element.title, element.description, subtasksCompleted, totalSubtasks, element.assigned, element.prio);
+      progress.innerHTML += renderCard(element.id, element.category, element.title, element.description, subtasksCompleted, totalSubtasks, element.prio);
     }
     if (element.status == "feedback") {
-      feedback.innerHTML += renderCard(element.id, element.category, element.title, element.description, subtasksCompleted, totalSubtasks, element.assigned, element.prio);
+      feedback.innerHTML += renderCard(element.id, element.category, element.title, element.description, subtasksCompleted, totalSubtasks, element.prio);
     }
     if (element.status == "done") {
-      done.innerHTML += renderCard(element.id, element.category, element.title, element.description, subtasksCompleted, totalSubtasks, element.assigned, element.prio);
+      done.innerHTML += renderCard(element.id, element.category, element.title, element.description, subtasksCompleted, totalSubtasks, element.prio);
     }
 
     calPercentageOfCompletedSubtasks(totalSubtasks, subtasksCompleted, element.id);
@@ -157,7 +156,6 @@ async function countCompletedSubtasks(subtask) {
   if (!Array.isArray(subtask) || subtask.length === undefined) {
     return 0;
   }
-
   let countTrue = 0;
   for (let index = 0; index < subtask.length; index++) {
     const element = subtask[index];
@@ -191,6 +189,9 @@ async function getContacts(list) {
   return contactObject;
 }
 
+const totalNumberOfTasks = document.querySelector("#current_number_tasks_in_board");
+console.log(totalNumberOfTasks);
+
 // -------------------------------------------------------------------- TEST LIST TEST TEST TEST TEST --------------------------------
 
 let assigContacts = ["contact_1738946637904", "contact_1738946802579"];
@@ -201,11 +202,11 @@ let subtaskList = {
   2: { task: "write function 3", state: false },
 };
 
-async function init() {
+async function initialize() {
   let test = await getContacts(assigContacts);
-  const today = taskTemplate(2, "HTML", "The HTMLStyleElement.disabled property can be used to get and set whether the stylesheet is disabled (true) or not (false).", test, "05.02.2025", "Urgent", "User Task", subtaskList, "toDo");
+  const today = taskTemplate(1, "Join", "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of", test, "05.02.2025", "low", "User Task", subtaskList, "progress");
   // addDataToFireBase("tasks", today);
   displayCardOnBoard();
 }
 
-init();
+initialize();

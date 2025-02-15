@@ -1,5 +1,4 @@
 const searchFiled = document.querySelector("#searchbar");
-const temporaryList = document.querySelector("#temp");
 const listOfTasks = [];
 
 function collectTasks() {

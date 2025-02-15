@@ -16,7 +16,6 @@ function renderCard(id, category, title, discription, completedSubtasks, subtask
                 </div>
                 <div class="profile_prio_container">
                   <div class="profile">
-                    
                   </div>
                   <div class="prio">
                     <img src="./assets/icons/board/${prio}.svg" alt="" />
