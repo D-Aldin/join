@@ -4,6 +4,7 @@ let tasksInProgress = document.querySelector("#current_number_tasks_in_progress"
 let tasksInFeedback = document.querySelector("#current_number_awaiting_feedback");
 let tasksInToDo = document.querySelector("#current_number_to_do");
 let tasksDone = document.querySelector("#current_number_done");
+let urgentTasks = document.querySelector("#current_number_urgent");
 let progressCount = 0;
 let feedbackCount = 0;
 let toDoCount = 0;
@@ -72,5 +73,17 @@ async function countTasks() {
   });
 }
 
+async function countTheNumberOfUrgentTasks() {
+  let counter = 0;
+  const dataFromFireBase = await fetchTasks("tasks");
+  dataFromFireBase.forEach((element) => {
+    if (element.prio === "urgent") {
+      counter += 1;
+    }
+  });
+  urgentTasks.innerHTML = counter;
+}
+
 totalNumberOfTasks();
 countTasks();
+countTheNumberOfUrgentTasks();
