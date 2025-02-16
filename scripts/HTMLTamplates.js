@@ -150,6 +150,16 @@ function HTMLTamplateForDropdownProfiles(key, color, initials, name) {
           </div>`;
 }
 
+function HTMLTamplateForDropdownProfilesSectionAddTask(key, color, initials, name) {
+  return `<div  class="align_items" id_value=${key}>
+            <div class="icon_name_container">
+            <div class="circle circle_profile_names spacing" style="background-color: ${color}">${initials}</div>${name}</div>
+            <div>
+              <img src="./assets/icons/checkbox/openCardRectangle.svg" alt="" srcset="">
+            </div>
+          </div>`;
+}
+
 function setStandardButtonInOpenCard() {
   document.getElementById("subtaskbuttons").innerHTML = /*html*/ `
           <button class="subtask-inputfield-button">
@@ -193,4 +203,72 @@ function HTMLTamplateForEditSubtask(id) {
               <img class="confirm" src="./assets/icons/board/confirm.svg" alt="confirm" />
             </div>            
           </div>`;
+}
+
+function HTMLTamplateForAddTaskInBorad() {
+  return `
+          <div class="flex-container">
+                    <div class="input-container">
+                        <div class="inputfield-title-container">
+                            <span class="display-flex"><p class="display-flex tasktitles">Title</p><p class="color-red tasktitles">*</p></span>
+                            <input class="inputfield" id="title" placeholder="Enter a title" type="text" >
+                        </div>
+                        <div class="inputfield-title-container">
+                            <p class="tasktitles">Description</p>
+                            <textarea class="textareafield" id="description" placeholder="Enter a Description" name="Description">
+                              
+                            </textarea>
+                            
+                        </div>
+                        <div class="inputfield-title-container">
+                            <p class="tasktitles">Assigned to</p>
+                            <select class="inputfield" id="contact-list" placeholder="select contacts to assign"></select>
+                        </div>
+                        <div class="assigned-contact-wrapper" id="assigned"></div>
+                    </div>
+                    <div class="pixelbar"></div>
+                    <div class="input-container">
+                        <div class="inputfield-title-container">
+                            <span class="display-flex"><p class="tasktitles">Due date</p><p class="color-red tasktitles">*</p></span>
+                            <input class="inputfield" id="date" type="date" required>
+                        </div>
+                        <div class="inputfield-title-container">
+                            <p class="tasktitles">Prio</p>
+                            <div class="button-container">
+                                <button onclick="setPrio('urgent')" id="urgent" class="urgentbutton">Urgent <div id="iconurgent" class="prio_icon"><img src="assets/icons/addTask/icon_urgent.svg" alt=""></div></button>
+                                <button onclick="setPrio('medium')" id="medium" class="urgentbutton">Medium<div id="iconmedium" class="prio_icon"><img src="assets/icons/addTask/icon_medium.svg" alt=""></div></button>
+                                <button onclick="setPrio('low')" id="low" class="urgentbutton">Low<div id="iconlow" class="prio_icon"><img src="assets/icons/addTask/icon_low.svg" alt=""></div></button>
+                            </div>
+                        </div>
+                        <div class="inputfield-title-container">
+                          <span class="display-flex"><p class="tasktitles">Category</p><p class="color-red tasktitles">*</p></span>
+                            <select class="inputfield" id="category" placeholder="Select task category" required>
+                                <option value="Technical Task">Technical Task</option>
+                                <option value="User Story">User Story</option>
+                            </select>
+                        </div>
+                        <div class="inputfield-title-container">
+                          <p class="tasktitles">Subtasks</p>
+                          <div class="subtask-inputfield">
+                            <input id="subtask" class="subtask-inputfield-text" oninput="writeSubtask()" type="text">
+                            <div id="subtaskbuttons" class="subtask-button-container">
+                              <button class="subtask-inputfield-button">
+                                <img src="assets/icons/addTask/subtasks_icons.svg" alt="">
+                              </button>
+                            </div>
+                          </div>
+                          <div id="tasks-wrapper" class="subtask-wrapper">
+                          </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="footer-container">
+                  <span class="display-flex"><p class="color-red">*</p><p></p>This field is required</p></span>
+                  <div class="button-container-clear-creat">
+                    <button class="clear-button" onclick="clearAllTasks()">Clear <div class="icon-box"></div></button>
+                    <button class="great-button" onclick="CreateTask()">Creat Task <img src="assets/icons/addTask/check.svg" alt=""></button>
+                  </div>
+                </div>
+            </div>
+        </div>`;
 }

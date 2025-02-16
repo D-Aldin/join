@@ -14,6 +14,7 @@
     <script src="./scripts/edit_function.js" defer></script>
     <script src="./scripts/search_function.js" defer></script>
     <script src="./scripts/count_tasks.js" defer></script>
+    <script src="./scripts/add_task_in_board.js" defer></script>
 
     <link rel="stylesheet" href="./css/aside.css" />
     <link rel="stylesheet" href="./css/header.css" />
@@ -26,6 +27,7 @@
     <link rel="stylesheet" href="./css/add_task.css" />
     <link rel="stylesheet" href="./css/edit_section.css" />
     <link rel="stylesheet" href="./css/custom_dropdown_menu.css" />
+    <link rel="stylesheet" href="./css/add_task_in_board.css">
     <title>Board</title>
   </head>
   <body onload="noTaskToDo(), setAccountInitialsSubmenu()">
@@ -84,6 +86,73 @@
         <div id="box" onclick="stopEventBubbel(event)"></div>
       </div>
 
+      <div id="overlayForAddTask" onclick="hideOverlay()">
+        <div id="add_task_box" onclick="stopEventBubbel(event)">
+          <div class="title_and_closeBtn">
+            <h1>Add Task</h1>
+            <button><img src="./assets/icons/board/close.svg" alt="close"></button>
+          </div>
+          <div class="all_content">
+            <div class="input-container">
+              <div class="inputfield-title-container">
+                  <span class="display-flex"><p class="display-flex tasktitles">Title</p><p class="color-red tasktitles">*</p></span>
+                  <input class="inputfield" id="title" placeholder="Enter a title" type="text" >
+              </div>
+              <div class="inputfield-title-container">
+                  <p class="tasktitles">Description</p>
+                  <textarea class="textareafield" id="description" placeholder="Enter a Description" name="Description"></textarea>
+              </div>
+              <div class="inputfield-title-container">
+                  <p class="tasktitles">Assigned to</p>
+                  <div class="dropdown_menu">
+                    <div class="dropdown_button" onclick="openMenuSectionAddTask(), displayDropDownMenuSectionAddTask()">Select contacts to assign
+                    <img id="arrow" src="./assets/icons/board/arrow_drop_down.svg" alt="arrow" /></div>
+                    <div class="contentSectionAddTask"></div>
+                  </div>  
+              </div>
+              <div class="assigned-contact-wrapper" id="assigned"></div>
+            </div>
+            <div class="pixelbar"></div>
+            <div class="input-container">
+              <div class="inputfield-title-container">
+                  <span class="display-flex"><p class="tasktitles">Due date</p><p class="color-red tasktitles">*</p></span>
+                  <input class="inputfield" id="date" type="date" required>
+              </div>
+              <div class="inputfield-title-container">
+                  <p class="tasktitles">Prio</p>
+                  <div class="button-container">
+                      <button onclick="setPrio('urgent')" id="urgent" class="urgentbutton">Urgent <div id="iconurgent" class="prio_icon"><img src="assets/icons/addTask/icon_urgent.svg" alt=""></div></button>
+                      <button onclick="setPrio('medium')" id="medium" class="urgentbutton">Medium<div id="iconmedium" class="prio_icon"><img src="assets/icons/addTask/icon_medium.svg" alt=""></div></button>
+                      <button onclick="setPrio('low')" id="low" class="urgentbutton">Low<div id="iconlow" class="prio_icon"><img src="assets/icons/addTask/icon_low.svg" alt=""></div></button>
+                  </div>
+              </div>
+              <div class="inputfield-title-container">
+                <span class="display-flex"><p class="tasktitles">Category</p><p class="color-red tasktitles">*</p></span>
+                  <select class="inputfield" id="category" placeholder="Select task category" required>
+                      <option value="Technical Task">Technical Task</option>
+                      <option value="User Story">User Story</option>
+                  </select>
+              </div>
+              <div class="inputfield-title-container">
+                <p class="tasktitles">Subtasks</p>
+                <div class="subtask-inputfield">
+                  <input id="subtask" class="subtask-inputfield-text" oninput="writeSubtask()" type="text">
+                  <div id="subtaskbuttons" class="subtask-button-container">
+                    <button class="subtask-inputfield-button">
+                      <img src="assets/icons/addTask/subtasks_icons.svg" alt="">
+                    </button>
+                  </div>
+                </div>
+                <div id="tasks-wrapper" class="subtask-wrapper">
+                </div>
+              </div>
+          </div>
+          </div>
+        </div>
+
+          </div>
+          
+
       <div class="board_container">
         <section class="title_and_searchbar">
           <h1>Board</h1>
@@ -91,7 +160,7 @@
             <label for="" name="search"></label>
             <input list="temp" type="search" id="searchbar" name="searchbar" placeholder="Find Task" />
             <datalist id="temp"></datalist>
-            <button class="add_btn">Add task</button>
+            <button onclick="showOverlay(event)" class="add_btn">Add task</button>
           </from>
         </section>
 

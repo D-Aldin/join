@@ -47,8 +47,8 @@ async function totalNumberOfTasks() {
 
 async function countTasks() {
   const dataFromFireBase = await fetchTasks("tasks");
-  dataFromFireBase.forEach((element) => {
-    switch (element.status) {
+  dataFromFireBase.forEach((task) => {
+    switch (task.status) {
       case "progress": {
         progressCount += 1;
         break;
@@ -76,8 +76,8 @@ async function countTasks() {
 async function countTheNumberOfUrgentTasks() {
   let counter = 0;
   const dataFromFireBase = await fetchTasks("tasks");
-  dataFromFireBase.forEach((element) => {
-    if (element.prio === "urgent") {
+  dataFromFireBase.forEach((task) => {
+    if (task.prio === "urgent") {
       counter += 1;
     }
   });

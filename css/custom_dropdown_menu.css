@@ -23,7 +23,8 @@
   height: 620px;
 }
 
-.content {
+.content,
+.contentSectionAddTask {
   display: none;
   position: absolute;
   width: 100%;

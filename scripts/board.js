@@ -189,9 +189,6 @@ async function getContacts(list) {
   return contactObject;
 }
 
-const totalNumberOfTasks = document.querySelector("#current_number_tasks_in_board");
-console.log(totalNumberOfTasks);
-
 // -------------------------------------------------------------------- TEST LIST TEST TEST TEST TEST --------------------------------
 
 let assigContacts = ["contact_1738946637904", "contact_1738946802579"];
@@ -204,7 +201,7 @@ let subtaskList = {
 
 async function initialize() {
   let test = await getContacts(assigContacts);
-  const today = taskTemplate(1, "Join", "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of", test, "05.02.2025", "low", "User Task", subtaskList, "progress");
+  const today = taskTemplate(1, "Join", "The point of", test, "05.02.2025", "low", "User Task", subtaskList, "progress");
   // addDataToFireBase("tasks", today);
   displayCardOnBoard();
 }
