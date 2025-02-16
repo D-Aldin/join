@@ -5,7 +5,6 @@ const inputTitle = document.querySelector("#title");
 const inputDescription = document.querySelector("#description");
 const inputDate = document.querySelector("#date");
 const inputCategory = document.querySelector("#category");
-const inputSubtask = document.querySelector("#subtask");
 let btnLow = document.querySelector("#low");
 let btnMedium = document.querySelector("#medium");
 let btnUrgent = document.querySelector("#urgent");
@@ -101,22 +100,23 @@ function buttonLow(event) {
 }
 
 function newSubtask() {
-  const refAddButton = document.querySelector("#subtask-inputfield-button");
-  refAddButton.addEventListener("click", function () {
-    document.querySelector("#tasks-wrapper").innerHTML += `<p>${inputSubtask.value}</p>`;
-  });
+  const inputSubtask = document.querySelector("#subtask");
+  document.querySelector("#tasks-wrapper").innerHTML += `<p>${inputSubtask.value}</p>`;
+}
+
+function addSubtask() {
+  const inputSubtask = document.querySelector("#subtask");
 }
 
 // TODO
 function collectDataForNewTask(params) {
   let saveID = 0;
-  let saveTitle = inputTitle.value;
-  let saveDescription = inputDescription.value;
+  // let saveTitle = inputTitle.value;
+  // let saveDescription = inputDescription.value;
   let saveContacts = [...document.querySelectorAll(".test")].map((el) => el.id);
-  let saveDate = inputDate.value;
+  // let saveDate = inputDate.value;
   let savePrio = storeThePrioValue;
-  let saveCategory = inputCategory;
+  // let saveCategory = inputCategory;
 }
 
 collectDataForNewTask();
-newSubtask();

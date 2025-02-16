@@ -264,7 +264,7 @@ function HTMLTamplateForAddTaskInBorad() {
                 <div class="subtask-inputfield">
                   <input id="subtask" class="subtask-inputfield-text" type="text">
                   <div id="subtaskbuttons" class="subtask-button-container">
-                    <button class="subtask-inputfield-button">
+                    <button class="subtask-inputfield-button" onclick="newSubtask()">
                       <img src="assets/icons/addTask/subtasks_icons.svg" alt="">
                     </button>
                   </div>
