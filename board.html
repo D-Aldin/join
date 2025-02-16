@@ -14,6 +14,7 @@
     <script src="./scripts/edit_function.js" defer></script>
     <script src="./scripts/search_function.js" defer></script>
     <script src="./scripts/count_tasks.js" defer></script>
+    <script src="./scripts/add_task_in_board.js" defer></script>
 
     <link rel="stylesheet" href="./css/aside.css" />
     <link rel="stylesheet" href="./css/header.css" />
@@ -26,6 +27,7 @@
     <link rel="stylesheet" href="./css/add_task.css" />
     <link rel="stylesheet" href="./css/edit_section.css" />
     <link rel="stylesheet" href="./css/custom_dropdown_menu.css" />
+    <link rel="stylesheet" href="./css/add_task_in_board.css">
     <title>Board</title>
   </head>
   <body onload="noTaskToDo(), setAccountInitialsSubmenu()">
@@ -84,6 +86,11 @@
         <div id="box" onclick="stopEventBubbel(event)"></div>
       </div>
 
+      <div id="overlayForAddTask" onclick="hideOverlay()">
+        <div id="add_task_box" onclick="stopEventBubbel(event)"></div>
+      </div>
+      
+
       <div class="board_container">
         <section class="title_and_searchbar">
           <h1>Board</h1>
@@ -91,7 +98,7 @@
             <label for="" name="search"></label>
             <input list="temp" type="search" id="searchbar" name="searchbar" placeholder="Find Task" />
             <datalist id="temp"></datalist>
-            <button class="add_btn">Add task</button>
+            <button onclick="showOverlay(event), renderAddTaskMenu()" class="add_btn">Add task</button>
           </from>
         </section>
 

@@ -1,0 +1,86 @@
+#overlayForAddTask {
+  display: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.3);
+  z-index: 1;
+}
+
+#add_task_box {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 1116px;
+  height: 760px;
+  background-color: white;
+  color: rgb(0, 0, 0);
+  padding: 35px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+  text-align: center;
+  border-radius: 25px;
+  z-index: 999;
+}
+
+.title_and_closeBtn {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 38px 0 38px;
+}
+
+.title_and_closeBtn button {
+  border: none;
+  padding: 0;
+  background: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: inherit;
+  width: 32px;
+  height: 32px;
+  cursor: pointer;
+}
+
+.title_and_closeBtn button:hover {
+  background-color: rgb(238, 238, 238);
+  border: none;
+  border-radius: 50%;
+}
+
+.all_content {
+  display: flex;
+  justify-content: space-around;
+}
+
+.chosen_contacts {
+  display: flex;
+}
+
+.prioBtn {
+  cursor: pointer;
+  width: 136px;
+  height: 56px;
+  border: solid 1px rgba(209, 209, 209, 0.37);
+  background-color: white;
+  border-radius: 10px;
+  margin-bottom: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.prioBtn:hover {
+  filter: drop-shadow(1px 4px 1px rgba(193, 193, 193, 0.247));
+}
+
+.no_hover:hover {
+  filter: drop-shadow(0px 0px 0px rgba(193, 193, 193, 0.247));
+}
+
+.test {
+}

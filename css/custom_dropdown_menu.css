@@ -19,11 +19,16 @@
   padding: 0 16px 0 16px;
 }
 
+.add_task_section {
+  height: 48px;
+}
+
 .content_height {
   height: 620px;
 }
 
-.content {
+.content,
+.contentSectionAddTask {
   display: none;
   position: absolute;
   width: 100%;
