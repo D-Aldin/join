@@ -4,6 +4,9 @@ let profileContainer = document.querySelector(".chosen_contacts");
 const inputTitle = document.querySelector("#title");
 const inputDescription = document.querySelector("#description");
 const inputDate = document.querySelector("#date");
+let btnLow = document.querySelector("#low");
+let btnMedium = document.querySelector("#medium");
+let btnUrgent = document.querySelector("#urgent");
 
 function showOverlay(event) {
   document.querySelector("#overlayForAddTask").style.display = "block";
@@ -52,6 +55,45 @@ function unselect(id) {
   let refElement = document.getElementById(id);
   refElement.remove();
 }
+
+function buttonUrgent() {
+  btnUrgent.style.backgroundColor = "rgb(255, 61, 0)";
+  btnUrgent.style.color = "white";
+  document.querySelector("#iconurgent").firstChild.src = "./assets/icons/addTask/icon_clicket_urgent.svg";
+  if (btnMedium.hasAttribute("style") || btnLow.hasAttribute("style")) {
+    btnMedium.removeAttribute("style");
+    btnLow.removeAttribute("style");
+    document.querySelector("#iconmedium").firstChild.src = "assets/icons/addTask/icon_medium.svg";
+    document.querySelector("#iconlow").firstChild.src = "assets/icons/addTask/icon_low.svg";
+  }
+}
+
+function buttonMedium() {
+  btnMedium.style.backgroundColor = "rgb(255, 168, 0)";
+  btnMedium.style.color = "white";
+  document.querySelector("#iconmedium").firstChild.src = "./assets/icons/addTask/icon_clicket_medium.svg";
+  if (btnUrgent.hasAttribute("style") || btnLow.hasAttribute("style")) {
+    btnUrgent.removeAttribute("style");
+    btnLow.removeAttribute("style");
+    document.querySelector("#iconurgent").firstChild.src = "assets/icons/addTask/icon_urgent.svg";
+    document.querySelector("#iconlow").firstChild.src = "assets/icons/addTask/icon_low.svg";
+  }
+}
+
+function buttonLow() {
+  btnLow.style.backgroundColor = "rgb(122, 226, 41)";
+  btnLow.style.color = "white";
+  document.querySelector("#iconlow").firstChild.src = "./assets/icons/addTask/icon_clicket_low.svg";
+  if (btnMedium.hasAttribute("style") || btnUrgent.hasAttribute("style")) {
+    btnMedium.removeAttribute("style");
+    btnUrgent.removeAttribute("style");
+    document.querySelector("#iconmedium").firstChild.src = "assets/icons/addTask/icon_medium.svg";
+    document.querySelector("#iconurgent").firstChild.src = "assets/icons/addTask/icon_urgent.svg";
+  }
+}
+
+function resetFunkctionForTheButtons() {}
+
 // TODO
 function collectDataForNewTask(params) {
   let saveID = 0;
