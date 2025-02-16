@@ -1,9 +1,11 @@
 let contactList = [];
-
+let storeThePrioValue;
 let profileContainer = document.querySelector(".chosen_contacts");
 const inputTitle = document.querySelector("#title");
 const inputDescription = document.querySelector("#description");
 const inputDate = document.querySelector("#date");
+const inputCategory = document.querySelector("#category");
+const inputSubtask = document.querySelector("#subtask");
 let btnLow = document.querySelector("#low");
 let btnMedium = document.querySelector("#medium");
 let btnUrgent = document.querySelector("#urgent");
@@ -16,7 +18,9 @@ function hideOverlay() {
   document.querySelector("#overlayForAddTask").style.display = "none";
 }
 
-function renderAddTaskMenu() {}
+function renderAddTaskMenu() {
+  document.querySelector("#add_task_box").innerHTML = HTMLTamplateForAddTaskInBorad();
+}
 
 async function displayDropDownMenuSectionAddTask() {
   let dataFromFireBase = await fetchTasks("contacts");
@@ -56,7 +60,8 @@ function unselect(id) {
   refElement.remove();
 }
 
-function buttonUrgent() {
+function buttonUrgent(event) {
+  storeThePrioValue = event.currentTarget.id;
   btnUrgent.style.backgroundColor = "rgb(255, 61, 0)";
   btnUrgent.style.color = "white";
   document.querySelector("#iconurgent").firstChild.src = "./assets/icons/addTask/icon_clicket_urgent.svg";
@@ -66,9 +71,11 @@ function buttonUrgent() {
     document.querySelector("#iconmedium").firstChild.src = "assets/icons/addTask/icon_medium.svg";
     document.querySelector("#iconlow").firstChild.src = "assets/icons/addTask/icon_low.svg";
   }
+  console.log(storeThePrioValue);
 }
 
-function buttonMedium() {
+function buttonMedium(event) {
+  storeThePrioValue = event.currentTarget.id;
   btnMedium.style.backgroundColor = "rgb(255, 168, 0)";
   btnMedium.style.color = "white";
   document.querySelector("#iconmedium").firstChild.src = "./assets/icons/addTask/icon_clicket_medium.svg";
@@ -80,7 +87,8 @@ function buttonMedium() {
   }
 }
 
-function buttonLow() {
+function buttonLow(event) {
+  storeThePrioValue = event.currentTarget.id;
   btnLow.style.backgroundColor = "rgb(122, 226, 41)";
   btnLow.style.color = "white";
   document.querySelector("#iconlow").firstChild.src = "./assets/icons/addTask/icon_clicket_low.svg";
@@ -92,7 +100,12 @@ function buttonLow() {
   }
 }
 
-function resetFunkctionForTheButtons() {}
+function newSubtask() {
+  const refAddButton = document.querySelector("#subtask-inputfield-button");
+  refAddButton.addEventListener("click", function () {
+    document.querySelector("#tasks-wrapper").innerHTML += `<p>${inputSubtask.value}</p>`;
+  });
+}
 
 // TODO
 function collectDataForNewTask(params) {
@@ -101,7 +114,9 @@ function collectDataForNewTask(params) {
   let saveDescription = inputDescription.value;
   let saveContacts = [...document.querySelectorAll(".test")].map((el) => el.id);
   let saveDate = inputDate.value;
-  let savePrio;
+  let savePrio = storeThePrioValue;
+  let saveCategory = inputCategory;
 }
 
 collectDataForNewTask();
+newSubtask();
