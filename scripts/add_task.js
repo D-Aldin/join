@@ -4,33 +4,75 @@ selectedButton = '';
 
 let subtasks = [];
 
+arrayOfContacts = [];
+
 function render() {
+    renderContacts("contacts");
 }
 
-async function renderContacts() {
-    let contacts = await fetch(BASE_URL.contact)
-    console.log(contacts);
-    try {
-        for (let i = 0; i < contacts.length; i++) {
-            const contact = contacts[i];
-            let name = contact.name;
-            let color = contact.color;
-            console.log(contact);
-            console.log(color);
-            console.log(name);        
-        }
-    } catch (error) {
-        console.log(error);
+async function renderContacts(path="") {
+    let response = await fetch(BASE_URL + path + ".json")
+    let contacts = await response.json();
+  try {
+    for (let key in contacts) {
+      let contact = {
+        id: key,
+        name: contacts[key].name,
+        email: contacts[key].email,
+        phone: contacts[key].phone,
+        color: contacts[key].color,
+      };
+      arrayOfContacts.push(contact);
     }
+    } catch (error) {
+        console.error("Fehler beim Laden der Kontakte:", error);
+    }
+    pushContactsToSelectField()
 }
 
-function contactTemplate(name, color) {
+function pushContactsToSelectField() {
     let contactlist = document.getElementById('contact-list');
-        contactlist.innerHTML = /*html*/`
-            <option class="datalist" value="">
-                ${name},
-            </option>
-        `  
+    for (let i = 0; i < arrayOfContacts.length; i++) {
+        const currentContact = arrayOfContacts[i];
+
+        contactlist.innerHTML += /*html*/`
+            <div onclick="addContact(${i})" id="contact${i}" class="contactlist">
+                <div class="contact-img-cyrcle" style="background-color: ${currentContact.color}"></div>
+                ${currentContact.name}
+                <img src="" alt="">
+            </div>
+        `  }
+}
+
+function openContactList() {
+    let contactlist = document.getElementById('contact-list');
+    let contactWrapper = document.getElementById('contact-wrapper');
+    contactlist.classList.remove('display_none');
+    document.addEventListener("click", function outsideClick(event) {
+        if (!contactWrapper.contains(event.target)) {
+            closeContactList(contactlist);
+            document.removeEventListener("click", outsideClick);
+        }
+    });
+}
+
+function closeContactList(contactlist) {    
+    contactlist.classList.add('display_none');
+}
+
+function addContact(x) {
+    let addContact = document.getElementById('contact' + x);
+    addContact.classList.remove('contactlist');
+    addContact.classList.add('contactlist-clicket');
+
+}
+
+function setContact(x) {
+
+}
+
+function removeContact(x) {
+
 }
 
 function setPrio(x) {
@@ -122,7 +164,12 @@ function renderSubtasks() {
     tasks.innerHTML = '';
     for (let i = 0; i < subtasks.length; i++) {
         const element = subtasks[i];
-        tasks.innerHTML += /*html*/`
+        subtasksTemplate(tasks, i, element)
+    }
+}
+
+function subtasksTemplate(tasks, i, element) {
+    tasks.innerHTML += /*html*/`
         <div id="${i}" class="subtask-list" >
             <ul ondblclick="editSubtask(${i})">
                 <li>${element}</li>   
@@ -134,7 +181,6 @@ function renderSubtasks() {
             </div>
         </div>
         `
-    }
 }
 
 function deleteSubtask(x) {
@@ -156,15 +202,12 @@ function editSubtask(x) {
     `
     currentsubtask = document.getElementById('current-subtask'+x);
     currentsubtask.value = subtasks[x];
-    /* führt noch zu störungen !!
-
     document.addEventListener("click", function outsideClick(event) {
         if (!currentcontainer.contains(event.target)) {
             setEditSubtask(x);
             document.removeEventListener("click", outsideClick);
         }
     });
-    */
 }
 
 function setEditSubtask(x) {

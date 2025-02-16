@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="shortcut icon" href="./assets/icons/logo/joinLarge.png" type="image/x-icon" />
-    <script src="./scripts/submenu.js"></script>
+    <script src="./scripts/submenu.js" defer></script>
     <script src="./scripts/add_task.js"></script>
     <script src="./scripts/aside.js" defer></script>
     <script src="./scripts/submenu_initials.js" defer></script>
@@ -87,9 +87,18 @@
                         </div>
                         <div class="inputfield-title-container">
                             <p class="tasktitles">Assigned to</p>
-                            <select class="inputfield" id="contact-list" placeholder="select contacts to assign"></select>
+                            <div id="contact-wrapper">                              
+                              <div onclick="openContactList()" class="subtask-inputfield">
+                                <input placeholder="select contacts to assign" id="subtask" class="subtask-inputfield-text" oninput="writeSubtask()" type="text">
+                                <div id="subtaskbuttons" class="subtask-button-container">
+                                    <img src="assets/icons/addTask/subtasks_icons.svg" alt="">
+                                </div>
+                              </div>
+                              <div id="contact-list" class="contact-wrapper display_none"></div>
+                              <div class="assigned-contact-wrapper" id="assigned"></div>
+                            </div>  
                         </div>
-                        <div class="assigned-contact-wrapper" id="assigned"></div>
+                        
                     </div>
                     <div class="pixelbar"></div>
                     <div class="input-container">
