@@ -38,6 +38,14 @@ function contactTamplateForOpenCard(contact, color, fullName) {
           </div>  `;
 }
 
+function contactTamplateForAddTaskSectionInBoard(contact, color, id) {
+  return `
+          
+            <div class="circle circle_profile_names" style="background-color: ${color}" id="${id}">${contact}</div>
+            
+         `;
+}
+
 function subtasksTamplate(task, id, state) {
   return `
           <div class="check_box">

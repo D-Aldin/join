@@ -1,3 +1,6 @@
+let contactList = [];
+let profileContainer = document.querySelector(".chosen_contacts");
+
 function showOverlay(event) {
   document.querySelector("#overlayForAddTask").style.display = "block";
 }
@@ -21,11 +24,26 @@ async function displayDropDownMenuSectionAddTask() {
 
 function chooseContact(event) {
   const profile = event.currentTarget;
+  const contactID = profile.getAttributeNode("id_value").value;
   const checkbox = profile.lastElementChild.lastElementChild;
-
   if (profile.classList.toggle("selected_contact")) {
     checkbox.src = "./assets/icons/checkbox/check_white.svg";
+    displayChossenContact(contactID);
   } else {
     checkbox.src = "./assets/icons/checkbox/openCardRectangle.svg";
+    unselect(contactID);
   }
+}
+
+async function displayChossenContact(id) {
+  let dataFromFireBase = await fetchTasks(`contacts/${id}`);
+  let name = initials(dataFromFireBase.name);
+  let color = dataFromFireBase.color;
+  console.log(id);
+  profileContainer.innerHTML += contactTamplateForAddTaskSectionInBoard(name, color, id);
+}
+
+function unselect(id) {
+  let refElement = document.getElementById(id);
+  refElement.remove();
 }

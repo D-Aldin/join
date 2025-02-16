@@ -55,3 +55,7 @@
   display: flex;
   justify-content: space-around;
 }
+
+.chosen_contacts {
+  display: flex;
+}
