@@ -41,7 +41,7 @@ function contactTamplateForOpenCard(contact, color, fullName) {
 function contactTamplateForAddTaskSectionInBoard(contact, color, id) {
   return `
           
-            <div class="circle circle_profile_names" style="background-color: ${color}" id="${id}">${contact}</div>
+            <div class="circle circle_profile_names test" style="background-color: ${color}" id="${id}">${contact}</div>
             
          `;
 }

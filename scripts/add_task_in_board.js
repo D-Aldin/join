@@ -1,5 +1,9 @@
 let contactList = [];
+
 let profileContainer = document.querySelector(".chosen_contacts");
+const inputTitle = document.querySelector("#title");
+const inputDescription = document.querySelector("#description");
+const inputDate = document.querySelector("#date");
 
 function showOverlay(event) {
   document.querySelector("#overlayForAddTask").style.display = "block";
@@ -41,9 +45,21 @@ async function displayChossenContact(id) {
   let color = dataFromFireBase.color;
   console.log(id);
   profileContainer.innerHTML += contactTamplateForAddTaskSectionInBoard(name, color, id);
+  collectDataForNewTask();
 }
 
 function unselect(id) {
   let refElement = document.getElementById(id);
   refElement.remove();
 }
+// TODO
+function collectDataForNewTask(params) {
+  let saveID = 0;
+  let saveTitle = inputTitle.value;
+  let saveDescription = inputDescription.value;
+  let saveContacts = [...document.querySelectorAll(".test")].map((el) => el.id);
+  let saveDate = inputDate.value;
+  let savePrio;
+}
+
+collectDataForNewTask();
