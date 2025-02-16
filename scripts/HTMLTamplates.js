@@ -151,7 +151,7 @@ function HTMLTamplateForDropdownProfiles(key, color, initials, name) {
 }
 
 function HTMLTamplateForDropdownProfilesSectionAddTask(key, color, initials, name) {
-  return `<div  class="align_items" id_value=${key}>
+  return `<div onclick="chooseContact(event)" class="align_items" id_value=${key}>
             <div class="icon_name_container">
             <div class="circle circle_profile_names spacing" style="background-color: ${color}">${initials}</div>${name}</div>
             <div>

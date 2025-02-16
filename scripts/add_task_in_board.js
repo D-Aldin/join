@@ -18,3 +18,14 @@ async function displayDropDownMenuSectionAddTask() {
     }
   }
 }
+
+function chooseContact(event) {
+  const profile = event.currentTarget;
+  const checkbox = profile.lastElementChild.lastElementChild;
+
+  if (profile.classList.toggle("selected_contact")) {
+    checkbox.src = "./assets/icons/checkbox/check_white.svg";
+  } else {
+    checkbox.src = "./assets/icons/checkbox/openCardRectangle.svg";
+  }
+}
