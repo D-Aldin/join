@@ -101,24 +101,36 @@
 .subtask_wrapper_board {
   width: 440px;
   display: contents;
-  flex-direction: column;
   height: auto;
 }
 
 .iconContainerClose,
-.iconContainerCheck,
-.vectorContainer {
+.iconContainerCheck {
   width: 28px;
   height: 28px;
-  display: contents;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
 }
 
 .iconContainerClose:hover,
 .iconContainerCheck:hover {
   background-color: rgb(238, 238, 238);
-  border: none;
   border-radius: 50%;
 }
 
-.test {
+.create_task_container {
+  display: flex;
+  justify-content: space-between;
+  position: relative;
+  top: 150px;
+}
+
+.buttons_create_and_cancel {
+  display: flex;
+  gap: 30px;
+}
+
+.cancelBtn {
 }

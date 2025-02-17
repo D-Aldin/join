@@ -136,7 +136,7 @@ function collectDataForNewTask(params) {
   let saveID = 0;
   // let saveTitle = inputTitle.value;
   // let saveDescription = inputDescription.value;
-  let saveContacts = [...document.querySelectorAll(".test")].map((el) => el.id);
+  let saveContacts = [...document.querySelectorAll("#profile")].map((el) => el.id);
   // let saveDate = inputDate.value;
   let savePrio = storeThePrioValue;
   // let saveCategory = inputCategory;

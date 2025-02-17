@@ -40,7 +40,7 @@ function contactTamplateForOpenCard(contact, color, fullName) {
 
 function contactTamplateForAddTaskSectionInBoard(contact, color, id) {
   return ` 
-            <div class="circle circle_profile_names test" style="background-color: ${color}" id="${id}">${contact}</div>  
+            <div id="profile" class="circle circle_profile_names" style="background-color: ${color}" id="${id}">${contact}</div>  
          `;
 }
 
@@ -269,13 +269,13 @@ function HTMLTamplateForAddTaskInBorad() {
                     </button>
                       <div class="inputFiledSubtask hide_element">
                         <div class="iconContainerClose">
-                          <img onclick="closeInputField()" id="closeIcon" class="" src="./assets/icons/board/closesmall.svg" alt="close">
+                          <img onclick="closeInputField()" id="closeIcon" class="closeIcons" src="./assets/icons/board/closesmall.svg" alt="close">
                         </div>
-                        <div class="vectorContainer">
-                          <img id="vector" class="" src="./assets/icons/board/vectorOpenCard.png" alt="line">
+                        <div>
+                          <img id="vector"  src="./assets/icons/board/vectorOpenCard.png" alt="line">
                         </div>  
                         <div class="iconContainerCheck">
-                          <img onclick="newSubtask()" id="checkIcon" class="" src="./assets/icons/board/check.svg" alt="check">
+                          <img onclick="newSubtask()" id="checkIcon"  src="./assets/icons/board/check.svg" alt="check">
                         </div>  
                       </div>  
                   </div>
@@ -283,5 +283,12 @@ function HTMLTamplateForAddTaskInBorad() {
                 <div id="tasks-wrapper" class="subtask_wrapper_board"></div>
               </div>
             </div>
-          </div>`;
+          </div>
+          <div class="create_task_container">
+            <h5>*This field is required</h5>
+              <div class="buttons_create_and_cancel">
+                <button class="cancelBtn">Cancel</button>
+                <button class="createBtn">Create Task</button>
+              </div>
+          </div> `;
 }
