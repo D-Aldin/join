@@ -82,5 +82,23 @@
   filter: drop-shadow(0px 0px 0px rgba(193, 193, 193, 0.247));
 }
 
+.inputFiledSubtask {
+  display: flex;
+  gap: 8px;
+  margin-right: 10px;
+  cursor: pointer;
+}
+
+.subtask_paragraf {
+  margin-left: 30px;
+}
+
+.subtask_wrapper_board {
+  width: 440px;
+  display: contents;
+  flex-direction: column;
+  height: auto;
+}
+
 .test {
 }
