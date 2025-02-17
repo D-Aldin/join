@@ -116,6 +116,9 @@ async function displayContactsInDropdownMenu() {
 
 async function whichContactIsAssigned(id) {
   let dataFromFireBase = await fetchCardDetails("tasks", id);
+  if (!dataFromFireBase[id].assigned) {
+    dataFromFireBase[id].assigned = {};
+  }
   const allContactsInDropdownMenu = document.querySelectorAll(".align_items");
   for (let index = 0; index < allContactsInDropdownMenu.length; index++) {
     const contact = allContactsInDropdownMenu[index].getAttributeNode("id_value").value;
@@ -137,6 +140,9 @@ async function whichContactIsAssigned(id) {
 async function assignNewContacts(event) {
   const contact = event.currentTarget.getAttributeNode("id_value").value;
   let dataFromFireBase = await fetchCardDetails(taskPath, idOfcurrentElement);
+  if (!dataFromFireBase[idOfcurrentElement].assigned) {
+    dataFromFireBase[idOfcurrentElement].assigned = {};
+  }
   if (!(contact in dataFromFireBase[idOfcurrentElement].assigned || assignNewContList.includes(contact))) {
     assignNewContList.push(contact);
     let newContact = await getContacts(assignNewContList);

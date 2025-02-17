@@ -1,6 +1,5 @@
 let contactList = [];
 let storeThePrioValue;
-
 const inputTitle = document.querySelector("#title");
 const inputDescription = document.querySelector("#description");
 const inputDate = document.querySelector("#date");

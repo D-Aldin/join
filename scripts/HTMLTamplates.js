@@ -215,7 +215,7 @@ function HTMLTamplateForAddTaskInBorad() {
   return `
   <div class="title_and_closeBtn">
             <h1>Add Task</h1>
-            <button><img src="./assets/icons/board/close.svg" alt="close"></button>
+            <button onclick="hideOverlay()"><img src="./assets/icons/board/close.svg" alt="close"></button>
           </div>
           <div class="all_content">
             <div class="input-container">
@@ -285,7 +285,7 @@ function HTMLTamplateForAddTaskInBorad() {
             </div>
           </div>
           <div class="create_task_container">
-            <h5>*This field is required</h5>
+            <h5><p>*</p>This field is required</h5>
               <div class="buttons_create_and_cancel">
                 <button class="cancelBtn">Cancel</button>
                 <button class="createBtn">Create Task</button>

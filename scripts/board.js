@@ -52,12 +52,12 @@ function taskTemplate(id, title, description, assigned, date, prio, category, su
     [id]: {
       id: id,
       title: title,
-      description: description,
+      description: description || " ",
       assigned: assigned,
       date: date,
-      prio: prio,
+      prio: prio || " ",
       category: category,
-      subtask: subtask,
+      subtask: subtask || [],
       status: status,
     },
   };
@@ -176,22 +176,26 @@ function calPercentageOfCompletedSubtasks(numberOfSubtasks, completedSubtasks, i
 
 async function getContacts(list) {
   let contactObject = {};
-  for (let index = 0; index < list.length; index++) {
-    const dataFromFireBase = await fetchTasks(`contacts/${list[index]}`);
-    temporarilyObject = {
-      [list[index]]: {
-        color: dataFromFireBase.color,
-        name: dataFromFireBase.name,
-      },
-    };
-    Object.assign(contactObject, temporarilyObject);
+  if (list.length === 0) {
+    contactObject = {};
+  } else {
+    for (let index = 0; index < list.length; index++) {
+      const dataFromFireBase = await fetchTasks(`contacts/${list[index]}`);
+      temporarilyObject = {
+        [list[index]]: {
+          color: dataFromFireBase.color,
+          name: dataFromFireBase.name,
+        },
+      };
+      Object.assign(contactObject, temporarilyObject);
+    }
   }
   return contactObject;
 }
 
 // -------------------------------------------------------------------- TEST LIST TEST TEST TEST TEST --------------------------------
 
-let assigContacts = ["contact_1738946637904", "contact_1738946802579"];
+let assigContacts = [];
 
 let subtaskList = {
   0: { task: "write function 1", state: false },
@@ -201,7 +205,7 @@ let subtaskList = {
 
 async function initialize() {
   let test = await getContacts(assigContacts);
-  const today = taskTemplate(0, "Join", "The point of", test, "05.02.2025", "urgent", "User Task", subtaskList, "progress");
+  const today = taskTemplate(0, "Join", " ", test, "05.02.2025", " ", "User Task", 0, "progress");
   // addDataToFireBase("tasks", today);
   displayCardOnBoard();
 }

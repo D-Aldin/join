@@ -124,7 +124,16 @@
   display: flex;
   justify-content: space-between;
   position: relative;
-  top: 150px;
+  top: 120px;
+}
+
+.create_task_container p {
+  color: red;
+}
+
+.create_task_container h5 {
+  color: black;
+  display: flex;
 }
 
 .buttons_create_and_cancel {
@@ -133,4 +142,45 @@
 }
 
 .cancelBtn {
+  border: solid 1px rgba(42, 54, 71, 1);
+  border-radius: 10px;
+  height: 56px;
+  width: 110px;
+  font-size: 20px;
+  display: flex;
+  gap: 4px;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  background-color: white;
+}
+
+.cancelBtn:hover .icon-box {
+  content: url("../assets/icons/addTask/iconoir_cancel_hover.svg");
+}
+
+.cancelBtn:hover {
+  border: solid 1px rgba(41, 171, 226, 1);
+  box-shadow: 1px 4px rgba(0, 0, 0, 0.1);
+  color: rgba(41, 171, 226, 1);
+}
+
+.createBtn {
+  background-color: rgba(42, 54, 71, 1);
+  color: white;
+  border-radius: 10px;
+  width: 183px;
+  height: 56px;
+  display: flex;
+  gap: 4px;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 21px;
+  border: none;
+}
+
+.createBtn:hover {
+  background-color: rgba(41, 171, 226, 1);
+  box-shadow: 1px 4px rgba(0, 0, 0, 0.1);
 }
