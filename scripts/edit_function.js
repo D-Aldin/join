@@ -50,7 +50,7 @@ function displaySelectedPriority(data) {
   let medinu = document.getElementById("medium");
   let low = document.getElementById("low");
   switch (data) {
-    case "Urgent":
+    case "urgent":
       {
         urgent.style.backgroundColor = "rgb(255, 61, 0)";
         urgent.style.color = "white";
@@ -58,7 +58,7 @@ function displaySelectedPriority(data) {
         urgent.classList.add("no_hover");
       }
       break;
-    case "Medium":
+    case "medium":
       {
         medinu.style.backgroundColor = "rgb(255, 168, 0)";
         medinu.style.color = "white";
@@ -66,7 +66,7 @@ function displaySelectedPriority(data) {
         medinu.classList.add("no_hover");
       }
       break;
-    case "Low": {
+    case "low": {
       low.style.backgroundColor = "rgb(122, 226, 41)";
       low.style.color = "white";
       document.getElementById("lowImageEditBtn").src = "./assets/icons/addTask/icon_clicket_low.svg";
@@ -76,7 +76,7 @@ function displaySelectedPriority(data) {
 }
 
 async function urgent(event) {
-  saveDataToFire("prio", "Urgent");
+  saveDataToFire("prio", "urgent");
   document.querySelector(".assigned_to").innerHTML = " ";
   let dataFromFireBase = await fetchCardDetails(taskPath, idOfcurrentElement);
   displaySelectedPriority(dataFromFireBase[idOfcurrentElement].prio);
@@ -85,7 +85,7 @@ async function urgent(event) {
 }
 
 async function medium(event) {
-  saveDataToFire("prio", "Medium");
+  saveDataToFire("prio", "medium");
   document.querySelector(".assigned_to").innerHTML = " ";
   let dataFromFireBase = await fetchCardDetails(taskPath, idOfcurrentElement);
   displaySelectedPriority(dataFromFireBase[idOfcurrentElement].prio);
@@ -94,7 +94,7 @@ async function medium(event) {
 }
 
 async function low(event) {
-  saveDataToFire("prio", "Low");
+  saveDataToFire("prio", "low");
   document.querySelector(".assigned_to").innerHTML = " ";
   let dataFromFireBase = await fetchCardDetails(taskPath, idOfcurrentElement);
   displaySelectedPriority(dataFromFireBase[idOfcurrentElement].prio);

@@ -42,45 +42,53 @@ async function fetchTasks(path = "") {
 
 async function totalNumberOfTasks() {
   const dataFromFireBase = await fetchTasks("tasks");
-  tasksInBoard.innerHTML = dataFromFireBase.length;
+  if (!dataFromFireBase) {
+    tasksInBoard.innerHTML = 0;
+    return;
+  }
+  const validTasks = Object.values(dataFromFireBase).filter(Boolean);
+  tasksInBoard.innerHTML = validTasks.length;
 }
 
 async function countTasks() {
   const dataFromFireBase = await fetchTasks("tasks");
-  dataFromFireBase.forEach((task) => {
+  if (!dataFromFireBase) return;
+  const validTasks = Object.values(dataFromFireBase).filter(Boolean);
+  let progressCount = 0;
+  let feedbackCount = 0;
+  let toDoCount = 0;
+  let doneCount = 0;
+
+  validTasks.forEach((task) => {
     switch (task.status) {
-      case "progress": {
+      case "progress":
         progressCount += 1;
         break;
-      }
-      case "feedback": {
+      case "feedback":
         feedbackCount += 1;
         break;
-      }
-      case "toDo": {
+      case "toDo":
         toDoCount += 1;
         break;
-      }
-      case "done": {
+      case "done":
         doneCount += 1;
         break;
-      }
     }
-    tasksInProgress.innerHTML = progressCount;
-    tasksInFeedback.innerHTML = feedbackCount;
-    tasksInToDo.innerHTML = toDoCount;
-    tasksDone.innerHTML = doneCount;
   });
+  tasksInProgress.innerHTML = progressCount;
+  tasksInFeedback.innerHTML = feedbackCount;
+  tasksInToDo.innerHTML = toDoCount;
+  tasksDone.innerHTML = doneCount;
 }
 
 async function countTheNumberOfUrgentTasks() {
-  let counter = 0;
   const dataFromFireBase = await fetchTasks("tasks");
-  dataFromFireBase.forEach((task) => {
-    if (task.prio === "urgent") {
-      counter += 1;
-    }
-  });
+  if (!dataFromFireBase) {
+    urgentTasks.innerHTML = 0;
+    return;
+  }
+  const validTasks = Object.values(dataFromFireBase).filter(Boolean);
+  const counter = validTasks.filter((task) => task.prio === "urgent").length;
   urgentTasks.innerHTML = counter;
 }
 

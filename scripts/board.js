@@ -201,7 +201,7 @@ let subtaskList = {
 
 async function initialize() {
   let test = await getContacts(assigContacts);
-  const today = taskTemplate(1, "Join", "The point of", test, "05.02.2025", "low", "User Task", subtaskList, "progress");
+  const today = taskTemplate(0, "Join", "The point of", test, "05.02.2025", "urgent", "User Task", subtaskList, "progress");
   // addDataToFireBase("tasks", today);
   displayCardOnBoard();
 }
