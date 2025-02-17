@@ -84,9 +84,14 @@
 
 .inputFiledSubtask {
   display: flex;
+  align-items: center;
   gap: 8px;
   margin-right: 10px;
   cursor: pointer;
+}
+
+.hide_element {
+  display: none;
 }
 
 .subtask_paragraf {
@@ -98,6 +103,21 @@
   display: contents;
   flex-direction: column;
   height: auto;
+}
+
+.iconContainerClose,
+.iconContainerCheck,
+.vectorContainer {
+  width: 28px;
+  height: 28px;
+  display: contents;
+}
+
+.iconContainerClose:hover,
+.iconContainerCheck:hover {
+  background-color: rgb(238, 238, 238);
+  border: none;
+  border-radius: 50%;
 }
 
 .test {

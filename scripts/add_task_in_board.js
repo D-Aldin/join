@@ -106,22 +106,18 @@ function buttonLow(event) {
 }
 
 function focusTheField() {
-  document.getElementById("subtask").focus();
-  document.getElementById("plusIcon").classList.toggle("hide");
-  document.getElementById("closeIcon").classList.toggle("hide");
-  document.getElementById("checkIcon").classList.toggle("hide");
-  document.getElementById("vector").classList.toggle("hide");
-  document.querySelector(".subtask-inputfield-button").classList.toggle("hide");
-  document.querySelector(".subtask-inputfield-button").classList.toggle("display_none");
+  const inputSubtask = document.querySelector("#subtask");
+  inputSubtask.focus();
+  document.querySelector(".subtask-inputfield-button").classList.toggle("hide_element");
+  document.querySelector(".inputFiledSubtask").classList.toggle("hide_element");
+  inputSubtask.value = "";
 }
 
 function closeInputField() {
-  document.getElementById("plusIcon").classList.toggle("hide");
-  document.getElementById("closeIcon").classList.toggle("hide");
-  document.getElementById("checkIcon").classList.toggle("hide");
-  document.getElementById("vector").classList.toggle("hide");
-  document.querySelector(".subtask-inputfield-button").classList.toggle("hide");
-  document.querySelector(".subtask-inputfield-button").classList.toggle("display_none");
+  const inputSubtask = document.querySelector("#subtask");
+  document.querySelector(".subtask-inputfield-button").classList.toggle("hide_element");
+  document.querySelector(".inputFiledSubtask").classList.toggle("hide_element");
+  inputSubtask.value = "";
 }
 
 function newSubtask() {

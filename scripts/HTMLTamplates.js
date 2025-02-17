@@ -267,10 +267,16 @@ function HTMLTamplateForAddTaskInBorad() {
                     <button class="subtask-inputfield-button" onclick="focusTheField()">
                       <img id="plusIcon" src="assets/icons/addTask/subtasks_icons.svg" alt="">
                     </button>
-                      <div class="inputFiledSubtask">
-                        <img onclick="closeInputField()" id="closeIcon" class="hide" src="./assets/icons/board/closesmall.svg" alt="close">
-                        <img id="vector" class="hide" src="./assets/icons/board/vectorOpenCard.png" alt="line">
-                        <img onclick="newSubtask()" id="checkIcon" class="hide" src="./assets/icons/board/check.svg" alt="check">
+                      <div class="inputFiledSubtask hide_element">
+                        <div class="iconContainerClose">
+                          <img onclick="closeInputField()" id="closeIcon" class="" src="./assets/icons/board/closesmall.svg" alt="close">
+                        </div>
+                        <div class="vectorContainer">
+                          <img id="vector" class="" src="./assets/icons/board/vectorOpenCard.png" alt="line">
+                        </div>  
+                        <div class="iconContainerCheck">
+                          <img onclick="newSubtask()" id="checkIcon" class="" src="./assets/icons/board/check.svg" alt="check">
+                        </div>  
                       </div>  
                   </div>
                 </div>
