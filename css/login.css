@@ -28,28 +28,25 @@ body {
 
 .join_image {
   object-fit: cover;
-  animation: moveShrinkFade 0.4s ease-in-out forwards;
+  animation: moveShrinkFade 1s ease-in-out forwards;
+  opacity: 0;
 }
 
 @keyframes moveShrinkFade {
   0% {
     transform: translate(-50%, -50%) scale(1);
-    opacity: 1;
+    opacity: 0;
     position: absolute;
     top: 50%;
     left: 50%;
   }
 
-  50% {
-    opacity: 0.5;
-  }
-
   100% {
     transform: translate(0, 0) scale(0.5);
-    opacity: 0;
+    opacity: 1;
     position: absolute;
-    top: 0;
-    left: 0;
+    top: -40px;
+    left: -20px;
   }
 }
 
@@ -57,7 +54,7 @@ header {
   width: 100%;
   display: flex;
   align-items: self-start;
-  justify-content: space-between;
+  justify-content: flex-end;
   padding: 35px;
 }
 
@@ -90,10 +87,11 @@ header {
   margin-right: -50%;
   transform: translate(-50%, -50%);
   opacity: 0;
-  animation: fadeIn 3s forwards;
+  animation: fadeIn 125ms forwards;
   width: 415px;
   height: 300px;
   padding: 40px;
+  display: none;
 }
 
 .login_title {
@@ -132,6 +130,15 @@ h1 {
 @keyframes fadeIn {
   to {
     opacity: 1;
+  }
+}
+
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
   }
 }
 
@@ -288,8 +295,8 @@ h1 {
   left: 50%;
   margin-right: -50%;
   transform: translate(-50%, -50%);
-  opacity: 1;
-  animation: fadeIn 2s forwards;
+  opacity: 0;
+  animation: fadeIn 1s forwards;
   width: 415px;
   height: 450px;
   padding: 40px;
