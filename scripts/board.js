@@ -21,7 +21,6 @@ function dropPoint(event) {
   event.preventDefault();
   if (event.target.id == "toDo" || event.target.id == "progress" || event.target.id == "feedback" || event.target.id == "done") {
     let data = event.dataTransfer.getData("text");
-
     event.target.appendChild(document.getElementById(data));
     let newStatus = event.target.id;
     let statusUpdate = {
@@ -104,7 +103,6 @@ async function displayCardOnBoard() {
     if (element.status == "done") {
       done.innerHTML += renderCard(element.id, element.category, element.title, element.description, subtasksCompleted, totalSubtasks, element.prio);
     }
-
     calPercentageOfCompletedSubtasks(totalSubtasks, subtasksCompleted, element.id);
     addProfilesToCard(key, element.assigned);
   }
@@ -128,12 +126,10 @@ function initials(name) {
   if (typeof name !== "string" || name.trim() === "") {
     return "";
   }
-
   let fullName = name.trim().split(" ");
   if (fullName.length < 2) {
     return fullName[0]?.slice(0, 1) || "";
   }
-
   let firstName = fullName[0].slice(0, 1);
   let secondName = fullName[1].slice(0, 1);
   return firstName.toUpperCase() + secondName.toUpperCase();
@@ -193,21 +189,18 @@ async function getContacts(list) {
   return contactObject;
 }
 
+async function initialize() {
+  let profilesContacts = await getContacts(assigContacts);
+  const today = taskTemplate(0, "Join", " ", profilesContacts, "05.02.2025", " ", "User Task", 0, "progress");
+  // addDataToFireBase("tasks", today);
+  displayCardOnBoard();
+}
+
 // -------------------------------------------------------------------- TEST LIST TEST TEST TEST TEST --------------------------------
 
 let assigContacts = [];
-
 let subtaskList = {
   0: { task: "write function 1", state: false },
   1: { task: "write function 2", state: false },
   2: { task: "write function 3", state: false },
 };
-
-async function initialize() {
-  let test = await getContacts(assigContacts);
-  const today = taskTemplate(0, "Join", " ", test, "05.02.2025", " ", "User Task", 0, "progress");
-  // addDataToFireBase("tasks", today);
-  displayCardOnBoard();
-}
-
-initialize();

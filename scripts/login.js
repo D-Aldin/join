@@ -3,6 +3,7 @@ const refLoginButton = document.querySelector("#login_btn");
 let email;
 let password;
 
+// TODO reduce lines of code
 async function loginUser(email) {
   let response = await fetch(BASE_URL + "contacts.json", {
     method: "GET",

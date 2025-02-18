@@ -46,13 +46,12 @@ async function displayChossenContact(id) {
   let dataFromFireBase = await fetchTasks(`contacts/${id}`);
   let name = initials(dataFromFireBase.name);
   let color = dataFromFireBase.color;
-  console.log(id);
   profileContainer.innerHTML += contactTamplateForAddTaskSectionInBoard(name, color, id);
   collectDataForNewTask();
 }
 
 function unselect(id) {
-  let refElement = document.getElementById(id);
+  let refElement = document.querySelector(`[profile_id=${id}]`);
   refElement.remove();
 }
 
@@ -132,13 +131,18 @@ function addSubtask() {
 
 // TODO
 function collectDataForNewTask(params) {
-  let saveID = 0;
-  // let saveTitle = inputTitle.value;
-  // let saveDescription = inputDescription.value;
-  let saveContacts = [...document.querySelectorAll("#profile")].map((el) => el.id);
-  // let saveDate = inputDate.value;
-  let savePrio = storeThePrioValue;
-  // let saveCategory = inputCategory;
+  collectTheContacts();
+  // taskTemplate(inputTitle.value, inputDescription.value, );
+}
+
+function collectTheContacts() {
+  let refAllChosenContacts = document.querySelectorAll("#profile");
+  refAllChosenContacts.forEach((element) => {
+    let contact = element.getAttribute("profile_id");
+    if (!contactList.includes(contact)) {
+      contactList.push(contact);
+    }
+  });
 }
 
 collectDataForNewTask();

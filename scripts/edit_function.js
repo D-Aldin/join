@@ -7,7 +7,6 @@ function renderEditMenu() {
   refCardBox.innerHTML += HTMLTamplateForTheEditFunk();
   displaySubtasksInTheEditMenu();
   changeTitleAndDescription();
-  //   okBtnFunk();
 }
 
 async function saveDataToFire(section, newValue) {
@@ -45,6 +44,7 @@ async function changeTitleAndDescription() {
   });
 }
 
+// TODO reduce lines of code
 function displaySelectedPriority(data) {
   let urgent = document.getElementById("urgent");
   let medinu = document.getElementById("medium");
@@ -114,6 +114,7 @@ async function displayContactsInDropdownMenu() {
   whichContactIsAssigned(idOfcurrentElement);
 }
 
+// TODO reduce lines of code
 async function whichContactIsAssigned(id) {
   let dataFromFireBase = await fetchCardDetails("tasks", id);
   if (!dataFromFireBase[id].assigned) {
@@ -137,6 +138,7 @@ async function whichContactIsAssigned(id) {
   }
 }
 
+// TODO reduce lines of code
 async function assignNewContacts(event) {
   const contact = event.currentTarget.getAttributeNode("id_value").value;
   let dataFromFireBase = await fetchCardDetails(taskPath, idOfcurrentElement);
@@ -214,6 +216,7 @@ async function deleteSubtask(event) {
   displaySubtasksInTheEditMenu();
 }
 
+// TODO reduce lines of code
 async function reorderSubtasks() {
   try {
     const response = await fetch(`${BASE_URL}/tasks/${idOfcurrentElement}/subtask.json`);
@@ -225,7 +228,6 @@ async function reorderSubtasks() {
     console.log("Original subtasks:", subtasks);
     let subtaskArray = Array.isArray(subtasks) ? subtasks.filter((subtask) => subtask !== null) : Object.values(subtasks).filter((subtask) => subtask !== null);
     let reorderedSubtasks = subtaskArray.map((subtask, index) => ({ ...subtask }));
-
     console.log("Reordered subtasks:", reorderedSubtasks);
     const updateResponse = await fetch(`${BASE_URL}/tasks/${idOfcurrentElement}/subtask.json`, {
       method: "PUT",
@@ -239,6 +241,7 @@ async function reorderSubtasks() {
   }
 }
 
+// TODO reduce lines of code
 async function addNewSubtask(event) {
   let setIndex;
   let newTaskObj;

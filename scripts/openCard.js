@@ -69,6 +69,7 @@ async function renderSubtasks(id) {
   setCheckboxAttributes(id);
 }
 
+// TODO reduce lines of code
 async function managenCheckBoxes(id) {
   let refCheckBoxes = document.querySelectorAll("input[type='checkbox']");
   for (let index = 0; index < refCheckBoxes.length; index++) {
@@ -104,13 +105,10 @@ async function updateSubtaskState(path = "", taskID, subtaskID, state) {
 async function setCheckboxAttributes(id) {
   let response = await fetchCardDetails(taskPath, id);
   let refToSubtask = Array.isArray(response[id]?.subtask) ? response[id].subtask : [];
-
   for (let index = 0; index < refToSubtask.length; index++) {
     const element = refToSubtask[index];
     const checkbox = document.getElementById(`subtask${index}`);
-
     if (!checkbox) continue;
-
     if (element.state === false) {
       checkbox.removeAttribute("checked");
     }
