@@ -55,3 +55,7 @@ a {
 .cursor_pointer {
   cursor: pointer;
 }
+
+.transition {
+  transition: 125ms ease-in-out;
+}
