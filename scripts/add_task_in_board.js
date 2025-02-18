@@ -1,9 +1,6 @@
 let contactList = [];
 let storeThePrioValue;
-const inputTitle = document.querySelector("#title");
-const inputDescription = document.querySelector("#description");
-const inputDate = document.querySelector("#date");
-const inputCategory = document.querySelector("#category");
+let subtaskObject = {};
 
 function showOverlay(event) {
   document.querySelector("#overlayForAddTask").style.display = "block";
@@ -85,6 +82,7 @@ function buttonMedium(event) {
     document.querySelector("#iconurgent").firstChild.src = "assets/icons/addTask/icon_urgent.svg";
     document.querySelector("#iconlow").firstChild.src = "assets/icons/addTask/icon_low.svg";
   }
+  storeThePrioValue = "medium";
 }
 
 function buttonLow(event) {
@@ -101,6 +99,7 @@ function buttonLow(event) {
     document.querySelector("#iconmedium").firstChild.src = "assets/icons/addTask/icon_medium.svg";
     document.querySelector("#iconurgent").firstChild.src = "assets/icons/addTask/icon_urgent.svg";
   }
+  storeThePrioValue = "low";
 }
 
 function focusTheField() {
@@ -130,9 +129,16 @@ function addSubtask() {
 }
 
 // TODO
-function collectDataForNewTask(params) {
+async function collectDataForNewTask(params) {
+  const inputTitle = document.querySelector("#title");
+  const inputDescription = document.querySelector("#description");
+  const inputDate = document.querySelector("#date");
+  const inputCategory = document.querySelector("#category");
   collectTheContacts();
-  // taskTemplate(inputTitle.value, inputDescription.value, );
+  let contacts = await getContactsFromFireBase(contactList);
+  collectTheSubtasks();
+  const newTask = taskTemplate(1, inputTitle.value, inputDescription.value, contacts, inputDate.value, storeThePrioValue, inputCategory, subtaskObject);
+  addDataToFireBase("tasks", newTask);
 }
 
 function collectTheContacts() {
@@ -145,4 +151,12 @@ function collectTheContacts() {
   });
 }
 
-collectDataForNewTask();
+function collectTheSubtasks() {
+  let refAllChosenSubtasks = document.querySelectorAll(".subtask_paragraf");
+  for (let index = 0; index < refAllChosenSubtasks.length; index++) {
+    const task = refAllChosenSubtasks[index].innerHTML.substring(1);
+    subtaskObject[index] = { task: task, state: false };
+  }
+}
+
+async function checkIDSequence(params) {}

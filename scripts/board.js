@@ -110,7 +110,7 @@ async function displayCardOnBoard() {
 }
 
 function addProfilesToCard(id, obj) {
-  getContacts(assigContacts);
+  getContactsFromFireBase(assigContacts);
   let transX = 0;
   for (const key in obj) {
     if (Object.prototype.hasOwnProperty.call(obj, key)) {
@@ -170,7 +170,7 @@ function calPercentageOfCompletedSubtasks(numberOfSubtasks, completedSubtasks, i
   document.getElementById("progress_bar" + id).style.width = `${result}%`;
 }
 
-async function getContacts(list) {
+async function getContactsFromFireBase(list) {
   let contactObject = {};
   if (list.length === 0) {
     contactObject = {};
@@ -190,8 +190,8 @@ async function getContacts(list) {
 }
 
 async function initialize() {
-  let profilesContacts = await getContacts(assigContacts);
-  const today = taskTemplate(0, "Join", " ", profilesContacts, "05.02.2025", " ", "User Task", 0, "progress");
+  let profilesContacts = await getContactsFromFireBase(assigContacts);
+  const today = taskTemplate(0, "Join", " ", profilesContacts, "05.02.2025", " ", "User Task", subtaskList, "progress");
   // addDataToFireBase("tasks", today);
   displayCardOnBoard();
 }

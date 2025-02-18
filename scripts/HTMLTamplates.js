@@ -288,7 +288,7 @@ function HTMLTamplateForAddTaskInBorad() {
             <h5><p>*</p>This field is required</h5>
               <div class="buttons_create_and_cancel">
                 <button class="cancelBtn">Cancel</button>
-                <button class="createBtn">Create Task</button>
+                <button onclick="collectDataForNewTask()" class="createBtn">Create Task</button>
               </div>
           </div> `;
 }
