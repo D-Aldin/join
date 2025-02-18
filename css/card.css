@@ -17,6 +17,8 @@
 }
 
 .card_title {
+  text-overflow: ellipsis;
+  white-space: normal;
 }
 
 .discription {

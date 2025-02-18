@@ -1,5 +1,5 @@
 let contactList = [];
-let storeThePrioValue;
+let storeThePrioValue = " ";
 let subtaskObject = {};
 
 function showOverlay(event) {
@@ -134,11 +134,23 @@ async function collectDataForNewTask(params) {
   const inputDescription = document.querySelector("#description");
   const inputDate = document.querySelector("#date");
   const inputCategory = document.querySelector("#category");
+  let id = `task_${Date.now()}`;
   collectTheContacts();
-  let contacts = await getContactsFromFireBase(contactList);
   collectTheSubtasks();
-  const newTask = taskTemplate(1, inputTitle.value, inputDescription.value, contacts, inputDate.value, storeThePrioValue, inputCategory, subtaskObject);
-  addDataToFireBase("tasks", newTask);
+  let contacts = await getContactsFromFireBase(contactList);
+  return {
+    [id]: {
+      id: id,
+      title: inputTitle.value,
+      description: inputDescription.value || " ",
+      assigned: contacts,
+      date: inputDate.value,
+      prio: storeThePrioValue || " ",
+      category: inputCategory.value,
+      subtask: subtaskObject || [],
+      status: status || "toDo",
+    },
+  };
 }
 
 function collectTheContacts() {
@@ -159,4 +171,7 @@ function collectTheSubtasks() {
   }
 }
 
-async function checkIDSequence(params) {}
+async function createTaskButtonClick() {
+  let card = await collectDataForNewTask();
+  addDataToFireBase("tasks", card);
+}

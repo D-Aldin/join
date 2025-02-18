@@ -46,21 +46,21 @@ async function updateStatusInDB(path = "", idNumber, status) {
   noTaskToDo();
 }
 
-function taskTemplate(id, title, description, assigned, date, prio, category, subtask, status) {
-  return {
-    [id]: {
-      id: id,
-      title: title,
-      description: description || " ",
-      assigned: assigned,
-      date: date,
-      prio: prio || " ",
-      category: category,
-      subtask: subtask || [],
-      status: status,
-    },
-  };
-}
+// function taskTemplate(id, title, description, assigned, date, prio, category, subtask, status) {
+//   return {
+//     [id]: {
+//       id: id,
+//       title: title,
+//       description: description || " ",
+//       assigned: assigned,
+//       date: date,
+//       prio: prio || " ",
+//       category: category,
+//       subtask: subtask || [],
+//       status: status || "toDo",
+//     },
+//   };
+// }
 
 async function fetchTasks(path = "") {
   let response = await fetch(BASE_URL + path + ".json", {
@@ -190,8 +190,12 @@ async function getContactsFromFireBase(list) {
 }
 
 async function initialize() {
-  let profilesContacts = await getContactsFromFireBase(assigContacts);
-  const today = taskTemplate(0, "Join", " ", profilesContacts, "05.02.2025", " ", "User Task", subtaskList, "progress");
+  // let profilesContacts = await getContactsFromFireBase(assigContacts);
+  // let IDkey = `task_${Date.now()}`;
+  // console.log(IDkey);
+
+  // const today = taskTemplate(IDkey, "TEST", "test", profilesContacts, "05.02.2025", "low", "User Task", subtaskList, "progress");
+
   // addDataToFireBase("tasks", today);
   displayCardOnBoard();
 }

@@ -147,7 +147,7 @@ async function assignNewContacts(event) {
   }
   if (!(contact in dataFromFireBase[idOfcurrentElement].assigned || assignNewContList.includes(contact))) {
     assignNewContList.push(contact);
-    let newContact = await getContacts(assignNewContList);
+    let newContact = await getContactsFromFireBase(assignNewContList);
     addDataToFireBase(`${taskPath}/${idOfcurrentElement}/assigned`, newContact);
     let clicked_element = document.querySelector(`[id_value="${contact}"]`);
     clicked_element.classList.add("selected_contact");
