@@ -9,7 +9,7 @@ function getLetterTemplate(letter) {
 
 function getContactTemplate(contact, index) {
   return `
-    <div id="contact_${index}" class="contact_list hover_contact_list" onclick="toggleOverlayContactInfos(${index})">
+    <div id="contact_${index}" class="contact_list hover_contact_list transition" onclick="toggleOverlayContactInfos(${index})">
       <div class="circle" id="circle_${index}"></div>
       <div class="account_info">
         <p>${contact.name}</p>
@@ -38,8 +38,8 @@ function getTemplateOfContactInfo(contact) {
     <div>
       <h2>${contact.name}</h2>
       <div class="btn_position">
-        <img onclick="openOverlayEditContact('${contact.id}')" class="edit_hover" src="./assets/icons/contacts/edit.svg" alt="edit" />
-        <img onclick="deleteContactFromList('${contact.id}'); setTimeoutDeleteOverlayContact()" class="delete_hover" src="./assets/icons/contacts/delete.svg" alt="delete" />
+        <img onclick="openOverlayEditContact('${contact.id}')" class="edit_hover transition" src="./assets/icons/contacts/edit.svg" alt="edit" />
+        <img onclick="deleteContactFromList('${contact.id}'); setTimeoutDeleteOverlayContact()" class="delete_hover transition" src="./assets/icons/contacts/delete.svg" alt="delete" />
       </div>
     </div>
   </div>
@@ -77,8 +77,8 @@ function getTemplateOfContactEdit(contact) {
         <input id="edit_email" type="email" placeholder="Email" value="${contact.email}" required />
         <input id="edit_phone" type="number" placeholder="Phone" value="${contact.phone}" required />
         <div class="overlay_btn_position">
-          <button type="button" class="btn_delete" onclick="deleteContactFromList('${contact.id}'); setTimeoutDeleteOverlayContact()">Delete <img src="./assets/icons/contacts/Close.svg" class="cancel_icon" alt="Cancel" /></button>
-          <button type="submit" class="btn_save">Save <img src="./assets/icons/contacts/check.svg" alt="check" /></button>
+          <button type="button" class="btn_delete transition" onclick="deleteContactFromList('${contact.id}'); setTimeoutDeleteOverlayContact()">Delete <img src="./assets/icons/contacts/Close.svg" class="cancel_icon" alt="Cancel" /></button>
+          <button type="submit" class="btn_save transition">Save <img src="./assets/icons/contacts/check.svg" alt="check" /></button>
         </div>
       </form>
     </div>`;

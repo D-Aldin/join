@@ -23,8 +23,8 @@
         <h1>Kanban Project Managment Tool</h1>
       </div>
       <div class="question_marker_account_img_position">
-        <a href="help.html"><img class="question_marker" src="./assets/icons/imgs/questionMarker.svg" alt="" /></a>
-        <div class="account_circle" id="account_icon" onclick="toggleShowSubmenu()"></div>
+        <a href="help.html"><img class="question_marker transition" src="./assets/icons/imgs/questionMarker.svg" alt="" /></a>
+        <div class="account_circle transition" id="account_icon" onclick="toggleShowSubmenu()"></div>
       </div>
     </header>
 
@@ -33,24 +33,24 @@
         <img class="join_logo" src="./assets/icons/aside/joinLogo.svg" alt="Join_Logo" />
       </div>
       <div class="nav_position">
-        <div class="link_nav_summary cursor_pointer">
+        <div class="link_nav_summary cursor_pointer transition">
           <a href="./summary.html"><img src="./assets/icons/aside/summary.svg" alt="Summary" />Summary</a>
         </div>
-        <div class="link_nav_add_task cursor_pointer">
+        <div class="link_nav_add_task cursor_pointer transition">
           <a href="./add_task.html"><img src="./assets/icons/aside/addTask.svg" alt="Add Task" />Add Task</a>
         </div>
-        <div class="link_nav_board cursor_pointer">
+        <div class="link_nav_board cursor_pointer transition">
           <a href="./board.html"><img src="./assets/icons/aside/board.svg" alt="Board" />Board</a>
         </div>
-        <div class="link_nav_contacts cursor_pointer">
+        <div class="link_nav_contacts cursor_pointer transition">
           <a href="./contacts.html"><img src="./assets/icons/aside/contacts.svg" alt="Contacts" />Contacts</a>
         </div>
       </div>
       <div class="legal_and_policy_position">
-        <div class="privacy_policy_login">
+        <div class="privacy_policy_login transition">
           <a href="./privacy_policy_login.html">Privacy Policy</a>
         </div>
-        <div class="legal_notice_login">
+        <div class="legal_notice_login transition">
           <a href="./legal_notice_login.html">Legal notice</a>
         </div>
       </div>
@@ -69,82 +69,101 @@
     </div>
 
     <main>
-        <div class="task">
-            <div class="task-wrapper">
-                <h1 class=".h1-content-titles">Add Task</h1>
-                <div class="flex-container">
-                    <div class="input-container">
-                        <div class="inputfield-title-container">
-                            <span class="display-flex"><p class="display-flex tasktitles">Title</p><p class="color-red tasktitles">*</p></span>
-                            <input class="inputfield" id="title" placeholder="Enter a title" type="text" >
-                        </div>
-                        <div class="inputfield-title-container">
-                            <p class="tasktitles">Description</p>
-                            <textarea class="textareafield" id="description" placeholder="Enter a Description" name="Description">
-                              
-                            </textarea>
-                            
-                        </div>
-                        <div class="inputfield-title-container">
-                            <p class="tasktitles">Assigned to</p>
-                            <div id="contact-wrapper">                              
-                              <div onclick="openContactList()" class="subtask-inputfield">
-                                <input placeholder="select contacts to assign" id="subtask" class="subtask-inputfield-text" oninput="writeSubtask()" type="text">
-                                <div id="subtaskbuttons" class="subtask-button-container">
-                                    <img src="assets/icons/addTask/subtasks_icons.svg" alt="">
-                                </div>
-                              </div>
-                              <div id="contact-list" class="contact-wrapper display_none"></div>
-                              <div class="assigned-contact-wrapper" id="assigned"></div>
-                            </div>  
-                        </div>
-                        
+      <div class="task">
+        <div class="task-wrapper">
+          <h1 class=".h1-content-titles">Add Task</h1>
+          <div class="flex-container">
+            <div class="input-container">
+              <div class="inputfield-title-container">
+                <span class="display-flex"
+                  ><p class="display-flex tasktitles">Title</p>
+                  <p class="color-red tasktitles">*</p></span
+                >
+                <input class="inputfield" id="title" placeholder="Enter a title" type="text" />
+              </div>
+              <div class="inputfield-title-container">
+                <p class="tasktitles">Description</p>
+                <textarea class="textareafield" id="description" placeholder="Enter a Description" name="Description"> </textarea>
+              </div>
+              <div class="inputfield-title-container">
+                <p class="tasktitles">Assigned to</p>
+                <div id="contact-wrapper">
+                  <div onclick="openContactList()" class="subtask-inputfield">
+                    <input placeholder="select contacts to assign" id="subtask" class="subtask-inputfield-text" oninput="writeSubtask()" type="text" />
+                    <div id="subtaskbuttons" class="subtask-button-container">
+                      <img src="assets/icons/addTask/subtasks_icons.svg" alt="" />
                     </div>
-                    <div class="pixelbar"></div>
-                    <div class="input-container">
-                        <div class="inputfield-title-container">
-                            <span class="display-flex"><p class="tasktitles">Due date</p><p class="color-red tasktitles">*</p></span>
-                            <input class="inputfield" id="date" type="date" required>
-                        </div>
-                        <div class="inputfield-title-container">
-                            <p class="tasktitles">Prio</p>
-                            <div class="button-container">
-                                <button onclick="setPrio('urgent')" id="urgent" class="urgentbutton">Urgent <div id="iconurgent" class="prio_icon"><img src="assets/icons/addTask/icon_urgent.svg" alt=""></div></button>
-                                <button onclick="setPrio('medium')" id="medium" class="urgentbutton">Medium<div id="iconmedium" class="prio_icon"><img src="assets/icons/addTask/icon_medium.svg" alt=""></div></button>
-                                <button onclick="setPrio('low')" id="low" class="urgentbutton">Low<div id="iconlow" class="prio_icon"><img src="assets/icons/addTask/icon_low.svg" alt=""></div></button>
-                            </div>
-                        </div>
-                        <div class="inputfield-title-container">
-                          <span class="display-flex"><p class="tasktitles">Category</p><p class="color-red tasktitles">*</p></span>
-                            <select class="inputfield" id="category" placeholder="Select task category" required>
-                                <option value="Technical Task">Technical Task</option>
-                                <option value="User Story">User Story</option>
-                            </select>
-                        </div>
-                        <div class="inputfield-title-container">
-                          <p class="tasktitles">Subtasks</p>
-                          <div class="subtask-inputfield">
-                            <input id="subtask" class="subtask-inputfield-text" oninput="writeSubtask()" type="text">
-                            <div id="subtaskbuttons" class="subtask-button-container">
-                              <button class="subtask-inputfield-button">
-                                <img src="assets/icons/addTask/subtasks_icons.svg" alt="">
-                              </button>
-                            </div>
-                          </div>
-                          <div id="tasks-wrapper" class="subtask-wrapper">
-                          </div>
-                        </div>
-                    </div>
+                  </div>
+                  <div id="contact-list" class="contact-wrapper display_none"></div>
+                  <div class="assigned-contact-wrapper" id="assigned"></div>
                 </div>
-                <div class="footer-container">
-                  <span class="display-flex"><p class="color-red">*</p><p></p>This field is required</p></span>
-                  <div class="button-container-clear-creat">
-                    <button class="clear-button" onclick="clearAllTasks()">Clear <div class="icon-box"></div></button>
-                    <button class="great-button" onclick="creatTask()">Creat Task <img src="assets/icons/addTask/check.svg" alt=""></button>
+              </div>
+            </div>
+            <div class="pixelbar"></div>
+            <div class="input-container">
+              <div class="inputfield-title-container">
+                <span class="display-flex"
+                  ><p class="tasktitles">Due date</p>
+                  <p class="color-red tasktitles">*</p></span
+                >
+                <input class="inputfield" id="date" type="date" required />
+              </div>
+              <div class="inputfield-title-container">
+                <p class="tasktitles">Prio</p>
+                <div class="button-container">
+                  <button onclick="setPrio('urgent')" id="urgent" class="urgentbutton transition">
+                    Urgent
+                    <div id="iconurgent" class="prio_icon"><img src="assets/icons/addTask/icon_urgent.svg" alt="" /></div>
+                  </button>
+                  <button onclick="setPrio('medium')" id="medium" class="urgentbutton transition">
+                    Medium
+                    <div id="iconmedium" class="prio_icon"><img src="assets/icons/addTask/icon_medium.svg" alt="" /></div>
+                  </button>
+                  <button onclick="setPrio('low')" id="low" class="urgentbutton transition">
+                    Low
+                    <div id="iconlow" class="prio_icon transition"><img src="assets/icons/addTask/icon_low.svg" alt="" /></div>
+                  </button>
+                </div>
+              </div>
+              <div class="inputfield-title-container">
+                <span class="display-flex"
+                  ><p class="tasktitles">Category</p>
+                  <p class="color-red tasktitles">*</p></span
+                >
+                <select class="inputfield" id="category" placeholder="Select task category" required>
+                  <option value="Technical Task">Technical Task</option>
+                  <option value="User Story">User Story</option>
+                </select>
+              </div>
+              <div class="inputfield-title-container">
+                <p class="tasktitles">Subtasks</p>
+                <div class="subtask-inputfield">
+                  <input id="subtask" class="subtask-inputfield-text" oninput="writeSubtask()" type="text" />
+                  <div id="subtaskbuttons" class="subtask-button-container">
+                    <button class="subtask-inputfield-button">
+                      <img src="assets/icons/addTask/subtasks_icons.svg" alt="" />
+                    </button>
                   </div>
                 </div>
+                <div id="tasks-wrapper" class="subtask-wrapper"></div>
+              </div>
             </div>
+          </div>
+          <div class="footer-container">
+            <span class="display-flex"
+              ><p class="color-red">*</p>
+              <p>This field is required</p></span
+            >
+            <div class="button-container-clear-creat">
+              <button class="clear-button transition" onclick="clearAllTasks()">
+                Clear
+                <div class="icon-box"></div>
+              </button>
+              <button class="great-button transition" onclick="creatTask()">Creat Task <img src="assets/icons/addTask/check.svg" alt="" /></button>
+            </div>
+          </div>
         </div>
+      </div>
     </main>
   </body>
 </html>

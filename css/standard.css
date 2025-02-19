@@ -57,5 +57,5 @@ a {
 }
 
 .transition {
-  transition: 125ms ease-in-out;
+  transition: all 125ms ease-in-out;
 }
