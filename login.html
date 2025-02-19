@@ -18,19 +18,20 @@
     </div>
 
     <header>
-      <div class="join_logo">
+      <!-- <div class="join_logo">
         <img src="./assets/icons/logo/joinSmall.svg" alt="Join Logo" />
-      </div>
+      </div> -->
       <div class="sign_up">
         <span>Not a Join user?</span>
-        <button id="signBtn">Sign up</button>
+        <button id="signBtn" class="transition">Sign up</button>
       </div>
     </header>
+
     <div class="image_container">
       <img class="join_image" src="./assets/icons/logo/joinLarge.png" alt="Join Logo" />
     </div>
 
-    <div class="login_window">
+    <div class="login_window" style="display: none">
       <div class="login_title">
         <h1>Log In</h1>
         <div class="underline"></div>
@@ -43,8 +44,8 @@
           <input id="loginPassword" name="password" type="password" placeholder="Password" required />
           <span class="checkEmailPassword"></span>
           <div class="form_btn">
-            <button id="login_btn" type="submit">Log in</button>
-            <button id="guest_log" class="cursor_pointer" type="submit" onclick="linkGuestBtn()">Guest Log in</button>
+            <button id="login_btn" type="submit" class="transition">Log in</button>
+            <button id="guest_log" class="cursor_pointer transition" type="submit" onclick="linkGuestBtn()">Guest Log in</button>
           </div>
         </form>
       </div>
@@ -53,7 +54,7 @@
     <div class="sign_window">
       <div class="sign_up_content">
         <div>
-          <img id="goBackArrow" src="./assets/icons/signUp/arrow.svg" alt="arrow" />
+          <img id="goBackArrow" class="transition" src="./assets/icons/signUp/arrow.svg" alt="arrow" />
         </div>
         <div class="sign_title">
           <div class="center_title_and_underline">
@@ -84,7 +85,7 @@
             </div>
 
             <div class="form_btn">
-              <button id="sign_btn" class="cursor_pointer" type="submit">Sign up</button>
+              <button id="sign_btn" class="cursor_pointer transition" type="submit">Sign up</button>
             </div>
           </form>
         </div>
@@ -92,8 +93,8 @@
     </div>
 
     <footer class="terms_conditions">
-      <a href="./privacy_policy.html">Privacy Policy</a>
-      <a href="./legal_notice.html">Legal Notice</a>
+      <a href="./privacy_policy.html" class="transition">Privacy Policy</a>
+      <a href="./legal_notice.html" class="transition">Legal Notice</a>
     </footer>
   </body>
 </html>

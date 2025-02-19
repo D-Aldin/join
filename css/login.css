@@ -28,28 +28,25 @@ body {
 
 .join_image {
   object-fit: cover;
-  animation: moveShrinkFade 0.4s ease-in-out forwards;
+  animation: moveShrinkFade 1s ease-in-out forwards;
+  opacity: 0;
 }
 
 @keyframes moveShrinkFade {
   0% {
     transform: translate(-50%, -50%) scale(1);
-    opacity: 1;
+    opacity: 0;
     position: absolute;
     top: 50%;
     left: 50%;
   }
 
-  50% {
-    opacity: 0.5;
-  }
-
   100% {
     transform: translate(0, 0) scale(0.5);
-    opacity: 0;
+    opacity: 1;
     position: absolute;
-    top: 0;
-    left: 0;
+    top: -40px;
+    left: -20px;
   }
 }
 
@@ -57,7 +54,7 @@ header {
   width: 100%;
   display: flex;
   align-items: self-start;
-  justify-content: space-between;
+  justify-content: flex-end;
   padding: 35px;
 }
 
@@ -67,16 +64,23 @@ header {
   gap: 20px;
 }
 
+.sign_up span {
+  font-size: 20px;
+  font-weight: 400;
+}
+
 .sign_up button {
   background-color: rgb(42, 54, 71);
   color: white;
   padding: 10px;
   border: none;
   border-radius: 10px;
-  font-family: FigTreeFont;
-  font-weight: 200;
+  font-size: 16px;
+  font-weight: 700;
   cursor: pointer;
   margin-left: 20px;
+  height: 49px;
+  width: 91px;
 }
 
 .login_window {
@@ -90,10 +94,11 @@ header {
   margin-right: -50%;
   transform: translate(-50%, -50%);
   opacity: 0;
-  animation: fadeIn 3s forwards;
+  animation: fadeIn 125ms forwards;
   width: 415px;
   height: 300px;
   padding: 40px;
+  display: none;
 }
 
 .login_title {
@@ -135,6 +140,15 @@ h1 {
   }
 }
 
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
 .form_content {
   display: flex;
   flex-direction: column;
@@ -161,10 +175,28 @@ h1 {
 #signUpEmail,
 #signUppassword,
 #signUpconfirmPassword {
-  border: 1px solid #ccc;
+  cursor: pointer;
+  border-radius: 10px;
+  border: 1px solid rgba(209, 209, 209, 1);
+  outline: none;
+  font-size: 20px;
+  font-weight: 400;
   height: 36px;
   border-radius: 12px;
   padding-left: 16px;
+}
+
+::placeholder {
+  color: rgba(209, 209, 209, 1);
+}
+
+#loginEmail:focus,
+#signUpEmail:focus,
+#loginPassword:focus,
+#signUppassword:focus,
+#signUpconfirmPassword:focus,
+#name:focus {
+  border: 1px solid rgb(41, 171, 226);
 }
 
 #loginEmail,
@@ -201,7 +233,6 @@ h1 {
   font-weight: bold;
   width: 140px;
   height: 40px;
-  font-family: FigTreeFont;
   font-size: large;
 }
 
@@ -221,7 +252,6 @@ h1 {
   font-weight: 400;
   width: 99px;
   height: 40px;
-  font-family: FigTreeFont;
   font-size: large;
 }
 
@@ -259,7 +289,6 @@ h1 {
 .checkPassword,
 .checkEmailPassword {
   color: red;
-  font-family: InterLight;
   font-size: 10px;
 }
 
@@ -268,7 +297,6 @@ h1 {
   justify-content: center;
   align-items: center;
   gap: 8px;
-  font-family: InterLight;
   font-size: small;
 }
 
@@ -288,8 +316,8 @@ h1 {
   left: 50%;
   margin-right: -50%;
   transform: translate(-50%, -50%);
-  opacity: 1;
-  animation: fadeIn 2s forwards;
+  opacity: 0;
+  animation: fadeIn 1s forwards;
   width: 415px;
   height: 450px;
   padding: 40px;
@@ -314,8 +342,9 @@ h1 {
   margin: auto;
 }
 
-#goBackArrow {
+#goBackArrow:hover {
   cursor: pointer;
+  content: url(../assets/icons/help/arrow_hover.svg);
 }
 
 .display_none {

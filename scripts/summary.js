@@ -13,6 +13,9 @@ let doneCount = 0;
 function init() {
   setGreeting();
   setAccountInitialsSubmenu();
+  totalNumberOfTasks();
+  countTasks();
+  countTheNumberOfUrgentTasks();
 }
 
 async function setGreeting() {
@@ -91,7 +94,3 @@ async function countTheNumberOfUrgentTasks() {
   const counter = validTasks.filter((task) => task.prio === "urgent").length;
   urgentTasks.innerHTML = counter;
 }
-
-totalNumberOfTasks();
-countTasks();
-countTheNumberOfUrgentTasks();

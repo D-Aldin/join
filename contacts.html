@@ -27,8 +27,8 @@
         <h1>Kanban Project Managment Tool</h1>
       </div>
       <div class="question_marker_account_img_position">
-        <a href="help.html"><img class="question_marker" src="./assets/icons/imgs/questionMarker.svg" alt="" /></a>
-        <div class="account_circle" id="account_icon" onclick="toggleShowSubmenu()"></div>
+        <a href="help.html"><img class="question_marker transition" src="./assets/icons/imgs/questionMarker.svg" alt="" /></a>
+        <div class="account_circle transition" id="account_icon" onclick="toggleShowSubmenu()"></div>
       </div>
     </header>
 
@@ -37,24 +37,24 @@
         <img class="join_logo" src="./assets/icons/aside/joinLogo.svg" alt="Join_Logo" />
       </div>
       <div class="nav_position">
-        <div class="link_nav_summary cursor_pointer">
+        <div class="link_nav_summary cursor_pointer transition">
           <a href="./summary.html"><img src="./assets/icons/aside/summary.svg" alt="Summary" />Summary</a>
         </div>
-        <div class="link_nav_add_task cursor_pointer">
+        <div class="link_nav_add_task cursor_pointer transition">
           <a href="./add_task.html"><img src="./assets/icons/aside/addTask.svg" alt="Add Task" />Add Task</a>
         </div>
-        <div class="link_nav_board cursor_pointer">
+        <div class="link_nav_board cursor_pointer transition">
           <a href="./board.html"><img src="./assets/icons/aside/board.svg" alt="Board" />Board</a>
         </div>
-        <div class="link_nav_contacts cursor_pointer">
+        <div class="link_nav_contacts cursor_pointer transition">
           <a href="./contacts.html"><img src="./assets/icons/aside/contacts.svg" alt="Contacts" />Contacts</a>
         </div>
       </div>
       <div class="legal_and_policy_position">
-        <div class="privacy_policy_login">
+        <div class="privacy_policy_login transition">
           <a href="./privacy_policy_login.html">Privacy Policy</a>
         </div>
-        <div class="legal_notice_login">
+        <div class="legal_notice_login transition">
           <a href="./legal_notice_login.html">Legal notice</a>
         </div>
       </div>
@@ -80,7 +80,7 @@
       </div>
       <section>
         <div class="add_contact_btn_position">
-          <button class="add_contact_btn" onclick="openOverlayAddContact()">
+          <button class="add_contact_btn transition" onclick="openOverlayAddContact()">
             Add new contact
             <img src="./assets/icons/contacts/person_add.svg" alt="add_contact" />
           </button>
@@ -119,8 +119,8 @@
           <input type="number" id="add_phone" placeholder="Phone" />
           <div id="phone_error" class="error-message phone_error_position"></div>
           <div class="overlay_btn_position">
-            <button class="btn_cancel" type="button" onclick="closeOverlayAddContact()">Cancel <img src="./assets/icons/contacts/Close.svg" class="cancel_icon" alt="Cancel" /></button>
-            <button id="create_contact_enter" class="btn_create_contact" type="submit">Create contact <img src="./assets/icons/contacts/check.svg" alt="check" /></button>
+            <button class="btn_cancel transition" type="button" onclick="closeOverlayAddContact()">Cancel <img src="./assets/icons/contacts/Close.svg" class="cancel_icon" alt="Cancel" /></button>
+            <button id="create_contact_enter" class="btn_create_contact transition" type="submit">Create contact <img src="./assets/icons/contacts/check.svg" alt="check" /></button>
           </div>
         </form>
       </div>

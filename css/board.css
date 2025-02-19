@@ -4,6 +4,7 @@ main {
 
 h1 {
   font-size: 61px;
+  margin: 0;
 }
 
 h3 {
@@ -71,7 +72,8 @@ input::placeholder {
 .board_container {
   display: flex;
   flex-direction: column;
-  padding: 120px;
+  padding-top: 110px;
+  padding-left: 96px;
 }
 
 .board_content {

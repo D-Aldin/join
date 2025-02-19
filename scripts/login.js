@@ -3,6 +3,14 @@ const refLoginButton = document.querySelector("#login_btn");
 let email;
 let password;
 
+document.addEventListener("DOMContentLoaded", function () {
+  const loginWindow = document.querySelector(".login_window");
+  setTimeout(() => {
+    loginWindow.style.display = "inline";
+    loginWindow.style.animation = "fadeIn 1s forwards";
+  }, 1000);
+});
+
 // TODO reduce lines of code
 async function loginUser(email) {
   let response = await fetch(BASE_URL + "contacts.json", {

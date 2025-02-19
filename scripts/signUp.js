@@ -21,9 +21,13 @@ function getRandomColor() {
  * @returns {void}
  */
 function openSignUpModal() {
-  refLoginWindow.style.display = "none";
-  refSignUpSegment.style.display = "none";
-  refSignWindow.style.display = "inline";
+  refLoginWindow.style.animation = "fadeOut 1s forwards";
+  setTimeout(() => {
+    refLoginWindow.style.display = "none";
+    refSignUpSegment.style.display = "none";
+    refSignWindow.style.display = "inline";
+    refSignWindow.style.animation = "fadeIn 1s forwards";
+  }, 125);
 }
 
 /**
@@ -31,13 +35,13 @@ function openSignUpModal() {
  * @returns {void}
  */
 function goBack() {
-  refLoginWindow.style.display = "inline";
-  refSignUpSegment.style.display = "inline";
-  refSignWindow.style.display = "none";
-  document.querySelector("#name").value = "";
-  document.querySelector("#signUpEmail").value = "";
-  document.querySelector("#signUppassword").value = "";
-  document.querySelector("#signUpconfirmPassword").value = "";
+  refSignWindow.style.animation = "fadeOut 1s forwards";
+  setTimeout(() => {
+    refSignWindow.style.display = "none";
+    refLoginWindow.style.display = "inline";
+    refSignUpSegment.style.display = "inline";
+    refLoginWindow.style.animation = "fadeIn 1s forwards";
+  }, 125);
 }
 
 /**

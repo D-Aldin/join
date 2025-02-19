@@ -8,7 +8,6 @@
     <script src="./scripts/summary.js" defer></script>
     <script src="./scripts/aside.js" defer></script>
     <script src="./scripts/submenu_initials.js" defer></script>
-    <script src="./scripts/count_tasks.js" defer></script>
 
     <link rel="stylesheet" href="./css/aside.css" />
     <link rel="stylesheet" href="./css/header.css" />
@@ -24,8 +23,8 @@
         <h1>Kanban Project Managment Tool</h1>
       </div>
       <div class="question_marker_account_img_position">
-        <a href="help.html"><img class="question_marker" src="./assets/icons/imgs/questionMarker.svg" alt="" /></a>
-        <div class="account_circle" id="account_icon" onclick="toggleShowSubmenu()"></div>
+        <a href="help.html"><img class="question_marker transition" src="./assets/icons/imgs/questionMarker.svg" alt="" /></a>
+        <div class="account_circle transition" id="account_icon" onclick="toggleShowSubmenu()"></div>
       </div>
     </header>
 
@@ -34,24 +33,24 @@
         <img class="join_logo" src="./assets/icons/aside/joinLogo.svg" alt="Join_Logo" />
       </div>
       <div class="nav_position">
-        <div class="link_nav_summary cursor_pointer">
+        <div class="link_nav_summary cursor_pointer transition">
           <a href="./summary.html"><img src="./assets/icons/aside/summary.svg" alt="Summary" />Summary</a>
         </div>
-        <div class="link_nav_add_task cursor_pointer">
+        <div class="link_nav_add_task cursor_pointer transition">
           <a href="./add_task.html"><img src="./assets/icons/aside/addTask.svg" alt="Add Task" />Add Task</a>
         </div>
-        <div class="link_nav_board cursor_pointer">
+        <div class="link_nav_board cursor_pointer transition">
           <a href="./board.html"><img src="./assets/icons/aside/board.svg" alt="Board" />Board</a>
         </div>
-        <div class="link_nav_contacts cursor_pointer">
+        <div class="link_nav_contacts cursor_pointer transition">
           <a href="./contacts.html"><img src="./assets/icons/aside/contacts.svg" alt="Contacts" />Contacts</a>
         </div>
       </div>
       <div class="legal_and_policy_position">
-        <div class="privacy_policy_login">
+        <div class="privacy_policy_login transition">
           <a href="./privacy_policy_login.html">Privacy Policy</a>
         </div>
-        <div class="legal_notice_login">
+        <div class="legal_notice_login transition">
           <a href="./legal_notice_login.html">Legal notice</a>
         </div>
       </div>
@@ -79,32 +78,29 @@
 
         <div class="dashboard">
           <div class="to_do_and_done" onclick="window.location.href = './board.html'">
-            <div class="box_to_do">
+            <div class="box_to_do transition">
               <img class="dashboard_img_size_pen" src="./assets/icons/summary/pen.svg" alt="" />
               <div class="column">
-                <!-- Number of tasks in to-do list from board / use the id to update the number -->
-                <div class="box_number_size" id="current_number_to_do">0</div>
+                <div class="box_number_size" id="current_number_to_do"></div>
                 <div class="box_text_size">To-do</div>
               </div>
             </div>
 
-            <div class="box_done" onclick="window.location.href = './board.html'">
+            <div class="box_done transition" onclick="window.location.href = './board.html'">
               <img class="dashboard_img_size_hook" src="./assets/icons/summary/hook.svg" alt="" />
               <div class="column">
-                <!-- Number of tasks in done list from board / use the id to update the number -->
-                <div class="box_number_size" id="current_number_done">0</div>
+                <div class="box_number_size" id="current_number_done"></div>
                 <div class="box_text_size">Done</div>
               </div>
             </div>
           </div>
 
-          <div class="urgency_summary" onclick="window.location.href = './board.html'">
+          <div class="urgency_summary transition" onclick="window.location.href = './board.html'">
             <div class="box_urgency_summary">
               <div class="img_and_text_summary">
                 <img class="dashboard_img_size" src="./assets/icons/summary/urgent.svg" alt="" />
                 <div class="column">
-                  <!-- Number of urgent tasks from board / use the id to update the number -->
-                  <div class="box_number_size" id="current_number_urgent">0</div>
+                  <div class="box_number_size" id="current_number_urgent"></div>
                   <div class="box_text_size">Urgent</div>
                 </div>
               </div>
@@ -117,24 +113,21 @@
           </div>
 
           <div class="tasks_info" onclick="window.location.href = './board.html'">
-            <div class="box_tasks_in_board">
+            <div class="box_tasks_in_board transition">
               <div class="column">
-                <!-- Number of tasks in tasks in board list from board / use the id to update the number -->
-                <div class="box_number_size" id="current_number_tasks_in_board">0</div>
+                <div class="box_number_size" id="current_number_tasks_in_board"></div>
                 <div class="box_text_size">Tasks in<br />Board</div>
               </div>
             </div>
-            <div class="box_tasks_in_progress">
+            <div class="box_tasks_in_progress transition">
               <div class="column">
-                <!-- Number of tasks in tasks in progress list from board / use the id to update the number -->
-                <div class="box_number_size" id="current_number_tasks_in_progress">0</div>
+                <div class="box_number_size" id="current_number_tasks_in_progress"></div>
                 <div class="box_text_size">Tasks in<br />Progress</div>
               </div>
             </div>
-            <div class="box_awating_feedback">
+            <div class="box_awating_feedback transition">
               <div class="column">
-                <!-- Number of tasks in awaiting feedback list from board / use the id to update the number -->
-                <div class="box_number_size" id="current_number_awaiting_feedback">0</div>
+                <div class="box_number_size" id="current_number_awaiting_feedback"></div>
                 <div class="box_text_size">Awaiting<br />Feedback</div>
               </div>
             </div>

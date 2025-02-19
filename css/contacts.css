@@ -180,7 +180,6 @@
 .overlay_close_btn_position img:hover {
   border-radius: 50%;
   background: rgba(238, 238, 238);
-  transition: ease-in-out 125ms;
 }
 
 .form_input_fields_position {
@@ -286,7 +285,6 @@ input[type="number"]::-webkit-outer-spin-button {
 
 .btn_cancel:hover,
 .btn_delete:hover {
-  transition: ease-in-out 125ms;
   border: 1px solid rgba(41, 171, 226);
   color: rgba(41, 171, 226);
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
@@ -294,7 +292,6 @@ input[type="number"]::-webkit-outer-spin-button {
 
 .btn_cancel:hover img,
 .btn_delete:hover img {
-  transition: ease-in-out 125ms;
   filter: invert(41%) sepia(100%) saturate(1000%) hue-rotate(170deg) brightness(100%) contrast(100%);
 }
 
@@ -326,7 +323,6 @@ input[type="number"]::-webkit-outer-spin-button {
 
 .btn_create_contact:hover,
 .btn_save:hover {
-  transition: ease-in-out 125ms;
   background-color: rgba(41, 171, 226);
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
 }
