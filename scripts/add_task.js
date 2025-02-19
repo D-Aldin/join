@@ -47,6 +47,9 @@ function pushContactsToSelectField() {
 function openContactList() {
     let contactlist = document.getElementById('contact-list');
     let contactWrapper = document.getElementById('contact-wrapper');
+    document.getElementById('contact-input-field').innerHTML = /*html*/`
+        <img class="icon-drop-down" src="assets/icons/addTask/arrow_drop_downaa.svg" alt="">
+    `
     contactlist.classList.remove('display_none');
     document.addEventListener("click", function outsideClick(event) {
         if (!contactWrapper.contains(event.target)) {
@@ -58,6 +61,9 @@ function openContactList() {
 
 function closeContactList(contactlist) {    
     contactlist.classList.add('display_none');
+    document.getElementById('contact-input-field').innerHTML = /*html*/`
+        <img class="icon-drop-down" src="assets/icons/addTask/arrow_drop_downaa (1).svg" alt="">
+    `
 }
 
 function addContact(x) {
@@ -202,12 +208,13 @@ function editSubtask(x) {
     `
     currentsubtask = document.getElementById('current-subtask'+x);
     currentsubtask.value = subtasks[x];
+    /*
     document.addEventListener("click", function outsideClick(event) {
         if (!currentcontainer.contains(event.target)) {
             setEditSubtask(x);
             document.removeEventListener("click", outsideClick);
         }
-    });
+    });*/
 }
 
 function setEditSubtask(x) {

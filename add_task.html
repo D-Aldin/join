@@ -80,18 +80,16 @@
                         </div>
                         <div class="inputfield-title-container">
                             <p class="tasktitles">Description</p>
-                            <textarea class="textareafield" id="description" placeholder="Enter a Description" name="Description">
-                              
+                            <textarea class="textareafield" id="description" placeholder="Enter a Description" name="Description"></textarea>
                             </textarea>
-                            
                         </div>
                         <div class="inputfield-title-container">
                             <p class="tasktitles">Assigned to</p>
-                            <div id="contact-wrapper">                              
+                            <div id="contact-wrapper">
                               <div onclick="openContactList()" class="subtask-inputfield">
-                                <input placeholder="select contacts to assign" id="subtask" class="subtask-inputfield-text" oninput="writeSubtask()" type="text">
-                                <div id="subtaskbuttons" class="subtask-button-container">
-                                    <img src="assets/icons/addTask/subtasks_icons.svg" alt="">
+                                <input id="contact-input" placeholder="select contacts to assign" class="subtask-inputfield-text" type="text">
+                                <div id="contact-input-field" class="subtask-button-container">
+                                    <img class="icon-drop-down" src="assets/icons/addTask/arrow_drop_downaa (1).svg" alt="">
                                 </div>
                               </div>
                               <div id="contact-list" class="contact-wrapper display_none"></div>
@@ -104,7 +102,7 @@
                     <div class="input-container">
                         <div class="inputfield-title-container">
                             <span class="display-flex"><p class="tasktitles">Due date</p><p class="color-red tasktitles">*</p></span>
-                            <input class="inputfield" id="date" type="date" required>
+                            <input class="inputfield" value="dd/mm/yyyy" id="date" type="date" required>
                         </div>
                         <div class="inputfield-title-container">
                             <p class="tasktitles">Prio</p>
@@ -124,7 +122,7 @@
                         <div class="inputfield-title-container">
                           <p class="tasktitles">Subtasks</p>
                           <div class="subtask-inputfield">
-                            <input id="subtask" class="subtask-inputfield-text" oninput="writeSubtask()" type="text">
+                            <input id="subtask" class="subtask-inputfield-text" placeholder="Add new subtask" oninput="writeSubtask()" type="text">
                             <div id="subtaskbuttons" class="subtask-button-container">
                               <button class="subtask-inputfield-button">
                                 <img src="assets/icons/addTask/subtasks_icons.svg" alt="">

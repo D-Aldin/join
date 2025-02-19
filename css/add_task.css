@@ -6,6 +6,14 @@ input {
   font-size: 21px;
 }
 
+textarea {
+  resize: none;
+}
+
+::placeholder {
+  color: rgba(209, 209, 209, 1);
+}
+
 select {
   width: 100%;
   box-sizing: border-box;
@@ -296,9 +304,27 @@ p {
   padding-right: 16px;
 }
 
-.subtask-inputfield:focus {
+/* funktioniert noch nicht!*/
+.subtask-inputfield-text:focus .subtask-inputfield{
   outline: none;
   border: solid 1px rgba(41, 171, 226, 1);
+}
+
+.subtask-inputfield-focus {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-sizing: border-box;
+  width: 440px;
+  height: 48px;
+  border-radius: 10px;
+  border: solid 1px rgba(41, 171, 226, 1);
+  background-color: white;
+  padding-right: 16px;
+}
+
+.subtask-inputfield-text:focus::placeholder {
+  color: transparent;
 }
 
 .subtask-inputfield-text {
@@ -435,12 +461,16 @@ ul {
 .contact-wrapper {
   height: 280px;
   width: 440px;
-  box-sizing: border-box;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   background-color: white;
-  overflow: scroll;
+  overflow: auto;
+}
+
+.contact-wrapper::-webkit-scrollbar-thumb {
+  background: rgba(168, 168, 168, 1);
+  border-radius: 3px;
 }
 
 .contactlist {
@@ -458,6 +488,11 @@ ul {
 
 .contactlist:hover {
   background-color: rgba(209, 209, 209, 1);
+}
+
+.icon-drop-down {
+  width: 24px;
+  height: 24px;
 }
 
 .contact-img-cyrcle {
