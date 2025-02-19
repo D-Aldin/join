@@ -119,13 +119,18 @@ function closeInputField() {
 
 function newSubtask() {
   const inputSubtask = document.querySelector("#subtask");
-  document.querySelector("#tasks-wrapper").innerHTML += `<p class="subtask_paragraf">&bull; ${inputSubtask.value}</p>`;
+  document.querySelector("#tasks-wrapper").innerHTML += HTMLTamplateForSubtasksInAddTaskBoard(inputSubtask.value);
   inputSubtask.value = "";
   closeInputField();
 }
 
-function addSubtask() {
-  const inputSubtask = document.querySelector("#subtask");
+function deleteSubtask(event) {
+  let task = event.currentTarget.parentElement.parentElement;
+  task.remove();
+}
+
+function confirmEdit() {
+  let inputFiled = document.querySelector("#editInput").value;
 }
 
 // TODO

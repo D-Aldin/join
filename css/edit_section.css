@@ -118,6 +118,7 @@ select {
 .subtask_box_items {
   display: flex;
   justify-content: space-between;
+  width: 100%;
 }
 
 .subtask_edit_buttons {
@@ -153,6 +154,10 @@ select {
   display: flex;
   margin: 3px 0 3px 0;
   cursor: pointer;
+}
+
+.editTaskBoard {
+  margin-left: 20px;
 }
 
 .edit_subtask_input_field {
@@ -195,6 +200,8 @@ select {
   justify-content: center;
   align-items: center;
   gap: 10px;
+  position: absolute;
+  bottom: 23px;
 }
 
 #okBtn:hover {

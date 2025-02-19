@@ -139,7 +139,7 @@ input::placeholder {
   border: 1px, transparent;
   box-shadow: 1px 1px 6px #838282;
   border-radius: 18px;
-  height: 15rem;
+  height: 15rem auto;
   width: 300px;
   padding: 18px;
   margin-bottom: 10px;

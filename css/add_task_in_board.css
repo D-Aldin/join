@@ -184,3 +184,9 @@
   background-color: rgba(41, 171, 226, 1);
   box-shadow: 1px 4px rgba(0, 0, 0, 0.1);
 }
+
+.editInputFieldWhenOpen {
+  border: none;
+  outline: none;
+  width: 360px;
+}
