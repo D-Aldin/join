@@ -183,7 +183,11 @@ async function editSubtaskFunk(event) {
   const refTaskElement = event.currentTarget;
   const dataFromFireBase = await fetchCardDetails(`${taskPath}/${idOfcurrentElement}/subtask/${refSubtaskID}`, idOfcurrentElement);
   refTaskElement.innerHTML = HTMLTamplateForEditSubtask(refSubtaskID);
-  document.getElementById(`editInputField${refSubtaskID}`).value = dataFromFireBase.task;
+  let inputField = document.getElementById(`editInputField${refSubtaskID}`);
+  if (!inputField) {
+    return;
+  }
+  inputField.value = dataFromFireBase.task;
   document.querySelector(".subtask_box_items").classList.add("under_line");
   document.querySelector(".subtask_box_items").classList.remove("subtask_box_items");
   document.querySelector(`#editInputField${refSubtaskID}`).addEventListener("change", function (event) {

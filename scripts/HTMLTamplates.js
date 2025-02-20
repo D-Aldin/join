@@ -44,7 +44,7 @@ function contactTamplateForAddTaskSectionInBoard(contact, color, id) {
          `;
 }
 
-function subtasksTamplate(task, id) {
+function subtasksTamplate(task, id, state) {
   return `
           <div class="check_box">
             <input type="checkbox" id="subtask${id}" name="subtask${id}" value="task${id}"/>
@@ -83,6 +83,7 @@ function HTMLForOpenCard(category, title, discription, date, prio, id) {
                   <div class="open_card_subtasks">
                     <h5>Subtasks</h5>
                     <form id="subtasks_container">
+                      
                     </form>
                   </div>  
                   </div>

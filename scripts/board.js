@@ -5,7 +5,6 @@ const feedback = document.querySelector("#feedback");
 const done = document.querySelector("#done");
 const refProfile = document.getElementsByClassName("profile");
 let cardID;
-let assigContacts = [];
 
 function draggedElementID(event) {
   event.target.addEventListener("dragstart", () => {
@@ -46,6 +45,22 @@ async function updateStatusInDB(path = "", idNumber, status) {
   const responseData = await response.json();
   noTaskToDo();
 }
+
+// function taskTemplate(id, title, description, assigned, date, prio, category, subtask, status) {
+//   return {
+//     [id]: {
+//       id: id,
+//       title: title,
+//       description: description || " ",
+//       assigned: assigned,
+//       date: date,
+//       prio: prio || " ",
+//       category: category,
+//       subtask: subtask || [],
+//       status: status || "toDo",
+//     },
+//   };
+// }
 
 async function fetchTasks(path = "") {
   let response = await fetch(BASE_URL + path + ".json", {
@@ -175,5 +190,21 @@ async function getContactsFromFireBase(list) {
 }
 
 async function initialize() {
+  // let profilesContacts = await getContactsFromFireBase(assigContacts);
+  // let IDkey = `task_${Date.now()}`;
+  // console.log(IDkey);
+
+  // const today = taskTemplate(IDkey, "TEST", "test", profilesContacts, "05.02.2025", "low", "User Task", subtaskList, "progress");
+
+  // addDataToFireBase("tasks", today);
   displayCardOnBoard();
 }
+
+// -------------------------------------------------------------------- TEST LIST TEST TEST TEST TEST --------------------------------
+
+let assigContacts = [];
+let subtaskList = {
+  0: { task: "write function 1", state: false },
+  1: { task: "write function 2", state: false },
+  2: { task: "write function 3", state: false },
+};
