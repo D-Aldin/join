@@ -185,14 +185,29 @@ function collectTheSubtasks() {
   }
 }
 
+// BUG
 async function createTaskButtonClick() {
   const inputFiledTitle = document.querySelector("#title");
-  const inputFiledDate = document.querySelector("#date");
+  const inputFiledDate = document.getElementById("date");
   const inputFiledCategory = document.querySelector("#category");
-
-  if (inputFiledTitle.value.length === 0 || inputFiledDate.value.length === 0 || inputFiledCategory.value.length === 0) {
-    console.log("NO ");
+  if (inputFiledTitle.value.length === 0) {
+    inputFiledTitle.style = "border: solid 1px rgb(255 0 0);";
   }
+  if (!inputFiledDate.value) {
+    inputFiledDate.style = "border: solid 1px rgb(255 0 0);";
+  }
+  if (inputFiledCategory.value === "placeholder") {
+    inputFiledCategory.style = "border: solid 1px rgb(255 0 0);";
+  }
+  inputFiledTitle.addEventListener("input", function () {
+    this.style = "solid 1px rgba(209, 209, 209, 1);";
+  });
+  inputFiledDate.addEventListener("input", function () {
+    this.style = "solid 1px rgba(209, 209, 209, 1);";
+  });
+  inputFiledCategory.addEventListener("input", function () {
+    this.style = "solid 1px rgba(209, 209, 209, 1);";
+  });
 
   let card = await collectDataForNewTask();
   addDataToFireBase("tasks", card);
@@ -204,5 +219,8 @@ function getCurrentUser() {
 
 function mimicPlaceHolder() {
   let placeholder = document.querySelector('option[value="placeholder"]');
+  if (!placeholder) {
+    return;
+  }
   placeholder.remove();
 }
