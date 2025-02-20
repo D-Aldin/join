@@ -91,9 +91,6 @@ async function displayCardOnBoard() {
     const subtaskArray = Array.isArray(element.subtask) ? element.subtask : [];
     const subtasksCompleted = await countCompletedSubtasks(subtaskArray);
     const totalSubtasks = subtaskArray.length;
-    console.log(element.user);
-    console.log(localStorage.userId);
-
     if (element.user === localStorage.userId) {
       if (element.status == "toDo") {
         toDo.innerHTML += renderCard(element.id, element.category, element.title, element.description, subtasksCompleted, totalSubtasks, element.prio);

@@ -44,13 +44,19 @@ async function fetchTasks(path = "") {
 }
 
 async function totalNumberOfTasks() {
+  count = 0;
   const dataFromFireBase = await fetchTasks("tasks");
-  if (!dataFromFireBase) {
-    tasksInBoard.innerHTML = 0;
-    return;
+  for (const key in dataFromFireBase) {
+    if (Object.prototype.hasOwnProperty.call(dataFromFireBase, key)) {
+      const user = dataFromFireBase[key].user;
+      console.log(user);
+
+      if (user === localStorage.userId) {
+        count += 1;
+      }
+    }
   }
-  const validTasks = Object.values(dataFromFireBase).filter(Boolean);
-  tasksInBoard.innerHTML = validTasks.length;
+  tasksInBoard.innerHTML = count;
 }
 
 async function countTasks() {
