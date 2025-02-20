@@ -185,8 +185,13 @@
   box-shadow: 1px 4px rgba(0, 0, 0, 0.1);
 }
 
-.editInputFieldWhenOpen {
+.input_edit_subtask_board_section {
   border: none;
   outline: none;
-  width: 360px;
+  width: 350px;
+}
+
+.h_effect:hover {
+  background-color: green;
+  cursor: pointer;
 }

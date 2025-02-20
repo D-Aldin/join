@@ -197,36 +197,11 @@ function HTMLTamplateForSubtasksInTheEditMenu(id, task) {
             </div>`;
 }
 
-function HTMLTamplateForSubtasksInAddTaskBoard(task) {
-  return ` 
-            <div class="subtask_box_items">
-              <div class="editTask editTaskBoard"><p>&bull; ${task}</p></div>
-              <div class="subtask_edit_buttons">
-                <img onclick="editSubtaskAddTask(event)" id="editPen" class="pen" src="./assets/icons/board/subtasks_pen.svg" alt="edit">
-                <img src="./assets/icons/board/vector_line_for_subtask_edit.svg" alt="line"/>
-                <img onclick=deleteSubtask(event) class="trash" src="./assets/icons/board/subtasks_trash.svg" alt="delete">
-              </div>
-            </div>`;
-}
-
 function HTMLTamplateForEditSubtask(id) {
   return `
           <div  class="edit_subtask_input_field">
             <label for="editInputField"></label>
             <input onclick="stopEventBubbel(event)" type="text" id="editInputField${id}" />
-            <div class="buttons">
-              <img class="trash" onclick="deleteSubtask(event)" src="./assets/icons/board/subtasks_trash.svg" alt="trash" />
-              <img src="./assets/icons/board/vector_line_for_subtask_edit.svg" alt="line" />
-              <img class="confirm" src="./assets/icons/board/confirm.svg" alt="confirm" />
-            </div>            
-          </div>`;
-}
-
-function HTMLTamplateForEditSubtaskInAddTask() {
-  return `
-          <div  class="edit_subtask_input_field">
-            <label for="editInput"></label>
-            <input onclick="stopEventBubbel(event)" type="text" id="editInput"/>
             <div class="buttons">
               <img class="trash" onclick="deleteSubtask(event)" src="./assets/icons/board/subtasks_trash.svg" alt="trash" />
               <img src="./assets/icons/board/vector_line_for_subtask_edit.svg" alt="line" />
@@ -315,4 +290,16 @@ function HTMLTamplateForAddTaskInBorad() {
                 <button onclick="createTaskButtonClick()" class="createBtn transition">Create Task</button>
               </div>
           </div> `;
+}
+
+function HTMLTamplateForSubtasksInAddTaskBoard(task) {
+  return ` 
+            <div class="subtask_box_items">
+              <div class="editTask"><p>&bull; ${task}</p></div>
+              <div class="subtask_edit_buttons">
+                <img onclick="editSubtaskInAddTaskAreaBoard(event)" class="pen" src="./assets/icons/board/subtasks_pen.svg" alt="edit">
+                <img src="./assets/icons/board/vector_line_for_subtask_edit.svg" alt="line"/>
+                <img class="trash" onclick="deleteSubtaskBoardSection(event)" src="./assets/icons/board/subtasks_trash.svg" alt="delete">
+              </div>
+            </div>`;
 }

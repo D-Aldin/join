@@ -124,13 +124,15 @@ function newSubtask() {
   closeInputField();
 }
 
-function deleteSubtask(event) {
+function deleteSubtaskBoardSection(event) {
   let task = event.currentTarget.parentElement.parentElement;
   task.remove();
 }
 
-function confirmEdit() {
-  let inputFiled = document.querySelector("#editInput").value;
+function editSubtaskInAddTaskAreaBoard(event) {
+  let task = event.currentTarget.parentElement.parentElement;
+  let text = task.firstElementChild.firstElementChild.innerHTML.substring(1);
+  console.log(text);
 }
 
 // TODO
