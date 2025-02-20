@@ -177,12 +177,11 @@ async function displaySubtasksInTheEditMenu() {
     document.querySelector(".subtasks_box").innerHTML += HTMLTamplateForSubtasksInTheEditMenu(element, dataFromFireBase[element].task);
   }
 }
-// TODO reduce lines
+
 async function editSubtaskFunk(event) {
   const refSubtaskID = event.currentTarget.getAttributeNode("id_subtask").value;
   const refTaskElement = event.currentTarget;
   const dataFromFireBase = await fetchCardDetails(`${taskPath}/${idOfcurrentElement}/subtask/${refSubtaskID}`, idOfcurrentElement);
-
   refTaskElement.innerHTML = HTMLTamplateForEditSubtask(refSubtaskID);
   setupSubtaskEditing(refSubtaskID, dataFromFireBase);
 }
@@ -190,15 +189,12 @@ async function editSubtaskFunk(event) {
 function setupSubtaskEditing(refSubtaskID, dataFromFireBase) {
   let inputField = document.getElementById(`editInputField${refSubtaskID}`);
   if (!inputField) return;
-
   inputField.value = dataFromFireBase.task;
   document.querySelector(".subtask_box_items").classList.add("under_line");
   document.querySelector(".subtask_box_items").classList.remove("subtask_box_items");
-
   document.querySelector(`#editInputField${refSubtaskID}`).addEventListener("change", (event) => {
     saveNewSubtask(refSubtaskID, event.target.value);
   });
-
   document.querySelector(".confirm").addEventListener("click", (event) => {
     saveNewSubtask(refSubtaskID, event.target.value);
     document.querySelector(".subtasks_box").innerHTML = " ";

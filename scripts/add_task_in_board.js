@@ -130,8 +130,18 @@ function deleteSubtaskBoardSection(event) {
 }
 
 function editSubtaskInAddTaskAreaBoard(event) {
-  let task = event.currentTarget.parentElement.parentElement;
-  let text = task.firstElementChild.firstElementChild.innerHTML.substring(1);
+  task = event.currentTarget.parentElement.parentElement;
+  document.getElementById(task.id).style.backgroundColor = "white";
+  task.innerHTML = testTamplate();
+  let inputField = document.querySelector(".edit_subtask_input_field input");
+  inputField.value = task.id;
+}
+
+function confirmEditing(event) {
+  let task = event.currentTarget.parentElement.parentElement.parentElement;
+  let inputField = document.querySelector(".edit_subtask_input_field input");
+  task.remove();
+  document.querySelector("#tasks-wrapper").innerHTML += HTMLTamplateForSubtasksInAddTaskBoard(inputField.value);
 }
 
 // TODO
