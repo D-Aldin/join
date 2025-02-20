@@ -84,12 +84,25 @@ function updateSummary(progress, feedback, toDo, done) {
 }
 
 async function countTheNumberOfUrgentTasks() {
+  urgent = 0;
   const dataFromFireBase = await fetchTasks("tasks");
   if (!dataFromFireBase) {
     urgentTasks.innerHTML = 0;
     return;
   }
-  const validTasks = Object.values(dataFromFireBase).filter(Boolean);
-  const counter = validTasks.filter((task) => task.prio === "urgent").length;
+  helperFunction(urgent, dataFromFireBase);
+}
+
+function helperFunction(counter, data) {
+  for (const task in data) {
+    if (Object.prototype.hasOwnProperty.call(data, task)) {
+      const user = data[task].user;
+      if (user === localStorage.userId) {
+        if (data[task].prio === "urgent") {
+          counter++;
+        }
+      }
+    }
+  }
   urgentTasks.innerHTML = counter;
 }
