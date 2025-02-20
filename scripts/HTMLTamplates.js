@@ -296,7 +296,7 @@ function HTMLTamplateForAddTaskInBorad() {
 function HTMLTamplateForSubtasksInAddTaskBoard(task) {
   return ` 
             <div class="subtask_box_items new_sizes" id="${task}">
-              <div class="editTask"><p>&bull; ${task}</p></div>
+              <div class="editTask"><p class="subtask_paragraf">&bull; ${task}</p></div>
               <div class="subtask_edit_buttons">
                 <img onclick="editSubtaskInAddTaskAreaBoard(event)" class="pen" src="./assets/icons/board/subtasks_pen.svg" alt="edit">
                 <img src="./assets/icons/board/vector_line_for_subtask_edit.svg" alt="line"/>

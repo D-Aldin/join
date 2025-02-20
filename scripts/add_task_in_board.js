@@ -162,6 +162,7 @@ async function collectDataForNewTask(params) {
       category: inputCategory.value,
       subtask: subtaskObject || [],
       status: status || "toDo",
+      user: localStorage.userId,
     },
   };
 }
@@ -187,4 +188,8 @@ function collectTheSubtasks() {
 async function createTaskButtonClick() {
   let card = await collectDataForNewTask();
   addDataToFireBase("tasks", card);
+}
+
+function getCurrentUser() {
+  console.log(localStorage.userId);
 }

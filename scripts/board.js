@@ -91,21 +91,27 @@ async function displayCardOnBoard() {
     const subtaskArray = Array.isArray(element.subtask) ? element.subtask : [];
     const subtasksCompleted = await countCompletedSubtasks(subtaskArray);
     const totalSubtasks = subtaskArray.length;
-    if (element.status == "toDo") {
-      toDo.innerHTML += renderCard(element.id, element.category, element.title, element.description, subtasksCompleted, totalSubtasks, element.prio);
+    console.log(element.user);
+    console.log(localStorage.userId);
+
+    if (element.user === localStorage.userId) {
+      if (element.status == "toDo") {
+        toDo.innerHTML += renderCard(element.id, element.category, element.title, element.description, subtasksCompleted, totalSubtasks, element.prio);
+      }
+      if (element.status == "progress") {
+        progress.innerHTML += renderCard(element.id, element.category, element.title, element.description, subtasksCompleted, totalSubtasks, element.prio);
+      }
+      if (element.status == "feedback") {
+        feedback.innerHTML += renderCard(element.id, element.category, element.title, element.description, subtasksCompleted, totalSubtasks, element.prio);
+      }
+      if (element.status == "done") {
+        done.innerHTML += renderCard(element.id, element.category, element.title, element.description, subtasksCompleted, totalSubtasks, element.prio);
+      }
+      calPercentageOfCompletedSubtasks(totalSubtasks, subtasksCompleted, element.id);
+      addProfilesToCard(key, element.assigned);
     }
-    if (element.status == "progress") {
-      progress.innerHTML += renderCard(element.id, element.category, element.title, element.description, subtasksCompleted, totalSubtasks, element.prio);
-    }
-    if (element.status == "feedback") {
-      feedback.innerHTML += renderCard(element.id, element.category, element.title, element.description, subtasksCompleted, totalSubtasks, element.prio);
-    }
-    if (element.status == "done") {
-      done.innerHTML += renderCard(element.id, element.category, element.title, element.description, subtasksCompleted, totalSubtasks, element.prio);
-    }
-    calPercentageOfCompletedSubtasks(totalSubtasks, subtasksCompleted, element.id);
-    addProfilesToCard(key, element.assigned);
   }
+
   noTaskToDo();
 }
 
@@ -190,13 +196,6 @@ async function getContactsFromFireBase(list) {
 }
 
 async function initialize() {
-  // let profilesContacts = await getContactsFromFireBase(assigContacts);
-  // let IDkey = `task_${Date.now()}`;
-  // console.log(IDkey);
-
-  // const today = taskTemplate(IDkey, "TEST", "test", profilesContacts, "05.02.2025", "low", "User Task", subtaskList, "progress");
-
-  // addDataToFireBase("tasks", today);
   displayCardOnBoard();
 }
 
