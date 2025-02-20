@@ -186,10 +186,23 @@ function collectTheSubtasks() {
 }
 
 async function createTaskButtonClick() {
+  const inputFiledTitle = document.querySelector("#title");
+  const inputFiledDate = document.querySelector("#date");
+  const inputFiledCategory = document.querySelector("#category");
+
+  if (inputFiledTitle.value.length === 0 || inputFiledDate.value.length === 0 || inputFiledCategory.value.length === 0) {
+    console.log("NO ");
+  }
+
   let card = await collectDataForNewTask();
   addDataToFireBase("tasks", card);
 }
 
 function getCurrentUser() {
   console.log(localStorage.userId);
+}
+
+function mimicPlaceHolder() {
+  let placeholder = document.querySelector('option[value="placeholder"]');
+  placeholder.remove();
 }

@@ -254,7 +254,8 @@ function HTMLTamplateForAddTaskInBorad() {
               </div>
               <div class="inputfield-title-container">
                 <span class="display-flex"><p class="tasktitles">Category</p><p class="color-red tasktitles">*</p></span>
-                  <select class="inputfield" id="category" placeholder="Select task category" required>
+                  <select onclick="mimicPlaceHolder()" class="inputfield" id="category" placeholder="Select task category" required>
+                      <option value="placeholder">Select task category</option>
                       <option value="Technical Task">Technical Task</option>
                       <option value="User Story">User Story</option>
                   </select>
