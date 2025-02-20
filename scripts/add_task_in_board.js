@@ -57,8 +57,7 @@ function buttonUrgent(event) {
   let btnMedium = document.querySelector("#medium");
   let btnLow = document.querySelector("#low");
   storeThePrioValue = event.currentTarget.id;
-  btnUrgent.style.backgroundColor = "rgb(255, 61, 0)";
-  btnUrgent.style.color = "white";
+  btnUrgent.style = "background-color:rgb(255, 61, 0); color: white";
   document.querySelector("#iconurgent").firstChild.src = "./assets/icons/addTask/icon_clicket_urgent.svg";
   if (btnMedium.hasAttribute("style") || btnLow.hasAttribute("style")) {
     btnMedium.removeAttribute("style");
@@ -73,8 +72,7 @@ function buttonMedium(event) {
   let btnMedium = document.querySelector("#medium");
   let btnLow = document.querySelector("#low");
   storeThePrioValue = event.currentTarget.id;
-  btnMedium.style.backgroundColor = "rgb(255, 168, 0)";
-  btnMedium.style.color = "white";
+  btnMedium.style = "background-color:rgb(255, 168, 0); color: white";
   document.querySelector("#iconmedium").firstChild.src = "./assets/icons/addTask/icon_clicket_medium.svg";
   if (btnUrgent.hasAttribute("style") || btnLow.hasAttribute("style")) {
     btnUrgent.removeAttribute("style");
@@ -90,8 +88,7 @@ function buttonLow(event) {
   let btnMedium = document.querySelector("#medium");
   let btnLow = document.querySelector("#low");
   storeThePrioValue = event.currentTarget.id;
-  btnLow.style.backgroundColor = "rgb(122, 226, 41)";
-  btnLow.style.color = "white";
+  btnLow.style = "background-color: rgb(122, 226, 41); color: white";
   document.querySelector("#iconlow").firstChild.src = "./assets/icons/addTask/icon_clicket_low.svg";
   if (btnMedium.hasAttribute("style") || btnUrgent.hasAttribute("style")) {
     btnMedium.removeAttribute("style");
