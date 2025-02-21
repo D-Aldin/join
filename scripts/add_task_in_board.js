@@ -189,12 +189,10 @@ function collectTheSubtasks() {
 // BUG
 function requiredFieldTitle() {
   const inputFiledTitle = document.querySelector("#title");
-
   if (inputFiledTitle.value.length === 0) {
     inputFiledTitle.classList.add("required_color");
     document.querySelector("#titleRequired").classList.remove("hide_element");
   }
-
   inputFiledTitle.addEventListener("input", function () {
     this.classList.remove("required_color");
     document.querySelector("#titleRequired").classList.add("hide_element");
@@ -244,7 +242,6 @@ async function createTask() {
   const inputFiledTitle = document.querySelector("#title");
   const inputFiledDate = document.getElementById("date");
   const inputFiledCategory = document.querySelector("#category");
-
   if (inputFiledTitle.value.length === 0 || !inputFiledDate.value || inputFiledDate.value === 0 || inputFiledCategory.value === "placeholder") {
     return 0;
   } else {
