@@ -222,6 +222,7 @@ function HTMLTamplateForAddTaskInBorad() {
               <div class="inputfield-title-container">
                   <span class="display-flex"><p class="display-flex tasktitles">Title</p><p class="color-red tasktitles">*</p></span>
                   <input class="inputfield" id="title" placeholder="Enter a title" type="text" >
+                  <span id="titleRequired" class="required hide_element">This field is requierd</span>
               </div>
               <div class="inputfield-title-container">
                   <p class="tasktitles">Description</p>
@@ -243,6 +244,7 @@ function HTMLTamplateForAddTaskInBorad() {
               <div class="inputfield-title-container">
                   <span class="display-flex"><p class="tasktitles">Due date</p><p class="color-red tasktitles">*</p></span>
                   <input class="inputfield" id="date" type="date" required>
+                  <span id="dateRequired" class="required hide_element">This field is requierd</span>
               </div>
               <div class="inputfield-title-container">
                   <p class="tasktitles">Prio</p>
@@ -259,6 +261,7 @@ function HTMLTamplateForAddTaskInBorad() {
                       <option value="Technical Task">Technical Task</option>
                       <option value="User Story">User Story</option>
                   </select>
+                  <span id="categoryRequired" class="required hide_element">This field is requierd</span>
               </div>
               <div class="inputfield-title-container">
                 <p class="tasktitles">Subtasks</p>
@@ -289,7 +292,7 @@ function HTMLTamplateForAddTaskInBorad() {
             <h5><p>*</p>This field is required</h5>
               <div class="buttons_create_and_cancel">
                 <button class="cancelBtn transition">Cancel</button>
-                <button onclick="createTaskButtonClick()" class="createBtn transition">Create Task</button>
+                <button onclick="createTask()" class="createBtn transition">Create Task</button>
               </div>
           </div> `;
 }

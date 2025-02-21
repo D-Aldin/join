@@ -1,6 +1,7 @@
 let contactList = [];
 let storeThePrioValue = " ";
 let subtaskObject = {};
+let statusOfRequired = false;
 
 function showOverlay(event) {
   document.querySelector("#overlayForAddTask").style.display = "block";
@@ -186,35 +187,46 @@ function collectTheSubtasks() {
 }
 
 // BUG
-async function createTaskButtonClick() {
+function requiredFieldTitle() {
   const inputFiledTitle = document.querySelector("#title");
-  const inputFiledDate = document.getElementById("date");
-  const inputFiledCategory = document.querySelector("#category");
-  if (inputFiledTitle.value.length === 0) {
-    inputFiledTitle.style = "border: solid 1px rgb(255 0 0);";
-  }
-  if (!inputFiledDate.value) {
-    inputFiledDate.style = "border: solid 1px rgb(255 0 0);";
-  }
-  if (inputFiledCategory.value === "placeholder") {
-    inputFiledCategory.style = "border: solid 1px rgb(255 0 0);";
-  }
-  inputFiledTitle.addEventListener("input", function () {
-    this.style = "solid 1px rgba(209, 209, 209, 1);";
-  });
-  inputFiledDate.addEventListener("input", function () {
-    this.style = "solid 1px rgba(209, 209, 209, 1);";
-  });
-  inputFiledCategory.addEventListener("input", function () {
-    this.style = "solid 1px rgba(209, 209, 209, 1);";
-  });
 
-  let card = await collectDataForNewTask();
-  addDataToFireBase("tasks", card);
+  if (inputFiledTitle.value.length === 0) {
+    inputFiledTitle.classList.add("required_color");
+    document.querySelector("#titleRequired").classList.remove("hide_element");
+  }
+
+  inputFiledTitle.addEventListener("input", function () {
+    this.classList.remove("required_color");
+    document.querySelector("#titleRequired").classList.add("hide_element");
+  });
 }
 
-function getCurrentUser() {
-  console.log(localStorage.userId);
+function requiredFieldDate() {
+  const inputFiledDate = document.getElementById("date");
+  if (!inputFiledDate.value || inputFiledDate.value === "") {
+    inputFiledDate.classList.add("required_color");
+    document.querySelector("#dateRequired").classList.remove("hide_element");
+  }
+  inputFiledDate.addEventListener("change", function () {
+    this.classList.remove("required_color");
+    document.querySelector("#dateRequired").classList.add("hide_element");
+  });
+  inputFiledDate.addEventListener("input", function () {
+    this.classList.remove("required_color");
+    document.querySelector("#dateRequired").classList.add("hide_element");
+  });
+}
+
+function requiredFieldCategory() {
+  const inputFiledCategory = document.querySelector("#category");
+  if (inputFiledCategory.value === "placeholder") {
+    inputFiledCategory.classList.add("required_color");
+    document.querySelector("#categoryRequired").classList.remove("hide_element");
+  }
+  inputFiledCategory.addEventListener("input", function () {
+    this.classList.remove("required_color");
+    document.querySelector("#categoryRequired").classList.add("hide_element");
+  });
 }
 
 function mimicPlaceHolder() {
@@ -223,4 +235,20 @@ function mimicPlaceHolder() {
     return;
   }
   placeholder.remove();
+}
+
+async function createTask() {
+  requiredFieldTitle();
+  requiredFieldDate();
+  requiredFieldCategory();
+  const inputFiledTitle = document.querySelector("#title");
+  const inputFiledDate = document.getElementById("date");
+  const inputFiledCategory = document.querySelector("#category");
+
+  if (inputFiledTitle.value.length === 0 || !inputFiledDate.value || inputFiledDate.value === 0 || inputFiledCategory.value === "placeholder") {
+    return 0;
+  } else {
+    let card = await collectDataForNewTask();
+    addDataToFireBase("tasks", card);
+  }
 }

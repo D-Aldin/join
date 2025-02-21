@@ -199,3 +199,12 @@
 .new_sizes {
   width: 430px;
 }
+
+.required {
+  color: rgb(255, 129, 144);
+  font-size: 0.78rem;
+}
+
+.required_color {
+  border: solid 1px rgb(255, 129, 144);
+}
