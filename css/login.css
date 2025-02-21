@@ -1,20 +1,4 @@
-@font-face {
-  font-family: FigTreeFont;
-  src: url(../assets/fonts/Figtree/static/Figtree-Bold.ttf) format("woff2"), url(../assets/fonts//Figtree/static/Figtree-Bold.ttf) format("woff");
-}
-
-@font-face {
-  font-family: InterBold;
-  src: url(..//assets/fonts/Inter/static/Inter_18pt-Bold.ttf) format("woff2"), url(../assets/fonts/Inter/static/Inter_18pt-ExtraBold.ttf) format("woff");
-}
-
-@font-face {
-  font-family: InterLight;
-  src: url(../assets/fonts/Inter/static/Inter_18pt-Light.ttf) format("woff2"), url(../assets/fonts/Inter/static/Inter_18pt-Light.ttf) format("woff");
-}
-
 body {
-  font-family: InterBold;
   margin: 0;
   padding: 0;
   width: 100%;
@@ -108,9 +92,7 @@ header {
 }
 
 h1 {
-  font-family: InterBold;
   text-align: center;
-  font-weight: bolder;
   font-size: 40px;
   margin-bottom: 13px;
   margin-top: 10px;
