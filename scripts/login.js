@@ -1,5 +1,7 @@
 const BASE_URL = "https://dv-join-bbc2e-default-rtdb.europe-west1.firebasedatabase.app/";
 const refLoginButton = document.querySelector("#login_btn");
+const passwordInput = document.getElementById("loginPassword");
+const togglePassword = document.getElementById("togglePassword");
 let email;
 let password;
 
@@ -49,29 +51,26 @@ document.querySelector("#guest_log").onclick = function () {
 
 refLoginButton.addEventListener("click", getDataFromLogin);
 
-const passwordInput = document.getElementById("loginPassword");
-const togglePassword = document.getElementById("togglePassword");
-
 passwordInput.addEventListener("input", () => {
   if (passwordInput.value.length === 0) {
-    togglePassword.src = "../assets/icons/signUp/lock.svg";
+    togglePassword.src = "../assets/icons/login_and_signUp/lock.svg";
   } else if (passwordInput.type === "password") {
-    togglePassword.src = "../assets/icons/signUp/visibility_off.svg";
+    togglePassword.src = "../assets/icons/login_and_signUp/visibility_off.svg";
   } else {
-    togglePassword.src = "../assets/icons/signUp/visibility.svg";
+    togglePassword.src = "../assets/icons/login_and_signUp/visibility.svg";
   }
 });
 
 togglePassword.addEventListener("click", () => {
   if (passwordInput.type === "password") {
     passwordInput.type = "text";
-    togglePassword.src = "../assets/icons/signUp/visibility.svg";
+    togglePassword.src = "../assets/icons/login_and_signUp/visibility.svg";
   } else {
     passwordInput.type = "password";
     if (passwordInput.value.length === 0) {
-      togglePassword.src = "../assets/icons/signUp/lock.svg";
+      togglePassword.src = "../assets/icons/login_and_signUp/lock.svg";
     } else {
-      togglePassword.src = "../assets/icons/signUp/visibility_off.svg";
+      togglePassword.src = "../assets/icons/login_and_signUp/visibility_off.svg";
     }
   }
 });
