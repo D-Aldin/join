@@ -39,7 +39,7 @@
           <label for="loginPassword"></label>
           <div class="password_container">
             <input id="loginPassword" name="password" type="password" placeholder="Password" required />
-            <img id="togglePassword" src="./assets/icons/login/lock.svg" alt="Toggle Password Visibility" class="password_icon cursor_pointer" />
+            <img id="togglePassword" src="./assets/icons/signUp/lock.svg" alt="Toggle Password Visibility" class="password_icon cursor_pointer" />
           </div>
           <span class="checkEmailPassword"></span>
           <div class="form_btn">
@@ -72,10 +72,17 @@
             <input id="signUpEmail" name="email" type="email" required placeholder="Email" />
 
             <label for="signUppassword"></label>
-            <input id="signUppassword" name="password" type="password" required placeholder="Password" />
+            <div class="password_container">
+              <input id="signUppassword" name="password" type="password" required placeholder="Password" />
+              <img id="toggleSignUpPassword" src="./assets/icons/signUp/lock.svg" alt="Toggle Password Visibility" class="password_icon cursor_pointer" />
+            </div>
 
             <label for="signUpconfirmPassword"></label>
-            <input id="signUpconfirmPassword" name="confirmPassword" type="password" required placeholder="Confirm Password" />
+            <div class="password_container">
+              <input id="signUpconfirmPassword" name="confirmPassword" type="password" required placeholder="Confirm Password" />
+              <img id="toggleSignUpConfirmPassword" src="./assets/icons/signUp/lock.svg" alt="Toggle Password Visibility" class="password_icon cursor_pointer" />
+            </div>
+
             <span class="checkPassword"></span>
 
             <div class="privacy_police_content">
