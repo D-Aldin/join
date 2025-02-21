@@ -48,3 +48,30 @@ document.querySelector("#guest_log").onclick = function () {
 };
 
 refLoginButton.addEventListener("click", getDataFromLogin);
+
+const passwordInput = document.getElementById("loginPassword");
+const togglePassword = document.getElementById("togglePassword");
+
+passwordInput.addEventListener("input", () => {
+  if (passwordInput.value.length === 0) {
+    togglePassword.src = "../assets/icons/signUp/lock.svg";
+  } else if (passwordInput.type === "password") {
+    togglePassword.src = "../assets/icons/signUp/visibility_off.svg";
+  } else {
+    togglePassword.src = "../assets/icons/signUp/visibility.svg";
+  }
+});
+
+togglePassword.addEventListener("click", () => {
+  if (passwordInput.type === "password") {
+    passwordInput.type = "text";
+    togglePassword.src = "../assets/icons/signUp/visibility.svg";
+  } else {
+    passwordInput.type = "password";
+    if (passwordInput.value.length === 0) {
+      togglePassword.src = "../assets/icons/signUp/lock.svg";
+    } else {
+      togglePassword.src = "../assets/icons/signUp/visibility_off.svg";
+    }
+  }
+});

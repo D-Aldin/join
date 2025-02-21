@@ -207,7 +207,38 @@ h1 {
   background-position: calc(100% - 10px);
 }
 
-#loginPassword,
+#loginEmail,
+#loginPassword {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 12px;
+  border-radius: 10px;
+  border: 1px solid rgba(209, 209, 209, 1);
+  outline: none;
+  font-size: 20px;
+  font-weight: 400;
+  box-sizing: border-box;
+}
+
+.password_container {
+  position: relative;
+  width: 100%;
+}
+
+.password_icon {
+  position: absolute;
+  right: 10px;
+  top: 40%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  width: 24px;
+  height: 24px;
+}
+
+#loginPassword {
+  background-image: none;
+}
+
 #signUppassword,
 #signUpconfirmPassword {
   background: url("../assets/icons/signUp/lock.svg") no-repeat right center;

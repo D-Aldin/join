@@ -37,7 +37,10 @@
           <label for="loginEmail"></label>
           <input id="loginEmail" name="email" type="email" placeholder="Email" required />
           <label for="loginPassword"></label>
-          <input id="loginPassword" name="password" type="password" placeholder="Password" required />
+          <div class="password_container">
+            <input id="loginPassword" name="password" type="password" placeholder="Password" required />
+            <img id="togglePassword" src="./assets/icons/login/lock.svg" alt="Toggle Password Visibility" class="password_icon cursor_pointer" />
+          </div>
           <span class="checkEmailPassword"></span>
           <div class="form_btn">
             <button id="login_btn" type="submit" class="transition">Log in</button>
