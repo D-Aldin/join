@@ -80,8 +80,8 @@ document.addEventListener("DOMContentLoaded", function () {
   const guestLogButton = document.querySelector("#guest_log");
   if (guestLogButton) {
     guestLogButton.onclick = function () {
-      localStorage.setItem("isGuest", "true");
-      localStorage.removeItem("userId");
+      localStorage.setItem("userId", "guest");
+      // localStorage.removeItem("userId");
       window.location.href = "summary.html";
     };
   } else {

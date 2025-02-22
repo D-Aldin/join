@@ -46,22 +46,6 @@ async function updateStatusInDB(path = "", idNumber, status) {
   noTaskToDo();
 }
 
-// function taskTemplate(id, title, description, assigned, date, prio, category, subtask, status) {
-//   return {
-//     [id]: {
-//       id: id,
-//       title: title,
-//       description: description || " ",
-//       assigned: assigned,
-//       date: date,
-//       prio: prio || " ",
-//       category: category,
-//       subtask: subtask || [],
-//       status: status || "toDo",
-//     },
-//   };
-// }
-
 async function fetchTasks(path = "") {
   let response = await fetch(BASE_URL + path + ".json", {
     method: "GET",
@@ -91,6 +75,9 @@ async function displayCardOnBoard() {
     const subtaskArray = Array.isArray(element.subtask) ? element.subtask : [];
     const subtasksCompleted = await countCompletedSubtasks(subtaskArray);
     const totalSubtasks = subtaskArray.length;
+    const keyFromLocalSotage = Object.keys(localStorage)[0];
+    // console.log(keyFromLocalSotage);
+
     if (element.user === localStorage.userId) {
       if (element.status == "toDo") {
         toDo.innerHTML += renderCard(element.id, element.category, element.title, element.description, subtasksCompleted, totalSubtasks, element.prio);
@@ -108,7 +95,6 @@ async function displayCardOnBoard() {
       addProfilesToCard(key, element.assigned);
     }
   }
-
   noTaskToDo();
 }
 
