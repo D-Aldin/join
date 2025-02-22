@@ -245,7 +245,9 @@ async function createTask() {
   if (inputFiledTitle.value.length === 0 || !inputFiledDate.value || inputFiledDate.value === 0 || inputFiledCategory.value === "placeholder") {
     return 0;
   } else {
+    document.querySelector(".task_added").classList.remove("hide_element");
     let card = await collectDataForNewTask();
     addDataToFireBase("tasks", card);
+    setTimeout(hideOverlay, 1000);
   }
 }
