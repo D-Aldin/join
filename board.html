@@ -3,6 +3,9 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
     <link rel="shortcut icon" href="./assets/icons/logo/joinLarge.png" type="image/x-icon" />
     <script src="./scripts/submenu.js" defer></script>
     <script src="./scripts/HTMLTamplates.js" defer></script>
@@ -15,6 +18,7 @@
     <script src="./scripts/search_function.js" defer></script>
     <script src="./scripts/count_tasks.js" defer></script>
     <script src="./scripts/add_task_in_board.js" defer></script>
+    <script src="./scripts/checkActiveUser.js" defer></script>
 
     <link rel="stylesheet" href="./css/aside.css" />
     <link rel="stylesheet" href="./css/header.css" />
@@ -30,7 +34,7 @@
     <link rel="stylesheet" href="./css/add_task_in_board.css" />
     <title>Board</title>
   </head>
-  <body onload="noTaskToDo(), setAccountInitialsSubmenu(), initialize()">
+  <body onload="noTaskToDo(), setAccountInitialsSubmenu(), initialize(), checkUser()">
     <header>
       <div>
         <h1>Kanban Project Managment Tool</h1>
@@ -76,8 +80,8 @@
       <div class="submenu_section" onclick="window.location.href='./privacy_policy_login.html'">
         <a href="./privacy_policy_login.html" class="submenu_links_design link_privacy_policy_hover">Privacy Policy</a>
       </div>
-      <div class="submenu_section" onclick="window.location.href='./login.html'">
-        <a class="submenu_links_design link_login_hover" href="./login.html">Log out</a>
+      <div class="submenu_section" onclick="logout()">
+        <a class="submenu_links_design link_login_hover" onclick="logout()">Log out</a>
       </div>
     </div>
 

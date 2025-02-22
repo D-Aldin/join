@@ -1,3 +1,4 @@
+BASE_URL = "https://dv-join-bbc2e-default-rtdb.europe-west1.firebasedatabase.app/";
 let submenuRef = document.getElementById("submenu_position");
 let accountImg = document.querySelector(".account_circle");
 

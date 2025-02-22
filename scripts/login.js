@@ -25,6 +25,7 @@ async function loginUser(email) {
     const passwordFromDB = responseToJSON[key].password;
     if (emailFromDatabase === email && passwordFromDB === password) {
       localStorage.setItem("userId", key);
+      localStorage.removeItem("isGuest");
       window.location.href = "summary.html";
       userFound = true;
       break;
@@ -72,5 +73,19 @@ togglePassword.addEventListener("click", () => {
     } else {
       togglePassword.src = "../assets/icons/login_and_signUp/visibility_off.svg";
     }
+  }
+});
+
+document.addEventListener("DOMContentLoaded", function () {
+  // Gast-Login
+  const guestLogButton = document.querySelector("#guest_log");
+  if (guestLogButton) {
+    guestLogButton.onclick = function () {
+      localStorage.setItem("isGuest", "true"); // Gaststatus speichern
+      localStorage.removeItem("userId"); // userId zurücksetzen
+      window.location.href = "summary.html"; // Weiterleitung zur geschützten Seite
+    };
+  } else {
+    console.error("Element #guest_log nicht gefunden!");
   }
 });

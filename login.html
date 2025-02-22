@@ -6,6 +6,7 @@
     <link rel="shortcut icon" href="./assets/icons/logo/joinLarge.png" type="image/x-icon" />
     <script type="module" src="./scripts/signUp.js" defer></script>
     <script src="./scripts/login.js" defer></script>
+    <script src="./scripts/checkActiveUser.js" defer></script>
 
     <link rel="stylesheet" href="./css/standard.css" />
     <link rel="stylesheet" href="./css/login.css" />
@@ -66,10 +67,10 @@
         <div>
           <form id="signUp" class="form_content" action="">
             <label for="name"></label>
-            <input id="name" type="text" required placeholder="Name" />
+            <input id="name" name="name" type="text" required placeholder="Name" />
 
             <label for="signUpEmail"></label>
-            <input id="signUpEmail" type="email" required placeholder="Email" />
+            <input id="signUpEmail" name="email" type="email" required placeholder="Email" />
 
             <label for="signUppassword"></label>
             <div class="password_container">
