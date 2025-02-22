@@ -8,14 +8,13 @@ function renderEditMenu() {
   refCardBox.innerHTML += HTMLTamplateForTheEditFunk();
   displaySubtasksInTheEditMenu();
   changeTitleAndDescription();
+  changeDate();
   displayValuesInTheInputFields();
 }
 
 function displayValuesInTheInputFields() {
   document.querySelector("#editTitle").value = titleValue;
   document.querySelector("#editDescription").value = descriptionValue;
-  console.log(dateValue);
-
   document.querySelector("#editDate").value = dateValue;
 }
 
@@ -52,7 +51,11 @@ async function changeTitleAndDescription() {
 }
 
 async function changeDate() {
-  let taskDate = document.querySelector("#date");
+  let taskDate = document.querySelector("#editDate");
+  console.log(idOfcurrentElement);
+  taskDate.addEventListener("change", function () {
+    saveDataToFire("date", taskDate.value);
+  });
 }
 
 // TODO reduce lines of code
@@ -297,7 +300,7 @@ async function okBtnFunk() {
   let id = idOfcurrentElement;
   const fetchDetails = await fetchCardDetails(taskPath, id);
   const refersToCard = fetchDetails[id];
-  refCardBox.innerHTML = HTMLForOpenCard(refersToCard.category, refersToCard.title, refersToCard.description, refersToCard.data, refersToCard.prio, id);
+  refCardBox.innerHTML = HTMLForOpenCard(refersToCard.category, refersToCard.title, refersToCard.description, refersToCard.date, refersToCard.prio, id);
   managenProfilesWhenCardOpen(id);
   renderSubtasks(id);
 }
