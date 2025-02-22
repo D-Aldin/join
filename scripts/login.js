@@ -77,13 +77,12 @@ togglePassword.addEventListener("click", () => {
 });
 
 document.addEventListener("DOMContentLoaded", function () {
-  // Gast-Login
   const guestLogButton = document.querySelector("#guest_log");
   if (guestLogButton) {
     guestLogButton.onclick = function () {
-      localStorage.setItem("isGuest", "true"); // Gaststatus speichern
-      localStorage.removeItem("userId"); // userId zurücksetzen
-      window.location.href = "summary.html"; // Weiterleitung zur geschützten Seite
+      localStorage.setItem("isGuest", "true");
+      localStorage.removeItem("userId");
+      window.location.href = "summary.html";
     };
   } else {
     console.error("Element #guest_log nicht gefunden!");

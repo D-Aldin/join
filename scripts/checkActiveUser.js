@@ -1,22 +1,16 @@
 function checkUser() {
   const isGuest = localStorage.getItem("isGuest");
   const userId = localStorage.getItem("userId");
-
   if (isGuest === "true" || userId) {
-    // Wenn der Benutzer ein Gast ist ODER ein regulärer Benutzer eingeloggt ist
-    return; // Keine Weiterleitung zur Login-Seite
+    return;
   }
-
-  // Wenn weder Gast noch regulärer Benutzer eingeloggt ist
-  window.location.replace("../login.html"); // Weiterleitung zur Login-Seite
+  window.location.replace("../login.html");
 }
 
 function logout() {
-  localStorage.removeItem("userId"); // userId entfernen
-  localStorage.removeItem("isGuest"); // Gaststatus entfernen
-  window.location.replace("../login.html"); // Zur Login-Seite weiterleiten
-
-  // History-API: Die aktuelle Seite aus der History entfernen
+  localStorage.removeItem("userId");
+  localStorage.removeItem("isGuest");
+  window.location.replace("../login.html");
   if (window.history && window.history.pushState) {
     window.history.pushState(null, "", window.location.href);
     window.onpopstate = function () {
