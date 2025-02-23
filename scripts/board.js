@@ -72,9 +72,8 @@ async function displayCardOnBoard() {
   for (const key in taskFromFireBase) {
     const element = taskFromFireBase[key];
     if (!element) continue;
-    const subtaskArray = Array.isArray(element.subtask) ? element.subtask : [];
-    const subtasksCompleted = Object.values(element.subtask).filter((sub) => sub.state === true).length;
-    const totalSubtasks = Object.keys(element.subtask).length;
+    const subtasksCompleted = element.subtask ? Object.values(element.subtask).filter((sub) => sub.state === true).length : 0;
+    const totalSubtasks = element.subtask ? Object.keys(element.subtask).length : 0;
     if (element.user === localStorage.userId) {
       if (element.status == "toDo") {
         toDo.innerHTML += renderCard(element.id, element.category, element.title, element.description, subtasksCompleted, totalSubtasks, element.prio);

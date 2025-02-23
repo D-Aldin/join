@@ -186,7 +186,6 @@ function collectTheSubtasks() {
   }
 }
 
-// BUG
 function requiredFieldTitle() {
   const inputFiledTitle = document.querySelector("#title");
   if (inputFiledTitle.value.length === 0) {
