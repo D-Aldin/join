@@ -315,12 +315,12 @@ function HTMLTamplateForSubtasksInAddTaskBoard(task) {
             </div>`;
 }
 
-function testTamplate() {
+function HTMLTamplateForEditSubtaskAreaAddTask(id) {
   return `<div class="edit_subtask_input_field ">
             <label for="editInputField"></label>
             <input class="input_edit_subtask_board_section" onclick="stopEventBubbel(event)" type="text" />
             <div class="buttons">
-              <img class="trash" onclick="deleteSubtask(event)" src="./assets/icons/board/subtasks_trash.svg" alt="trash" />
+              <img class="trash" onclick="deleteEditingSubtask(event)" src="./assets/icons/board/subtasks_trash.svg" alt="trash" id_trash="${id}" />
               <img src="./assets/icons/board/vector_line_for_subtask_edit.svg" alt="line" />
               <img onclick="confirmEditing(event)" class="confirm" src="./assets/icons/board/confirm.svg" alt="confirm" />
             </div>            

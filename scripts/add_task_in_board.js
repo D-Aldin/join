@@ -129,11 +129,18 @@ function deleteSubtaskBoardSection(event) {
 }
 
 function editSubtaskInAddTaskAreaBoard(event) {
-  task = event.currentTarget.parentElement.parentElement;
+  let task = event.currentTarget.parentElement.parentElement;
+  let id = task.id;
   document.getElementById(task.id).style.backgroundColor = "white";
-  task.innerHTML = testTamplate();
+  task.innerHTML = HTMLTamplateForEditSubtaskAreaAddTask(id);
   let inputField = document.querySelector(".edit_subtask_input_field input");
   inputField.value = task.id;
+}
+
+function deleteEditingSubtask(event) {
+  let taskID = event.currentTarget.getAttribute("id_trash");
+  let refTask = document.querySelector(`#${taskID}`);
+  refTask.remove();
 }
 
 function confirmEditing(event) {
