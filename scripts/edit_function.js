@@ -52,7 +52,6 @@ async function changeTitleAndDescription() {
 
 async function changeDate() {
   let taskDate = document.querySelector("#editDate");
-  console.log(idOfcurrentElement);
   taskDate.addEventListener("change", function () {
     saveDataToFire("date", taskDate.value);
   });
@@ -232,33 +231,7 @@ async function deleteSubtask(event) {
     headers: { "Content-Type": "application/json" },
   });
   document.querySelector(".subtasks_box").innerHTML = " ";
-  reorderSubtasks();
   displaySubtasksInTheEditMenu();
-}
-
-// TODO reduce lines of code
-async function reorderSubtasks() {
-  try {
-    const response = await fetch(`${BASE_URL}/tasks/${idOfcurrentElement}/subtask.json`);
-    const subtasks = await response.json();
-    if (!subtasks) {
-      console.log("No subtasks found.");
-      return;
-    }
-    console.log("Original subtasks:", subtasks);
-    let subtaskArray = Array.isArray(subtasks) ? subtasks.filter((subtask) => subtask !== null) : Object.values(subtasks).filter((subtask) => subtask !== null);
-    let reorderedSubtasks = subtaskArray.map((subtask, index) => ({ ...subtask }));
-    console.log("Reordered subtasks:", reorderedSubtasks);
-    const updateResponse = await fetch(`${BASE_URL}/tasks/${idOfcurrentElement}/subtask.json`, {
-      method: "PUT",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(reorderedSubtasks),
-    });
-    if (!updateResponse.ok) throw new Error("Failed to update Firebase");
-    console.log("Subtasks reordered successfully!");
-  } catch (error) {
-    console.error("Error reordering subtasks:", error);
-  }
 }
 
 // TODO reduce lines of code

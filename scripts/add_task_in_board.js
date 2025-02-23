@@ -182,7 +182,7 @@ function collectTheSubtasks() {
   let refAllChosenSubtasks = document.querySelectorAll(".subtask_paragraf");
   for (let index = 0; index < refAllChosenSubtasks.length; index++) {
     const task = refAllChosenSubtasks[index].innerHTML.substring(1);
-    subtaskObject[index] = { task: task, state: false };
+    subtaskObject[`sub${index}`] = { task: task, state: false };
   }
 }
 
