@@ -33,7 +33,6 @@
 }
 
 .submenu_section:hover {
-  transition: 0.125ms ease-in-out;
   background-color: rgb(42, 61, 89);
 }
 

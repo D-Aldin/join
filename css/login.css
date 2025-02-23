@@ -64,16 +64,23 @@ header {
   gap: 20px;
 }
 
+.sign_up span {
+  font-size: 20px;
+  font-weight: 400;
+}
+
 .sign_up button {
   background-color: rgb(42, 54, 71);
   color: white;
   padding: 10px;
   border: none;
   border-radius: 10px;
-  font-family: FigTreeFont;
-  font-weight: 200;
+  font-size: 16px;
+  font-weight: 700;
   cursor: pointer;
   margin-left: 20px;
+  height: 49px;
+  width: 91px;
 }
 
 .login_window {
@@ -168,10 +175,28 @@ h1 {
 #signUpEmail,
 #signUppassword,
 #signUpconfirmPassword {
-  border: 1px solid #ccc;
+  cursor: pointer;
+  border-radius: 10px;
+  border: 1px solid rgba(209, 209, 209, 1);
+  outline: none;
+  font-size: 20px;
+  font-weight: 400;
   height: 36px;
   border-radius: 12px;
   padding-left: 16px;
+}
+
+::placeholder {
+  color: rgba(209, 209, 209, 1);
+}
+
+#loginEmail:focus,
+#signUpEmail:focus,
+#loginPassword:focus,
+#signUppassword:focus,
+#signUpconfirmPassword:focus,
+#name:focus {
+  border: 1px solid rgb(41, 171, 226);
 }
 
 #loginEmail,
@@ -208,7 +233,6 @@ h1 {
   font-weight: bold;
   width: 140px;
   height: 40px;
-  font-family: FigTreeFont;
   font-size: large;
 }
 
@@ -228,7 +252,6 @@ h1 {
   font-weight: 400;
   width: 99px;
   height: 40px;
-  font-family: FigTreeFont;
   font-size: large;
 }
 
@@ -266,7 +289,6 @@ h1 {
 .checkPassword,
 .checkEmailPassword {
   color: red;
-  font-family: InterLight;
   font-size: 10px;
 }
 
@@ -275,7 +297,6 @@ h1 {
   justify-content: center;
   align-items: center;
   gap: 8px;
-  font-family: InterLight;
   font-size: small;
 }
 
@@ -321,8 +342,9 @@ h1 {
   margin: auto;
 }
 
-#goBackArrow {
+#goBackArrow:hover {
   cursor: pointer;
+  content: url(../assets/icons/help/arrow_hover.svg);
 }
 
 .display_none {

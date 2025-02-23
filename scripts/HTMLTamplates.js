@@ -247,9 +247,9 @@ function HTMLTamplateForAddTaskInBorad() {
               <div class="inputfield-title-container">
                   <p class="tasktitles">Prio</p>
                   <div class="button-container button-container-section-board">
-                      <button onclick="buttonUrgent(event)" id="urgent" class="prioBtn">Urgent <div id="iconurgent" class="prio_icon"><img src="assets/icons/addTask/icon_urgent.svg" alt=""></div></button>
-                      <button onclick="buttonMedium(event)" id="medium" class="prioBtn">Medium<div id="iconmedium" class="prio_icon"><img src="assets/icons/addTask/icon_medium.svg" alt=""></div></button>
-                      <button onclick="buttonLow(event)" id="low" class="prioBtn">Low<div id="iconlow" class="prio_icon"><img src="assets/icons/addTask/icon_low.svg" alt=""></div></button>
+                      <button onclick="buttonUrgent(event)" id="urgent" class="prioBtn transition">Urgent <div id="iconurgent" class="prio_icon"><img src="assets/icons/addTask/icon_urgent.svg" alt=""></div></button>
+                      <button onclick="buttonMedium(event)" id="medium" class="prioBtn transition">Medium<div id="iconmedium" class="prio_icon"><img src="assets/icons/addTask/icon_medium.svg" alt=""></div></button>
+                      <button onclick="buttonLow(event)" id="low" class="prioBtn">Low<div id="iconlow" class="prio_icon transition"><img src="assets/icons/addTask/icon_low.svg" alt=""></div></button>
                   </div>
               </div>
               <div class="inputfield-title-container">
@@ -287,8 +287,8 @@ function HTMLTamplateForAddTaskInBorad() {
           <div class="create_task_container">
             <h5><p>*</p>This field is required</h5>
               <div class="buttons_create_and_cancel">
-                <button class="cancelBtn">Cancel</button>
-                <button onclick="createTaskButtonClick()" class="createBtn">Create Task</button>
+                <button class="cancelBtn transition">Cancel</button>
+                <button onclick="createTaskButtonClick()" class="createBtn transition">Create Task</button>
               </div>
           </div> `;
 }
