@@ -26,11 +26,11 @@ body {
   }
 
   100% {
-    transform: translate(0, 0) scale(0.5);
+    transform: translate(0, 0) scale(0.45);
     opacity: 1;
     position: absolute;
-    top: -40px;
-    left: -20px;
+    top: -60px;
+    left: -30px;
   }
 }
 
