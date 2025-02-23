@@ -193,7 +193,7 @@ function HTMLTamplateForSubtasksInTheEditMenu(id, task) {
               <div class="subtask_edit_buttons">
                 <img class="pen" src="./assets/icons/board/subtasks_pen.svg" alt="edit">
                 <img src="./assets/icons/board/vector_line_for_subtask_edit.svg" alt="line"/>
-                <img class="trash" onclick="deleteSubtask(event)" src="./assets/icons/board/subtasks_trash.svg" alt="delete">
+                <img class="trash" onclick="deleteSubtask(event)" src="./assets/icons/board/subtasks_trash.svg" alt="delete" id_trash="${id}">
               </div>
             </div>`;
 }
@@ -202,9 +202,9 @@ function HTMLTamplateForEditSubtask(id) {
   return `
           <div  class="edit_subtask_input_field">
             <label for="editInputField"></label>
-            <input onclick="stopEventBubbel(event)" type="text" id="editInputField${id}" />
+            <input onclick="stopEventBubbel(event)" type="text" id="${id}" />
             <div class="buttons">
-              <img class="trash" onclick="deleteSubtask(event)" src="./assets/icons/board/subtasks_trash.svg" alt="trash" />
+              <img class="trash" onclick="deleteSubtask(event)" src="./assets/icons/board/subtasks_trash.svg" alt="trash" id_trash="${id}"/>
               <img src="./assets/icons/board/vector_line_for_subtask_edit.svg" alt="line" />
               <img class="confirm" src="./assets/icons/board/confirm.svg" alt="confirm" />
             </div>            
