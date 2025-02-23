@@ -47,6 +47,7 @@ function pushContactsToSelectField() {
 function openContactList() {
     let contactlist = document.getElementById('contact-list');
     let contactWrapper = document.getElementById('contact-wrapper');
+    document.getElementById('contact-input-border').classList.add('subtask-inputfield-focus');
     document.getElementById('contact-input-field').innerHTML = /*html*/`
         <img class="icon-drop-down" src="assets/icons/addTask/arrow_drop_downaa.svg" alt="">
     `
@@ -61,6 +62,7 @@ function openContactList() {
 
 function closeContactList(contactlist) {    
     contactlist.classList.add('display_none');
+    document.getElementById('contact-input-border').classList.remove('subtask-inputfield-focus');
     document.getElementById('contact-input-field').innerHTML = /*html*/`
         <img class="icon-drop-down" src="assets/icons/addTask/arrow_drop_downaa (1).svg" alt="">
     `
@@ -103,18 +105,38 @@ function resetPrioButton() {
     }
 }
 
+function submitTask() {
+    event.preventDefault();
+    const form = document.querySelector("form");
+    if (form.reportValidity()) {
+        finishTaskNotification();
+        creatTask();
+        clearAllTasks();
+        window.location.href = "http://127.0.0.1:5501/board.html";
+    } 
+}
+
 function creatTask() {
+    document.getElementById("title").required = true;
     let title = document.getElementById('title').value;
     let discription = document.getElementById('description').value;
     let date = document.getElementById('date').value;
     let category = document.getElementById('category').value;
     console.log(title, discription, date, category);
-    clearAllTasks();
 }
 
+function finishTaskNotification() {
+    document.getElementById('finish-box').classList.add('finish-container-activ');
+        setTimeout(()=>{
+        document.getElementById('finish-box').classList.remove('finish-container-activ')
+    }, 3000)
+} 
+
+
 function clearAllTasks() {
-    console.log('hello');
     resetPrioButton();
+    subtasks = [];
+    renderSubtasks();
     document.getElementById('title').value = '';
     document.getElementById('description').value = '';
     document.getElementById('assigned').value = '';
@@ -123,8 +145,20 @@ function clearAllTasks() {
     document.getElementById('subtask').value = '';
 }
 
+function borderFocus() {
+    let border = document.getElementById('subtusk-input-border')
+    border.classList.add('subtask-inputfield-focus');
+    document.addEventListener("click", function outsideClick(event) {
+        if (!border.contains(event.target)) {
+            border.classList.remove('subtask-inputfield-focus');
+            document.removeEventListener("click", outsideClick);
+        }
+    });
+}
+
 function writeSubtask() {
-    let subtask = document.getElementById('subtask').value  
+    let subtask = document.getElementById('subtask').value;
+    document.getElementById('subtusk-input-border').classList.add('subtask-inputfield-focus');
     if (subtask.length < 1) {
         setStandardButton();
     }
@@ -149,8 +183,7 @@ function setdubbleButton() {
             <div class="pixelbar-mini"></div>
             <button class="subtask-inputfield-button">    
                 <img onclick="setSubtask()" src="assets/icons/addTask/done.svg" alt="">
-            </button>
-        `
+            </button>`;
 }
 
 function clearsubtask() {
@@ -159,7 +192,8 @@ function clearsubtask() {
 }
 
 function setSubtask() {
-    let subtask = document.getElementById('subtask').value
+    let subtask = document.getElementById('subtask').value;
+
     subtasks.push(subtask);
     renderSubtasks();
     clearsubtask();
@@ -185,8 +219,7 @@ function subtasksTemplate(tasks, i, element) {
                 <div class="pixelbar-subtask"></div>
                 <button onclick="deleteSubtask(${i})" class="subtask-list-button"><img src="assets/icons/addTask/delete.svg" alt=""></button>
             </div>
-        </div>
-        `
+        </div>`
 }
 
 function deleteSubtask(x) {
@@ -204,8 +237,7 @@ function editSubtask(x) {
                 <button onclick="setEditSubtask(${x})" class="subtask-list-button"><img src="assets/icons/addTask/done.svg" alt=""></button>
                 <div class="pixelbar-subtask"></div>
                 <button onclick="deleteSubtask(${x})" class="subtask-list-button"><img src="assets/icons/addTask/delete.svg" alt=""></button>
-        </div>
-    `
+        </div>`
     currentsubtask = document.getElementById('current-subtask'+x);
     currentsubtask.value = subtasks[x];
     /*

@@ -73,14 +73,14 @@
     </div>
 
     <main>
-        <div class="task">
+        <form id="form" class="task">
             <div class="task-wrapper">
                 <h1 class=".h1-content-titles">Add Task</h1>
                 <div class="flex-container">
                     <div class="input-container">
                         <div class="inputfield-title-container">
                             <span class="display-flex"><p class="display-flex tasktitles">Title</p><p class="color-red tasktitles">*</p></span>
-                            <input class="inputfield" id="title" placeholder="Enter a title" type="text" >
+                            <input class="inputfield" id="title" placeholder="Enter a title" type="text" required>
                         </div>
                         <div class="inputfield-title-container">
                             <p class="tasktitles">Description</p>
@@ -90,7 +90,7 @@
                         <div class="inputfield-title-container">
                             <p class="tasktitles">Assigned to</p>
                             <div id="contact-wrapper">
-                              <div onclick="openContactList()" class="subtask-inputfield">
+                              <div onclick="openContactList()" id="contact-input-border" class="subtask-inputfield">
                                 <input id="contact-input" placeholder="select contacts to assign" class="subtask-inputfield-text" type="text">
                                 <div id="contact-input-field" class="subtask-button-container">
                                     <img class="icon-drop-down" src="assets/icons/addTask/arrow_drop_downaa (1).svg" alt="">
@@ -106,26 +106,27 @@
                     <div class="input-container">
                         <div class="inputfield-title-container">
                             <span class="display-flex"><p class="tasktitles">Due date</p><p class="color-red tasktitles">*</p></span>
-                            <input class="inputfield" value="dd/mm/yyyy" id="date" type="date" required>
+                            <input class="inputfield" id="date" type="date" required>
                         </div>
                         <div class="inputfield-title-container">
                             <p class="tasktitles">Prio</p>
                             <div class="button-container">
-                                <button onclick="setPrio('urgent')" id="urgent" class="urgentbutton">Urgent <div id="iconurgent" class="prio_icon"><img src="assets/icons/addTask/icon_urgent.svg" alt=""></div></button>
-                                <button onclick="setPrio('medium')" id="medium" class="urgentbutton">Medium<div id="iconmedium" class="prio_icon"><img src="assets/icons/addTask/icon_medium.svg" alt=""></div></button>
-                                <button onclick="setPrio('low')" id="low" class="urgentbutton">Low<div id="iconlow" class="prio_icon"><img src="assets/icons/addTask/icon_low.svg" alt=""></div></button>
+                                <button type="button" onclick="setPrio('urgent')" id="urgent" class="urgentbutton">Urgent <div id="iconurgent" class="prio_icon"><img src="assets/icons/addTask/icon_urgent.svg" alt=""></div></button>
+                                <button type="button" onclick="setPrio('medium')" id="medium" class="urgentbutton">Medium<div id="iconmedium" class="prio_icon"><img src="assets/icons/addTask/icon_medium.svg" alt=""></div></button>
+                                <button type="button" onclick="setPrio('low')" id="low" class="urgentbutton">Low<div id="iconlow" class="prio_icon"><img src="assets/icons/addTask/icon_low.svg" alt=""></div></button>
                             </div>
                         </div>
                         <div class="inputfield-title-container">
                           <span class="display-flex"><p class="tasktitles">Category</p><p class="color-red tasktitles">*</p></span>
-                            <select class="inputfield" id="category" placeholder="Select task category" required>
+                            <select class="inputfield" id="category" required>
+                                <option class="placeholder" value="" disabled selected>Select task category</option>
                                 <option value="Technical Task">Technical Task</option>
                                 <option value="User Story">User Story</option>
                             </select>
                         </div>
                         <div class="inputfield-title-container">
                           <p class="tasktitles">Subtasks</p>
-                          <div class="subtask-inputfield">
+                          <div onclick="borderFocus()" id="subtusk-input-border" class="subtask-inputfield">
                             <input id="subtask" class="subtask-inputfield-text" placeholder="Add new subtask" oninput="writeSubtask()" type="text">
                             <div id="subtaskbuttons" class="subtask-button-container">
                               <button class="subtask-inputfield-button">
@@ -142,11 +143,15 @@
                   <span class="display-flex"><p class="color-red">*</p><p></p>This field is required</p></span>
                   <div class="button-container-clear-creat">
                     <button class="clear-button" onclick="clearAllTasks()">Clear <div class="icon-box"></div></button>
-                    <button class="great-button" onclick="creatTask()">Creat Task <img src="assets/icons/addTask/check.svg" alt=""></button>
+                    <button type="submit" class="great-button" onclick="submitTask()">Creat Task <img src="assets/icons/addTask/check.svg" alt=""></button>
                   </div>
                 </div>
             </div>
-        </div>
+            <div id="finish-box" class="finish-container">
+                <p>Task added to board</p>
+                <img src="./assets/icons/aside/board.svg" alt="">
+            </div>
+          </form>
     </main>
   </body>
 </html>
