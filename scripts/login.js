@@ -81,7 +81,6 @@ document.addEventListener("DOMContentLoaded", function () {
   if (guestLogButton) {
     guestLogButton.onclick = function () {
       localStorage.setItem("userId", "guest");
-      // localStorage.removeItem("userId");
       window.location.href = "summary.html";
     };
   } else {

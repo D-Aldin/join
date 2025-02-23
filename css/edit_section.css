@@ -193,6 +193,7 @@ select {
   justify-content: center;
   align-items: center;
   gap: 10px;
+  bottom: 23px;
 }
 
 #okBtn:hover {

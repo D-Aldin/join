@@ -52,7 +52,6 @@ async function changeTitleAndDescription() {
 
 async function changeDate() {
   let taskDate = document.querySelector("#editDate");
-  console.log(idOfcurrentElement);
   taskDate.addEventListener("change", function () {
     saveDataToFire("date", taskDate.value);
   });
@@ -195,18 +194,21 @@ async function displaySubtasksInTheEditMenu() {
 async function editSubtaskFunk(event) {
   const refSubtaskID = event.currentTarget.getAttributeNode("id_subtask").value;
   const refTaskElement = event.currentTarget;
+  // console.log(refSubtaskID);
+  // console.log(refTaskElement);
+
   const dataFromFireBase = await fetchCardDetails(`${taskPath}/${idOfcurrentElement}/subtask/${refSubtaskID}`, idOfcurrentElement);
   refTaskElement.innerHTML = HTMLTamplateForEditSubtask(refSubtaskID);
   setupSubtaskEditing(refSubtaskID, dataFromFireBase);
 }
 
 function setupSubtaskEditing(refSubtaskID, dataFromFireBase) {
-  let inputField = document.getElementById(`editInputField${refSubtaskID}`);
+  let inputField = document.getElementById(`${refSubtaskID}`);
   if (!inputField) return;
   inputField.value = dataFromFireBase.task;
-  document.querySelector(".subtask_box_items").classList.add("under_line");
-  document.querySelector(".subtask_box_items").classList.remove("subtask_box_items");
-  document.querySelector(`#editInputField${refSubtaskID}`).addEventListener("change", (event) => {
+  document.querySelector(`div[id_subtask="${refSubtaskID}"]`).classList.add("under_line");
+  document.querySelector(`div[id_subtask="${refSubtaskID}"]`).classList.remove("subtask_box_items");
+  document.querySelector(`input[id="${refSubtaskID}"]`).addEventListener("change", (event) => {
     saveNewSubtask(refSubtaskID, event.target.value);
   });
   document.querySelector(".confirm").addEventListener("click", (event) => {
@@ -225,45 +227,23 @@ async function saveNewSubtask(subtaskID, newValue) {
 }
 
 async function deleteSubtask(event) {
-  const refTrashButton = event.currentTarget;
-  const refSubtaskID = refTrashButton.parentElement.parentElement.getAttributeNode("id_subtask").value;
-  await fetch(`${BASE_URL}/${taskPath}/${idOfcurrentElement}/subtask/${refSubtaskID}.json`, {
+  const refTrashButton = event.currentTarget.getAttribute("id_trash");
+
+  // const refSubtaskID = refTrashButton.parentElement.parentElement.getAttributeNode("id_subtask").value;
+  console.log(refTrashButton);
+
+  // console.log(refSubtaskID);
+
+  await fetch(`${BASE_URL}/${taskPath}/${idOfcurrentElement}/subtask/${refTrashButton}.json`, {
     method: "DELETE",
     headers: { "Content-Type": "application/json" },
   });
   document.querySelector(".subtasks_box").innerHTML = " ";
-  reorderSubtasks();
   displaySubtasksInTheEditMenu();
 }
 
 // TODO reduce lines of code
-async function reorderSubtasks() {
-  try {
-    const response = await fetch(`${BASE_URL}/tasks/${idOfcurrentElement}/subtask.json`);
-    const subtasks = await response.json();
-    if (!subtasks) {
-      console.log("No subtasks found.");
-      return;
-    }
-    console.log("Original subtasks:", subtasks);
-    let subtaskArray = Array.isArray(subtasks) ? subtasks.filter((subtask) => subtask !== null) : Object.values(subtasks).filter((subtask) => subtask !== null);
-    let reorderedSubtasks = subtaskArray.map((subtask, index) => ({ ...subtask }));
-    console.log("Reordered subtasks:", reorderedSubtasks);
-    const updateResponse = await fetch(`${BASE_URL}/tasks/${idOfcurrentElement}/subtask.json`, {
-      method: "PUT",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(reorderedSubtasks),
-    });
-    if (!updateResponse.ok) throw new Error("Failed to update Firebase");
-    console.log("Subtasks reordered successfully!");
-  } catch (error) {
-    console.error("Error reordering subtasks:", error);
-  }
-}
-
-// TODO reduce lines of code
 async function addNewSubtask(event) {
-  let setIndex;
   let newTaskObj;
   let response = await fetch(`${BASE_URL}/tasks/${idOfcurrentElement}/subtask.json`, {
     method: "GET",
@@ -276,7 +256,7 @@ async function addNewSubtask(event) {
   }
   let theNewTask = document.querySelector("#editSubtask").value;
   newTaskObj = {
-    [setIndex]: {
+    [`subtask_${Date.now()}`]: {
       task: theNewTask,
       state: false,
     },

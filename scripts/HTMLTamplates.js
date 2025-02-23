@@ -44,10 +44,10 @@ function contactTamplateForAddTaskSectionInBoard(contact, color, id) {
          `;
 }
 
-function subtasksTamplate(task, id, state) {
+function subtasksTamplate(task, id) {
   return `
           <div class="check_box">
-            <input type="checkbox" id="subtask${id}" name="subtask${id}" value="task${id}"/>
+            <input type="checkbox" id="${id}" name="${id}" value="${id}"/>
             <label for="subtask${id}">${task}</label>
           </div>`;
 }
@@ -193,7 +193,7 @@ function HTMLTamplateForSubtasksInTheEditMenu(id, task) {
               <div class="subtask_edit_buttons">
                 <img class="pen" src="./assets/icons/board/subtasks_pen.svg" alt="edit">
                 <img src="./assets/icons/board/vector_line_for_subtask_edit.svg" alt="line"/>
-                <img class="trash" onclick="deleteSubtask(event)" src="./assets/icons/board/subtasks_trash.svg" alt="delete">
+                <img class="trash" onclick="deleteSubtask(event)" src="./assets/icons/board/subtasks_trash.svg" alt="delete" id_trash="${id}">
               </div>
             </div>`;
 }
@@ -202,9 +202,9 @@ function HTMLTamplateForEditSubtask(id) {
   return `
           <div  class="edit_subtask_input_field">
             <label for="editInputField"></label>
-            <input onclick="stopEventBubbel(event)" type="text" id="editInputField${id}" />
+            <input onclick="stopEventBubbel(event)" type="text" id="${id}" />
             <div class="buttons">
-              <img class="trash" onclick="deleteSubtask(event)" src="./assets/icons/board/subtasks_trash.svg" alt="trash" />
+              <img class="trash" onclick="deleteSubtask(event)" src="./assets/icons/board/subtasks_trash.svg" alt="trash" id_trash="${id}"/>
               <img src="./assets/icons/board/vector_line_for_subtask_edit.svg" alt="line" />
               <img class="confirm" src="./assets/icons/board/confirm.svg" alt="confirm" />
             </div>            
@@ -291,7 +291,7 @@ function HTMLTamplateForAddTaskInBorad() {
           <div class="create_task_container">
             <h5><p>*</p>This field is required</h5>
               <div class="buttons_create_and_cancel">
-                <button class="cancelBtn transition">Cancel</button>
+                <button onclick="hideOverlay()" class="cancelBtn transition">Cancel</button>
                 <button onclick="createTask()" class="createBtn transition">Create Task</button>
               </div>
               <div class="task_added hide_element">
@@ -315,12 +315,12 @@ function HTMLTamplateForSubtasksInAddTaskBoard(task) {
             </div>`;
 }
 
-function testTamplate() {
+function HTMLTamplateForEditSubtaskAreaAddTask(id) {
   return `<div class="edit_subtask_input_field ">
             <label for="editInputField"></label>
             <input class="input_edit_subtask_board_section" onclick="stopEventBubbel(event)" type="text" />
             <div class="buttons">
-              <img class="trash" onclick="deleteSubtask(event)" src="./assets/icons/board/subtasks_trash.svg" alt="trash" />
+              <img class="trash" onclick="deleteEditingSubtask(event)" src="./assets/icons/board/subtasks_trash.svg" alt="trash" id_trash="${id}" />
               <img src="./assets/icons/board/vector_line_for_subtask_edit.svg" alt="line" />
               <img onclick="confirmEditing(event)" class="confirm" src="./assets/icons/board/confirm.svg" alt="confirm" />
             </div>            

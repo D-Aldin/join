@@ -2,6 +2,7 @@ let contactList = [];
 let storeThePrioValue = " ";
 let subtaskObject = {};
 let statusOfRequired = false;
+let taskStatus = "toDo";
 
 function showOverlay(event) {
   document.querySelector("#overlayForAddTask").style.display = "block";
@@ -128,11 +129,18 @@ function deleteSubtaskBoardSection(event) {
 }
 
 function editSubtaskInAddTaskAreaBoard(event) {
-  task = event.currentTarget.parentElement.parentElement;
+  let task = event.currentTarget.parentElement.parentElement;
+  let id = task.id;
   document.getElementById(task.id).style.backgroundColor = "white";
-  task.innerHTML = testTamplate();
+  task.innerHTML = HTMLTamplateForEditSubtaskAreaAddTask(id);
   let inputField = document.querySelector(".edit_subtask_input_field input");
   inputField.value = task.id;
+}
+
+function deleteEditingSubtask(event) {
+  let taskID = event.currentTarget.getAttribute("id_trash");
+  let refTask = document.querySelector(`#${taskID}`);
+  refTask.remove();
 }
 
 function confirmEditing(event) {
@@ -143,7 +151,7 @@ function confirmEditing(event) {
 }
 
 // TODO
-async function collectDataForNewTask(params) {
+async function collectDataForNewTask(status) {
   const inputTitle = document.querySelector("#title");
   const inputDescription = document.querySelector("#description");
   const inputDate = document.querySelector("#date");
@@ -152,18 +160,22 @@ async function collectDataForNewTask(params) {
   collectTheContacts();
   collectTheSubtasks();
   let contacts = await getContactsFromFireBase(contactList);
+  return tamplate(id, inputTitle.value, inputDescription.value, contacts, inputDate.value, storeThePrioValue, inputCategory.value, subtaskObject, taskStatus, localStorage.userId);
+}
+
+function tamplate(id, title, description, contact, date, prio, category, subtask, status, user) {
   return {
     [id]: {
       id: id,
-      title: inputTitle.value,
-      description: inputDescription.value || " ",
-      assigned: contacts,
-      date: inputDate.value,
-      prio: storeThePrioValue || " ",
-      category: inputCategory.value,
-      subtask: subtaskObject || [],
-      status: status || "toDo",
-      user: localStorage.userId,
+      title: title,
+      description: description || " ",
+      assigned: contact,
+      date: date,
+      prio: prio || " ",
+      category: category,
+      subtask: subtask || [],
+      status: status,
+      user: user,
     },
   };
 }
@@ -182,11 +194,10 @@ function collectTheSubtasks() {
   let refAllChosenSubtasks = document.querySelectorAll(".subtask_paragraf");
   for (let index = 0; index < refAllChosenSubtasks.length; index++) {
     const task = refAllChosenSubtasks[index].innerHTML.substring(1);
-    subtaskObject[index] = { task: task, state: false };
+    subtaskObject[`subtask_${Date.now()}`] = { task: task, state: false };
   }
 }
 
-// BUG
 function requiredFieldTitle() {
   const inputFiledTitle = document.querySelector("#title");
   if (inputFiledTitle.value.length === 0) {
@@ -251,3 +262,20 @@ async function createTask() {
     setTimeout(hideOverlay, 1000);
   }
 }
+
+document.querySelector("#addToDo").addEventListener("click", function () {
+  showOverlay();
+  renderAddTaskMenu();
+});
+
+document.querySelector("#addProgress").addEventListener("click", function () {
+  showOverlay();
+  renderAddTaskMenu();
+  taskStatus = "progress";
+});
+
+document.querySelector("#addFeedback").addEventListener("click", function () {
+  showOverlay();
+  renderAddTaskMenu();
+  taskStatus = "feedback";
+});

@@ -80,18 +80,19 @@ async function managenCheckBoxes(id) {
   let refCheckBoxes = document.querySelectorAll("input[type='checkbox']");
   for (let index = 0; index < refCheckBoxes.length; index++) {
     const element = refCheckBoxes[index];
-    element.addEventListener("change", () => {
+    element.addEventListener("change", (e) => {
+      let idOfTask = e.currentTarget.id;
       if (element.checked) {
         let newState = {
           state: true,
         };
-        updateSubtaskState(taskPath, id, index, newState);
+        updateSubtaskState(taskPath, id, idOfTask, newState);
       }
       if (element.checked === false) {
         let newState = {
           state: false,
         };
-        updateSubtaskState(taskPath, id, index, newState);
+        updateSubtaskState(taskPath, id, idOfTask, newState);
       }
     });
   }
@@ -109,17 +110,21 @@ async function updateSubtaskState(path = "", taskID, subtaskID, state) {
 }
 
 async function setCheckboxAttributes(id) {
-  let response = await fetchCardDetails(taskPath, id);
-  let refToSubtask = Array.isArray(response[id]?.subtask) ? response[id].subtask : [];
-  for (let index = 0; index < refToSubtask.length; index++) {
-    const element = refToSubtask[index];
-    const checkbox = document.getElementById(`subtask${index}`);
-    if (!checkbox) continue;
-    if (element.state === false) {
-      checkbox.removeAttribute("checked");
-    }
-    if (element.state === true) {
-      checkbox.setAttribute("checked", "true");
+  let response = await fetchCardDetails(`tasks/${id}/subtask`, id);
+  let checkbox = document.querySelectorAll('input[type="checkbox"]');
+  for (const task in response) {
+    if (Object.prototype.hasOwnProperty.call(response, task)) {
+      const element = response[task];
+      if (element.state === false) {
+        checkbox.forEach((box) => {
+          box.removeAttribute("checked");
+        });
+      }
+      if (element.state === true) {
+        checkbox.forEach((box) => {
+          box.setAttribute("checked", "true");
+        });
+      }
     }
   }
 }
