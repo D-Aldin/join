@@ -2,6 +2,7 @@ let contactList = [];
 let storeThePrioValue = " ";
 let subtaskObject = {};
 let statusOfRequired = false;
+let taskStatus = "toDo";
 
 function showOverlay(event) {
   document.querySelector("#overlayForAddTask").style.display = "block";
@@ -143,7 +144,7 @@ function confirmEditing(event) {
 }
 
 // TODO
-async function collectDataForNewTask(params) {
+async function collectDataForNewTask(status) {
   const inputTitle = document.querySelector("#title");
   const inputDescription = document.querySelector("#description");
   const inputDate = document.querySelector("#date");
@@ -162,7 +163,7 @@ async function collectDataForNewTask(params) {
       prio: storeThePrioValue || " ",
       category: inputCategory.value,
       subtask: subtaskObject || [],
-      status: status || "toDo",
+      status: taskStatus,
       user: localStorage.userId,
     },
   };
@@ -250,3 +251,20 @@ async function createTask() {
     setTimeout(hideOverlay, 1000);
   }
 }
+
+document.querySelector("#addToDo").addEventListener("click", function () {
+  showOverlay();
+  renderAddTaskMenu();
+});
+
+document.querySelector("#addProgress").addEventListener("click", function () {
+  showOverlay();
+  renderAddTaskMenu();
+  taskStatus = "progress";
+});
+
+document.querySelector("#addFeedback").addEventListener("click", function () {
+  showOverlay();
+  renderAddTaskMenu();
+  taskStatus = "feedback";
+});
