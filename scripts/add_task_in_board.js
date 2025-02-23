@@ -160,18 +160,22 @@ async function collectDataForNewTask(status) {
   collectTheContacts();
   collectTheSubtasks();
   let contacts = await getContactsFromFireBase(contactList);
+  return tamplate(id, inputTitle.value, inputDescription.value, contacts, inputDate.value, storeThePrioValue, inputCategory.value, subtaskObject, taskStatus, localStorage.userId);
+}
+
+function tamplate(id, title, description, contact, date, prio, category, subtask, status, user) {
   return {
     [id]: {
       id: id,
-      title: inputTitle.value,
-      description: inputDescription.value || " ",
-      assigned: contacts,
-      date: inputDate.value,
-      prio: storeThePrioValue || " ",
-      category: inputCategory.value,
-      subtask: subtaskObject || [],
-      status: taskStatus,
-      user: localStorage.userId,
+      title: title,
+      description: description || " ",
+      assigned: contact,
+      date: date,
+      prio: prio || " ",
+      category: category,
+      subtask: subtask || [],
+      status: status,
+      user: user,
     },
   };
 }
