@@ -222,6 +222,7 @@ function HTMLTamplateForAddTaskInBorad() {
               <div class="inputfield-title-container">
                   <span class="display-flex"><p class="display-flex tasktitles">Title</p><p class="color-red tasktitles">*</p></span>
                   <input class="inputfield" id="title" placeholder="Enter a title" type="text" >
+                  <span id="titleRequired" class="required hide_element">This field is requierd</span>
               </div>
               <div class="inputfield-title-container">
                   <p class="tasktitles">Description</p>
@@ -243,6 +244,7 @@ function HTMLTamplateForAddTaskInBorad() {
               <div class="inputfield-title-container">
                   <span class="display-flex"><p class="tasktitles">Due date</p><p class="color-red tasktitles">*</p></span>
                   <input class="inputfield" id="date" type="date" required>
+                  <span id="dateRequired" class="required hide_element">This field is requierd</span>
               </div>
               <div class="inputfield-title-container">
                   <p class="tasktitles">Prio</p>
@@ -254,10 +256,12 @@ function HTMLTamplateForAddTaskInBorad() {
               </div>
               <div class="inputfield-title-container">
                 <span class="display-flex"><p class="tasktitles">Category</p><p class="color-red tasktitles">*</p></span>
-                  <select class="inputfield" id="category" placeholder="Select task category" required>
+                  <select onclick="mimicPlaceHolder()" class="inputfield" id="category" placeholder="Select task category" required>
+                      <option value="placeholder">Select task category</option>
                       <option value="Technical Task">Technical Task</option>
                       <option value="User Story">User Story</option>
                   </select>
+                  <span id="categoryRequired" class="required hide_element">This field is requierd</span>
               </div>
               <div class="inputfield-title-container">
                 <p class="tasktitles">Subtasks</p>
@@ -288,7 +292,37 @@ function HTMLTamplateForAddTaskInBorad() {
             <h5><p>*</p>This field is required</h5>
               <div class="buttons_create_and_cancel">
                 <button class="cancelBtn transition">Cancel</button>
-                <button onclick="createTaskButtonClick()" class="createBtn transition">Create Task</button>
+                <button onclick="createTask()" class="createBtn transition">Create Task</button>
+              </div>
+              <div class="task_added hide_element">
+                <div class="task_added_content">
+                  <h4>Task added to board</h4>
+                  <img src="./assets/icons/addTask/added_task.svg" alt="" />
+                </div>
               </div>
           </div> `;
+}
+
+function HTMLTamplateForSubtasksInAddTaskBoard(task) {
+  return ` 
+            <div class="subtask_box_items new_sizes" id="${task}">
+              <div class="editTask"><p class="subtask_paragraf">&bull; ${task}</p></div>
+              <div class="subtask_edit_buttons">
+                <img onclick="editSubtaskInAddTaskAreaBoard(event)" class="pen" src="./assets/icons/board/subtasks_pen.svg" alt="edit">
+                <img src="./assets/icons/board/vector_line_for_subtask_edit.svg" alt="line"/>
+                <img class="trash" onclick="deleteSubtaskBoardSection(event)" src="./assets/icons/board/subtasks_trash.svg" alt="delete">
+              </div>
+            </div>`;
+}
+
+function testTamplate() {
+  return `<div class="edit_subtask_input_field ">
+            <label for="editInputField"></label>
+            <input class="input_edit_subtask_board_section" onclick="stopEventBubbel(event)" type="text" />
+            <div class="buttons">
+              <img class="trash" onclick="deleteSubtask(event)" src="./assets/icons/board/subtasks_trash.svg" alt="trash" />
+              <img src="./assets/icons/board/vector_line_for_subtask_edit.svg" alt="line" />
+              <img onclick="confirmEditing(event)" class="confirm" src="./assets/icons/board/confirm.svg" alt="confirm" />
+            </div>            
+          </div>`;
 }

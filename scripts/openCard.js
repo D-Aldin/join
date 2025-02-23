@@ -5,6 +5,9 @@ let assignNewContList = [];
 let refCardBox = document.getElementById("box");
 const refCloseBtn = document.getElementsByClassName("closeBtn");
 const refEditButton = document.querySelector(".position_edit");
+let titleValue;
+let descriptionValue;
+let dateValue;
 
 function overlayOn(event) {
   document.getElementById("overlay").style.display = "block";
@@ -24,9 +27,12 @@ async function getData(event) {
   let id = event.currentTarget.id;
   const fetchDetails = await fetchCardDetails(taskPath, id);
   const refersToCard = fetchDetails[id];
-  refCardBox.innerHTML = HTMLForOpenCard(refersToCard.category, refersToCard.title, refersToCard.description, refersToCard.data, refersToCard.prio, id);
+  refCardBox.innerHTML = HTMLForOpenCard(refersToCard.category, refersToCard.title, refersToCard.description, refersToCard.date, refersToCard.prio, id);
   managenProfilesWhenCardOpen(id);
   renderSubtasks(id);
+  titleValue = refersToCard.title;
+  descriptionValue = refersToCard.description;
+  dateValue = refersToCard.date;
 }
 
 async function fetchCardDetails(path = "", id) {

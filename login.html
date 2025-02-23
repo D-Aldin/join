@@ -5,11 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="shortcut icon" href="./assets/icons/logo/joinLarge.png" type="image/x-icon" />
     <script type="module" src="./scripts/signUp.js" defer></script>
-    <script type="module" src="./scripts/login.js" defer></script>
-    <!-- <script type="module" src="./scripts/contacts.js" defer></script> -->
+    <script src="./scripts/login.js" defer></script>
+    <script src="./scripts/checkActiveUser.js" defer></script>
 
-    <link rel="stylesheet" href="./css/login.css" />
     <link rel="stylesheet" href="./css/standard.css" />
+    <link rel="stylesheet" href="./css/login.css" />
     <title>JOIN Login</title>
   </head>
   <body>
@@ -18,9 +18,6 @@
     </div>
 
     <header>
-      <!-- <div class="join_logo">
-        <img src="./assets/icons/logo/joinSmall.svg" alt="Join Logo" />
-      </div> -->
       <div class="sign_up">
         <span>Not a Join user?</span>
         <button id="signBtn" class="transition">Sign up</button>
@@ -39,9 +36,12 @@
       <div>
         <form id="loginForm" class="form_content" action="">
           <label for="loginEmail"></label>
-          <input id="loginEmail" name="email" type="email" placeholder="Email" required />
+          <input id="loginEmail" type="email" placeholder="Email" required />
           <label for="loginPassword"></label>
-          <input id="loginPassword" name="password" type="password" placeholder="Password" required />
+          <div class="password_container">
+            <input id="loginPassword" name="password" type="password" placeholder="Password" required />
+            <img id="togglePassword" src="./assets/icons/login_and_signUp/lock.svg" alt="Toggle Password Visibility" class="password_icon cursor_pointer" />
+          </div>
           <span class="checkEmailPassword"></span>
           <div class="form_btn">
             <button id="login_btn" type="submit" class="transition">Log in</button>
@@ -52,10 +52,10 @@
     </div>
 
     <div class="sign_window">
+      <div class="goBackArrowContainer transition">
+        <img id="goBackArrow" src="./assets/icons/login_and_signUp/arrow.svg" alt="arrow" />
+      </div>
       <div class="sign_up_content">
-        <div>
-          <img id="goBackArrow" class="transition" src="./assets/icons/signUp/arrow.svg" alt="arrow" />
-        </div>
         <div class="sign_title">
           <div class="center_title_and_underline">
             <h1>Sign up</h1>
@@ -73,14 +73,21 @@
             <input id="signUpEmail" name="email" type="email" required placeholder="Email" />
 
             <label for="signUppassword"></label>
-            <input id="signUppassword" name="password" type="password" required placeholder="Password" />
+            <div class="password_container">
+              <input id="signUppassword" name="password" type="password" required placeholder="Password" />
+              <img id="toggleSignUpPassword" src="./assets/icons/login_and_signUp/lock.svg" alt="Toggle Password Visibility" class="password_icon cursor_pointer" />
+            </div>
 
             <label for="signUpconfirmPassword"></label>
-            <input id="signUpconfirmPassword" name="confirmPassword" type="password" required placeholder="Confirm Password" />
+            <div class="password_container">
+              <input id="signUpconfirmPassword" type="password" required placeholder="Confirm Password" />
+              <img id="toggleSignUpConfirmPassword" src="./assets/icons/login_and_signUp/lock.svg" alt="Toggle Password Visibility" class="password_icon cursor_pointer" />
+            </div>
+
             <span class="checkPassword"></span>
 
             <div class="privacy_police_content">
-              <input class="cursor_pointer" type="checkbox" id="privacy_police" name="privacy_police" value="privacy_police" required />
+              <input class="cursor_pointer" type="checkbox" id="privacy_police" value="privacy_police" required />
               <label for="privacy_police">I accept the <a href="./privacy_policy.html">Privacy policy</a></label>
             </div>
 

@@ -249,11 +249,11 @@ input[type="number"]::-webkit-outer-spin-button {
 }
 
 #add_name {
-  background: url(../assets/icons/signUp/person.svg) no-repeat right 21px center;
+  background: url(../assets/icons/login_and_signUp/person.svg) no-repeat right 21px center;
 }
 
 #add_email {
-  background: url(../assets/icons/signUp/mail.svg) no-repeat right 21px center;
+  background: url(../assets/icons/login_and_signUp/mail.svg) no-repeat right 21px center;
 }
 
 #add_phone {

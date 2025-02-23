@@ -165,9 +165,7 @@ select {
 
 .buttons {
   display: flex;
-
   height: 1.4rem;
-  /* border: 1px solid; */
 }
 
 #editInputField {

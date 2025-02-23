@@ -6,6 +6,10 @@ const refSignUpSegment = document.querySelector(".sign_up");
 const refBackButton = document.querySelector("#goBackArrow");
 const pswConfirm = document.querySelector("#signUpconfirmPassword");
 const psw = document.querySelector("#signUppassword");
+const signUpPasswordInput = document.getElementById("signUppassword");
+const toggleSignUpPassword = document.getElementById("toggleSignUpPassword");
+const signUpConfirmPasswordInput = document.getElementById("signUpconfirmPassword");
+const toggleSignUpConfirmPassword = document.getElementById("toggleSignUpConfirmPassword");
 let refToUnderLineClass = document.querySelector(".under_line");
 let user = [];
 let newUser;
@@ -160,3 +164,51 @@ function showOverlay() {
     }, 500);
   }, 1000);
 }
+
+signUpPasswordInput.addEventListener("input", () => {
+  if (signUpPasswordInput.value.length === 0) {
+    toggleSignUpPassword.src = "../assets/icons/login_and_signUp/lock.svg";
+  } else if (signUpPasswordInput.type === "password") {
+    toggleSignUpPassword.src = "../assets/icons/login_and_signUp/visibility_off.svg";
+  } else {
+    toggleSignUpPassword.src = "../assets/icons/login_and_signUp/visibility.svg";
+  }
+});
+
+toggleSignUpPassword.addEventListener("click", () => {
+  if (signUpPasswordInput.type === "password") {
+    signUpPasswordInput.type = "text";
+    toggleSignUpPassword.src = "../assets/icons/login_and_signUp/visibility.svg";
+  } else {
+    signUpPasswordInput.type = "password";
+    if (signUpPasswordInput.value.length === 0) {
+      toggleSignUpPassword.src = "../assets/icons/login_and_signUp/lock.svg";
+    } else {
+      toggleSignUpPassword.src = "../assets/icons/login_and_signUp/visibility_off.svg";
+    }
+  }
+});
+
+signUpConfirmPasswordInput.addEventListener("input", () => {
+  if (signUpConfirmPasswordInput.value.length === 0) {
+    toggleSignUpConfirmPassword.src = "../assets/icons/login_and_signUp/lock.svg";
+  } else if (signUpConfirmPasswordInput.type === "password") {
+    toggleSignUpConfirmPassword.src = "../assets/icons/login_and_signUp/visibility_off.svg";
+  } else {
+    toggleSignUpConfirmPassword.src = "../assets/icons/login_and_signUp/visibility.svg";
+  }
+});
+
+toggleSignUpConfirmPassword.addEventListener("click", () => {
+  if (signUpConfirmPasswordInput.type === "password") {
+    signUpConfirmPasswordInput.type = "text";
+    toggleSignUpConfirmPassword.src = "../assets/icons/login_and_signUp/visibility.svg";
+  } else {
+    signUpConfirmPasswordInput.type = "password";
+    if (signUpConfirmPasswordInput.value.length === 0) {
+      toggleSignUpConfirmPassword.src = "../assets/icons/login_and_signUp/lock.svg";
+    } else {
+      toggleSignUpConfirmPassword.src = "../assets/icons/login_and_signUp/visibility_off.svg";
+    }
+  }
+});

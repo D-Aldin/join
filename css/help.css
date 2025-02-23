@@ -18,6 +18,8 @@ body {
 .help_header img:hover {
   cursor: pointer;
   content: url(../assets/icons/help/arrow_hover.svg);
+  width: 30px;
+  height: 32px;
 }
 
 .help_header h1 {

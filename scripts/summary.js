@@ -44,53 +44,65 @@ async function fetchTasks(path = "") {
 }
 
 async function totalNumberOfTasks() {
+  count = 0;
   const dataFromFireBase = await fetchTasks("tasks");
-  if (!dataFromFireBase) {
-    tasksInBoard.innerHTML = 0;
-    return;
+  for (const task in dataFromFireBase) {
+    if (Object.prototype.hasOwnProperty.call(dataFromFireBase, task)) {
+      const user = dataFromFireBase[task].user;
+      if (user === localStorage.userId) {
+        count += 1;
+      }
+    }
   }
-  const validTasks = Object.values(dataFromFireBase).filter(Boolean);
-  tasksInBoard.innerHTML = validTasks.length;
+  tasksInBoard.innerHTML = count;
 }
 
 async function countTasks() {
   const dataFromFireBase = await fetchTasks("tasks");
   if (!dataFromFireBase) return;
   const validTasks = Object.values(dataFromFireBase).filter(Boolean);
-  let progressCount = 0;
-  let feedbackCount = 0;
-  let toDoCount = 0;
-  let doneCount = 0;
-
-  validTasks.forEach((task) => {
-    switch (task.status) {
-      case "progress":
-        progressCount += 1;
-        break;
-      case "feedback":
-        feedbackCount += 1;
-        break;
-      case "toDo":
-        toDoCount += 1;
-        break;
-      case "done":
-        doneCount += 1;
-        break;
+  for (const task in validTasks) {
+    if (Object.prototype.hasOwnProperty.call(validTasks, task)) {
+      const user = validTasks[task].user;
+      const status = validTasks[task].status;
+      if (user === localStorage.userId) {
+        if (status === "progress") progressCount++;
+        else if (status === "feedback") feedbackCount++;
+        else if (status === "toDo") toDoCount++;
+        else if (status === "done") doneCount++;
+      }
     }
-  });
-  tasksInProgress.innerHTML = progressCount;
-  tasksInFeedback.innerHTML = feedbackCount;
-  tasksInToDo.innerHTML = toDoCount;
-  tasksDone.innerHTML = doneCount;
+  }
+  updateSummary(progressCount, feedbackCount, toDoCount, doneCount);
+}
+
+function updateSummary(progress, feedback, toDo, done) {
+  tasksInProgress.innerHTML = progress;
+  tasksInFeedback.innerHTML = feedback;
+  tasksInToDo.innerHTML = toDo;
+  tasksDone.innerHTML = done;
 }
 
 async function countTheNumberOfUrgentTasks() {
+  urgent = 0;
   const dataFromFireBase = await fetchTasks("tasks");
   if (!dataFromFireBase) {
     urgentTasks.innerHTML = 0;
     return;
   }
-  const validTasks = Object.values(dataFromFireBase).filter(Boolean);
-  const counter = validTasks.filter((task) => task.prio === "urgent").length;
+  helperFunction(urgent, dataFromFireBase);
+}
+
+function helperFunction(counter, data) {
+  for (const task in data) {
+    if (Object.prototype.hasOwnProperty.call(data, task)) {
+      const user = data[task].user;
+      if (user === localStorage.userId) {
+        if (data[task].prio === "urgent") {
+          counter++;
+        }
+      }
+    }
+  }
   urgentTasks.innerHTML = counter;
 }

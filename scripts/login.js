@@ -1,5 +1,7 @@
 const BASE_URL = "https://dv-join-bbc2e-default-rtdb.europe-west1.firebasedatabase.app/";
 const refLoginButton = document.querySelector("#login_btn");
+const passwordInput = document.getElementById("loginPassword");
+const togglePassword = document.getElementById("togglePassword");
 let email;
 let password;
 
@@ -23,6 +25,7 @@ async function loginUser(email) {
     const passwordFromDB = responseToJSON[key].password;
     if (emailFromDatabase === email && passwordFromDB === password) {
       localStorage.setItem("userId", key);
+      localStorage.removeItem("isGuest");
       window.location.href = "summary.html";
       userFound = true;
       break;
@@ -48,3 +51,40 @@ document.querySelector("#guest_log").onclick = function () {
 };
 
 refLoginButton.addEventListener("click", getDataFromLogin);
+
+passwordInput.addEventListener("input", () => {
+  if (passwordInput.value.length === 0) {
+    togglePassword.src = "../assets/icons/login_and_signUp/lock.svg";
+  } else if (passwordInput.type === "password") {
+    togglePassword.src = "../assets/icons/login_and_signUp/visibility_off.svg";
+  } else {
+    togglePassword.src = "../assets/icons/login_and_signUp/visibility.svg";
+  }
+});
+
+togglePassword.addEventListener("click", () => {
+  if (passwordInput.type === "password") {
+    passwordInput.type = "text";
+    togglePassword.src = "../assets/icons/login_and_signUp/visibility.svg";
+  } else {
+    passwordInput.type = "password";
+    if (passwordInput.value.length === 0) {
+      togglePassword.src = "../assets/icons/login_and_signUp/lock.svg";
+    } else {
+      togglePassword.src = "../assets/icons/login_and_signUp/visibility_off.svg";
+    }
+  }
+});
+
+document.addEventListener("DOMContentLoaded", function () {
+  const guestLogButton = document.querySelector("#guest_log");
+  if (guestLogButton) {
+    guestLogButton.onclick = function () {
+      localStorage.setItem("userId", "guest");
+      // localStorage.removeItem("userId");
+      window.location.href = "summary.html";
+    };
+  } else {
+    console.error("Element #guest_log nicht gefunden!");
+  }
+});

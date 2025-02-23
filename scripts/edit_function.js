@@ -1,12 +1,21 @@
 const refUrgentBtn = document.getElementById("urgent");
 const refMediumBtn = document.getElementById("medium");
 const refLowBtn = document.getElementById("low");
+const title = document.querySelector(".open_card_title");
 
 function renderEditMenu() {
   refCardBox.innerHTML = "";
   refCardBox.innerHTML += HTMLTamplateForTheEditFunk();
   displaySubtasksInTheEditMenu();
   changeTitleAndDescription();
+  changeDate();
+  displayValuesInTheInputFields();
+}
+
+function displayValuesInTheInputFields() {
+  document.querySelector("#editTitle").value = titleValue;
+  document.querySelector("#editDescription").value = descriptionValue;
+  document.querySelector("#editDate").value = dateValue;
 }
 
 async function saveDataToFire(section, newValue) {
@@ -19,9 +28,6 @@ async function saveDataToFire(section, newValue) {
 
 async function editFunction() {
   let dataFromFireBase = await fetchCardDetails(taskPath, idOfcurrentElement);
-  let refTitleInputField = (document.querySelector("#editTitle").value = dataFromFireBase[idOfcurrentElement].title);
-  let refDescriptionField = (document.querySelector("#editDescription").value = dataFromFireBase[idOfcurrentElement].description);
-  let refDateField = (document.querySelector("#editDate").value = dataFromFireBase[idOfcurrentElement].data);
   displayContactsInDropdownMenu();
   displaySelectedPriority(dataFromFireBase[idOfcurrentElement].prio);
   for (const key in dataFromFireBase[idOfcurrentElement].assigned) {
@@ -41,6 +47,14 @@ async function changeTitleAndDescription() {
   });
   refDescriptionField.addEventListener("change", function () {
     saveDataToFire("description", refDescriptionField.value);
+  });
+}
+
+async function changeDate() {
+  let taskDate = document.querySelector("#editDate");
+  console.log(idOfcurrentElement);
+  taskDate.addEventListener("change", function () {
+    saveDataToFire("date", taskDate.value);
   });
 }
 
@@ -183,13 +197,19 @@ async function editSubtaskFunk(event) {
   const refTaskElement = event.currentTarget;
   const dataFromFireBase = await fetchCardDetails(`${taskPath}/${idOfcurrentElement}/subtask/${refSubtaskID}`, idOfcurrentElement);
   refTaskElement.innerHTML = HTMLTamplateForEditSubtask(refSubtaskID);
-  document.getElementById(`editInputField${refSubtaskID}`).value = dataFromFireBase.task;
+  setupSubtaskEditing(refSubtaskID, dataFromFireBase);
+}
+
+function setupSubtaskEditing(refSubtaskID, dataFromFireBase) {
+  let inputField = document.getElementById(`editInputField${refSubtaskID}`);
+  if (!inputField) return;
+  inputField.value = dataFromFireBase.task;
   document.querySelector(".subtask_box_items").classList.add("under_line");
   document.querySelector(".subtask_box_items").classList.remove("subtask_box_items");
-  document.querySelector(`#editInputField${refSubtaskID}`).addEventListener("change", function (event) {
+  document.querySelector(`#editInputField${refSubtaskID}`).addEventListener("change", (event) => {
     saveNewSubtask(refSubtaskID, event.target.value);
   });
-  document.querySelector(".confirm").addEventListener("click", function (event) {
+  document.querySelector(".confirm").addEventListener("click", (event) => {
     saveNewSubtask(refSubtaskID, event.target.value);
     document.querySelector(".subtasks_box").innerHTML = " ";
     displaySubtasksInTheEditMenu();
@@ -280,7 +300,7 @@ async function okBtnFunk() {
   let id = idOfcurrentElement;
   const fetchDetails = await fetchCardDetails(taskPath, id);
   const refersToCard = fetchDetails[id];
-  refCardBox.innerHTML = HTMLForOpenCard(refersToCard.category, refersToCard.title, refersToCard.description, refersToCard.data, refersToCard.prio, id);
+  refCardBox.innerHTML = HTMLForOpenCard(refersToCard.category, refersToCard.title, refersToCard.description, refersToCard.date, refersToCard.prio, id);
   managenProfilesWhenCardOpen(id);
   renderSubtasks(id);
 }

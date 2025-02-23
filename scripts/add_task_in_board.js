@@ -1,6 +1,7 @@
 let contactList = [];
 let storeThePrioValue = " ";
 let subtaskObject = {};
+let statusOfRequired = false;
 
 function showOverlay(event) {
   document.querySelector("#overlayForAddTask").style.display = "block";
@@ -57,8 +58,7 @@ function buttonUrgent(event) {
   let btnMedium = document.querySelector("#medium");
   let btnLow = document.querySelector("#low");
   storeThePrioValue = event.currentTarget.id;
-  btnUrgent.style.backgroundColor = "rgb(255, 61, 0)";
-  btnUrgent.style.color = "white";
+  btnUrgent.style = "background-color:rgb(255, 61, 0); color: white";
   document.querySelector("#iconurgent").firstChild.src = "./assets/icons/addTask/icon_clicket_urgent.svg";
   if (btnMedium.hasAttribute("style") || btnLow.hasAttribute("style")) {
     btnMedium.removeAttribute("style");
@@ -73,8 +73,7 @@ function buttonMedium(event) {
   let btnMedium = document.querySelector("#medium");
   let btnLow = document.querySelector("#low");
   storeThePrioValue = event.currentTarget.id;
-  btnMedium.style.backgroundColor = "rgb(255, 168, 0)";
-  btnMedium.style.color = "white";
+  btnMedium.style = "background-color:rgb(255, 168, 0); color: white";
   document.querySelector("#iconmedium").firstChild.src = "./assets/icons/addTask/icon_clicket_medium.svg";
   if (btnUrgent.hasAttribute("style") || btnLow.hasAttribute("style")) {
     btnUrgent.removeAttribute("style");
@@ -90,8 +89,7 @@ function buttonLow(event) {
   let btnMedium = document.querySelector("#medium");
   let btnLow = document.querySelector("#low");
   storeThePrioValue = event.currentTarget.id;
-  btnLow.style.backgroundColor = "rgb(122, 226, 41)";
-  btnLow.style.color = "white";
+  btnLow.style = "background-color: rgb(122, 226, 41); color: white";
   document.querySelector("#iconlow").firstChild.src = "./assets/icons/addTask/icon_clicket_low.svg";
   if (btnMedium.hasAttribute("style") || btnUrgent.hasAttribute("style")) {
     btnMedium.removeAttribute("style");
@@ -119,13 +117,29 @@ function closeInputField() {
 
 function newSubtask() {
   const inputSubtask = document.querySelector("#subtask");
-  document.querySelector("#tasks-wrapper").innerHTML += `<p class="subtask_paragraf">&bull; ${inputSubtask.value}</p>`;
+  document.querySelector("#tasks-wrapper").innerHTML += HTMLTamplateForSubtasksInAddTaskBoard(inputSubtask.value);
   inputSubtask.value = "";
   closeInputField();
 }
 
-function addSubtask() {
-  const inputSubtask = document.querySelector("#subtask");
+function deleteSubtaskBoardSection(event) {
+  let task = event.currentTarget.parentElement.parentElement;
+  task.remove();
+}
+
+function editSubtaskInAddTaskAreaBoard(event) {
+  task = event.currentTarget.parentElement.parentElement;
+  document.getElementById(task.id).style.backgroundColor = "white";
+  task.innerHTML = testTamplate();
+  let inputField = document.querySelector(".edit_subtask_input_field input");
+  inputField.value = task.id;
+}
+
+function confirmEditing(event) {
+  let task = event.currentTarget.parentElement.parentElement.parentElement;
+  let inputField = document.querySelector(".edit_subtask_input_field input");
+  task.remove();
+  document.querySelector("#tasks-wrapper").innerHTML += HTMLTamplateForSubtasksInAddTaskBoard(inputField.value);
 }
 
 // TODO
@@ -149,6 +163,7 @@ async function collectDataForNewTask(params) {
       category: inputCategory.value,
       subtask: subtaskObject || [],
       status: status || "toDo",
+      user: localStorage.userId,
     },
   };
 }
@@ -171,7 +186,68 @@ function collectTheSubtasks() {
   }
 }
 
-async function createTaskButtonClick() {
-  let card = await collectDataForNewTask();
-  addDataToFireBase("tasks", card);
+// BUG
+function requiredFieldTitle() {
+  const inputFiledTitle = document.querySelector("#title");
+  if (inputFiledTitle.value.length === 0) {
+    inputFiledTitle.classList.add("required_color");
+    document.querySelector("#titleRequired").classList.remove("hide_element");
+  }
+  inputFiledTitle.addEventListener("input", function () {
+    this.classList.remove("required_color");
+    document.querySelector("#titleRequired").classList.add("hide_element");
+  });
+}
+
+function requiredFieldDate() {
+  const inputFiledDate = document.getElementById("date");
+  if (!inputFiledDate.value || inputFiledDate.value === "") {
+    inputFiledDate.classList.add("required_color");
+    document.querySelector("#dateRequired").classList.remove("hide_element");
+  }
+  inputFiledDate.addEventListener("change", function () {
+    this.classList.remove("required_color");
+    document.querySelector("#dateRequired").classList.add("hide_element");
+  });
+  inputFiledDate.addEventListener("input", function () {
+    this.classList.remove("required_color");
+    document.querySelector("#dateRequired").classList.add("hide_element");
+  });
+}
+
+function requiredFieldCategory() {
+  const inputFiledCategory = document.querySelector("#category");
+  if (inputFiledCategory.value === "placeholder") {
+    inputFiledCategory.classList.add("required_color");
+    document.querySelector("#categoryRequired").classList.remove("hide_element");
+  }
+  inputFiledCategory.addEventListener("input", function () {
+    this.classList.remove("required_color");
+    document.querySelector("#categoryRequired").classList.add("hide_element");
+  });
+}
+
+function mimicPlaceHolder() {
+  let placeholder = document.querySelector('option[value="placeholder"]');
+  if (!placeholder) {
+    return;
+  }
+  placeholder.remove();
+}
+
+async function createTask() {
+  requiredFieldTitle();
+  requiredFieldDate();
+  requiredFieldCategory();
+  const inputFiledTitle = document.querySelector("#title");
+  const inputFiledDate = document.getElementById("date");
+  const inputFiledCategory = document.querySelector("#category");
+  if (inputFiledTitle.value.length === 0 || !inputFiledDate.value || inputFiledDate.value === 0 || inputFiledCategory.value === "placeholder") {
+    return 0;
+  } else {
+    document.querySelector(".task_added").classList.remove("hide_element");
+    let card = await collectDataForNewTask();
+    addDataToFireBase("tasks", card);
+    setTimeout(hideOverlay, 1000);
+  }
 }
