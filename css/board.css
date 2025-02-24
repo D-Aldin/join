@@ -205,3 +205,64 @@ input::placeholder {
 .hide {
   display: none;
 }
+
+@media only screen and (max-width: 1600px) {
+  .board_column {
+    width: 14.5rem;
+  }
+
+  .board_content {
+    gap: 1rem;
+  }
+
+  .progress_container {
+    max-width: 160px;
+  }
+
+  .card {
+    width: 206px;
+  }
+}
+
+@media only screen and (max-width: 1300px) {
+  .board_column {
+    width: 12.5rem;
+  }
+
+  .add_btn {
+    width: 123px;
+  }
+
+  #searchbar {
+    height: 40px;
+    width: 290px;
+  }
+
+  .search_bar {
+    gap: 3rem;
+  }
+
+  h1 {
+    font-size: 49px;
+  }
+
+  h3 {
+    font-size: 14px !important;
+  }
+
+  .card {
+    width: 172px;
+  }
+
+  aside {
+    width: 220px;
+  }
+
+  .nav_position img {
+    width: 23px !important;
+  }
+
+  .nav_position a {
+    font-size: 16px;
+  }
+}

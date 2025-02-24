@@ -47,7 +47,7 @@
 
 .progress_bar {
   height: 100%;
-  background-color: #007bff; /* Blue color */
+  background-color: #007bff;
   color: white;
   text-align: center;
   line-height: 30px;
@@ -87,4 +87,34 @@
 .rotate {
   rotate: 4deg;
   transition: transform 0.3s;
+}
+
+@media only screen and (max-width: 1600px) {
+  .progress_container {
+    max-width: 100px;
+  }
+}
+
+@media (max-width: 1300px) {
+  .progress_container {
+    max-width: 71px;
+    font-size: 2px;
+  }
+
+  .circle {
+    width: 1.9rem;
+    height: 1.9rem;
+  }
+
+  h5 {
+    font-size: 12px !important;
+  }
+
+  span {
+    font-size: 14px;
+  }
+
+  aside {
+    width: 220px;
+  }
 }
