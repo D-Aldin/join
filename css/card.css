@@ -113,8 +113,52 @@
   span {
     font-size: 14px;
   }
+}
 
+@media only screen and (max-width: 1200px) {
   aside {
-    width: 220px;
+    bottom: 0px;
+    width: 100%;
+    height: 80px;
+    top: initial;
+    position: fixed;
+    padding: 10px 0 10px 0;
+  }
+
+  .logo_position {
+    display: none;
+  }
+
+  .nav_position {
+    flex-direction: initial;
+  }
+
+  .legal_and_policy_position {
+    display: none;
+  }
+
+  .link_nav_add_task,
+  .link_nav_summary,
+  .link_nav_board,
+  .link_nav_contacts {
+    padding-left: 12px;
+  }
+
+  .nav_position {
+    width: 300px;
+  }
+
+  .nav_position a {
+    display: flex;
+    flex-direction: column;
+    font-size: 12px;
+  }
+
+  .nav_position img {
+    width: 20px !important;
+  }
+
+  header h1 {
+    display: non;
   }
 }

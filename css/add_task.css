@@ -540,3 +540,17 @@ ul {
 .finish-container-activ {
   bottom: 50%;
 }
+
+@media only screen and (max-width: 1300px) {
+  .button-container {
+    width: 390px !important;
+  }
+
+  .inputfield-title-container {
+    width: 400px;
+  }
+
+  .subtask-inputfield {
+    width: 400px;
+  }
+}

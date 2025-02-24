@@ -29,7 +29,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0 38px 0 38px;
+  padding: 0 38px 38px 38px;
 }
 
 .title_and_closeBtn button {
@@ -237,4 +237,44 @@
   align-items: center;
   width: 100%;
   height: 100%;
+}
+
+@media only screen and (max-width: 1600px) {
+  #add_task_box {
+    width: 967px;
+    left: 58%;
+  }
+
+  .title_and_closeBtn {
+    padding: 0 38px 38px 38px;
+  }
+}
+
+@media only screen and (max-width: 1300px) {
+  #add_task_box {
+    left: 58%;
+    width: 862px;
+    height: 760px;
+  }
+
+  .prioBtn {
+    width: 110px;
+    height: 49px;
+  }
+
+  .title_and_closeBtn {
+    padding: 0 38px 38px 38px;
+  }
+
+  .createBtn {
+    font-size: 16px;
+    width: 134px;
+    height: 49px;
+  }
+
+  .cancelBtn {
+    font-size: 16px;
+    width: 85px;
+    height: 49px;
+  }
 }

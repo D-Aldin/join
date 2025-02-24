@@ -222,6 +222,10 @@ input::placeholder {
   .card {
     width: 206px;
   }
+
+  #box {
+    left: 57%;
+  }
 }
 
 @media only screen and (max-width: 1300px) {
@@ -264,5 +268,16 @@ input::placeholder {
 
   .nav_position a {
     font-size: 16px;
+  }
+
+  #box {
+    left: 59%;
+  }
+}
+
+@media only screen and (max-width: 320px) {
+  aside {
+    bottom: 0px;
+    width: 100%;
   }
 }
