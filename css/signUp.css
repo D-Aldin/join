@@ -1,0 +1,131 @@
+.sign_window {
+  display: none;
+  border: 1px transparent;
+  border-radius: 16px;
+  filter: drop-shadow(3px 3px 3px rgba(179, 179, 179, 0.9));
+  background-color: white;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-right: -50%;
+  transform: translate(-50%, -50%);
+  opacity: 0;
+  animation: fadeIn 1s forwards;
+  width: 415px;
+  height: 450px;
+  padding: 40px;
+}
+
+.center_title_and_underline {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.sign_up_content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.sign_title {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: auto;
+}
+
+.goBackArrowContainer {
+  position: absolute;
+  top: 70px;
+}
+
+#goBackArrow:hover {
+  cursor: pointer;
+  content: url(../assets/icons/help/arrow_hover.svg);
+  width: 35px;
+  height: 32px;
+}
+
+.signUp_underline {
+  border: 1px solid;
+  width: 90px;
+  height: 1px;
+  color: rgb(41, 171, 226);
+  background-color: rgb(41, 171, 226);
+  margin-bottom: 13px;
+}
+
+#name {
+  background: url("../assets/icons/login_and_signUp/person.svg") no-repeat right center;
+  background-repeat: no-repeat;
+  background-position: calc(100% - 20px);
+}
+
+#signUppassword,
+#signUpconfirmPassword {
+  width: 100%;
+  padding: 20px;
+  border-radius: 10px;
+  border: 1px solid rgba(209, 209, 209, 1);
+  outline: none;
+  font-size: 20px;
+  font-weight: 400;
+  box-sizing: border-box;
+  background-image: none;
+}
+
+@media only screen and (max-width: 1000px) {
+  @keyframes moveShrinkFade {
+    0% {
+      transform: translate(-50%, -50%) scale(1);
+      opacity: 0;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+    }
+    100% {
+      transform: translate(0, 0) scale(0.35);
+      opacity: 1;
+      position: absolute;
+      top: -80px;
+      left: -40px;
+    }
+  }
+}
+
+@media only screen and (max-width: 850px) {
+  .sign_window {
+    top: 55%;
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  .sign_window {
+    width: 80%;
+  }
+}
+
+@media only screen and (max-width: 450px) {
+  .sign_window {
+    padding: 20px;
+    padding-bottom: 40px;
+    width: 85%;
+  }
+  @keyframes moveShrinkFade {
+    0% {
+      transform: translate(-50%, -50%) scale(1);
+      opacity: 0;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+    }
+    100% {
+      transform: translate(0, 0) scale(0.35);
+      opacity: 1;
+      position: absolute;
+      top: -90px;
+      left: -60px;
+    }
+  }
+}
