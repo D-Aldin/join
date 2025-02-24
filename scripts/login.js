@@ -7,7 +7,13 @@ let password;
 
 document.addEventListener("DOMContentLoaded", function () {
   const loginWindow = document.querySelector(".login_window");
+  const loginHeader = document.querySelector(".login_header");
+  const footer = document.querySelector("footer");
   setTimeout(() => {
+    footer.style.display = "block";
+    footer.style.animation = "fadeIn 1s forwards";
+    loginHeader.style.display = "flex";
+    loginHeader.style.animation = "fadeIn 1s forwards";
     loginWindow.style.display = "inline";
     loginWindow.style.animation = "fadeIn 1s forwards";
   }, 1000);
