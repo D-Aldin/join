@@ -6,6 +6,6 @@ main {
 
 @media only screen and (max-width: 1200px) {
   main {
-    padding-left: 5px;
+    padding-left: 0px;
   }
 }

@@ -70,15 +70,4 @@ h2 {
   .legal {
     width: 100%;
   }
-  .nav_position_login {
-    bottom: 0;
-    background-color: brown;
-    display: flex;
-    justify-content: flex-start;
-    align-items: flex-start;
-  }
-  .nav_position_login a {
-    flex-direction: column;
-    gap: 4px;
-  }
 }

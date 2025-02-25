@@ -125,6 +125,9 @@ aside {
   .join_logo {
     display: none;
   }
+  .logo_position {
+    display: none;
+  }
   aside {
     position: fixed;
     bottom: 0px;
@@ -136,6 +139,19 @@ aside {
     justify-content: space-between;
     align-items: center;
     flex-direction: row;
+  }
+  .nav_position_login {
+    bottom: 0;
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    margin-left: 24px;
+    padding: 24px;
+    border-radius: 16px;
+  }
+  .nav_position_login a {
+    flex-direction: column;
+    gap: 4px;
   }
   .legal_and_policy_position {
     display: flex;
@@ -166,5 +182,25 @@ aside {
   .privacy_policy_login.active_background_color a:hover,
   .legal_notice_login.active_background_color a:hover {
     color: rgba(255, 255, 255, 1);
+  }
+}
+
+@media only screen and (max-width: 1200px) {
+  .nav_position_login {
+    padding: 12px;
+    margin-left: 12px;
+  }
+  .legal_and_policy_position {
+    margin-right: 8px;
+  }
+  .legal_and_policy_position a {
+    padding: 36px 0px 36px 0px;
+    width: 100px;
+  }
+  .privacy_policy_login {
+    width: 100px;
+  }
+  .legal_notice_login {
+    width: 100px;
   }
 }
