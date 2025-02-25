@@ -203,4 +203,19 @@ aside {
   .legal_notice_login {
     width: 100px;
   }
+
+  .link_nav_add_task,
+  .link_nav_summary,
+  .link_nav_board,
+  .link_nav_contacts {
+    display: block;
+  }
+
+  .nav_position {
+    height: 80px;
+  }
+
+  .nav_position a {
+    height: 90px;
+  }
 }

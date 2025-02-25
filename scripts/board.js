@@ -6,6 +6,7 @@ const done = document.querySelector("#done");
 const refProfile = document.getElementsByClassName("profile");
 let cardID;
 let assigContacts = [];
+let windowWidth;
 
 function draggedElementID(event) {
   event.target.addEventListener("dragstart", () => {
@@ -182,7 +183,7 @@ async function initialize() {
 
 function ifNoTaskResizeContainer() {
   document.querySelectorAll("#toDo, #progress, #feedback, #done").forEach((section) => {
-    if (section.firstChild && window.innerWidth < 1200) {
+    if (section.children.length > 0 && window.innerWidth < 1200) {
       section.style.height = "300px";
     } else {
       section.style.height = "80px";
