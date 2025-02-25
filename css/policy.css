@@ -3,7 +3,6 @@
   bottom: 180px;
   left: 0;
   display: flex;
-  align-items: center;
   justify-content: center;
   cursor: pointer;
 }
@@ -24,7 +23,7 @@
 .content {
   display: inline-block;
   font-size: 16px;
-  width: 1014px;
+  width: calc(100% - 232px);
   height: 1024px;
 }
 
@@ -55,4 +54,27 @@ h2 {
 
 a {
   color: rgba(41, 171, 226, 1);
+}
+
+@media only screen and (max-width: 1200px) {
+  .logo_position {
+    display: none;
+  }
+  .nav_position_login {
+    bottom: 0;
+    background-color: brown;
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+  }
+  .nav_position_login a {
+    flex-direction: column;
+    gap: 4px;
+  }
+  .scroll_layout {
+    margin: 32px 16px 112px 16px;
+  }
+  .content {
+    width: 100%;
+  }
 }

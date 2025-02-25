@@ -62,3 +62,23 @@ h2 {
   font-size: 27px;
   font-weight: 400;
 }
+
+@media only screen and (max-width: 1200px) {
+  .scroll_layout {
+    margin: 32px 16px 112px 16px;
+  }
+  .legal {
+    width: 100%;
+  }
+  .nav_position_login {
+    bottom: 0;
+    background-color: brown;
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+  }
+  .nav_position_login a {
+    flex-direction: column;
+    gap: 4px;
+  }
+}
