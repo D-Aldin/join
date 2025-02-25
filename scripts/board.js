@@ -5,6 +5,7 @@ const feedback = document.querySelector("#feedback");
 const done = document.querySelector("#done");
 const refProfile = document.getElementsByClassName("profile");
 let cardID;
+let assigContacts = [];
 
 function draggedElementID(event) {
   event.target.addEventListener("dragstart", () => {
@@ -92,7 +93,6 @@ async function displayCardOnBoard() {
     }
   }
   noTaskToDo();
-  ifNoTaskResizeContainer();
 }
 
 function addProfilesToCard(id, obj) {
@@ -132,6 +132,7 @@ function noTaskToDo() {
     feedback.lastElementChild == null ? (noTaskAwaitFeedback.classList.add("no_task"), (noTaskAwaitFeedback.innerHTML = "No Tasks Await feedback")) : (noTaskAwaitFeedback.classList.remove("no_task"), (noTaskAwaitFeedback.innerHTML = ""));
     done.lastElementChild == null ? (noTaskDone.classList.add("no_task"), (noTaskDone.innerHTML = "No Tasks Done")) : (noTaskDone.classList.remove("no_task"), (noTaskDone.innerHTML = ""));
   }, 130);
+  ifNoTaskResizeContainer();
 }
 
 async function countCompletedSubtasks(subtask) {
@@ -181,7 +182,7 @@ async function initialize() {
 
 function ifNoTaskResizeContainer() {
   document.querySelectorAll("#toDo, #progress, #feedback, #done").forEach((section) => {
-    if (section.firstChild) {
+    if (section.firstChild && window.innerWidth < 1200) {
       section.style.height = "300px";
     } else {
       section.style.height = "80px";

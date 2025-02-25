@@ -166,4 +166,11 @@
   header h1 {
     display: none;
   }
+
+  .link_nav_add_task,
+  .link_nav_summary,
+  .link_nav_board,
+  .link_nav_contacts {
+    padding: 0px;
+  }
 }
