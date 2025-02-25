@@ -218,6 +218,10 @@ input::placeholder {
   display: inline;
 }
 
+.grabbing {
+  cursor: grabbing;
+}
+
 @media only screen and (max-width: 1600px) {
   .board_column {
     width: 14.5rem;
@@ -347,7 +351,10 @@ input::placeholder {
   #done {
     height: 300px;
     display: flex;
-    overflow-y: scroll;
+    overflow-x: auto;
+    white-space: nowrap;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
   }
 
   #toDo::-webkit-scrollbar,
@@ -359,6 +366,7 @@ input::placeholder {
 
   .board_content {
     flex-direction: column;
+    display: flex;
   }
 
   h3 {
@@ -371,6 +379,10 @@ input::placeholder {
   }
 
   .card {
-    width: 300px !important;
+    min-width: 197px !important;
+  }
+
+  .grabbing {
+    cursor: grabbing;
   }
 }

@@ -92,6 +92,7 @@ async function displayCardOnBoard() {
     }
   }
   noTaskToDo();
+  ifNoTaskResizeContainer();
 }
 
 function addProfilesToCard(id, obj) {
@@ -178,11 +179,12 @@ async function initialize() {
   displayCardOnBoard();
 }
 
-// -------------------------------------------------------------------- TEST LIST TEST TEST TEST TEST --------------------------------
-
-let assigContacts = [];
-let subtaskList = {
-  0: { task: "write function 1", state: false },
-  1: { task: "write function 2", state: false },
-  2: { task: "write function 3", state: false },
-};
+function ifNoTaskResizeContainer() {
+  document.querySelectorAll("#toDo, #progress, #feedback, #done").forEach((section) => {
+    if (section.firstChild) {
+      section.style.height = "300px";
+    } else {
+      section.style.height = "80px";
+    }
+  });
+}
