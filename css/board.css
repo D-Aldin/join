@@ -210,6 +210,14 @@ input::placeholder {
   display: none;
 }
 
+.mobile_head {
+  display: none;
+}
+
+.dekstop_view {
+  display: inline;
+}
+
 @media only screen and (max-width: 1600px) {
   .board_column {
     width: 14.5rem;
@@ -260,6 +268,7 @@ input::placeholder {
 
   .card {
     width: 172px;
+    margin: 5px 5px 0 5px;
   }
 
   aside {
@@ -289,5 +298,79 @@ input::placeholder {
     display: flex;
     width: 100%;
     height: 100%;
+  }
+
+  .mobile_head {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    margin-bottom: 22px;
+    align-items: center;
+  }
+
+  .dekstop_view {
+    display: none;
+  }
+
+  .title_and_searchbar {
+    flex-direction: column;
+  }
+
+  .title_and_searchbar h1 {
+    flex-direction: column;
+  }
+
+  .search_bar {
+    display: inline-block;
+    width: 100%;
+  }
+
+  #searchbar {
+    width: 100%;
+  }
+
+  .add_btn {
+    color: transparent;
+    width: 34px;
+    background-position: center;
+    height: 42px;
+  }
+
+  .board_container {
+    padding-left: 22px;
+    padding-right: 22px;
+  }
+
+  #toDo,
+  #progress,
+  #feedback,
+  #done {
+    height: 300px;
+    display: flex;
+    overflow-y: scroll;
+  }
+
+  #toDo::-webkit-scrollbar,
+  #progress::-webkit-scrollbar,
+  #feedback::-webkit-scrollbar,
+  #done::-webkit-scrollbar {
+    display: none;
+  }
+
+  .board_content {
+    flex-direction: column;
+  }
+
+  h3 {
+    font-weight: bolder !important;
+    font-size: 20px !important;
+  }
+
+  .board_column {
+    width: 100%;
+  }
+
+  .card {
+    width: 300px !important;
   }
 }

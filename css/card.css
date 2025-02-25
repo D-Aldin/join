@@ -116,6 +116,10 @@
 }
 
 @media only screen and (max-width: 1200px) {
+  main {
+    display: inline;
+  }
+
   aside {
     bottom: 0px;
     width: 100%;
@@ -142,11 +146,11 @@
   .link_nav_summary,
   .link_nav_board,
   .link_nav_contacts {
-    padding-left: 12px;
+    padding-left: 0px;
   }
 
   .nav_position {
-    width: 300px;
+    width: 100%;
   }
 
   .nav_position a {
@@ -160,6 +164,6 @@
   }
 
   header h1 {
-    display: non;
+    display: none;
   }
 }

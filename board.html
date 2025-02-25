@@ -96,12 +96,16 @@
       </div>
       <div class="board_container">
         <section class="title_and_searchbar">
-          <h1>Board</h1>
+          <h1 class="dekstop_view">Board</h1>
+          <div class="mobile_head">
+            <h1>Board</h1>
+            <button onclick="showOverlay(event), renderAddTaskMenu()" class="add_btn transition">Add task</button>
+          </div>
           <form onsubmit="event.preventDefault()" id="search_form" class="search_bar">
             <label for="" name="search"></label>
             <input list="temp" type="search" id="searchbar" name="searchbar" placeholder="Find Task" />
             <datalist id="temp"></datalist>
-            <button onclick="showOverlay(event), renderAddTaskMenu()" class="add_btn transition">Add task</button>
+            <button onclick="showOverlay(event), renderAddTaskMenu()" class="add_btn transition dekstop_view">Add task</button>
           </form>
         </section>
 
