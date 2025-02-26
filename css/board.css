@@ -279,10 +279,6 @@ input::placeholder {
     width: 220px;
   }
 
-  .nav_position img {
-    width: 23px !important;
-  }
-
   .nav_position a {
     font-size: 16px;
   }
@@ -293,9 +289,43 @@ input::placeholder {
 }
 
 @media only screen and (max-width: 1200px) {
-  aside {
-    bottom: 0px;
+  ::-webkit-scrollbar {
+    display: none;
+  }
+
+  .question_marker_account_img_position a {
+    display: none;
+  }
+
+  .nav_position {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
     width: 100%;
+    margin-left: 24px;
+    margin-right: 24px;
+  }
+
+  .link_nav_summary,
+  .link_nav_add_task,
+  .link_nav_board,
+  .link_nav_contacts {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0;
+    border-radius: 16px;
+    width: 120px;
+  }
+
+  .link_nav_summary a,
+  .link_nav_add_task a,
+  .link_nav_board a,
+  .link_nav_contacts a {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
   }
 
   .mobile_logo {

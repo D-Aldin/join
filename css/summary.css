@@ -55,9 +55,7 @@
   cursor: pointer;
   color: rgb(255, 255, 255);
   background-color: rgb(42, 54, 71);
-  width: 282.5px;
-  height: 184px;
-  margin-left: -4px;
+  transform: scale(1.05);
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
 }
 
@@ -77,9 +75,7 @@
   cursor: pointer;
   color: rgb(255, 255, 255);
   background-color: rgb(42, 54, 71);
-  width: 282.5px;
-  height: 184px;
-  margin-right: -4px;
+  transform: scale(1.05);
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
 }
 
@@ -124,7 +120,7 @@
   cursor: pointer;
   color: rgb(255, 255, 255);
   background-color: rgb(42, 54, 71);
-  transform: scale(1.05);
+  transform: scale(1.025);
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
 }
 
@@ -184,10 +180,7 @@
   cursor: pointer;
   color: rgb(255, 255, 255);
   background-color: rgb(42, 54, 71);
-  width: 184px;
-  height: 184px;
-  margin-right: -16px;
-  margin-top: -16px;
+  transform: scale(1.05);
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
 }
 
@@ -207,9 +200,7 @@
   cursor: pointer;
   color: rgb(255, 255, 255);
   background-color: rgb(42, 54, 71);
-  width: 184px;
-  height: 184px;
-  margin-top: -16px;
+  transform: scale(1.05);
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
 }
 
@@ -229,9 +220,172 @@
   cursor: pointer;
   color: rgb(255, 255, 255);
   background-color: rgb(42, 54, 71);
-  width: 184px;
-  height: 184px;
-  margin-top: -16px;
-  margin-left: -16px;
+  transform: scale(1.05);
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+}
+
+.mobile_logo {
+  display: none;
+}
+
+@media only screen and (max-width: 1350px) {
+  .greetings_position {
+    display: none;
+  }
+}
+
+@media only screen and (max-width: 1200px) {
+  .question_marker_account_img_position a {
+    display: none;
+  }
+
+  .greetings_position {
+    display: flex;
+    top: 400px;
+    left: 500px;
+  }
+
+  .mobile_logo {
+    display: flex;
+    width: 100%;
+    height: 100%;
+  }
+
+  .header_standard_position {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 0;
+    padding-top: 32px;
+    padding-left: 24px;
+  }
+
+  .line {
+    display: none;
+  }
+
+  .line_responsive {
+    border-top: 3px solid rgb(41, 171, 226);
+    width: 90px;
+    height: 0;
+  }
+
+  .legal_and_policy_position {
+    display: none;
+  }
+
+  .dashboard {
+    height: 384px;
+    width: 396px;
+    left: 24px;
+    top: 320px;
+  }
+
+  .dashboard_img_size_pen,
+  .dashboard_img_size_hook,
+  .dashboard_img_size {
+    height: 40px;
+    width: 40px;
+  }
+
+  .box_number_size {
+    font-weight: 600;
+    font-size: 47px;
+  }
+
+  .to_do_and_done {
+    height: auto;
+  }
+
+  .box_to_do {
+    width: 186px;
+    height: 110px;
+  }
+
+  .box_done {
+    width: 186px;
+    height: 110px;
+  }
+
+  .urgency_summary {
+    width: 396px;
+    height: 110px;
+  }
+
+  .box_urgency_summary {
+    gap: 20px;
+  }
+
+  .line_urgency {
+    height: 68px;
+  }
+
+  .logo_position {
+    display: none;
+  }
+
+  .nav_position {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    margin-left: 24px;
+    margin-right: 24px;
+  }
+
+  .link_nav_summary,
+  .link_nav_add_task,
+  .link_nav_board,
+  .link_nav_contacts {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0;
+    border-radius: 16px;
+    width: 120px;
+  }
+
+  .link_nav_summary a,
+  .link_nav_add_task a,
+  .link_nav_board a,
+  .link_nav_contacts a {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+  }
+
+  .box_tasks_in_board,
+  .box_tasks_in_progress,
+  .box_awating_feedback {
+    height: 110px;
+    width: 116px;
+  }
+
+  .box_text_size {
+    font-weight: 400;
+    font-size: 14px;
+  }
+}
+
+@media only screen and (max-width: 900px) {
+  .greetings_position {
+    display: flex;
+    top: 440px;
+    left: 450px;
+    width: 300px;
+  }
+
+  .greetings_position p {
+    font-size: 32px;
+  }
+
+  .account_name {
+    font-size: 47px;
+  }
+}
+
+@media only screen and (max-width: 900px) {
+  .greetings_position {
+    display: none;
+  }
 }
