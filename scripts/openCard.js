@@ -75,27 +75,15 @@ async function renderSubtasks(id) {
   setCheckboxAttributes(id);
 }
 
-// TODO reduce lines of code
 async function managenCheckBoxes(id) {
   let refCheckBoxes = document.querySelectorAll("input[type='checkbox']");
-  for (let index = 0; index < refCheckBoxes.length; index++) {
-    const element = refCheckBoxes[index];
+  refCheckBoxes.forEach((element) => {
     element.addEventListener("change", (e) => {
       let idOfTask = e.currentTarget.id;
-      if (element.checked) {
-        let newState = {
-          state: true,
-        };
-        updateSubtaskState(taskPath, id, idOfTask, newState);
-      }
-      if (element.checked === false) {
-        let newState = {
-          state: false,
-        };
-        updateSubtaskState(taskPath, id, idOfTask, newState);
-      }
+      let newState = { state: element.checked };
+      updateSubtaskState(taskPath, id, idOfTask, newState);
     });
-  }
+  });
 }
 
 async function updateSubtaskState(path = "", taskID, subtaskID, state) {
@@ -114,7 +102,6 @@ async function setCheckboxAttributes(id) {
   for (const subtask in response) {
     if (Object.prototype.hasOwnProperty.call(response, subtask)) {
       const element = response[subtask];
-      const subtaskID = Object.keys(response);
       let checkbox = document.querySelector(`#${subtask}`);
       if (element.state === true) {
         checkbox.setAttribute("checked", "true");
