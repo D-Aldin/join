@@ -111,19 +111,15 @@ async function updateSubtaskState(path = "", taskID, subtaskID, state) {
 
 async function setCheckboxAttributes(id) {
   let response = await fetchCardDetails(`tasks/${id}/subtask`, id);
-  let checkbox = document.querySelectorAll('input[type="checkbox"]');
-  for (const task in response) {
-    if (Object.prototype.hasOwnProperty.call(response, task)) {
-      const element = response[task];
-      if (element.state === false) {
-        checkbox.forEach((box) => {
-          box.removeAttribute("checked");
-        });
-      }
+  for (const subtask in response) {
+    if (Object.prototype.hasOwnProperty.call(response, subtask)) {
+      const element = response[subtask];
+      const subtaskID = Object.keys(response);
+      let checkbox = document.querySelector(`#${subtask}`);
       if (element.state === true) {
-        checkbox.forEach((box) => {
-          box.setAttribute("checked", "true");
-        });
+        checkbox.setAttribute("checked", "true");
+      } else {
+        checkbox.removeAttribute("checked");
       }
     }
   }
