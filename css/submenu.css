@@ -7,7 +7,7 @@
   border-radius: 20px 0 20px 20px;
   background-color: rgb(42, 54, 71);
   box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.1);
-  z-index: 2;
+  z-index: 3;
   display: none;
 
   display: flex;
@@ -27,12 +27,13 @@
 .submenu_section {
   cursor: pointer;
   display: flex;
-  align-items: center !important;
+  align-items: center;
   width: 80%;
   height: 40px;
 }
 
-.submenu_section:hover {
+.submenu_section:hover,
+.help_submenu_section_responsive:hover {
   background-color: rgb(42, 61, 89);
 }
 
@@ -51,5 +52,19 @@
   }
   to {
     transform: translateX(100%);
+  }
+}
+
+@media only screen and (max-width: 1200px) {
+  .submenu_position {
+    height: 204px;
+  }
+
+  .help_submenu_section_responsive {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    width: 80%;
+    height: 40px;
   }
 }
