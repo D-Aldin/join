@@ -13,7 +13,12 @@ function hideOverlay() {
 }
 
 function renderAddTaskMenu() {
-  document.querySelector("#add_task_box").innerHTML = HTMLTamplateForAddTaskInBorad();
+  let addTaskButton = document.querySelector("#add_task_box");
+  if (window.innerWidth > 1200) {
+    addTaskButton.innerHTML = HTMLTamplateForAddTaskInBorad();
+  } else {
+    window.location = "add_task.html";
+  }
 }
 
 async function displayDropDownMenuSectionAddTask() {
