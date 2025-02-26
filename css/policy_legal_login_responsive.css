@@ -1,85 +1,13 @@
-body {
-  overflow: hidden;
-}
-
-.help_header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  width: 1014px;
-  gap: 30px;
-}
-
-.help_header img {
-  width: 32px;
-  height: 32px;
-}
-
-.help_header img:hover {
-  cursor: pointer;
-  content: url(../assets/icons/help/arrow_hover.svg);
-  width: 30px;
-  height: 32px;
-}
-
-.help_header h1 {
-  font-size: 61px;
-  margin: 0;
-}
-
-.scroll_layout {
-  gap: 24px;
-  margin: 110px 0 110px 96px;
-  overflow-y: scroll;
-  width: 1014px;
-}
-
-.scroll_layout::-webkit-scrollbar {
-  display: none;
-}
-
-.layout h2 {
-  font-size: 27px;
-  font-weight: 700;
-  line-height: 32.4px;
-}
-
-.layout p {
-  font-size: 16px;
-  font-weight: 400;
-  line-height: 19.2px;
-}
-
-.layout span {
-  color: rgb(41, 171, 226);
-}
-
-ol {
-  list-style-type: decimal;
-  padding-left: 30px;
-}
-
-li::marker {
-  font-size: 27px;
-  font-weight: 700;
-}
-
-li {
-  font-size: 16px;
-  padding-bottom: 16px;
-}
-
-li p,
-h3 {
-  margin: 0;
-}
-
 @media only screen and (max-width: 1200px) {
   .legal_and_policy_position {
     display: none;
   }
 
-  .question_marker {
+  .question_marker_account_img_position a {
+    display: none;
+  }
+
+  .logo_position {
     display: none;
   }
 
@@ -112,15 +40,6 @@ h3 {
     display: flex;
     justify-content: center;
     flex-direction: column;
-  }
-
-  .scroll_layout {
-    margin: 32px 16px 112px 16px;
-    width: 100%;
-  }
-
-  .help_header {
-    width: 100%;
   }
 }
 

@@ -56,24 +56,15 @@ a {
   color: rgba(41, 171, 226, 1);
 }
 
+.mobile_logo {
+  display: none;
+}
+
 @media only screen and (max-width: 1200px) {
-  .logo_position {
-    display: none;
-  }
-  .nav_position_login {
-    bottom: 0;
-    background-color: brown;
-    display: flex;
-    justify-content: flex-start;
-    align-items: flex-start;
-  }
-  .nav_position_login a {
-    flex-direction: column;
-    gap: 4px;
-  }
   .scroll_layout {
     margin: 32px 16px 112px 16px;
   }
+
   .content {
     width: 100%;
   }

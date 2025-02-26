@@ -210,6 +210,18 @@ input::placeholder {
   display: none;
 }
 
+.mobile_head {
+  display: none;
+}
+
+.dekstop_view {
+  display: inline;
+}
+
+.grabbing {
+  cursor: grabbing;
+}
+
 @media only screen and (max-width: 1600px) {
   .board_column {
     width: 14.5rem;
@@ -260,14 +272,11 @@ input::placeholder {
 
   .card {
     width: 172px;
+    margin: 5px 5px 0 5px;
   }
 
   aside {
     width: 220px;
-  }
-
-  .nav_position img {
-    width: 23px !important;
   }
 
   .nav_position a {
@@ -280,14 +289,130 @@ input::placeholder {
 }
 
 @media only screen and (max-width: 1200px) {
-  aside {
-    bottom: 0px;
+  ::-webkit-scrollbar {
+    display: none;
+  }
+
+  .question_marker_account_img_position a {
+    display: none;
+  }
+
+  .nav_position {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
     width: 100%;
+    margin-left: 24px;
+    margin-right: 24px;
+  }
+
+  .link_nav_summary,
+  .link_nav_add_task,
+  .link_nav_board,
+  .link_nav_contacts {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0;
+    border-radius: 16px;
+    width: 120px;
+  }
+
+  .link_nav_summary a,
+  .link_nav_add_task a,
+  .link_nav_board a,
+  .link_nav_contacts a {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
   }
 
   .mobile_logo {
     display: flex;
     width: 100%;
     height: 100%;
+  }
+
+  .mobile_head {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    margin-bottom: 22px;
+    align-items: center;
+  }
+
+  .dekstop_view {
+    display: none;
+  }
+
+  .title_and_searchbar {
+    flex-direction: column;
+  }
+
+  .title_and_searchbar h1 {
+    flex-direction: column;
+  }
+
+  .search_bar {
+    display: inline-block;
+    width: 100%;
+  }
+
+  #searchbar {
+    width: 100%;
+  }
+
+  .add_btn {
+    color: transparent;
+    width: 34px;
+    background-position: center;
+    height: 42px;
+  }
+
+  .board_container {
+    padding-left: 22px;
+    padding-right: 22px;
+  }
+
+  #toDo,
+  #progress,
+  #feedback,
+  #done {
+    height: 300px;
+    display: flex;
+    overflow-x: auto;
+    white-space: nowrap;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+
+  #toDo::-webkit-scrollbar,
+  #progress::-webkit-scrollbar,
+  #feedback::-webkit-scrollbar,
+  #done::-webkit-scrollbar {
+    display: none;
+  }
+
+  .board_content {
+    flex-direction: column;
+    display: flex;
+  }
+
+  h3 {
+    font-weight: bolder !important;
+    font-size: 20px !important;
+  }
+
+  .board_column {
+    width: 100%;
+  }
+
+  .card {
+    min-width: 197px !important;
+  }
+
+  .grabbing {
+    cursor: grabbing;
   }
 }

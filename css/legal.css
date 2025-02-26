@@ -63,22 +63,22 @@ h2 {
   font-weight: 400;
 }
 
+.mobile_logo {
+  display: none;
+}
+
 @media only screen and (max-width: 1200px) {
   .scroll_layout {
     margin: 32px 16px 112px 16px;
   }
+
   .legal {
     width: 100%;
   }
-  .nav_position_login {
-    bottom: 0;
-    background-color: brown;
+
+  .mobile_logo {
     display: flex;
-    justify-content: flex-start;
-    align-items: flex-start;
-  }
-  .nav_position_login a {
-    flex-direction: column;
-    gap: 4px;
+    width: 100%;
+    height: 100%;
   }
 }

@@ -13,8 +13,8 @@
     <script src="./scripts/submenu_initials.js" defer></script>
     <script src="./scripts/checkActiveUser.js" defer></script>
 
-    <link rel="stylesheet" href="./css/aside.css" />
     <link rel="stylesheet" href="./css/header.css" />
+    <link rel="stylesheet" href="./css/aside.css" />
     <link rel="stylesheet" href="./css/main.css" />
     <link rel="stylesheet" href="./css/standard.css" />
     <link rel="stylesheet" href="./css/summary.css" />
@@ -24,6 +24,7 @@
   <body onload="init(), setAccountInitialsSubmenu(), checkUser()">
     <header>
       <div>
+        <img class="mobile_logo" src="./assets/icons/logo/JoinLogoMobile.svg" alt="" />
         <h1>Kanban Project Managment Tool</h1>
       </div>
       <div class="question_marker_account_img_position">
@@ -61,6 +62,9 @@
     </aside>
 
     <div id="submenu_position" class="d_none">
+      <div class="d_none help_submenu_section_responsive" onclick="window.location.href='./help.html'">
+        <a href="./help.html" class="submenu_links_design link_legal_notice_hover">Help</a>
+      </div>
       <div class="submenu_section" onclick="window.location.href='./legal_notice_login.html'">
         <a href="./legal_notice_login.html" class="submenu_links_design link_legal_notice_hover">Legal Notice</a>
       </div>
@@ -78,6 +82,7 @@
           <h1>Join 360</h1>
           <div class="line"></div>
           <h2>Key Metrics at a Glance</h2>
+          <div class="line_responsive"></div>
         </div>
 
         <div class="dashboard">

@@ -5,6 +5,8 @@ const feedback = document.querySelector("#feedback");
 const done = document.querySelector("#done");
 const refProfile = document.getElementsByClassName("profile");
 let cardID;
+let assigContacts = [];
+let windowWidth;
 
 function draggedElementID(event) {
   event.target.addEventListener("dragstart", () => {
@@ -131,6 +133,7 @@ function noTaskToDo() {
     feedback.lastElementChild == null ? (noTaskAwaitFeedback.classList.add("no_task"), (noTaskAwaitFeedback.innerHTML = "No Tasks Await feedback")) : (noTaskAwaitFeedback.classList.remove("no_task"), (noTaskAwaitFeedback.innerHTML = ""));
     done.lastElementChild == null ? (noTaskDone.classList.add("no_task"), (noTaskDone.innerHTML = "No Tasks Done")) : (noTaskDone.classList.remove("no_task"), (noTaskDone.innerHTML = ""));
   }, 130);
+  ifNoTaskResizeContainer();
 }
 
 async function countCompletedSubtasks(subtask) {
@@ -178,11 +181,12 @@ async function initialize() {
   displayCardOnBoard();
 }
 
-// -------------------------------------------------------------------- TEST LIST TEST TEST TEST TEST --------------------------------
-
-let assigContacts = [];
-let subtaskList = {
-  0: { task: "write function 1", state: false },
-  1: { task: "write function 2", state: false },
-  2: { task: "write function 3", state: false },
-};
+function ifNoTaskResizeContainer() {
+  document.querySelectorAll("#toDo, #progress, #feedback, #done").forEach((section) => {
+    if (section.children.length > 0 && window.innerWidth < 1200) {
+      section.style.height = "300px";
+    } else {
+      section.style.height = "80px";
+    }
+  });
+}

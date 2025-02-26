@@ -19,6 +19,7 @@
     <script src="./scripts/count_tasks.js" defer></script>
     <script src="./scripts/add_task_in_board.js" defer></script>
     <script src="./scripts/checkActiveUser.js" defer></script>
+    <script src="./scripts/scroll.js" defer></script>
 
     <link rel="stylesheet" href="./css/aside.css" />
     <link rel="stylesheet" href="./css/header.css" />
@@ -75,6 +76,9 @@
     </aside>
 
     <div id="submenu_position" class="d_none">
+      <div class="d_none help_submenu_section_responsive" onclick="window.location.href='./help.html'">
+        <a href="./help.html" class="submenu_links_design link_legal_notice_hover">Help</a>
+      </div>
       <div class="submenu_section" onclick="window.location.href='./legal_notice_login.html'">
         <a href="./legal_notice_login.html" class="submenu_links_design link_legal_notice_hover">Legal Notice</a>
       </div>
@@ -96,12 +100,16 @@
       </div>
       <div class="board_container">
         <section class="title_and_searchbar">
-          <h1>Board</h1>
+          <h1 class="dekstop_view">Board</h1>
+          <div class="mobile_head">
+            <h1>Board</h1>
+            <button onclick="showOverlay(event), renderAddTaskMenu()" class="add_btn transition">Add task</button>
+          </div>
           <form onsubmit="event.preventDefault()" id="search_form" class="search_bar">
             <label for="" name="search"></label>
             <input list="temp" type="search" id="searchbar" name="searchbar" placeholder="Find Task" />
             <datalist id="temp"></datalist>
-            <button onclick="showOverlay(event), renderAddTaskMenu()" class="add_btn transition">Add task</button>
+            <button onclick="showOverlay(event), renderAddTaskMenu()" class="add_btn transition dekstop_view">Add task</button>
           </form>
         </section>
 

@@ -172,3 +172,12 @@ section {
   font-weight: 400;
   color: rgb(0, 124, 238);
 }
+
+@media only screen and (max-width: 1200px) {
+  section {
+    left: 0;
+  }
+  .contact_headline {
+    left: 511px;
+  }
+}

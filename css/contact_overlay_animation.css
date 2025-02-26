@@ -103,3 +103,9 @@
     left: 150%;
   }
 }
+
+@media only screen and (max-width: 1200px) {
+  #overlay_contact_infos {
+    left: 518px;
+  }
+}

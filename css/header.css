@@ -61,12 +61,22 @@ header img {
   background-color: rgba(12, 46, 98, 0.12);
 }
 
+.mobile_logo {
+  display: none;
+}
+
 @media only screen and (max-width: 1200px) {
+  .mobile_logo {
+    display: flex;
+    width: 100%;
+    height: 100%;
+  }
+
   header h1 {
     display: none;
   }
 
   header {
-    padding: 0 20px 0 20px;
+    padding: 0 24px 0 24px;
   }
 }

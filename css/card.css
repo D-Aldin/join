@@ -1,8 +1,3 @@
-@font-face {
-  font-family: InterLight;
-  src: url(../assets/fonts/Inter/static//Inter_24pt-Light.ttf);
-}
-
 .category {
   width: 7rem;
   height: 1.6rem;
@@ -116,6 +111,10 @@
 }
 
 @media only screen and (max-width: 1200px) {
+  main {
+    display: inline;
+  }
+
   aside {
     bottom: 0px;
     width: 100%;
@@ -138,28 +137,11 @@
     display: none;
   }
 
-  .link_nav_add_task,
-  .link_nav_summary,
-  .link_nav_board,
-  .link_nav_contacts {
-    padding-left: 12px;
-  }
-
   .nav_position {
-    width: 300px;
-  }
-
-  .nav_position a {
-    display: flex;
-    flex-direction: column;
-    font-size: 12px;
-  }
-
-  .nav_position img {
-    width: 20px !important;
+    width: 100%;
   }
 
   header h1 {
-    display: non;
+    display: none;
   }
 }
