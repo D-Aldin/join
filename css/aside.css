@@ -234,3 +234,30 @@ aside {
     height: 90px;
   }
 }
+
+@media only screen and (max-width: 540px) {
+  .link_nav_summary,
+  .link_nav_add_task,
+  .link_nav_board,
+  .link_nav_contacts {
+    width: 80px !important;
+  }
+}
+
+@media only screen and (max-width: 400px) {
+  .nav_position a {
+    font-size: 12px !important;
+  }
+
+  .nav_position img {
+    width: 24px !important;
+    height: 24px !important;
+  }
+
+  .link_nav_summary,
+  .link_nav_add_task,
+  .link_nav_board,
+  .link_nav_contacts {
+    width: 65px !important;
+  }
+}

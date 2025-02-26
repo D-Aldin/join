@@ -8,6 +8,8 @@
     <meta http-equiv="Expires" content="0" />
     <link rel="shortcut icon" href="./assets/icons/logo/joinLarge.png" type="image/x-icon" />
 
+    <script src="./scripts/submenu.js" defer></script>
+    <script src="./scripts/submenu_initials.js" defer></script>
     <script src="./scripts/aside.js" defer></script>
     <script src="./scripts/checkActiveUser.js" defer></script>
 
@@ -17,12 +19,18 @@
     <link rel="stylesheet" href="./css/main.css" />
     <link rel="stylesheet" href="./css/standard.css" />
     <link rel="stylesheet" href="./css/legal.css" />
+    <link rel="stylesheet" href="./css/policy_legal_login_responsive.css" />
     <title>Legal Notice</title>
   </head>
   <body class="privacy_policy_legal_notice_login" onload="checkUser()">
     <header>
       <div>
+        <img class="mobile_logo" src="./assets/icons/logo/JoinLogoMobile.svg" alt="" />
         <h1>Kanban Project Managment Tool</h1>
+      </div>
+      <div class="question_marker_account_img_position">
+        <a href="help.html"><img class="question_marker transition" src="./assets/icons/imgs/questionMarker.svg" alt="" /></a>
+        <div class="account_circle transition" id="account_icon" onclick="toggleShowSubmenu()"></div>
       </div>
     </header>
 
@@ -49,7 +57,7 @@
           <a href="./privacy_policy_login.html">Privacy Policy</a>
         </div>
         <div class="legal_notice_login transition">
-          <a href="./legal_notice_login.html">Legal notice</a>
+          <a href="./legal_notice_login.html">Legal Notice</a>
         </div>
       </div>
     </aside>

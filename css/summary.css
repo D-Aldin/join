@@ -389,3 +389,60 @@
     display: none;
   }
 }
+
+@media only screen and (max-width: 540px) {
+  .link_nav_summary,
+  .link_nav_add_task,
+  .link_nav_board,
+  .link_nav_contacts {
+    width: 80px;
+  }
+
+  .dashboard {
+    width: calc(100% - 48px);
+  }
+
+  .urgency_summary {
+    width: 100%;
+  }
+}
+
+@media only screen and (max-width: 400px) {
+  .box_to_do {
+    width: 160px;
+  }
+
+  .box_done {
+    width: 160px;
+  }
+
+  .urgency_summary {
+    width: 100%;
+  }
+
+  .date_deadline {
+    font-size: 16px;
+  }
+
+  .text_deadline {
+    font-size: 12px;
+  }
+
+  .box_tasks_in_board,
+  .box_tasks_in_progress,
+  .box_awating_feedback {
+    width: 100px;
+  }
+
+  .box_text_size {
+    font-weight: 400;
+    font-size: 10px;
+  }
+
+  .dashboard_img_size_pen,
+  .dashboard_img_size_hook,
+  .dashboard_img_size {
+    height: 30px;
+    width: 30px;
+  }
+}

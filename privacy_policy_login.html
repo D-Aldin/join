@@ -10,17 +10,25 @@
     <link rel="stylesheet" href="./css/policy.css" />
     <script src="./scripts/aside.js" defer></script>
     <script src="./scripts/checkActiveUser.js" defer></script>
+    <script src="./scripts/submenu.js" defer></script>
+    <script src="./scripts/submenu_initials.js" defer></script>
 
+    <link rel="stylesheet" href="./css/standard.css" />
     <link rel="stylesheet" href="./css/aside.css" />
     <link rel="stylesheet" href="./css/header.css" />
     <link rel="stylesheet" href="./css/main.css" />
-    <link rel="stylesheet" href="./css/standard.css" />
+    <link rel="stylesheet" href="./css/policy_legal_login_responsive.css" />
     <title>Privacy Policy</title>
   </head>
   <body class="privacy_policy_legal_notice_login" onload="checkUser()">
     <header>
       <div>
+        <img class="mobile_logo" src="./assets/icons/logo/JoinLogoMobile.svg" alt="" />
         <h1>Kanban Project Managment Tool</h1>
+      </div>
+      <div class="question_marker_account_img_position">
+        <a href="help.html"><img class="question_marker transition" src="./assets/icons/imgs/questionMarker.svg" alt="" /></a>
+        <div class="account_circle transition" id="account_icon" onclick="toggleShowSubmenu()"></div>
       </div>
     </header>
 
@@ -47,7 +55,7 @@
           <a href="./privacy_policy_login.html">Privacy Policy</a>
         </div>
         <div class="legal_notice_login transition">
-          <a href="./legal_notice_login.html">Legal notice</a>
+          <a href="./legal_notice_login.html">Legal Notice</a>
         </div>
       </div>
     </aside>
@@ -55,7 +63,7 @@
     <main>
       <div class="scroll_layout">
         <div class="content">
-          <h1>Datenschutzerklärung</h1>
+          <h1>Privacy Policy</h1>
 
           <span>
             <h2 id="m716">Präambel</h2>
