@@ -125,9 +125,11 @@ aside {
   .join_logo {
     display: none;
   }
+
   .logo_position {
     display: none;
   }
+
   aside {
     position: fixed;
     bottom: 0px;
@@ -140,6 +142,7 @@ aside {
     align-items: center;
     flex-direction: row;
   }
+
   .nav_position_login {
     bottom: 0;
     display: flex;
@@ -149,15 +152,19 @@ aside {
     padding: 24px;
     border-radius: 16px;
   }
+
   .nav_position_login a {
     flex-direction: column;
-    gap: 4px;
+    gap: 2px;
+    padding: 9px 9px 12px 9px;
   }
+
   .legal_and_policy_position {
     display: flex;
     flex-direction: row;
     margin-right: 24px;
   }
+
   .legal_and_policy_position a {
     justify-content: center;
     padding: 36px 24px;
@@ -165,6 +172,7 @@ aside {
     font-size: 14px;
     color: rgba(255, 255, 255, 1);
   }
+
   .privacy_policy_login,
   .legal_notice_login {
     display: flex;
@@ -172,13 +180,16 @@ aside {
     align-items: center;
     width: 144px;
   }
+
   .active_background_color {
     border-radius: 16px;
   }
+
   .legal_notice_login:hover:not(.active_background_color),
   .privacy_policy_login:hover:not(.active_background_color) {
     border-radius: 16px;
   }
+
   .privacy_policy_login.active_background_color a:hover,
   .legal_notice_login.active_background_color a:hover {
     color: rgba(255, 255, 255, 1);
@@ -190,16 +201,20 @@ aside {
     padding: 12px;
     margin-left: 12px;
   }
+
   .legal_and_policy_position {
     margin-right: 8px;
   }
+
   .legal_and_policy_position a {
     padding: 36px 0px 36px 0px;
     width: 100px;
   }
+
   .privacy_policy_login {
     width: 100px;
   }
+
   .legal_notice_login {
     width: 100px;
   }
