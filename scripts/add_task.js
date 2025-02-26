@@ -6,6 +6,8 @@ let subtasks = [];
 
 arrayOfContacts = [];
 
+selectedContacts = [];
+
 function render() {
     renderContacts("contacts");
 }
@@ -34,12 +36,15 @@ function pushContactsToSelectField() {
     let contactlist = document.getElementById('contact-list');
     for (let i = 0; i < arrayOfContacts.length; i++) {
         const currentContact = arrayOfContacts[i];
-
         contactlist.innerHTML += /*html*/`
             <div onclick="addContact(${i})" id="contact${i}" class="contactlist">
-                <div class="contact-img-cyrcle" style="background-color: ${currentContact.color}"></div>
-                ${currentContact.name}
-                <img src="" alt="">
+                <div class="flex_gap_16">
+                    <div class="contact-img-cyrcle" style="background-color: ${currentContact.color}">${currentContact.name.charAt(0)}</div>
+                    ${currentContact.name}
+                </div>
+                <div id="contact-checkbox${i}">
+                    <img src="assets/icons/addTask/box.svg" alt="">
+                </div>
             </div>
         `  }
 }
@@ -69,18 +74,46 @@ function closeContactList(contactlist) {
 }
 
 function addContact(x) {
-    let addContact = document.getElementById('contact' + x);
-    addContact.classList.remove('contactlist');
-    addContact.classList.add('contactlist-clicket');
-
+    if (selectedContacts.includes(x) ) {
+        removeContact(x)
+    } else {
+        setContact(x)
+    }
+    renderSelectetContacts();
 }
 
 function setContact(x) {
-
+    let addContact = document.getElementById('contact' + x);
+    addContact.classList.remove('contactlist');
+    addContact.classList.add('contactlist-clicket');
+    let box = document.getElementById('contact-checkbox'+ x); 
+    box.innerHTML = /*html*/`
+        <img src="assets/icons/addTask/checkbox.svg" alt="">
+    `
+    selectedContacts.push(x);
 }
 
 function removeContact(x) {
+    let addContact = document.getElementById('contact' + x);
+    addContact.classList.add('contactlist');
+    addContact.classList.remove('contactlist-clicket');
+    let box = document.getElementById('contact-checkbox'+ x); 
+    box.innerHTML = /*html*/`
+        <img src="assets/icons/addTask/box.svg" alt="">
+    `
+    const index = selectedContacts.indexOf(x)
+    selectedContacts.splice(index, 1);
+}
 
+function renderSelectetContacts() {
+    let wrapper = document.getElementById('assigned');
+    wrapper.innerHTML = '';
+    for (let i = 0; i < selectedContacts.length; i++) {
+        const index = selectedContacts[i];
+        wrapper.innerHTML += /*html*/`
+            <div class="contact-img-cyrcle" style="background-color: ${arrayOfContacts[index].color}">${arrayOfContacts[index].name.charAt(0)}</div>
+        `
+    }
 }
 
 function setPrio(x) {
@@ -130,8 +163,7 @@ function finishTaskNotification() {
         setTimeout(()=>{
         document.getElementById('finish-box').classList.remove('finish-container-activ')
     }, 3000)
-} 
-
+}
 
 function clearAllTasks() {
     resetPrioButton();
@@ -193,7 +225,6 @@ function clearsubtask() {
 
 function setSubtask() {
     let subtask = document.getElementById('subtask').value;
-
     subtasks.push(subtask);
     renderSubtasks();
     clearsubtask();

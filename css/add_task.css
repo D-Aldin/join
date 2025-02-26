@@ -139,6 +139,7 @@ p {
   align-items: center;
   justify-content: flex-start;
   gap: 8px;
+  margin-top: 8px;
 }
 
 .contact-icons {
@@ -475,10 +476,14 @@ ul {
 .contactlist {
   display: flex;
   align-items: center;
+  justify-content: space-between;
   border-radius: 10px;
   gap: 10px;
   height: 56px;
   box-sizing: border-box;
+  width: 100%;
+  padding-top: 7px;
+  padding-bottom: 7px;
   padding-left: 16px;
   padding-right: 16px;
   font-size: 20px;
@@ -498,17 +503,33 @@ ul {
   width: 45px;
   height: 45px;
   border-radius: 22.5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  color: white;
+}
+
+.flex_gap_16 {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  justify-content: center;
 }
 
 .contactlist-clicket {
   display: flex;
   align-items: center;
+  justify-content: space-between;
   border-radius: 10px;
   gap: 10px;
   height: 56px;
   box-sizing: border-box;
+  width: 100%;
   padding-left: 16px;
   padding-right: 16px;
+  padding-top: 7px;
+  padding-bottom: 7px;
   font-size: 20px;
   background-color: rgba(42, 54, 71, 1);
   color: white;
