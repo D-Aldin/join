@@ -73,3 +73,80 @@ li p,
 h3 {
   margin: 0;
 }
+
+@media only screen and (max-width: 1200px) {
+  .legal_and_policy_position {
+    display: none;
+  }
+
+  .question_marker {
+    display: none;
+  }
+
+  .nav_position {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    margin-left: 24px;
+    margin-right: 24px;
+  }
+
+  .link_nav_summary,
+  .link_nav_add_task,
+  .link_nav_board,
+  .link_nav_contacts {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0;
+    border-radius: 16px;
+    width: 120px;
+  }
+
+  .link_nav_summary a,
+  .link_nav_add_task a,
+  .link_nav_board a,
+  .link_nav_contacts a {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+  }
+
+  .scroll_layout {
+    margin: 32px 16px 112px 16px;
+    width: 100%;
+  }
+
+  .help_header {
+    width: 100%;
+  }
+}
+
+@media only screen and (max-width: 540px) {
+  .link_nav_summary,
+  .link_nav_add_task,
+  .link_nav_board,
+  .link_nav_contacts {
+    width: 80px !important;
+  }
+}
+
+@media only screen and (max-width: 400px) {
+  .nav_position a {
+    font-size: 12px !important;
+  }
+
+  .nav_position img {
+    width: 24px !important;
+    height: 24px !important;
+  }
+
+  .link_nav_summary,
+  .link_nav_add_task,
+  .link_nav_board,
+  .link_nav_contacts {
+    width: 65px !important;
+  }
+}

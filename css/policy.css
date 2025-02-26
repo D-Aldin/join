@@ -64,12 +64,8 @@ a {
   .scroll_layout {
     margin: 32px 16px 112px 16px;
   }
+
   .content {
     width: 100%;
-  }
-  .mobile_logo {
-    display: flex;
-    width: 100%;
-    height: 100%;
   }
 }
