@@ -1,7 +1,6 @@
 .contact_headline {
   position: absolute;
   height: 73px;
-  width: 569px;
   top: 206px;
   left: 743px;
   gap: 30px;
@@ -357,4 +356,100 @@ input[type="number"]::-webkit-outer-spin-button {
   color: rgba(255, 255, 255);
   font-size: 21px;
   font-weight: 700;
+}
+
+@media only screen and (max-width: 1350px) {
+  .contact_headline {
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+    width: 240px;
+    gap: 0;
+  }
+
+  .line {
+    display: none;
+  }
+
+  .line_responsive {
+    border-top: 3px solid rgb(41, 171, 226);
+    width: 90px;
+  }
+}
+
+@media only screen and (max-width: 1200px) {
+  .legal_and_policy_position {
+    display: none;
+  }
+
+  .question_marker {
+    display: none;
+  }
+
+  .nav_position {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    margin-left: 24px;
+    margin-right: 24px;
+  }
+
+  .link_nav_summary,
+  .link_nav_add_task,
+  .link_nav_board,
+  .link_nav_contacts {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0;
+    border-radius: 16px;
+    width: 120px;
+  }
+
+  .link_nav_summary a,
+  .link_nav_add_task a,
+  .link_nav_board a,
+  .link_nav_contacts a {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+  }
+
+  .scroll_layout {
+    margin: 32px 16px 112px 16px;
+    width: 100%;
+  }
+
+  .help_header {
+    width: 100%;
+  }
+}
+
+@media only screen and (max-width: 540px) {
+  .link_nav_summary,
+  .link_nav_add_task,
+  .link_nav_board,
+  .link_nav_contacts {
+    width: 80px !important;
+  }
+}
+
+@media only screen and (max-width: 400px) {
+  .nav_position a {
+    font-size: 12px !important;
+  }
+
+  .nav_position img {
+    width: 24px !important;
+    height: 24px !important;
+  }
+
+  .link_nav_summary,
+  .link_nav_add_task,
+  .link_nav_board,
+  .link_nav_contacts {
+    width: 65px !important;
+  }
 }
