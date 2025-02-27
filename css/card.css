@@ -144,4 +144,14 @@
   header h1 {
     display: none;
   }
+
+  .circle_profile_names {
+    margin-left: 22px;
+  }
+
+  .circle {
+    width: 1.5rem;
+    height: 1.5rem;
+    font-size: 12px;
+  }
 }

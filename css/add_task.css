@@ -346,8 +346,8 @@ p {
   cursor: pointer;
   border: none;
   background-color: white;
-  height: 30px;
-  width: 30px;
+  height: 25px;
+  width: 25px;
   border-radius: 15px;
   align-items: center;
   justify-content: center;
@@ -573,5 +573,20 @@ ul {
 
   .subtask-inputfield {
     width: 400px;
+  }
+}
+
+@media only screen and (max-width: 1200px) {
+  textarea {
+    padding: 10px 0 0 10px;
+  }
+
+  .subtask-inputfield-text {
+    font-size: 14px;
+  }
+
+  .subtask-inputfield-button img {
+    width: 18px;
+    height: 18px;
   }
 }

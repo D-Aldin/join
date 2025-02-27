@@ -95,3 +95,26 @@
   border-radius: 10px;
   margin: 4px;
 }
+
+@media only screen and (max-width: 1200px) {
+  .content_height {
+    height: 570px;
+  }
+
+  .dropdown_button {
+    height: 30px;
+    font-size: 14px;
+  }
+
+  .icon_name_container {
+    font-size: 14px;
+  }
+
+  .selected_contact img {
+    width: 12px;
+  }
+
+  .align_items img {
+    width: 12px;
+  }
+}
