@@ -256,3 +256,27 @@ input[type="checkbox"]:checked {
   background-position: center;
   background-repeat: no-repeat;
 }
+
+@media only screen and (max-width: 1200px) {
+  .open_card_title {
+    font-size: 41px;
+    margin-bottom: 20px;
+    width: 257px;
+  }
+
+  .category_box {
+    margin-bottom: 10px;
+  }
+
+  .open_card_discription {
+    margin-bottom: 20px;
+  }
+
+  .profile_names {
+    width: 260px;
+  }
+
+  .edit_button_box {
+    left: 42%;
+  }
+}

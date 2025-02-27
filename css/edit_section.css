@@ -201,3 +201,41 @@ select {
   box-shadow: 0 5px 5px 0 rgba(104, 104, 104, 0.301);
   transform: scale(1);
 }
+
+@media only screen and (max-width: 1200px) {
+  .prio_button {
+    width: 80px;
+    height: 35px;
+    font-size: 12px;
+  }
+
+  label {
+    font-size: 14px;
+  }
+
+  .dimensions {
+    height: 30px;
+    font-size: 14px;
+  }
+
+  .title_description_date {
+    margin-bottom: 20px;
+  }
+
+  .close_button {
+    margin-bottom: 20px;
+  }
+
+  .subtask_input {
+    height: 30px;
+  }
+
+  .editTask {
+    font-size: 14px;
+  }
+
+  #okBtn {
+    width: 76px;
+    height: 50px;
+  }
+}

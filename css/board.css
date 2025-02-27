@@ -417,4 +417,12 @@ input::placeholder {
   .grabbing {
     cursor: grabbing;
   }
+
+  #box {
+    padding: 20px;
+    top: 45%;
+    height: 700px;
+    width: 257px;
+    left: 50%;
+  }
 }
