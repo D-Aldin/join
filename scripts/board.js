@@ -160,19 +160,16 @@ function calPercentageOfCompletedSubtasks(numberOfSubtasks, completedSubtasks, i
 // TODO
 async function getContactsFromFireBase(list) {
   let contactObject = {};
-  if (list.length === 0) {
-    contactObject = {};
-  } else {
-    for (let index = 0; index < list.length; index++) {
-      const dataFromFireBase = await fetchTasks(`contacts/${list[index]}`);
-      temporarilyObject = {
-        [list[index]]: {
-          color: dataFromFireBase.color,
-          name: dataFromFireBase.name,
-        },
-      };
-      Object.assign(contactObject, temporarilyObject);
-    }
+  if (list.length === 0) return contactObject;
+  for (let index = 0; index < list.length; index++) {
+    const dataFromFireBase = await fetchTasks(`contacts/${list[index]}`);
+    let temporarilyObject = {
+      [list[index]]: {
+        color: dataFromFireBase.color,
+        name: dataFromFireBase.name,
+      },
+    };
+    Object.assign(contactObject, temporarilyObject);
   }
   return contactObject;
 }
