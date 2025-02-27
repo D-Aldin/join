@@ -39,7 +39,7 @@ function pushContactsToSelectField() {
         contactlist.innerHTML += /*html*/`
             <div onclick="addContact(${i})" id="contact${i}" class="contactlist">
                 <div class="flex_gap_16">
-                    <div class="contact-img-cyrcle" style="background-color: ${currentContact.color}">${currentContact.name.charAt(0)}</div>
+                    <div class="contact-img-cyrcle" style="background-color: ${currentContact.color}">${returnFirstLetter(currentContact.name)}</div>
                     ${currentContact.name}
                 </div>
                 <div id="contact-checkbox${i}">
@@ -93,6 +93,16 @@ function setContact(x) {
     selectedContacts.push(x);
 }
 
+function returnFirstLetter(name) {
+    let words = name.split(" ");
+    let initialsArray = words.map(function (word) {
+      let firstLetter = word.charAt(0).toUpperCase();
+      return firstLetter;
+    });
+    let initials = initialsArray.join("");
+    return initials;
+  }
+
 function removeContact(x) {
     let addContact = document.getElementById('contact' + x);
     addContact.classList.add('contactlist');
@@ -115,6 +125,20 @@ function renderSelectetContacts() {
         `
     }
 }
+
+document.addEventListener("DOMContentLoaded", function () {
+    let dateInput = document.getElementById("date");
+  
+    dateInput.addEventListener("focus", function () {
+      this.type = "date"; // Ändert das Feld zu einem echten Datumsauswahlfeld
+    });
+  
+    dateInput.addEventListener("blur", function () {
+      if (!this.value) {
+        this.type = "text"; // Setzt es zurück auf Text, wenn nichts eingegeben wurde
+      }
+    });
+  });
 
 function setPrio(x) {
     resetPrioButton()
