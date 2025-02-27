@@ -12,6 +12,7 @@ let dateValue;
 function overlayOn(event) {
   document.getElementById("overlay").style.display = "block";
   idOfcurrentElement = event.currentTarget.id;
+  document.querySelector("header").style.zIndex = "0";
 }
 
 function overlayOff() {

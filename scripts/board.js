@@ -135,7 +135,7 @@ function noTaskToDo() {
   }, 130);
   ifNoTaskResizeContainer();
 }
-
+// TODO
 async function countCompletedSubtasks(subtask) {
   if (!Array.isArray(subtask) || subtask.length === undefined) {
     return 0;
@@ -158,6 +158,7 @@ function calPercentageOfCompletedSubtasks(numberOfSubtasks, completedSubtasks, i
   document.getElementById("progress_bar" + id).style.width = `${result}%`;
 }
 
+// TODO
 async function getContactsFromFireBase(list) {
   let contactObject = {};
   if (list.length === 0) {

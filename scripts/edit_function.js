@@ -194,9 +194,6 @@ async function displaySubtasksInTheEditMenu() {
 async function editSubtaskFunk(event) {
   const refSubtaskID = event.currentTarget.getAttributeNode("id_subtask").value;
   const refTaskElement = event.currentTarget;
-  // console.log(refSubtaskID);
-  // console.log(refTaskElement);
-
   const dataFromFireBase = await fetchCardDetails(`${taskPath}/${idOfcurrentElement}/subtask/${refSubtaskID}`, idOfcurrentElement);
   refTaskElement.innerHTML = HTMLTamplateForEditSubtask(refSubtaskID);
   setupSubtaskEditing(refSubtaskID, dataFromFireBase);
@@ -228,12 +225,7 @@ async function saveNewSubtask(subtaskID, newValue) {
 
 async function deleteSubtask(event) {
   const refTrashButton = event.currentTarget.getAttribute("id_trash");
-
-  // const refSubtaskID = refTrashButton.parentElement.parentElement.getAttributeNode("id_subtask").value;
   console.log(refTrashButton);
-
-  // console.log(refSubtaskID);
-
   await fetch(`${BASE_URL}/${taskPath}/${idOfcurrentElement}/subtask/${refTrashButton}.json`, {
     method: "DELETE",
     headers: { "Content-Type": "application/json" },

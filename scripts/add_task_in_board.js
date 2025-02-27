@@ -155,8 +155,7 @@ function confirmEditing(event) {
   document.querySelector("#tasks-wrapper").innerHTML += HTMLTamplateForSubtasksInAddTaskBoard(inputField.value);
 }
 
-// TODO
-async function collectDataForNewTask(status) {
+async function collectDataForNewTask() {
   const inputTitle = document.querySelector("#title");
   const inputDescription = document.querySelector("#description");
   const inputDate = document.querySelector("#date");
