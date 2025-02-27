@@ -274,9 +274,42 @@ input[type="checkbox"]:checked {
 
   .profile_names {
     width: 260px;
+    height: 38px;
   }
 
   .edit_button_box {
     left: 42%;
+  }
+
+  .open_card_subtasks {
+    margin-bottom: 20px;
+  }
+
+  .open_card_assigned {
+    margin-bottom: 20px;
+  }
+}
+
+@media only screen and (min-width: 800px) {
+  .open_card_title {
+    font-size: 61px;
+    margin-bottom: 30px;
+    width: 380px;
+  }
+
+  .category_box {
+    margin-bottom: 20px;
+  }
+
+  .open_card_discription {
+    margin-bottom: 30px;
+  }
+
+  .profile_names {
+    width: 260px;
+  }
+
+  .edit_button_box {
+    left: 55%;
   }
 }

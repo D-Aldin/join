@@ -421,8 +421,25 @@ input::placeholder {
   #box {
     padding: 20px;
     top: 45%;
-    height: 700px;
+    height: 625px;
     width: 257px;
     left: 50%;
+  }
+
+  #box h3 {
+    font-size: 14px !important;
+  }
+
+  body {
+    overflow: hidden;
+  }
+}
+
+@media only screen and (min-width: 800px) {
+  #box {
+    top: 45%;
+    width: 380px;
+    height: 720px;
+    padding: 35px;
   }
 }
