@@ -2,6 +2,10 @@ main {
   overflow: auto;
 }
 
+main::-webkit-scrollbar {
+  display: none;
+}
+
 h1 {
   font-size: 61px;
   margin: 0;
@@ -245,6 +249,10 @@ input::placeholder {
 }
 
 @media only screen and (max-width: 1300px) {
+  .board_container {
+    background-color: rgb(246, 247, 248);
+  }
+
   .board_column {
     width: 12.5rem;
   }
@@ -262,10 +270,6 @@ input::placeholder {
     gap: 3rem;
   }
 
-  h1 {
-    font-size: 49px;
-  }
-
   h3 {
     font-size: 14px !important;
   }
@@ -273,10 +277,6 @@ input::placeholder {
   .card {
     width: 172px;
     margin: 5px 5px 0 5px;
-  }
-
-  aside {
-    width: 220px;
   }
 
   .nav_position a {
@@ -351,6 +351,7 @@ input::placeholder {
   }
 
   .title_and_searchbar h1 {
+    font-size: 61px;
     flex-direction: column;
   }
 
@@ -371,8 +372,9 @@ input::placeholder {
   }
 
   .board_container {
-    padding-left: 22px;
-    padding-right: 22px;
+    padding-top: 32px;
+    padding-left: 24px;
+    padding-right: 24px;
   }
 
   #toDo,
