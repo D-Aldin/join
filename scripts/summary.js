@@ -106,3 +106,14 @@ function helperFunction(counter, data) {
   }
   urgentTasks.innerHTML = counter;
 }
+
+document.addEventListener("DOMContentLoaded", function () {
+  const welcomeMessage = document.getElementById("welcome_message");
+  const mainContent = document.querySelector(".main_content");
+
+  // Startet die Animation und zeigt den Hauptinhalt an, nachdem die Animation abgeschlossen ist
+  welcomeMessage.addEventListener("animationend", function () {
+    welcomeMessage.style.display = "none";
+    mainContent.style.display = "block";
+  });
+});

@@ -19,6 +19,7 @@
     <link rel="stylesheet" href="./css/standard.css" />
     <link rel="stylesheet" href="./css/summary.css" />
     <link rel="stylesheet" href="./css/submenu.css" />
+    <link rel="stylesheet" href="./css/summary_responsive.css" />
     <title>Summary</title>
   </head>
   <body onload="init(), setAccountInitialsSubmenu(), checkUser()">
@@ -77,14 +78,20 @@
     </div>
 
     <main>
-      <div>
+      <div id="welcome_message" class="greetings_position">
+        <p>
+          <span id="time_message"></span> <br />
+          <span class="account_name"></span>
+        </p>
+      </div>
+
+      <div class="main_content">
         <div class="header_standard_position header_standard_size">
           <h1>Join 360</h1>
           <div class="line"></div>
           <h2>Key Metrics at a Glance</h2>
           <div class="line_responsive"></div>
         </div>
-
         <div class="dashboard">
           <div class="to_do_and_done" onclick="window.location.href = './board.html'">
             <div class="box_to_do transition">
@@ -141,13 +148,6 @@
               </div>
             </div>
           </div>
-        </div>
-
-        <div class="greetings_position">
-          <p>
-            <span id="time_message"></span> <br />
-            <span class="account_name"></span>
-          </p>
         </div>
       </div>
     </main>

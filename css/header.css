@@ -8,6 +8,7 @@ header {
   box-shadow: -2px 0px 6px 0px rgb(0, 0, 0, 0.2);
   left: 0;
   height: 96px;
+  z-index: 2;
 }
 
 header h1 {
