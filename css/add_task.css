@@ -461,16 +461,33 @@ ul {
 .contact-wrapper {
   height: 280px;
   width: 440px;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   background-color: white;
   overflow: auto;
+  scrollbar-width: 24px;
+  scrollbar-color: rgba(168, 168, 168, 1) transparent;
+}
+
+.contact-wrapper::-webkit-scrollbar {
+  height: 40px;
+}
+
+.contact-wrapper::-webkit-scrollbar-track {
+  background: transparent;
 }
 
 .contact-wrapper::-webkit-scrollbar-thumb {
   background: rgba(168, 168, 168, 1);
-  border-radius: 3px;
+  border-radius: 2px;
+  height: 24px;
+}
+
+.contact-wrapper::-webkit-scrollbar-thumb:hover {
+  background: rgba(120, 120, 120, 1);
 }
 
 .contactlist {
@@ -500,9 +517,10 @@ ul {
 }
 
 .contact-img-cyrcle {
-  width: 45px;
-  height: 45px;
-  border-radius: 22.5px;
+  width: 42px;
+  height: 42px;
+  border-radius: 22px;
+  border: solid 2px white;
   display: flex;
   align-items: center;
   justify-content: center;
