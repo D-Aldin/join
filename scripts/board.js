@@ -135,18 +135,17 @@ function noTaskToDo() {
   }, 130);
   window.addEventListener("resize", ifNoTaskResizeContainer);
 }
-// TODO
+
 async function countCompletedSubtasks(subtask) {
   if (!Array.isArray(subtask) || subtask.length === undefined) {
     return 0;
   }
   let countTrue = 0;
   for (let index = 0; index < subtask.length; index++) {
-    const element = subtask[index];
-    if (element === null) {
+    if (subtask[index] === null) {
       continue;
     }
-    if (element.state === true) {
+    if (subtask[index].state === true) {
       countTrue += 1;
     }
   }
