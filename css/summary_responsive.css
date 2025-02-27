@@ -136,7 +136,6 @@
     display: none;
   }
 
-  /* Stile für die Willkommensnachricht */
   .greetings_position {
     position: absolute;
     top: 0;
@@ -164,23 +163,20 @@
     color: rgb(41, 171, 226);
   }
 
-  /* Keyframe-Animation für das Ausblenden */
   @keyframes fadeOut {
     from {
       opacity: 1;
     }
     to {
       opacity: 0;
-      visibility: hidden; /* Versteckt das Element nach der Animation */
+      visibility: hidden;
     }
   }
 
-  /* Stile für den Hauptinhalt, der nach der Willkommensnachricht angezeigt wird */
   .main_content {
-    display: none; /* Versteckt den Hauptinhalt zunächst */
+    display: none;
   }
 
-  /* Zeigt den Hauptinhalt an, nachdem die Willkommensnachricht verschwunden ist */
   .greetings_position.fade-out + .main-content {
     display: block;
   }
