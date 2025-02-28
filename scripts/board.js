@@ -73,27 +73,28 @@ async function displayCardOnBoard() {
   let taskFromFireBase = await fetchTasks("tasks");
   for (const key in taskFromFireBase) {
     const element = taskFromFireBase[key];
-    if (!element) continue;
+    if (!element || element.user !== localStorage.userId) continue;
+
     const subtasksCompleted = element.subtask ? Object.values(element.subtask).filter((sub) => sub.state === true).length : 0;
     const totalSubtasks = element.subtask ? Object.keys(element.subtask).length : 0;
-    if (element.user === localStorage.userId) {
-      if (element.status == "toDo") {
-        toDo.innerHTML += renderCard(element.id, element.category, element.title, element.description, subtasksCompleted, totalSubtasks, element.prio);
-      }
-      if (element.status == "progress") {
-        progress.innerHTML += renderCard(element.id, element.category, element.title, element.description, subtasksCompleted, totalSubtasks, element.prio);
-      }
-      if (element.status == "feedback") {
-        feedback.innerHTML += renderCard(element.id, element.category, element.title, element.description, subtasksCompleted, totalSubtasks, element.prio);
-      }
-      if (element.status == "done") {
-        done.innerHTML += renderCard(element.id, element.category, element.title, element.description, subtasksCompleted, totalSubtasks, element.prio);
-      }
-      calPercentageOfCompletedSubtasks(totalSubtasks, subtasksCompleted, element.id);
-      addProfilesToCard(key, element.assigned);
-    }
+
+    renderTaskCard(element, subtasksCompleted, totalSubtasks);
+    calPercentageOfCompletedSubtasks(totalSubtasks, subtasksCompleted, element.id);
+    addProfilesToCard(key, element.assigned);
   }
   noTaskToDo();
+}
+
+function renderTaskCard(element, subtasksCompleted, totalSubtasks) {
+  const columnMap = {
+    toDo: toDo,
+    progress: progress,
+    feedback: feedback,
+    done: done,
+  };
+  if (columnMap[element.status]) {
+    columnMap[element.status].innerHTML += renderCard(element.id, element.category, element.title, element.description, subtasksCompleted, totalSubtasks, element.prio);
+  }
 }
 
 function addProfilesToCard(id, obj) {
@@ -157,7 +158,6 @@ function calPercentageOfCompletedSubtasks(numberOfSubtasks, completedSubtasks, i
   document.getElementById("progress_bar" + id).style.width = `${result}%`;
 }
 
-// TODO
 async function getContactsFromFireBase(list) {
   let contactObject = {};
   if (list.length === 0) return contactObject;
