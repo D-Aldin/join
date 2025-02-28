@@ -57,34 +57,19 @@ async function changeDate() {
   });
 }
 
-// TODO reduce lines of code
 function displaySelectedPriority(data) {
-  let urgent = document.getElementById("urgent");
-  let medinu = document.getElementById("medium");
-  let low = document.getElementById("low");
-  switch (data) {
-    case "urgent":
-      {
-        urgent.style.backgroundColor = "rgb(255, 61, 0)";
-        urgent.style.color = "white";
-        document.getElementById("urgentImageEditBtn").src = "./assets/icons/addTask/icon_clicket_urgent.svg";
-        urgent.classList.add("no_hover");
-      }
-      break;
-    case "medium":
-      {
-        medinu.style.backgroundColor = "rgb(255, 168, 0)";
-        medinu.style.color = "white";
-        document.getElementById("mediumImageEditBtn").src = "./assets/icons/addTask/icon_clicket_medium.svg";
-        medinu.classList.add("no_hover");
-      }
-      break;
-    case "low": {
-      low.style.backgroundColor = "rgb(122, 226, 41)";
-      low.style.color = "white";
-      document.getElementById("lowImageEditBtn").src = "./assets/icons/addTask/icon_clicket_low.svg";
-      low.classList.add("no_hover");
-    }
+  const priorityMap = {
+    urgent: { color: "rgb(255, 61, 0)", img: "icon_clicket_urgent.svg" },
+    medium: { color: "rgb(255, 168, 0)", img: "icon_clicket_medium.svg" },
+    low: { color: "rgb(122, 226, 41)", img: "icon_clicket_low.svg" },
+  };
+
+  if (priorityMap[data]) {
+    let element = document.getElementById(data);
+    element.style.backgroundColor = priorityMap[data].color;
+    element.style.color = "white";
+    document.getElementById(`${data}ImageEditBtn`).src = `./assets/icons/addTask/${priorityMap[data].img}`;
+    element.classList.add("no_hover");
   }
 }
 
