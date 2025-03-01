@@ -6,10 +6,6 @@ input {
   font-size: 21px;
 }
 
-input [name="catecory"] {
-  pointer-events: none;
-}
-
 textarea {
   resize: none;
 }
@@ -60,6 +56,12 @@ textarea {
   color: red;
 }
 
+.required-text {
+  color: red;
+  font-size: 12px;
+  font-weight: 400;
+}
+
 .display-flex {
   display: flex;
 }
@@ -105,13 +107,15 @@ p {
   align-items: flex-start;
   gap: 8px;
   width: 440px;
+  margin-bottom: 16px;
 }
 
 .inputfield {
   border: solid 1px rgba(209, 209, 209, 1);
   border-radius: 10px;
   height: 48px;
-  width: 440px;
+  width: 440px !important;
+  box-sizing: border-box;
   width: 100%;
   box-sizing: border-box;
   padding-left: 16px;
@@ -640,6 +644,7 @@ ul {
   }
 
   .subtask-inputfield-text {
+
   }
 
   .subtask-inputfield-button img {

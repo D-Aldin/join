@@ -10,6 +10,11 @@ selectedContacts = [];
 
 let selectetCategory = '';
 
+requiredTitle = false;
+requiredDate = false;
+requiredCategory = false;
+
+
 function render() {
     renderContacts("contacts");
 }
@@ -201,6 +206,48 @@ function addCatecory(x) {
 
 function invisibleCategoryPlaceholder() {
     document.getElementById('category-placeholder').classList.add('display_none')
+}
+
+function checkRequiredField() {
+    checkRequiredTitle();
+    checkRequiredDate();
+    checkRequiredcategory();
+    if (requiredTitle && requiredDate && requiredCategory === true) {
+        console.log('hello');
+    }
+}
+
+function checkRequiredTitle() {
+    let title = document.getElementById('title');
+    if (title.value === "") {
+        document.getElementById('required-title').classList.remove('display_none');
+    }
+    else {
+        requiredTitle = true;
+        document.getElementById('required-title').classList.add('display_none');
+    }
+}
+
+function checkRequiredDate() {
+    let date = document.getElementById('date');
+    if (date.value === "") {
+        document.getElementById('required-date').classList.remove('display_none');
+    }
+    else {
+        requiredDate = true;
+        document.getElementById('required-date').classList.add('display_none');
+    }
+}
+
+function checkRequiredcategory() {
+    let category = document.getElementById('catecory-input');
+    if (category.value === "") {
+        document.getElementById('required-category').classList.remove('display_none');
+    }
+    else {
+        requiredCategory = true;
+        document.getElementById('required-category').classList.add('display_none');
+    }
 }
 
 function submitTask() {
