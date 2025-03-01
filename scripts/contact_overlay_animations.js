@@ -124,6 +124,20 @@ function toggleOverlayContactInfos(index) {
   }
 }
 
+function closeContactInfoOverlay() {
+  let overlay = document.getElementById("overlay_contact_infos");
+  overlay.style.animation = "slideOutToRightContactInfos 125ms forwards";
+  overlay.addEventListener(
+    "animationend",
+    () => {
+      overlay.classList.add("d_none");
+      overlay.style.animation = "";
+      removeActiveClassFromContacts();
+    },
+    { once: true }
+  );
+}
+
 function removeActiveClassFromContacts() {
   const activeContacts = document.querySelectorAll(".contact_active");
   for (let i = 0; i < activeContacts.length; i++) {
@@ -135,7 +149,7 @@ function removeActiveClassFromContacts() {
 function ifContactElementContainsContactActive(overlay, contactElement) {
   contactElement.classList.remove("contact_active");
   contactElement.classList.add("hover_contact_list");
-  overlay.style.animation = "slideOutToRightContactInfos 0.3s forwards";
+  overlay.style.animation = "slideOutToRightContactInfos 125ms forwards";
   overlay.addEventListener(
     "animationend",
     () => {
@@ -152,14 +166,14 @@ function elseContactElementContainsContactActive(overlay, contactElement, contac
   overlay.innerHTML = getTemplateOfContactInfo(contact);
   if (overlay.classList.contains("d_none")) {
     overlay.classList.remove("d_none");
-    overlay.style.animation = "slideInFromRightContactInfos 0.3s forwards";
+    overlay.style.animation = "slideInFromRightContactInfos 125ms forwards";
   } else {
     elseOverlayContactInfosGoOut(overlay, contact);
   }
 }
 
 function elseOverlayContactInfosGoOut(overlay, contact) {
-  overlay.style.animation = "slideOutToRightContactInfos 0.3s forwards";
+  overlay.style.animation = "slideOutToRightContactInfos 125ms forwards";
   overlay.addEventListener(
     "animationend",
     () => {
@@ -167,7 +181,7 @@ function elseOverlayContactInfosGoOut(overlay, contact) {
       overlay.style.animation = "";
       overlay.innerHTML = getTemplateOfContactInfo(contact);
       overlay.classList.remove("d_none");
-      overlay.style.animation = "slideInFromRightContactInfos 0.3s forwards";
+      overlay.style.animation = "slideInFromRightContactInfos 125ms forwards";
     },
     { once: true }
   );

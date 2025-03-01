@@ -173,11 +173,114 @@ section {
   color: rgb(0, 124, 238);
 }
 
+@media only screen and (max-width: 1350px) {
+  section {
+    width: 406px;
+  }
+
+  .contact_list_scrollbar {
+    width: 302px;
+    padding-right: calc(28px + 52px);
+  }
+
+  .content_width_contacts {
+    margin-left: 25px;
+  }
+}
+
 @media only screen and (max-width: 1200px) {
   section {
     left: 0;
   }
-  .contact_headline {
-    left: 511px;
+}
+
+@media only screen and (max-width: 900px) {
+  body {
+    overflow: hidden;
+  }
+
+  section {
+    width: 100%;
+    height: 100vh;
+  }
+
+  .content_width_contacts {
+    width: calc(100% - 48px);
+    margin-left: 24px;
+    margin-right: 24px;
+  }
+
+  .contact_list_scrollbar {
+    width: 100%;
+    padding-right: 0;
+    height: calc(100vh - 260px);
+  }
+
+  .add_contact_btn {
+    display: none;
+  }
+
+  .respnsive_add_contact {
+    background-color: saddlebrown;
+    position: absolute;
+    bottom: 130px;
+    right: 24px;
+    height: 56px;
+    width: 56px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+    background-color: rgba(42, 54, 71, 1);
+  }
+
+  .responsive_add_contact img {
+    width: 32px;
+    height: 32px;
+  }
+
+  .responsive_edit_contact {
+    background-color: saddlebrown;
+    position: absolute;
+    bottom: 50px;
+    right: 24px;
+    height: 56px;
+    width: 56px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+    background-color: rgba(42, 54, 71, 1);
+  }
+
+  .responsive_edit_contact img {
+    width: 32px;
+    height: 24px;
+  }
+
+  .contact_active {
+    margin-right: 24px;
+  }
+
+  .account_info {
+    margin-left: 24px;
+  }
+
+  .contacts_list_first_letter {
+    justify-content: flex-start;
+    width: 100%;
+  }
+
+  .line_bottom {
+    width: calc(100% - 16px);
+  }
+}
+
+@media only screen and (max-width: 400px) {
+  .account_info {
+    padding: 8px 16px 8px 0px;
+    margin-left: 16px;
   }
 }

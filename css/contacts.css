@@ -1,3 +1,7 @@
+body {
+  overflow: hidden;
+}
+
 .contact_headline {
   position: absolute;
   height: 73px;
@@ -365,6 +369,12 @@ input[type="number"]::-webkit-outer-spin-button {
     flex-direction: column;
     width: 240px;
     gap: 0;
+    top: calc(96px + 32px);
+    left: calc(743px - 70px);
+  }
+
+  .overlay_contact_info_header h2 {
+    font-size: 40px;
   }
 
   .line {
@@ -377,6 +387,39 @@ input[type="number"]::-webkit-outer-spin-button {
   }
 }
 
+@media only screen and (max-width: 1280px) {
+  .overlay_add_contact_left_side {
+    width: 440px;
+  }
+
+  .overlay_account_icon_position {
+    left: 500px;
+  }
+
+  #overlay_add_contact_card,
+  #overlay_edit_contact_card {
+    width: 90%;
+  }
+
+  .form_input_fields_position {
+    left: 700px;
+    width: 30%;
+  }
+
+  .btn_cancel {
+    display: none;
+  }
+
+  .overlay_btn_position {
+    width: 100%;
+  }
+
+  .overlay_close_btn_position img {
+    position: relative;
+    left: 570px;
+  }
+}
+
 @media only screen and (max-width: 1200px) {
   .legal_and_policy_position {
     display: none;
@@ -384,6 +427,10 @@ input[type="number"]::-webkit-outer-spin-button {
 
   .question_marker {
     display: none;
+  }
+
+  .contact_headline {
+    left: 450px;
   }
 
   .nav_position {
@@ -424,6 +471,12 @@ input[type="number"]::-webkit-outer-spin-button {
 
   .help_header {
     width: 100%;
+  }
+}
+
+@media only screen and (max-width: 900px) {
+  .contact_headline {
+    display: none;
   }
 }
 

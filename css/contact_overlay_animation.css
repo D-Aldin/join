@@ -11,23 +11,19 @@
 
 @keyframes slideInFromRightAddContact {
   from {
-    top: 50%;
-    left: 150%;
+    clip-path: inset(0 0 0 100%);
   }
   to {
-    top: 50%;
-    right: 50%;
+    clip-path: inset(0 0 0 0);
   }
 }
 
 @keyframes slideOutToRightAddContact {
   from {
-    top: 50%;
-    left: 50%;
+    clip-path: inset(0 0 0 0);
   }
   to {
-    top: 50%;
-    left: 150%;
+    clip-path: inset(0 0 0 100%);
   }
 }
 
@@ -53,23 +49,19 @@
 
 @keyframes slideInFromRightContactSuccessfullyCreated {
   from {
-    top: 85%;
-    left: 150%;
+    clip-path: inset(0 0 0 100%);
   }
   to {
-    top: 85%;
-    left: 914px;
+    clip-path: inset(0 0 0 0);
   }
 }
 
 @keyframes slideOutToRightContactSuccessfullyCreated {
   from {
-    top: 85%;
-    left: 914px;
+    clip-path: inset(0 0 0 0);
   }
   to {
-    top: 85%;
-    left: 150%;
+    clip-path: inset(0 0 0 100%);
   }
 }
 
@@ -77,35 +69,115 @@
   position: absolute;
   top: 311px;
   left: 750px;
-  width: 461px;
   height: 364px;
   z-index: 3;
 }
 
+.arrow_contact_info {
+  display: none;
+}
+
 @keyframes slideInFromRightContactInfos {
   from {
-    top: 311px;
-    left: 150%;
+    clip-path: inset(0 0 0 100%);
   }
   to {
-    top: 311px;
-    right: 50%;
+    clip-path: inset(0 0 0 0);
   }
 }
 
 @keyframes slideOutToRightContactInfos {
   from {
-    top: 311px;
-    left: 50%;
+    clip-path: inset(0 0 0 0);
   }
   to {
-    top: 311px;
-    left: 150%;
+    clip-path: inset(0 0 0 100%);
+  }
+}
+
+@media only screen and (max-width: 1350px) {
+  #overlay_contact_infos {
+    left: calc(750px - 76px);
+  }
+
+  .overlay_contact_info_header {
+    width: 450px;
   }
 }
 
 @media only screen and (max-width: 1200px) {
   #overlay_contact_infos {
-    left: 518px;
+    left: 450px;
+  }
+
+  .overlay_contact_successfully_created {
+    top: 80%;
+    left: 650px;
+  }
+}
+
+@media only screen and (max-width: 900px) {
+  header,
+  aside {
+    z-index: 10;
+  }
+
+  .btn_position {
+    display: none;
+  }
+
+  #overlay_contact_infos {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 96px;
+    bottom: 80px;
+    background-color: #f6f7f8;
+    padding: 24px;
+    height: auto;
+    width: auto;
+  }
+
+  .overlay_contact_info_header {
+    width: 100%;
+  }
+
+  .arrow_contact_info {
+    position: absolute;
+    display: block;
+    right: 24px;
+    top: 30px;
+  }
+
+  .responsive_contact_headline {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 48px;
+  }
+
+  .responsive_header_standard_size h1 {
+    font-size: 61px;
+    margin: 0;
+  }
+
+  .responsive_header_standard_size h2 {
+    font-size: 27px;
+    font-weight: 400;
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  .overlay_contact_info_header {
+    gap: 24px;
+  }
+
+  .overlay_contact_info_header h2 {
+    font-size: 30px;
+  }
+
+  .circle_contact_img {
+    width: 100px;
+    height: 100px;
+    font-size: 37px;
   }
 }
