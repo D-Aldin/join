@@ -200,8 +200,10 @@ function closeCatecoryList(categorytlist) {
 function addCatecory(x) {
     let input = document.getElementById('catecory-input');
     let catecory = document.getElementById('catecory' + x).innerHTML;
+    let categorytlist = document.getElementById('catecory-list');
     input.value = catecory;
     selectetCategory = input.value;
+    closeCatecoryList(categorytlist);
 }
 
 function invisibleCategoryPlaceholder() {
@@ -330,6 +332,8 @@ function clearAllTasks() {
     resetPrioButton();
     subtasks = [];
     renderSubtasks();
+    selectedContacts = [];
+    renderSelectetContacts();
     document.getElementById('title').value = '';
     document.getElementById('description').value = '';
     document.getElementById('assigned').value = '';
