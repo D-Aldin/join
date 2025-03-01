@@ -23,6 +23,11 @@
   text-align: center;
   border-radius: 25px;
   z-index: 999;
+  /* overflow-y: scroll; */
+}
+
+#add_task_box::-webkit-scrollbar {
+  display: none;
 }
 
 .title_and_closeBtn {
@@ -100,8 +105,13 @@
 
 .subtask_wrapper_board {
   width: 440px;
-  display: contents;
-  height: auto;
+  /* display: contents; */
+  height: 70px;
+  overflow-y: scroll;
+}
+
+.subtask_wrapper_board::-webkit-scrollbar {
+  display: none;
 }
 
 .iconContainerClose,
@@ -124,7 +134,7 @@
   display: flex;
   justify-content: space-between;
   position: relative;
-  top: 120px;
+  top: 50px;
 }
 
 .create_task_container p {
@@ -219,6 +229,10 @@
   top: 50%;
   opacity: 0;
   animation: fadeIn 1s ease-in forwards;
+}
+
+.no_space_between {
+  justify-content: unset;
 }
 
 @keyframes fadeIn {

@@ -218,7 +218,7 @@ function HTMLTamplateForAddTaskInBorad() {
             <button onclick="hideOverlay()"><img src="./assets/icons/board/close.svg" alt="close"></button>
           </div>
           <div class="all_content">
-            <div class="input-container">
+            <div class="no_space_between input-container">
               <div class="inputfield-title-container">
                   <span class="display-flex"><p class="display-flex tasktitles">Title</p><p class="color-red tasktitles">*</p></span>
                   <input class="inputfield" id="title" placeholder="Enter a title" type="text" >
@@ -284,7 +284,8 @@ function HTMLTamplateForAddTaskInBorad() {
                       </div>  
                   </div>
                 </div>
-                <div id="tasks-wrapper" class="subtask_wrapper_board"></div>
+                <div id="tasks-wrapper" class="subtask_wrapper_board">
+                </div>
               </div>
             </div>
           </div>
@@ -304,7 +305,7 @@ function HTMLTamplateForAddTaskInBorad() {
 }
 
 function HTMLTamplateForSubtasksInAddTaskBoard(task) {
-  return ` 
+  return `  <div>
             <div class="subtask_box_items new_sizes" id="${task}">
               <div class="editTask"><p class="subtask_paragraf">&bull; ${task}</p></div>
               <div class="subtask_edit_buttons">
