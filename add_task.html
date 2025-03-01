@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="de-DE">
+<html lang="en-EN">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -108,9 +108,9 @@
                     </div>
                     <div class="pixelbar"></div>
                     <div class="input-container">
-                        <div class="inputfield-title-container">
-                            <span class="display-flex"><p class="tasktitles">Due date</p><p class="color-red tasktitles">*</p></span>
-                            <input class="inputfield" id="date" type="text" placeholder="dd/mm/yyyy" required>
+                        <div lang="en" class="inputfield-title-container">
+                            <label for="date" class="display-flex"><p class="tasktitles">Due date</p><p class="color-red tasktitles">*</p></label>
+                            <input lang="en" class="inputfield" id="date" type="date" placeholder="dd/mm/yyyy" required>
                         </div>
                         <div class="inputfield-title-container">
                             <p class="tasktitles">Prio</p>
@@ -122,11 +122,18 @@
                         </div>
                         <div class="inputfield-title-container">
                           <span class="display-flex"><p class="tasktitles">Category</p><p class="color-red tasktitles">*</p></span>
-                            <select class="inputfield" id="category" required>
-                                <option class="placeholder" value="" disabled selected>Select task category</option>
-                                <option value="Technical Task">Technical Task</option>
-                                <option value="User Story">User Story</option>
-                            </select>
+                          <div id="catecory-wrapper">
+                            <div onclick="openCatecoryList()" id="catecory-input-border" class="subtask-inputfield">
+                              <input readonly id="catecory-input" placeholder="select contacts to assign" class="subtask-inputfield-text" type="text">
+                              <div id="catecory-input-field" class="subtask-button-container">
+                                  <img class="icon-drop-down" src="assets/icons/addTask/arrow_drop_downaa (1).svg" alt="">
+                              </div>
+                            </div>
+                            <div id="catecory-list" class="catecory-wrapper display_none">
+                              <div onclick="addCatecory(1)" id="catecory1" class="contactlist">Technical Task</div>
+                              <div onclick="addCatecory(2)" id="catecory2" class="contactlist">User Story</div>
+                            </div>
+                          </div>
                         </div>
                         <div class="inputfield-title-container">
                           <p class="tasktitles">Subtasks</p>

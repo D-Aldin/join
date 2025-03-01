@@ -6,6 +6,10 @@ input {
   font-size: 21px;
 }
 
+input [name="catecory"] {
+  pointer-events: none;
+}
+
 textarea {
   resize: none;
 }
@@ -135,6 +139,7 @@ p {
 
 .assigned-contact-wrapper {
   width: 100%;
+  flex-wrap: wrap;
   display: flex;
   align-items: center;
   justify-content: flex-start;
@@ -382,6 +387,10 @@ p {
   cursor: pointer;
 }
 
+.full_with {
+  flex: 1;
+}
+
 .subtask-list:hover {
   background-color: rgba(209, 209, 209, 1);
 }
@@ -456,6 +465,7 @@ ul {
   width: 100% !important;
   height: 32px !important;
   padding-right: 16px;
+  border-bottom: 1px solid rgba(41, 171, 226, 1);
 }
 
 .contact-wrapper {
@@ -470,6 +480,17 @@ ul {
   overflow: auto;
   scrollbar-width: 24px;
   scrollbar-color: rgba(168, 168, 168, 1) transparent;
+}
+
+.catecory-wrapper {
+  height: auto;
+  width: 440px;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  background-color: white;
 }
 
 .contact-wrapper::-webkit-scrollbar {
