@@ -68,7 +68,6 @@ async function addDataToFireBase(path = "", card) {
   return responseToJSON;
 }
 
-//TODO  reduce lines of code
 async function displayCardOnBoard() {
   let taskFromFireBase = await fetchTasks("tasks");
   for (const key in taskFromFireBase) {
