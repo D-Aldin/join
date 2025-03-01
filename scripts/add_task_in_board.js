@@ -140,6 +140,7 @@ function editSubtaskInAddTaskAreaBoard(event) {
   document.getElementById(task.id).style.backgroundColor = "white";
   task.innerHTML = HTMLTamplateForEditSubtaskAreaAddTask(id);
   let inputField = document.querySelector(".edit_subtask_input_field input");
+  document.querySelector(".edit_subtask_input_field ").style = "border-bottom: 1px solid rgba(133, 192, 217)";
   inputField.value = task.id;
 }
 
