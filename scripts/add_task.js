@@ -110,7 +110,7 @@ function returnFirstLetter(name) {
     });
     let initials = initialsArray.join("");
     return initials;
-  }
+}
 
 function removeContact(x) {
     let addContact = document.getElementById('contact' + x);
@@ -134,21 +134,7 @@ function renderSelectetContacts() {
         `
     }
 }
-/*
-document.addEventListener("DOMContentLoaded", function () {
-    let dateInput = document.getElementById("date");
-  
-    dateInput.addEventListener("focus", function () {
-      this.type = "date"; 
-    });
-  
-    dateInput.addEventListener("blur", function () {
-      if (!this.value) {
-        this.type = "text"; 
-      }
-    });
-});
-*/
+
 function setPrio(x) {
     resetPrioButton()
     let button = document.getElementById(x);
@@ -199,9 +185,9 @@ function closeCatecoryList(categorytlist) {
 
 function addCatecory(x) {
     let input = document.getElementById('catecory-input');
-    let catecory = document.getElementById('catecory' + x).innerHTML;
+    let category = document.getElementById('catecory' + x).innerHTML;
     let categorytlist = document.getElementById('catecory-list');
-    input.value = catecory;
+    input.value = category;
     selectetCategory = input.value;
     closeCatecoryList(categorytlist);
 }
@@ -215,7 +201,7 @@ function checkRequiredField() {
     checkRequiredDate();
     checkRequiredcategory();
     if (requiredTitle && requiredDate && requiredCategory === true) {
-        console.log('hello');
+        creatTask();
     }
 }
 
@@ -223,10 +209,12 @@ function checkRequiredTitle() {
     let title = document.getElementById('title');
     if (title.value === "") {
         document.getElementById('required-title').classList.remove('display_none');
+        title.classList.add('inputfield-required');
     }
     else {
         requiredTitle = true;
         document.getElementById('required-title').classList.add('display_none');
+        title.classList.remove('inputfield-required');
     }
 }
 
@@ -234,10 +222,12 @@ function checkRequiredDate() {
     let date = document.getElementById('date');
     if (date.value === "") {
         document.getElementById('required-date').classList.remove('display_none');
+        date.classList.add('inputfield-required');
     }
     else {
         requiredDate = true;
         document.getElementById('required-date').classList.add('display_none');
+        date.classList.remove('inputfield-required');
     }
 }
 
@@ -245,63 +235,60 @@ function checkRequiredcategory() {
     let category = document.getElementById('catecory-input');
     if (category.value === "") {
         document.getElementById('required-category').classList.remove('display_none');
+        document.getElementById('catecory-input-border').classList.add('inputfield-required');
     }
     else {
         requiredCategory = true;
         document.getElementById('required-category').classList.add('display_none');
+        document.getElementById('catecory-input-border').classList.remove('inputfield-required');
     }
 }
 
-function submitTask() {
-    event.preventDefault();
-    const form = document.querySelector("form");
-    if (form.reportValidity()) {
-        finishTaskNotification();
-        creatTask();
-        clearAllTasks();
-        window.location.href = "http://127.0.0.1:5501/board.html";
-    } 
-}
-
 function creatTask() {
-    document.getElementById("title").required = true;
-    let title = document.getElementById('title').value;
-    let discription = document.getElementById('description').value;
-    let date = document.getElementById('date').value;
-    let category = document.getElementById('category').value;
-    console.log(title, discription, date, category);
-    postAllData("/tasks", data={});
+    let data = returnAllData();
+    postAllData("tasks", data);
+    clearAllTasks();
+    finishTaskNotification();
+    window.location.href = "http://127.0.0.1:5501/board.html";
 }
 
 function returnAllData() {
     let title = document.getElementById('title').value;
     let description = document.getElementById('description').value;
     let date = document.getElementById('date').value;
-    let category = document.getElementById('category').value;
-    contact = renderContactsToNewTask();
+    let category  = document.getElementById('catecory-input').value;
+    renderContactsToNewTask();
     let id = `task_${Date.now()}`;
     let status = "ToDo";
-    return tamplate(id, title, description, contact, date, prio, category, subtasks, status, localStorage.userId)
+    console.log(id, title, description, assignedContacts, date, selectedButton, category, subtasks, status, localStorage.userId);
+    return tamplate(id, title, description, assignedContacts, date, selectedButton, category, subtasks, status, localStorage.userId)
 }
+
+let assignedContacts = [];
 
 function renderContactsToNewTask() {
+    assignedContacts = [];
     for (let index = 0; index < selectedContacts.length; index++) {
         const contactNumber = selectedContacts[index];
-        arrayOfContacts[contactNumber].id;
-        arrayOfContacts[contactNumber].color;
-        arrayOfContacts[contactNumber].name;
-    }
-}
+        const contact = arrayOfContacts[contactNumber];
+        let assignedContact = {
+            [contact.id]: {
+                color: contact.color,
+                name: contact.name
+            }
+        };
+            assignedContacts.push(assignedContact);
+}}
 
-function tamplate(id, title, description, contact, date, prio, category, subtasks, status, user) {
+function tamplate(id, title, description, assignedContacts, date, selectedButton, category, subtasks, status, user) {
     return {
       [id]: {
         id: id,
         title: title,
         description: description || " ",
-        assigned: contact,
+        assigned: assignedContacts,
         date: date,
-        prio: prio || " ",
+        prio: selectedButton || " ",
         category: category,
         subtask: subtasks || [],
         status: status,
@@ -312,13 +299,10 @@ function tamplate(id, title, description, contact, date, prio, category, subtask
 
 async function postAllData(path="", data={}) {
     let response = await fetch(BASE_URL + path + ".json", {
-        method: "Post",
-        header: {
-            "content-Type": "application/json"
-        },
+        method: "POST",
         body: JSON.stringify(data)
     });
-    return respinseToJson = await response.json();
+    return await response.json();
 }
 
 function finishTaskNotification() {
