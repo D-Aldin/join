@@ -2,7 +2,7 @@ BASE_URL = "https://dv-join-bbc2e-default-rtdb.europe-west1.firebasedatabase.app
 
 selectedButton = '';
 
-let subtasks = [];
+let subtasks = {};
 
 arrayOfContacts = [];
 
@@ -300,11 +300,16 @@ function tamplate(id, title, description, assignedContacts, date, selectedButton
 
 async function postAllData(path="", data) {
     let response = await fetch(BASE_URL + path + ".json", {
-        method: "POST",
+        method: "PATCH",
+        headers: {
+            "Content-Type": "application/json",
+          },
         body: JSON.stringify(data)
     });
-    return await response.json();
+  let responseToJSON = response.json();
+  return responseToJSON;
 }
+
 
 function finishTaskNotification() {
     document.getElementById('finish-box').classList.add('finish-container-activ');
@@ -374,12 +379,13 @@ function clearsubtask() {
 }
 
 function setSubtask() {
-    let subtask = document.getElementById('subtask').value;
+    let subtaskValue = document.getElementById('subtask').value;
+    let newSubtaskKey = `subtask_${Date.now()}`;
     let newSubtask = {
-        "state": false,
-        "task": subtask
-    }
-    subtasks.push(newSubtask);
+        state: false,
+        task: subtaskValue
+    };
+    subtasks[newSubtaskKey] = newSubtask;
     renderSubtasks();
     clearsubtask();
 }
