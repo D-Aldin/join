@@ -38,10 +38,14 @@
   }
 
   .dashboard {
-    height: 384px;
+    height: 360px;
     width: 396px;
     left: 24px;
     top: 320px;
+  }
+
+  .column {
+    gap: 0px;
   }
 
   .dashboard_img_size_pen,
@@ -60,19 +64,15 @@
     height: auto;
   }
 
-  .box_to_do {
-    width: 186px;
-    height: 110px;
-  }
-
+  .box_to_do,
   .box_done {
     width: 186px;
-    height: 110px;
+    height: 100px;
   }
 
   .urgency_summary {
     width: 396px;
-    height: 110px;
+    height: 100px;
   }
 
   .box_urgency_summary {
@@ -121,7 +121,7 @@
   .box_tasks_in_board,
   .box_tasks_in_progress,
   .box_awating_feedback {
-    height: 110px;
+    height: 100px;
     width: 116px;
   }
 

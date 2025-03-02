@@ -75,6 +75,7 @@ function getTemplateOfContactInfo(contact) {
 // deleteContactFromList('${contact.id}');
 
 function getTemplateOfContactEdit(contact) {
+  const initials = getInitials(contact.name);
   return `
     <div class="overlay_add_contact_left_side">
       <div class="overlay_logo_position">
@@ -87,7 +88,7 @@ function getTemplateOfContactEdit(contact) {
     </div>
     <div class="overlay_add_contact_right_side">
       <div class="overlay_account_icon_position">
-        <img src="./assets/icons/contacts/account_icon.svg" alt="account_icon" />
+        <div class="circle_contact_img" style="background-color:${contact.color}">${initials}</div>
       </div>
       <div class="overlay_close_btn_position">
         <img onclick="closeOverlayEditContact()" src="./assets/icons/contacts/Close.svg" alt="close_button" />

@@ -429,8 +429,67 @@ input[type="number"]::-webkit-outer-spin-button {
     display: none;
   }
 
+  .overlay_logo_position {
+    display: none;
+  }
+
   .contact_headline {
     left: 450px;
+  }
+
+  .overlay_add_contact_card,
+  .overlay_edit_contact_card {
+    flex-direction: column;
+    height: 90%;
+    width: 80%;
+    z-index: 12;
+  }
+
+  .overlay_add_contact_left_side {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    height: 40%;
+    border-radius: 30px 30px 0px 0px;
+  }
+
+  .overlay_headline_add_contact {
+    width: 80%;
+    margin: 0;
+    margin-left: 24px;
+  }
+
+  .overlay_account_icon_position {
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -60%);
+  }
+
+  .overlay_close_btn_position img {
+    top: -254px;
+    left: calc(92%);
+    transform: translate(0%, 0%);
+    background-color: aliceblue;
+  }
+
+  .overlay_add_contact_right_side {
+    width: 100%;
+    height: 60%;
+    border-radius: 0px 0px 30px 30px;
+  }
+
+  .form_input_fields_position {
+    left: 50%;
+    top: 58%;
+    transform: translate(-50%, -50%);
+    width: calc(100% - 48px);
+    height: 100px;
+  }
+
+  .overlay_btn_position {
+    display: flex;
+    justify-content: center;
+    width: 100%;
   }
 
   .nav_position {
@@ -480,12 +539,29 @@ input[type="number"]::-webkit-outer-spin-button {
   }
 }
 
+@media only screen and (max-width: 700px) {
+  .overlay_close_btn_position img {
+    left: calc(92% - 16px);
+    margin-right: 24px;
+  }
+}
+
 @media only screen and (max-width: 540px) {
   .link_nav_summary,
   .link_nav_add_task,
   .link_nav_board,
   .link_nav_contacts {
     width: 80px !important;
+  }
+}
+
+@media only screen and (max-width: 490px) {
+  .overlay_headline_add_contact h1 {
+    font-size: 40px;
+  }
+
+  .overlay_headline_add_contact h2 {
+    font-size: 20px;
   }
 }
 
