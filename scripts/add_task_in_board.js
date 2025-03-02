@@ -6,6 +6,7 @@ let taskStatus = "toDo";
 
 function showOverlay(event) {
   document.querySelector("#overlayForAddTask").style.display = "block";
+  document.querySelector("header").style.zIndex = "0";
 }
 
 function hideOverlay() {
@@ -139,6 +140,7 @@ function editSubtaskInAddTaskAreaBoard(event) {
   document.getElementById(task.id).style.backgroundColor = "white";
   task.innerHTML = HTMLTamplateForEditSubtaskAreaAddTask(id);
   let inputField = document.querySelector(".edit_subtask_input_field input");
+  document.querySelector(".edit_subtask_input_field ").style = "border-bottom: 1px solid rgba(133, 192, 217)";
   inputField.value = task.id;
 }
 
@@ -158,7 +160,7 @@ function confirmEditing(event) {
 async function collectDataForNewTask() {
   const inputTitle = document.querySelector("#title");
   const inputDescription = document.querySelector("#description");
-  const inputDate = document.querySelector("#date");
+  const inputDate = document.querySelector("#date").value;
   const inputCategory = document.querySelector("#category");
   let id = `task_${Date.now()}`;
   collectTheContacts();
@@ -196,10 +198,12 @@ function collectTheContacts() {
 
 function collectTheSubtasks() {
   let refAllChosenSubtasks = document.querySelectorAll(".subtask_paragraf");
+
   for (let index = 0; index < refAllChosenSubtasks.length; index++) {
     const task = refAllChosenSubtasks[index].innerHTML.substring(1);
-    subtaskObject[`subtask_${Date.now()}`] = { task: task, state: false };
+    subtaskObject[`subtask_${crypto.randomUUID()}`] = { task: task, state: false };
   }
+  console.log(subtaskObject);
 }
 
 function requiredFieldTitle() {
