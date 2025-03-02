@@ -2,7 +2,7 @@ BASE_URL = "https://dv-join-bbc2e-default-rtdb.europe-west1.firebasedatabase.app
 
 selectedButton = "";
 
-let subtasks = {};
+let subtasksList = {};
 
 arrayOfContacts = [];
 
@@ -258,9 +258,9 @@ function returnAllData() {
   let category = document.getElementById("catecory-input").value;
   renderContactsToNewTask();
   let id = `task_${Date.now()}`;
-  let status = "ToDo";
-  console.log(id, title, description, assignedContacts, date, selectedButton, category, subtasks, status, localStorage.userId);
-  return tamplate(id, title, description, assignedContacts, date, selectedButton, category, subtasks, status, localStorage.userId);
+  let status = "toDo";
+  console.log(id, title, description, assignedContacts, date, selectedButton, category, subtasksList, status, localStorage.userId);
+  return tamplate(id, title, description, assignedContacts, date, selectedButton, category, subtasksList, status, localStorage.userId);
 }
 
 function renderContactsToNewTask() {
@@ -295,18 +295,17 @@ function tamplate(id, title, description, assignedContacts, date, selectedButton
   };
 }
 
-async function postAllData(path="", data) {
-    let response = await fetch(BASE_URL + path + ".json", {
-        method: "PUT",
-        headers: {
-            "Content-Type": "application/json",
-          },
-        body: JSON.stringify(data)
-    });
+async function postAllData(path = "", data) {
+  let response = await fetch(BASE_URL + path + ".json", {
+    method: "PATCH",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(data),
+  });
   let responseToJSON = response.json();
   return responseToJSON;
 }
-
 
 function finishTaskNotification() {
   document.getElementById("finish-box").classList.add("finish-container-activ");
@@ -377,28 +376,32 @@ function clearsubtask() {
 
 function setSubtask() {
   let subtask = document.getElementById("subtask").value;
+  let newSubtaskKey = `subtask_${Date.now()}`;
   let newSubtask = {
     state: false,
     task: subtask,
   };
-  subtasks.push(newSubtask);
+  subtasksList[newSubtaskKey] = newSubtask;
   renderSubtasks();
   clearsubtask();
+  // console.log(subtasks);
 }
 
 function renderSubtasks() {
-  let tasks = document.getElementById("tasks-wrapper");
+  let tasks = document.querySelector("#tasks-wrapper");
   tasks.innerHTML = "";
-  for (let i = 0; i < subtasks.length; i++) {
-    const element = subtasks[i].task;
-    subtasksTemplate(tasks, i, element);
+  for (const key in subtasksList) {
+    if (Object.prototype.hasOwnProperty.call(subtasksList, key)) {
+      const element = subtasksList[key];
+      subtasksTemplate(tasks, key, element.task);
+    }
   }
 }
 
 function subtasksTemplate(tasks, i, element) {
   tasks.innerHTML += /*html*/ `
         <div id="${i}" class="subtask-list" >
-            <ul class="full_with" ondblclick="editSubtask(${i})">
+            <ul class="full_with" onclick="editSubtask(${i})">
                 <li>${element}</li>   
             </ul>
             <div class="subtask-list-button-container">

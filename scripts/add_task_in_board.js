@@ -160,13 +160,13 @@ function confirmEditing(event) {
 async function collectDataForNewTask() {
   const inputTitle = document.querySelector("#title");
   const inputDescription = document.querySelector("#description");
-  const inputDate = document.querySelector("#date").value;
+  let inputDate = document.querySelector("#date").value;
   const inputCategory = document.querySelector("#category");
   let id = `task_${Date.now()}`;
   collectTheContacts();
   collectTheSubtasks();
   let contacts = await getContactsFromFireBase(contactList);
-  return tamplate(id, inputTitle.value, inputDescription.value, contacts, inputDate.value, storeThePrioValue, inputCategory.value, subtaskObject, taskStatus, localStorage.userId);
+  return tamplate(id, inputTitle.value, inputDescription.value, contacts, inputDate, storeThePrioValue, inputCategory.value, subtaskObject, taskStatus, localStorage.userId);
 }
 
 function tamplate(id, title, description, contact, date, prio, category, subtask, status, user) {
