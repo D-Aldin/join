@@ -8,6 +8,8 @@ arrayOfContacts = [];
 
 selectedContacts = [];
 
+let assignedContacts = [];
+
 let selectetCategory = '';
 
 requiredTitle = false;
@@ -249,7 +251,7 @@ function creatTask() {
     postAllData("tasks", data);
     clearAllTasks();
     finishTaskNotification();
-    window.location.href = "http://127.0.0.1:5501/board.html";
+    /*window.location.href = "http://127.0.0.1:5501/board.html";*/
 }
 
 function returnAllData() {
@@ -264,7 +266,6 @@ function returnAllData() {
     return tamplate(id, title, description, assignedContacts, date, selectedButton, category, subtasks, status, localStorage.userId)
 }
 
-let assignedContacts = [];
 
 function renderContactsToNewTask() {
     assignedContacts = [];
@@ -297,7 +298,7 @@ function tamplate(id, title, description, assignedContacts, date, selectedButton
     };
 }
 
-async function postAllData(path="", data={}) {
+async function postAllData(path="", data) {
     let response = await fetch(BASE_URL + path + ".json", {
         method: "POST",
         body: JSON.stringify(data)
@@ -374,7 +375,11 @@ function clearsubtask() {
 
 function setSubtask() {
     let subtask = document.getElementById('subtask').value;
-    subtasks.push(subtask);
+    let newSubtask = {
+        "state": false,
+        "task": subtask
+    }
+    subtasks.push(newSubtask);
     renderSubtasks();
     clearsubtask();
 }
@@ -383,7 +388,7 @@ function renderSubtasks() {
     let tasks = document.getElementById('tasks-wrapper');
     tasks.innerHTML = '';
     for (let i = 0; i < subtasks.length; i++) {
-        const element = subtasks[i];
+        const element = subtasks[i].task;
         subtasksTemplate(tasks, i, element)
     }
 }
@@ -420,7 +425,7 @@ function editSubtask(x) {
                 <button type="button" onclick="deleteSubtask(${x})" class="subtask-list-button"><img src="assets/icons/addTask/delete.svg" alt=""></button>
         </div>`
     currentsubtask = document.getElementById('current-subtask'+x);
-    currentsubtask.value = subtasks[x];
+    currentsubtask.value = subtasks[x].task;
     /*
     document.addEventListener("click", function outsideClick(event) {
         if (!currentcontainer.contains(event.target)) {
@@ -431,8 +436,7 @@ function editSubtask(x) {
 }
 
 function setEditSubtask(x) {
-    subtasks.splice(x, 1);
-    let subtask = document.getElementById('current-subtask'+x).value
-    subtasks.splice(x, 0, subtask);
+    let subtaskText = document.getElementById('current-subtask'+x).value
+    subtasks[x].task = subtaskText
     renderSubtasks();
 }
