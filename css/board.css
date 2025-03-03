@@ -289,12 +289,21 @@ input::placeholder {
 }
 
 @media only screen and (max-width: 1200px) {
+  body {
+    overflow: auto;
+  }
+
   ::-webkit-scrollbar {
     display: none;
   }
 
   .question_marker_account_img_position a {
     display: none;
+  }
+
+  .board_container {
+    overflow-y: auto;
+    height: calc(100vh - 100px);
   }
 
   .nav_position {

@@ -5,6 +5,28 @@
 }
 
 @media only screen and (max-width: 1200px) {
+  body {
+    overflow: auto;
+    padding-top: 80px; /* Adjust based on your header height */
+  }
+
+  ::-webkit-scrollbar {
+    display: none;
+  }
+
+  header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: calc(100% - 48px);
+  }
+
+  main {
+    overflow-y: auto;
+    height: calc(100vh - 100px);
+    padding-top: 20px; /* Add some space between header and content */
+  }
+
   .question_marker_account_img_position a {
     display: none;
   }
