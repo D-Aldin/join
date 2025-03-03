@@ -72,9 +72,7 @@ textarea {
 
 h1 {
   font-size: 61px;
-  margin-top: 0;
   font-weight: 700;
-  margin-bottom: 50px;
 }
 
 p {
@@ -254,7 +252,7 @@ p {
 }
 
 .footer-container {
-  margin-top: 146px;  
+  margin-top: 146px;
   display: flex;
   align-items: flex-end;
   justify-content: space-between;

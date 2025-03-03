@@ -263,18 +263,32 @@ function returnAllData() {
   return tamplate(id, title, description, assignedContacts, date, selectedButton, category, subtasksList, status, localStorage.userId);
 }
 
+// old version
+// function renderContactsToNewTask() {
+//   assignedContacts = [];
+//   for (let index = 0; index < selectedContacts.length; index++) {
+//     const contactNumber = selectedContacts[index];
+//     const contact = arrayOfContacts[contactNumber];
+//     let assignedContact = {
+//       [contact.id]: {
+//         color: contact.color,
+//         name: contact.name,
+//       },
+//     };
+//     assignedContacts.push(assignedContact);
+//   }
+// }
+
 function renderContactsToNewTask() {
   assignedContacts = [];
   for (let index = 0; index < selectedContacts.length; index++) {
     const contactNumber = selectedContacts[index];
     const contact = arrayOfContacts[contactNumber];
-    let assignedContact = {
-      [contact.id]: {
-        color: contact.color,
-        name: contact.name,
-      },
-    };
-    assignedContacts.push(assignedContact);
+    assignedContacts.push({
+      id: contact.id,
+      color: contact.color,
+      name: contact.name,
+    });
   }
 }
 
