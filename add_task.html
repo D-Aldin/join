@@ -32,6 +32,10 @@
         <div class="account_circle transition" id="account_icon" onclick="toggleShowSubmenu()"></div>
       </div>
     </header>
+    <div class="button-container-clear-creat mobile_view create_and_clean_btn_mobile_view">
+      <button type="button" class="clear-button" onclick="clearAllTasks()">Clear <div class="icon-box"></div></button>
+      <button type="submit" class="great-button" onclick="checkRequiredField()">Creat Task <img src="assets/icons/addTask/check.svg" alt=""></button>
+    </div>
 
     <aside id="aside">
       <div class="logo_position">
@@ -78,6 +82,7 @@
 
     <main>
         <div id="form" class="task">
+          <h1 class="mobile_view">Add Task</h1>
             <div class="task-wrapper">
                 <h1>Add Task</h1>
                 <div class="flex-container">
