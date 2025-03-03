@@ -640,6 +640,52 @@ ul {
     width: 18px;
     height: 18px;
   }
+
+  aside {
+    bottom: 0px;
+    width: 100%;
+    height: 80px;
+    top: initial;
+    position: fixed;
+    padding: 10px 0 10px 0;
+    align-items: center;
+  }
+
+  .link_nav_summary,
+  .link_nav_add_task,
+  .link_nav_board,
+  .link_nav_contacts {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0;
+    border-radius: 16px;
+    width: 120px;
+  }
+
+  .link_nav_summary a,
+  .link_nav_add_task a,
+  .link_nav_board a,
+  .link_nav_contacts a {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0;
+    border-radius: 16px;
+    width: 120px;
+    flex-direction: column;
+  }
+
+  .legal_and_policy_position {
+    display: none;
+  }
+
+  .nav_position {
+    width: 100%;
+    flex-direction: inherit;
+    margin-left: 24px;
+    margin-right: 24px;
+  }
 }
 
 @media only screen and (min-width: 800px) {
