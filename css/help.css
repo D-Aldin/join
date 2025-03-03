@@ -75,14 +75,14 @@ h3 {
 }
 
 @media only screen and (max-width: 1400px) {
-  /* .scroll_layout {
-    width: 100%;
-    margin: 32px 16px 112px 16px;
-  } */
+  .scroll_layout {
+    width: auto;
+    margin: 110px 40px 110px 96px;
+  }
 
-  /* .help_header {
-    width: 100vw;
-  } */
+  .help_header {
+    width: calc(100% - 12px);
+  }
 }
 
 @media only screen and (max-width: 1200px) {
@@ -92,10 +92,6 @@ h3 {
 
   .question_marker {
     display: none;
-  }
-
-  .help_header {
-    width: calc(100% - 12px);
   }
 
   .scroll_layout {
