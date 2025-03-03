@@ -413,7 +413,7 @@ function subtasksTemplate(tasks, i, element) {
 }
 
 function deleteSubtask(x) {
-  subtasksList.splice(x.id, 1);
+  delete subtasksList[x];
   renderSubtasks();
 }
 
@@ -427,7 +427,7 @@ function editSubtask(x) {
         <div class="subtask-list-button-container-by-edit">
                 <button type="button" onclick="setEditSubtask(${x})" class="subtask-list-button"><img src="assets/icons/addTask/done.svg" alt=""></button>
                 <div class="pixelbar-subtask"></div>
-                <button type="button" onclick="deleteSubtask(${x})" class="subtask-list-button"><img src="assets/icons/addTask/delete.svg" alt=""></button>
+                <button type="button" onclick="deleteSubtask('${x}')" class="subtask-list-button"><img src="assets/icons/addTask/delete.svg" alt=""></button>
         </div>`;
   currentsubtask = document.getElementById("current-subtask" + x);
   currentsubtask.value = subtasksList[x].task;
