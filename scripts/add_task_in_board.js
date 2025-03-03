@@ -5,12 +5,25 @@ let statusOfRequired = false;
 let taskStatus = "toDo";
 
 function showOverlay(event) {
-  document.querySelector("#overlayForAddTask").style.display = "block";
+  const overlay = document.querySelector("#overlayForAddTask");
+  const taskBox = document.querySelector("#add_task_box");
+  overlay.style.backgroundColor = "rgba(0, 0, 0, 0)";
+  overlay.style.display = "block";
   document.querySelector("header").style.zIndex = "0";
+  document.querySelector("aside").style.zIndex = "0";
+  void overlay.offsetWidth;
+  overlay.style.backgroundColor = "rgba(0, 0, 0, 0.3)";
+  taskBox.style.animation = "slideInFromRight 125ms ease forwards";
 }
 
 function hideOverlay() {
-  document.querySelector("#overlayForAddTask").style.display = "none";
+  const overlay = document.querySelector("#overlayForAddTask");
+  const taskBox = document.querySelector("#add_task_box");
+  overlay.style.backgroundColor = "rgba(0, 0, 0, 0)";
+  taskBox.style.animation = "slideOutToRight 125ms ease forwards";
+  setTimeout(() => {
+    overlay.style.display = "none";
+  }, 125);
 }
 
 function renderAddTaskMenu() {
