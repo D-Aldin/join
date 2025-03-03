@@ -263,32 +263,18 @@ function returnAllData() {
   return tamplate(id, title, description, assignedContacts, date, selectedButton, category, subtasksList, status, localStorage.userId);
 }
 
-// old version
-// function renderContactsToNewTask() {
-//   assignedContacts = [];
-//   for (let index = 0; index < selectedContacts.length; index++) {
-//     const contactNumber = selectedContacts[index];
-//     const contact = arrayOfContacts[contactNumber];
-//     let assignedContact = {
-//       [contact.id]: {
-//         color: contact.color,
-//         name: contact.name,
-//       },
-//     };
-//     assignedContacts.push(assignedContact);
-//   }
-// }
-
 function renderContactsToNewTask() {
   assignedContacts = [];
   for (let index = 0; index < selectedContacts.length; index++) {
     const contactNumber = selectedContacts[index];
     const contact = arrayOfContacts[contactNumber];
-    assignedContacts.push({
-      id: contact.id,
-      color: contact.color,
-      name: contact.name,
-    });
+    let assignedContact = {
+      [contact.id]: {
+        color: contact.color,
+        name: contact.name,
+      },
+    };
+    assignedContacts.push(assignedContact);
   }
 }
 
@@ -415,19 +401,19 @@ function renderSubtasks() {
 function subtasksTemplate(tasks, i, element) {
   tasks.innerHTML += /*html*/ `
         <div id="${i}" class="subtask-list" >
-            <ul class="full_with" onclick="editSubtask(${i})">
+            <ul class="full_with" onclick="editSubtask('${i}')">
                 <li>${element}</li>   
             </ul>
             <div class="subtask-list-button-container">
-                <button type="button" onclick="editSubtask(${i})" class="subtask-list-button"><img src="assets/icons/addTask/pen.svg" alt=""></button>
+                <button type="button" onclick="editSubtask('${i}')" class="subtask-list-button"><img src="assets/icons/addTask/pen.svg" alt=""></button>
                 <div class="pixelbar-subtask"></div>
-                <button type="button" onclick="deleteSubtask(${i})" class="subtask-list-button"><img src="assets/icons/addTask/delete.svg" alt=""></button>
+                <button type="button" onclick="deleteSubtask('${i}')" class="subtask-list-button"><img src="assets/icons/addTask/delete.svg" alt=""></button>
             </div>
         </div>`;
 }
 
 function deleteSubtask(x) {
-  subtasks.splice(x, 1);
+  subtasksList.splice(x.id, 1);
   renderSubtasks();
 }
 
@@ -444,18 +430,11 @@ function editSubtask(x) {
                 <button type="button" onclick="deleteSubtask(${x})" class="subtask-list-button"><img src="assets/icons/addTask/delete.svg" alt=""></button>
         </div>`;
   currentsubtask = document.getElementById("current-subtask" + x);
-  currentsubtask.value = subtasks[x].task;
-  /*
-    document.addEventListener("click", function outsideClick(event) {
-        if (!currentcontainer.contains(event.target)) {
-            setEditSubtask(x);
-            document.removeEventListener("click", outsideClick);
-        }
-    });*/
+  currentsubtask.value = subtasksList[x].task;
 }
 
 function setEditSubtask(x) {
-  let subtaskText = document.getElementById("current-subtask" + x).value;
-  subtasks[x].task = subtaskText;
+  let newText = document.querySelector(`#${x.id}`).firstElementChild.value;
+  subtasksList[x.id].task = newText;
   renderSubtasks();
 }
