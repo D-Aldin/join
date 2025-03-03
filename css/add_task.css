@@ -254,7 +254,8 @@ p {
 }
 
 .footer-container {
-  margin-top: 146px;  
+  margin-top: 146px;
+  padding-bottom: 64px;
   display: flex;
   align-items: flex-end;
   justify-content: space-between;

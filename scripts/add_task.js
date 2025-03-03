@@ -248,7 +248,7 @@ function creatTask() {
   postAllData("tasks", data);
   clearAllTasks();
   finishTaskNotification();
-  /*window.location.href = "http://127.0.0.1:5501/board.html";*/
+  window.location.href = "http://127.0.0.1:5501/board.html";
 }
 
 function returnAllData() {
