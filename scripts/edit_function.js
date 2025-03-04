@@ -119,21 +119,22 @@ async function whichContactIsAssigned(id) {
     dataFromFireBase[id].assigned = {};
   }
   const allContactsInDropdownMenu = document.querySelectorAll(".align_items");
-  for (let index = 0; index < allContactsInDropdownMenu.length; index++) {
-    const contact = allContactsInDropdownMenu[index].getAttributeNode("id_value").value;
-    const keyNames = Object.keys(dataFromFireBase[id].assigned);
-    keyNames.forEach((element) => {
-      if (contact === element) {
-        allContactsInDropdownMenu[index].classList.add("selected_contact");
-        allContactsInDropdownMenu[index].lastElementChild.lastElementChild.src = "./assets/icons/checkbox/check_white.svg";
-        allContactsInDropdownMenu[index].addEventListener("click", function (event) {
-          retractContactFromCard(event);
-          allContactsInDropdownMenu[index].classList.remove("selected_contact");
-          allContactsInDropdownMenu[index].lastElementChild.lastElementChild.src = "./assets/icons/checkbox/openCardRectangle.svg";
-        });
-      }
-    });
-  }
+  markAssignedContacts(allContactsInDropdownMenu, dataFromFireBase[id].assigned);
+}
+
+function markAssignedContacts(allContacts, assignedContacts) {
+  allContacts.forEach((contactElement) => {
+    const contact = contactElement.getAttributeNode("id_value").value;
+    if (Object.keys(assignedContacts).includes(contact)) {
+      contactElement.classList.add("selected_contact");
+      contactElement.lastElementChild.lastElementChild.src = "./assets/icons/checkbox/check_white.svg";
+      contactElement.addEventListener("click", (event) => {
+        retractContactFromCard(event);
+        contactElement.classList.remove("selected_contact");
+        contactElement.lastElementChild.lastElementChild.src = "./assets/icons/checkbox/openCardRectangle.svg";
+      });
+    }
+  });
 }
 
 // TODO reduce lines of code
