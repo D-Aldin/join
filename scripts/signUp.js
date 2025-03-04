@@ -60,53 +60,73 @@ function getDataFromSignUp(event) {
   ifUserAlreadyExists(userEmail);
 }
 
-// TODO: Reduce lines of code
 function validateSignUpInputs(name, email, password, confirmPassword, privacyPolicy) {
   const inputs = { name, email, password, confirmPassword };
+  let hasError = validateEachField(inputs);
+  if (password && confirmPassword && password !== confirmPassword) {
+    showPasswordMismatchError();
+    hasError = true;
+  }
+  if (!privacyPolicy) {
+    showPrivacyPolicyError();
+    hasError = true;
+  } else {
+    clearPrivacyPolicyError();
+  }
+  return hasError;
+}
+
+function validateEachField(inputs) {
+  let hasError = false;
+  for (const key in inputs) {
+    if (validateSingleField(key, inputs[key])) {
+      hasError = true;
+    }
+  }
+  return hasError;
+}
+
+function validateSingleField(key, value) {
   const errors = {
     name: "Please enter your name.",
     email: "Please enter your email address.",
     password: "Please enter your password.",
     confirmPassword: "Please confirm your password.",
   };
-  let hasError = false;
-  for (const key in inputs) {
-    const value = inputs[key];
-    const inputElement = document.getElementById(inputIds[key]);
-    const errorElement = document.getElementById(`signUp_${key}_error`);
-
-    if (!value) {
-      errorElement.innerText = errors[key];
-      inputElement.style.borderColor = "red";
-      hasError = true;
-    } else {
-      errorElement.innerText = "";
-      inputElement.style.borderColor = "";
-    }
-  }
-  if (password && confirmPassword && password !== confirmPassword) {
-    document.getElementById("signUp_confirmPassword_error").innerText = "Passwords don't match. Please try again.";
-    document.getElementById("signUpConfirmPassword").style.borderColor = "red";
-    hasError = true;
-  }
-  if (!privacyPolicy) {
-    const privacyPolicyContainer = document.querySelector(".privacy_police_content");
-    let errorElement = document.getElementById("signUp_privacy_error");
-    if (!errorElement) {
-      errorElement = document.createElement("div");
-      errorElement.id = "signUp_privacy_error";
-      errorElement.className = "error_message";
-      privacyPolicyContainer.parentNode.insertBefore(errorElement, privacyPolicyContainer.nextSibling);
-    }
-    errorElement.innerText = "You must accept the Privacy Policy to continue.";
-    hasError = true;
+  const inputElement = document.getElementById(inputIds[key]);
+  const errorElement = document.getElementById(`signUp_${key}_error`);
+  if (!value) {
+    errorElement.innerText = errors[key];
+    inputElement.style.borderColor = "red";
+    return true;
   } else {
-    const errorElement = document.getElementById("signUp_privacy_error");
-    if (errorElement) {
-      errorElement.innerText = "";
-    }
+    errorElement.innerText = "";
+    inputElement.style.borderColor = "";
+    return false;
   }
-  return hasError;
+}
+
+function showPasswordMismatchError() {
+  document.getElementById("signUp_confirmPassword_error").innerText = "Passwords don't match. Please try again.";
+  document.getElementById("signUpConfirmPassword").style.borderColor = "red";
+}
+
+function showPrivacyPolicyError() {
+  let errorElement = document.getElementById("signUp_privacy_error");
+  if (!errorElement) {
+    errorElement = document.createElement("div");
+    errorElement.id = "signUp_privacy_error";
+    errorElement.className = "error_message";
+    document.querySelector(".privacy_police_content").parentNode.insertBefore(errorElement, document.querySelector(".privacy_police_content").nextSibling);
+  }
+  errorElement.innerText = "You must accept the Privacy Policy to continue.";
+}
+
+function clearPrivacyPolicyError() {
+  const errorElement = document.getElementById("signUp_privacy_error");
+  if (errorElement) {
+    errorElement.innerText = "";
+  }
 }
 
 document.getElementById("signUp").addEventListener("submit", getDataFromSignUp);
@@ -160,26 +180,35 @@ function userData(id, email, name, password) {
 }
 
 async function ifUserAlreadyExists(email) {
-  let response = await fetch(BASE_URL + `contacts.json`, {
-    method: "GET",
-  });
-  let responseToJSON = await response.json();
-  let userExists = false;
-  for (const key in responseToJSON) {
-    if (responseToJSON[key].email === email) {
-      userExists = true;
-      break;
-    }
-  }
-  if (!userExists && pswConfirm.style.borderColor != "red") {
+  let responseToJSON = await fetchUserContacts();
+  let userExists = checkIfUserExists(responseToJSON, email);
+
+  if (!userExists && pswConfirm.style.borderColor !== "red") {
     console.log("User Doesn't Exist");
     await addUsersToDataBase(newUser);
     showOverlay();
   } else if (userExists) {
-    console.log("User Exists");
-    document.getElementById("signUp_email_error").innerText = "This email is already registered.";
-    document.getElementById("signUpEmail").style.borderColor = "red";
+    displayEmailError();
   }
+}
+
+async function fetchUserContacts() {
+  let response = await fetch(BASE_URL + `contacts.json`, { method: "GET" });
+  return await response.json();
+}
+
+function checkIfUserExists(responseToJSON, email) {
+  for (const key in responseToJSON) {
+    if (responseToJSON[key].email === email) {
+      return true;
+    }
+  }
+  return false;
+}
+
+function displayEmailError() {
+  document.getElementById("signUp_email_error").innerText = "This email is already registered.";
+  document.getElementById("signUpEmail").style.borderColor = "red";
 }
 
 function passwordMatch() {

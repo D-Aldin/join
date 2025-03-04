@@ -12,6 +12,7 @@
     <script src="./scripts/aside.js" defer></script>
     <script src="./scripts/submenu_initials.js" defer></script>
     <script src="./scripts/checkActiveUser.js" defer></script>
+    <script src="./scripts/write_edit_subtask.js" defer></script>
 
     <link rel="stylesheet" href="./css/aside.css" />
     <link rel="stylesheet" href="./css/add_task.css" />
@@ -177,12 +178,15 @@
                 <div id="tasks-wrapper" class="subtask-wrapper"></div>
               </div>
             </div>
+            <div class="mobile_view">
+              <p class="color-red">*</p>
+              <p>This field is required</p></span>
+            </div>
           </div>
           <div class="footer-container">
-            <span class="display-flex"
-              ><p class="color-red">*</p>
-              <p>This field is required</p></span
-            >
+            <span class="display-flex">
+              <p class="color-red">*</p>
+              <p>This field is required</p></span>
             <div class="button-container-clear-creat">
               <button type="button" class="clear-button" onclick="clearAllTasks()">
                 Clear
