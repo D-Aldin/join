@@ -136,7 +136,6 @@ function markAssignedContacts(allContacts, assignedContacts) {
   });
 }
 
-// TODO reduce lines of code
 async function assignNewContacts(event) {
   const contact = event.currentTarget.getAttributeNode("id_value").value;
   let dataFromFireBase = await fetchCardDetails(taskPath, idOfcurrentElement);
@@ -227,34 +226,34 @@ async function deleteSubtask(event) {
   displaySubtasksInTheEditMenu();
 }
 
-// TODO reduce lines of code
 async function addNewSubtask(event) {
-  let newTaskObj;
+  let subtasks = await fetchSubtasks();
+  let theNewTask = document.querySelector("#editSubtask").value;
+
+  let newTaskObj = {
+    [`subtask_${Date.now()}`]: { task: theNewTask, state: false },
+  };
+
+  await saveNewSubtask(newTaskObj);
+  document.querySelector("#editSubtask").value = "";
+  setStandardButtonInOpenCard();
+  document.querySelector(".subtasks_box").innerHTML = " ";
+  displaySubtasksInTheEditMenu();
+}
+
+async function fetchSubtasks() {
   let response = await fetch(`${BASE_URL}/tasks/${idOfcurrentElement}/subtask.json`, {
     method: "GET",
   });
-  let subtasks = await response.json();
-  if (subtasks === null) {
-    setIndex = 0;
-  } else {
-    setIndex = subtasks.length;
-  }
-  let theNewTask = document.querySelector("#editSubtask").value;
-  newTaskObj = {
-    [`subtask_${Date.now()}`]: {
-      task: theNewTask,
-      state: false,
-    },
-  };
+  return (await response.json()) || [];
+}
+
+async function saveNewSubtask(newTaskObj) {
   await fetch(`${BASE_URL}/${taskPath}/${idOfcurrentElement}/subtask.json`, {
     method: "PATCH",
     body: JSON.stringify(newTaskObj),
     headers: { "Content-Type": "application/json" },
   });
-  document.querySelector("#editSubtask").value = "";
-  setStandardButtonInOpenCard();
-  document.querySelector(".subtasks_box").innerHTML = " ";
-  displaySubtasksInTheEditMenu();
 }
 
 function focusOnInputField(event) {
