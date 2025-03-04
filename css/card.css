@@ -11,6 +11,15 @@
   margin-bottom: 10px;
 }
 
+.category_user_story {
+  width: 6rem;
+}
+
+.category_technical_task {
+  width: 9rem;
+  background-color: rgb(31, 215, 193);
+}
+
 .card_title {
   text-overflow: ellipsis;
   white-space: normal;
