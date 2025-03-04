@@ -19,29 +19,40 @@ document.addEventListener("DOMContentLoaded", function () {
   }, 1000);
 });
 
-// TODO reduce lines of code
 async function loginUser(email) {
-  let response = await fetch(BASE_URL + "contacts.json", {
-    method: "GET",
-  });
-  let responseToJSON = await response.json();
-  let userFound = false;
-  for (const key in responseToJSON) {
-    const emailFromDatabase = responseToJSON[key].email;
-    const passwordFromDB = responseToJSON[key].password;
-    if (emailFromDatabase === email && passwordFromDB === password) {
-      localStorage.setItem("userId", key);
-      localStorage.removeItem("isGuest");
-      window.location.href = "summary.html";
-      userFound = true;
-      break;
+  let responseToJSON = await fetchUserData();
+  let userKey = findUserByEmail(responseToJSON, email);
+  if (userKey) {
+    authenticateUser(userKey);
+  } else {
+    showLoginError();
+  }
+}
+
+async function fetchUserData() {
+  let response = await fetch(BASE_URL + "contacts.json", { method: "GET" });
+  return await response.json();
+}
+
+function findUserByEmail(users, email) {
+  for (const key in users) {
+    if (users[key].email === email && users[key].password === password) {
+      return key;
     }
   }
-  if (!userFound) {
-    document.querySelector("#loginEmail").style.borderColor = "red";
-    document.querySelector("#loginPassword").style.borderColor = "red";
-    document.querySelector(".checkEmailPassword").innerHTML = "Check your email and password. Please try again.";
-  }
+  return null;
+}
+
+function authenticateUser(userKey) {
+  localStorage.setItem("userId", userKey);
+  localStorage.removeItem("isGuest");
+  window.location.href = "summary.html";
+}
+
+function showLoginError() {
+  document.querySelector("#loginEmail").style.borderColor = "red";
+  document.querySelector("#loginPassword").style.borderColor = "red";
+  document.querySelector("#password_error").innerHTML = "Check your email and password. Please try again.";
 }
 
 function getDataFromLogin(event) {
