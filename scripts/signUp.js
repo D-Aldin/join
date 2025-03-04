@@ -27,22 +27,22 @@ function getRandomColor() {
 }
 
 function openSignUpModal() {
-  refLoginWindow.style.animation = "fadeOut 1s forwards";
+  refLoginWindow.style.animation = "fadeOut 125ms forwards";
   setTimeout(() => {
     refLoginWindow.style.display = "none";
     refSignUpSegment.style.display = "none";
     refSignWindow.style.display = "inline";
-    refSignWindow.style.animation = "fadeIn 1s forwards";
+    refSignWindow.style.animation = "fadeIn 125ms forwards";
   }, 125);
 }
 
 function goBack() {
-  refSignWindow.style.animation = "fadeOut 1s forwards";
+  refSignWindow.style.animation = "fadeOut 125ms forwards";
   setTimeout(() => {
     refSignWindow.style.display = "none";
     refLoginWindow.style.display = "inline";
     refSignUpSegment.style.display = "inline";
-    refLoginWindow.style.animation = "fadeIn 1s forwards";
+    refLoginWindow.style.animation = "fadeIn 125ms forwards";
   }, 125);
 }
 
