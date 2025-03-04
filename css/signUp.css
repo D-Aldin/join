@@ -118,8 +118,11 @@
 
 #signUp_privacy_error {
   position: absolute;
-  left: 110px;
+  left: 0;
   top: 435px;
+  transform: none;
+  text-align: center;
+  width: 100%;
 }
 
 @media only screen and (max-width: 1000px) {
@@ -159,6 +162,27 @@
     padding-bottom: 40px;
     width: 85%;
   }
+
+  #signUp_name_error {
+    top: 160px;
+  }
+
+  #signUp_email_error {
+    top: 225px;
+  }
+
+  #signUp_password_error {
+    top: 290px;
+  }
+
+  #signUp_confirmPassword_error {
+    top: 358px;
+  }
+
+  #signUp_privacy_error {
+    top: 415px;
+  }
+
   @keyframes moveShrinkFade {
     0% {
       transform: translate(-50%, -50%) scale(1);

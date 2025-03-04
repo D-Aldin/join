@@ -10,27 +10,6 @@ body {
   align-items: center;
 }
 
-.error_message {
-  position: absolute;
-  color: red;
-  font-size: 12px;
-  margin: 0;
-  padding: 0;
-  top: 48%;
-  left: 40px;
-  width: 100%;
-}
-
-.email_error_position {
-  position: absolute;
-  top: 182px;
-}
-
-.password_error_position {
-  position: absolute;
-  top: 250px;
-}
-
 .join_image {
   object-fit: cover;
   animation: moveShrinkFade 1s ease-in-out forwards;
@@ -161,6 +140,27 @@ h1 {
   display: flex;
   justify-content: center;
   gap: 40px;
+}
+
+.error_message {
+  position: absolute;
+  color: red;
+  font-size: 12px;
+  margin: 0;
+  padding: 0;
+  top: 48%;
+  left: 40px;
+  width: auto;
+}
+
+.email_error_position {
+  position: absolute;
+  top: 182px;
+}
+
+.password_error_position {
+  position: absolute;
+  top: 250px;
 }
 
 #loginEmail,
@@ -423,5 +423,19 @@ footer {
     padding: 20px;
     padding-bottom: 40px;
     width: 85%;
+  }
+
+  .error_message {
+    left: 20px;
+  }
+
+  .email_error_position {
+    position: absolute;
+    top: 164px;
+  }
+
+  .password_error_position {
+    position: absolute;
+    top: 232px;
   }
 }
