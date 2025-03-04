@@ -405,7 +405,7 @@ p {
 }
 
 .subtask-list:hover {
-  background-color: rgba(209, 209, 209, 1);
+  background-color: rgba(238, 238, 238, 1);
 }
 
 .subtask-list-button-container {
@@ -445,7 +445,7 @@ ul {
 }
 
 .subtask-list:hover .subtask-list-button {
-  background-color: rgba(209, 209, 209, 1);
+  background-color: rgba(238, 238, 238, 1);
 }
 
 .subtask-list-button:hover {
