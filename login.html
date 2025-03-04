@@ -38,12 +38,15 @@
         <form id="loginForm" class="form_content" action="">
           <label for="loginEmail"></label>
           <input id="loginEmail" type="email" placeholder="Email" required />
+          <div id="email_error" class="error_message email_error_position"></div>
+
           <label for="loginPassword"></label>
           <div class="password_container">
             <input id="loginPassword" name="password" type="password" placeholder="Password" required />
             <img id="togglePassword" src="./assets/icons/login_and_signUp/lock.svg" alt="Toggle Password Visibility" class="password_icon cursor_pointer" />
           </div>
-          <span class="checkEmailPassword"></span>
+          <div id="password_error" class="error_message password_error_position"></div>
+
           <div class="form_btn">
             <button id="login_btn" type="submit" class="transition">Log in</button>
             <button id="guest_log" class="cursor_pointer transition" type="submit" onclick="linkGuestBtn()">Guest Log in</button>
@@ -53,7 +56,7 @@
     </div>
 
     <div class="sign_window">
-      <div class="goBackArrowContainer transition">
+      <div class="goBackArrowContainer transition" onclick="deleteSignUpInputs()">
         <img id="goBackArrow" src="./assets/icons/login_and_signUp/arrow.svg" alt="arrow" />
       </div>
       <div class="sign_up_content">
@@ -68,31 +71,33 @@
         <div>
           <form id="signUp" class="form_content" action="">
             <label for="name"></label>
-            <input id="name" name="name" type="text" required placeholder="Name" />
+            <input id="name" name="name" type="text" placeholder="Name" />
+            <div id="signUp_name_error" class="error_message email_error_position"></div>
 
             <label for="signUpEmail"></label>
-            <input id="signUpEmail" name="email" type="email" required placeholder="Email" />
+            <input id="signUpEmail" name="email" type="email" placeholder="Email" />
+            <div id="signUp_email_error" class="error_message email_error_position"></div>
 
             <label for="signUppassword"></label>
             <div class="password_container">
-              <input id="signUppassword" name="password" type="password" required placeholder="Password" />
+              <input id="signUpPassword" name="password" type="password" placeholder="Password" />
               <img id="toggleSignUpPassword" src="./assets/icons/login_and_signUp/lock.svg" alt="Toggle Password Visibility" class="password_icon cursor_pointer" />
             </div>
+            <div id="signUp_password_error" class="error_message email_error_position"></div>
 
             <label for="signUpconfirmPassword"></label>
             <div class="password_container">
-              <input id="signUpconfirmPassword" type="password" required placeholder="Confirm Password" />
+              <input id="signUpConfirmPassword" type="password" placeholder="Confirm Password" />
               <img id="toggleSignUpConfirmPassword" src="./assets/icons/login_and_signUp/lock.svg" alt="Toggle Password Visibility" class="password_icon cursor_pointer" />
             </div>
-
-            <span class="checkPassword"></span>
+            <div id="signUp_confirmPassword_error" class="error_message email_error_position"></div>
 
             <div class="privacy_police_content">
-              <input class="cursor_pointer" type="checkbox" id="privacy_police" value="privacy_police" required />
+              <input class="cursor_pointer" type="checkbox" id="privacy_police" value="privacy_police" />
               <label for="privacy_police">I accept the <a href="./privacy_policy.html">Privacy policy</a></label>
             </div>
 
-            <div class="form_btn">
+            <div class="form_btn_sign">
               <button id="sign_btn" class="cursor_pointer transition" type="submit">Sign up</button>
             </div>
           </form>

@@ -10,6 +10,27 @@ body {
   align-items: center;
 }
 
+.error_message {
+  position: absolute;
+  color: red;
+  font-size: 12px;
+  margin: 0;
+  padding: 0;
+  top: 48%;
+  left: 40px;
+  width: 100%;
+}
+
+.email_error_position {
+  position: absolute;
+  top: 182px;
+}
+
+.password_error_position {
+  position: absolute;
+  top: 250px;
+}
+
 .join_image {
   object-fit: cover;
   animation: moveShrinkFade 1s ease-in-out forwards;
@@ -146,8 +167,8 @@ h1 {
 #loginPassword,
 #name,
 #signUpEmail,
-#signUppassword,
-#signUpconfirmPassword {
+#signUpPassword,
+#signUpConfirmPassword {
   cursor: pointer;
   border-radius: 10px;
   border: 1px solid rgba(209, 209, 209, 1);
@@ -166,8 +187,8 @@ h1 {
 #loginEmail:focus,
 #signUpEmail:focus,
 #loginPassword:focus,
-#signUppassword:focus,
-#signUpconfirmPassword:focus,
+#signUpPassword:focus,
+#signUpConfirmPassword:focus,
 #name:focus {
   border: 1px solid rgb(41, 171, 226);
 }
@@ -253,11 +274,6 @@ h1 {
   box-shadow: 0 7px 7px 0 rgba(104, 104, 104, 0.301);
 }
 
-.form_btn {
-  display: flex;
-  justify-content: center;
-}
-
 #sign_btn {
   background-color: rgb(42, 54, 71);
   color: white;
@@ -272,25 +288,6 @@ h1 {
 #sign_btn:hover {
   background-color: rgb(41, 171, 226);
   box-shadow: 0 7px 7px 0 rgba(104, 104, 104, 0.301);
-}
-
-.checkPassword,
-.checkEmailPassword {
-  color: red;
-  font-size: 10px;
-}
-
-.privacy_police_content {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 8px;
-  font-size: small;
-}
-
-.privacy_police_content a {
-  color: rgb(41, 171, 226);
-  text-decoration: none;
 }
 
 input[type="checkbox"] {
