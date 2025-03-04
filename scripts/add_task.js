@@ -132,8 +132,9 @@ function renderSelectetContacts() {
   for (let i = 0; i < selectedContacts.length; i++) {
     const index = selectedContacts[i];
     wrapper.innerHTML += /*html*/ `
-            <div class="contact-img-cyrcle" style="background-color: ${arrayOfContacts[index].color}">${arrayOfContacts[index].name.charAt(0)}</div>
+            <div class="contact-img-cyrcle" style="background-color: ${arrayOfContacts[index].color}">${returnFirstLetter(arrayOfContacts[index].name)}</div>
         `;
+    console.log(arrayOfContacts[index].name.charAt(0));
   }
 }
 
