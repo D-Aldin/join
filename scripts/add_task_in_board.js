@@ -300,3 +300,10 @@ document.querySelector("#addFeedback").addEventListener("click", function () {
   renderAddTaskMenu();
   taskStatus = "feedback";
 });
+
+window.addEventListener("resize", () => {
+  const refOverlay = document.querySelector("#overlayForAddTask");
+  if (window.innerWidth < 1301 && refOverlay.style.display === "block") {
+    window.location = "add_task.html";
+  }
+});

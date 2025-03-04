@@ -907,4 +907,9 @@ input[type="date"] {
   .contact-wrapper {
     width: 285px;
   }
+
+  [type="date"]::-webkit-calendar-picker-indicator {
+    background: #fff url(../assets/icons/addTask/typeDate.svg) 20% 50% no-repeat;
+    background-size: 20px 20px;
+  }
 }
