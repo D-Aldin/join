@@ -395,7 +395,7 @@ p {
   font-size: 16px;
   font-weight: 400px;
   height: 32px;
-  border-radius: 16px;
+  border-radius: 8px;
   padding-right: 16px;
   cursor: pointer;
 }
@@ -629,6 +629,10 @@ input[type="date"] {
   background-color: rgb(246, 247, 248);
   width: 100%;
   margin-left: 0px !important;
+}
+
+[type="date"]::-webkit-calendar-picker-indicator {
+  background: #fff url(../assets/icons/addTask/typeDate.svg) 97% 50% no-repeat;
 }
 
 @media only screen and (max-width: 1200px) {

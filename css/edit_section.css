@@ -122,6 +122,7 @@ select {
 
 .subtask_edit_buttons {
   display: none;
+  margin-right: 10px;
 }
 
 .pen,
@@ -200,6 +201,10 @@ select {
   background-color: rgb(41, 171, 226);
   box-shadow: 0 5px 5px 0 rgba(104, 104, 104, 0.301);
   transform: scale(1);
+}
+
+[type="date"]::-webkit-calendar-picker-indicator {
+  background: #fff url(../assets/icons/addTask/typeDate.svg) 97% 50% no-repeat;
 }
 
 @media only screen and (max-width: 1200px) {

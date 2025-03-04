@@ -225,7 +225,7 @@
 }
 
 .new_sizes {
-  width: 430px;
+  width: 440px;
 }
 
 .required {
@@ -251,6 +251,10 @@
 
 .no_space_between {
   justify-content: unset;
+}
+
+[type="date"]::-webkit-calendar-picker-indicator {
+  background: #fff url(../assets/icons/addTask/typeDate.svg) 97% 50% no-repeat;
 }
 
 @keyframes fadeIn {
