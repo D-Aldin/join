@@ -112,7 +112,6 @@ async function displayContactsInDropdownMenu() {
   whichContactIsAssigned(idOfcurrentElement);
 }
 
-// TODO reduce lines of code
 async function whichContactIsAssigned(id) {
   let dataFromFireBase = await fetchCardDetails("tasks", id);
   if (!dataFromFireBase[id].assigned) {
@@ -141,20 +140,28 @@ function markAssignedContacts(allContacts, assignedContacts) {
 async function assignNewContacts(event) {
   const contact = event.currentTarget.getAttributeNode("id_value").value;
   let dataFromFireBase = await fetchCardDetails(taskPath, idOfcurrentElement);
+
   if (!dataFromFireBase[idOfcurrentElement].assigned) {
     dataFromFireBase[idOfcurrentElement].assigned = {};
   }
+
   if (!(contact in dataFromFireBase[idOfcurrentElement].assigned || assignNewContList.includes(contact))) {
-    assignNewContList.push(contact);
-    let newContact = await getContactsFromFireBase(assignNewContList);
-    addDataToFireBase(`${taskPath}/${idOfcurrentElement}/assigned`, newContact);
-    let clicked_element = document.querySelector(`[id_value="${contact}"]`);
-    clicked_element.classList.add("selected_contact");
-    clicked_element.lastElementChild.lastElementChild.src = "./assets/icons/checkbox/check_white.svg";
-    document.querySelector(".assigned_to").innerHTML = "";
-    editFunction();
-    addDataToFireBase(`${taskPath}/${idOfcurrentElement}/assigned`, newContact);
+    await handleNewContactAssignment(contact, dataFromFireBase);
   }
+}
+
+async function handleNewContactAssignment(contact, dataFromFireBase) {
+  assignNewContList.push(contact);
+  let newContact = await getContactsFromFireBase(assignNewContList);
+  addDataToFireBase(`${taskPath}/${idOfcurrentElement}/assigned`, newContact);
+
+  let clickedElement = document.querySelector(`[id_value="${contact}"]`);
+  clickedElement.classList.add("selected_contact");
+  clickedElement.lastElementChild.lastElementChild.src = "./assets/icons/checkbox/check_white.svg";
+
+  document.querySelector(".assigned_to").innerHTML = "";
+  editFunction();
+  addDataToFireBase(`${taskPath}/${idOfcurrentElement}/assigned`, newContact);
 }
 
 async function retractContactFromCard(event) {
