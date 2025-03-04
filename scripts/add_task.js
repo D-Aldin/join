@@ -242,7 +242,6 @@ function creatTask() {
   postAllData("tasks", data);
   clearAllTasks();
   finishTaskNotification();
-  /*window.location.href = "http://127.0.0.1:5501/board.html";*/
 }
 
 function returnAllData() {
@@ -262,13 +261,11 @@ function renderContactsToNewTask() {
   for (let index = 0; index < selectedContacts.length; index++) {
     const contactNumber = selectedContacts[index];
     const contact = arrayOfContacts[contactNumber];
-    let assignedContact = {
-      [contact.id]: {
-        color: contact.color,
-        name: contact.name,
-      },
-    };
-    assignedContacts.push(assignedContact);
+    assignedContacts.push({
+      id: contact.id,
+      color: contact.color,
+      name: contact.name,
+    });
   }
 }
 
