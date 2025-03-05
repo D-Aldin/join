@@ -92,6 +92,7 @@ h2 {
 @media only screen and (max-width: 1200px) {
   .scroll_layout {
     margin: 32px 24px 112px 24px;
+    padding-bottom: 40px;
   }
 
   .legal {
