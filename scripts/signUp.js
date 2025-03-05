@@ -38,6 +38,10 @@ function openSignUpModal() {
 
 function goBack() {
   refSignWindow.style.animation = "fadeOut 125ms forwards";
+  const inputs = document.querySelectorAll("#signUp input");
+  for (let i = 0; i < inputs.length; i++) {
+    inputs[i].value = "";
+  }
   setTimeout(() => {
     refSignWindow.style.display = "none";
     refLoginWindow.style.display = "inline";
