@@ -48,7 +48,7 @@ function getTemplateOfContactInfo(contact) {
       <h2>${contact.name}</h2>
       <div class="btn_position">
         <img onclick="openOverlayEditContact('${contact.id}')" class="edit_hover transition" src="./assets/icons/contacts/edit.svg" alt="edit" />
-        <img onclick=" setTimeoutDeleteOverlayContact()" class="delete_hover transition" src="./assets/icons/contacts/delete.svg" alt="delete" />
+        <img onclick="deleteContactFromList('${contact.id}'), setTimeoutDeleteOverlayContact()" class="delete_hover transition" src="./assets/icons/contacts/delete.svg" alt="delete" />
       </div>
     </div>
   </div>

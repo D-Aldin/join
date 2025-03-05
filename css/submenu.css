@@ -51,24 +51,6 @@
   background-color: rgb(42, 61, 89);
 }
 
-@keyframes slideInFromRightSubmenu {
-  from {
-    clip-path: inset(0 0 0 100%);
-  }
-  to {
-    clip-path: inset(0 0 0 0);
-  }
-}
-
-@keyframes slideOutToRightSubmenu {
-  from {
-    clip-path: inset(0 0 0 0);
-  }
-  to {
-    clip-path: inset(0 0 0 100%);
-  }
-}
-
 @media only screen and (max-width: 1200px) {
   .submenu_position {
     height: 204px;
