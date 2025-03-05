@@ -217,16 +217,17 @@ function displayEmailError() {
 
 function passwordMatch() {
   const password = psw.value;
-  const confitmPassword = pswConfirm.value;
-  const confirmMsg = document.querySelector(".checkPassword");
-  if (password.length == confitmPassword.length || password.length < confitmPassword.length || password.length > confitmPassword.length) {
-    if (confitmPassword !== password) {
-      pswConfirm.style.borderColor = "red";
-      confirmMsg.innerHTML = "Your passwords don't match. Please try again.";
-    } else if (password == confitmPassword) {
-      pswConfirm.style.borderColor = "#ccc";
-      confirmMsg.innerHTML = "";
-      document.getElementById("signUp").addEventListener("submit", getDataFromSignUp);
+  const confirmPassword = pswConfirm.value;
+  const errorElement = document.getElementById("signUp_confirmPassword_error");
+  if (confirmPassword !== password) {
+    pswConfirm.style.borderColor = "red";
+    if (errorElement) {
+      errorElement.innerText = "Your passwords don't match. Please try again.";
+    }
+  } else {
+    pswConfirm.style.borderColor = "#ccc";
+    if (errorElement) {
+      errorElement.innerText = "";
     }
   }
 }
