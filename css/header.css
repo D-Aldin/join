@@ -82,3 +82,10 @@ header img {
     padding: 0 24px 0 24px;
   }
 }
+
+@media (min-width: 300px) and (max-width: 530px) {
+  header {
+    padding: 0 12px 0 12px;
+    width: unset;
+  }
+}

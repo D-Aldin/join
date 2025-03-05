@@ -163,6 +163,10 @@
     height: 1.5rem;
     font-size: 12px;
   }
+
+  .progress_indicator {
+    margin-bottom: 12px;
+  }
 }
 
 @media only screen and (min-width: 800px) {

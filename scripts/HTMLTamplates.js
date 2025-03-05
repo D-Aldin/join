@@ -48,7 +48,7 @@ function subtasksTamplate(task, id) {
   return `
           <div class="check_box">
             <input type="checkbox" id="${id}" name="${id}" value="${id}"/>
-            <label for="subtask${id}">${task}</label>
+            <label for="subtask${id}">${task}</label> 
           </div>`;
 }
 
