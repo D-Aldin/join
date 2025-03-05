@@ -82,6 +82,7 @@ async function displayCardOnBoard() {
     addProfilesToCard(key, element.assigned);
   }
   noTaskToDo();
+  setColorOfCategory();
 }
 
 function renderTaskCard(element, subtasksCompleted, totalSubtasks) {
@@ -183,6 +184,16 @@ function ifNoTaskResizeContainer() {
       section.style.height = "300px";
     } else {
       section.style.height = "80px";
+    }
+  });
+}
+
+function setColorOfCategory() {
+  const refCategory = document.querySelectorAll(".category");
+  refCategory.forEach((element) => {
+    if (element.innerHTML === "Technical Task") {
+      element.style.backgroundColor = "rgb(31, 215, 193)";
+      element.style.width = "8rem";
     }
   });
 }

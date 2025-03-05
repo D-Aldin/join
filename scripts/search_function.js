@@ -16,7 +16,7 @@ function searchFunk() {
   searchFiled.addEventListener("input", function () {
     let userInput = searchFiled.value.toLowerCase();
     listOfTasks.forEach((element) => {
-      let isVisible = element.title.toLowerCase().includes(userInput) || element.description.toLowerCase().includes(userInput);
+      let isVisible = element.title.toLowerCase().includes(userInput);
       element.card.classList.toggle("hide", !isVisible);
     });
   });

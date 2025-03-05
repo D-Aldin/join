@@ -10,14 +10,25 @@ let descriptionValue;
 let dateValue;
 
 function overlayOn(event) {
-  document.getElementById("overlay").style.display = "block";
+  const overlay = document.getElementById("overlay");
+  const cardContent = document.getElementById("box");
+  overlay.style.display = "block";
+  overlay.style.animation = "fadeIn 125ms ease-in-out forwards";
+  cardContent.style.animation = "slideInFromRight 125ms ease-in-out forwards";
   idOfcurrentElement = event.currentTarget.id;
   document.querySelector("header").style.zIndex = "0";
+  document.querySelector("aside").style.zIndex = "0";
 }
 
 function overlayOff() {
-  document.getElementById("overlay").style.display = "none";
-  refreshPageWhenOverlayOff();
+  const overlay = document.getElementById("overlay");
+  const cardContent = document.getElementById("box");
+  overlay.style.animation = "fadeOut 125ms ease-in-out forwards";
+  cardContent.style.animation = "slideOutToRight 125ms ease-in-out forwards";
+  setTimeout(() => {
+    overlay.style.display = "none";
+    refreshPageWhenOverlayOff();
+  }, 125);
 }
 
 function stopEventBubbel(event) {

@@ -4,12 +4,18 @@ const refLoginWindow = document.querySelector(".login_window");
 const refSignWindow = document.querySelector(".sign_window");
 const refSignUpSegment = document.querySelector(".sign_up");
 const refBackButton = document.querySelector("#goBackArrow");
-const pswConfirm = document.querySelector("#signUpconfirmPassword");
-const psw = document.querySelector("#signUppassword");
-const signUpPasswordInput = document.getElementById("signUppassword");
+const pswConfirm = document.querySelector("#signUpConfirmPassword");
+const psw = document.querySelector("#signUpPassword");
+const signUpPasswordInput = document.getElementById("signUpPassword");
 const toggleSignUpPassword = document.getElementById("toggleSignUpPassword");
-const signUpConfirmPasswordInput = document.getElementById("signUpconfirmPassword");
+const signUpConfirmPasswordInput = document.getElementById("signUpConfirmPassword");
 const toggleSignUpConfirmPassword = document.getElementById("toggleSignUpConfirmPassword");
+const inputIds = {
+  name: "name",
+  email: "signUpEmail",
+  password: "signUpPassword",
+  confirmPassword: "signUpConfirmPassword",
+};
 let refToUnderLineClass = document.querySelector(".under_line");
 let user = [];
 let newUser;
@@ -20,59 +26,140 @@ function getRandomColor() {
   return colors[randomIndex];
 }
 
-/**
- * Function to display the sign-up modal and hide the login modal.
- * @returns {void}
- */
 function openSignUpModal() {
-  refLoginWindow.style.animation = "fadeOut 1s forwards";
+  refLoginWindow.style.animation = "fadeOut 125ms forwards";
   setTimeout(() => {
     refLoginWindow.style.display = "none";
     refSignUpSegment.style.display = "none";
     refSignWindow.style.display = "inline";
-    refSignWindow.style.animation = "fadeIn 1s forwards";
+    refSignWindow.style.animation = "fadeIn 125ms forwards";
   }, 125);
 }
 
-/**
- * Function to go back to the login window from the sign-up modal.
- * @returns {void}
- */
 function goBack() {
-  refSignWindow.style.animation = "fadeOut 1s forwards";
+  refSignWindow.style.animation = "fadeOut 125ms forwards";
+  const inputs = document.querySelectorAll("#signUp input");
+  for (let i = 0; i < inputs.length; i++) {
+    inputs[i].value = "";
+  }
   setTimeout(() => {
     refSignWindow.style.display = "none";
     refLoginWindow.style.display = "inline";
     refSignUpSegment.style.display = "inline";
-    refLoginWindow.style.animation = "fadeIn 1s forwards";
+    refLoginWindow.style.animation = "fadeIn 125ms forwards";
   }, 125);
 }
 
-/**
- * Function to handle the form submission for signing up a new user.
- * It collects the user data, creates a new user object, and checks if the user already exists.
- *
- * @param {Event} event - The event triggered by form submission.
- * @returns {void}
- */
 function getDataFromSignUp(event) {
   event.preventDefault();
   const form = event.target;
-  const userEmail = form.email.value;
   const userName = form.name.value;
+  const userEmail = form.email.value;
   const userPassword = form.password.value;
+  const confirmPassword = document.getElementById("signUpConfirmPassword").value;
+  const privacyPolicy = document.getElementById("privacy_police").checked;
+  if (validateSignUpInputs(userName, userEmail, userPassword, confirmPassword, privacyPolicy)) return;
   const id = userEmail.split("@")[0].replace(".", "") + "user";
   newUser = userData(id, userEmail, userName, userPassword);
   ifUserAlreadyExists(userEmail);
 }
 
-/**
- * Function to add new user data to the Firebase Realtime Database.
- *
- * @async
- * @param {Object} data - The user data to be added.
- * @returns {Promise<Object>} The response object from the Firebase request.
- */
+function validateSignUpInputs(name, email, password, confirmPassword, privacyPolicy) {
+  const inputs = { name, email, password, confirmPassword };
+  let hasError = validateEachField(inputs);
+  if (password && confirmPassword && password !== confirmPassword) {
+    showPasswordMismatchError();
+    hasError = true;
+  }
+  if (!privacyPolicy) {
+    showPrivacyPolicyError();
+    hasError = true;
+  } else {
+    clearPrivacyPolicyError();
+  }
+  return hasError;
+}
+
+function validateEachField(inputs) {
+  let hasError = false;
+  for (const key in inputs) {
+    if (validateSingleField(key, inputs[key])) {
+      hasError = true;
+    }
+  }
+  return hasError;
+}
+
+function validateSingleField(key, value) {
+  const errors = {
+    name: "Please enter your name.",
+    email: "Please enter your email address.",
+    password: "Please enter your password.",
+    confirmPassword: "Please confirm your password.",
+  };
+  const inputElement = document.getElementById(inputIds[key]);
+  const errorElement = document.getElementById(`signUp_${key}_error`);
+  if (!value) {
+    errorElement.innerText = errors[key];
+    inputElement.style.borderColor = "red";
+    return true;
+  } else {
+    errorElement.innerText = "";
+    inputElement.style.borderColor = "";
+    return false;
+  }
+}
+
+function showPasswordMismatchError() {
+  document.getElementById("signUp_confirmPassword_error").innerText = "Passwords don't match. Please try again.";
+  document.getElementById("signUpConfirmPassword").style.borderColor = "red";
+}
+
+function showPrivacyPolicyError() {
+  let errorElement = document.getElementById("signUp_privacy_error");
+  if (!errorElement) {
+    errorElement = document.createElement("div");
+    errorElement.id = "signUp_privacy_error";
+    errorElement.className = "error_message";
+    document.querySelector(".privacy_police_content").parentNode.insertBefore(errorElement, document.querySelector(".privacy_police_content").nextSibling);
+  }
+  errorElement.innerText = "You must accept the Privacy Policy to continue.";
+}
+
+function clearPrivacyPolicyError() {
+  const errorElement = document.getElementById("signUp_privacy_error");
+  if (errorElement) {
+    errorElement.innerText = "";
+  }
+}
+
+document.getElementById("signUp").addEventListener("submit", getDataFromSignUp);
+
+document.addEventListener("click", function (event) {
+  const signUpForm = document.querySelector("#signUp");
+  if (signUpForm && !signUpForm.contains(event.target)) {
+    clearSignUpErrorMessages();
+  }
+});
+
+function clearSignUpErrorMessages() {
+  const errorFields = ["name", "email", "password", "confirmPassword"];
+  for (const field of errorFields) {
+    const errorElement = document.getElementById(`signUp_${field}_error`);
+    if (errorElement) {
+      errorElement.innerText = "";
+    }
+    const inputElement = document.getElementById(inputIds[field]);
+    if (inputElement) {
+      inputElement.style.borderColor = "";
+    }
+  }
+  const privacyError = document.getElementById("signUp_privacy_error");
+  if (privacyError) {
+    privacyError.innerText = "";
+  }
+}
+
 async function addUsersToDataBase(data) {
   const uniqueKey = `user_${Date.now()}`;
   let response = await fetch(BASE_URL + `contacts/${uniqueKey}.json`, {
@@ -83,19 +170,9 @@ async function addUsersToDataBase(data) {
     body: JSON.stringify(data),
   });
   let responseToJSON = await response.json();
-  // youSignedUp();
   return responseToJSON;
 }
 
-/**
- * Function to create a new user object with the provided data.
- *
- * @param {string} id - The unique ID for the new user.
- * @param {string} email - The email address of the new user.
- * @param {string} name - The name of the new user.
- * @param {string} password - The password for the new user.
- * @returns {Object} The user object to be added to the database.
- */
 function userData(id, email, name, password) {
   return {
     name: name,
@@ -107,45 +184,50 @@ function userData(id, email, name, password) {
 }
 
 async function ifUserAlreadyExists(email) {
-  let response = await fetch(BASE_URL + `contacts.json`, {
-    method: "GET",
-  });
-  let responseToJSON = await response.json();
-  let userExists = false;
-  for (const key in responseToJSON) {
-    if (responseToJSON[key].email === email) {
-      userExists = true;
-      break;
-    }
-  }
-  if (!userExists && pswConfirm.style.borderColor != "red") {
-    console.log("User Don't Exist");
+  let responseToJSON = await fetchUserContacts();
+  let userExists = checkIfUserExists(responseToJSON, email);
+
+  if (!userExists && pswConfirm.style.borderColor !== "red") {
+    console.log("User Doesn't Exist");
     await addUsersToDataBase(newUser);
     showOverlay();
-  } else {
-    console.log("User Exists");
+  } else if (userExists) {
+    displayEmailError();
   }
 }
 
-/**
- * Function to check if the password and confirmation password match.
- * If they do not match, it shows an error message and changes the input border color to red.
- *
- * @returns {void}
- */
+async function fetchUserContacts() {
+  let response = await fetch(BASE_URL + `contacts.json`, { method: "GET" });
+  return await response.json();
+}
+
+function checkIfUserExists(responseToJSON, email) {
+  for (const key in responseToJSON) {
+    if (responseToJSON[key].email === email) {
+      return true;
+    }
+  }
+  return false;
+}
+
+function displayEmailError() {
+  document.getElementById("signUp_email_error").innerText = "This email is already registered.";
+  document.getElementById("signUpEmail").style.borderColor = "red";
+}
+
 function passwordMatch() {
   const password = psw.value;
-  const confitmPassword = pswConfirm.value;
-  const confirmMsg = document.querySelector(".checkPassword");
-
-  if (password.length == confitmPassword.length || password.length < confitmPassword.length || password.length > confitmPassword.length) {
-    if (confitmPassword !== password) {
-      pswConfirm.style.borderColor = "red";
-      confirmMsg.innerHTML = "Your passwords don't match. Please try again.";
-    } else if (password == confitmPassword) {
-      pswConfirm.style.borderColor = "#ccc";
-      confirmMsg.innerHTML = "";
-      document.getElementById("signUp").addEventListener("submit", getDataFromSignUp);
+  const confirmPassword = pswConfirm.value;
+  const errorElement = document.getElementById("signUp_confirmPassword_error");
+  if (confirmPassword !== password) {
+    pswConfirm.style.borderColor = "red";
+    if (errorElement) {
+      errorElement.innerText = "Your passwords don't match. Please try again.";
+    }
+  } else {
+    pswConfirm.style.borderColor = "#ccc";
+    if (errorElement) {
+      errorElement.innerText = "";
     }
   }
 }
@@ -156,12 +238,21 @@ pswConfirm.addEventListener("input", passwordMatch);
 
 function showOverlay() {
   let overlay = document.getElementById("overlay");
-  overlay.classList.add("show");
+  let message = document.querySelector(".overlay_msg");
+  overlay.style.display = "block";
+  overlay.style.opacity = "0";
+  message.style.opacity = "1";
+  void overlay.offsetWidth;
+  void message.offsetWidth;
+  overlay.style.animation = "fadeIn 125ms ease-in-out forwards";
+  message.style.animation = "slideInFromRight 125ms ease-in-out forwards";
   setTimeout(() => {
-    overlay.classList.remove("show");
+    overlay.style.animation = "fadeOut 125ms ease-in-out forwards";
+    message.style.animation = "slideOutToRight 125ms ease-in-out forwards";
     setTimeout(() => {
+      overlay.style.display = "none";
       window.location.href = "login.html";
-    }, 500);
+    }, 125);
   }, 1000);
 }
 

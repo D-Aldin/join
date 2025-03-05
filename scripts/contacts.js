@@ -42,6 +42,7 @@ async function addContactToDataBase() {
 
 function validateContactInputs(name, email, phone) {
   const inputs = { name, email, phone };
+  const inputIds = { name: "add_name", email: "add_email", phone: "add_phone" };
   const errors = {
     name: "Please enter your first and last name here.",
     email: "Please enter your email address here.",
@@ -50,20 +51,36 @@ function validateContactInputs(name, email, phone) {
   let hasError = false;
   for (const key in inputs) {
     const value = inputs[key];
-    document.getElementById(`${key}_error`).innerText = value ? "" : errors[key];
-    if (!value) hasError = true;
+    const inputElement = document.getElementById(inputIds[key]);
+    if (!value) {
+      document.getElementById(`${key}_error`).innerText = errors[key];
+      inputElement.style.borderColor = "red";
+      hasError = true;
+    } else {
+      document.getElementById(`${key}_error`).innerText = "";
+      inputElement.style.borderColor = "";
+    }
   }
   return hasError;
 }
+
+document.addEventListener("click", function (event) {
+  if (!document.querySelector(".form_input_fields_position").contains(event.target)) {
+    clearErrorMessages();
+  }
+});
+
+document.querySelector(".btn_cancel").addEventListener("click", clearErrorMessages);
+document.querySelector(".overlay_close_btn_position img").addEventListener("click", clearErrorMessages);
 
 function clearErrorMessages() {
   document.getElementById("name_error").innerText = "";
   document.getElementById("email_error").innerText = "";
   document.getElementById("phone_error").innerText = "";
+  document.getElementById("add_name").style.borderColor = "";
+  document.getElementById("add_email").style.borderColor = "";
+  document.getElementById("add_phone").style.borderColor = "";
 }
-
-document.querySelector(".btn_cancel").addEventListener("click", clearErrorMessages);
-document.querySelector(".overlay_close_btn_position img").addEventListener("click", clearErrorMessages);
 
 async function getContactsFromDataBase() {
   let response = await fetch(BASE_URL + "contacts.json");

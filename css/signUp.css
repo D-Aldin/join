@@ -62,8 +62,8 @@
   background-position: calc(100% - 20px);
 }
 
-#signUppassword,
-#signUpconfirmPassword {
+#signUpPassword,
+#signUpConfirmPassword {
   width: 100%;
   padding: 20px;
   border-radius: 10px;
@@ -73,6 +73,56 @@
   font-weight: 400;
   box-sizing: border-box;
   background-image: none;
+}
+
+#signUp_name_error {
+  position: absolute;
+  top: 180px;
+}
+
+#signUp_email_error {
+  position: absolute;
+  top: 245px;
+}
+
+#signUp_password_error {
+  position: absolute;
+  top: 310px;
+}
+
+#signUp_confirmPassword_error {
+  position: absolute;
+  top: 378px;
+}
+
+.form_btn_sign {
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  margin-top: 10px;
+}
+
+.privacy_police_content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  font-size: small;
+  margin-top: 20px;
+}
+
+.privacy_police_content a {
+  color: rgb(41, 171, 226);
+  text-decoration: none;
+}
+
+#signUp_privacy_error {
+  position: absolute;
+  left: 0;
+  top: 435px;
+  transform: none;
+  text-align: center;
+  width: 100%;
 }
 
 @media only screen and (max-width: 1000px) {
@@ -112,6 +162,27 @@
     padding-bottom: 40px;
     width: 85%;
   }
+
+  #signUp_name_error {
+    top: 160px;
+  }
+
+  #signUp_email_error {
+    top: 225px;
+  }
+
+  #signUp_password_error {
+    top: 290px;
+  }
+
+  #signUp_confirmPassword_error {
+    top: 358px;
+  }
+
+  #signUp_privacy_error {
+    top: 415px;
+  }
+
   @keyframes moveShrinkFade {
     0% {
       transform: translate(-50%, -50%) scale(1);

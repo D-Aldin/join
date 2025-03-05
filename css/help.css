@@ -97,6 +97,7 @@ h3 {
   .scroll_layout {
     width: 100%;
     margin: 32px 24px 112px 24px;
+    padding-bottom: 40px;
   }
 
   .nav_position {

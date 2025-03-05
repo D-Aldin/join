@@ -1,17 +1,10 @@
 BASE_URL = "https://dv-join-bbc2e-default-rtdb.europe-west1.firebasedatabase.app/";
-
 selectedButton = "";
-
 let subtasksList = {};
-
 arrayOfContacts = [];
-
 selectedContacts = [];
-
 let assignedContacts = [];
-
 let selectetCategory = "";
-
 requiredTitle = false;
 requiredDate = false;
 requiredCategory = false;
@@ -42,9 +35,15 @@ async function renderContacts(path = "") {
 
 function pushContactsToSelectField() {
   let contactlist = document.getElementById("contact-list");
+  contactlist.innerHTML = '';
   for (let i = 0; i < arrayOfContacts.length; i++) {
     const currentContact = arrayOfContacts[i];
-    contactlist.innerHTML += /*html*/ `
+    renderContactTemplate(contactlist, currentContact, i);
+  }
+}
+
+function renderContactTemplate(contactlist, currentContact, i) {
+  contactlist.innerHTML += /*html*/ `
             <div onclick="addContact(${i})" id="contact${i}" class="contactlist">
                 <div class="flex_gap_16">
                     <div class="contact-img-cyrcle" style="background-color: ${currentContact.color}">${returnFirstLetter(currentContact.name)}</div>
@@ -55,8 +54,23 @@ function pushContactsToSelectField() {
                 </div>
             </div>
         `;
-  }
 }
+
+function searchContacts() {
+  let search = document.getElementById('contact-input').value.toLowerCase(); // Kleinbuchstaben für Vergleich
+  let contactlist = document.getElementById("contact-list");
+  contactlist.innerHTML = '';
+  let current = arrayOfContacts.map((contact, index) => ({ ...contact, index })).filter(contact => 
+    contact.name.toLowerCase().startsWith(search)
+  );
+  for (let i = 0; i < current.length; i++) {
+    let index = current[i].index;
+    let currentContact = arrayOfContacts[index]
+    renderContactTemplate(contactlist, currentContact, index)
+  }
+}   
+  
+
 
 function openContactList() {
   let contactlist = document.getElementById("contact-list");
@@ -81,7 +95,9 @@ function closeContactList(contactlist) {
   document.getElementById("contact-input-field").innerHTML = /*html*/ `
         <img class="icon-drop-down" src="assets/icons/addTask/arrow_drop_downaa (1).svg" alt="">
     `;
+  document.getElementById('contact-input').value = '';
   document.getElementById("assigned").classList.remove("display_none");
+  pushContactsToSelectField();
 }
 
 function addContact(x) {
@@ -132,8 +148,9 @@ function renderSelectetContacts() {
   for (let i = 0; i < selectedContacts.length; i++) {
     const index = selectedContacts[i];
     wrapper.innerHTML += /*html*/ `
-            <div class="contact-img-cyrcle" style="background-color: ${arrayOfContacts[index].color}">${arrayOfContacts[index].name.charAt(0)}</div>
+            <div class="contact-img-cyrcle" style="background-color: ${arrayOfContacts[index].color}">${returnFirstLetter(arrayOfContacts[index].name)}</div>
         `;
+    console.log(arrayOfContacts[index].name.charAt(0));
   }
 }
 
@@ -263,22 +280,6 @@ function returnAllData() {
   return tamplate(id, title, description, assignedContacts, date, selectedButton, category, subtasksList, status, localStorage.userId);
 }
 
-// old version
-// function renderContactsToNewTask() {
-//   assignedContacts = [];
-//   for (let index = 0; index < selectedContacts.length; index++) {
-//     const contactNumber = selectedContacts[index];
-//     const contact = arrayOfContacts[contactNumber];
-//     let assignedContact = {
-//       [contact.id]: {
-//         color: contact.color,
-//         name: contact.name,
-//       },
-//     };
-//     assignedContacts.push(assignedContact);
-//   }
-// }
-
 function renderContactsToNewTask() {
   assignedContacts = [];
   for (let index = 0; index < selectedContacts.length; index++) {
@@ -351,111 +352,4 @@ function borderFocus() {
       document.removeEventListener("click", outsideClick);
     }
   });
-}
-
-function writeSubtask() {
-  let subtask = document.getElementById("subtask").value;
-  document.getElementById("subtusk-input-border").classList.add("subtask-inputfield-focus");
-  if (subtask.length < 1) {
-    setStandardButton();
-  }
-  if (subtask.length >= 1) {
-    setdubbleButton();
-  }
-}
-
-function setStandardButton() {
-  document.getElementById("subtaskbuttons").innerHTML = /*html*/ `
-            <button type="button" class="subtask-inputfield-button">
-                <img src="assets/icons/addTask/subtasks_icons.svg" alt="">
-            </button>
-        `;
-}
-
-function setdubbleButton() {
-  document.getElementById("subtaskbuttons").innerHTML = /*html*/ `
-            <button type="button" class="subtask-inputfield-button">
-                <img onclick="clearsubtask()" src="assets/icons/addTask/cross.svg" alt="">
-            </button>
-            <div class="pixelbar-mini"></div>
-            <button type="button" class="subtask-inputfield-button">    
-                <img onclick="setSubtask()" src="assets/icons/addTask/done.svg" alt="">
-            </button>`;
-}
-
-function clearsubtask() {
-  document.getElementById("subtask").value = "";
-  setStandardButton();
-}
-
-function setSubtask() {
-  let subtask = document.getElementById("subtask").value;
-  let newSubtaskKey = `subtask_${Date.now()}`;
-  let newSubtask = {
-    state: false,
-    task: subtask,
-  };
-  subtasksList[newSubtaskKey] = newSubtask;
-  renderSubtasks();
-  clearsubtask();
-  // console.log(subtasks);
-}
-
-function renderSubtasks() {
-  let tasks = document.querySelector("#tasks-wrapper");
-  tasks.innerHTML = "";
-  for (const key in subtasksList) {
-    if (Object.prototype.hasOwnProperty.call(subtasksList, key)) {
-      const element = subtasksList[key];
-      subtasksTemplate(tasks, key, element.task);
-    }
-  }
-}
-
-function subtasksTemplate(tasks, i, element) {
-  tasks.innerHTML += /*html*/ `
-        <div id="${i}" class="subtask-list" >
-            <ul class="full_with" onclick="editSubtask(${i})">
-                <li>${element}</li>   
-            </ul>
-            <div class="subtask-list-button-container">
-                <button type="button" onclick="editSubtask(${i})" class="subtask-list-button"><img src="assets/icons/addTask/pen.svg" alt=""></button>
-                <div class="pixelbar-subtask"></div>
-                <button type="button" onclick="deleteSubtask(${i})" class="subtask-list-button"><img src="assets/icons/addTask/delete.svg" alt=""></button>
-            </div>
-        </div>`;
-}
-
-function deleteSubtask(x) {
-  subtasks.splice(x, 1);
-  renderSubtasks();
-}
-
-function editSubtask(x) {
-  currentcontainer = document.getElementById(x);
-  currentcontainer.classList.remove("subtask-list");
-  currentcontainer.classList.add("subtask-list-by-edit");
-
-  document.getElementById(x).innerHTML = /*html*/ `
-        <input class="subtask-edit-inputfield" id="current-subtask${x}" type="text">
-        <div class="subtask-list-button-container-by-edit">
-                <button type="button" onclick="setEditSubtask(${x})" class="subtask-list-button"><img src="assets/icons/addTask/done.svg" alt=""></button>
-                <div class="pixelbar-subtask"></div>
-                <button type="button" onclick="deleteSubtask(${x})" class="subtask-list-button"><img src="assets/icons/addTask/delete.svg" alt=""></button>
-        </div>`;
-  currentsubtask = document.getElementById("current-subtask" + x);
-  currentsubtask.value = subtasks[x].task;
-  /*
-    document.addEventListener("click", function outsideClick(event) {
-        if (!currentcontainer.contains(event.target)) {
-            setEditSubtask(x);
-            document.removeEventListener("click", outsideClick);
-        }
-    });*/
-}
-
-function setEditSubtask(x) {
-  let subtaskText = document.getElementById("current-subtask" + x).value;
-  subtasks[x].task = subtaskText;
-  renderSubtasks();
 }

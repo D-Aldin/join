@@ -112,48 +112,55 @@ async function displayContactsInDropdownMenu() {
   whichContactIsAssigned(idOfcurrentElement);
 }
 
-// TODO reduce lines of code
 async function whichContactIsAssigned(id) {
   let dataFromFireBase = await fetchCardDetails("tasks", id);
   if (!dataFromFireBase[id].assigned) {
     dataFromFireBase[id].assigned = {};
   }
   const allContactsInDropdownMenu = document.querySelectorAll(".align_items");
-  for (let index = 0; index < allContactsInDropdownMenu.length; index++) {
-    const contact = allContactsInDropdownMenu[index].getAttributeNode("id_value").value;
-    const keyNames = Object.keys(dataFromFireBase[id].assigned);
-    keyNames.forEach((element) => {
-      if (contact === element) {
-        allContactsInDropdownMenu[index].classList.add("selected_contact");
-        allContactsInDropdownMenu[index].lastElementChild.lastElementChild.src = "./assets/icons/checkbox/check_white.svg";
-        allContactsInDropdownMenu[index].addEventListener("click", function (event) {
-          retractContactFromCard(event);
-          allContactsInDropdownMenu[index].classList.remove("selected_contact");
-          allContactsInDropdownMenu[index].lastElementChild.lastElementChild.src = "./assets/icons/checkbox/openCardRectangle.svg";
-        });
-      }
-    });
-  }
+  markAssignedContacts(allContactsInDropdownMenu, dataFromFireBase[id].assigned);
 }
 
-// TODO reduce lines of code
+function markAssignedContacts(allContacts, assignedContacts) {
+  allContacts.forEach((contactElement) => {
+    const contact = contactElement.getAttributeNode("id_value").value;
+    if (Object.keys(assignedContacts).includes(contact)) {
+      contactElement.classList.add("selected_contact");
+      contactElement.lastElementChild.lastElementChild.src = "./assets/icons/checkbox/check_white.svg";
+      contactElement.addEventListener("click", (event) => {
+        retractContactFromCard(event);
+        contactElement.classList.remove("selected_contact");
+        contactElement.lastElementChild.lastElementChild.src = "./assets/icons/checkbox/openCardRectangle.svg";
+      });
+    }
+  });
+}
+
 async function assignNewContacts(event) {
   const contact = event.currentTarget.getAttributeNode("id_value").value;
   let dataFromFireBase = await fetchCardDetails(taskPath, idOfcurrentElement);
+
   if (!dataFromFireBase[idOfcurrentElement].assigned) {
     dataFromFireBase[idOfcurrentElement].assigned = {};
   }
+
   if (!(contact in dataFromFireBase[idOfcurrentElement].assigned || assignNewContList.includes(contact))) {
-    assignNewContList.push(contact);
-    let newContact = await getContactsFromFireBase(assignNewContList);
-    addDataToFireBase(`${taskPath}/${idOfcurrentElement}/assigned`, newContact);
-    let clicked_element = document.querySelector(`[id_value="${contact}"]`);
-    clicked_element.classList.add("selected_contact");
-    clicked_element.lastElementChild.lastElementChild.src = "./assets/icons/checkbox/check_white.svg";
-    document.querySelector(".assigned_to").innerHTML = "";
-    editFunction();
-    addDataToFireBase(`${taskPath}/${idOfcurrentElement}/assigned`, newContact);
+    await handleNewContactAssignment(contact, dataFromFireBase);
   }
+}
+
+async function handleNewContactAssignment(contact, dataFromFireBase) {
+  assignNewContList.push(contact);
+  let newContact = await getContactsFromFireBase(assignNewContList);
+  addDataToFireBase(`${taskPath}/${idOfcurrentElement}/assigned`, newContact);
+
+  let clickedElement = document.querySelector(`[id_value="${contact}"]`);
+  clickedElement.classList.add("selected_contact");
+  clickedElement.lastElementChild.lastElementChild.src = "./assets/icons/checkbox/check_white.svg";
+
+  document.querySelector(".assigned_to").innerHTML = "";
+  editFunction();
+  addDataToFireBase(`${taskPath}/${idOfcurrentElement}/assigned`, newContact);
 }
 
 async function retractContactFromCard(event) {
@@ -219,34 +226,34 @@ async function deleteSubtask(event) {
   displaySubtasksInTheEditMenu();
 }
 
-// TODO reduce lines of code
 async function addNewSubtask(event) {
-  let newTaskObj;
+  let subtasks = await fetchSubtasks();
+  let theNewTask = document.querySelector("#editSubtask").value;
+
+  let newTaskObj = {
+    [`subtask_${Date.now()}`]: { task: theNewTask, state: false },
+  };
+
+  await saveNewSubtask(newTaskObj);
+  document.querySelector("#editSubtask").value = "";
+  setStandardButtonInOpenCard();
+  document.querySelector(".subtasks_box").innerHTML = " ";
+  displaySubtasksInTheEditMenu();
+}
+
+async function fetchSubtasks() {
   let response = await fetch(`${BASE_URL}/tasks/${idOfcurrentElement}/subtask.json`, {
     method: "GET",
   });
-  let subtasks = await response.json();
-  if (subtasks === null) {
-    setIndex = 0;
-  } else {
-    setIndex = subtasks.length;
-  }
-  let theNewTask = document.querySelector("#editSubtask").value;
-  newTaskObj = {
-    [`subtask_${Date.now()}`]: {
-      task: theNewTask,
-      state: false,
-    },
-  };
+  return (await response.json()) || [];
+}
+
+async function saveNewSubtask(newTaskObj) {
   await fetch(`${BASE_URL}/${taskPath}/${idOfcurrentElement}/subtask.json`, {
     method: "PATCH",
     body: JSON.stringify(newTaskObj),
     headers: { "Content-Type": "application/json" },
   });
-  document.querySelector("#editSubtask").value = "";
-  setStandardButtonInOpenCard();
-  document.querySelector(".subtasks_box").innerHTML = " ";
-  displaySubtasksInTheEditMenu();
 }
 
 function focusOnInputField(event) {

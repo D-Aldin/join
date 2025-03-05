@@ -107,21 +107,6 @@ h1 {
   margin-bottom: 13px;
 }
 
-@keyframes fadeIn {
-  to {
-    opacity: 1;
-  }
-}
-
-@keyframes fadeOut {
-  from {
-    opacity: 1;
-  }
-  to {
-    opacity: 0;
-  }
-}
-
 .form_content {
   display: flex;
   flex-direction: column;
@@ -142,12 +127,33 @@ h1 {
   gap: 40px;
 }
 
+.error_message {
+  position: absolute;
+  color: red;
+  font-size: 12px;
+  margin: 0;
+  padding: 0;
+  top: 48%;
+  left: 40px;
+  width: auto;
+}
+
+.email_error_position {
+  position: absolute;
+  top: 182px;
+}
+
+.password_error_position {
+  position: absolute;
+  top: 250px;
+}
+
 #loginEmail,
 #loginPassword,
 #name,
 #signUpEmail,
-#signUppassword,
-#signUpconfirmPassword {
+#signUpPassword,
+#signUpConfirmPassword {
   cursor: pointer;
   border-radius: 10px;
   border: 1px solid rgba(209, 209, 209, 1);
@@ -166,8 +172,8 @@ h1 {
 #loginEmail:focus,
 #signUpEmail:focus,
 #loginPassword:focus,
-#signUppassword:focus,
-#signUpconfirmPassword:focus,
+#signUpPassword:focus,
+#signUpConfirmPassword:focus,
 #name:focus {
   border: 1px solid rgb(41, 171, 226);
 }
@@ -253,11 +259,6 @@ h1 {
   box-shadow: 0 7px 7px 0 rgba(104, 104, 104, 0.301);
 }
 
-.form_btn {
-  display: flex;
-  justify-content: center;
-}
-
 #sign_btn {
   background-color: rgb(42, 54, 71);
   color: white;
@@ -272,25 +273,6 @@ h1 {
 #sign_btn:hover {
   background-color: rgb(41, 171, 226);
   box-shadow: 0 7px 7px 0 rgba(104, 104, 104, 0.301);
-}
-
-.checkPassword,
-.checkEmailPassword {
-  color: red;
-  font-size: 10px;
-}
-
-.privacy_police_content {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 8px;
-  font-size: small;
-}
-
-.privacy_police_content a {
-  color: rgb(41, 171, 226);
-  text-decoration: none;
 }
 
 input[type="checkbox"] {
@@ -348,44 +330,29 @@ footer {
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.445);
-  z-index: 1;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  opacity: 0;
-  visibility: hidden;
-  transition: opacity 0.5s ease-out, visibility 0.5s ease-out;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 2;
+  display: none;
 }
 
 .overlay_msg {
-  border: 1px transparent;
-  border-radius: 20px;
-  width: 312px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 326px;
   height: 74px;
-  background-color: rgb(42, 54, 71);
-  color: white;
+  border-radius: 30px;
+  z-index: 3;
+  background-color: rgba(42, 54, 71, 1);
+  box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.1);
+  color: rgb(255, 255, 255);
+  font-size: 20px;
+  font-weight: 400;
+
   display: flex;
   justify-content: center;
-  align-content: center;
-  flex-direction: column-reverse;
-  text-align: center;
-  position: absolute;
-  top: 60%;
-  left: 50%;
-  transform: translate(-50%, 100%);
-  opacity: 0;
-  transition: transform 0.5s ease-out, opacity 0.5s ease-out;
-}
-
-#overlay.show {
-  opacity: 1;
-  visibility: visible;
-}
-
-#overlay.show .overlay_msg {
-  transform: translate(-50%, -50%);
-  opacity: 1;
+  align-items: center;
 }
 
 @media only screen and (max-width: 600px) {
@@ -393,6 +360,7 @@ footer {
     width: 80%;
     top: 45%;
   }
+
   .login_header {
     position: fixed;
     bottom: 90px;
@@ -400,9 +368,11 @@ footer {
     display: flex;
     justify-content: center;
   }
+
   .join_image {
     animation: moveShrinkFade600 1s ease-in-out forwards;
   }
+
   @keyframes moveShrinkFade600 {
     0% {
       transform: translate(-50%, -50%) scale(1);
@@ -426,5 +396,19 @@ footer {
     padding: 20px;
     padding-bottom: 40px;
     width: 85%;
+  }
+
+  .error_message {
+    left: 20px;
+  }
+
+  .email_error_position {
+    position: absolute;
+    top: 164px;
+  }
+
+  .password_error_position {
+    position: absolute;
+    top: 232px;
   }
 }

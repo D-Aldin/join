@@ -19,44 +19,45 @@ document.addEventListener("DOMContentLoaded", function () {
   }, 1000);
 });
 
-// TODO reduce lines of code
 async function loginUser(email) {
-  let response = await fetch(BASE_URL + "contacts.json", {
-    method: "GET",
-  });
-  let responseToJSON = await response.json();
-  let userFound = false;
-  for (const key in responseToJSON) {
-    const emailFromDatabase = responseToJSON[key].email;
-    const passwordFromDB = responseToJSON[key].password;
-    if (emailFromDatabase === email && passwordFromDB === password) {
-      localStorage.setItem("userId", key);
-      localStorage.removeItem("isGuest");
-      window.location.href = "summary.html";
-      userFound = true;
-      break;
+  let responseToJSON = await fetchUserData();
+  let userKey = findUserByEmail(responseToJSON, email);
+  if (userKey) {
+    authenticateUser(userKey);
+  }
+}
+
+async function fetchUserData() {
+  let response = await fetch(BASE_URL + "contacts.json", { method: "GET" });
+  return await response.json();
+}
+
+function findUserByEmail(users, email) {
+  for (const key in users) {
+    if (users[key].email === email && users[key].password === password) {
+      return key;
     }
   }
-  if (!userFound) {
-    document.querySelector("#loginEmail").style.borderColor = "red";
-    document.querySelector("#loginPassword").style.borderColor = "red";
-    document.querySelector(".checkEmailPassword").innerHTML = "Check your email and password. Please try again.";
-  }
+  return null;
 }
 
-function getDataFromLogin(event) {
-  event.preventDefault();
-  let email = document.getElementById("loginEmail").value;
-  password = document.getElementById("loginPassword").value;
-  loginUser(email);
-}
-
-document.querySelector("#guest_log").onclick = function () {
-  localStorage.removeItem("userId");
+function authenticateUser(userKey) {
+  localStorage.setItem("userId", userKey);
+  localStorage.removeItem("isGuest");
   window.location.href = "summary.html";
-};
+}
 
 refLoginButton.addEventListener("click", getDataFromLogin);
+
+document.addEventListener("DOMContentLoaded", function () {
+  const guestLogButton = document.querySelector("#guest_log");
+  if (guestLogButton) {
+    guestLogButton.onclick = function () {
+      localStorage.setItem("userId", "guest");
+      window.location.href = "summary.html";
+    };
+  }
+});
 
 passwordInput.addEventListener("input", () => {
   if (passwordInput.value.length === 0) {
@@ -82,14 +83,53 @@ togglePassword.addEventListener("click", () => {
   }
 });
 
-document.addEventListener("DOMContentLoaded", function () {
-  const guestLogButton = document.querySelector("#guest_log");
-  if (guestLogButton) {
-    guestLogButton.onclick = function () {
-      localStorage.setItem("userId", "guest");
-      window.location.href = "summary.html";
-    };
+function getDataFromLogin(event) {
+  event.preventDefault();
+  email = document.getElementById("loginEmail").value;
+  password = document.getElementById("loginPassword").value;
+  if (validateLoginInputs(email, password)) return;
+  loginUser(email);
+}
+
+function validateLoginInputs(email, password) {
+  const inputs = { email, password };
+  const inputIds = { email: "loginEmail", password: "loginPassword" };
+  const errors = {
+    email: "Please enter your email address here.",
+    password: "Please enter your password here.",
+  };
+  let hasError = false;
+  for (const key in inputs) {
+    const value = inputs[key];
+    const inputElement = document.getElementById(inputIds[key]);
+    if (loginInputsBehaviour(value, key, errors, inputElement)) {
+      hasError = true;
+    }
+  }
+  return hasError;
+}
+
+function loginInputsBehaviour(value, key, errors, inputElement) {
+  if (!value) {
+    document.getElementById(`${key}_error`).innerText = errors[key];
+    inputElement.style.borderColor = "red";
+    return true;
   } else {
-    console.error("Element #guest_log nicht gefunden!");
+    document.getElementById(`${key}_error`).innerText = "";
+    inputElement.style.borderColor = "";
+    return false;
+  }
+}
+
+document.addEventListener("click", function (event) {
+  if (!document.querySelector(".form_content").contains(event.target)) {
+    clearErrorMessages();
   }
 });
+
+function clearErrorMessages() {
+  document.getElementById("email_error").innerText = "";
+  document.getElementById("password_error").innerText = "";
+  document.getElementById("loginEmail").style.borderColor = "";
+  document.getElementById("loginPassword").style.borderColor = "";
+}

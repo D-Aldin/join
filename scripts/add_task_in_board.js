@@ -233,7 +233,8 @@ function requiredFieldTitle() {
 
 function requiredFieldDate() {
   const inputFiledDate = document.getElementById("date");
-  if (!inputFiledDate.value || inputFiledDate.value === "") {
+  const dateValue = inputFiledDate.value;
+  if (!dateValue || isNaN(Date.parse(dateValue))) {
     inputFiledDate.classList.add("required_color");
     document.querySelector("#dateRequired").classList.remove("hide_element");
   }
@@ -299,4 +300,11 @@ document.querySelector("#addFeedback").addEventListener("click", function () {
   showOverlay();
   renderAddTaskMenu();
   taskStatus = "feedback";
+});
+
+window.addEventListener("resize", () => {
+  const refOverlay = document.querySelector("#overlayForAddTask");
+  if (window.innerWidth < 1301 && refOverlay.style.display === "block") {
+    window.location = "add_task.html";
+  }
 });

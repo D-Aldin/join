@@ -48,7 +48,7 @@ function getTemplateOfContactInfo(contact) {
       <h2>${contact.name}</h2>
       <div class="btn_position">
         <img onclick="openOverlayEditContact('${contact.id}')" class="edit_hover transition" src="./assets/icons/contacts/edit.svg" alt="edit" />
-        <img onclick=" setTimeoutDeleteOverlayContact()" class="delete_hover transition" src="./assets/icons/contacts/delete.svg" alt="delete" />
+        <img onclick="deleteContactFromList('${contact.id}'), setTimeoutDeleteOverlayContact()" class="delete_hover transition" src="./assets/icons/contacts/delete.svg" alt="delete" />
       </div>
     </div>
   </div>
@@ -66,13 +66,11 @@ function getTemplateOfContactInfo(contact) {
     <div class="d_none help_submenu_section_responsive" onclick="openOverlayEditContact('${contact.id}')">
       <img class="edit_hover transition" src="./assets/icons/contacts/edit.svg" alt="edit" />
     </div>
-    <div class="submenu_section" onclick=" setTimeoutDeleteOverlayContact()">
+    <div class="submenu_section" onclick="deleteContactFromList('${contact.id}'), setTimeoutDeleteOverlayContact()">
       <img class="delete_hover transition" src="./assets/icons/contacts/delete.svg" alt="delete" />
     </div>
   </div>`;
 }
-
-// deleteContactFromList('${contact.id}');
 
 function getTemplateOfContactEdit(contact) {
   const initials = getInitials(contact.name);
@@ -98,11 +96,9 @@ function getTemplateOfContactEdit(contact) {
         <input id="edit_email" type="email" placeholder="Email" value="${contact.email}" required />
         <input id="edit_phone" type="number" placeholder="Phone" value="${contact.phone}" required />
         <div class="overlay_btn_position">
-          <button type="button" class="btn_delete transition" onclick=" setTimeoutDeleteOverlayContact()">Delete <img src="./assets/icons/contacts/Close.svg" class="cancel_icon" alt="Cancel" /></button>
+          <button type="button" class="btn_delete transition" onclick="deleteContactFromList('${contact.id}'), setTimeoutDeleteOverlayContact()">Delete <img src="./assets/icons/contacts/Close.svg" class="cancel_icon" alt="Cancel" /></button>
           <button type="submit" class="btn_save transition">Save <img src="./assets/icons/contacts/check.svg" alt="check" /></button>
         </div>
       </form>
     </div>`;
 }
-
-// deleteContactFromList('${contact.id}');
