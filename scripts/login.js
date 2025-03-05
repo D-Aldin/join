@@ -60,24 +60,24 @@ refLoginButton.addEventListener("click", getDataFromLogin);
 
 passwordInput.addEventListener("input", () => {
   if (passwordInput.value.length === 0) {
-    togglePassword.src = "../assets/icons/login_and_signUp/lock.svg";
+    togglePassword.src = "./assets/icons/login_and_signUp/lock.svg";
   } else if (passwordInput.type === "password") {
-    togglePassword.src = "../assets/icons/login_and_signUp/visibility_off.svg";
+    togglePassword.src = "./assets/icons/login_and_signUp/visibility_off.svg";
   } else {
-    togglePassword.src = "../assets/icons/login_and_signUp/visibility.svg";
+    togglePassword.src = "./assets/icons/login_and_signUp/visibility.svg";
   }
 });
 
 togglePassword.addEventListener("click", () => {
   if (passwordInput.type === "password") {
     passwordInput.type = "text";
-    togglePassword.src = "../assets/icons/login_and_signUp/visibility.svg";
+    togglePassword.src = "./assets/icons/login_and_signUp/visibility.svg";
   } else {
     passwordInput.type = "password";
     if (passwordInput.value.length === 0) {
-      togglePassword.src = "../assets/icons/login_and_signUp/lock.svg";
+      togglePassword.src = "./assets/icons/login_and_signUp/lock.svg";
     } else {
-      togglePassword.src = "../assets/icons/login_and_signUp/visibility_off.svg";
+      togglePassword.src = "./assets/icons/login_and_signUp/visibility_off.svg";
     }
   }
 });

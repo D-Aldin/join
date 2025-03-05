@@ -1,6 +1,6 @@
 .nav_position_login {
   position: relative;
-  bottom: 180px;
+  bottom: 140px;
   left: 0;
   display: flex;
   justify-content: center;
@@ -20,10 +20,17 @@
   background-color: rgb(42, 61, 89);
 }
 
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 30px;
+}
+
 .content {
   display: inline-block;
   font-size: 16px;
-  width: calc(100% - 232px);
+  width: 1014px;
   height: 1024px;
 }
 
@@ -60,12 +67,23 @@ a {
   display: none;
 }
 
-@media only screen and (max-width: 1200px) {
+@media only screen and (max-width: 1400px) {
+  .header {
+    width: calc(100% - 12px);
+  }
+
   .scroll_layout {
-    margin: 32px 16px 112px 16px;
+    width: auto;
+    margin: 110px 40px 110px 96px;
   }
 
   .content {
     width: 100%;
+  }
+}
+
+@media only screen and (max-width: 1200px) {
+  .scroll_layout {
+    margin: 32px 24px 112px 24px;
   }
 }

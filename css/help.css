@@ -74,6 +74,17 @@ h3 {
   margin: 0;
 }
 
+@media only screen and (max-width: 1400px) {
+  .scroll_layout {
+    width: auto;
+    margin: 110px 40px 110px 96px;
+  }
+
+  .help_header {
+    width: calc(100% - 12px);
+  }
+}
+
 @media only screen and (max-width: 1200px) {
   .legal_and_policy_position {
     display: none;
@@ -81,6 +92,11 @@ h3 {
 
   .question_marker {
     display: none;
+  }
+
+  .scroll_layout {
+    width: 100%;
+    margin: 32px 24px 112px 24px;
   }
 
   .nav_position {
@@ -112,15 +128,6 @@ h3 {
     display: flex;
     justify-content: center;
     flex-direction: column;
-  }
-
-  .scroll_layout {
-    margin: 32px 16px 112px 16px;
-    width: 100%;
-  }
-
-  .help_header {
-    width: 100%;
   }
 }
 

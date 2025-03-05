@@ -84,34 +84,48 @@ function updateSummary(progress, feedback, toDo, done) {
 }
 
 async function countTheNumberOfUrgentTasks() {
-  urgent = 0;
   const dataFromFireBase = await fetchTasks("tasks");
-  if (!dataFromFireBase) {
-    urgentTasks.innerHTML = 0;
-    return;
-  }
-  helperFunction(urgent, dataFromFireBase);
+  if (!dataFromFireBase) return handleNoTasks();
+  const { urgentCount, earliestDeadline } = getUrgentTasksInfo(dataFromFireBase);
+  updateUrgentTasksUI(urgentCount, earliestDeadline);
 }
 
-function helperFunction(counter, data) {
-  for (const task in data) {
-    if (Object.prototype.hasOwnProperty.call(data, task)) {
-      const user = data[task].user;
-      if (user === localStorage.userId) {
-        if (data[task].prio === "urgent") {
-          counter++;
-        }
+function getUrgentTasksInfo(tasks) {
+  let urgentCount = 0;
+  let earliestDeadline = null;
+  Object.values(tasks).forEach((task) => {
+    if (task.user === localStorage.userId && task.prio === "urgent") {
+      urgentCount++;
+      if (task.date) {
+        const taskDate = new Date(task.date);
+        if (!earliestDeadline || taskDate < earliestDeadline) earliestDeadline = taskDate;
       }
     }
+  });
+  return { urgentCount, earliestDeadline };
+}
+
+function updateUrgentTasksUI(count, deadline) {
+  urgentTasks.innerHTML = count;
+  if (deadline) {
+    const options = { month: "long", day: "numeric", year: "numeric" };
+    document.querySelector(".date_deadline").innerHTML = deadline.toLocaleDateString("en-US", options);
+    document.querySelector(".text_deadline").innerHTML = "Upcoming Deadline";
+  } else {
+    document.querySelector(".date_deadline").innerHTML = "No Deadlines";
+    document.querySelector(".text_deadline").innerHTML = "No Urgent Tasks";
   }
-  urgentTasks.innerHTML = counter;
+}
+
+function handleNoTasks() {
+  urgentTasks.innerHTML = 0;
+  document.querySelector(".date_deadline").innerHTML = "No Deadlines";
+  document.querySelector(".text_deadline").innerHTML = "No Urgent Tasks";
 }
 
 document.addEventListener("DOMContentLoaded", function () {
   const welcomeMessage = document.getElementById("welcome_message");
   const mainContent = document.querySelector(".main_content");
-
-  // Startet die Animation und zeigt den Hauptinhalt an, nachdem die Animation abgeschlossen ist
   welcomeMessage.addEventListener("animationend", function () {
     welcomeMessage.style.display = "none";
     mainContent.style.display = "block";
