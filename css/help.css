@@ -10,12 +10,17 @@ body {
   gap: 30px;
 }
 
-.help_header img {
+.arrow_go_back_position {
+  position: absolute;
+  right: 50px;
+}
+
+.arrow_go_back_position img {
   width: 32px;
   height: 32px;
 }
 
-.help_header img:hover {
+.arrow_go_back_position:hover {
   cursor: pointer;
   content: url(../assets/icons/help/arrow_hover.svg);
   width: 30px;
@@ -94,9 +99,14 @@ h3 {
     display: none;
   }
 
+  .arrow_go_back_position {
+    top: 150px;
+    right: 36px;
+  }
+
   .scroll_layout {
     width: 100%;
-    margin: 32px 24px 112px 24px;
+    margin: 32px 24px 150px 24px;
   }
 
   .nav_position {
