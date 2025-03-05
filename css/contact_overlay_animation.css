@@ -9,24 +9,6 @@
   transition: background-color 125ms;
 }
 
-@keyframes slideInFromRightAddContact {
-  from {
-    clip-path: inset(0 0 0 100%);
-  }
-  to {
-    clip-path: inset(0 0 0 0);
-  }
-}
-
-@keyframes slideOutToRightAddContact {
-  from {
-    clip-path: inset(0 0 0 0);
-  }
-  to {
-    clip-path: inset(0 0 0 100%);
-  }
-}
-
 .overlay_contact_successfully_created {
   position: absolute;
   top: 85%;
@@ -47,24 +29,6 @@
   align-items: center;
 }
 
-@keyframes slideInFromRightContactSuccessfullyCreated {
-  from {
-    clip-path: inset(0 0 0 100%);
-  }
-  to {
-    clip-path: inset(0 0 0 0);
-  }
-}
-
-@keyframes slideOutToRightContactSuccessfullyCreated {
-  from {
-    clip-path: inset(0 0 0 0);
-  }
-  to {
-    clip-path: inset(0 0 0 100%);
-  }
-}
-
 #overlay_contact_infos {
   position: absolute;
   top: 311px;
@@ -75,24 +39,6 @@
 
 .arrow_contact_info {
   display: none;
-}
-
-@keyframes slideInFromRightContactInfos {
-  from {
-    clip-path: inset(0 0 0 100%);
-  }
-  to {
-    clip-path: inset(0 0 0 0);
-  }
-}
-
-@keyframes slideOutToRightContactInfos {
-  from {
-    clip-path: inset(0 0 0 0);
-  }
-  to {
-    clip-path: inset(0 0 0 100%);
-  }
 }
 
 @media only screen and (max-width: 1350px) {

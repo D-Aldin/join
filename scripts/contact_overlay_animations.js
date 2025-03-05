@@ -1,6 +1,6 @@
 function closeOverlayContactInfoAfterDelete() {
   let overlay = document.getElementById("overlay_contact_infos");
-  overlay.style.animation = "slideOutToRightContactInfos 125ms forwards";
+  overlay.style.animation = "slideOutToRight 125ms forwards";
   overlay.addEventListener(
     "animationend",
     () => {
@@ -16,7 +16,7 @@ function openOverlayAddContact() {
   let overlayCardRef = document.getElementById("overlay_add_contact_card");
   overlayRef.classList.add("overlay_background");
   overlayCardRef.classList.add("overlay_add_contact_card");
-  overlayCardRef.style.animation = "slideInFromRightAddContact 125ms forwards";
+  overlayCardRef.style.animation = "slideInFromRight 125ms forwards";
 }
 
 function openOverlayEditContact(contactId) {
@@ -26,14 +26,14 @@ function openOverlayEditContact(contactId) {
   overlayEditCardRef.innerHTML = getTemplateOfContactEdit(contact);
   overlayRef.classList.add("overlay_background");
   overlayEditCardRef.classList.add("overlay_edit_contact_card");
-  overlayEditCardRef.style.animation = "slideInFromRightAddContact 125ms forwards";
+  overlayEditCardRef.style.animation = "slideInFromRight 125ms forwards";
 }
 
 function closeOverlayAddContact() {
   let overlayRef = document.getElementById("overlay_add_contacts_background");
   let overlayCardRef = document.getElementById("overlay_add_contact_card");
   overlayRef.style.backgroundColor = "transparent";
-  overlayCardRef.style.animation = "slideOutToRightAddContact 125ms forwards";
+  overlayCardRef.style.animation = "slideOutToRight 125ms forwards";
   overlayCardRef.addEventListener(
     "animationend",
     () => {
@@ -51,9 +51,9 @@ function overlayContactSuccessfullyCreated() {
   let overlayRef = document.getElementById("contact_successfully_created");
   overlayRef.classList.remove("d_none");
   overlayRef.classList.add("overlay_contact_successfully_created");
-  overlayRef.style.animation = "slideInFromRightContactSuccessfullyCreated 125ms forwards";
+  overlayRef.style.animation = "slideInFromRight 125ms forwards";
   setTimeout(() => {
-    overlayRef.style.animation = "slideOutToRightContactSuccessfullyCreated 125ms forwards";
+    overlayRef.style.animation = "slideOutToRight 125ms forwards";
   }, 800);
 }
 
@@ -61,9 +61,9 @@ function overlayContactSuccessfullyEdited() {
   let overlayRef = document.getElementById("contact_successfully_edit");
   overlayRef.classList.remove("d_none");
   overlayRef.classList.add("overlay_contact_successfully_created");
-  overlayRef.style.animation = "slideInFromRightContactSuccessfullyCreated 125ms forwards";
+  overlayRef.style.animation = "slideInFromRight 125ms forwards";
   setTimeout(() => {
-    overlayRef.style.animation = "slideOutToRightContactSuccessfullyCreated 125ms forwards";
+    overlayRef.style.animation = "slideOutToRight 125ms forwards";
   }, 800);
 }
 
@@ -71,9 +71,9 @@ function overlayContactSuccessfullyDelete() {
   let overlayRef = document.getElementById("contact_successfully_deleted");
   overlayRef.classList.remove("d_none");
   overlayRef.classList.add("overlay_contact_successfully_created");
-  overlayRef.style.animation = "slideInFromRightContactSuccessfullyCreated 125ms forwards";
+  overlayRef.style.animation = "slideInFromRight 125ms forwards";
   setTimeout(() => {
-    overlayRef.style.animation = "slideOutToRightContactSuccessfullyCreated 125ms forwards";
+    overlayRef.style.animation = "slideOutToRight 125ms forwards";
   }, 800);
 }
 
@@ -99,7 +99,7 @@ function closeOverlayEditContact() {
   let overlayRef = document.getElementById("overlay_add_contacts_background");
   let overlayCardRef = document.getElementById("overlay_edit_contact_card");
   overlayRef.style.backgroundColor = "transparent";
-  overlayCardRef.style.animation = "slideOutToRightAddContact 125ms forwards";
+  overlayCardRef.style.animation = "slideOutToRight 125ms forwards";
   overlayCardRef.addEventListener(
     "animationend",
     () => {
@@ -126,7 +126,7 @@ function toggleOverlayContactInfos(index) {
 
 function closeContactInfoOverlay() {
   let overlay = document.getElementById("overlay_contact_infos");
-  overlay.style.animation = "slideOutToRightContactInfos 125ms forwards";
+  overlay.style.animation = "slideOutToRight 125ms forwards";
   overlay.addEventListener(
     "animationend",
     () => {
@@ -149,7 +149,7 @@ function removeActiveClassFromContacts() {
 function ifContactElementContainsContactActive(overlay, contactElement) {
   contactElement.classList.remove("contact_active");
   contactElement.classList.add("hover_contact_list");
-  overlay.style.animation = "slideOutToRightContactInfos 125ms forwards";
+  overlay.style.animation = "slideOutToRight 125ms forwards";
   overlay.addEventListener(
     "animationend",
     () => {
@@ -166,14 +166,14 @@ function elseContactElementContainsContactActive(overlay, contactElement, contac
   overlay.innerHTML = getTemplateOfContactInfo(contact);
   if (overlay.classList.contains("d_none")) {
     overlay.classList.remove("d_none");
-    overlay.style.animation = "slideInFromRightContactInfos 125ms forwards";
+    overlay.style.animation = "slideInFromRight 125ms forwards";
   } else {
     elseOverlayContactInfosGoOut(overlay, contact);
   }
 }
 
 function elseOverlayContactInfosGoOut(overlay, contact) {
-  overlay.style.animation = "slideOutToRightContactInfos 125ms forwards";
+  overlay.style.animation = "slideOutToRight 125ms forwards";
   overlay.addEventListener(
     "animationend",
     () => {
@@ -181,7 +181,7 @@ function elseOverlayContactInfosGoOut(overlay, contact) {
       overlay.style.animation = "";
       overlay.innerHTML = getTemplateOfContactInfo(contact);
       overlay.classList.remove("d_none");
-      overlay.style.animation = "slideInFromRightContactInfos 125ms forwards";
+      overlay.style.animation = "slideInFromRight 125ms forwards";
     },
     { once: true }
   );
