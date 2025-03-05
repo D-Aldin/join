@@ -70,8 +70,6 @@ function searchContacts() {
   }
 }   
   
-
-
 function openContactList() {
   let contactlist = document.getElementById("contact-list");
   let contactWrapper = document.getElementById("contact-wrapper");
@@ -150,7 +148,6 @@ function renderSelectetContacts() {
     wrapper.innerHTML += /*html*/ `
             <div class="contact-img-cyrcle" style="background-color: ${arrayOfContacts[index].color}">${returnFirstLetter(arrayOfContacts[index].name)}</div>
         `;
-    console.log(arrayOfContacts[index].name.charAt(0));
   }
 }
 
@@ -276,7 +273,6 @@ function returnAllData() {
   renderContactsToNewTask();
   let id = `task_${Date.now()}`;
   let status = "toDo";
-  console.log(id, title, description, assignedContacts, date, selectedButton, category, subtasksList, status, localStorage.userId);
   return tamplate(id, title, description, assignedContacts, date, selectedButton, category, subtasksList, status, localStorage.userId);
 }
 
