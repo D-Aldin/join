@@ -24,8 +24,6 @@ async function loginUser(email) {
   let userKey = findUserByEmail(responseToJSON, email);
   if (userKey) {
     authenticateUser(userKey);
-  } else {
-    showLoginError();
   }
 }
 
@@ -49,25 +47,17 @@ function authenticateUser(userKey) {
   window.location.href = "summary.html";
 }
 
-function showLoginError() {
-  document.querySelector("#loginEmail").style.borderColor = "red";
-  document.querySelector("#loginPassword").style.borderColor = "red";
-  document.querySelector("#password_error").innerHTML = "Check your email and password. Please try again.";
-}
-
-function getDataFromLogin(event) {
-  event.preventDefault();
-  let email = document.getElementById("loginEmail").value;
-  password = document.getElementById("loginPassword").value;
-  loginUser(email);
-}
-
-document.querySelector("#guest_log").onclick = function () {
-  localStorage.removeItem("userId");
-  window.location.href = "summary.html";
-};
-
 refLoginButton.addEventListener("click", getDataFromLogin);
+
+document.addEventListener("DOMContentLoaded", function () {
+  const guestLogButton = document.querySelector("#guest_log");
+  if (guestLogButton) {
+    guestLogButton.onclick = function () {
+      localStorage.setItem("userId", "guest");
+      window.location.href = "summary.html";
+    };
+  }
+});
 
 passwordInput.addEventListener("input", () => {
   if (passwordInput.value.length === 0) {
@@ -93,16 +83,6 @@ togglePassword.addEventListener("click", () => {
   }
 });
 
-document.addEventListener("DOMContentLoaded", function () {
-  const guestLogButton = document.querySelector("#guest_log");
-  if (guestLogButton) {
-    guestLogButton.onclick = function () {
-      localStorage.setItem("userId", "guest");
-      window.location.href = "summary.html";
-    };
-  }
-});
-
 function getDataFromLogin(event) {
   event.preventDefault();
   email = document.getElementById("loginEmail").value;
@@ -122,16 +102,23 @@ function validateLoginInputs(email, password) {
   for (const key in inputs) {
     const value = inputs[key];
     const inputElement = document.getElementById(inputIds[key]);
-    if (!value) {
-      document.getElementById(`${key}_error`).innerText = errors[key];
-      inputElement.style.borderColor = "red";
+    if (loginInputsBehaviour(value, key, errors, inputElement)) {
       hasError = true;
-    } else {
-      document.getElementById(`${key}_error`).innerText = "";
-      inputElement.style.borderColor = "";
     }
   }
   return hasError;
+}
+
+function loginInputsBehaviour(value, key, errors, inputElement) {
+  if (!value) {
+    document.getElementById(`${key}_error`).innerText = errors[key];
+    inputElement.style.borderColor = "red";
+    return true;
+  } else {
+    document.getElementById(`${key}_error`).innerText = "";
+    inputElement.style.borderColor = "";
+    return false;
+  }
 }
 
 document.addEventListener("click", function (event) {
