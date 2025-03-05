@@ -238,12 +238,21 @@ pswConfirm.addEventListener("input", passwordMatch);
 
 function showOverlay() {
   let overlay = document.getElementById("overlay");
-  overlay.classList.add("show");
+  let message = document.querySelector(".overlay_msg");
+  overlay.style.display = "block";
+  overlay.style.opacity = "0";
+  message.style.opacity = "1";
+  void overlay.offsetWidth;
+  void message.offsetWidth;
+  overlay.style.animation = "fadeIn 125ms ease-in-out forwards";
+  message.style.animation = "slideInFromRight 125ms ease-in-out forwards";
   setTimeout(() => {
-    overlay.classList.remove("show");
+    overlay.style.animation = "fadeOut 125ms ease-in-out forwards";
+    message.style.animation = "slideOutToRight 125ms ease-in-out forwards";
     setTimeout(() => {
+      overlay.style.display = "none";
       window.location.href = "login.html";
-    }, 500);
+    }, 125);
   }, 1000);
 }
 
