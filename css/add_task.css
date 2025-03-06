@@ -253,8 +253,8 @@ p {
 }
 
 .footer-container {
-  margin-top: 146px;
-  padding-bottom: 64px;
+  margin-top: 75px;
+  padding-bottom: 30px;
   display: flex;
   align-items: flex-end;
   justify-content: space-between;
@@ -703,6 +703,10 @@ input[type="date"] {
   .task-wrapper {
     margin-top: 20px;
   }
+
+  /* .flex-container {
+    margin-top: 17px;
+  } */
 }
 
 @media only screen and (min-width: 800px) {
@@ -722,7 +726,7 @@ input[type="date"] {
 
 @media only screen and (max-width: 1048px) {
   .task-wrapper {
-    margin: 110px 0px 0px 40px;
+    margin: 45px 0px 0px 40px;
   }
 
   .inputfield {
@@ -743,6 +747,14 @@ input[type="date"] {
 
   .inputfield-title-container {
     width: auto;
+  }
+  .flex-container {
+    margin-top: 17px;
+  }
+
+  .footer-container {
+    margin-top: 10px;
+    width: 845px;
   }
 }
 
@@ -788,6 +800,14 @@ input[type="date"] {
   .inputfield-title-container {
     width: auto;
   }
+
+  .footer-container {
+    display: none;
+  }
+
+  main {
+    justify-content: center;
+  }
 }
 
 @media only screen and (max-width: 630px) {
@@ -798,13 +818,9 @@ input[type="date"] {
   .footer-container {
     display: none;
   }
-
-  .main {
-    justify-content: center;
-  }
 }
 
-@media (min-width: 300px) and (max-width: 530px) {
+@media (min-width: 300px) and (max-width: 900px) {
   .task {
     flex-direction: column;
   }
@@ -903,8 +919,10 @@ input[type="date"] {
     bottom: 90px;
     width: 100%;
     box-sizing: border-box;
-    padding: 5px 0 12px 56px;
+    padding: 8px 20px 10px 0;
     background-color: rgb(246, 247, 248);
+    display: flex;
+    justify-content: end;
   }
 
   .great-button {
