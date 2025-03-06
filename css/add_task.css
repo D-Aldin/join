@@ -794,6 +794,14 @@ input[type="date"] {
   .task-wrapper {
     margin-left: 6vw;
   }
+
+  .footer-container {
+    display: none;
+  }
+
+  .main {
+    justify-content: center;
+  }
 }
 
 @media (min-width: 300px) and (max-width: 530px) {
@@ -806,10 +814,15 @@ input[type="date"] {
     display: none;
   }
 
+  .title {
+    margin-top: 10px;
+  }
+
   .mobile_view {
     display: flex;
     margin-left: 3vw;
     margin-block-end: -0.2em;
+    margin-top: 40px;
   }
 
   .tasktitles {
@@ -908,6 +921,9 @@ input[type="date"] {
 
   .subtask-wrapper {
     width: 285px;
+    gap: 5px;
+    min-height: 25px;
+    padding-bottom: 20px;
   }
 
   .catecory-wrapper {
@@ -938,11 +954,23 @@ input[type="date"] {
 
   .space_for_subtask {
     height: auto;
-    padding-bottom: 50px;
+    padding-bottom: 130px;
+    display: flex;
   }
 
-  /* * {
-    outline: 1px solid red;
-    box-sizing: border-box;
-  } */
+  .subtask-list-button-container {
+    display: flex;
+  }
+
+  .subtask-list-button-container img {
+    background-color: rgb(246, 247, 248);
+  }
+
+  .pixelbar-subtask {
+    margin: 0 3px 0 3px;
+  }
+
+  main {
+    justify-content: center;
+  }
 }
