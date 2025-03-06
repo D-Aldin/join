@@ -295,12 +295,6 @@ function HTMLTamplateForAddTaskInBorad() {
                 <button onclick="hideOverlay()" class="cancelBtn transition">Cancel</button>
                 <button onclick="createTask()" class="createBtn transition">Create Task</button>
               </div>
-              <div class="task_added hide_element">
-                <div class="task_added_content">
-                  <h4>Task added to board</h4>
-                  <img src="./assets/icons/addTask/added_task.svg" alt="" />
-                </div>
-              </div>
           </div> `;
 }
 

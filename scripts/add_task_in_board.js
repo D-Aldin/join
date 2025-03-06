@@ -278,10 +278,18 @@ async function createTask() {
   if (inputFiledTitle.value.length === 0 || !inputFiledDate.value || inputFiledDate.value === 0 || inputFiledCategory.value === "placeholder") {
     return 0;
   } else {
-    document.querySelector(".task_added").classList.remove("hide_element");
+    const taskAdded = document.querySelector(".task_added");
+    taskAdded.classList.remove("d_none");
+    taskAdded.style.animation = "slideInFromRight 125ms ease forwards";
     let card = await collectDataForNewTask();
     addDataToFireBase("tasks", card);
-    setTimeout(hideOverlay, 1000);
+    setTimeout(() => {
+      taskAdded.style.animation = "slideOutToRight 125ms ease forwards";
+      setTimeout(() => {
+        hideOverlay();
+        window.location = "board.html";
+      }, 125);
+    }, 1000);
   }
 }
 

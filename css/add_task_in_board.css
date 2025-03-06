@@ -123,7 +123,6 @@
 
 .subtask_wrapper_board {
   width: 440px;
-  /* display: contents; */
   height: 70px;
   overflow-y: scroll;
 }
@@ -238,15 +237,27 @@
 }
 
 .task_added {
-  width: 326px;
-  height: 75px;
-  background-color: rgb(42, 54, 71);
-  border-radius: 18px;
-  position: fixed;
-  left: 50%;
+  position: absolute;
   top: 50%;
-  opacity: 0;
-  animation: fadeIn 1s ease-in forwards;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 326px;
+  height: 74px;
+  border-radius: 30px;
+  z-index: 1;
+  background-color: rgba(42, 54, 71, 1);
+  box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.1);
+  color: rgb(255, 255, 255);
+  font-size: 20px;
+  font-weight: 400;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.d_none {
+  display: none;
 }
 
 .no_space_between {
@@ -257,30 +268,7 @@
   background: #fff url(../assets/icons/addTask/typeDate.svg) 97% 50% no-repeat;
 }
 
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-}
-
-.task_added_content {
-  color: white;
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  width: 100%;
-  height: 100%;
-}
-
 @media only screen and (max-width: 1600px) {
-  #add_task_box {
-    width: 967px;
-    left: 58%;
-  }
-
   .title_and_closeBtn {
     padding: 0 38px 38px 38px;
   }
