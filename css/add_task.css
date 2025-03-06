@@ -42,6 +42,10 @@ textarea {
   display: flex;
 }
 
+.special-view {
+  display: none;
+}
+
 .task-wrapper {
   display: inline-block;
   margin: 110px 0px 0px 96px;
@@ -990,5 +994,9 @@ input[type="date"] {
 
   main {
     justify-content: center;
+  }
+
+  .special-view {
+    display: flex;
   }
 }

@@ -1,3 +1,5 @@
+const subtaskInputField = document.querySelector("#subtask");
+
 function writeSubtask() {
   let subtask = document.getElementById("subtask").value;
   document.getElementById("subtusk-input-border").classList.add("subtask-inputfield-focus");
@@ -97,3 +99,10 @@ function setEditSubtask(x) {
   subtasksList[x.id].task = newText;
   renderSubtasks();
 }
+
+subtaskInputField.addEventListener("keypress", function (event) {
+  if (event.key === "Enter") {
+    event.preventDefault();
+    setSubtask();
+  }
+});

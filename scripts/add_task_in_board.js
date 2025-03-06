@@ -14,6 +14,7 @@ function showOverlay(event) {
   void overlay.offsetWidth;
   overlay.style.backgroundColor = "rgba(0, 0, 0, 0.3)";
   taskBox.style.animation = "slideInFromRight 125ms ease forwards";
+  // setEventListenerForSubtask();
 }
 
 function hideOverlay() {
@@ -28,6 +29,7 @@ function hideOverlay() {
 
 function renderAddTaskMenu() {
   let addTaskButton = document.querySelector("#add_task_box");
+  const refInputFiledSubtask = document.querySelector("#subtask");
   if (window.innerWidth > 1200) {
     addTaskButton.innerHTML = HTMLTamplateForAddTaskInBorad();
   } else {
@@ -126,6 +128,7 @@ function focusTheField() {
   document.querySelector(".subtask-inputfield-button").classList.toggle("hide_element");
   document.querySelector(".inputFiledSubtask").classList.toggle("hide_element");
   inputSubtask.value = "";
+  setEventListenerForSubtask();
 }
 
 function closeInputField() {
@@ -316,3 +319,13 @@ window.addEventListener("resize", () => {
     window.location = "add_task.html";
   }
 });
+
+function setEventListenerForSubtask() {
+  const refSubtaskInput = document.querySelector("#subtask");
+  refSubtaskInput.addEventListener("keypress", function (event) {
+    if (event.key === "Enter") {
+      event.preventDefault();
+      newSubtask();
+    }
+  });
+}

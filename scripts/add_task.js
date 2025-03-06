@@ -8,6 +8,7 @@ let selectetCategory = "";
 requiredTitle = false;
 requiredDate = false;
 requiredCategory = false;
+const refSubtaskInputField = document.querySelector("#subtask");
 
 function render() {
   renderContacts("contacts");
@@ -35,7 +36,7 @@ async function renderContacts(path = "") {
 
 function pushContactsToSelectField() {
   let contactlist = document.getElementById("contact-list");
-  contactlist.innerHTML = '';
+  contactlist.innerHTML = "";
   for (let i = 0; i < arrayOfContacts.length; i++) {
     const currentContact = arrayOfContacts[i];
     renderContactTemplate(contactlist, currentContact, i);
@@ -57,19 +58,17 @@ function renderContactTemplate(contactlist, currentContact, i) {
 }
 
 function searchContacts() {
-  let search = document.getElementById('contact-input').value.toLowerCase(); // Kleinbuchstaben für Vergleich
+  let search = document.getElementById("contact-input").value.toLowerCase(); // Kleinbuchstaben für Vergleich
   let contactlist = document.getElementById("contact-list");
-  contactlist.innerHTML = '';
-  let current = arrayOfContacts.map((contact, index) => ({ ...contact, index })).filter(contact => 
-    contact.name.toLowerCase().startsWith(search)
-  );
+  contactlist.innerHTML = "";
+  let current = arrayOfContacts.map((contact, index) => ({ ...contact, index })).filter((contact) => contact.name.toLowerCase().startsWith(search));
   for (let i = 0; i < current.length; i++) {
     let index = current[i].index;
-    let currentContact = arrayOfContacts[index]
-    renderContactTemplate(contactlist, currentContact, index)
+    let currentContact = arrayOfContacts[index];
+    renderContactTemplate(contactlist, currentContact, index);
   }
-}   
-  
+}
+
 function openContactList() {
   let contactlist = document.getElementById("contact-list");
   let contactWrapper = document.getElementById("contact-wrapper");
@@ -93,7 +92,7 @@ function closeContactList(contactlist) {
   document.getElementById("contact-input-field").innerHTML = /*html*/ `
         <img class="icon-drop-down" src="assets/icons/addTask/arrow_drop_downaa (1).svg" alt="">
     `;
-  document.getElementById('contact-input').value = '';
+  document.getElementById("contact-input").value = "";
   document.getElementById("assigned").classList.remove("display_none");
   pushContactsToSelectField();
 }
@@ -349,3 +348,5 @@ function borderFocus() {
     }
   });
 }
+
+console.log(refSubtaskInputField);
