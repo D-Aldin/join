@@ -936,6 +936,11 @@ input[type="date"] {
     width: 100%;
   }
 
+  .space_for_subtask {
+    height: auto;
+    padding-bottom: 50px;
+  }
+
   /* * {
     outline: 1px solid red;
     box-sizing: border-box;
