@@ -5,6 +5,7 @@ arrayOfContacts = [];
 selectedContacts = [];
 let assignedContacts = [];
 let selectetCategory = "";
+let categoryFirstOpen = true;
 requiredTitle = false;
 requiredDate = false;
 requiredCategory = false;
@@ -173,38 +174,63 @@ function resetPrioButton() {
 }
 
 function openCatecoryList() {
-  let categorytlist = document.getElementById("catecory-list");
-  let categoryWrapper = document.getElementById("catecory-wrapper");
-  inputfield = document.getElementById("catecory-input-field");
-  inputfield.readonly = true;
-  document.getElementById("catecory-input-border").classList.add("subtask-inputfield-focus");
-  document.getElementById("catecory-input-field").innerHTML = /*html*/ `
-        <img class="icon-drop-down" src="assets/icons/addTask/arrow_drop_downaa.svg" alt="">
-    `;
-  categorytlist.classList.remove("display_none");
-  document.addEventListener("click", function outsideClick(event) {
-    if (!categoryWrapper.contains(event.target)) {
-      closeCatecoryList(categorytlist);
-      document.removeEventListener("click", outsideClick);
-    }
-  });
+  let categoryList = document.getElementById("catecory-list");
+  let inputBorder = document.getElementById("catecory-input-border");
+  let inputField = document.getElementById("catecory-input-field");
+  if (categoryList.classList.contains("visible")) {
+    closeCatecoryList();
+    return;
+  }
+  inputBorder.classList.add("subtask-inputfield-focus");
+  inputField.innerHTML = /*html*/ `
+    <img class="icon-drop-down" src="assets/icons/addTask/arrow_drop_downaa.svg" alt="">
+  `;
+  categoryList.classList.remove("display_none");
+  if (categoryFirstOpen) {
+    void categoryList.offsetWidth;
+    categoryFirstOpen = false;
+  }
+  setTimeout(() => {
+    categoryList.classList.add("visible");
+  }, 10);
+  setTimeout(() => {
+    document.addEventListener("click", handleOutsideClick);
+  }, 10);
 }
 
-function closeCatecoryList(categorytlist) {
-  categorytlist.classList.add("display_none");
-  document.getElementById("catecory-input-border").classList.remove("subtask-inputfield-focus");
-  document.getElementById("catecory-input-field").innerHTML = /*html*/ `
-        <img class="icon-drop-down" src="assets/icons/addTask/arrow_drop_downaa (1).svg" alt="">
-    `;
+function handleOutsideClick(event) {
+  let categoryList = document.getElementById("catecory-list");
+  let inputBorder = document.getElementById("catecory-input-border");
+  if (!categoryList.contains(event.target) && !inputBorder.contains(event.target)) {
+    closeCatecoryList();
+    document.removeEventListener("click", handleOutsideClick);
+  }
 }
 
-function addCatecory(x) {
-  let input = document.getElementById("catecory-input");
-  let category = document.getElementById("catecory" + x).innerHTML;
-  let categorytlist = document.getElementById("catecory-list");
-  input.value = category;
-  selectetCategory = input.value;
-  closeCatecoryList(categorytlist);
+function closeCatecoryList() {
+  let categoryList = document.getElementById("catecory-list");
+  let inputBorder = document.getElementById("catecory-input-border");
+  let inputField = document.getElementById("catecory-input-field");
+  inputBorder.classList.remove("subtask-inputfield-focus");
+  inputField.innerHTML = /*html*/ `
+    <img class="icon-drop-down" src="assets/icons/addTask/arrow_drop_downaa (1).svg" alt="">
+  `;
+  categoryList.classList.remove("visible");
+  setTimeout(() => {
+    categoryList.classList.add("display_none");
+  }, 225);
+  document.removeEventListener("click", handleOutsideClick);
+}
+
+function addCatecory(categoryNum) {
+  let categoryInput = document.getElementById("catecory-input");
+  if (categoryNum === 1) {
+    categoryInput.value = "Technical Task";
+  } else if (categoryNum === 2) {
+    categoryInput.value = "User Story";
+  }
+  closeCatecoryList();
+  document.getElementById("required-category").classList.add("display_none");
 }
 
 function invisibleCategoryPlaceholder() {
