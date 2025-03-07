@@ -8,7 +8,6 @@ let selectetCategory = "";
 requiredTitle = false;
 requiredDate = false;
 requiredCategory = false;
-const refSubtaskInputField = document.querySelector("#subtask");
 
 function render() {
   renderContacts("contacts");
@@ -348,5 +347,3 @@ function borderFocus() {
     }
   });
 }
-
-console.log(refSubtaskInputField);

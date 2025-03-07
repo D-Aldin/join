@@ -226,6 +226,16 @@ input::placeholder {
   cursor: grabbing;
 }
 
+.highlight_box {
+  width: 332px;
+  height: 15rem;
+  background-color: rgb(246, 247, 248);
+  border: 1px dashed rgb(139, 139, 139);
+  margin: 5px 0 5px 0;
+  border-radius: 18px;
+  pointer-events: none;
+}
+
 @media only screen and (max-width: 1600px) {
   .board_column {
     width: 14.5rem;

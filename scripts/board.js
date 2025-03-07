@@ -4,23 +4,46 @@ const progress = document.querySelector("#progress");
 const feedback = document.querySelector("#feedback");
 const done = document.querySelector("#done");
 const refProfile = document.getElementsByClassName("profile");
+let dropZones = document.querySelectorAll("section");
 let cardID;
 let assigContacts = [];
 let windowWidth;
+let startPosition;
 
 function draggedElementID(event) {
+  highlightDropPoint(event);
   event.target.addEventListener("dragstart", () => {
     event.target.classList.add("rotate");
   });
   event.target.addEventListener("dragend", () => {
     event.target.classList.remove("rotate");
+    document.querySelector(".highlight_box").remove();
   });
   event.dataTransfer.setData("text", event.target.id);
   cardID = event.target.id;
 }
 
+function highlightDropPoint(dragevent) {
+  dropZones.forEach((zone) => {
+    zone.addEventListener("dragenter", function () {
+      if (!zone.contains(dragevent.target) && !zone.contains(document.querySelector(".highlight_box"))) {
+        let box = document.createElement("div");
+        box.classList.add("highlight_box");
+        box.setAttribute("dragover", "allowDrop(event)");
+        zone.lastElementChild.appendChild(box);
+      }
+    });
+
+    zone.addEventListener("dragleave", function () {
+      let refBox = document.querySelector(".highlight_box");
+      refBox.remove();
+    });
+  });
+}
+
 function dropPoint(event) {
   event.preventDefault();
+
   if (event.target.id == "toDo" || event.target.id == "progress" || event.target.id == "feedback" || event.target.id == "done") {
     let data = event.dataTransfer.getData("text");
     event.target.appendChild(document.getElementById(data));

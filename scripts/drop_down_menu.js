@@ -1,6 +1,9 @@
+const contentMenu = document.querySelector(".contentSectionAddTask");
+const addTaskWindow = document.querySelector("#add_task_box");
+const contentWindow = document.querySelector("#box");
+
 function openMenu() {
   const contentMenu = document.querySelector(".content");
-  const contentWindow = document.querySelector("#box");
   if (contentMenu.style.display === "inline") {
     contentMenu.style.display = "none";
     document.querySelector("#arrow").src = "./assets/icons/board/arrow_drop_down.svg";
@@ -17,8 +20,6 @@ function openMenu() {
 }
 
 function openMenuSectionAddTask() {
-  const contentMenu = document.querySelector(".contentSectionAddTask");
-  const addTaskWindow = document.querySelector("#add_task_box");
   if (contentMenu.style.display === "inline") {
     contentMenu.style.display = "none";
     document.querySelector("#arrow").src = "./assets/icons/board/arrow_drop_down.svg";
