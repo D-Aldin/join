@@ -17,7 +17,8 @@ function draggedElementID(event) {
   });
   event.target.addEventListener("dragend", () => {
     event.target.classList.remove("rotate");
-    document.querySelector(".highlight_box").remove();
+    let highlightBox = document.querySelector(".highlight_box");
+    if (highlightBox) highlightBox.remove();
   });
   event.dataTransfer.setData("text", event.target.id);
   cardID = event.target.id;
@@ -35,7 +36,7 @@ function highlightDropPoint(dragevent) {
     });
     zone.addEventListener("dragleave", function () {
       let refBox = document.querySelector(".highlight_box");
-      refBox.remove();
+      if (refBox) refBox.remove();
     });
   });
 }

@@ -18,26 +18,23 @@ function searchFunk() {
     listOfTasks.forEach((element) => {
       let isVisible = element.title.toLowerCase().includes(userInput);
       element.card.classList.toggle("hide", !isVisible);
+      noTaskFound();
     });
   });
-}
-
-function NoTaskFound() {
-  const noTask = document.querySelector(".no_found");
-  noTask.classList.remove("d_none");
-  noTask.style.animation = "slideInFromRight 125ms ease forwards";
-}
-
-function hideTaskAddedAnimation() {
-  setTimeout(() => {
-    document.querySelector(".no_found").style.animation = "slideOutToRight 125ms ease forwards";
-    setTimeout(() => {
-      hideOverlay();
-    }, 125);
-  }, 1000);
 }
 
 document.addEventListener("DOMContentLoaded", function () {
   setTimeout(collectTasks, 500);
   searchFunk();
 });
+
+function noTaskFound() {
+  const cards = document.querySelectorAll("article");
+  cards.forEach((element) => {
+    // console.log(element);
+
+    if (!element.hasAttribute("hide")) {
+      console.log("no");
+    }
+  });
+}
