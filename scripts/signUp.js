@@ -99,6 +99,10 @@ function validateSingleField(key, value) {
   };
   const inputElement = document.getElementById(inputIds[key]);
   const errorElement = document.getElementById(`signUp_${key}_error`);
+  visibilityOfInputFields(key, value, inputElement, errorElement, errors);
+}
+
+function visibilityOfInputFields(key, value, inputElement, errorElement, errors) {
   if (!value) {
     errorElement.innerText = errors[key];
     inputElement.style.borderColor = "red";
@@ -236,23 +240,27 @@ refBackButton.addEventListener("click", goBack);
 pswConfirm.addEventListener("input", passwordMatch);
 
 function showOverlay() {
-  let overlay = document.getElementById("overlay");
-  let message = document.querySelector(".overlay_msg");
+  const overlay = document.getElementById("overlay");
+  const message = document.querySelector(".overlay_msg");
   overlay.style.display = "block";
   overlay.style.opacity = "0";
   message.style.opacity = "1";
-  void overlay.offsetWidth;
-  void message.offsetWidth;
-  overlay.style.animation = "fadeIn 125ms ease-in-out forwards";
-  message.style.animation = "slideInFromRight 125ms ease-in-out forwards";
+  requestAnimationFrame(() => {
+    overlay.style.animation = "fadeIn 125ms ease-in-out forwards";
+    message.style.animation = "slideInFromRight 125ms ease-in-out forwards";
+    setTimeout(() => hideOverlay(), 1000);
+  });
+}
+
+function hideOverlay() {
+  const overlay = document.getElementById("overlay");
+  const message = document.querySelector(".overlay_msg");
+  overlay.style.animation = "fadeOut 125ms ease-in-out forwards";
+  message.style.animation = "slideOutToRight 125ms ease-in-out forwards";
   setTimeout(() => {
-    overlay.style.animation = "fadeOut 125ms ease-in-out forwards";
-    message.style.animation = "slideOutToRight 125ms ease-in-out forwards";
-    setTimeout(() => {
-      overlay.style.display = "none";
-      window.location.href = "login.html";
-    }, 125);
-  }, 1000);
+    overlay.style.display = "none";
+    window.location.href = "index.html";
+  }, 125);
 }
 
 signUpPasswordInput.addEventListener("input", () => {
