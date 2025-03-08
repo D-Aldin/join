@@ -42,10 +42,6 @@ textarea {
   display: flex;
 }
 
-.special-view {
-  display: none;
-}
-
 .task-wrapper {
   display: inline-block;
   margin: 110px 0px 0px 96px;
@@ -684,9 +680,6 @@ input[type="date"] {
     padding: 10px 0 0 10px;
   }
 
-  .subtask-inputfield-text {
-    font-size: 14px;
-  }
 
   .subtask-inputfield-button img {
     width: 18px;
@@ -780,6 +773,18 @@ input[type="date"] {
   .subtask-list {
     max-width: 390px;
   }
+
+  .catecory-wrapper {
+    max-width: 390px;
+  }
+
+  .subtask-wrapper {
+    max-width: 390px;
+  }
+
+  .contact-wrapper {
+    max-width: 390px;
+  }
   
   li {
     inline-size: 270px;
@@ -819,6 +824,10 @@ input[type="date"] {
     height: 35px;
   }
 
+  .subtask-inputfield-text {
+    font-size: 16px;
+  }
+
   .inputfield::placeholder {
     font-size: 16px;
   }
@@ -835,41 +844,57 @@ input[type="date"] {
     width: 285px !important;
   }
 
+  .contactlist-clicket {
+    font-size: 16px;
+  }
+
+  input[type="date"] {
+    font-size: 16px;
+    padding: 8px;
+    color: rgb(209, 209, 209);
+  }
+
   .subtask-inputfield {
     width: 285px;
   }
 
   .button-container {
     width: 285px !important;
+    gap: 4px;
   }
 
   .urgentbutton {
-    font-size: 14px;
+    font-size: 16px;
     height: 42px !important;
+  }
+
+  .urgent-img {
+    max-height: 16px;
+    max-width: 16px;
+  }
+
+  .prio_icon {
+    max-height: 16px !important;
   }
 
   .urgentbutton img {
     width: 16px;
   }
 
-  .button-container {
-    gap: 12px;
-  }
-
   .great-button {
-    font-size: 14px;
+    font-size: 16px;
     height: 42px !important;
   }
 
   .backgroundcolorurgent,
   .backgroundcolormedium,
   .backgroundcolorlow {
-    font-size: 14px;
+    font-size: 16px;
     height: 42px !important;
   }
 
   .clear-button {
-    font-size: 14px !important;
+    font-size: 16px !important;
     height: 42px !important;
   }
 
@@ -907,7 +932,7 @@ input[type="date"] {
   }
 }
 
-@media only screen and (max-width: 690px) {
+@media (min-width: 300px) and (max-width: 690px /*900px*/) {
   .task-wrapper { 
     flex-direction: column;
     align-items: center;
@@ -944,11 +969,7 @@ input[type="date"] {
   .inputfield-title-container {
     height: max-content;
     padding-bottom: 0px !important;
-  }
-}
-
-@media (min-width: 300px) and (max-width: 690px /*900px*/) {
-  .task {
+  }.task {
     flex-direction: column;
   }
 
@@ -995,8 +1016,12 @@ input[type="date"] {
     height: 35px;
   }
 
+  .subtask-edit-inputfield {
+    font-size: 16px;
+  }
+
   input[type="date"] {
-    font-size: 14px;
+    font-size: 16px;
     padding: 8px;
     color: rgb(209, 209, 209);
   }
@@ -1004,10 +1029,11 @@ input[type="date"] {
   .button-container {
     width: 285px !important;
     height: 35px;
+    justify-content: space-between;
   }
 
   .urgentbutton {
-    font-size: 14px;
+    font-size: 16px;
     height: 42px !important;
   }
 
@@ -1015,44 +1041,33 @@ input[type="date"] {
     width: 16px;
   }
 
-  .button-container {
-    gap: 12px;
-  }
-
   .great-button {
-    font-size: 14px;
+    font-size: 16px;
     height: 42px !important;
+    width: 150px;
   }
 
   .clear-button {
-    font-size: 14px !important;
+    font-size: 16px !important;
     height: 42px !important;
   }
 
   .backgroundcolorurgent,
   .backgroundcolormedium,
   .backgroundcolorlow {
-    font-size: 14px;
+    font-size: 16px;
     height: 42px !important;
   }
 
-  .flex-container {
-    gap: 0px;
-
-  }
-
-  /*.scroll {
+  .scroll {
     overflow-y: scroll;
   }
 
   .scroll::-webkit-scrollbar {
     display: none;
   }
-*/
+
   .button-container-clear-creat {
-   /* position: absolute;
-    bottom: 90px;
-    width: 100%;*/
     box-sizing: border-box;
     padding: 8px 20px 10px 0;
     display: flex;
@@ -1061,18 +1076,6 @@ input[type="date"] {
 
   .button-container-clear-creat:hover {
     background-color: none;
-  }
-
-  .great-button {
-    width: 130px;
-    height: 50px;
-    font-size: 14px;
-  }
-
-  .clear-button {
-    width: 100px;
-    height: 50px;
-    font-size: 18px;
   }
 
   .subtask-wrapper {
@@ -1126,9 +1129,6 @@ input[type="date"] {
     justify-content: center;
   }
 
-  .special-view {
-    display: flex;
-  }
 }
 /*
 @media only screen and (min-width: 800px) {
@@ -1146,12 +1146,8 @@ input[type="date"] {
   }
 }
 */
-@media only screen and (max-width: 630px) {
+@media only screen and (max-width: 400px) {
   .task-wrapper {
-    margin-left: 6vw;
+    margin-left: 2vw;
   }
-  /*
-  .footer-container {
-    display: none;
-  }*/
 }

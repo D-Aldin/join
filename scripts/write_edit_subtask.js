@@ -50,6 +50,9 @@ function setSubtask() {
 function renderSubtasks() {
   let tasks = document.querySelector("#tasks-wrapper");
   tasks.innerHTML = "";
+  if (subtasksTemplate.length == []) {
+    
+  }
   for (const key in subtasksList) {
     if (Object.prototype.hasOwnProperty.call(subtasksList, key)) {
       const element = subtasksList[key];
