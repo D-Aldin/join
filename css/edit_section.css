@@ -122,6 +122,7 @@ select {
 .subtask_edit_buttons {
   display: none;
   margin-right: 10px;
+  white-space: nowrap;
 }
 
 .pen,

@@ -16,6 +16,7 @@ input.addEventListener("keypress", function (event) {
   }
 });
 
+// TODO reduce lines
 async function addContactToDataBase() {
   let name = document.getElementById("add_name").value;
   let email = document.getElementById("add_email").value;
@@ -40,6 +41,7 @@ async function addContactToDataBase() {
   }
 }
 
+// TODO reduce lines
 function validateContactInputs(name, email, phone) {
   const inputs = { name, email, phone };
   const inputIds = { name: "add_name", email: "add_email", phone: "add_phone" };
@@ -82,6 +84,7 @@ function clearErrorMessages() {
   document.getElementById("add_phone").style.borderColor = "";
 }
 
+// TODO reduce lines
 async function getContactsFromDataBase() {
   let response = await fetch(BASE_URL + "contacts.json");
   let data = await response.json();
@@ -103,6 +106,7 @@ async function getContactsFromDataBase() {
   }
 }
 
+// TODO reduce lines
 async function updateContactInDataBase(id) {
   let name = document.getElementById("edit_name").value;
   let email = document.getElementById("edit_email").value;
@@ -163,6 +167,7 @@ async function removeContactFromAllTasks(contactId) {
   }
 }
 
+// TODO reduce lines
 function renderContacts() {
   let contactList = document.getElementById("contact_list");
   contactList.innerHTML = "";
