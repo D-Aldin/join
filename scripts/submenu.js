@@ -29,21 +29,29 @@ function openEditOverlay() {
 }
 
 window.addEventListener("click", function (event) {
-  if (event.target != submenuRef && event.target != accountImg && !submenuRef.contains(event.target)) {
-    submenuRef.style.animation = "slideOutToRight 125ms forwards";
-    setTimeout(() => {
-      submenuRef.classList.add("d_none");
-      submenuRef.classList.remove("submenu_position");
-      accountImg.classList.remove("active");
-    }, 125);
-  }
   let submenuEditRef = document.getElementById("submenu_edit_position");
   const clickedEditButton = event.target.closest(".responsive_edit_contact");
+  if (event.target != submenuRef && event.target != accountImg && !submenuRef.contains(event.target)) {
+    closeMainSubmenu();
+  }
   if (submenuEditRef && event.target != submenuEditRef && !submenuEditRef.contains(event.target) && !clickedEditButton) {
-    submenuEditRef.style.animation = "slideOutToRight 125ms forwards";
-    setTimeout(() => {
-      submenuEditRef.classList.add("d_none");
-      submenuEditRef.classList.remove("submenu_edit_position");
-    }, 125);
+    closeEditSubmenu(submenuEditRef);
   }
 });
+
+function closeMainSubmenu() {
+  submenuRef.style.animation = "slideOutToRight 125ms forwards";
+  setTimeout(() => {
+    submenuRef.classList.add("d_none");
+    submenuRef.classList.remove("submenu_position");
+    accountImg.classList.remove("active");
+  }, 125);
+}
+
+function closeEditSubmenu(submenuEditRef) {
+  submenuEditRef.style.animation = "slideOutToRight 125ms forwards";
+  setTimeout(() => {
+    submenuEditRef.classList.add("d_none");
+    submenuEditRef.classList.remove("submenu_edit_position");
+  }, 125);
+}
