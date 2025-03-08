@@ -1,4 +1,5 @@
-BASE_URL = "https://dv-join-bbc2e-default-rtdb.europe-west1.firebasedatabase.app/";
+BASE_URL =
+  "https://dv-join-bbc2e-default-rtdb.europe-west1.firebasedatabase.app/";
 const toDo = document.querySelector("#toDo");
 const progress = document.querySelector("#progress");
 const feedback = document.querySelector("#feedback");
@@ -26,14 +27,16 @@ function draggedElementID(event) {
 function highlightDropPoint(dragevent) {
   dropZones.forEach((zone) => {
     zone.addEventListener("dragenter", function () {
-      if (!zone.contains(dragevent.target) && !zone.contains(document.querySelector(".highlight_box"))) {
+      if (
+        !zone.contains(dragevent.target) &&
+        !zone.contains(document.querySelector(".highlight_box"))
+      ) {
         let box = document.createElement("div");
         box.classList.add("highlight_box");
         box.setAttribute("dragover", "allowDrop(event)");
         zone.lastElementChild.appendChild(box);
       }
     });
-
     zone.addEventListener("dragleave", function () {
       let refBox = document.querySelector(".highlight_box");
       refBox.remove();
@@ -44,7 +47,12 @@ function highlightDropPoint(dragevent) {
 function dropPoint(event) {
   event.preventDefault();
 
-  if (event.target.id == "toDo" || event.target.id == "progress" || event.target.id == "feedback" || event.target.id == "done") {
+  if (
+    event.target.id == "toDo" ||
+    event.target.id == "progress" ||
+    event.target.id == "feedback" ||
+    event.target.id == "done"
+  ) {
     let data = event.dataTransfer.getData("text");
     event.target.appendChild(document.getElementById(data));
     let newStatus = event.target.id;
@@ -97,11 +105,20 @@ async function displayCardOnBoard() {
     const element = taskFromFireBase[key];
     if (!element || element.user !== localStorage.userId) continue;
 
-    const subtasksCompleted = element.subtask ? Object.values(element.subtask).filter((sub) => sub.state === true).length : 0;
-    const totalSubtasks = element.subtask ? Object.keys(element.subtask).length : 0;
+    const subtasksCompleted = element.subtask
+      ? Object.values(element.subtask).filter((sub) => sub.state === true)
+          .length
+      : 0;
+    const totalSubtasks = element.subtask
+      ? Object.keys(element.subtask).length
+      : 0;
 
     renderTaskCard(element, subtasksCompleted, totalSubtasks);
-    calPercentageOfCompletedSubtasks(totalSubtasks, subtasksCompleted, element.id);
+    calPercentageOfCompletedSubtasks(
+      totalSubtasks,
+      subtasksCompleted,
+      element.id
+    );
     addProfilesToCard(key, element.assigned);
   }
   noTaskToDo();
@@ -116,7 +133,15 @@ function renderTaskCard(element, subtasksCompleted, totalSubtasks) {
     done: done,
   };
   if (columnMap[element.status]) {
-    columnMap[element.status].innerHTML += renderCard(element.id, element.category, element.title, element.description, subtasksCompleted, totalSubtasks, element.prio);
+    columnMap[element.status].innerHTML += renderCard(
+      element.id,
+      element.category,
+      element.title,
+      element.description,
+      subtasksCompleted,
+      totalSubtasks,
+      element.prio
+    );
   }
 }
 
@@ -127,7 +152,13 @@ function addProfilesToCard(id, obj) {
     if (Object.prototype.hasOwnProperty.call(obj, key)) {
       let name = initials(obj[key].name);
       let color = obj[key].color;
-      document.getElementById(id).lastElementChild.firstElementChild.innerHTML += contactTamplate(name, color, transX);
+      document.getElementById(
+        id
+      ).lastElementChild.firstElementChild.innerHTML += contactTamplate(
+        name,
+        color,
+        transX
+      );
       transX += 30;
     }
   }
@@ -152,10 +183,24 @@ function noTaskToDo() {
   let noTaskAwaitFeedback = document.getElementById("placeholderFeedback");
   let noTaskDone = document.getElementById("placeholderDone");
   setTimeout(() => {
-    toDo.lastElementChild == null ? (noTaskToDo.classList.add("no_task"), (noTaskToDo.innerHTML = "No Tasks To Do")) : (noTaskToDo.classList.remove("no_task"), (noTaskToDo.innerHTML = ""));
-    progress.lastElementChild == null ? (noTaskInProgress.classList.add("no_task"), (noTaskInProgress.innerHTML = "No Tasks In Progress")) : (noTaskInProgress.classList.remove("no_task"), (noTaskInProgress.innerHTML = ""));
-    feedback.lastElementChild == null ? (noTaskAwaitFeedback.classList.add("no_task"), (noTaskAwaitFeedback.innerHTML = "No Tasks Await feedback")) : (noTaskAwaitFeedback.classList.remove("no_task"), (noTaskAwaitFeedback.innerHTML = ""));
-    done.lastElementChild == null ? (noTaskDone.classList.add("no_task"), (noTaskDone.innerHTML = "No Tasks Done")) : (noTaskDone.classList.remove("no_task"), (noTaskDone.innerHTML = ""));
+    toDo.lastElementChild == null
+      ? (noTaskToDo.classList.add("no_task"),
+        (noTaskToDo.innerHTML = "No Tasks To Do"))
+      : (noTaskToDo.classList.remove("no_task"), (noTaskToDo.innerHTML = ""));
+    progress.lastElementChild == null
+      ? (noTaskInProgress.classList.add("no_task"),
+        (noTaskInProgress.innerHTML = "No Tasks In Progress"))
+      : (noTaskInProgress.classList.remove("no_task"),
+        (noTaskInProgress.innerHTML = ""));
+    feedback.lastElementChild == null
+      ? (noTaskAwaitFeedback.classList.add("no_task"),
+        (noTaskAwaitFeedback.innerHTML = "No Tasks Await feedback"))
+      : (noTaskAwaitFeedback.classList.remove("no_task"),
+        (noTaskAwaitFeedback.innerHTML = ""));
+    done.lastElementChild == null
+      ? (noTaskDone.classList.add("no_task"),
+        (noTaskDone.innerHTML = "No Tasks Done"))
+      : (noTaskDone.classList.remove("no_task"), (noTaskDone.innerHTML = ""));
   }, 125);
   window.addEventListener("resize", ifNoTaskResizeContainer);
 }
@@ -176,7 +221,11 @@ async function countCompletedSubtasks(subtask) {
   return countTrue;
 }
 
-function calPercentageOfCompletedSubtasks(numberOfSubtasks, completedSubtasks, id) {
+function calPercentageOfCompletedSubtasks(
+  numberOfSubtasks,
+  completedSubtasks,
+  id
+) {
   const result = (completedSubtasks / numberOfSubtasks) * 100;
   document.getElementById("progress_bar" + id).style.width = `${result}%`;
 }
@@ -202,13 +251,15 @@ async function initialize() {
 }
 
 function ifNoTaskResizeContainer() {
-  document.querySelectorAll("#toDo, #progress, #feedback, #done").forEach((section) => {
-    if (section.children.length > 0 && window.innerWidth < 1200) {
-      section.style.height = "300px";
-    } else {
-      section.style.height = "80px";
-    }
-  });
+  document
+    .querySelectorAll("#toDo, #progress, #feedback, #done")
+    .forEach((section) => {
+      if (section.children.length > 0 && window.innerWidth < 1200) {
+        section.style.height = "300px";
+      } else {
+        section.style.height = "80px";
+      }
+    });
 }
 
 function setColorOfCategory() {

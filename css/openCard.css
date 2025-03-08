@@ -258,6 +258,7 @@ input[type="checkbox"]:checked {
 
 @media only screen and (max-width: 1200px) {
   .open_card_title {
+    display: flex;
     font-size: 41px;
     margin-bottom: 20px;
     width: 257px;
@@ -291,6 +292,7 @@ input[type="checkbox"]:checked {
 
 @media only screen and (min-width: 800px) {
   .open_card_title {
+    display: flex;
     font-size: 61px;
     margin-bottom: 30px;
     width: 380px;
