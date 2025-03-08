@@ -37,7 +37,6 @@ window.addEventListener("click", function (event) {
       accountImg.classList.remove("active");
     }, 125);
   }
-
   let submenuEditRef = document.getElementById("submenu_edit_position");
   const clickedEditButton = event.target.closest(".responsive_edit_contact");
   if (submenuEditRef && event.target != submenuEditRef && !submenuEditRef.contains(event.target) && !clickedEditButton) {
