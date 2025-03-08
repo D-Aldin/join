@@ -137,11 +137,29 @@ async function deleteContactFromList(id) {
       method: "DELETE",
     });
     arrayOfContacts = arrayOfContacts.filter((contact) => contact.id !== id);
+    await removeContactFromAllTasks(id);
     renderContacts();
     closeOverlayEditContact();
     closeOverlayContactInfoAfterDelete();
   } catch (error) {
-    console.error("Fehler beim Löschen des Kontakts:", error);
+    console.error("Error by delete the contact:", error);
+  }
+}
+
+async function removeContactFromAllTasks(contactId) {
+  try {
+    const response = await fetch(BASE_URL + "tasks.json");
+    const tasks = await response.json();
+    for (const taskId in tasks) {
+      const task = tasks[taskId];
+      if (task.assigned && task.assigned[contactId]) {
+        await fetch(`${BASE_URL}/tasks/${taskId}/assigned/${contactId}.json`, {
+          method: "DELETE",
+        });
+      }
+    }
+  } catch (error) {
+    console.error("Error removing contact from tasks:", error);
   }
 }
 
