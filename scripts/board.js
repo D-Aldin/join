@@ -33,7 +33,6 @@ function highlightDropPoint(dragevent) {
         zone.lastElementChild.appendChild(box);
       }
     });
-
     zone.addEventListener("dragleave", function () {
       let refBox = document.querySelector(".highlight_box");
       refBox.remove();
@@ -43,7 +42,6 @@ function highlightDropPoint(dragevent) {
 
 function dropPoint(event) {
   event.preventDefault();
-
   if (event.target.id == "toDo" || event.target.id == "progress" || event.target.id == "feedback" || event.target.id == "done") {
     let data = event.dataTransfer.getData("text");
     event.target.appendChild(document.getElementById(data));
@@ -96,10 +94,8 @@ async function displayCardOnBoard() {
   for (const key in taskFromFireBase) {
     const element = taskFromFireBase[key];
     if (!element || element.user !== localStorage.userId) continue;
-
     const subtasksCompleted = element.subtask ? Object.values(element.subtask).filter((sub) => sub.state === true).length : 0;
     const totalSubtasks = element.subtask ? Object.keys(element.subtask).length : 0;
-
     renderTaskCard(element, subtasksCompleted, totalSubtasks);
     calPercentageOfCompletedSubtasks(totalSubtasks, subtasksCompleted, element.id);
     addProfilesToCard(key, element.assigned);

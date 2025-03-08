@@ -16,6 +16,7 @@ input.addEventListener("keypress", function (event) {
   }
 });
 
+// TODO reduce lines
 async function addContactToDataBase() {
   let name = document.getElementById("add_name").value;
   let email = document.getElementById("add_email").value;
@@ -40,6 +41,7 @@ async function addContactToDataBase() {
   }
 }
 
+// TODO reduce lines
 function validateContactInputs(name, email, phone) {
   const inputs = { name, email, phone };
   const inputIds = { name: "add_name", email: "add_email", phone: "add_phone" };
@@ -82,6 +84,7 @@ function clearErrorMessages() {
   document.getElementById("add_phone").style.borderColor = "";
 }
 
+// TODO reduce lines
 async function getContactsFromDataBase() {
   let response = await fetch(BASE_URL + "contacts.json");
   let data = await response.json();
@@ -103,6 +106,7 @@ async function getContactsFromDataBase() {
   }
 }
 
+// TODO reduce lines
 async function updateContactInDataBase(id) {
   let name = document.getElementById("edit_name").value;
   let email = document.getElementById("edit_email").value;
@@ -137,14 +141,33 @@ async function deleteContactFromList(id) {
       method: "DELETE",
     });
     arrayOfContacts = arrayOfContacts.filter((contact) => contact.id !== id);
+    await removeContactFromAllTasks(id);
     renderContacts();
     closeOverlayEditContact();
     closeOverlayContactInfoAfterDelete();
   } catch (error) {
-    console.error("Fehler beim Löschen des Kontakts:", error);
+    console.error("Error by delete the contact:", error);
   }
 }
 
+async function removeContactFromAllTasks(contactId) {
+  try {
+    const response = await fetch(BASE_URL + "tasks.json");
+    const tasks = await response.json();
+    for (const taskId in tasks) {
+      const task = tasks[taskId];
+      if (task.assigned && task.assigned[contactId]) {
+        await fetch(`${BASE_URL}/tasks/${taskId}/assigned/${contactId}.json`, {
+          method: "DELETE",
+        });
+      }
+    }
+  } catch (error) {
+    console.error("Error removing contact from tasks:", error);
+  }
+}
+
+// TODO reduce lines
 function renderContacts() {
   let contactList = document.getElementById("contact_list");
   contactList.innerHTML = "";

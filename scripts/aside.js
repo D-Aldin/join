@@ -32,7 +32,9 @@ function updateActiveLinks(links, currentPath) {
 }
 
 function addContainerClickListeners() {
-  const containers = document.querySelectorAll(".link_nav_summary, .link_nav_add_task, .link_nav_board, .link_nav_contacts");
+  const containers = document.querySelectorAll(
+    ".link_nav_summary, .link_nav_add_task, .link_nav_board, .link_nav_contacts"
+  );
   for (let i = 0; i < containers.length; i++) {
     containers[i].addEventListener("click", function () {
       const link = this.querySelector("a");
@@ -44,7 +46,9 @@ function addContainerClickListeners() {
 }
 
 function addLegalAndPolicyClickListeners() {
-  const containers = document.querySelectorAll(".privacy_policy_login, .legal_notice_login");
+  const containers = document.querySelectorAll(
+    ".privacy_policy_login, .legal_notice_login"
+  );
   containers.forEach((container) => {
     container.addEventListener("click", function () {
       const link = container.querySelector("a");

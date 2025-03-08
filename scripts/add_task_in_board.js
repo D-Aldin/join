@@ -14,7 +14,6 @@ function showOverlay(event) {
   void overlay.offsetWidth;
   overlay.style.backgroundColor = "rgba(0, 0, 0, 0.3)";
   taskBox.style.animation = "slideInFromRight 125ms ease forwards";
-  // setEventListenerForSubtask();
 }
 
 function hideOverlay() {
@@ -272,28 +271,37 @@ function mimicPlaceHolder() {
 }
 
 async function createTask() {
+  if (!validateInputs()) return;
+  showTaskAddedAnimation();
+  let card = await collectDataForNewTask();
+  addDataToFireBase("tasks", card);
+  hideTaskAddedAnimation();
+}
+
+function validateInputs() {
   requiredFieldTitle();
   requiredFieldDate();
   requiredFieldCategory();
-  const inputFiledTitle = document.querySelector("#title");
-  const inputFiledDate = document.getElementById("date");
-  const inputFiledCategory = document.querySelector("#category");
-  if (inputFiledTitle.value.length === 0 || !inputFiledDate.value || inputFiledDate.value === 0 || inputFiledCategory.value === "placeholder") {
-    return 0;
-  } else {
-    const taskAdded = document.querySelector(".task_added");
-    taskAdded.classList.remove("d_none");
-    taskAdded.style.animation = "slideInFromRight 125ms ease forwards";
-    let card = await collectDataForNewTask();
-    addDataToFireBase("tasks", card);
+  const title = document.querySelector("#title").value;
+  const date = document.getElementById("date").value;
+  const category = document.querySelector("#category").value;
+  return title.length && date && date !== 0 && category !== "placeholder";
+}
+
+function showTaskAddedAnimation() {
+  const taskAdded = document.querySelector(".task_added");
+  taskAdded.classList.remove("d_none");
+  taskAdded.style.animation = "slideInFromRight 125ms ease forwards";
+}
+
+function hideTaskAddedAnimation() {
+  setTimeout(() => {
+    document.querySelector(".task_added").style.animation = "slideOutToRight 125ms ease forwards";
     setTimeout(() => {
-      taskAdded.style.animation = "slideOutToRight 125ms ease forwards";
-      setTimeout(() => {
-        hideOverlay();
-        window.location = "board.html";
-      }, 125);
-    }, 1000);
-  }
+      hideOverlay();
+      window.location = "board.html";
+    }, 125);
+  }, 1000);
 }
 
 document.querySelector("#addToDo").addEventListener("click", function () {

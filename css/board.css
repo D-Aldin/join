@@ -253,6 +253,10 @@ input::placeholder {
     width: 206px;
   }
 
+  .highlight_box {
+    width: 230px;
+  }
+
   #box {
     left: 57%;
   }
@@ -287,6 +291,10 @@ input::placeholder {
   .card {
     width: 172px;
     margin: 5px 5px 0 5px;
+  }
+
+  .highlight_box {
+    width: 190px;
   }
 
   .nav_position a {
@@ -431,6 +439,10 @@ input::placeholder {
 
   .card {
     min-width: 197px !important;
+  }
+
+  .highlight_box {
+    width: 210px;
   }
 
   .grabbing {

@@ -45,7 +45,6 @@ function setSubtask() {
   subtasksList[newSubtaskKey] = newSubtask;
   renderSubtasks();
   clearsubtask();
-  // console.log(subtasks);
 }
 
 function renderSubtasks() {
