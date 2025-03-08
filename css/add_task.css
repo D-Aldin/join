@@ -422,10 +422,11 @@ li {
 
 .subtask-list-button-container {
   display: none;
+  background-color: none;
 }
 
 .subtask-list-button {
-  background-color: white;
+  background-color: none;
   border: none;
   display: flex;
   align-items: center;
@@ -665,6 +666,11 @@ input[type="date"] {
   background: #fff url(../assets/icons/addTask/typeDate.svg) 97% 50% no-repeat;
 }
 
+.column {
+  display: flex;
+  flex-direction: column;
+} 
+
 @media only screen and (max-width: 1200px) {
   .task-wrapper {
     margin: 32px 0px 0px 24px;
@@ -790,20 +796,14 @@ input[type="date"] {
   }
 }
 
-<<<<<<< HEAD
 @media only screen and (max-width: 900px) {
   .task {
     width: 100%;
     justify-content: space-around;
-=======
-@media (min-width: 300px) and (max-width: 900px) {
-  .task {
-    flex-direction: column;
   }
 
-  .flex-container {
-    flex-direction: column;
->>>>>>> c2f43b5ea7656a92361640d1cff7872ca5556b96
+  .tasktitles {
+    font-size: 16px;
   }
   
   .flex-container {
@@ -815,19 +815,62 @@ input[type="date"] {
   }
 
   .inputfield {
-    width: 440px !important;
+    width: 285px !important;
+    height: 35px;
+  }
+
+  .inputfield::placeholder {
+    font-size: 16px;
   }
 
   .textareafield {
-    width: 440px;
+    width: 285px;
+  }
+
+  .textareafield::placeholder {
+    font-size: 16px;
+  }
+
+  .contact-wrapper {
+    width: 285px !important;
   }
 
   .subtask-inputfield {
-    width: 440px;
+    width: 285px;
   }
 
   .button-container {
-    width: 440px !important;
+    width: 285px !important;
+  }
+
+  .urgentbutton {
+    font-size: 14px;
+    height: 42px !important;
+  }
+
+  .urgentbutton img {
+    width: 16px;
+  }
+
+  .button-container {
+    gap: 12px;
+  }
+
+  .great-button {
+    font-size: 14px;
+    height: 42px !important;
+  }
+
+  .backgroundcolorurgent,
+  .backgroundcolormedium,
+  .backgroundcolorlow {
+    font-size: 14px;
+    height: 42px !important;
+  }
+
+  .clear-button {
+    font-size: 14px !important;
+    height: 42px !important;
   }
 
   .inputfield-title-container {
@@ -837,7 +880,6 @@ input[type="date"] {
   main {
     justify-content: center;
   }
-<<<<<<< HEAD
 
   .subtask-list {
     max-width: 285px;
@@ -845,6 +887,23 @@ input[type="date"] {
   
   li {
     inline-size: 150px;
+  }
+
+  .footer-container {
+    width: 635px;
+    padding-top: 32px;
+  }
+
+  .contactlist {
+    font-size: 16px;
+  }
+
+  .catecory-wrapper {
+    width: 285px;
+  }
+
+  .contact-wrapper {
+    width: 285px;
   }
 }
 
@@ -894,11 +953,8 @@ input[type="date"] {
   }
 
   h1 {
-    font-size: 51px;
-    display: none;
+    font-size: 47px;
   }
-=======
->>>>>>> c2f43b5ea7656a92361640d1cff7872ca5556b96
 
   .title {
     margin-top: 10px;
@@ -930,6 +986,10 @@ input[type="date"] {
     width: 285px;
   }
 
+  .textareafield::placeholder {
+    font-size: 16px;
+  }
+
   .subtask-inputfield {
     width: 285px;
     height: 35px;
@@ -959,6 +1019,16 @@ input[type="date"] {
     gap: 12px;
   }
 
+  .great-button {
+    font-size: 14px;
+    height: 42px !important;
+  }
+
+  .clear-button {
+    font-size: 14px !important;
+    height: 42px !important;
+  }
+
   .backgroundcolorurgent,
   .backgroundcolormedium,
   .backgroundcolorlow {
@@ -985,9 +1055,12 @@ input[type="date"] {
     width: 100%;*/
     box-sizing: border-box;
     padding: 8px 20px 10px 0;
-    background-color: rgb(246, 247, 248);
     display: flex;
     justify-content: end;
+  }
+
+  .button-container-clear-creat:hover {
+    background-color: none;
   }
 
   .great-button {
@@ -1041,12 +1114,8 @@ input[type="date"] {
     display: flex;
   }
 
-  .subtask-list-button-container {
-    display: flex;
-  }
-
   .subtask-list-button-container img {
-    background-color: rgb(246, 247, 248);
+    background-color: none;
   }
 
   .pixelbar-subtask {
@@ -1061,7 +1130,7 @@ input[type="date"] {
     display: flex;
   }
 }
-
+/*
 @media only screen and (min-width: 800px) {
   textarea {
     width: 100%;
@@ -1076,13 +1145,13 @@ input[type="date"] {
     height: 18px;
   }
 }
-
+*/
 @media only screen and (max-width: 630px) {
   .task-wrapper {
     margin-left: 6vw;
   }
-
+  /*
   .footer-container {
     display: none;
-  }
+  }*/
 }
