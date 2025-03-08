@@ -31,7 +31,6 @@ async function addContactToDataBase() {
   }
 }
 
-<<<<<<< HEAD
 async function tryHandlingFromAddContact(uniqueKey, { name, email, phone, color }) {
   let response = await fetch(BASE_URL + `contacts/${uniqueKey}.json`, {
     method: "PUT",
@@ -46,9 +45,6 @@ async function tryHandlingFromAddContact(uniqueKey, { name, email, phone, color 
   return contactData;
 }
 
-=======
-// TODO reduce lines
->>>>>>> 7dbb1128cb5880ac104f2333e97f22c3d319e526
 function validateContactInputs(name, email, phone) {
   const inputs = { name, email, phone };
   const inputIds = { name: "add_name", email: "add_email", phone: "add_phone" };
@@ -119,7 +115,6 @@ async function getContactsFromDataBase() {
   }
 }
 
-<<<<<<< HEAD
 function getUpdatedContactData(id) {
   return {
     name: document.getElementById("edit_name").value,
@@ -145,9 +140,6 @@ function updateLocalContactAndUI(id, contactData) {
   closeOverlayContactInfoAfterDelete();
 }
 
-=======
-// TODO reduce lines
->>>>>>> 7dbb1128cb5880ac104f2333e97f22c3d319e526
 async function updateContactInDataBase(id) {
   try {
     const updatedContact = getUpdatedContactData(id);
