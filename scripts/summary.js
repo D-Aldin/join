@@ -63,17 +63,21 @@ async function countTasks() {
   const validTasks = Object.values(dataFromFireBase).filter(Boolean);
   for (const task in validTasks) {
     if (Object.prototype.hasOwnProperty.call(validTasks, task)) {
-      const user = validTasks[task].user;
-      const status = validTasks[task].status;
-      if (user === localStorage.userId) {
-        if (status === "progress") progressCount++;
-        else if (status === "feedback") feedbackCount++;
-        else if (status === "toDo") toDoCount++;
-        else if (status === "done") doneCount++;
-      }
+      processTaskStatus(validTasks, task);
     }
   }
   updateSummary(progressCount, feedbackCount, toDoCount, doneCount);
+}
+
+function processTaskStatus(validTasks, task) {
+  const user = validTasks[task].user;
+  const status = validTasks[task].status;
+  if (user === localStorage.userId) {
+    if (status === "progress") progressCount++;
+    else if (status === "feedback") feedbackCount++;
+    else if (status === "toDo") toDoCount++;
+    else if (status === "done") doneCount++;
+  }
 }
 
 function updateSummary(progress, feedback, toDo, done) {

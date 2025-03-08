@@ -24,20 +24,24 @@ async function addContactToDataBase() {
   let color = getRandomColor();
   const uniqueKey = `contact_${Date.now()}`;
   try {
-    let response = await fetch(BASE_URL + `contacts/${uniqueKey}.json`, {
-      method: "PUT",
-      body: JSON.stringify({ name, email, phone, color }),
-    });
-    let contactData = await response.json();
-    arrayOfContacts.push({ id: uniqueKey, ...contactData });
-    renderContacts();
-    closeOverlayAddContact();
-    deleteInputs();
-    setTimeoutSuccessfullyOverlayAddContact();
-    return contactData;
+    tryHandlingFromAddContact(uniqueKey, { name, email, phone, color });
   } catch (error) {
     console.error("Fehler:", error);
   }
+}
+
+async function tryHandlingFromAddContact(uniqueKey, { name, email, phone, color }) {
+  let response = await fetch(BASE_URL + `contacts/${uniqueKey}.json`, {
+    method: "PUT",
+    body: JSON.stringify({ name, email, phone, color }),
+  });
+  let contactData = await response.json();
+  arrayOfContacts.push({ id: uniqueKey, ...contactData });
+  renderContacts();
+  closeOverlayAddContact();
+  deleteInputs();
+  setTimeoutSuccessfullyOverlayAddContact();
+  return contactData;
 }
 
 function validateContactInputs(name, email, phone) {
@@ -50,18 +54,24 @@ function validateContactInputs(name, email, phone) {
   };
   let hasError = false;
   for (const key in inputs) {
-    const value = inputs[key];
-    const inputElement = document.getElementById(inputIds[key]);
-    if (!value) {
-      document.getElementById(`${key}_error`).innerText = errors[key];
-      inputElement.style.borderColor = "red";
-      hasError = true;
-    } else {
-      document.getElementById(`${key}_error`).innerText = "";
-      inputElement.style.borderColor = "";
-    }
+    hasError = statusOfInputFields(key, inputs, inputIds, errors);
   }
   return hasError;
+}
+
+function statusOfInputFields(key, inputs, inputIds, errors) {
+  const value = inputs[key];
+  const inputElement = document.getElementById(inputIds[key]);
+  let fieldHasError = false;
+  if (!value) {
+    document.getElementById(`${key}_error`).innerText = errors[key];
+    inputElement.style.borderColor = "red";
+    fieldHasError = true;
+  } else {
+    document.getElementById(`${key}_error`).innerText = "";
+    inputElement.style.borderColor = "";
+  }
+  return fieldHasError;
 }
 
 document.addEventListener("click", function (event) {
@@ -103,28 +113,36 @@ async function getContactsFromDataBase() {
   }
 }
 
+function getUpdatedContactData(id) {
+  return {
+    name: document.getElementById("edit_name").value,
+    email: document.getElementById("edit_email").value,
+    phone: document.getElementById("edit_phone").value,
+    color: arrayOfContacts.find((c) => c.id === id).color,
+  };
+}
+
+async function sendContactUpdate(id, contactData) {
+  const response = await fetch(BASE_URL + `contacts/${id}.json`, {
+    method: "PATCH",
+    body: JSON.stringify(contactData),
+  });
+  return await response.json();
+}
+
+function updateLocalContactAndUI(id, contactData) {
+  const index = arrayOfContacts.findIndex((contact) => contact.id === id);
+  arrayOfContacts[index] = { id, ...contactData };
+  renderContacts();
+  closeOverlayEditContact();
+  closeOverlayContactInfoAfterDelete();
+}
+
 async function updateContactInDataBase(id) {
-  let name = document.getElementById("edit_name").value;
-  let email = document.getElementById("edit_email").value;
-  let phone = document.getElementById("edit_phone").value;
-  let contact = arrayOfContacts.find((c) => c.id === id);
-  let color = contact.color;
   try {
-    let response = await fetch(BASE_URL + `contacts/${id}.json`, {
-      method: "PATCH",
-      body: JSON.stringify({
-        name: name,
-        email: email,
-        phone: phone,
-        color: color,
-      }),
-    });
-    let contactData = await response.json();
-    let index = arrayOfContacts.findIndex((contact) => contact.id === id);
-    arrayOfContacts[index] = { id: id, ...contactData };
-    renderContacts();
-    closeOverlayEditContact();
-    closeOverlayContactInfoAfterDelete();
+    const updatedContact = getUpdatedContactData(id);
+    const contactData = await sendContactUpdate(id, updatedContact);
+    updateLocalContactAndUI(id, contactData);
     return contactData;
   } catch (error) {
     console.error("Fehler:", error);

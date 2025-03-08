@@ -186,7 +186,6 @@ function userData(id, email, name, password) {
 async function ifUserAlreadyExists(email) {
   let responseToJSON = await fetchUserContacts();
   let userExists = checkIfUserExists(responseToJSON, email);
-
   if (!userExists && pswConfirm.style.borderColor !== "red") {
     console.log("User Doesn't Exist");
     await addUsersToDataBase(newUser);
