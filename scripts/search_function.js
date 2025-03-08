@@ -18,6 +18,7 @@ function collectTasks() {
 function searchFunk() {
   searchFiled.addEventListener("input", function () {
     let userInput = searchFiled.value.toLowerCase();
+    statusCounter = 0;
     listOfTasks.forEach((element) => {
       let isVisible = element.title.toLowerCase().includes(userInput);
       element.card.classList.toggle("hide", !isVisible);
@@ -29,7 +30,6 @@ function searchFunk() {
         refMessage.classList.add("d_none");
       }
     });
-    statusCounter = 0;
   });
 }
 
@@ -41,6 +41,7 @@ document.addEventListener("DOMContentLoaded", function () {
 function noTaskFound(list, counter) {
   if (list.length === counter) {
     refMessage.classList.remove("d_none");
+    refMessage.style.animation = "slideInFromRight 125ms ease forwards";
   }
   if (list.length != counter) {
     refMessage.classList.add("d_none");
