@@ -14,7 +14,6 @@ function showOverlay(event) {
   void overlay.offsetWidth;
   overlay.style.backgroundColor = "rgba(0, 0, 0, 0.3)";
   taskBox.style.animation = "slideInFromRight 125ms ease forwards";
-  // setEventListenerForSubtask();
 }
 
 function hideOverlay() {
