@@ -1,4 +1,3 @@
-const contentMenu = document.querySelector(".contentSectionAddTask");
 const addTaskWindow = document.querySelector("#add_task_box");
 const contentWindow = document.querySelector("#box");
 
@@ -20,6 +19,7 @@ function openMenu() {
 }
 
 function openMenuSectionAddTask() {
+  const contentMenu = document.querySelector(".contentSectionAddTask");
   if (contentMenu.style.display === "inline") {
     contentMenu.style.display = "none";
     document.querySelector("#arrow").src = "./assets/icons/board/arrow_drop_down.svg";
