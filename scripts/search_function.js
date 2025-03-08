@@ -1,5 +1,7 @@
 const searchFiled = document.querySelector("#searchbar");
+const refMessage = document.querySelector(".no_found");
 const listOfTasks = [];
+let statusCounter = 0;
 
 function collectTasks() {
   const cards = document.querySelectorAll("article");
@@ -9,6 +11,7 @@ function collectTasks() {
     let description = element.firstElementChild.nextElementSibling.nextElementSibling.innerText;
     listOfTasks.push({ card, title, description });
   });
+
   return listOfTasks;
 }
 
@@ -18,8 +21,15 @@ function searchFunk() {
     listOfTasks.forEach((element) => {
       let isVisible = element.title.toLowerCase().includes(userInput);
       element.card.classList.toggle("hide", !isVisible);
-      noTaskFound();
+      if (isVisible === false) {
+        statusCounter += 1;
+        noTaskFound(listOfTasks, statusCounter);
+      }
+      if (searchFiled.value == "") {
+        refMessage.classList.add("d_none");
+      }
     });
+    statusCounter = 0;
   });
 }
 
@@ -28,13 +38,11 @@ document.addEventListener("DOMContentLoaded", function () {
   searchFunk();
 });
 
-function noTaskFound() {
-  const cards = document.querySelectorAll("article");
-  cards.forEach((element) => {
-    // console.log(element);
-
-    if (!element.hasAttribute("hide")) {
-      console.log("no");
-    }
-  });
+function noTaskFound(list, counter) {
+  if (list.length === counter) {
+    refMessage.classList.remove("d_none");
+  }
+  if (list.length != counter) {
+    refMessage.classList.add("d_none");
+  }
 }
