@@ -60,7 +60,6 @@ async function managenProfilesWhenCardOpen(id) {
   const dataFromFireBase = await fetchCardDetails(taskPath, id);
   const refAssignedObject = dataFromFireBase[id].assigned;
   let refProfileContainer = document.querySelector(".profiles");
-
   for (const key in refAssignedObject) {
     if (Object.prototype.hasOwnProperty.call(refAssignedObject, key)) {
       const fullName = refAssignedObject[key].name;

@@ -16,6 +16,7 @@ input.addEventListener("keypress", function (event) {
   }
 });
 
+// TODO reduce lines
 async function addContactToDataBase() {
   let name = document.getElementById("add_name").value;
   let email = document.getElementById("add_email").value;
@@ -30,6 +31,7 @@ async function addContactToDataBase() {
   }
 }
 
+<<<<<<< HEAD
 async function tryHandlingFromAddContact(uniqueKey, { name, email, phone, color }) {
   let response = await fetch(BASE_URL + `contacts/${uniqueKey}.json`, {
     method: "PUT",
@@ -44,6 +46,9 @@ async function tryHandlingFromAddContact(uniqueKey, { name, email, phone, color 
   return contactData;
 }
 
+=======
+// TODO reduce lines
+>>>>>>> 7dbb1128cb5880ac104f2333e97f22c3d319e526
 function validateContactInputs(name, email, phone) {
   const inputs = { name, email, phone };
   const inputIds = { name: "add_name", email: "add_email", phone: "add_phone" };
@@ -92,6 +97,7 @@ function clearErrorMessages() {
   document.getElementById("add_phone").style.borderColor = "";
 }
 
+// TODO reduce lines
 async function getContactsFromDataBase() {
   let response = await fetch(BASE_URL + "contacts.json");
   let data = await response.json();
@@ -113,6 +119,7 @@ async function getContactsFromDataBase() {
   }
 }
 
+<<<<<<< HEAD
 function getUpdatedContactData(id) {
   return {
     name: document.getElementById("edit_name").value,
@@ -138,6 +145,9 @@ function updateLocalContactAndUI(id, contactData) {
   closeOverlayContactInfoAfterDelete();
 }
 
+=======
+// TODO reduce lines
+>>>>>>> 7dbb1128cb5880ac104f2333e97f22c3d319e526
 async function updateContactInDataBase(id) {
   try {
     const updatedContact = getUpdatedContactData(id);
@@ -181,6 +191,7 @@ async function removeContactFromAllTasks(contactId) {
   }
 }
 
+// TODO reduce lines
 function renderContacts() {
   let contactList = document.getElementById("contact_list");
   contactList.innerHTML = "";

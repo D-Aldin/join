@@ -176,23 +176,20 @@ function openCatecoryList() {
   let categoryList = document.getElementById("catecory-list");
   let inputBorder = document.getElementById("catecory-input-border");
   let inputField = document.getElementById("catecory-input-field");
-  if (categoryList.classList.contains("visible")) {
-    closeCatecoryList();
-    return;
-  }
+  if (categoryList.classList.contains("visible")) return closeCatecoryList();
   inputBorder.classList.add("subtask-inputfield-focus");
-  inputField.innerHTML = /*html*/ `
-    <img class="icon-drop-down" src="assets/icons/addTask/arrow_drop_downaa.svg" alt="">
-  `;
+  inputField.innerHTML = /*html*/ `<img class="icon-drop-down" src="assets/icons/addTask/arrow_drop_downaa.svg" alt="">`;
   categoryList.classList.remove("display_none");
   if (categoryFirstOpen) {
     void categoryList.offsetWidth;
     categoryFirstOpen = false;
   }
+  showCategoryList(categoryList);
+}
+
+function showCategoryList(categoryList) {
   setTimeout(() => {
     categoryList.classList.add("visible");
-  }, 10);
-  setTimeout(() => {
     document.addEventListener("click", handleOutsideClick);
   }, 10);
 }

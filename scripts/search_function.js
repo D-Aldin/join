@@ -22,6 +22,21 @@ function searchFunk() {
   });
 }
 
+function NoTaskFound() {
+  const noTask = document.querySelector(".no_found");
+  noTask.classList.remove("d_none");
+  noTask.style.animation = "slideInFromRight 125ms ease forwards";
+}
+
+function hideTaskAddedAnimation() {
+  setTimeout(() => {
+    document.querySelector(".no_found").style.animation = "slideOutToRight 125ms ease forwards";
+    setTimeout(() => {
+      hideOverlay();
+    }, 125);
+  }, 1000);
+}
+
 document.addEventListener("DOMContentLoaded", function () {
   setTimeout(collectTasks, 500);
   searchFunk();
