@@ -15,18 +15,23 @@ function render() {
 }
 
 async function renderContacts(path = "") {
+  let response = await fetch(BASE_URL + path + ".json");
+  let contacts = await response.json();
   try {
-    let response = await fetch(BASE_URL + path + ".json");
-    let contacts = await response.json();
-    for (let key in contacts) addContact(key, contacts[key]);
+    for (let key in contacts) {
+      let contact = {
+        id: key,
+        name: contacts[key].name,
+        email: contacts[key].email,
+        phone: contacts[key].phone,
+        color: contacts[key].color,
+      };
+      arrayOfContacts.push(contact);
+    }
   } catch (error) {
     console.error("Fehler beim Laden der Kontakte:", error);
   }
   pushContactsToSelectField();
-}
-
-function addContact(id, data) {
-  arrayOfContacts.push({ id, ...data });
 }
 
 function pushContactsToSelectField() {
