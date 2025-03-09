@@ -135,15 +135,15 @@
               <div class="inputfield-title-container">
                 <p class="tasktitles">Prio</p>
                 <div class="button-container">
-                  <button type="button" onclick="setPrio('urgent')" id="urgent" class="urgentbutton">
+                  <button type="button" onclick="setPrio('urgent')" id="urgent" class="urgentbutton transition">
                     Urgent
                     <div id="iconurgent" class="prio_icon"><img class="urgent-img" src="assets/icons/addTask/icon_urgent.svg" alt="" /></div>
                   </button>
-                  <button type="button" onclick="setPrio('medium')" id="medium" class="urgentbutton">
+                  <button type="button" onclick="setPrio('medium')" id="medium" class="urgentbutton transition">
                     Medium
                     <div id="iconmedium" class="prio_icon"><img src="assets/icons/addTask/icon_medium.svg" alt="" /></div>
                   </button>
-                  <button type="button" onclick="setPrio('low')" id="low" class="urgentbutton">
+                  <button type="button" onclick="setPrio('low')" id="low" class="urgentbutton transition">
                     Low
                     <div id="iconlow" class="prio_icon"><img src="assets/icons/addTask/icon_low.svg" alt="" /></div>
                   </button>
@@ -188,11 +188,11 @@
               <p>This field is required</p></span
             >
             <div class="button-container-clear-creat">
-              <button type="button" class="clear-button" onclick="clearAllTasks()">
+              <button type="button" class="clear-button transition" onclick="clearAllTasks()">
                 Clear
                 <div class="icon-box"></div>
               </button>
-              <button type="submit" class="great-button" onclick="checkRequiredField()">Creat Task <img src="assets/icons/addTask/check.svg" alt="" /></button>
+              <button type="submit" class="great-button transition" onclick="checkRequiredField()">Creat Task <img src="assets/icons/addTask/check.svg" alt="" /></button>
             </div>
           </div>
         </div>
