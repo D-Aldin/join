@@ -243,7 +243,7 @@ function HTMLTamplateForAddTaskInBorad() {
             <div class="input-container">
               <div class="inputfield-title-container">
                   <span class="display-flex"><p class="tasktitles">Due date</p><p class="color-red tasktitles">*</p></span>
-                  <input class="inputfield" id="date" type="date" required>
+                  <input class="inputfield" id="dateBoard" type="date" required>
                   <span id="dateRequired" class="required hide_element">This field is requierd</span>
               </div>
               <div class="inputfield-title-container">

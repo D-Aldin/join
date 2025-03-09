@@ -175,7 +175,7 @@ function confirmEditing(event) {
 async function collectDataForNewTask() {
   const inputTitle = document.querySelector("#title");
   const inputDescription = document.querySelector("#description");
-  let inputDate = document.getElementById("date");
+  let inputDate = document.querySelector("#dateBoard");
   console.log(inputDate.value);
 
   const inputCategory = document.querySelector("#category");
@@ -193,7 +193,7 @@ function tamplate(id, title, description, contact, date, prio, category, subtask
       title: title,
       description: description || " ",
       assigned: contact,
-      date: date,
+      date: date || document.querySelector("#dateBoard").value,
       prio: prio || " ",
       category: category,
       subtask: subtask || [],
@@ -235,7 +235,7 @@ function requiredFieldTitle() {
 }
 
 function requiredFieldDate() {
-  let inputFiledDate = document.getElementById("date");
+  let inputFiledDate = document.getElementById("dateBoard");
   let dateValue = inputFiledDate.value;
   console.log(dateValue);
 
@@ -274,8 +274,8 @@ function mimicPlaceHolder() {
 }
 
 async function createTask() {
-  if (!validateInputs()) return;
   let card = await collectDataForNewTask();
+  if (!validateInputs()) return;
   showTaskAddedAnimation();
   addDataToFireBase("tasks", card);
   hideTaskAddedAnimation();
@@ -286,7 +286,7 @@ function validateInputs() {
   requiredFieldDate();
   requiredFieldCategory();
   const title = document.querySelector("#title").value;
-  const date = document.getElementById("date").value;
+  const date = document.getElementById("dateBoard").value;
   const category = document.querySelector("#category").value;
   return title.length && date && date !== 0 && category !== "placeholder";
 }
