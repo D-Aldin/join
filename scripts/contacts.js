@@ -16,7 +16,6 @@ input.addEventListener("keypress", function (event) {
   }
 });
 
-// TODO reduce lines
 async function addContactToDataBase() {
   let name = document.getElementById("add_name").value;
   let email = document.getElementById("add_email").value;
@@ -93,25 +92,28 @@ function clearErrorMessages() {
   document.getElementById("add_phone").style.borderColor = "";
 }
 
-// TODO reduce lines
 async function getContactsFromDataBase() {
   let response = await fetch(BASE_URL + "contacts.json");
   let data = await response.json();
   arrayOfContacts = [];
   try {
-    for (let key in data) {
-      let contact = {
-        id: key,
-        name: data[key].name,
-        email: data[key].email,
-        phone: data[key].phone,
-        color: data[key].color,
-      };
-      arrayOfContacts.push(contact);
-    }
+    await getContactDatasFromDataBase(data);
     return arrayOfContacts;
   } catch (error) {
     console.error("Fehler beim Laden der Kontakte:", error);
+  }
+}
+
+async function getContactDatasFromDataBase(data) {
+  for (let key in data) {
+    let contact = {
+      id: key,
+      name: data[key].name,
+      email: data[key].email,
+      phone: data[key].phone,
+      color: data[key].color,
+    };
+    arrayOfContacts.push(contact);
   }
 }
 
@@ -183,7 +185,6 @@ async function removeContactFromAllTasks(contactId) {
   }
 }
 
-// TODO reduce lines
 function renderContacts() {
   let contactList = document.getElementById("contact_list");
   contactList.innerHTML = "";
@@ -195,15 +196,23 @@ function renderContacts() {
     let contact = arrayOfContacts[i];
     let firstLetter = contact.name.charAt(0).toUpperCase();
     if (renderedLetters.indexOf(firstLetter) === -1) {
-      contactList.innerHTML += getLetterTemplate(firstLetter);
-      renderedLetters.push(firstLetter);
+      renderLetterTemplate(contactList, renderedLetters, firstLetter);
     }
-    contactList.innerHTML += getContactTemplate(contact, i);
-    let initials = getInitials(contact.name);
-    let circleElement = document.getElementById(`circle_${i}`);
-    circleElement.innerText = initials;
-    circleElement.style.backgroundColor = contact.color;
+    renderInitials(contactList, contact, i);
   }
+}
+
+function renderLetterTemplate(contactList, renderedLetters, firstLetter) {
+  contactList.innerHTML += getLetterTemplate(firstLetter);
+  renderedLetters.push(firstLetter);
+}
+
+function renderInitials(contactList, contact, i) {
+  contactList.innerHTML += getContactTemplate(contact, i);
+  let initials = getInitials(contact.name);
+  let circleElement = document.getElementById(`circle_${i}`);
+  circleElement.innerText = initials;
+  circleElement.style.backgroundColor = contact.color;
 }
 
 function deleteInputs() {
