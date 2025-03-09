@@ -66,7 +66,7 @@ async function displayChossenContact(id) {
   let name = initials(dataFromFireBase.name);
   let color = dataFromFireBase.color;
   profileContainer.innerHTML += contactTamplateForAddTaskSectionInBoard(name, color, id);
-  collectDataForNewTask();
+  // collectDataForNewTask();
 }
 
 function unselect(id) {
@@ -175,13 +175,15 @@ function confirmEditing(event) {
 async function collectDataForNewTask() {
   const inputTitle = document.querySelector("#title");
   const inputDescription = document.querySelector("#description");
-  let inputDate = document.querySelector("#date").value;
+  let inputDate = document.querySelector("#dateBoard");
+  console.log(inputDate.value);
+
   const inputCategory = document.querySelector("#category");
   let id = `task_${Date.now()}`;
   collectTheContacts();
   collectTheSubtasks();
   let contacts = await getContactsFromFireBase(contactList);
-  return tamplate(id, inputTitle.value, inputDescription.value, contacts, inputDate, storeThePrioValue, inputCategory.value, subtaskObject, taskStatus, localStorage.userId);
+  return tamplate(id, inputTitle.value, inputDescription.value, contacts, inputDate.value, storeThePrioValue, inputCategory.value, subtaskObject, taskStatus, localStorage.userId);
 }
 
 function tamplate(id, title, description, contact, date, prio, category, subtask, status, user) {
@@ -191,7 +193,7 @@ function tamplate(id, title, description, contact, date, prio, category, subtask
       title: title,
       description: description || " ",
       assigned: contact,
-      date: date,
+      date: date || document.querySelector("#dateBoard").value,
       prio: prio || " ",
       category: category,
       subtask: subtask || [],
@@ -218,7 +220,6 @@ function collectTheSubtasks() {
     const task = refAllChosenSubtasks[index].innerHTML.substring(1);
     subtaskObject[`subtask_${crypto.randomUUID()}`] = { task: task, state: false };
   }
-  console.log(subtaskObject);
 }
 
 function requiredFieldTitle() {
@@ -234,9 +235,11 @@ function requiredFieldTitle() {
 }
 
 function requiredFieldDate() {
-  const inputFiledDate = document.getElementById("date");
-  const dateValue = inputFiledDate.value;
-  if (!dateValue || isNaN(Date.parse(dateValue))) {
+  let inputFiledDate = document.getElementById("dateBoard");
+  let dateValue = inputFiledDate.value;
+  console.log(dateValue);
+
+  if (!dateValue || isNaN(new Date(dateValue).getTime())) {
     inputFiledDate.classList.add("required_color");
     document.querySelector("#dateRequired").classList.remove("hide_element");
   }
@@ -271,9 +274,9 @@ function mimicPlaceHolder() {
 }
 
 async function createTask() {
+  let card = await collectDataForNewTask();
   if (!validateInputs()) return;
   showTaskAddedAnimation();
-  let card = await collectDataForNewTask();
   addDataToFireBase("tasks", card);
   hideTaskAddedAnimation();
 }
@@ -283,7 +286,7 @@ function validateInputs() {
   requiredFieldDate();
   requiredFieldCategory();
   const title = document.querySelector("#title").value;
-  const date = document.getElementById("date").value;
+  const date = document.getElementById("dateBoard").value;
   const category = document.querySelector("#category").value;
   return title.length && date && date !== 0 && category !== "placeholder";
 }

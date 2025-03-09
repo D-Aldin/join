@@ -651,6 +651,10 @@ input[type="date"] {
   color: black;
 }
 
+input[type="date"]:valid {
+  color: rgb(0, 0, 0);
+}
+
 .mobile_view {
   display: none;
 }
@@ -670,7 +674,7 @@ input[type="date"] {
 .column {
   display: flex;
   flex-direction: column;
-} 
+}
 
 @media only screen and (max-width: 1200px) {
   .task-wrapper {
@@ -826,7 +830,7 @@ input[type="date"] {
   .tasktitles {
     font-size: 16px;
   }
-  
+
   .flex-container {
     gap: 32px !important;
   }
@@ -933,7 +937,7 @@ input[type="date"] {
   .subtask-list {
     max-width: 285px;
   }
-  
+
   li {
     inline-size: 150px;
   }
@@ -957,7 +961,7 @@ input[type="date"] {
 }
 
 @media (min-width: 300px) and (max-width: 690px) {
-  .task-wrapper { 
+  .task-wrapper {
     flex-direction: column;
     align-items: center;
     justify-content: center;
@@ -991,13 +995,14 @@ input[type="date"] {
   }
 
   .button-container-clear-creat {
-    justify-content: flex-start !important;    
+    justify-content: flex-start !important;
   }
 
   .inputfield-title-container {
     height: max-content;
     padding-bottom: 0px !important;
-  }.task {
+  }
+  .task {
     flex-direction: column;
   }
 
