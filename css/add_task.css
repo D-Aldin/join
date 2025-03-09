@@ -463,7 +463,6 @@ ul {
 
 .subtask-list-button:hover {
   height: 26px;
-  
 }
 
 .subtask-edit-inputfield {
@@ -805,7 +804,7 @@ input[type="date"]:valid {
   .assigned-contact-wrapper {
     max-width: 390px;
   }
-  
+
   li {
     inline-size: 270px;
   }
@@ -1002,6 +1001,7 @@ input[type="date"]:valid {
     height: max-content;
     padding-bottom: 0px !important;
   }
+
   .task {
     flex-direction: column;
   }
