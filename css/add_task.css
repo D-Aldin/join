@@ -150,13 +150,17 @@ p {
 }
 
 .assigned-contact-wrapper {
-  width: 100%;
+  width: 440px;
   flex-wrap: wrap;
   display: flex;
   align-items: center;
   justify-content: flex-start;
   gap: 8px;
   margin-top: 8px;
+  max-height: 46px;
+  overflow: auto;
+  scrollbar-width: 24px;
+  scrollbar-color: rgba(168, 168, 168, 1) transparent;
 }
 
 .contact-icons {
@@ -383,9 +387,12 @@ p {
 
 .subtask-wrapper {
   width: 440px;
+  max-height: 160px;
   display: flex;
   flex-direction: column;
-  height: auto;
+  overflow: auto;
+  scrollbar-width: 24px;
+  scrollbar-color: rgba(168, 168, 168, 1) transparent;
 }
 
 .subtask-list {
@@ -404,16 +411,17 @@ p {
 
 .full_with {
   flex: 1;
-  max-inline-size: 400px;
+  max-inline-size: 440px;
   overflow-wrap: break-word;
 }
 
 li {
-  inline-size: 340px;
+  inline-size: 300px;
 }
 
 .subtask-list:hover {
   background-color: rgba(238, 238, 238, 1);
+  max-width: 440px !important;
 }
 
 .subtask-list-button-container {
@@ -453,12 +461,9 @@ ul {
   background-color: black;
 }
 
-.subtask-list:hover .subtask-list-button {
-  background-color: rgba(238, 238, 238, 1);
-}
-
 .subtask-list-button:hover {
   height: 26px;
+  
 }
 
 .subtask-edit-inputfield {
@@ -643,7 +648,7 @@ ul {
 
 input[type="date"] {
   padding: 8px;
-  color: rgb(209, 209, 209);
+  color: black;
 }
 
 .mobile_view {
@@ -731,6 +736,10 @@ input[type="date"] {
     margin-right: 24px;
   }
 
+  .subtask-wrapper {
+    max-width: 440px;
+  }
+
   .textareafield {
     width: 440px;
   }
@@ -773,6 +782,10 @@ input[type="date"] {
     max-width: 390px;
   }
 
+  li {
+    max-width: 250px;
+  }
+
   .catecory-wrapper {
     max-width: 390px;
   }
@@ -782,6 +795,10 @@ input[type="date"] {
   }
 
   .contact-wrapper {
+    max-width: 390px;
+  }
+
+  .assigned-contact-wrapper {
     max-width: 390px;
   }
   
@@ -823,8 +840,16 @@ input[type="date"] {
     height: 35px;
   }
 
+  .assigned-contact-wrapper {
+    max-width: 285px;
+  }
+
   .subtask-inputfield-text {
     font-size: 16px;
+  }
+
+  .subtask-wrapper {
+    width: 285px;
   }
 
   .inputfield::placeholder {
@@ -1127,7 +1152,6 @@ input[type="date"] {
   main {
     justify-content: center;
   }
-
 }
 
 @media only screen and (max-width: 400px) {

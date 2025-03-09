@@ -285,7 +285,9 @@ function creatTask() {
   postAllData("tasks", data);
   clearAllTasks();
   finishTaskNotification();
-  window.location.href = "http://127.0.0.1:5501/board.html";
+  setTimeout(() => {
+    window.location.href = "http://127.0.0.1:5501/board.html";
+  }, 3000);
 }
 
 function returnAllData() {
@@ -345,7 +347,7 @@ function finishTaskNotification() {
   document.getElementById("finish-box").classList.add("finish-container-activ");
   setTimeout(() => {
     document.getElementById("finish-box").classList.remove("finish-container-activ");
-  }, 3000);
+  }, 2000);
 }
 
 function clearAllTasks() {
