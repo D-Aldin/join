@@ -18,20 +18,24 @@ async function renderContacts(path = "") {
   let response = await fetch(BASE_URL + path + ".json");
   let contacts = await response.json();
   try {
-    for (let key in contacts) {
-      let contact = {
-        id: key,
-        name: contacts[key].name,
-        email: contacts[key].email,
-        phone: contacts[key].phone,
-        color: contacts[key].color,
-      };
-      arrayOfContacts.push(contact);
-    }
+    pushContacts(contacts)
   } catch (error) {
     console.error("Fehler beim Laden der Kontakte:", error);
   }
   pushContactsToSelectField();
+}
+
+function pushContacts(contacts) {
+  for (let key in contacts) {
+    let contact = {
+      id: key,
+      name: contacts[key].name,
+      email: contacts[key].email,
+      phone: contacts[key].phone,
+      color: contacts[key].color,
+    };
+    arrayOfContacts.push(contact);
+  }
 }
 
 function pushContactsToSelectField() {
@@ -75,8 +79,7 @@ function openContactList() {
   document.getElementById("assigned").classList.add("display_none");
   document.getElementById("contact-input-border").classList.add("subtask-inputfield-focus");
   document.getElementById("contact-input-field").innerHTML = /*html*/ `
-        <img class="icon-drop-down" src="assets/icons/addTask/arrow_drop_downaa.svg" alt="">
-    `;
+        <img class="icon-drop-down" src="assets/icons/addTask/arrow_drop_downaa.svg" alt="">`;
   contactlist.classList.remove("display_none");
   document.addEventListener("click", function outsideClick(event) {
     if (!contactWrapper.contains(event.target)) {
@@ -94,7 +97,6 @@ function closeContactList(contactlist) {
     `;
   document.getElementById("contact-input").value = "";
   document.getElementById("assigned").classList.remove("display_none");
-  pushContactsToSelectField();
 }
 
 function addContact(x) {
@@ -347,11 +349,16 @@ function finishTaskNotification() {
 }
 
 function clearAllTasks() {
+  pushContactsToSelectField();
   resetPrioButton();
-  subtasks = [];
+  subtasksList = {};
   renderSubtasks();
   selectedContacts = [];
   renderSelectetContacts();
+  clearValueOfInputFields();
+}
+
+function clearValueOfInputFields() {
   document.getElementById("title").value = "";
   document.getElementById("description").value = "";
   document.getElementById("assigned").value = "";
