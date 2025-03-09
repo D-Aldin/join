@@ -135,6 +135,7 @@ h5 {
   border: 1px, transparent;
   background-color: white;
   cursor: pointer;
+  border: unset;
 }
 
 .trash_img {
