@@ -6,6 +6,11 @@
   display: none;
 }
 
+.scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
 .close_button {
   display: flex;
   justify-content: flex-end;

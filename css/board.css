@@ -1,5 +1,7 @@
 main {
   overflow: auto;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }
 
 main::-webkit-scrollbar {
@@ -433,6 +435,7 @@ h5 {
     white-space: nowrap;
     scrollbar-width: none;
     -ms-overflow-style: none;
+    scrollbar-width: none;
   }
 
   #toDo::-webkit-scrollbar,

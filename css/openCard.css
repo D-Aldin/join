@@ -8,6 +8,8 @@
   position: relative;
   height: 86%;
   overflow-y: auto;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }
 
 .content_box::-webkit-scrollbar {
