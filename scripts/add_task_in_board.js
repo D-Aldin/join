@@ -66,7 +66,7 @@ async function displayChossenContact(id) {
   let name = initials(dataFromFireBase.name);
   let color = dataFromFireBase.color;
   profileContainer.innerHTML += contactTamplateForAddTaskSectionInBoard(name, color, id);
-  collectDataForNewTask();
+  // collectDataForNewTask();
 }
 
 function unselect(id) {
@@ -175,13 +175,15 @@ function confirmEditing(event) {
 async function collectDataForNewTask() {
   const inputTitle = document.querySelector("#title");
   const inputDescription = document.querySelector("#description");
-  let inputDate = document.querySelector("#date").value;
+  let inputDate = document.getElementById("date");
+  console.log(inputDate.value);
+
   const inputCategory = document.querySelector("#category");
   let id = `task_${Date.now()}`;
   collectTheContacts();
   collectTheSubtasks();
   let contacts = await getContactsFromFireBase(contactList);
-  return tamplate(id, inputTitle.value, inputDescription.value, contacts, inputDate, storeThePrioValue, inputCategory.value, subtaskObject, taskStatus, localStorage.userId);
+  return tamplate(id, inputTitle.value, inputDescription.value, contacts, inputDate.value, storeThePrioValue, inputCategory.value, subtaskObject, taskStatus, localStorage.userId);
 }
 
 function tamplate(id, title, description, contact, date, prio, category, subtask, status, user) {
@@ -218,7 +220,6 @@ function collectTheSubtasks() {
     const task = refAllChosenSubtasks[index].innerHTML.substring(1);
     subtaskObject[`subtask_${crypto.randomUUID()}`] = { task: task, state: false };
   }
-  console.log(subtaskObject);
 }
 
 function requiredFieldTitle() {
@@ -234,9 +235,11 @@ function requiredFieldTitle() {
 }
 
 function requiredFieldDate() {
-  const inputFiledDate = document.getElementById("date");
-  const dateValue = inputFiledDate.value;
-  if (!dateValue || isNaN(Date.parse(dateValue))) {
+  let inputFiledDate = document.getElementById("date");
+  let dateValue = inputFiledDate.value;
+  console.log(dateValue);
+
+  if (!dateValue || isNaN(new Date(dateValue).getTime())) {
     inputFiledDate.classList.add("required_color");
     document.querySelector("#dateRequired").classList.remove("hide_element");
   }
@@ -272,8 +275,8 @@ function mimicPlaceHolder() {
 
 async function createTask() {
   if (!validateInputs()) return;
-  showTaskAddedAnimation();
   let card = await collectDataForNewTask();
+  showTaskAddedAnimation();
   addDataToFireBase("tasks", card);
   hideTaskAddedAnimation();
 }
