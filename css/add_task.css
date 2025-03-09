@@ -426,11 +426,11 @@ li {
 
 .subtask-list-button-container {
   display: none;
-  background-color: none;
+  background-color: unset;
 }
 
 .subtask-list-button {
-  background-color: none;
+  background-color: unset;
   border: none;
   display: flex;
   align-items: center;
@@ -463,7 +463,6 @@ ul {
 
 .subtask-list-button:hover {
   height: 26px;
-  
 }
 
 .subtask-edit-inputfield {
@@ -1147,7 +1146,7 @@ input[type="date"]:valid {
   }
 
   .subtask-list-button-container img {
-    background-color: none;
+    background-color: unset;
   }
 
   .pixelbar-subtask {

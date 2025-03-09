@@ -85,9 +85,9 @@ function editSubtask(x) {
   document.getElementById(x).innerHTML = /*html*/ `
           <input class="subtask-edit-inputfield" id="current-subtask${x}" type="text">
           <div class="subtask-list-button-container-by-edit">
-                  <button type="button" onclick="setEditSubtask(${x})" class="subtask-list-button"><img src="assets/icons/addTask/done.svg" alt=""></button>
+                  <button type="button" onclick="setEditSubtask(${x})" style="background-color: white" class="subtask-list-button"><img src="assets/icons/addTask/done.svg" alt=""></button>
                   <div class="pixelbar-subtask"></div>
-                  <button type="button" onclick="deleteSubtask('${x}')" class="subtask-list-button"><img src="assets/icons/addTask/delete.svg" alt=""></button>
+                  <button type="button" onclick="deleteSubtask('${x}')" style="background-color: white" class="subtask-list-button"><img src="assets/icons/addTask/delete.svg" alt=""></button>
           </div>`;
   currentsubtask = document.getElementById("current-subtask" + x);
   currentsubtask.value = subtasksList[x].task;
