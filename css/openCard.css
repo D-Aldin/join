@@ -33,14 +33,17 @@
   margin-bottom: 30px;
   margin-block-start: 0.3em;
 }
+
 .open_card_discription {
   display: flex;
   margin-bottom: 30px;
 }
+
 .open_card_date {
   display: flex;
   gap: 90px;
 }
+
 .open_card_priority {
   display: flex;
   align-items: center;
@@ -299,6 +302,12 @@ input[type="checkbox"]:checked {
     font-size: 61px;
     margin-bottom: 30px;
     width: 380px;
+  }
+
+  @-moz-document url-prefix() {
+    .open_card_title {
+      font-size: 56px;
+    }
   }
 
   .category_box {
