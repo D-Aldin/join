@@ -149,6 +149,32 @@ p {
   border: solid 1px rgba(41, 171, 226, 1) !important;
 }
 
+.contact-wrapper {
+  max-height: 280px;
+  width: 440px;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  background-color: white;
+  overflow: auto;
+  scrollbar-width: 24px;
+  scrollbar-color: rgba(168, 168, 168, 1) transparent;
+  transition: all 225ms ease-in-out;
+  transform-origin: top;
+  overflow: hidden;
+  max-height: 0;
+  opacity: 0;
+  transform: scaleY(0.9);
+}
+
+.contact-wrapper.visible {
+  max-height: 280px;
+  opacity: 1;
+  transform: scaleY(1);
+}
+
 .assigned-contact-wrapper {
   width: 440px;
   flex-wrap: wrap;
@@ -804,7 +830,7 @@ input[type="date"]:valid {
   .assigned-contact-wrapper {
     max-width: 390px;
   }
-  
+
   li {
     inline-size: 270px;
   }
@@ -1001,6 +1027,7 @@ input[type="date"]:valid {
     height: max-content;
     padding-bottom: 0px !important;
   }
+
   .task {
     flex-direction: column;
   }
