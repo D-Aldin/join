@@ -37,6 +37,7 @@ function renderAddTaskMenu() {
 }
 
 async function displayDropDownMenuSectionAddTask() {
+  document.querySelector(".contentSectionAddTask").innerHTML = "";
   let dataFromFireBase = await fetchTasks("contacts");
   for (const key in dataFromFireBase) {
     if (Object.prototype.hasOwnProperty.call(dataFromFireBase, key)) {
