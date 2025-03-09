@@ -48,7 +48,7 @@ h5 {
   box-sizing: border-box;
 }
 
-input::placeholder {
+#searchbar::placeholder {
   font-size: larger;
   padding: 10px;
   background-image: url(../assets/icons/board/vector.svg);
