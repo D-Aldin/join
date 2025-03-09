@@ -1,14 +1,43 @@
+/**
+ * Stores a reference to the currently selected card.
+ * @type {HTMLElement | null}
+ */
 let card;
+
+/**
+ * Stores the ID of the currently selected task card.
+ * @type {string | null}
+ */
 let idOfcurrentElement;
+
+/** The base path for fetching task data. */
 const taskPath = "tasks";
+
+/** Stores the list of assigned users when opening a card. */
 let assignNewContList = [];
+
+/** Reference to the card container in the overlay. */
 let refCardBox = document.getElementById("box");
+
+/** Reference to all close buttons in the overlay. */
 const refCloseBtn = document.getElementsByClassName("closeBtn");
+
+/** Reference to the edit button inside the overlay. */
 const refEditButton = document.querySelector(".position_edit");
+
+/** Stores the current card's title. */
 let titleValue;
+
+/** Stores the current card's description. */
 let descriptionValue;
+
+/** Stores the current card's due date. */
 let dateValue;
 
+/**
+ * Displays the overlay with detailed task information.
+ * @param {Event} event - The event object from the clicked element.
+ */
 function overlayOn(event) {
   const overlay = document.getElementById("overlay");
   const cardContent = document.getElementById("box");
@@ -20,6 +49,9 @@ function overlayOn(event) {
   document.querySelector("aside").style.zIndex = "0";
 }
 
+/**
+ * Hides the overlay and refreshes the board.
+ */
 function overlayOff() {
   const overlay = document.getElementById("overlay");
   const cardContent = document.getElementById("box");
@@ -31,10 +63,18 @@ function overlayOff() {
   }, 125);
 }
 
+/**
+ * Stops event bubbling to prevent unintended actions.
+ * @param {Event} event - The event object.
+ */
 function stopEventBubbel(event) {
   event.stopPropagation();
 }
 
+/**
+ * Fetches and displays task details in the overlay.
+ * @param {Event} event - The event object from the clicked card.
+ */
 async function getData(event) {
   let id = event.currentTarget.id;
   const fetchDetails = await fetchCardDetails(taskPath, id);
@@ -47,15 +87,23 @@ async function getData(event) {
   dateValue = refersToCard.date;
 }
 
+/**
+ * Fetches task details from the database.
+ * @param {string} path - The path to the task data.
+ * @param {string} id - The ID of the task.
+ * @returns {Promise<Object>} The fetched task data.
+ */
 async function fetchCardDetails(path = "", id) {
   let response = await fetch(BASE_URL + path + ".json", {
     method: "GET",
   });
-  let responseToJSON = response.json();
-  let result = await responseToJSON;
-  return result;
+  return response.json();
 }
 
+/**
+ * Loads and displays assigned users when a card is opened.
+ * @param {string} id - The ID of the task.
+ */
 async function managenProfilesWhenCardOpen(id) {
   const dataFromFireBase = await fetchCardDetails(taskPath, id);
   const refAssignedObject = dataFromFireBase[id].assigned;
@@ -70,6 +118,10 @@ async function managenProfilesWhenCardOpen(id) {
   }
 }
 
+/**
+ * Loads and displays subtasks inside the overlay.
+ * @param {string} id - The ID of the task.
+ */
 async function renderSubtasks(id) {
   let dataFromFireBase = await fetchCardDetails(taskPath, id);
   let refSubtaskContainer = document.querySelector("#subtasks_container");
@@ -86,6 +138,10 @@ async function renderSubtasks(id) {
   setCheckboxAttributes(id);
 }
 
+/**
+ * Adds event listeners to checkboxes to update subtask completion state.
+ * @param {string} id - The ID of the task.
+ */
 async function managenCheckBoxes(id) {
   let refCheckBoxes = document.querySelectorAll("input[type='checkbox']");
   refCheckBoxes.forEach((element) => {
@@ -97,6 +153,13 @@ async function managenCheckBoxes(id) {
   });
 }
 
+/**
+ * Updates the state of a subtask in the database.
+ * @param {string} path - The base path for the task.
+ * @param {string} taskID - The ID of the main task.
+ * @param {string} subtaskID - The ID of the subtask.
+ * @param {Object} state - The updated state of the subtask.
+ */
 async function updateSubtaskState(path = "", taskID, subtaskID, state) {
   let response = await fetch(`${BASE_URL}/${path}/${taskID}/subtask/${subtaskID}.json`, {
     method: "PATCH",
@@ -105,9 +168,13 @@ async function updateSubtaskState(path = "", taskID, subtaskID, state) {
     },
     body: JSON.stringify(state),
   });
-  const responseData = await response.json();
+  return response.json();
 }
 
+/**
+ * Sets the "checked" attribute for subtasks based on their completion state.
+ * @param {string} id - The ID of the task.
+ */
 async function setCheckboxAttributes(id) {
   let response = await fetchCardDetails(`tasks/${id}/subtask`, id);
   for (const subtask in response) {
@@ -123,6 +190,9 @@ async function setCheckboxAttributes(id) {
   }
 }
 
+/**
+ * Refreshes the task board after closing the overlay.
+ */
 function refreshPageWhenOverlayOff() {
   toDo.innerHTML = "";
   progress.innerHTML = "";
@@ -131,6 +201,9 @@ function refreshPageWhenOverlayOff() {
   displayCardOnBoard();
 }
 
+/**
+ * Deletes a task from the database.
+ */
 async function deleteButton() {
   let response = await fetch(`${BASE_URL}/${taskPath}/${idOfcurrentElement}.json`, {
     method: "DELETE",
@@ -138,5 +211,5 @@ async function deleteButton() {
       "Content-Type": "application/json",
     },
   });
-  const responseData = await response.json();
+  return response.json();
 }
