@@ -1,8 +1,6 @@
-const refUrgentBtn = document.getElementById("urgent");
-const refMediumBtn = document.getElementById("medium");
-const refLowBtn = document.getElementById("low");
-const title = document.querySelector(".open_card_title");
-
+/**
+ * Renders the edit menu, displaying the task's title, description, date, and subtasks.
+ */
 function renderEditMenu() {
   refCardBox.innerHTML = "";
   refCardBox.innerHTML += HTMLTamplateForTheEditFunk();
@@ -12,12 +10,20 @@ function renderEditMenu() {
   displayValuesInTheInputFields();
 }
 
+/**
+ * Populates the input fields with the task's title, description, and date.
+ */
 function displayValuesInTheInputFields() {
   document.querySelector("#editTitle").value = titleValue;
   document.querySelector("#editDescription").value = descriptionValue;
   document.querySelector("#editDate").value = dateValue;
 }
 
+/**
+ * Saves the edited data to Firebase under a specific section.
+ * @param {string} section - The section to update (e.g., "title", "description").
+ * @param {string} newValue - The new value to save.
+ */
 async function saveDataToFire(section, newValue) {
   await fetch(`${BASE_URL}/${taskPath}/${idOfcurrentElement}.json`, {
     method: "PATCH",
@@ -26,6 +32,9 @@ async function saveDataToFire(section, newValue) {
   });
 }
 
+/**
+ * Initiates the task edit process, fetching data from Firebase and rendering the necessary UI elements.
+ */
 async function editFunction() {
   let dataFromFireBase = await fetchCardDetails(taskPath, idOfcurrentElement);
   displayContactsInDropdownMenu();
@@ -39,6 +48,9 @@ async function editFunction() {
   }
 }
 
+/**
+ * Sets up event listeners to change the task's title and description in Firebase when edited.
+ */
 async function changeTitleAndDescription() {
   let refTitle = document.querySelector("#editTitle");
   let refDescriptionField = document.querySelector("#editDescription");
@@ -50,6 +62,9 @@ async function changeTitleAndDescription() {
   });
 }
 
+/**
+ * Sets up an event listener to change the task's due date in Firebase when edited.
+ */
 async function changeDate() {
   let taskDate = document.querySelector("#editDate");
   taskDate.addEventListener("change", function () {
@@ -57,6 +72,10 @@ async function changeDate() {
   });
 }
 
+/**
+ * Displays the selected priority for a task.
+ * @param {string} data - The priority level (e.g., "urgent", "medium", "low").
+ */
 function displaySelectedPriority(data) {
   const priorityMap = {
     urgent: { color: "rgb(255, 61, 0)", img: "icon_clicket_urgent.svg" },
@@ -73,7 +92,11 @@ function displaySelectedPriority(data) {
   }
 }
 
-async function urgent(event) {
+/**
+ * Handles setting the priority to "urgent" and updates the task.
+ *
+ */
+async function urgent() {
   saveDataToFire("prio", "urgent");
   document.querySelector(".assigned_to").innerHTML = " ";
   let dataFromFireBase = await fetchCardDetails(taskPath, idOfcurrentElement);
@@ -82,7 +105,11 @@ async function urgent(event) {
   editFunction();
 }
 
-async function medium(event) {
+/**
+ * Handles setting the priority to "medium" and updates the task.
+ *
+ */
+async function medium() {
   saveDataToFire("prio", "medium");
   document.querySelector(".assigned_to").innerHTML = " ";
   let dataFromFireBase = await fetchCardDetails(taskPath, idOfcurrentElement);
@@ -91,7 +118,11 @@ async function medium(event) {
   editFunction();
 }
 
-async function low(event) {
+/**
+ * Handles setting the priority to "low" and updates the task.
+ *
+ */
+async function low() {
   saveDataToFire("prio", "low");
   document.querySelector(".assigned_to").innerHTML = " ";
   let dataFromFireBase = await fetchCardDetails(taskPath, idOfcurrentElement);
@@ -100,6 +131,9 @@ async function low(event) {
   editFunction();
 }
 
+/**
+ * Displays the contacts in the dropdown menu.
+ */
 async function displayContactsInDropdownMenu() {
   let dataFromFireBase = await fetchCardDetails("contacts", idOfcurrentElement);
   for (const key in dataFromFireBase) {
@@ -112,6 +146,10 @@ async function displayContactsInDropdownMenu() {
   whichContactIsAssigned(idOfcurrentElement);
 }
 
+/**
+ * Marks the contacts that have been assigned to the current task.
+ * @param {string} id - The task's ID.
+ */
 async function whichContactIsAssigned(id) {
   let dataFromFireBase = await fetchCardDetails("tasks", id);
   if (!dataFromFireBase[id].assigned) {
@@ -121,6 +159,11 @@ async function whichContactIsAssigned(id) {
   markAssignedContacts(allContactsInDropdownMenu, dataFromFireBase[id].assigned);
 }
 
+/**
+ * Marks the assigned contacts in the dropdown list and sets up event listeners for removing contacts.
+ * @param {NodeList} allContacts - The list of all contact elements.
+ * @param {Object} assignedContacts - The list of assigned contacts.
+ */
 function markAssignedContacts(allContacts, assignedContacts) {
   allContacts.forEach((contactElement) => {
     const contact = contactElement.getAttributeNode("id_value").value;
@@ -136,6 +179,10 @@ function markAssignedContacts(allContacts, assignedContacts) {
   });
 }
 
+/**
+ * Assigns a new contact to the current task.
+ * @param {Event} event - The event object from the user interaction.
+ */
 async function assignNewContacts(event) {
   const contact = event.currentTarget.getAttributeNode("id_value").value;
   let dataFromFireBase = await fetchCardDetails(taskPath, idOfcurrentElement);
@@ -147,6 +194,10 @@ async function assignNewContacts(event) {
   }
 }
 
+/**
+ * Handles the assignment of a new contact to the task and updates Firebase.
+ * @param {string} contact - The contact's ID to be assigned.
+ */
 async function handleNewContactAssignment(contact) {
   assignNewContList.push(contact);
   let newContact = await getContactsFromFireBase(assignNewContList);
@@ -159,6 +210,10 @@ async function handleNewContactAssignment(contact) {
   addDataToFireBase(`${taskPath}/${idOfcurrentElement}/assigned`, newContact);
 }
 
+/**
+ * Removes an assigned contact from the task.
+ * @param {Event} event - The event object from the user interaction.
+ */
 async function retractContactFromCard(event) {
   const contact = event.currentTarget.getAttributeNode("id_value").value;
   let response = await fetch(`${BASE_URL}/${taskPath}/${idOfcurrentElement}/assigned/${contact}.json`, {
@@ -172,6 +227,9 @@ async function retractContactFromCard(event) {
   editFunction();
 }
 
+/**
+ * Displays the subtasks in the edit menu.
+ */
 async function displaySubtasksInTheEditMenu() {
   const dataFromFireBase = await fetchCardDetails(`${taskPath}/${idOfcurrentElement}/subtask`, idOfcurrentElement);
   for (const element in dataFromFireBase) {
@@ -179,6 +237,10 @@ async function displaySubtasksInTheEditMenu() {
   }
 }
 
+/**
+ * Edits an existing subtask.
+ * @param {Event} event - The event object from the user interaction.
+ */
 async function editSubtaskFunk(event) {
   const refSubtaskID = event.currentTarget.getAttributeNode("id_subtask").value;
   const refTaskElement = event.currentTarget;
@@ -187,6 +249,11 @@ async function editSubtaskFunk(event) {
   setupSubtaskEditing(refSubtaskID, dataFromFireBase);
 }
 
+/**
+ * Sets up the subtask editing process, allowing the user to modify the subtask.
+ * @param {string} refSubtaskID - The subtask's ID.
+ * @param {Object} dataFromFireBase - The data fetched from Firebase for the subtask.
+ */
 function setupSubtaskEditing(refSubtaskID, dataFromFireBase) {
   let inputField = document.getElementById(`${refSubtaskID}`);
   if (!inputField) return;
@@ -203,6 +270,11 @@ function setupSubtaskEditing(refSubtaskID, dataFromFireBase) {
   });
 }
 
+/**
+ * Saves the new subtask value to Firebase.
+ * @param {string} subtaskID - The subtask's ID.
+ * @param {string} newValue - The new value of the subtask.
+ */
 async function saveNewSubtask(subtaskID, newValue) {
   await fetch(`${BASE_URL}/${taskPath}/${idOfcurrentElement}/subtask/${subtaskID}.json`, {
     method: "PATCH",
@@ -211,6 +283,10 @@ async function saveNewSubtask(subtaskID, newValue) {
   });
 }
 
+/**
+ * Deletes a subtask from Firebase.
+ * @param {Event} event - The event object from the user interaction.
+ */
 async function deleteSubtask(event) {
   const refTrashButton = event.currentTarget.getAttribute("id_trash");
   console.log(refTrashButton);
@@ -222,8 +298,11 @@ async function deleteSubtask(event) {
   displaySubtasksInTheEditMenu();
 }
 
-async function addNewSubtask(event) {
-  let subtasks = await fetchSubtasks();
+/**
+ * Adds a new subtask to Firebase.
+ *
+ */
+async function addNewSubtask() {
   let theNewTask = document.querySelector("#editSubtask").value;
 
   let newTaskObj = {
@@ -237,6 +316,10 @@ async function addNewSubtask(event) {
   displaySubtasksInTheEditMenu();
 }
 
+/**
+ * Fetches all subtasks for the current task.
+ * @returns {Array} - A list of subtasks.
+ */
 async function fetchSubtasks() {
   let response = await fetch(`${BASE_URL}/tasks/${idOfcurrentElement}/subtask.json`, {
     method: "GET",
@@ -244,6 +327,10 @@ async function fetchSubtasks() {
   return (await response.json()) || [];
 }
 
+/**
+ * Saves a new subtask to Firebase.
+ * @param {Object} newTaskObj - The new task object to save.
+ */
 async function saveNewSubtask(newTaskObj) {
   await fetch(`${BASE_URL}/${taskPath}/${idOfcurrentElement}/subtask.json`, {
     method: "PATCH",
@@ -252,10 +339,17 @@ async function saveNewSubtask(newTaskObj) {
   });
 }
 
+/**
+ * Focuses on the input field for adding a new subtask.
+ * @param {Event} event - The event object from the user interaction.
+ */
 function focusOnInputField(event) {
   const newTaskInputField = document.querySelector("#editSubtask").focus();
 }
 
+/**
+ * Handles the OK button click functionality in the edit menu.
+ */
 async function okBtnFunk() {
   let id = idOfcurrentElement;
   const fetchDetails = await fetchCardDetails(taskPath, id);
@@ -265,6 +359,11 @@ async function okBtnFunk() {
   renderSubtasks(id);
 }
 
+/**
+ * Handles the change in the subtask input field and updates the button state based on the input's length.
+ * If the input field is empty, it sets the button to the standard state.
+ * If there is input, it sets the button to the double button state.
+ */
 function writeEditSubtask() {
   let subtask = document.getElementById("editSubtask").value;
   if (subtask.length < 1) {
@@ -275,6 +374,11 @@ function writeEditSubtask() {
   }
 }
 
+/**
+ * Clears the content of the subtask input field and resets the button to its standard state.
+ * Typically called when the user clears the subtask input.
+ * @param {Event} event - The event object associated with the action.
+ */
 function clearEditSubtask(event) {
   document.getElementById("editSubtask").value = "";
   setStandardButtonInOpenCard();
