@@ -168,6 +168,14 @@
   gap: 30px;
 }
 
+.cancelBtn img {
+  transition: filter 125ms ease;
+}
+
+.cancelBtn:hover img {
+  filter: brightness(0) saturate(100%) invert(55%) sepia(75%) saturate(1619%) hue-rotate(165deg) brightness(92%) contrast(101%);
+}
+
 .cancelBtn {
   border: solid 1px rgba(42, 54, 71, 1);
   border-radius: 10px;

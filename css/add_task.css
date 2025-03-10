@@ -334,10 +334,11 @@ p {
   height: 24px;
   width: auto;
   content: url("../assets/icons/addTask/iconoir_cancel.svg");
+  transition: filter 125ms ease-in-out;
 }
 
 .clear-button:hover .icon-box {
-  content: url("../assets/icons/addTask/iconoir_cancel_hover.svg");
+  filter: brightness(0) saturate(100%) invert(55%) sepia(75%) saturate(1619%) hue-rotate(165deg) brightness(92%) contrast(101%);
 }
 
 .clear-button:hover {
