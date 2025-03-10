@@ -11,10 +11,19 @@ requiredTitle = false;
 requiredDate = false;
 requiredCategory = false;
 
+/**
+ * Calls functions to render the contacts when the page is initialized.
+ * @returns {void}
+ */
 function render() {
   renderContacts("contacts");
 }
 
+/**
+ * Fetches and renders contacts from the database.
+ * @param {string} path - The path in the Firebase database to fetch contacts from.
+ * @returns {Promise<void>} A promise that resolves when contacts are rendered.
+ */
 async function renderContacts(path = "") {
   let response = await fetch(BASE_URL + path + ".json");
   let contacts = await response.json();
@@ -26,6 +35,11 @@ async function renderContacts(path = "") {
   pushContactsToSelectField();
 }
 
+/**
+ * Converts the raw contact data into an array of contact objects.
+ * @param {Object} contacts - The raw contact data from Firebase.
+ * @returns {void}
+ */
 function pushContacts(contacts) {
   for (let key in contacts) {
     let contact = {
@@ -39,6 +53,10 @@ function pushContacts(contacts) {
   }
 }
 
+/**
+ * Renders contacts in the dropdown list.
+ * @returns {void}
+ */
 function pushContactsToSelectField() {
   let contactlist = document.getElementById("contact-list");
   contactlist.innerHTML = "";
@@ -48,6 +66,13 @@ function pushContactsToSelectField() {
   }
 }
 
+/**
+ * Renders an individual contact item in the contact list dropdown.
+ * @param {HTMLElement} contactlist - The container to append the contact to.
+ * @param {Object} currentContact - The contact object to render.
+ * @param {number} i - The index of the contact in the array.
+ * @returns {void}
+ */
 function renderContactTemplate(contactlist, currentContact, i) {
   contactlist.innerHTML += /*html*/ `
             <div onclick="addContact(${i})" id="contact${i}" class="contactlist">
@@ -62,6 +87,10 @@ function renderContactTemplate(contactlist, currentContact, i) {
         `;
 }
 
+/**
+ * Filters and renders contacts based on search input.
+ * @returns {void}
+ */
 function searchContacts() {
   let search = document.getElementById("contact-input").value.toLowerCase(); // Kleinbuchstaben für Vergleich
   let contactlist = document.getElementById("contact-list");
@@ -74,6 +103,10 @@ function searchContacts() {
   }
 }
 
+/**
+ * Opens the contact list dropdown.
+ * @returns {void}
+ */
 function openContactList() {
   let contactList = document.getElementById("contact-list");
   let inputBorder = document.getElementById("contact-input-border");
@@ -92,6 +125,11 @@ function openContactList() {
   showContactList(contactList);
 }
 
+/**
+ * Shows the contact list dropdown with animation.
+ * @param {HTMLElement} contactList - The contact list dropdown element.
+ * @returns {void}
+ */
 function showContactList(contactList) {
   setTimeout(() => {
     contactList.classList.add("visible");
@@ -99,6 +137,11 @@ function showContactList(contactList) {
   }, 10);
 }
 
+/**
+ * Handles closing the contact list if clicked outside.
+ * @param {Event} event - The event triggered by a click.
+ * @returns {void}
+ */
 function handleContactOutsideClick(event) {
   let contactList = document.getElementById("contact-list");
   let contactWrapper = document.getElementById("contact-wrapper");
@@ -108,6 +151,10 @@ function handleContactOutsideClick(event) {
   }
 }
 
+/**
+ * Closes the contact list dropdown.
+ * @returns {void}
+ */
 function closeContactList() {
   let contactList = document.getElementById("contact-list");
   let inputBorder = document.getElementById("contact-input-border");
@@ -125,6 +172,11 @@ function closeContactList() {
   document.removeEventListener("click", handleContactOutsideClick);
 }
 
+/**
+ * Adds or removes a contact from the selected contacts list.
+ * @param {number} x - The index of the contact to add/remove.
+ * @returns {void}
+ */
 function addContact(x) {
   if (selectedContacts.includes(x)) {
     removeContact(x);
@@ -134,6 +186,11 @@ function addContact(x) {
   renderSelectetContacts();
 }
 
+/**
+ * Sets a contact as selected.
+ * @param {number} x - The index of the contact to select.
+ * @returns {void}
+ */
 function setContact(x) {
   let addContact = document.getElementById("contact" + x);
   addContact.classList.remove("contactlist");
@@ -145,6 +202,11 @@ function setContact(x) {
   selectedContacts.push(x);
 }
 
+/**
+ * Returns the first letter of the name in uppercase.
+ * @param {string} name - The name from which to extract the first letter.
+ * @returns {string} The first letter(s) of the name in uppercase.
+ */
 function returnFirstLetter(name) {
   let words = name.split(" ");
   let initialsArray = words.map(function (word) {
@@ -155,6 +217,11 @@ function returnFirstLetter(name) {
   return initials;
 }
 
+/**
+ * Removes a contact from the selected contacts list.
+ * @param {number} x - The index of the contact to remove.
+ * @returns {void}
+ */
 function removeContact(x) {
   let addContact = document.getElementById("contact" + x);
   addContact.classList.add("contactlist");
@@ -167,6 +234,10 @@ function removeContact(x) {
   selectedContacts.splice(index, 1);
 }
 
+/**
+ * Renders the selected contacts in the assigned area.
+ * @returns {void}
+ */
 function renderSelectetContacts() {
   let wrapper = document.getElementById("assigned");
   wrapper.innerHTML = "";
@@ -178,6 +249,11 @@ function renderSelectetContacts() {
   }
 }
 
+/**
+ * Sets the priority for a task.
+ * @param {string} x - The ID of the priority button to select.
+ * @returns {void}
+ */
 function setPrio(x) {
   resetPrioButton();
   let button = document.getElementById(x);
@@ -189,6 +265,10 @@ function setPrio(x) {
     `;
 }
 
+/**
+ * Resets the previously selected priority button to its default state.
+ * @returns {void}
+ */
 function resetPrioButton() {
   if ((selectedButton == "") == false) {
     let button = document.getElementById(selectedButton);
@@ -200,6 +280,10 @@ function resetPrioButton() {
   }
 }
 
+/**
+ * Opens the category list dropdown for task selection.
+ * @returns {void}
+ */
 function openCatecoryList() {
   let categoryList = document.getElementById("catecory-list");
   let inputBorder = document.getElementById("catecory-input-border");
@@ -215,6 +299,11 @@ function openCatecoryList() {
   showCategoryList(categoryList);
 }
 
+/**
+ * Shows the category list dropdown with animation.
+ * @param {HTMLElement} categoryList - The category list dropdown element.
+ * @returns {void}
+ */
 function showCategoryList(categoryList) {
   setTimeout(() => {
     categoryList.classList.add("visible");
@@ -222,6 +311,11 @@ function showCategoryList(categoryList) {
   }, 10);
 }
 
+/**
+ * Handles closing the category list dropdown if the click is outside the dropdown.
+ * @param {Event} event - The event triggered by a click.
+ * @returns {void}
+ */
 function handleOutsideClick(event) {
   let categoryList = document.getElementById("catecory-list");
   let inputBorder = document.getElementById("catecory-input-border");
@@ -231,6 +325,10 @@ function handleOutsideClick(event) {
   }
 }
 
+/**
+ * Closes the category list dropdown.
+ * @returns {void}
+ */
 function closeCatecoryList() {
   let categoryList = document.getElementById("catecory-list");
   let inputBorder = document.getElementById("catecory-input-border");
@@ -246,6 +344,11 @@ function closeCatecoryList() {
   document.removeEventListener("click", handleOutsideClick);
 }
 
+/**
+ * Adds a category to the input field based on the selected category number.
+ * @param {number} categoryNum - The category number (1 for "Technical Task", 2 for "User Story").
+ * @returns {void}
+ */
 function addCatecory(categoryNum) {
   let categoryInput = document.getElementById("catecory-input");
   if (categoryNum === 1) {
@@ -257,10 +360,18 @@ function addCatecory(categoryNum) {
   document.getElementById("required-category").classList.add("display_none");
 }
 
+/**
+ * Hides the category placeholder.
+ * @returns {void}
+ */
 function invisibleCategoryPlaceholder() {
   document.getElementById("category-placeholder").classList.add("display_none");
 }
 
+/**
+ * Validates required fields before creating a task.
+ * @returns {void}
+ */
 function checkRequiredField() {
   checkRequiredTitle();
   checkRequiredDate();
@@ -270,6 +381,10 @@ function checkRequiredField() {
   }
 }
 
+/**
+ * Checks if the title field is filled.
+ * @returns {void}
+ */
 function checkRequiredTitle() {
   let title = document.getElementById("title");
   if (title.value === "") {
@@ -282,6 +397,10 @@ function checkRequiredTitle() {
   }
 }
 
+/**
+ * Checks if the date field is filled.
+ * @returns {void}
+ */
 function checkRequiredDate() {
   let date = document.getElementById("date");
   if (date.value === "") {
@@ -294,6 +413,10 @@ function checkRequiredDate() {
   }
 }
 
+/**
+ * Checks if the category field is filled.
+ * @returns {void}
+ */
 function checkRequiredcategory() {
   let category = document.getElementById("catecory-input");
   if (category.value === "") {
@@ -306,6 +429,10 @@ function checkRequiredcategory() {
   }
 }
 
+/**
+ * Creates a task by collecting data and posting it to the database.
+ * @returns {void}
+ */
 function creatTask() {
   let data = returnAllData();
   postAllData("tasks", data);
@@ -316,6 +443,10 @@ function creatTask() {
   }, 3000);
 }
 
+/**
+ * Collects all task data to send it to the database.
+ * @returns {Object} The task data object.
+ */
 function returnAllData() {
   let title = document.getElementById("title").value;
   let description = document.getElementById("description").value;
@@ -327,6 +458,10 @@ function returnAllData() {
   return tamplate(id, title, description, assignedContacts, date, selectedButton, category, subtasksList, status, localStorage.userId);
 }
 
+/**
+ * Renders selected contacts for a new task.
+ * @returns {void}
+ */
 function renderContactsToNewTask() {
   assignedContacts = [];
   for (let index = 0; index < selectedContacts.length; index++) {
@@ -340,6 +475,20 @@ function renderContactsToNewTask() {
   }
 }
 
+/**
+ * Creates a template for the task data to be posted.
+ * @param {string} id - The task ID.
+ * @param {string} title - The task title.
+ * @param {string} description - The task description.
+ * @param {Array<Object>} assignedContacts - The assigned contacts for the task.
+ * @param {string} date - The due date for the task.
+ * @param {string} selectedButton - The selected priority button for the task.
+ * @param {string} category - The category of the task.
+ * @param {Object} subtasks - The list of subtasks for the task.
+ * @param {string} status - The status of the task (e.g., "toDo").
+ * @param {string} user - The user ID of the task creator.
+ * @returns {Object} The task data object in template format.
+ */
 function tamplate(id, title, description, assignedContacts, date, selectedButton, category, subtasks, status, user) {
   return {
     [id]: {
@@ -357,6 +506,12 @@ function tamplate(id, title, description, assignedContacts, date, selectedButton
   };
 }
 
+/**
+ * Posts task data to the specified Firebase database path.
+ * @param {string} path - The Firebase database path to post the data to.
+ * @param {Object} data - The data to post.
+ * @returns {Promise<Object>} The response from the database.
+ */
 async function postAllData(path = "", data) {
   let response = await fetch(BASE_URL + path + ".json", {
     method: "PATCH",
@@ -369,6 +524,10 @@ async function postAllData(path = "", data) {
   return responseToJSON;
 }
 
+/**
+ * Displays a notification once a task is finished.
+ * @returns {void}
+ */
 function finishTaskNotification() {
   document.getElementById("finish-box").classList.add("finish-container-activ");
   setTimeout(() => {
@@ -376,6 +535,10 @@ function finishTaskNotification() {
   }, 2000);
 }
 
+/**
+ * Clears all tasks and resets input fields.
+ * @returns {void}
+ */
 function clearAllTasks() {
   pushContactsToSelectField();
   resetPrioButton();
@@ -386,6 +549,10 @@ function clearAllTasks() {
   clearValueOfInputFields();
 }
 
+/**
+ * Clears the values of all input fields.
+ * @returns {void}
+ */
 function clearValueOfInputFields() {
   document.getElementById("title").value = "";
   document.getElementById("description").value = "";
@@ -395,6 +562,10 @@ function clearValueOfInputFields() {
   document.getElementById("subtask").value = "";
 }
 
+/**
+ * Adds focus style to the subtask input field when clicked.
+ * @returns {void}
+ */
 function borderFocus() {
   let border = document.getElementById("subtusk-input-border");
   border.classList.add("subtask-inputfield-focus");
