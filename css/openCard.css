@@ -153,8 +153,8 @@ h5 {
   background-image: url(../assets/icons/board/edit.svg);
   background-repeat: no-repeat;
   background-size: cover;
-  min-width: 22px;
-  min-height: 22px;
+  width: 18px;
+  height: 18px;
 }
 
 .vector {
@@ -163,7 +163,6 @@ h5 {
   background-size: cover;
   min-width: 3px;
   min-height: 1px;
-  display: none;
 }
 
 .position_delete {
@@ -187,6 +186,9 @@ h5 {
 .position_edit:hover .edit_img {
   background-image: url(../assets/icons/board/edit_hover.svg);
   color: rgb(41, 171, 226);
+  width: 19px;
+  height: 22px;
+  margin-left: -2px;
 }
 
 .position_delete:hover .delete_button {
@@ -199,12 +201,6 @@ h5 {
 
 .edit_button_box:hover .vector {
   display: inline-block;
-}
-
-.delete_button {
-}
-
-.edit_button {
 }
 
 td,
