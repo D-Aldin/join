@@ -34,6 +34,9 @@ let descriptionValue;
 /** Stores the current card's due date. */
 let dateValue;
 
+/** Reference to the Task Delete Message*/
+const refTaskDeleteMsg = document.querySelector(".task_deleted_msg");
+
 /**
  * Displays the overlay with detailed task information.
  * @param {Event} event - The event object from the clicked element.
@@ -211,5 +214,22 @@ async function deleteButton() {
       "Content-Type": "application/json",
     },
   });
+  showTaskDeleteMsg();
+  overlayOff();
+  hideTaskDeleteMsg();
   return response.json();
+}
+
+/** Give feedback to the user when a task is deleted.  */
+function showTaskDeleteMsg() {
+  refTaskDeleteMsg.classList.remove("d_none");
+  refTaskDeleteMsg.style.animation = "slideInFromRight 125ms ease forwards";
+}
+
+/** Hide the 'Task Deleted' message after 900 ms */
+function hideTaskDeleteMsg() {
+  setTimeout(() => {
+    refTaskDeleteMsg.style.animation = "slideOutToRight 125ms ease forwards";
+    refTaskDeleteMsg.classList.add("d_none");
+  }, 900);
 }
