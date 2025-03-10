@@ -1,9 +1,17 @@
+/**
+ * Adds event listeners to the DOMContentLoaded event to initialize the page.
+ * @returns {void}
+ */
 document.addEventListener("DOMContentLoaded", function () {
   activeLink();
   addContainerClickListeners();
   addLegalAndPolicyClickListeners();
 });
 
+/**
+ * Highlights the active link in the navigation and legal sections based on the current page.
+ * @returns {void}
+ */
 function activeLink() {
   const currentPath = window.location.pathname
     .split("/")
@@ -15,6 +23,13 @@ function activeLink() {
   updateActiveLinks(legalLinks, currentPath);
 }
 
+/**
+ * Updates the active link in the navigation and legal sections.
+ * Adds the "active_background_color" class to the active link's parent.
+ * @param {NodeList} links - A collection of link elements.
+ * @param {string} currentPath - The current page path without the ".html" extension.
+ * @returns {void}
+ */
 function updateActiveLinks(links, currentPath) {
   links.forEach((link) => {
     const linkPath = link
@@ -31,10 +46,13 @@ function updateActiveLinks(links, currentPath) {
   });
 }
 
+/**
+ * Adds click event listeners to containers for navigation links.
+ * Redirects to the link's href when clicked.
+ * @returns {void}
+ */
 function addContainerClickListeners() {
-  const containers = document.querySelectorAll(
-    ".link_nav_summary, .link_nav_add_task, .link_nav_board, .link_nav_contacts"
-  );
+  const containers = document.querySelectorAll(".link_nav_summary, .link_nav_add_task, .link_nav_board, .link_nav_contacts");
   for (let i = 0; i < containers.length; i++) {
     containers[i].addEventListener("click", function () {
       const link = this.querySelector("a");
@@ -45,10 +63,13 @@ function addContainerClickListeners() {
   }
 }
 
+/**
+ * Adds click event listeners to legal and policy containers.
+ * Redirects to the link's href when clicked.
+ * @returns {void}
+ */
 function addLegalAndPolicyClickListeners() {
-  const containers = document.querySelectorAll(
-    ".privacy_policy_login, .legal_notice_login"
-  );
+  const containers = document.querySelectorAll(".privacy_policy_login, .legal_notice_login");
   containers.forEach((container) => {
     container.addEventListener("click", function () {
       const link = container.querySelector("a");
