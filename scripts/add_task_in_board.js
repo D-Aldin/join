@@ -3,6 +3,7 @@ let storeThePrioValue = " ";
 let subtaskObject = {};
 let statusOfRequired = false;
 let taskStatus = "toDo";
+let selectedContactIds = [];
 
 function showOverlay(event) {
   const overlay = document.querySelector("#overlayForAddTask");
@@ -38,13 +39,26 @@ function renderAddTaskMenu() {
 
 async function displayDropDownMenuSectionAddTask() {
   document.querySelector(".contentSectionAddTask").innerHTML = "";
-  let dataFromFireBase = await fetchTasks("contacts");
-  for (const key in dataFromFireBase) {
-    if (Object.prototype.hasOwnProperty.call(dataFromFireBase, key)) {
-      const profile = dataFromFireBase[key];
-      const profileInitials = initials(profile.name);
-      document.querySelector(".contentSectionAddTask").innerHTML += HTMLTamplateForDropdownProfilesSectionAddTask(key, profile.color, profileInitials, profile.name);
+  let contactsData = await fetchTasks("contacts");
+  for (const key in contactsData) {
+    if (Object.prototype.hasOwnProperty.call(contactsData, key)) {
+      renderContactItem(key, contactsData[key]);
     }
+  }
+}
+
+function renderContactItem(key, profile) {
+  const profileInitials = initials(profile.name);
+  const isSelected = selectedContactIds.includes(key);
+  const checkboxImage = isSelected ? "./assets/icons/checkbox/check_white.svg" : "./assets/icons/checkbox/openCardRectangle.svg";
+  const contactHTML = HTMLTamplateForDropdownProfilesSectionAddTask(key, profile.color, profileInitials, profile.name);
+  document.querySelector(".contentSectionAddTask").innerHTML += contactHTML;
+  if (isSelected) {
+    setTimeout(() => {
+      const contactElement = document.querySelector(`.contentSectionAddTask [id_value="${key}"]`);
+      contactElement.classList.add("selected_contact");
+      contactElement.querySelector("img").src = checkboxImage;
+    }, 0);
   }
 }
 
@@ -52,12 +66,18 @@ function chooseContact(event) {
   const profile = event.currentTarget;
   const contactID = profile.getAttributeNode("id_value").value;
   const checkbox = profile.lastElementChild.lastElementChild;
-  if (profile.classList.toggle("selected_contact")) {
-    checkbox.src = "./assets/icons/checkbox/check_white.svg";
-    displayChossenContact(contactID);
-  } else {
+  const index = selectedContactIds.indexOf(contactID);
+  const isAlreadySelected = index !== -1;
+  if (isAlreadySelected) {
+    selectedContactIds.splice(index, 1);
+    profile.classList.remove("selected_contact");
     checkbox.src = "./assets/icons/checkbox/openCardRectangle.svg";
     unselect(contactID);
+  } else {
+    selectedContactIds.push(contactID);
+    profile.classList.add("selected_contact");
+    checkbox.src = "./assets/icons/checkbox/check_white.svg";
+    displayChossenContact(contactID);
   }
 }
 
@@ -212,6 +232,7 @@ function collectTheContacts() {
       contactList.push(contact);
     }
   });
+  contactList = [...selectedContactIds];
 }
 
 function collectTheSubtasks() {
