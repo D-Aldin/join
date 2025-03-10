@@ -76,17 +76,22 @@ async function fetchUserData() {
 }
 
 /**
- * Finds the user by email in the provided user data.
+ * Finds the user by email and password in the provided user data.
  * @param {Object} users - The user data.
  * @param {string} email - The email to search for.
  * @returns {string|null} The user key if found, or null if not found.
  */
 function findUserByEmail(users, email) {
+  const emailElement = document.getElementById("loginEmail");
+  const passwordElement = document.getElementById("loginPassword");
   for (const key in users) {
     if (users[key].email === email && users[key].password === password) {
       return key;
     }
   }
+  emailElement.style.borderColor = "red";
+  passwordElement.style.borderColor = "red";
+  document.getElementById("password_error").innerText = "Invalid email or password.";
   return null;
 }
 
