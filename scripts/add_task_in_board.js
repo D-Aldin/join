@@ -1,3 +1,10 @@
+/**
+ * @fileOverview Handles the task creation overlay, priority selection, contact selection, subtask management, and form validation.
+ */
+
+/**
+ * Global variables for task management.
+ */
 let contactList = [];
 let storeThePrioValue = " ";
 let subtaskObject = {};
@@ -5,6 +12,10 @@ let statusOfRequired = false;
 let taskStatus = "toDo";
 let selectedContactIds = [];
 
+/**
+ * Displays the task overlay with an animation.
+ * @param {Event} event - The event triggering the overlay display.
+ */
 function showOverlay(event) {
   const overlay = document.querySelector("#overlayForAddTask");
   const taskBox = document.querySelector("#add_task_box");
@@ -17,6 +28,9 @@ function showOverlay(event) {
   taskBox.style.animation = "slideInFromRight 125ms ease forwards";
 }
 
+/**
+ * Hides the task overlay with an animation.
+ */
 function hideOverlay() {
   const overlay = document.querySelector("#overlayForAddTask");
   const taskBox = document.querySelector("#add_task_box");
@@ -27,9 +41,11 @@ function hideOverlay() {
   }, 125);
 }
 
+/**
+ * Renders the add task menu, redirecting to a new page if the screen is too small.
+ */
 function renderAddTaskMenu() {
   let addTaskButton = document.querySelector("#add_task_box");
-  const refInputFiledSubtask = document.querySelector("#subtask");
   if (window.innerWidth > 1200) {
     addTaskButton.innerHTML = HTMLTamplateForAddTaskInBorad();
   } else {
@@ -37,6 +53,9 @@ function renderAddTaskMenu() {
   }
 }
 
+/**
+ * Fetches contacts and displays them in the dropdown menu.
+ */
 async function displayDropDownMenuSectionAddTask() {
   document.querySelector(".contentSectionAddTask").innerHTML = "";
   let contactsData = await fetchTasks("contacts");
@@ -47,6 +66,11 @@ async function displayDropDownMenuSectionAddTask() {
   }
 }
 
+/**
+ * Renders a contact item in the dropdown menu.
+ * @param {string} key - The contact's unique identifier.
+ * @param {Object} profile - The contact's profile data.
+ */
 function renderContactItem(key, profile) {
   const profileInitials = initials(profile.name);
   const isSelected = selectedContactIds.includes(key);
@@ -62,6 +86,10 @@ function renderContactItem(key, profile) {
   }
 }
 
+/**
+ * Toggles the selection state of a contact.
+ * @param {Event} event - The event triggering the contact selection.
+ */
 function chooseContact(event) {
   const profile = event.currentTarget;
   const contactID = profile.getAttributeNode("id_value").value;
@@ -81,20 +109,31 @@ function chooseContact(event) {
   }
 }
 
+/**
+ * Displays a selected contact in the chosen contacts section.
+ * @param {string} id - The contact's ID.
+ */
 async function displayChossenContact(id) {
   let profileContainer = document.querySelector(".chosen_contacts");
   let dataFromFireBase = await fetchTasks(`contacts/${id}`);
   let name = initials(dataFromFireBase.name);
   let color = dataFromFireBase.color;
   profileContainer.innerHTML += contactTamplateForAddTaskSectionInBoard(name, color, id);
-  // collectDataForNewTask();
 }
 
+/**
+ * Removes a selected contact from the chosen contacts section.
+ * @param {string} id - The contact's ID.
+ */
 function unselect(id) {
   let refElement = document.querySelector(`[profile_id=${id}]`);
   refElement.remove();
 }
 
+/**
+ * Handles priority button selection and updates styling.
+ * @param {Event} event - The event triggering the priority selection.
+ */
 function buttonUrgent(event) {
   let btnUrgent = document.querySelector("#urgent");
   let btnMedium = document.querySelector("#medium");
@@ -110,6 +149,10 @@ function buttonUrgent(event) {
   }
 }
 
+/**
+ * Handles priority button selection and updates styling.
+ * @param {Event} event - The event triggering the priority selection.
+ */
 function buttonMedium(event) {
   let btnUrgent = document.querySelector("#urgent");
   let btnMedium = document.querySelector("#medium");
@@ -126,6 +169,10 @@ function buttonMedium(event) {
   storeThePrioValue = "medium";
 }
 
+/**
+ * Handles priority button selection and updates styling.
+ * @param {Event} event - The event triggering the priority selection.
+ */
 function buttonLow(event) {
   let btnUrgent = document.querySelector("#urgent");
   let btnMedium = document.querySelector("#medium");
@@ -142,6 +189,9 @@ function buttonLow(event) {
   storeThePrioValue = "low";
 }
 
+/**
+ * Focuses the subtask input field and displays its buttons.
+ */
 function focusTheField() {
   const inputSubtask = document.querySelector("#subtask");
   inputSubtask.focus();
@@ -151,6 +201,9 @@ function focusTheField() {
   setEventListenerForSubtask();
 }
 
+/**
+ * Closes the subtask input field and resets its value.
+ */
 function closeInputField() {
   const inputSubtask = document.querySelector("#subtask");
   document.querySelector(".subtask-inputfield-button").classList.toggle("hide_element");
@@ -158,6 +211,9 @@ function closeInputField() {
   inputSubtask.value = "";
 }
 
+/**
+ * Adds a new subtask to the task wrapper.
+ */
 function newSubtask() {
   const inputSubtask = document.querySelector("#subtask");
   document.querySelector("#tasks-wrapper").innerHTML += HTMLTamplateForSubtasksInAddTaskBoard(inputSubtask.value);
@@ -165,11 +221,19 @@ function newSubtask() {
   closeInputField();
 }
 
+/**
+ * Deletes a subtask from the board section.
+ * @param {Event} event - The event triggering the deletion.
+ */
 function deleteSubtaskBoardSection(event) {
   let task = event.currentTarget.parentElement.parentElement;
   task.remove();
 }
 
+/**
+ * Edits a subtask by transforming it into an input field.
+ * @param {Event} event - The event triggering the edit.
+ */
 function editSubtaskInAddTaskAreaBoard(event) {
   let task = event.currentTarget.parentElement.parentElement;
   let id = task.id;
@@ -180,12 +244,20 @@ function editSubtaskInAddTaskAreaBoard(event) {
   inputField.value = task.id;
 }
 
+/**
+ * Deletes an editing subtask.
+ * @param {Event} event - The event triggering the deletion.
+ */
 function deleteEditingSubtask(event) {
   let taskID = event.currentTarget.getAttribute("id_trash");
   let refTask = document.querySelector(`#${taskID}`);
   refTask.remove();
 }
 
+/**
+ * Confirms an edited subtask and updates it in the list.
+ * @param {Event} event - The event triggering the confirmation.
+ */
 function confirmEditing(event) {
   let task = event.currentTarget.parentElement.parentElement.parentElement;
   let inputField = document.querySelector(".edit_subtask_input_field input");
@@ -193,6 +265,10 @@ function confirmEditing(event) {
   document.querySelector("#tasks-wrapper").innerHTML += HTMLTamplateForSubtasksInAddTaskBoard(inputField.value);
 }
 
+/**
+ * Collects all input data for a new task.
+ * @returns {Promise<Object>} The structured task data object.
+ */
 async function collectDataForNewTask() {
   const inputTitle = document.querySelector("#title");
   const inputDescription = document.querySelector("#description");
@@ -207,6 +283,20 @@ async function collectDataForNewTask() {
   return tamplate(id, inputTitle.value, inputDescription.value, contacts, inputDate.value, storeThePrioValue, inputCategory.value, subtaskObject, taskStatus, localStorage.userId);
 }
 
+/**
+ * Creates a task template object.
+ * @param {string} id - Task ID.
+ * @param {string} title - Task title.
+ * @param {string} description - Task description.
+ * @param {Array} contact - Assigned contacts.
+ * @param {string} date - Due date.
+ * @param {string} prio - Priority level.
+ * @param {string} category - Task category.
+ * @param {Object} subtask - Subtasks.
+ * @param {string} status - Task status.
+ * @param {string} user - User ID.
+ * @returns {Object} The task template object.
+ */
 function tamplate(id, title, description, contact, date, prio, category, subtask, status, user) {
   return {
     [id]: {
@@ -224,6 +314,9 @@ function tamplate(id, title, description, contact, date, prio, category, subtask
   };
 }
 
+/**
+ * Collects selected contacts and updates the contact list.
+ */
 function collectTheContacts() {
   let refAllChosenContacts = document.querySelectorAll("#profile");
   refAllChosenContacts.forEach((element) => {
@@ -235,6 +328,9 @@ function collectTheContacts() {
   contactList = [...selectedContactIds];
 }
 
+/**
+ * Collects subtasks and stores them in an object.
+ */
 function collectTheSubtasks() {
   let refAllChosenSubtasks = document.querySelectorAll(".subtask_paragraf");
 
@@ -244,6 +340,9 @@ function collectTheSubtasks() {
   }
 }
 
+/**
+ * Validates if the title field is filled.
+ */
 function requiredFieldTitle() {
   const inputFiledTitle = document.querySelector("#title");
   if (inputFiledTitle.value.length === 0) {
@@ -256,6 +355,9 @@ function requiredFieldTitle() {
   });
 }
 
+/**
+ * Validates if the date field is filled.
+ */
 function requiredFieldDate() {
   let inputFiledDate = document.getElementById("dateBoard");
   let dateValue = inputFiledDate.value;
@@ -275,6 +377,9 @@ function requiredFieldDate() {
   });
 }
 
+/**
+ * Validates if the category field is selected.
+ */
 function requiredFieldCategory() {
   const inputFiledCategory = document.querySelector("#category");
   if (inputFiledCategory.value === "placeholder") {
@@ -287,6 +392,9 @@ function requiredFieldCategory() {
   });
 }
 
+/**
+ * Removes the placeholder option from the category dropdown.
+ */
 function mimicPlaceHolder() {
   let placeholder = document.querySelector('option[value="placeholder"]');
   if (!placeholder) {
@@ -295,6 +403,9 @@ function mimicPlaceHolder() {
   placeholder.remove();
 }
 
+/**
+ * Creates a task, validates inputs, and saves it to Firebase.
+ */
 async function createTask() {
   let card = await collectDataForNewTask();
   if (!validateInputs()) return;
@@ -303,6 +414,10 @@ async function createTask() {
   hideTaskAddedAnimation();
 }
 
+/**
+ * Validates required input fields before creating a task.
+ * @returns {boolean} Whether the input fields are valid.
+ */
 function validateInputs() {
   requiredFieldTitle();
   requiredFieldDate();
@@ -313,12 +428,18 @@ function validateInputs() {
   return title.length && date && date !== 0 && category !== "placeholder";
 }
 
+/**
+ * Displays the task added animation.
+ */
 function showTaskAddedAnimation() {
   const taskAdded = document.querySelector(".task_added");
   taskAdded.classList.remove("d_none");
   taskAdded.style.animation = "slideInFromRight 125ms ease forwards";
 }
 
+/**
+ * Hides the task added animation and redirects to the board.
+ */
 function hideTaskAddedAnimation() {
   setTimeout(() => {
     document.querySelector(".task_added").style.animation = "slideOutToRight 125ms ease forwards";
@@ -329,23 +450,35 @@ function hideTaskAddedAnimation() {
   }, 1000);
 }
 
+/**
+ * Sets up event listeners for task buttons.
+ */
 document.querySelector("#addToDo").addEventListener("click", function () {
   showOverlay();
   renderAddTaskMenu();
 });
 
+/**
+ * Sets up event listeners for task buttons.
+ */
 document.querySelector("#addProgress").addEventListener("click", function () {
   showOverlay();
   renderAddTaskMenu();
   taskStatus = "progress";
 });
 
+/**
+ * Sets up event listeners for task buttons.
+ */
 document.querySelector("#addFeedback").addEventListener("click", function () {
   showOverlay();
   renderAddTaskMenu();
   taskStatus = "feedback";
 });
 
+/**
+ * Redirects to add_task.html if the window is resized below a threshold.
+ */
 window.addEventListener("resize", () => {
   const refOverlay = document.querySelector("#overlayForAddTask");
   if (window.innerWidth < 1301 && refOverlay.style.display === "block") {
@@ -353,6 +486,9 @@ window.addEventListener("resize", () => {
   }
 });
 
+/**
+ * Sets an event listener to create a new subtask on pressing Enter.
+ */
 function setEventListenerForSubtask() {
   const refSubtaskInput = document.querySelector("#subtask");
   refSubtaskInput.addEventListener("keypress", function (event) {
