@@ -1,219 +1,170 @@
-BASE_URL = "https://dv-join-bbc2e-default-rtdb.europe-west1.firebasedatabase.app/";
-const toDo = document.querySelector("#toDo");
-const progress = document.querySelector("#progress");
-const feedback = document.querySelector("#feedback");
-const done = document.querySelector("#done");
-const refProfile = document.getElementsByClassName("profile");
-let dropZones = document.querySelectorAll("section");
-let cardID;
-let assigContacts = [];
-let windowWidth;
-let startPosition;
+/**
+ * Base URL for Firebase database
+ * @constant {string}
+ */
+const BASE_URL = "https://dv-join-bbc2e-default-rtdb.europe-west1.firebasedatabase.app/";
 
+/** @type {HTMLElement} */
+const toDo = document.querySelector("#toDo");
+/** @type {HTMLElement} */
+const progress = document.querySelector("#progress");
+/** @type {HTMLElement} */
+const feedback = document.querySelector("#feedback");
+/** @type {HTMLElement} */
+const done = document.querySelector("#done");
+/** @type {NodeListOf<Element>} */
+let dropZones = document.querySelectorAll("section");
+
+/** @type {string} ID of dragged card */
+let cardID;
+/** @type {Array} Assigned contacts */
+let assigContacts = [];
+
+/**
+ * Handles drag event to store the dragged element's ID and add rotation effect.
+ * @param {DragEvent} event - The drag event.
+ */
 function draggedElementID(event) {
   highlightDropPoint(event);
-  event.target.addEventListener("dragstart", () => {
-    event.target.classList.add("rotate");
-  });
+  event.target.addEventListener("dragstart", () => event.target.classList.add("rotate"));
   event.target.addEventListener("dragend", () => {
     event.target.classList.remove("rotate");
-    let highlightBox = document.querySelector(".highlight_box");
-    if (highlightBox) highlightBox.remove();
+    document.querySelector(".highlight_box")?.remove();
   });
   event.dataTransfer.setData("text", event.target.id);
   cardID = event.target.id;
 }
 
+/**
+ * Highlights drop zones when dragging an element over them.
+ * @param {DragEvent} dragevent - The drag event.
+ */
 function highlightDropPoint(dragevent) {
   dropZones.forEach((zone) => {
-    zone.addEventListener("dragenter", function () {
-      if (!zone.contains(dragevent.target) && !zone.contains(document.querySelector(".highlight_box"))) {
+    zone.addEventListener("dragenter", () => {
+      if (!zone.contains(dragevent.target) && !zone.querySelector(".highlight_box")) {
         let box = document.createElement("div");
         box.classList.add("highlight_box");
-        box.setAttribute("dragover", "allowDrop(event)");
         zone.lastElementChild.appendChild(box);
       }
     });
-    zone.addEventListener("dragleave", function () {
-      let refBox = document.querySelector(".highlight_box");
-      if (refBox) refBox.remove();
-    });
+    zone.addEventListener("dragleave", () => document.querySelector(".highlight_box")?.remove());
   });
 }
 
+/**
+ * Handles dropping of a task and updates its status in Firebase.
+ * @param {DragEvent} event - The drop event.
+ */
 function dropPoint(event) {
   event.preventDefault();
-  if (event.target.id == "toDo" || event.target.id == "progress" || event.target.id == "feedback" || event.target.id == "done") {
-    let data = event.dataTransfer.getData("text");
+  const targetId = event.target.id;
+  if (["toDo", "progress", "feedback", "done"].includes(targetId)) {
+    const data = event.dataTransfer.getData("text");
     event.target.appendChild(document.getElementById(data));
-    let newStatus = event.target.id;
-    let statusUpdate = {
-      status: newStatus,
-    };
-    updateStatusInDB("tasks", cardID, statusUpdate);
+    updateStatusInDB("tasks", cardID, { status: targetId });
   }
 }
 
-function allowDrop() {
+/**
+ * Allows drop events on valid elements.
+ * @param {DragEvent} event - The event object.
+ */
+function allowDrop(event) {
   event.preventDefault();
 }
 
-async function updateStatusInDB(path = "", idNumber, status) {
-  let response = await fetch(`${BASE_URL}/${path}/${idNumber}.json`, {
+/**
+ * Updates task status in Firebase.
+ * @async
+ * @param {string} path - Database path.
+ * @param {string} idNumber - Task ID.
+ * @param {Object} status - Status object.
+ */
+async function updateStatusInDB(path, idNumber, status) {
+  await fetch(`${BASE_URL}/${path}/${idNumber}.json`, {
     method: "PATCH",
-    headers: {
-      "Content-Type": "application/json",
-    },
+    headers: { "Content-Type": "application/json" },
     body: JSON.stringify(status),
   });
-  const responseData = await response.json();
   noTaskToDo();
 }
 
-async function fetchTasks(path = "") {
-  let response = await fetch(BASE_URL + path + ".json", {
-    method: "GET",
-  });
-  let responseToJSON = await response.json();
-  return responseToJSON;
+/**
+ * Fetches tasks from Firebase.
+ * @async
+ * @param {string} path - Database path.
+ * @returns {Promise<Object>} - Task data.
+ */
+async function fetchTasks(path) {
+  const response = await fetch(`${BASE_URL}/${path}.json`, { method: "GET" });
+  return response.json();
 }
 
-async function addDataToFireBase(path = "", card) {
-  let response = await fetch(BASE_URL + path + ".json", {
-    method: "PATCH",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(card),
-  });
-  let responseToJSON = response.json();
-  return responseToJSON;
-}
-
+/**
+ * Displays task cards on the board.
+ * @async
+ */
 async function displayCardOnBoard() {
-  let taskFromFireBase = await fetchTasks("tasks");
-  for (const key in taskFromFireBase) {
-    const element = taskFromFireBase[key];
-    if (!element || element.user !== localStorage.userId) continue;
-    const subtasksCompleted = element.subtask ? Object.values(element.subtask).filter((sub) => sub.state === true).length : 0;
-    const totalSubtasks = element.subtask ? Object.keys(element.subtask).length : 0;
-    renderTaskCard(element, subtasksCompleted, totalSubtasks);
-    calPercentageOfCompletedSubtasks(totalSubtasks, subtasksCompleted, element.id);
-    addProfilesToCard(key, element.assigned);
+  const tasks = await fetchTasks("tasks");
+  for (const key in tasks) {
+    const task = tasks[key];
+    if (!task || task.user !== localStorage.userId) continue;
+    const subtasksCompleted = task.subtask ? Object.values(task.subtask).filter((sub) => sub.state).length : 0;
+    const totalSubtasks = task.subtask ? Object.keys(task.subtask).length : 0;
+    renderTaskCard(task, subtasksCompleted, totalSubtasks);
+    calPercentageOfCompletedSubtasks(totalSubtasks, subtasksCompleted, task.id);
+    addProfilesToCard(key, task.assigned);
   }
   noTaskToDo();
-  setColorOfCategory();
 }
 
-function renderTaskCard(element, subtasksCompleted, totalSubtasks) {
-  const columnMap = {
-    toDo: toDo,
-    progress: progress,
-    feedback: feedback,
-    done: done,
-  };
-  if (columnMap[element.status]) {
-    columnMap[element.status].innerHTML += renderCard(element.id, element.category, element.title, element.description, subtasksCompleted, totalSubtasks, element.prio);
+/**
+ * Renders a task card in the correct column.
+ * @param {Object} task - Task object.
+ * @param {number} subtasksCompleted - Completed subtasks count.
+ * @param {number} totalSubtasks - Total subtasks count.
+ */
+function renderTaskCard(task, subtasksCompleted, totalSubtasks) {
+  const columns = { toDo, progress, feedback, done };
+  if (columns[task.status]) {
+    columns[task.status].innerHTML += renderCard(task.id, task.category, task.title, task.description, subtasksCompleted, totalSubtasks, task.prio);
   }
 }
 
-function addProfilesToCard(id, obj) {
-  getContactsFromFireBase(assigContacts);
-  let transX = 0;
-  for (const key in obj) {
-    if (Object.prototype.hasOwnProperty.call(obj, key)) {
-      let name = initials(obj[key].name);
-      let color = obj[key].color;
-      document.getElementById(id).lastElementChild.firstElementChild.innerHTML += contactTamplate(name, color, transX);
-      transX += 30;
-    }
-  }
-}
-
-function initials(name) {
-  if (typeof name !== "string" || name.trim() === "") {
-    return "";
-  }
-  let fullName = name.trim().split(" ");
-  if (fullName.length < 2) {
-    return fullName[0]?.slice(0, 1) || "";
-  }
-  let firstName = fullName[0].slice(0, 1);
-  let secondName = fullName[1].slice(0, 1);
-  return firstName.toUpperCase() + secondName.toUpperCase();
-}
-
+/**
+ * Updates task placeholders when no tasks are present.
+ */
 function noTaskToDo() {
-  let noTaskToDo = document.getElementById("placeholderToDo");
-  let noTaskInProgress = document.getElementById("placeholderProgress");
-  let noTaskAwaitFeedback = document.getElementById("placeholderFeedback");
-  let noTaskDone = document.getElementById("placeholderDone");
+  const placeholders = {
+    toDo: "No Tasks To Do",
+    progress: "No Tasks In Progress",
+    feedback: "No Tasks Await Feedback",
+    done: "No Tasks Done",
+  };
   setTimeout(() => {
-    toDo.lastElementChild == null ? (noTaskToDo.classList.add("no_task"), (noTaskToDo.innerHTML = "No Tasks To Do")) : (noTaskToDo.classList.remove("no_task"), (noTaskToDo.innerHTML = ""));
-    progress.lastElementChild == null ? (noTaskInProgress.classList.add("no_task"), (noTaskInProgress.innerHTML = "No Tasks In Progress")) : (noTaskInProgress.classList.remove("no_task"), (noTaskInProgress.innerHTML = ""));
-    feedback.lastElementChild == null ? (noTaskAwaitFeedback.classList.add("no_task"), (noTaskAwaitFeedback.innerHTML = "No Tasks Await feedback")) : (noTaskAwaitFeedback.classList.remove("no_task"), (noTaskAwaitFeedback.innerHTML = ""));
-    done.lastElementChild == null ? (noTaskDone.classList.add("no_task"), (noTaskDone.innerHTML = "No Tasks Done")) : (noTaskDone.classList.remove("no_task"), (noTaskDone.innerHTML = ""));
+    Object.entries(placeholders).forEach(([key, text]) => {
+      const element = document.getElementById(`placeholder${key.charAt(0).toUpperCase() + key.slice(1)}`);
+      element.classList.toggle("no_task", !document.getElementById(key).lastElementChild);
+      element.innerHTML = document.getElementById(key).lastElementChild ? "" : text;
+    });
   }, 125);
-  window.addEventListener("resize", ifNoTaskResizeContainer);
 }
 
-async function countCompletedSubtasks(subtask) {
-  if (!Array.isArray(subtask) || subtask.length === undefined) {
-    return 0;
-  }
-  let countTrue = 0;
-  for (let index = 0; index < subtask.length; index++) {
-    if (subtask[index] === null) {
-      continue;
-    }
-    if (subtask[index].state === true) {
-      countTrue += 1;
-    }
-  }
-  return countTrue;
+/**
+ * Calculates and updates the progress bar for subtasks.
+ * @param {number} total - Total subtasks.
+ * @param {number} completed - Completed subtasks.
+ * @param {string} id - Task ID.
+ */
+function calPercentageOfCompletedSubtasks(total, completed, id) {
+  const percentage = (completed / total) * 100;
+  document.getElementById(`progress_bar${id}`).style.width = `${percentage}%`;
 }
 
-function calPercentageOfCompletedSubtasks(numberOfSubtasks, completedSubtasks, id) {
-  const result = (completedSubtasks / numberOfSubtasks) * 100;
-  document.getElementById("progress_bar" + id).style.width = `${result}%`;
-}
-
-async function getContactsFromFireBase(list) {
-  let contactObject = {};
-  if (list.length === 0) return contactObject;
-  for (let index = 0; index < list.length; index++) {
-    const dataFromFireBase = await fetchTasks(`contacts/${list[index]}`);
-    let temporarilyObject = {
-      [list[index]]: {
-        color: dataFromFireBase.color,
-        name: dataFromFireBase.name,
-      },
-    };
-    Object.assign(contactObject, temporarilyObject);
-  }
-  return contactObject;
-}
-
+/**
+ * Initializes the Kanban board by loading tasks.
+ */
 async function initialize() {
-  displayCardOnBoard();
-}
-
-function ifNoTaskResizeContainer() {
-  document.querySelectorAll("#toDo, #progress, #feedback, #done").forEach((section) => {
-    if (section.children.length > 0 && window.innerWidth < 1200) {
-      section.style.height = "300px";
-    } else {
-      section.style.height = "80px";
-    }
-  });
-}
-
-function setColorOfCategory() {
-  const refCategory = document.querySelectorAll(".category");
-  refCategory.forEach((element) => {
-    if (element.innerHTML === "Technical Task") {
-      element.style.backgroundColor = "rgb(31, 215, 193)";
-      element.style.width = "8rem";
-    }
-  });
+  await displayCardOnBoard();
 }
