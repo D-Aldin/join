@@ -143,7 +143,6 @@ function showContactList(contactList) {
  * @returns {void}
  */
 function handleContactOutsideClick(event) {
-  let contactList = document.getElementById("contact-list");
   let contactWrapper = document.getElementById("contact-wrapper");
   if (!contactWrapper.contains(event.target)) {
     closeContactList();

@@ -856,7 +856,7 @@ input[type="date"]:valid {
 @media only screen and (max-width: 900px) {
   .task {
     width: 100%;
-    justify-content: space-around;
+    justify-content: flex-start;
   }
 
   .tasktitles {
@@ -1000,12 +1000,12 @@ input[type="date"]:valid {
   }
 
   h1 {
-    justify-self: center;
+    justify-self: flex-start;
   }
 
   .flex-container {
     flex-direction: column;
-    align-items: center;
+    align-items: flex-start;
     justify-content: center;
     gap: 0px !important;
     height: auto;
@@ -1023,7 +1023,7 @@ input[type="date"]:valid {
     display: flex;
     align-items: flex-start;
     justify-content: flex-start;
-    justify-self: center;
+    justify-self: flex-start;
   }
 
   .button-container-clear-creat {
@@ -1040,7 +1040,7 @@ input[type="date"]:valid {
   }
 
   h1 {
-    font-size: 47px;
+    font-size: 61px;
   }
 
   .title {
@@ -1137,11 +1137,8 @@ input[type="date"]:valid {
     box-sizing: border-box;
     padding: 8px 20px 10px 0;
     display: flex;
-    justify-content: end;
-  }
-
-  .button-container-clear-creat:hover {
-    background-color: none;
+    justify-content: flex-start;
+    justify-self: flex-start;
   }
 
   .subtask-wrapper {
@@ -1149,6 +1146,7 @@ input[type="date"]:valid {
     gap: 5px;
     min-height: 25px;
     padding-bottom: 20px;
+    justify-content: flex-start;
   }
 
   .catecory-wrapper {
