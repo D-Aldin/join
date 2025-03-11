@@ -82,6 +82,8 @@ async function getData(event) {
   let id = event.currentTarget.id;
   const fetchDetails = await fetchCardDetails(taskPath, id);
   const refersToCard = fetchDetails[id];
+  console.log(refersToCard.prio);
+
   refCardBox.innerHTML = HTMLForOpenCard(refersToCard.category, refersToCard.title, refersToCard.description, refersToCard.date, refersToCard.prio, id);
   managenProfilesWhenCardOpen(id);
   renderSubtasks(id);
@@ -139,6 +141,7 @@ async function renderSubtasks(id) {
   }
   managenCheckBoxes(id);
   setCheckboxAttributes(id);
+  resizeTitleIfTooLong();
 }
 
 /**
@@ -239,4 +242,14 @@ function hideTaskDeleteMsg() {
       refTaskDeleteMsg.classList.add("d_none");
     }, 125);
   }, 900);
+}
+
+/**
+ * Resizes the card title if it is too long.
+ */
+function resizeTitleIfTooLong() {
+  const cardTitle = document.querySelector(".open_card_title");
+  if (cardTitle.innerHTML.length > 35) {
+    cardTitle.style.fontSize = "3rem";
+  }
 }

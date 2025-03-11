@@ -273,13 +273,14 @@ async function collectDataForNewTask() {
   const inputTitle = document.querySelector("#title");
   const inputDescription = document.querySelector("#description");
   let inputDate = document.querySelector("#dateBoard");
-  console.log(inputDate.value);
-
   const inputCategory = document.querySelector("#category");
   let id = `task_${Date.now()}`;
   collectTheContacts();
   collectTheSubtasks();
   let contacts = await getContactsFromFireBase(contactList);
+  if (storeThePrioValue === " ") {
+    storeThePrioValue = "low";
+  }
   return tamplate(id, inputTitle.value, inputDescription.value, contacts, inputDate.value, storeThePrioValue, inputCategory.value, subtaskObject, taskStatus, localStorage.userId);
 }
 
@@ -305,7 +306,7 @@ function tamplate(id, title, description, contact, date, prio, category, subtask
       description: description || " ",
       assigned: contact,
       date: date || document.querySelector("#dateBoard").value,
-      prio: prio || " ",
+      prio: prio || "low",
       category: category,
       subtask: subtask || [],
       status: status,
