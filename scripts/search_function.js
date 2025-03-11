@@ -48,12 +48,15 @@ function collectTasks() {
  * Sets up the search functionality by adding an input event listener to the search field.
  *
  * When the user types into the search field, it:
- * - Converts the user input to lowercase.
- * - Iterates over all tasks in listOfTasks.
- * - Toggles the "hide" class on each task card based on whether the task title includes the input text.
- * - Increments the status counter for tasks that do not match.
- * - Calls the noTaskFound function if no tasks match the search criteria.
- * - Hides the "no tasks found" message when the search field is empty.
+ * - Converts the user input to lowercase for case-insensitive comparison
+ * - Iterates over all tasks in listOfTasks
+ * - Checks if the task title contains the search text
+ * - Toggles the "hide" class on each task card to control visibility
+ * - Increments statusCounter for tasks that don't match search criteria
+ * - Calls noTaskFound() to manage the "no tasks found" message visibility
+ * - Hides the "no tasks found" message if the search field is empty
+ *
+ * This function is called once during initialization to establish the search behavior.
  */
 function searchFunk() {
   searchFiled.addEventListener("input", function () {
@@ -62,33 +65,37 @@ function searchFunk() {
     listOfTasks.forEach((element) => {
       let isVisible = element.title.toLowerCase().includes(userInput);
       element.card.classList.toggle("hide", !isVisible);
-      if (isVisible === false) {
+      if (!isVisible) {
         statusCounter += 1;
-        noTaskFound(listOfTasks, statusCounter);
-      }
-      if (searchFiled.value == "") {
-        refMessage.classList.add("d_none");
       }
     });
+    noTaskFound(listOfTasks, statusCounter);
+    if (searchFiled.value == "") {
+      refMessage.classList.add("d_none");
+    }
   });
 }
 
 /**
- * Checks if no task is found based on the current search criteria.
+ * Controls the visibility and animation of the "No task found" message.
  *
- * If the number of tasks that don't match equals the total number of tasks,
- * the "no tasks found" message is displayed with an animation. Otherwise, the message is hidden.
+ * This function compares the total number of tasks with the number of hidden tasks:
+ * - When all tasks are hidden: Displays the message with a slide-in animation from right
+ * - When some tasks are visible: Hides the message with a slide-out animation to right
+ *   and adds the d_none class after animation completes
  *
- * @param {Array} list - The array of task objects.
- * @param {number} counter - The number of tasks that did not match the search criteria.
+ * @param {Array<{card: HTMLElement, title: string, description: string}>} list - The array of task objects
+ * @param {number} counter - The number of tasks that did not match the search criteria
  */
 function noTaskFound(list, counter) {
   if (list.length === counter) {
     refMessage.classList.remove("d_none");
     refMessage.style.animation = "slideInFromRight 125ms ease forwards";
-  }
-  if (list.length != counter) {
-    refMessage.classList.add("d_none");
+  } else {
+    refMessage.style.animation = "slideOutToRight 125ms ease forwards";
+    setTimeout(() => {
+      refMessage.classList.add("d_none");
+    }, 125);
   }
 }
 
