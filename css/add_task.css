@@ -3,6 +3,13 @@ body {
   background-color: rgb(246, 247, 248);
 }
 
+body::-webkit-scrollbar {
+  display: none;
+  overflow: auto;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
 input {
   width: 100%;
   box-sizing: border-box;
@@ -64,6 +71,7 @@ textarea {
   color: red;
   font-size: 12px;
   font-weight: 400;
+  position:fixed;
 }
 
 .display-flex {
@@ -994,6 +1002,8 @@ input[type="date"]:valid {
 
 @media (min-width: 300px) and (max-width: 690px) {
   .task-wrapper {
+    margin-left: 16px;
+    margin-top: 8px;
     flex-direction: column;
     align-items: center;
     justify-content: center;
@@ -1026,10 +1036,6 @@ input[type="date"]:valid {
     justify-self: flex-start;
   }
 
-  .button-container-clear-creat {
-    justify-content: flex-start !important;
-  }
-
   .inputfield-title-container {
     height: max-content;
     padding-bottom: 0px !important;
@@ -1039,25 +1045,12 @@ input[type="date"]:valid {
     flex-direction: column;
   }
 
-  h1 {
-    font-size: 61px;
-  }
-
   .title {
     margin-top: 10px;
   }
 
   .tasktitles {
     font-size: 16px;
-  }
-
-  .task-wrapper {
-    margin-left: 3vw;
-    margin-top: 8px;
-    overflow-y: auto;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
   }
 
   .inputfield {
@@ -1108,11 +1101,10 @@ input[type="date"]:valid {
   }
 
   .great-button {
-    font-size: 16px;
-    height: 42px !important;
     width: 150px;
   }
-
+  
+  .great-button,
   .clear-button {
     font-size: 16px !important;
     height: 42px !important;
@@ -1125,14 +1117,6 @@ input[type="date"]:valid {
     height: 42px !important;
   }
 
-  .scroll {
-    overflow-y: scroll;
-  }
-
-  .scroll::-webkit-scrollbar {
-    display: none;
-  }
-
   .button-container-clear-creat {
     box-sizing: border-box;
     padding: 8px 20px 10px 0;
@@ -1142,7 +1126,6 @@ input[type="date"]:valid {
   }
 
   .subtask-wrapper {
-    width: 285px;
     gap: 5px;
     min-height: 25px;
     padding-bottom: 20px;
@@ -1184,14 +1167,5 @@ input[type="date"]:valid {
   .pixelbar-subtask {
     margin: 0 3px 0 3px;
   }
-
-  main {
-    justify-content: center;
-  }
 }
 
-@media only screen and (max-width: 400px) {
-  .task-wrapper {
-    margin-left: 2vw;
-  }
-}
