@@ -135,6 +135,7 @@ async function low() {
  * Displays the contacts in the dropdown menu.
  */
 async function displayContactsInDropdownMenu() {
+  document.querySelector(".content").innerHTML = "";
   let dataFromFireBase = await fetchCardDetails("contacts", idOfcurrentElement);
   for (const key in dataFromFireBase) {
     if (Object.prototype.hasOwnProperty.call(dataFromFireBase, key)) {
@@ -144,6 +145,7 @@ async function displayContactsInDropdownMenu() {
     }
   }
   whichContactIsAssigned(idOfcurrentElement);
+  assignNewContList = [];
 }
 
 /**
