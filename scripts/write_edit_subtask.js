@@ -12,22 +12,11 @@ function writeSubtask() {
 }
 
 function setStandardButton() {
-  document.getElementById("subtaskbuttons").innerHTML = /*html*/ `
-              <button type="button" class="subtask-inputfield-button">
-                  <img src="assets/icons/addTask/subtasks_icons.svg" alt="">
-              </button>
-          `;
+  document.getElementById("subtaskbuttons").innerHTML = getStandardButton();
 }
 
 function setdubbleButton() {
-  document.getElementById("subtaskbuttons").innerHTML = /*html*/ `
-              <button type="button" class="subtask-inputfield-button">
-                  <img onclick="clearsubtask()" src="assets/icons/addTask/cross.svg" alt="">
-              </button>
-              <div class="pixelbar-mini"></div>
-              <button type="button" class="subtask-inputfield-button">    
-                  <img onclick="setSubtask()" src="assets/icons/addTask/done.svg" alt="">
-              </button>`;
+  document.getElementById("subtaskbuttons").innerHTML = getDubbleButton();
 }
 
 function clearsubtask() {
@@ -59,17 +48,7 @@ function renderSubtasks() {
 }
 
 function subtasksTemplate(tasks, i, element) {
-  tasks.innerHTML += /*html*/ `
-          <div id="${i}" class="subtask-list" >
-              <ul class="full_with" onclick="editSubtask('${i}')">
-                  <li>${element}</li>   
-              </ul>
-              <div class="subtask-list-button-container">
-                  <button type="button" onclick="editSubtask('${i}')" class="subtask-list-button"><img src="assets/icons/addTask/pen.svg" alt=""></button>
-                  <div class="pixelbar-subtask"></div>
-                  <button type="button" onclick="deleteSubtask('${i}')" class="subtask-list-button"><img src="assets/icons/addTask/delete.svg" alt=""></button>
-              </div>
-          </div>`;
+  tasks.innerHTML += getSubtaskTemplate(i, element);
 }
 
 function deleteSubtask(x) {
@@ -81,14 +60,7 @@ function editSubtask(x) {
   currentcontainer = document.getElementById(x);
   currentcontainer.classList.remove("subtask-list");
   currentcontainer.classList.add("subtask-list-by-edit");
-
-  document.getElementById(x).innerHTML = /*html*/ `
-          <input class="subtask-edit-inputfield" id="current-subtask${x}" type="text">
-          <div class="subtask-list-button-container-by-edit">
-                  <button type="button" onclick="setEditSubtask(${x})" style="background-color: white" class="subtask-list-button"><img src="assets/icons/addTask/done.svg" alt=""></button>
-                  <div class="pixelbar-subtask"></div>
-                  <button type="button" onclick="deleteSubtask('${x}')" style="background-color: white" class="subtask-list-button"><img src="assets/icons/addTask/delete.svg" alt=""></button>
-          </div>`;
+  document.getElementById(x).innerHTML = getEditSubtask(x);
   currentsubtask = document.getElementById("current-subtask" + x);
   currentsubtask.value = subtasksList[x].task;
 }
