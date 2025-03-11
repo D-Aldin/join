@@ -226,10 +226,17 @@ function showTaskDeleteMsg() {
   refTaskDeleteMsg.style.animation = "slideInFromRight 125ms ease forwards";
 }
 
-/** Hide the 'Task Deleted' message after 900 ms */
+/**
+ * Hides the task deletion message with an animation after a delay.
+ * First waits 900ms, then applies a 125ms slide-out animation,
+ * and finally adds the d_none class to completely hide the element
+ * after the animation completes.
+ */
 function hideTaskDeleteMsg() {
   setTimeout(() => {
     refTaskDeleteMsg.style.animation = "slideOutToRight 125ms ease forwards";
-    refTaskDeleteMsg.classList.add("d_none");
+    setTimeout(() => {
+      refTaskDeleteMsg.classList.add("d_none");
+    }, 125);
   }, 900);
 }
