@@ -439,7 +439,7 @@ function creatTask() {
   clearAllTasks();
   finishTaskNotification();
   setTimeout(() => {
-    window.location.href = "http://127.0.0.1:5501/board.html";
+    window.location.href = "./board.html";
   }, 1500);
 }
 
