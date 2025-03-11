@@ -1,4 +1,10 @@
+const refUrgentBtn = document.getElementById("urgent");
+const refMediumBtn = document.getElementById("medium");
+const refLowBtn = document.getElementById("low");
+const title = document.querySelector(".open_card_title");
+
 /**
+ *
  * Renders the edit menu, displaying the task's title, description, date, and subtasks.
  */
 function renderEditMenu() {

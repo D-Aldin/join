@@ -156,6 +156,7 @@ h5 {
   padding: 18px;
   margin-bottom: 10px;
   cursor: pointer;
+  position: relative;
 }
 
 .no_task {

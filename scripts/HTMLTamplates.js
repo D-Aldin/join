@@ -109,7 +109,7 @@ function HTMLTamplateForTheEditFunk() {
               <div class="content_height">
                 <form class="title_description_date" action="">
                   <label for="editTitle">Title</label>
-                  <input type="text" id="editTitle" name="title" class="inputfield dimensions" /><br>
+                  <input type="text" maxlength="60" id="editTitle" name="title" class="inputfield dimensions"/><br>
                   <label for="editDescription">Description</label>
                   <textarea name="description" id="editDescription"></textarea><br /> 
                   <label for="editDate">Due date</label>
@@ -221,7 +221,7 @@ function HTMLTamplateForAddTaskInBorad() {
             <div class="no_space_between input-container">
               <div class="inputfield-title-container">
                   <span class="display-flex"><p class="display-flex tasktitles">Title</p><p class="color-red tasktitles">*</p></span>
-                  <input class="inputfield" id="title" placeholder="Enter a title" type="text" >
+                  <input class="inputfield" maxlength="60" id="title" placeholder="Enter a title" type="text" >
                   <span id="titleRequired" class="required hide_element">This field is requierd</span>
               </div>
               <div class="inputfield-title-container">
