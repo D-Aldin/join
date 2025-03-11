@@ -440,7 +440,7 @@ function creatTask() {
   finishTaskNotification();
   setTimeout(() => {
     window.location.href = "http://127.0.0.1:5501/board.html";
-  }, 3000);
+  }, 1500);
 }
 
 /**
@@ -529,10 +529,17 @@ async function postAllData(path = "", data) {
  * @returns {void}
  */
 function finishTaskNotification() {
-  document.getElementById("finish-box").classList.add("finish-container-activ");
+  let finishBox = document.getElementById("finish-box");
+  finishBox.style.animation = "none";
+  finishBox.offsetHeight;
+  finishBox.style.animation = "slideInFromRight 125ms forwards";
+  finishBox.classList.add("finish-container-activ");
   setTimeout(() => {
-    document.getElementById("finish-box").classList.remove("finish-container-activ");
-  }, 2000);
+    finishBox.style.animation = "slideOutToRight 125ms forwards";
+    setTimeout(() => {
+      finishBox.classList.remove("finish-container-activ");
+    }, 125);
+  }, 1000);
 }
 
 /**
