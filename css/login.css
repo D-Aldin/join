@@ -254,9 +254,21 @@ h1 {
   box-shadow: 0 7px 7px 0 rgba(104, 104, 104, 0.301);
 }
 
-#signBtn:hover {
+#signBtn:hover,
+#signBtn_next_page:hover {
   background-color: rgb(41, 171, 226);
   box-shadow: 0 7px 7px 0 rgba(104, 104, 104, 0.301);
+}
+
+.disabled_btn {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+#sign_btn:disabled:hover {
+  background-color: rgb(42, 54, 71);
+  box-shadow: none;
+  cursor: not-allowed;
 }
 
 #sign_btn {
