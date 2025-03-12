@@ -266,3 +266,28 @@ function elseOverlayContactInfosGoOut(overlay, contact) {
     { once: true }
   );
 }
+
+/**
+ * Adds an event listener to the document to close the overlay when clicking outside
+ * Checks if the clicked element is the overlay background or the overlay card
+ * If true, closes the overlay by removing the overlay classes
+ * If false, keeps the overlay open
+ * @param {Event} event - The event object from the clicked element
+ * @param {HTMLElement} overlayBg - The overlay background element
+ * @param {HTMLElement} overlayCard - The overlay card element
+ * @param {HTMLElement} overlayEditCard - The overlay edit card element
+ * @listens click
+ * @returns {void}
+ */
+addEventListener("click", (event) => {
+  const overlayBg = document.getElementById("overlay_add_contacts_background");
+  const overlayCard = document.getElementById("overlay_add_contact_card");
+  const overlayEditCard = document.getElementById("overlay_edit_contact_card");
+  if (event.target === overlayBg) {
+    if (overlayCard.classList.contains("overlay_add_contact_card")) {
+      closeOverlayAddContact();
+    } else if (overlayEditCard.classList.contains("overlay_edit_contact_card")) {
+      closeOverlayEditContact();
+    }
+  }
+});
