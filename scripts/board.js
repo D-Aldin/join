@@ -142,6 +142,7 @@ async function displayCardOnBoard() {
   }
   noTaskToDo();
   setColorOfCategory();
+  shortenContactView();
 }
 
 /**
@@ -178,6 +179,26 @@ function addProfilesToCard(id, obj) {
       transX += 30;
     }
   }
+}
+
+/**
+ * Shortens the contact view by removing all child elements after the first four.
+ * It then adds a new element indicating how many contacts are hidden.
+ *
+ * @function shortenContactView
+ * @returns {void}
+ */
+function shortenContactView() {
+  const refContacts = document.querySelectorAll(".profile");
+  refContacts.forEach((profile) => {
+    let totalLength = profile.children.length - 4;
+    while (profile.children.length > 4) {
+      profile.removeChild(profile.lastChild);
+    }
+    if (profile.children.length === 4) {
+      profile.innerHTML += contactTamplate(`+${totalLength}`, "rgba(230, 23, 8, 0.85)", 140);
+    }
+  });
 }
 
 /**
