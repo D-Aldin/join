@@ -1,73 +1,14 @@
-/**
- * Base URL for Firebase Realtime Database.
- * @constant {string}
- */
 const BASE_URL = "https://dv-join-bbc2e-default-rtdb.europe-west1.firebasedatabase.app/";
-
-/**
- * DOM element representing the sign button.
- * @type {HTMLElement}
- */
 const signBtn = document.querySelector("#signBtn");
-
-/**
- * DOM element representing the login window.
- * @type {HTMLElement}
- */
 const refLoginWindow = document.querySelector(".login_window");
-
-/**
- * DOM element representing the sign-up window.
- * @type {HTMLElement}
- */
 const refSignWindow = document.querySelector(".sign_window");
-
-/**
- * DOM element representing the sign-up segment.
- * @type {HTMLElement}
- */
 const refSignUpSegment = document.querySelector(".sign_up");
-
-/**
- * DOM element representing the back button.
- * @type {HTMLElement}
- */
-const refBackButton = document.querySelector("#goBackArrow");
-
-/**
- * DOM element for the confirm password input in the sign-up form.
- * @type {HTMLElement}
- */
-const pswConfirm = document.querySelector("#signUpConfirmPassword");
-
-/**
- * DOM element for the password input in the sign-up form.
- * @type {HTMLElement}
- */
+export const refBackButton = document.querySelector("#goBackArrow");
+export const pswConfirm = document.querySelector("#signUpConfirmPassword");
 const psw = document.querySelector("#signUpPassword");
-
-/**
- * DOM element for the sign-up password input.
- * @type {HTMLElement}
- */
-const signUpPasswordInput = document.getElementById("signUpPassword");
-
-/**
- * DOM element for toggling sign-up password visibility.
- * @type {HTMLElement}
- */
+export const signUpPasswordInput = document.getElementById("signUpPassword");
 const toggleSignUpPassword = document.getElementById("toggleSignUpPassword");
-
-/**
- * DOM element for the sign-up confirm password input.
- * @type {HTMLElement}
- */
-const signUpConfirmPasswordInput = document.getElementById("signUpConfirmPassword");
-
-/**
- * DOM element for toggling sign-up confirm password visibility.
- * @type {HTMLElement}
- */
+export const signUpConfirmPasswordInput = document.getElementById("signUpConfirmPassword");
 const toggleSignUpConfirmPassword = document.getElementById("toggleSignUpConfirmPassword");
 
 /**
@@ -117,7 +58,7 @@ function getRandomColor() {
 /**
  * Opens the sign-up modal by fading out the login window and fading in the sign-up window.
  */
-function openSignUpModal() {
+export function openSignUpModal() {
   refLoginWindow.style.animation = "fadeOut 125ms forwards";
   setTimeout(() => {
     refLoginWindow.style.display = "none";
@@ -130,7 +71,7 @@ function openSignUpModal() {
 /**
  * Returns the user to the login window by clearing sign-up inputs and applying fade animations.
  */
-function goBack() {
+export function goBack() {
   refSignWindow.style.animation = "fadeOut 125ms forwards";
   const inputs = document.querySelectorAll("#signUp input");
   for (let i = 0; i < inputs.length; i++) {
@@ -147,10 +88,9 @@ function goBack() {
 /**
  * Handles sign-up form submission by collecting data, validating inputs,
  * and checking if the user already exists.
- *
  * @param {Event} event - The submit event from the sign-up form.
  */
-function getDataFromSignUp(event) {
+export function getDataFromSignUp(event) {
   event.preventDefault();
   const form = event.target;
   const userName = form.name.value;
@@ -166,7 +106,6 @@ function getDataFromSignUp(event) {
 
 /**
  * Validates the sign-up form inputs.
- *
  * @param {string} name - The user's name.
  * @param {string} email - The user's email.
  * @param {string} password - The user's password.
@@ -192,7 +131,6 @@ function validateSignUpInputs(name, email, password, confirmPassword, privacyPol
 
 /**
  * Validates each field in the inputs object.
- *
  * @param {Object} inputs - An object containing field names and their corresponding values.
  * @returns {boolean} Returns true if any field is invalid.
  */
@@ -208,7 +146,6 @@ function validateEachField(inputs) {
 
 /**
  * Validates a single input field by checking if it has a value.
- *
  * @param {string} key - The key of the input field (name, email, etc.).
  * @param {string} value - The value of the input field.
  * @returns {boolean} Returns true if the field is invalid.
@@ -227,7 +164,6 @@ function validateSingleField(key, value) {
 
 /**
  * Sets error messages and border styles for input fields based on their values.
- *
  * @param {string} key - The key of the input field.
  * @param {string} value - The value of the input field.
  * @param {HTMLElement} inputElement - The DOM element of the input.
@@ -282,7 +218,7 @@ function clearPrivacyPolicyError() {
 /**
  * Clears all error messages and resets the border styles for sign-up form inputs.
  */
-function clearSignUpErrorMessages() {
+export function clearSignUpErrorMessages() {
   const errorFields = ["name", "email", "password", "confirmPassword"];
   for (const field of errorFields) {
     const errorElement = document.getElementById(`signUp_${field}_error`);
@@ -302,7 +238,6 @@ function clearSignUpErrorMessages() {
 
 /**
  * Adds a new user to the database.
- *
  * @async
  * @param {Object} data - The user data object to be stored.
  * @returns {Promise<Object>} The response parsed as JSON.
@@ -322,7 +257,6 @@ async function addUsersToDataBase(data) {
 
 /**
  * Constructs a user data object.
- *
  * @param {string} id - The user's unique identifier.
  * @param {string} email - The user's email.
  * @param {string} name - The user's name.
@@ -341,7 +275,6 @@ function userData(id, email, name, password) {
 
 /**
  * Checks if a user already exists and if not, adds the user to the database.
- *
  * @async
  * @param {string} email - The email to check for existence.
  */
@@ -359,7 +292,6 @@ async function ifUserAlreadyExists(email) {
 
 /**
  * Fetches the user contacts from the database.
- *
  * @async
  * @returns {Promise<Object>} The JSON response containing user contacts.
  */
@@ -370,7 +302,6 @@ async function fetchUserContacts() {
 
 /**
  * Checks if a user exists in the database response based on the email.
- *
  * @param {Object} responseToJSON - The JSON response containing user contacts.
  * @param {string} email - The email to check.
  * @returns {boolean} Returns true if a user with the email exists.
@@ -395,7 +326,7 @@ function displayEmailError() {
 /**
  * Checks if the password and confirmation password match and updates the UI accordingly.
  */
-function passwordMatch() {
+export function passwordMatch() {
   const password = psw.value;
   const confirmPassword = pswConfirm.value;
   const errorElement = document.getElementById("signUp_confirmPassword_error");
@@ -441,66 +372,3 @@ function hideOverlay() {
     window.location.href = "index.html";
   }, 125);
 }
-
-// Event listeners for UI interactions
-
-signBtn.addEventListener("click", openSignUpModal);
-refBackButton.addEventListener("click", goBack);
-pswConfirm.addEventListener("input", passwordMatch);
-
-document.getElementById("signUp").addEventListener("submit", getDataFromSignUp);
-
-document.addEventListener("click", function (event) {
-  const signUpForm = document.querySelector("#signUp");
-  if (signUpForm && !signUpForm.contains(event.target)) {
-    clearSignUpErrorMessages();
-  }
-});
-
-signUpPasswordInput.addEventListener("input", () => {
-  if (signUpPasswordInput.value.length === 0) {
-    toggleSignUpPassword.src = "./assets/icons/login_and_signUp/lock.svg";
-  } else if (signUpPasswordInput.type === "password") {
-    toggleSignUpPassword.src = "./assets/icons/login_and_signUp/visibility_off.svg";
-  } else {
-    toggleSignUpPassword.src = "./assets/icons/login_and_signUp/visibility.svg";
-  }
-});
-
-toggleSignUpPassword.addEventListener("click", () => {
-  if (signUpPasswordInput.type === "password") {
-    signUpPasswordInput.type = "text";
-    toggleSignUpPassword.src = "./assets/icons/login_and_signUp/visibility.svg";
-  } else {
-    signUpPasswordInput.type = "password";
-    if (signUpPasswordInput.value.length === 0) {
-      toggleSignUpPassword.src = "./assets/icons/login_and_signUp/lock.svg";
-    } else {
-      toggleSignUpPassword.src = "./assets/icons/login_and_signUp/visibility_off.svg";
-    }
-  }
-});
-
-signUpConfirmPasswordInput.addEventListener("input", () => {
-  if (signUpConfirmPasswordInput.value.length === 0) {
-    toggleSignUpConfirmPassword.src = "./assets/icons/login_and_signUp/lock.svg";
-  } else if (signUpConfirmPasswordInput.type === "password") {
-    toggleSignUpConfirmPassword.src = "./assets/icons/login_and_signUp/visibility_off.svg";
-  } else {
-    toggleSignUpConfirmPassword.src = "./assets/icons/login_and_signUp/visibility.svg";
-  }
-});
-
-toggleSignUpConfirmPassword.addEventListener("click", () => {
-  if (signUpConfirmPasswordInput.type === "password") {
-    signUpConfirmPasswordInput.type = "text";
-    toggleSignUpConfirmPassword.src = "./assets/icons/login_and_signUp/visibility.svg";
-  } else {
-    signUpConfirmPasswordInput.type = "password";
-    if (signUpConfirmPasswordInput.value.length === 0) {
-      toggleSignUpConfirmPassword.src = "./assets/icons/login_and_signUp/lock.svg";
-    } else {
-      toggleSignUpConfirmPassword.src = "./assets/icons/login_and_signUp/visibility_off.svg";
-    }
-  }
-});
