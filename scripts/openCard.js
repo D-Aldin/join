@@ -225,7 +225,7 @@ async function deleteButton() {
 
 /** Give feedback to the user when a task is deleted.  */
 function showTaskDeleteMsg() {
-  refTaskDeleteMsg.classList.remove("d_none");
+  refTaskDeleteMsg.classList.remove("msg_d_none");
   refTaskDeleteMsg.style.animation = "slideInFromRight 125ms ease forwards";
 }
 
@@ -239,7 +239,7 @@ function hideTaskDeleteMsg() {
   setTimeout(() => {
     refTaskDeleteMsg.style.animation = "slideOutToRight 125ms ease forwards";
     setTimeout(() => {
-      refTaskDeleteMsg.classList.add("d_none");
+      refTaskDeleteMsg.classList.add("msg_d_none");
     }, 125);
   }, 900);
 }

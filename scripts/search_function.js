@@ -89,12 +89,12 @@ function searchFunk() {
  */
 function noTaskFound(list, counter) {
   if (list.length === counter) {
-    refMessage.classList.remove("d_none");
+    refMessage.classList.remove("msg_d_none");
     refMessage.style.animation = "slideInFromRight 125ms ease forwards";
   } else {
     refMessage.style.animation = "slideOutToRight 125ms ease forwards";
     setTimeout(() => {
-      refMessage.classList.add("d_none");
+      refMessage.classList.add("msg_d_none");
     }, 125);
   }
 }
