@@ -1,4 +1,4 @@
-import { openSignUpModal, goBack, passwordMatch, getDataFromSignUp, clearSignUpErrorMessages, refBackButton, pswConfirm, signUpPasswordInput, signUpConfirmPasswordInput } from "./signUp.js";
+import { openSignUpModal, goBack, passwordMatch, getDataFromSignUp, clearSignUpErrorMessages, refBackButton, pswConfirm, signUpPasswordInput, signUpConfirmPasswordInput, signBtn, toggleSignUpConfirmPassword, toggleSignUpPassword } from "./signUp.js";
 
 signBtn.addEventListener("click", openSignUpModal);
 refBackButton.addEventListener("click", goBack);

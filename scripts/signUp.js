@@ -1,29 +1,74 @@
+/**
+ * Base URL for Firebase Realtime Database.
+ * @constant {string}
+ */
 const BASE_URL = "https://dv-join-bbc2e-default-rtdb.europe-west1.firebasedatabase.app/";
-const signBtn = document.querySelector("#signBtn");
-<<<<<<< HEAD
-=======
 
 /**
- * Reference to the sign-up submit button
+ * DOM element representing the sign button.
  * @type {HTMLElement}
  */
-const signUpButton = document.querySelector("#sign_btn");
+export const signBtn = document.querySelector("#signBtn_next_page");
 
 /**
  * DOM element representing the login window.
  * @type {HTMLElement}
  */
->>>>>>> 94a67a1e7c3457400271fa8ece924c890f38a13e
 const refLoginWindow = document.querySelector(".login_window");
+
+/**
+ * DOM element representing the sign-up window.
+ * @type {HTMLElement}
+ */
 const refSignWindow = document.querySelector(".sign_window");
+
+/**
+ * DOM element representing the sign-up segment.
+ * @type {HTMLElement}
+ */
 const refSignUpSegment = document.querySelector(".sign_up");
+
+/**
+ * DOM element representing the back button.
+ * @type {HTMLElement}
+ */
 export const refBackButton = document.querySelector("#goBackArrow");
+
+/**
+ * DOM element for the confirm password input in the sign-up form.
+ * @type {HTMLElement}
+ */
 export const pswConfirm = document.querySelector("#signUpConfirmPassword");
+
+/**
+ * DOM element for the password input in the sign-up form.
+ * @type {HTMLElement}
+ */
 const psw = document.querySelector("#signUpPassword");
+
+/**
+ * DOM element for the sign-up password input.
+ * @type {HTMLElement}
+ */
 export const signUpPasswordInput = document.getElementById("signUpPassword");
-const toggleSignUpPassword = document.getElementById("toggleSignUpPassword");
+
+/**
+ * DOM element for toggling sign-up password visibility.
+ * @type {HTMLElement}
+ */
+export const toggleSignUpPassword = document.getElementById("toggleSignUpPassword");
+
+/**
+ * DOM element for the sign-up confirm password input.
+ * @type {HTMLElement}
+ */
 export const signUpConfirmPasswordInput = document.getElementById("signUpConfirmPassword");
-const toggleSignUpConfirmPassword = document.getElementById("toggleSignUpConfirmPassword");
+
+/**
+ * DOM element for toggling sign-up confirm password visibility.
+ * @type {HTMLElement}
+ */
+export const toggleSignUpConfirmPassword = document.getElementById("toggleSignUpConfirmPassword");
 
 /**
  * Object mapping input field keys to their corresponding DOM element IDs.
@@ -83,7 +128,7 @@ export function openSignUpModal() {
 }
 
 /**
- * Returns the user to the login window by clearing sign-up inputs, return the button to disabled and applying fade animations.
+ * Returns the user to the login window by clearing sign-up inputs and applying fade animations.
  */
 export function goBack() {
   refSignWindow.style.animation = "fadeOut 125ms forwards";
@@ -91,9 +136,6 @@ export function goBack() {
   for (let i = 0; i < inputs.length; i++) {
     inputs[i].value = "";
   }
-  document.getElementById("privacy_police").checked = false;
-  signUpButton.disabled = true;
-  signUpButton.classList.add("disabled_btn");
   setTimeout(() => {
     refSignWindow.style.display = "none";
     refLoginWindow.style.display = "inline";
@@ -105,6 +147,7 @@ export function goBack() {
 /**
  * Handles sign-up form submission by collecting data, validating inputs,
  * and checking if the user already exists.
+ *
  * @param {Event} event - The submit event from the sign-up form.
  */
 export function getDataFromSignUp(event) {
@@ -122,52 +165,8 @@ export function getDataFromSignUp(event) {
 }
 
 /**
- * Validates the form and enables/disables the sign-up button accordingly.
- * The button is disabled when:
- * - All input fields are empty, OR
- * - The privacy policy checkbox is not checked
- * When disabled, the button also receives a visual style through CSS.
- */
-function validateSignUpForm() {
-  const nameInput = document.getElementById(inputIds.name);
-  const emailInput = document.getElementById(inputIds.email);
-  const passwordInput = document.getElementById(inputIds.password);
-  const confirmPasswordInput = document.getElementById(inputIds.confirmPassword);
-  const privacyPolicyCheckbox = document.getElementById("privacy_police");
-  const allInputsEmpty = !nameInput.value && !emailInput.value && !passwordInput.value && !confirmPasswordInput.value;
-  const privacyPolicyUnchecked = !privacyPolicyCheckbox.checked;
-  signUpButton.disabled = allInputsEmpty || privacyPolicyUnchecked;
-  if (signUpButton.disabled) {
-    signUpButton.classList.add("disabled_btn");
-  } else {
-    signUpButton.classList.remove("disabled_btn");
-  }
-}
-
-// Run initial validation when page loads
-document.addEventListener("DOMContentLoaded", validateSignUpForm);
-
-// Add input event listeners to all form fields
-document.getElementById(inputIds.name).addEventListener("input", validateSignUpForm);
-document.getElementById(inputIds.email).addEventListener("input", validateSignUpForm);
-document.getElementById(inputIds.password).addEventListener("input", validateSignUpForm);
-document.getElementById(inputIds.confirmPassword).addEventListener("input", validateSignUpForm);
-document.getElementById("privacy_police").addEventListener("change", validateSignUpForm);
-
-/**
- * Initializes the sign-up form when the DOM content is loaded.
- * - Disables the sign-up button by default
- * - Adds the disabled visual style
- * - Runs the form validation
- */
-document.addEventListener("DOMContentLoaded", () => {
-  signUpButton.disabled = true;
-  signUpButton.classList.add("disabled_btn");
-  validateSignUpForm();
-});
-
-/**
  * Validates the sign-up form inputs.
+ *
  * @param {string} name - The user's name.
  * @param {string} email - The user's email.
  * @param {string} password - The user's password.
@@ -193,6 +192,7 @@ function validateSignUpInputs(name, email, password, confirmPassword, privacyPol
 
 /**
  * Validates each field in the inputs object.
+ *
  * @param {Object} inputs - An object containing field names and their corresponding values.
  * @returns {boolean} Returns true if any field is invalid.
  */
@@ -208,6 +208,7 @@ function validateEachField(inputs) {
 
 /**
  * Validates a single input field by checking if it has a value.
+ *
  * @param {string} key - The key of the input field (name, email, etc.).
  * @param {string} value - The value of the input field.
  * @returns {boolean} Returns true if the field is invalid.
@@ -226,6 +227,7 @@ function validateSingleField(key, value) {
 
 /**
  * Sets error messages and border styles for input fields based on their values.
+ *
  * @param {string} key - The key of the input field.
  * @param {string} value - The value of the input field.
  * @param {HTMLElement} inputElement - The DOM element of the input.
@@ -300,6 +302,7 @@ export function clearSignUpErrorMessages() {
 
 /**
  * Adds a new user to the database.
+ *
  * @async
  * @param {Object} data - The user data object to be stored.
  * @returns {Promise<Object>} The response parsed as JSON.
@@ -319,6 +322,7 @@ async function addUsersToDataBase(data) {
 
 /**
  * Constructs a user data object.
+ *
  * @param {string} id - The user's unique identifier.
  * @param {string} email - The user's email.
  * @param {string} name - The user's name.
@@ -337,6 +341,7 @@ function userData(id, email, name, password) {
 
 /**
  * Checks if a user already exists and if not, adds the user to the database.
+ *
  * @async
  * @param {string} email - The email to check for existence.
  */
@@ -354,6 +359,7 @@ async function ifUserAlreadyExists(email) {
 
 /**
  * Fetches the user contacts from the database.
+ *
  * @async
  * @returns {Promise<Object>} The JSON response containing user contacts.
  */
@@ -364,6 +370,7 @@ async function fetchUserContacts() {
 
 /**
  * Checks if a user exists in the database response based on the email.
+ *
  * @param {Object} responseToJSON - The JSON response containing user contacts.
  * @param {string} email - The email to check.
  * @returns {boolean} Returns true if a user with the email exists.
@@ -434,94 +441,66 @@ function hideOverlay() {
     window.location.href = "index.html";
   }, 125);
 }
-<<<<<<< HEAD
-=======
 
 // Event listeners for UI interactions
-signBtn_next_page.addEventListener("click", openSignUpModal);
-refBackButton.addEventListener("click", goBack);
-pswConfirm.addEventListener("input", passwordMatch);
 
-document.getElementById("signUp").addEventListener("submit", getDataFromSignUp);
+// signBtn.addEventListener("click", openSignUpModal);
+// refBackButton.addEventListener("click", goBack);
+// pswConfirm.addEventListener("input", passwordMatch);
 
-/**
- * Event listener for the document click event.
- * Clears error messages when clicking outside the sign-up form.
- *
- * @param {Event} event - The click event object
- */
-document.addEventListener("click", function (event) {
-  const signUpForm = document.querySelector("#signUp");
-  if (signUpForm && !signUpForm.contains(event.target)) {
-    clearSignUpErrorMessages();
-  }
-});
+// document.getElementById("signUp").addEventListener("submit", getDataFromSignUp);
 
-/**
- * Updates the password field icon based on input state.
- * - Empty: Shows lock icon
- * - With text (password hidden): Shows visibility_off icon
- * - With text (password visible): Shows visibility icon
- */
-signUpPasswordInput.addEventListener("input", () => {
-  if (signUpPasswordInput.value.length === 0) {
-    toggleSignUpPassword.src = "./assets/icons/login_and_signUp/lock.svg";
-  } else if (signUpPasswordInput.type === "password") {
-    toggleSignUpPassword.src = "./assets/icons/login_and_signUp/visibility_off.svg";
-  } else {
-    toggleSignUpPassword.src = "./assets/icons/login_and_signUp/visibility.svg";
-  }
-});
+// document.addEventListener("click", function (event) {
+//   const signUpForm = document.querySelector("#signUp");
+//   if (signUpForm && !signUpForm.contains(event.target)) {
+//     clearSignUpErrorMessages();
+//   }
+// });
 
-/**
- * Toggles password visibility when clicking the eye icon.
- * Also updates the icon to match the current visibility state.
- */
-toggleSignUpPassword.addEventListener("click", () => {
-  if (signUpPasswordInput.type === "password") {
-    signUpPasswordInput.type = "text";
-    toggleSignUpPassword.src = "./assets/icons/login_and_signUp/visibility.svg";
-  } else {
-    signUpPasswordInput.type = "password";
-    if (signUpPasswordInput.value.length === 0) {
-      toggleSignUpPassword.src = "./assets/icons/login_and_signUp/lock.svg";
-    } else {
-      toggleSignUpPassword.src = "./assets/icons/login_and_signUp/visibility_off.svg";
-    }
-  }
-});
+// signUpPasswordInput.addEventListener("input", () => {
+//   if (signUpPasswordInput.value.length === 0) {
+//     toggleSignUpPassword.src = "./assets/icons/login_and_signUp/lock.svg";
+//   } else if (signUpPasswordInput.type === "password") {
+//     toggleSignUpPassword.src = "./assets/icons/login_and_signUp/visibility_off.svg";
+//   } else {
+//     toggleSignUpPassword.src = "./assets/icons/login_and_signUp/visibility.svg";
+//   }
+// });
 
-/**
- * Updates the confirm password field icon based on input state.
- * - Empty: Shows lock icon
- * - With text (password hidden): Shows visibility_off icon
- * - With text (password visible): Shows visibility icon
- */
-signUpConfirmPasswordInput.addEventListener("input", () => {
-  if (signUpConfirmPasswordInput.value.length === 0) {
-    toggleSignUpConfirmPassword.src = "./assets/icons/login_and_signUp/lock.svg";
-  } else if (signUpConfirmPasswordInput.type === "password") {
-    toggleSignUpConfirmPassword.src = "./assets/icons/login_and_signUp/visibility_off.svg";
-  } else {
-    toggleSignUpConfirmPassword.src = "./assets/icons/login_and_signUp/visibility.svg";
-  }
-});
+// toggleSignUpPassword.addEventListener("click", () => {
+//   if (signUpPasswordInput.type === "password") {
+//     signUpPasswordInput.type = "text";
+//     toggleSignUpPassword.src = "./assets/icons/login_and_signUp/visibility.svg";
+//   } else {
+//     signUpPasswordInput.type = "password";
+//     if (signUpPasswordInput.value.length === 0) {
+//       toggleSignUpPassword.src = "./assets/icons/login_and_signUp/lock.svg";
+//     } else {
+//       toggleSignUpPassword.src = "./assets/icons/login_and_signUp/visibility_off.svg";
+//     }
+//   }
+// });
 
-/**
- * Toggles confirm password visibility when clicking the eye icon.
- * Also updates the icon to match the current visibility state.
- */
-toggleSignUpConfirmPassword.addEventListener("click", () => {
-  if (signUpConfirmPasswordInput.type === "password") {
-    signUpConfirmPasswordInput.type = "text";
-    toggleSignUpConfirmPassword.src = "./assets/icons/login_and_signUp/visibility.svg";
-  } else {
-    signUpConfirmPasswordInput.type = "password";
-    if (signUpConfirmPasswordInput.value.length === 0) {
-      toggleSignUpConfirmPassword.src = "./assets/icons/login_and_signUp/lock.svg";
-    } else {
-      toggleSignUpConfirmPassword.src = "./assets/icons/login_and_signUp/visibility_off.svg";
-    }
-  }
-});
->>>>>>> 94a67a1e7c3457400271fa8ece924c890f38a13e
+// signUpConfirmPasswordInput.addEventListener("input", () => {
+//   if (signUpConfirmPasswordInput.value.length === 0) {
+//     toggleSignUpConfirmPassword.src = "./assets/icons/login_and_signUp/lock.svg";
+//   } else if (signUpConfirmPasswordInput.type === "password") {
+//     toggleSignUpConfirmPassword.src = "./assets/icons/login_and_signUp/visibility_off.svg";
+//   } else {
+//     toggleSignUpConfirmPassword.src = "./assets/icons/login_and_signUp/visibility.svg";
+//   }
+// });
+
+// toggleSignUpConfirmPassword.addEventListener("click", () => {
+//   if (signUpConfirmPasswordInput.type === "password") {
+//     signUpConfirmPasswordInput.type = "text";
+//     toggleSignUpConfirmPassword.src = "./assets/icons/login_and_signUp/visibility.svg";
+//   } else {
+//     signUpConfirmPasswordInput.type = "password";
+//     if (signUpConfirmPasswordInput.value.length === 0) {
+//       toggleSignUpConfirmPassword.src = "./assets/icons/login_and_signUp/lock.svg";
+//     } else {
+//       toggleSignUpConfirmPassword.src = "./assets/icons/login_and_signUp/visibility_off.svg";
+//     }
+//   }
+// });
