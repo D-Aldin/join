@@ -16,9 +16,7 @@ let startPosition;
  */
 function draggedElementID(event) {
   highlightDropPoint(event);
-  event.target.addEventListener("dragstart", () => {
-    event.target.classList.add("rotate");
-  });
+  event.target.classList.add("rotate");
   event.target.addEventListener("dragend", () => {
     event.target.classList.remove("rotate");
     let highlightBox = document.querySelector(".highlight_box");
