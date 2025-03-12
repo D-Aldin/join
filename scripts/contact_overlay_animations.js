@@ -134,8 +134,8 @@ function setTimeoutDeleteOverlayContact() {
 }
 
 /**
- * Closes the edit contact overlay
- * Animates the card sliding out to the right and removes overlay classes
+ * Closes the edit contact overlay with animation
+ * Clears all validation error messages after animation completes
  */
 function closeOverlayEditContact() {
   let overlayRef = document.getElementById("overlay_add_contacts_background");
@@ -149,6 +149,7 @@ function closeOverlayEditContact() {
       overlayCardRef.classList.remove("overlay_edit_contact_card");
       overlayCardRef.style.animation = "";
       overlayRef.style.backgroundColor = "";
+      clearErrorMessages();
     },
     { once: true }
   );

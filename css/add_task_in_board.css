@@ -25,24 +25,6 @@
   z-index: 10;
 }
 
-@keyframes slideInFromRight {
-  from {
-    clip-path: inset(0 0 0 100%);
-  }
-  to {
-    clip-path: inset(0 0 0 0);
-  }
-}
-
-@keyframes slideOutToRight {
-  from {
-    clip-path: inset(0 0 0 0);
-  }
-  to {
-    clip-path: inset(0 0 0 100%);
-  }
-}
-
 #add_task_box::-webkit-scrollbar {
   display: none;
 }
@@ -263,7 +245,7 @@
   align-items: center;
 }
 
-.d_none {
+.msg_d_none {
   display: none;
 }
 

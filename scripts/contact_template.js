@@ -91,10 +91,13 @@ function getTemplateOfContactEdit(contact) {
       <div class="overlay_close_btn_position">
         <img onclick="closeOverlayEditContact()" src="./assets/icons/contacts/Close.svg" alt="close_button" />
       </div>
-      <form action class="form_input_fields_position" onsubmit="updateContactInDataBase('${contact.id}'); setTimeoutSuccessfullyOverlayEdit(); return false;">
-        <input id="edit_name" type="text" placeholder="Name" value="${contact.name}" required />
-        <input id="edit_email" type="email" placeholder="Email" value="${contact.email}" required />
-        <input id="edit_phone" type="number" placeholder="Phone" value="${contact.phone}" required />
+      <form action class="form_input_fields_position" onsubmit="return validateAndUpdateContact('${contact.id}')">
+        <input id="edit_name" type="text" placeholder="Name" value="${contact.name}"/>
+        <div id="edit_name_error" class="error-message name_error_position"></div>
+        <input id="edit_email" type="email" placeholder="Email" value="${contact.email}"/>
+        <div id="edit_email_error" class="error-message email_error_position"></div>
+        <input id="edit_phone" type="number" placeholder="Phone" value="${contact.phone}"/>
+        <div id="edit_phone_error" class="error-message phone_error_position"></div>
         <div class="overlay_btn_position">
           <button type="button" class="btn_delete transition" onclick="deleteContactFromList('${contact.id}'), setTimeoutDeleteOverlayContact()">Delete <img src="./assets/icons/contacts/Close.svg" class="cancel_icon" alt="Cancel" /></button>
           <button type="submit" class="btn_save transition">Save <img src="./assets/icons/contacts/check.svg" alt="check" /></button>
