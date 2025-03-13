@@ -1,16 +1,12 @@
 /**
- * @fileOverview Handles the task creation overlay, priority selection, contact selection, subtask management, and form validation.
- */
-
-/**
  * Global variables for task management.
  */
-let contactList = [];
-let storeThePrioValue = " ";
-let subtaskObject = {};
-let statusOfRequired = false;
-let taskStatus = "toDo";
-let selectedContactIds = [];
+let contactList = [],
+  storeThePrioValue = " ",
+  subtaskObject = {},
+  statusOfRequired = false,
+  taskStatus = "toDo",
+  selectedContactIds = [];
 
 /**
  * Displays the task overlay with an animation.
@@ -91,10 +87,10 @@ function renderContactItem(key, profile) {
  * @param {Event} event - The event triggering the contact selection.
  */
 function chooseContact(event) {
-  const profile = event.currentTarget;
-  const contactID = profile.getAttributeNode("id_value").value;
-  const checkbox = profile.lastElementChild.lastElementChild;
-  const index = selectedContactIds.indexOf(contactID);
+  const profile = event.currentTarget,
+    contactID = profile.getAttributeNode("id_value").value,
+    checkbox = profile.lastElementChild.lastElementChild,
+    index = selectedContactIds.indexOf(contactID);
   const isAlreadySelected = index !== -1;
   if (isAlreadySelected) {
     selectedContactIds.splice(index, 1);
@@ -128,65 +124,6 @@ async function displayChossenContact(id) {
 function unselect(id) {
   let refElement = document.querySelector(`[profile_id=${id}]`);
   refElement.remove();
-}
-
-/**
- * Handles priority button selection and updates styling.
- * @param {Event} event - The event triggering the priority selection.
- */
-function buttonUrgent(event) {
-  let btnUrgent = document.querySelector("#urgent");
-  let btnMedium = document.querySelector("#medium");
-  let btnLow = document.querySelector("#low");
-  storeThePrioValue = event.currentTarget.id;
-  btnUrgent.style = "background-color:rgb(255, 61, 0); color: white";
-  document.querySelector("#iconurgent").firstChild.src = "./assets/icons/addTask/icon_clicket_urgent.svg";
-  if (btnMedium.hasAttribute("style") || btnLow.hasAttribute("style")) {
-    btnMedium.removeAttribute("style");
-    btnLow.removeAttribute("style");
-    document.querySelector("#iconmedium").firstChild.src = "assets/icons/addTask/icon_medium.svg";
-    document.querySelector("#iconlow").firstChild.src = "assets/icons/addTask/icon_low.svg";
-  }
-}
-
-/**
- * Handles priority button selection and updates styling.
- * @param {Event} event - The event triggering the priority selection.
- */
-function buttonMedium(event) {
-  let btnUrgent = document.querySelector("#urgent");
-  let btnMedium = document.querySelector("#medium");
-  let btnLow = document.querySelector("#low");
-  storeThePrioValue = event.currentTarget.id;
-  btnMedium.style = "background-color:rgb(255, 168, 0); color: white";
-  document.querySelector("#iconmedium").firstChild.src = "./assets/icons/addTask/icon_clicket_medium.svg";
-  if (btnUrgent.hasAttribute("style") || btnLow.hasAttribute("style")) {
-    btnUrgent.removeAttribute("style");
-    btnLow.removeAttribute("style");
-    document.querySelector("#iconurgent").firstChild.src = "assets/icons/addTask/icon_urgent.svg";
-    document.querySelector("#iconlow").firstChild.src = "assets/icons/addTask/icon_low.svg";
-  }
-  storeThePrioValue = "medium";
-}
-
-/**
- * Handles priority button selection and updates styling.
- * @param {Event} event - The event triggering the priority selection.
- */
-function buttonLow(event) {
-  let btnUrgent = document.querySelector("#urgent");
-  let btnMedium = document.querySelector("#medium");
-  let btnLow = document.querySelector("#low");
-  storeThePrioValue = event.currentTarget.id;
-  btnLow.style = "background-color: rgb(122, 226, 41); color: white";
-  document.querySelector("#iconlow").firstChild.src = "./assets/icons/addTask/icon_clicket_low.svg";
-  if (btnMedium.hasAttribute("style") || btnUrgent.hasAttribute("style")) {
-    btnMedium.removeAttribute("style");
-    btnUrgent.removeAttribute("style");
-    document.querySelector("#iconmedium").firstChild.src = "assets/icons/addTask/icon_medium.svg";
-    document.querySelector("#iconurgent").firstChild.src = "assets/icons/addTask/icon_urgent.svg";
-  }
-  storeThePrioValue = "low";
 }
 
 /**
@@ -334,7 +271,6 @@ function collectTheContacts() {
  */
 function collectTheSubtasks() {
   let refAllChosenSubtasks = document.querySelectorAll(".subtask_paragraf");
-
   for (let index = 0; index < refAllChosenSubtasks.length; index++) {
     const task = refAllChosenSubtasks[index].innerHTML.substring(1);
     subtaskObject[`subtask_${crypto.randomUUID()}`] = { task: task, state: false };
@@ -362,8 +298,6 @@ function requiredFieldTitle() {
 function requiredFieldDate() {
   let inputFiledDate = document.getElementById("dateBoard");
   let dateValue = inputFiledDate.value;
-  console.log(dateValue);
-
   if (!dateValue || isNaN(new Date(dateValue).getTime())) {
     inputFiledDate.classList.add("required_color");
     document.querySelector("#dateRequired").classList.remove("hide_element");
@@ -449,53 +383,4 @@ function hideTaskAddedAnimation() {
       window.location = "board.html";
     }, 125);
   }, 1000);
-}
-
-/**
- * Sets up event listeners for task buttons.
- */
-document.querySelector("#addToDo").addEventListener("click", function () {
-  showOverlay();
-  renderAddTaskMenu();
-});
-
-/**
- * Sets up event listeners for task buttons.
- */
-document.querySelector("#addProgress").addEventListener("click", function () {
-  showOverlay();
-  renderAddTaskMenu();
-  taskStatus = "progress";
-});
-
-/**
- * Sets up event listeners for task buttons.
- */
-document.querySelector("#addFeedback").addEventListener("click", function () {
-  showOverlay();
-  renderAddTaskMenu();
-  taskStatus = "feedback";
-});
-
-/**
- * Redirects to add_task.html if the window is resized below a threshold.
- */
-window.addEventListener("resize", () => {
-  const refOverlay = document.querySelector("#overlayForAddTask");
-  if (window.innerWidth < 1301 && refOverlay.style.display === "block") {
-    window.location = "add_task.html";
-  }
-});
-
-/**
- * Sets an event listener to create a new subtask on pressing Enter.
- */
-function setEventListenerForSubtask() {
-  const refSubtaskInput = document.querySelector("#subtask");
-  refSubtaskInput.addEventListener("keypress", function (event) {
-    if (event.key === "Enter") {
-      event.preventDefault();
-      newSubtask();
-    }
-  });
 }
