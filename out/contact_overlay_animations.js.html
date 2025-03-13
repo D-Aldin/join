@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: contact_overlay_animations.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: contact_overlay_animations.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
+ * Closes the contact information overlay after deleting a contact
+ * Animates the overlay sliding out to the right and hides it
+ */
+function closeOverlayContactInfoAfterDelete() {
+  let overlay = document.getElementById("overlay_contact_infos");
+  overlay.style.animation = "slideOutToRight 125ms forwards";
+  overlay.addEventListener(
+    "animationend",
+    () => {
+      overlay.classList.add("d_none");
+      overlay.style.animation = "";
+    },
+    { once: true }
+  );
+}
+
+/**
+ * Opens the overlay for adding a new contact
+ * Shows the background overlay and animates the contact card sliding in from the right
+ */
+function openOverlayAddContact() {
+  let overlayRef = document.getElementById("overlay_add_contacts_background");
+  let overlayCardRef = document.getElementById("overlay_add_contact_card");
+  overlayRef.classList.add("overlay_background");
+  overlayCardRef.classList.add("overlay_add_contact_card");
+  overlayCardRef.style.animation = "slideInFromRight 125ms forwards";
+}
+
+/**
+ * Opens the overlay for editing an existing contact
+ * @param {string} contactId - The unique identifier of the contact to edit
+ */
+function openOverlayEditContact(contactId) {
+  let contact = arrayOfContacts.find((c) => c.id === contactId);
+  let overlayRef = document.getElementById("overlay_add_contacts_background");
+  let overlayEditCardRef = document.getElementById("overlay_edit_contact_card");
+  overlayEditCardRef.innerHTML = getTemplateOfContactEdit(contact);
+  overlayRef.classList.add("overlay_background");
+  overlayEditCardRef.classList.add("overlay_edit_contact_card");
+  overlayEditCardRef.style.animation = "slideInFromRight 125ms forwards";
+}
+
+/**
+ * Closes the add contact overlay
+ * Animates the card sliding out to the right and removes overlay classes
+ * Clears input fields after animation completes
+ */
+function closeOverlayAddContact() {
+  let overlayRef = document.getElementById("overlay_add_contacts_background");
+  let overlayCardRef = document.getElementById("overlay_add_contact_card");
+  overlayRef.style.backgroundColor = "transparent";
+  overlayCardRef.style.animation = "slideOutToRight 125ms forwards";
+  overlayCardRef.addEventListener(
+    "animationend",
+    () => {
+      overlayRef.classList.remove("overlay_background");
+      overlayCardRef.classList.remove("overlay_add_contact_card");
+      overlayCardRef.style.animation = "";
+      overlayRef.style.backgroundColor = "";
+      deleteInputs();
+    },
+    { once: true }
+  );
+}
+
+/**
+ * Displays a success message when a contact is created
+ * Shows the message with a slide-in animation and automatically hides it after a delay
+ */
+function overlayContactSuccessfullyCreated() {
+  let overlayRef = document.getElementById("contact_successfully_created");
+  overlayRef.classList.remove("d_none");
+  overlayRef.classList.add("overlay_contact_successfully_created");
+  overlayRef.style.animation = "slideInFromRight 125ms forwards";
+  setTimeout(() => {
+    overlayRef.style.animation = "slideOutToRight 125ms forwards";
+  }, 800);
+}
+
+/**
+ * Displays a success message when a contact is edited
+ * Shows the message with a slide-in animation and automatically hides it after a delay
+ */
+function overlayContactSuccessfullyEdited() {
+  let overlayRef = document.getElementById("contact_successfully_edit");
+  overlayRef.classList.remove("d_none");
+  overlayRef.classList.add("overlay_contact_successfully_created");
+  overlayRef.style.animation = "slideInFromRight 125ms forwards";
+  setTimeout(() => {
+    overlayRef.style.animation = "slideOutToRight 125ms forwards";
+  }, 800);
+}
+
+/**
+ * Displays a success message when a contact is deleted
+ * Shows the message with a slide-in animation and automatically hides it after a delay
+ */
+function overlayContactSuccessfullyDelete() {
+  let overlayRef = document.getElementById("contact_successfully_deleted");
+  overlayRef.classList.remove("d_none");
+  overlayRef.classList.add("overlay_contact_successfully_created");
+  overlayRef.style.animation = "slideInFromRight 125ms forwards";
+  setTimeout(() => {
+    overlayRef.style.animation = "slideOutToRight 125ms forwards";
+  }, 800);
+}
+
+/**
+ * Sets a short delay before showing the contact created success message
+ */
+function setTimeoutSuccessfullyOverlayAddContact() {
+  setTimeout(() => {
+    overlayContactSuccessfullyCreated();
+  }, 200);
+}
+
+/**
+ * Sets a short delay before showing the contact edited success message
+ */
+function setTimeoutSuccessfullyOverlayEdit() {
+  setTimeout(() => {
+    overlayContactSuccessfullyEdited();
+  }, 200);
+}
+
+/**
+ * Sets a short delay before showing the contact deleted success message
+ */
+function setTimeoutDeleteOverlayContact() {
+  setTimeout(() => {
+    overlayContactSuccessfullyDelete();
+  }, 200);
+}
+
+/**
+ * Closes the edit contact overlay with animation
+ * Clears all validation error messages after animation completes
+ */
+function closeOverlayEditContact() {
+  let overlayRef = document.getElementById("overlay_add_contacts_background");
+  let overlayCardRef = document.getElementById("overlay_edit_contact_card");
+  overlayRef.style.backgroundColor = "transparent";
+  overlayCardRef.style.animation = "slideOutToRight 125ms forwards";
+  overlayCardRef.addEventListener(
+    "animationend",
+    () => {
+      overlayRef.classList.remove("overlay_background");
+      overlayCardRef.classList.remove("overlay_edit_contact_card");
+      overlayCardRef.style.animation = "";
+      overlayRef.style.backgroundColor = "";
+      clearErrorMessages();
+    },
+    { once: true }
+  );
+}
+
+/**
+ * Toggles the contact information overlay for a specific contact
+ * If the contact is already active, it closes the overlay
+ * If the contact is not active, it shows the overlay with contact details
+ *
+ * @param {number} index - The index of the contact in the contacts array
+ */
+function toggleOverlayContactInfos(index) {
+  let overlay = document.getElementById("overlay_contact_infos");
+  let contactElement = document.getElementById(`contact_${index}`);
+  let contact = arrayOfContacts[index];
+  if (contactElement.classList.contains("contact_active")) {
+    ifContactElementContainsContactActive(overlay, contactElement);
+  } else {
+    removeActiveClassFromContacts();
+    elseContactElementContainsContactActive(overlay, contactElement, contact);
+  }
+}
+
+/**
+ * Closes the contact information overlay
+ * Animates the overlay sliding out to the right and removes active states from contacts
+ */
+function closeContactInfoOverlay() {
+  let overlay = document.getElementById("overlay_contact_infos");
+  overlay.style.animation = "slideOutToRight 125ms forwards";
+  overlay.addEventListener(
+    "animationend",
+    () => {
+      overlay.classList.add("d_none");
+      overlay.style.animation = "";
+      removeActiveClassFromContacts();
+    },
+    { once: true }
+  );
+}
+
+/**
+ * Removes the active class from all contacts in the list
+ * Restores hover effect on all contacts
+ */
+function removeActiveClassFromContacts() {
+  const activeContacts = document.querySelectorAll(".contact_active");
+  for (let i = 0; i &lt; activeContacts.length; i++) {
+    activeContacts[i].classList.remove("contact_active");
+    activeContacts[i].classList.add("hover_contact_list");
+  }
+}
+
+/**
+ * Handles the case when a contact element already has the active class
+ * Removes active styling and closes the overlay with animation
+ *
+ * @param {HTMLElement} overlay - The contact info overlay element
+ * @param {HTMLElement} contactElement - The contact element in the list
+ */
+function ifContactElementContainsContactActive(overlay, contactElement) {
+  contactElement.classList.remove("contact_active");
+  contactElement.classList.add("hover_contact_list");
+  overlay.style.animation = "slideOutToRight 125ms forwards";
+  overlay.addEventListener(
+    "animationend",
+    () => {
+      overlay.classList.add("d_none");
+      overlay.style.animation = "";
+    },
+    { once: true }
+  );
+}
+
+/**
+ * Handles the case when a contact element doesn't have the active class
+ * Adds active styling to the contact and displays its information in the overlay
+ *
+ * @param {HTMLElement} overlay - The contact info overlay element
+ * @param {HTMLElement} contactElement - The contact element in the list
+ * @param {Object} contact - The contact data object to display
+ */
+function elseContactElementContainsContactActive(overlay, contactElement, contact) {
+  contactElement.classList.add("contact_active");
+  contactElement.classList.remove("hover_contact_list");
+  overlay.innerHTML = getTemplateOfContactInfo(contact);
+  if (overlay.classList.contains("d_none")) {
+    overlay.classList.remove("d_none");
+    overlay.style.animation = "slideInFromRight 125ms forwards";
+  } else {
+    elseOverlayContactInfosGoOut(overlay, contact);
+  }
+}
+
+/**
+ * Handles animation for changing contact information in an already open overlay
+ * Slides out the current overlay, updates content, then slides it back in
+ *
+ * @param {HTMLElement} overlay - The contact info overlay element
+ * @param {Object} contact - The new contact data object to display
+ */
+function elseOverlayContactInfosGoOut(overlay, contact) {
+  overlay.style.animation = "slideOutToRight 125ms forwards";
+  overlay.addEventListener(
+    "animationend",
+    () => {
+      overlay.classList.add("d_none");
+      overlay.style.animation = "";
+      overlay.innerHTML = getTemplateOfContactInfo(contact);
+      overlay.classList.remove("d_none");
+      overlay.style.animation = "slideInFromRight 125ms forwards";
+    },
+    { once: true }
+  );
+}
+
+/**
+ * Adds an event listener to the document to close the overlay when clicking outside
+ * Checks if the clicked element is the overlay background or the overlay card
+ * If true, closes the overlay by removing the overlay classes
+ * If false, keeps the overlay open
+ * @param {Event} event - The event object from the clicked element
+ * @param {HTMLElement} overlayBg - The overlay background element
+ * @param {HTMLElement} overlayCard - The overlay card element
+ * @param {HTMLElement} overlayEditCard - The overlay edit card element
+ * @listens click
+ * @returns {void}
+ */
+addEventListener("click", (event) => {
+  const overlayBg = document.getElementById("overlay_add_contacts_background");
+  const overlayCard = document.getElementById("overlay_add_contact_card");
+  const overlayEditCard = document.getElementById("overlay_edit_contact_card");
+  if (event.target === overlayBg) {
+    if (overlayCard.classList.contains("overlay_add_contact_card")) {
+      closeOverlayAddContact();
+    } else if (overlayEditCard.classList.contains("overlay_edit_contact_card")) {
+      closeOverlayEditContact();
+    }
+  }
+});
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-signUpEventListener.html">signUpEventListener</a></li></ul><h3>Global</h3><ul><li><a href="global.html#BASE_URL">BASE_URL</a></li><li><a href="global.html#accountImg">accountImg</a></li><li><a href="global.html#activeLink">activeLink</a></li><li><a href="global.html#addCatecory">addCatecory</a></li><li><a href="global.html#addContact">addContact</a></li><li><a href="global.html#addContactToDataBase">addContactToDataBase</a></li><li><a href="global.html#addContainerClickListeners">addContainerClickListeners</a></li><li><a href="global.html#addDataToFireBase">addDataToFireBase</a></li><li><a href="global.html#addLegalAndPolicyClickListeners">addLegalAndPolicyClickListeners</a></li><li><a href="global.html#addProfilesToCard">addProfilesToCard</a></li><li><a href="global.html#addUsersToDataBase">addUsersToDataBase</a></li><li><a href="global.html#allowDrop">allowDrop</a></li><li><a href="global.html#arrayOfContacts">arrayOfContacts</a></li><li><a href="global.html#assignNewContList">assignNewContList</a></li><li><a href="global.html#authenticateUser">authenticateUser</a></li><li><a href="global.html#borderFocus">borderFocus</a></li><li><a href="global.html#buttonLow">buttonLow</a></li><li><a href="global.html#buttonMedium">buttonMedium</a></li><li><a href="global.html#buttonUrgent">buttonUrgent</a></li><li><a href="global.html#calPercentageOfCompletedSubtasks">calPercentageOfCompletedSubtasks</a></li><li><a href="global.html#card">card</a></li><li><a href="global.html#checkIfUserExists">checkIfUserExists</a></li><li><a href="global.html#checkRequiredDate">checkRequiredDate</a></li><li><a href="global.html#checkRequiredField">checkRequiredField</a></li><li><a href="global.html#checkRequiredTitle">checkRequiredTitle</a></li><li><a href="global.html#checkRequiredcategory">checkRequiredcategory</a></li><li><a href="global.html#checkUser">checkUser</a></li><li><a href="global.html#chooseContact">chooseContact</a></li><li><a href="global.html#clearAllTasks">clearAllTasks</a></li><li><a href="global.html#clearErrorMessages">clearErrorMessages</a></li><li><a href="global.html#clearPrivacyPolicyError">clearPrivacyPolicyError</a></li><li><a href="global.html#clearSignUpErrorMessages">clearSignUpErrorMessages</a></li><li><a href="global.html#clearValueOfInputFields">clearValueOfInputFields</a></li><li><a href="global.html#clearsubtask">clearsubtask</a></li><li><a href="global.html#closeCatecoryList">closeCatecoryList</a></li><li><a href="global.html#closeContactInfoOverlay">closeContactInfoOverlay</a></li><li><a href="global.html#closeContactList">closeContactList</a></li><li><a href="global.html#closeEditSubmenu">closeEditSubmenu</a></li><li><a href="global.html#closeInputField">closeInputField</a></li><li><a href="global.html#closeMainSubmenu">closeMainSubmenu</a></li><li><a href="global.html#closeOverlayAddContact">closeOverlayAddContact</a></li><li><a href="global.html#closeOverlayContactInfoAfterDelete">closeOverlayContactInfoAfterDelete</a></li><li><a href="global.html#closeOverlayEditContact">closeOverlayEditContact</a></li><li><a href="global.html#collectDataForNewTask">collectDataForNewTask</a></li><li><a href="global.html#collectTasks">collectTasks</a></li><li><a href="global.html#collectTheContacts">collectTheContacts</a></li><li><a href="global.html#collectTheSubtasks">collectTheSubtasks</a></li><li><a href="global.html#colors">colors</a></li><li><a href="global.html#confirmEditing">confirmEditing</a></li><li><a href="global.html#contactList">contactList</a></li><li><a href="global.html#countCompletedSubtasks">countCompletedSubtasks</a></li><li><a href="global.html#countTasks">countTasks</a></li><li><a href="global.html#countTheNumberOfUrgentTasks">countTheNumberOfUrgentTasks</a></li><li><a href="global.html#creatTask">creatTask</a></li><li><a href="global.html#createTask">createTask</a></li><li><a href="global.html#dateValue">dateValue</a></li><li><a href="global.html#deleteButton">deleteButton</a></li><li><a href="global.html#deleteContactFromList">deleteContactFromList</a></li><li><a href="global.html#deleteEditingSubtask">deleteEditingSubtask</a></li><li><a href="global.html#deleteInputs">deleteInputs</a></li><li><a href="global.html#deleteSubtask">deleteSubtask</a></li><li><a href="global.html#deleteSubtaskBoardSection">deleteSubtaskBoardSection</a></li><li><a href="global.html#descriptionValue">descriptionValue</a></li><li><a href="global.html#displayCardOnBoard">displayCardOnBoard</a></li><li><a href="global.html#displayChossenContact">displayChossenContact</a></li><li><a href="global.html#displayDropDownMenuSectionAddTask">displayDropDownMenuSectionAddTask</a></li><li><a href="global.html#displayEmailError">displayEmailError</a></li><li><a href="global.html#doneCount">doneCount</a></li><li><a href="global.html#draggedElementID">draggedElementID</a></li><li><a href="global.html#dropPoint">dropPoint</a></li><li><a href="global.html#editButton">editButton</a></li><li><a href="global.html#editSubtask">editSubtask</a></li><li><a href="global.html#editSubtaskInAddTaskAreaBoard">editSubtaskInAddTaskAreaBoard</a></li><li><a href="global.html#elseContactElementContainsContactActive">elseContactElementContainsContactActive</a></li><li><a href="global.html#elseOverlayContactInfosGoOut">elseOverlayContactInfosGoOut</a></li><li><a href="global.html#email">email</a></li><li><a href="global.html#feedbackCount">feedbackCount</a></li><li><a href="global.html#fetchCardDetails">fetchCardDetails</a></li><li><a href="global.html#fetchTasks">fetchTasks</a></li><li><a href="global.html#fetchUserContacts">fetchUserContacts</a></li><li><a href="global.html#fetchUserData">fetchUserData</a></li><li><a href="global.html#findUserByEmail">findUserByEmail</a></li><li><a href="global.html#finishTaskNotification">finishTaskNotification</a></li><li><a href="global.html#focusTheField">focusTheField</a></li><li><a href="global.html#getContactDatasFromDataBase">getContactDatasFromDataBase</a></li><li><a href="global.html#getContactsFromDataBase">getContactsFromDataBase</a></li><li><a href="global.html#getContactsFromFireBase">getContactsFromFireBase</a></li><li><a href="global.html#getData">getData</a></li><li><a href="global.html#getDataFromLogin">getDataFromLogin</a></li><li><a href="global.html#getDataFromSignUp">getDataFromSignUp</a></li><li><a href="global.html#getInitials">getInitials</a></li><li><a href="global.html#getInitialsSubmenu">getInitialsSubmenu</a></li><li><a href="global.html#getRandomColor">getRandomColor</a></li><li><a href="global.html#getUpdatedContactData">getUpdatedContactData</a></li><li><a href="global.html#getUrgentTasksInfo">getUrgentTasksInfo</a></li><li><a href="global.html#getUserName">getUserName</a></li><li><a href="global.html#goBack">goBack</a></li><li><a href="global.html#handleContactOutsideClick">handleContactOutsideClick</a></li><li><a href="global.html#handleNoTasks">handleNoTasks</a></li><li><a href="global.html#handleOrientation">handleOrientation</a></li><li><a href="global.html#handleOutsideClick">handleOutsideClick</a></li><li><a href="global.html#hideOverlay">hideOverlay</a></li><li><a href="global.html#hideTaskAddedAnimation">hideTaskAddedAnimation</a></li><li><a href="global.html#hideTaskDeleteMsg">hideTaskDeleteMsg</a></li><li><a href="global.html#highlightDropPoint">highlightDropPoint</a></li><li><a href="global.html#idOfcurrentElement">idOfcurrentElement</a></li><li><a href="global.html#ifContactElementContainsContactActive">ifContactElementContainsContactActive</a></li><li><a href="global.html#ifNoTaskResizeContainer">ifNoTaskResizeContainer</a></li><li><a href="global.html#ifUserAlreadyExists">ifUserAlreadyExists</a></li><li><a href="global.html#init">init</a></li><li><a href="global.html#initialize">initialize</a></li><li><a href="global.html#initials">initials</a></li><li><a href="global.html#input">input</a></li><li><a href="global.html#invisibleCategoryPlaceholder">invisibleCategoryPlaceholder</a></li><li><a href="global.html#listOfTasks">listOfTasks</a></li><li><a href="global.html#loginInputsBehaviour">loginInputsBehaviour</a></li><li><a href="global.html#loginUser">loginUser</a></li><li><a href="global.html#logout">logout</a></li><li><a href="global.html#managenCheckBoxes">managenCheckBoxes</a></li><li><a href="global.html#managenProfilesWhenCardOpen">managenProfilesWhenCardOpen</a></li><li><a href="global.html#mimicPlaceHolder">mimicPlaceHolder</a></li><li><a href="global.html#newSubtask">newSubtask</a></li><li><a href="global.html#noTaskFound">noTaskFound</a></li><li><a href="global.html#noTaskToDo">noTaskToDo</a></li><li><a href="global.html#openCatecoryList">openCatecoryList</a></li><li><a href="global.html#openContactList">openContactList</a></li><li><a href="global.html#openEditOverlay">openEditOverlay</a></li><li><a href="global.html#openMenu">openMenu</a></li><li><a href="global.html#openMenuSectionAddTask">openMenuSectionAddTask</a></li><li><a href="global.html#openOverlayAddContact">openOverlayAddContact</a></li><li><a href="global.html#openOverlayEditContact">openOverlayEditContact</a></li><li><a href="global.html#openSignUpModal">openSignUpModal</a></li><li><a href="global.html#overlayContactSuccessfullyCreated">overlayContactSuccessfullyCreated</a></li><li><a href="global.html#overlayContactSuccessfullyDelete">overlayContactSuccessfullyDelete</a></li><li><a href="global.html#overlayContactSuccessfullyEdited">overlayContactSuccessfullyEdited</a></li><li><a href="global.html#overlayOff">overlayOff</a></li><li><a href="global.html#overlayOn">overlayOn</a></li><li><a href="global.html#password">password</a></li><li><a href="global.html#passwordInput">passwordInput</a></li><li><a href="global.html#passwordMatch">passwordMatch</a></li><li><a href="global.html#postAllData">postAllData</a></li><li><a href="global.html#processTaskStatus">processTaskStatus</a></li><li><a href="global.html#progressCount">progressCount</a></li><li><a href="global.html#pushContacts">pushContacts</a></li><li><a href="global.html#pushContactsToSelectField">pushContactsToSelectField</a></li><li><a href="global.html#queryOfClearErrorMessage">queryOfClearErrorMessage</a></li><li><a href="global.html#refCardBox">refCardBox</a></li><li><a href="global.html#refCloseBtn">refCloseBtn</a></li><li><a href="global.html#refEditButton">refEditButton</a></li><li><a href="global.html#refLoginButton">refLoginButton</a></li><li><a href="global.html#refMessage">refMessage</a></li><li><a href="global.html#refTaskDeleteMsg">refTaskDeleteMsg</a></li><li><a href="global.html#refreshPageWhenOverlayOff">refreshPageWhenOverlayOff</a></li><li><a href="global.html#removeActiveClassFromContacts">removeActiveClassFromContacts</a></li><li><a href="global.html#removeContact">removeContact</a></li><li><a href="global.html#removeContactFromAllTasks">removeContactFromAllTasks</a></li><li><a href="global.html#render">render</a></li><li><a href="global.html#renderAddTaskMenu">renderAddTaskMenu</a></li><li><a href="global.html#renderContactItem">renderContactItem</a></li><li><a href="global.html#renderContacts">renderContacts</a></li><li><a href="global.html#renderContactsToNewTask">renderContactsToNewTask</a></li><li><a href="global.html#renderInitials">renderInitials</a></li><li><a href="global.html#renderLetterTemplate">renderLetterTemplate</a></li><li><a href="global.html#renderSelectetContacts">renderSelectetContacts</a></li><li><a href="global.html#renderSubtasks">renderSubtasks</a></li><li><a href="global.html#renderTaskCard">renderTaskCard</a></li><li><a href="global.html#requiredFieldCategory">requiredFieldCategory</a></li><li><a href="global.html#requiredFieldDate">requiredFieldDate</a></li><li><a href="global.html#requiredFieldTitle">requiredFieldTitle</a></li><li><a href="global.html#resetPrioButton">resetPrioButton</a></li><li><a href="global.html#resizeTitleIfTooLong">resizeTitleIfTooLong</a></li><li><a href="global.html#returnAllData">returnAllData</a></li><li><a href="global.html#returnFirstLetter">returnFirstLetter</a></li><li><a href="global.html#searchContacts">searchContacts</a></li><li><a href="global.html#searchFiled">searchFiled</a></li><li><a href="global.html#searchFunk">searchFunk</a></li><li><a href="global.html#sendContactUpdate">sendContactUpdate</a></li><li><a href="global.html#setAccountInitialsSubmenu">setAccountInitialsSubmenu</a></li><li><a href="global.html#setCheckboxAttributes">setCheckboxAttributes</a></li><li><a href="global.html#setColorOfCategory">setColorOfCategory</a></li><li><a href="global.html#setContact">setContact</a></li><li><a href="global.html#setEditSubtask">setEditSubtask</a></li><li><a href="global.html#setEventListenerForSubtask">setEventListenerForSubtask</a></li><li><a href="global.html#setGreeting">setGreeting</a></li><li><a href="global.html#setPrio">setPrio</a></li><li><a href="global.html#setStandardButton">setStandardButton</a></li><li><a href="global.html#setSubtask">setSubtask</a></li><li><a href="global.html#setTimeoutDeleteOverlayContact">setTimeoutDeleteOverlayContact</a></li><li><a href="global.html#setTimeoutSuccessfullyOverlayAddContact">setTimeoutSuccessfullyOverlayAddContact</a></li><li><a href="global.html#setTimeoutSuccessfullyOverlayEdit">setTimeoutSuccessfullyOverlayEdit</a></li><li><a href="global.html#setdubbleButton">setdubbleButton</a></li><li><a href="global.html#setupValidationParams">setupValidationParams</a></li><li><a href="global.html#shortenContactView">shortenContactView</a></li><li><a href="global.html#showCategoryList">showCategoryList</a></li><li><a href="global.html#showContactList">showContactList</a></li><li><a href="global.html#showOverlay">showOverlay</a></li><li><a href="global.html#showPasswordMismatchError">showPasswordMismatchError</a></li><li><a href="global.html#showPrivacyPolicyError">showPrivacyPolicyError</a></li><li><a href="global.html#showTaskAddedAnimation">showTaskAddedAnimation</a></li><li><a href="global.html#showTaskDeleteMsg">showTaskDeleteMsg</a></li><li><a href="global.html#statusCounter">statusCounter</a></li><li><a href="global.html#statusOfInputFields">statusOfInputFields</a></li><li><a href="global.html#stopEventBubbel">stopEventBubbel</a></li><li><a href="global.html#submenuRef">submenuRef</a></li><li><a href="global.html#subtaskInputField">subtaskInputField</a></li><li><a href="global.html#subtasksTemplate">subtasksTemplate</a></li><li><a href="global.html#tamplate">tamplate</a></li><li><a href="global.html#taskPath">taskPath</a></li><li><a href="global.html#tasksDone">tasksDone</a></li><li><a href="global.html#tasksInBoard">tasksInBoard</a></li><li><a href="global.html#tasksInFeedback">tasksInFeedback</a></li><li><a href="global.html#tasksInProgress">tasksInProgress</a></li><li><a href="global.html#tasksInToDo">tasksInToDo</a></li><li><a href="global.html#titleValue">titleValue</a></li><li><a href="global.html#toDoCount">toDoCount</a></li><li><a href="global.html#toggleOverlayContactInfos">toggleOverlayContactInfos</a></li><li><a href="global.html#togglePassword">togglePassword</a></li><li><a href="global.html#toggleShowSubmenu">toggleShowSubmenu</a></li><li><a href="global.html#totalNumberOfTasks">totalNumberOfTasks</a></li><li><a href="global.html#tryHandlingFromAddContact">tryHandlingFromAddContact</a></li><li><a href="global.html#unselect">unselect</a></li><li><a href="global.html#updateActiveLinks">updateActiveLinks</a></li><li><a href="global.html#updateContactInDataBase">updateContactInDataBase</a></li><li><a href="global.html#updateLocalContactAndUI">updateLocalContactAndUI</a></li><li><a href="global.html#updateStatusInDB">updateStatusInDB</a></li><li><a href="global.html#updateSubtaskState">updateSubtaskState</a></li><li><a href="global.html#updateSummary">updateSummary</a></li><li><a href="global.html#updateUrgentTasksUI">updateUrgentTasksUI</a></li><li><a href="global.html#urgentTasks">urgentTasks</a></li><li><a href="global.html#userData">userData</a></li><li><a href="global.html#validateAndUpdateContact">validateAndUpdateContact</a></li><li><a href="global.html#validateContactInputs">validateContactInputs</a></li><li><a href="global.html#validateEachField">validateEachField</a></li><li><a href="global.html#validateInputs">validateInputs</a></li><li><a href="global.html#validateLoginInputs">validateLoginInputs</a></li><li><a href="global.html#validateSignUpForm">validateSignUpForm</a></li><li><a href="global.html#validateSignUpInputs">validateSignUpInputs</a></li><li><a href="global.html#validateSingleField">validateSingleField</a></li><li><a href="global.html#visibilityOfInputFields">visibilityOfInputFields</a></li><li><a href="global.html#writeSubtask">writeSubtask</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.4</a> on Thu Mar 13 2025 20:29:56 GMT+0100 (Central European Standard Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

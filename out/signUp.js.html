@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: signUp.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: signUp.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>const BASE_URL = "https://dv-join-bbc2e-default-rtdb.europe-west1.firebasedatabase.app/";
+export const signBtn = document.querySelector("#signBtn_next_page");
+const refLoginWindow = document.querySelector(".login_window");
+const refSignWindow = document.querySelector(".sign_window");
+const refSignUpSegment = document.querySelector(".sign_up");
+export const refBackButton = document.querySelector("#goBackArrow");
+export const pswConfirm = document.querySelector("#signUpConfirmPassword");
+const psw = document.querySelector("#signUpPassword");
+export const signUpPasswordInput = document.getElementById("signUpPassword");
+export const toggleSignUpPassword = document.getElementById("toggleSignUpPassword");
+export const signUpConfirmPasswordInput = document.getElementById("signUpConfirmPassword");
+export const toggleSignUpConfirmPassword = document.getElementById("toggleSignUpConfirmPassword");
+const signUpButton = document.getElementById("sign_btn");
+const inputIds = {
+  name: "name",
+  email: "signUpEmail",
+  password: "signUpPassword",
+  confirmPassword: "signUpConfirmPassword",
+};
+let refToUnderLineClass = document.querySelector(".under_line");
+let user = [];
+let newUser;
+const colors = ["rgb(255, 122, 0)", "rgb(147, 39, 255)", "rgb(110, 82, 255)", "rgb(252, 113, 255)", "rgb(255, 187, 43)", "rgb(31, 215, 193)", "rgb(70, 47, 138)", "rgb(255, 70, 70)", "rgb(0, 190, 232)", "rgb(255, 122, 0)"];
+
+/**
+ * Returns a random color from the predefined colors array.
+ * @returns {string} A random RGB color string.
+ */
+function getRandomColor() {
+  const randomIndex = Math.floor(Math.random() * colors.length);
+  return colors[randomIndex];
+}
+
+/**
+ * Opens the sign-up modal by fading out the login window and fading in the sign-up window.
+ */
+export function openSignUpModal() {
+  refLoginWindow.style.animation = "fadeOut 125ms forwards";
+  setTimeout(() => {
+    refLoginWindow.style.display = "none";
+    refSignUpSegment.style.display = "none";
+    refSignWindow.style.display = "inline";
+    refSignWindow.style.animation = "fadeIn 125ms forwards";
+  }, 125);
+}
+
+/**
+ * Returns the user to the login window by clearing sign-up inputs and applying fade animations.
+ */
+export function goBack() {
+  refSignWindow.style.animation = "fadeOut 125ms forwards";
+  const inputs = document.querySelectorAll("#signUp input");
+  signUpButton.disabled = true;
+  signUpButton.classList.add("disabled_btn");
+  privacy_police.checked = false;
+  for (let i = 0; i &lt; inputs.length; i++) {
+    inputs[i].value = "";
+  }
+  setTimeout(() => {
+    refSignWindow.style.display = "none";
+    refLoginWindow.style.display = "inline";
+    refSignUpSegment.style.display = "inline";
+    refLoginWindow.style.animation = "fadeIn 125ms forwards";
+  }, 125);
+}
+
+/**
+ * Handles sign-up form submission by collecting data, validating inputs,
+ * and checking if the user already exists.
+ * @param {Event} event - The submit event from the sign-up form.
+ */
+export function getDataFromSignUp(event) {
+  event.preventDefault();
+  const form = event.target;
+  const userName = form.name.value;
+  const userEmail = form.email.value;
+  const userPassword = form.password.value;
+  const confirmPassword = document.getElementById("signUpConfirmPassword").value;
+  const privacyPolicy = document.getElementById("privacy_police").checked;
+  if (validateSignUpInputs(userName, userEmail, userPassword, confirmPassword, privacyPolicy)) return;
+  const id = userEmail.split("@")[0].replace(".", "") + "user";
+  newUser = userData(id, userEmail, userName, userPassword);
+  ifUserAlreadyExists(userEmail);
+}
+
+/**
+ * Validates the sign-up form inputs.
+ * @param {string} name - The user's name.
+ * @param {string} email - The user's email.
+ * @param {string} password - The user's password.
+ * @param {string} confirmPassword - The confirmation of the password.
+ * @param {boolean} privacyPolicy - Whether the privacy policy checkbox is checked.
+ * @returns {boolean} Returns true if there are errors in the inputs.
+ */
+function validateSignUpInputs(name, email, password, confirmPassword, privacyPolicy) {
+  const inputs = { name, email, password, confirmPassword };
+  let hasError = validateEachField(inputs);
+  if (password &amp;&amp; confirmPassword &amp;&amp; password !== confirmPassword) {
+    showPasswordMismatchError();
+    hasError = true;
+  }
+  if (!privacyPolicy) {
+    showPrivacyPolicyError();
+    hasError = true;
+  } else {
+    clearPrivacyPolicyError();
+  }
+  return hasError;
+}
+
+/**
+ * Validates each field in the inputs object.
+ * @param {Object} inputs - An object containing field names and their corresponding values.
+ * @returns {boolean} Returns true if any field is invalid.
+ */
+function validateEachField(inputs) {
+  let hasError = false;
+  for (const key in inputs) {
+    if (validateSingleField(key, inputs[key])) {
+      hasError = true;
+    }
+  }
+  return hasError;
+}
+
+/**
+ * Validates a single input field by checking if it has a value.
+ * @param {string} key - The key of the input field (name, email, etc.).
+ * @param {string} value - The value of the input field.
+ * @returns {boolean} Returns true if the field is invalid.
+ */
+function validateSingleField(key, value) {
+  const errors = {
+    name: "Please enter your name.",
+    email: "Please enter your email address.",
+    password: "Please enter your password.",
+    confirmPassword: "Please confirm your password.",
+  };
+  const inputElement = document.getElementById(inputIds[key]);
+  const errorElement = document.getElementById(`signUp_${key}_error`);
+  return visibilityOfInputFields(key, value, inputElement, errorElement, errors);
+}
+
+/**
+ * Sets error messages and border styles for input fields based on their values.
+ * @param {string} key - The key of the input field.
+ * @param {string} value - The value of the input field.
+ * @param {HTMLElement} inputElement - The DOM element of the input.
+ * @param {HTMLElement} errorElement - The DOM element for displaying the error.
+ * @param {Object} errors - An object mapping keys to their corresponding error messages.
+ * @returns {boolean} Returns true if the input is empty.
+ */
+function visibilityOfInputFields(key, value, inputElement, errorElement, errors) {
+  if (!value) {
+    errorElement.innerText = errors[key];
+    inputElement.style.borderColor = "red";
+    return true;
+  } else {
+    errorElement.innerText = "";
+    inputElement.style.borderColor = "";
+    return false;
+  }
+}
+
+/**
+ * Displays an error message indicating that the passwords do not match.
+ */
+function showPasswordMismatchError() {
+  document.getElementById("signUp_confirmPassword_error").innerText = "Passwords don't match. Please try again.";
+  document.getElementById("signUpConfirmPassword").style.borderColor = "red";
+}
+
+/**
+ * Displays an error message if the privacy policy checkbox is not checked.
+ */
+function showPrivacyPolicyError() {
+  let errorElement = document.getElementById("signUp_privacy_error");
+  if (!errorElement) {
+    errorElement = document.createElement("div");
+    errorElement.id = "signUp_privacy_error";
+    errorElement.className = "error_message";
+    document.querySelector(".privacy_police_content").parentNode.insertBefore(errorElement, document.querySelector(".privacy_police_content").nextSibling);
+  }
+  errorElement.innerText = "You must accept the Privacy Policy to continue.";
+}
+
+/**
+ * Clears the error message related to the privacy policy.
+ */
+function clearPrivacyPolicyError() {
+  const errorElement = document.getElementById("signUp_privacy_error");
+  if (errorElement) {
+    errorElement.innerText = "";
+  }
+}
+
+/**
+ * Clears all error messages and resets the border styles for sign-up form inputs.
+ */
+export function clearSignUpErrorMessages() {
+  const errorFields = ["name", "email", "password", "confirmPassword"];
+  for (const field of errorFields) {
+    const errorElement = document.getElementById(`signUp_${field}_error`);
+    if (errorElement) {
+      errorElement.innerText = "";
+    }
+    const inputElement = document.getElementById(inputIds[field]);
+    if (inputElement) {
+      inputElement.style.borderColor = "";
+    }
+  }
+  const privacyError = document.getElementById("signUp_privacy_error");
+  if (privacyError) {
+    privacyError.innerText = "";
+  }
+}
+
+/**
+ * Adds a new user to the database.
+ * @async
+ * @param {Object} data - The user data object to be stored.
+ * @returns {Promise&lt;Object>} The response parsed as JSON.
+ */
+async function addUsersToDataBase(data) {
+  const uniqueKey = `user_${Date.now()}`;
+  let response = await fetch(BASE_URL + `contacts/${uniqueKey}.json`, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(data),
+  });
+  let responseToJSON = await response.json();
+  return responseToJSON;
+}
+
+/**
+ * Constructs a user data object.
+ * @param {string} id - The user's unique identifier.
+ * @param {string} email - The user's email.
+ * @param {string} name - The user's name.
+ * @param {string} password - The user's password.
+ * @returns {Object} The constructed user data object.
+ */
+function userData(id, email, name, password) {
+  return {
+    name: name,
+    email: email,
+    password: password,
+    phone: "",
+    color: getRandomColor(),
+  };
+}
+
+/**
+ * Checks if a user already exists and if not, adds the user to the database.
+ * @async
+ * @param {string} email - The email to check for existence.
+ */
+async function ifUserAlreadyExists(email) {
+  let responseToJSON = await fetchUserContacts();
+  let userExists = checkIfUserExists(responseToJSON, email);
+  if (!userExists &amp;&amp; pswConfirm.style.borderColor !== "red") {
+    console.log("User Doesn't Exist");
+    await addUsersToDataBase(newUser);
+    showOverlay();
+  } else if (userExists) {
+    displayEmailError();
+  }
+}
+
+/**
+ * Fetches the user contacts from the database.
+ * @async
+ * @returns {Promise&lt;Object>} The JSON response containing user contacts.
+ */
+async function fetchUserContacts() {
+  let response = await fetch(BASE_URL + `contacts.json`, { method: "GET" });
+  return await response.json();
+}
+
+/**
+ * Checks if a user exists in the database response based on the email.
+ * @param {Object} responseToJSON - The JSON response containing user contacts.
+ * @param {string} email - The email to check.
+ * @returns {boolean} Returns true if a user with the email exists.
+ */
+function checkIfUserExists(responseToJSON, email) {
+  for (const key in responseToJSON) {
+    if (responseToJSON[key].email === email) {
+      return true;
+    }
+  }
+  return false;
+}
+
+/**
+ * Displays an error message indicating that the email is already registered.
+ */
+function displayEmailError() {
+  document.getElementById("signUp_email_error").innerText = "This email is already registered.";
+  document.getElementById("signUpEmail").style.borderColor = "red";
+}
+
+/**
+ * Checks if the password and confirmation password match and updates the UI accordingly.
+ */
+export function passwordMatch() {
+  const password = psw.value;
+  const confirmPassword = pswConfirm.value;
+  const errorElement = document.getElementById("signUp_confirmPassword_error");
+  if (confirmPassword !== password) {
+    pswConfirm.style.borderColor = "red";
+    if (errorElement) {
+      errorElement.innerText = "Your passwords don't match. Please try again.";
+    }
+  } else {
+    pswConfirm.style.borderColor = "#ccc";
+    if (errorElement) {
+      errorElement.innerText = "";
+    }
+  }
+}
+
+/**
+ * Displays the overlay indicating a successful registration and triggers its animations.
+ */
+function showOverlay() {
+  const overlay = document.getElementById("overlay");
+  const message = document.querySelector(".overlay_msg");
+  overlay.style.display = "block";
+  overlay.style.opacity = "0";
+  message.style.opacity = "1";
+  requestAnimationFrame(() => {
+    overlay.style.animation = "fadeIn 125ms ease-in-out forwards";
+    message.style.animation = "slideInFromRight 125ms ease-in-out forwards";
+    setTimeout(() => hideOverlay(), 1000);
+  });
+}
+
+/**
+ * Hides the overlay with animations and then redirects the user to the index page.
+ */
+function hideOverlay() {
+  const overlay = document.getElementById("overlay");
+  const message = document.querySelector(".overlay_msg");
+  overlay.style.animation = "fadeOut 125ms ease-in-out forwards";
+  message.style.animation = "slideOutToRight 125ms ease-in-out forwards";
+  setTimeout(() => {
+    overlay.style.display = "none";
+    window.location.href = "index.html";
+  }, 125);
+}
+
+/**
+ * Validates the form and enables/disables the sign-up button accordingly.
+ * The button is disabled when:
+ * - All input fields are empty, OR
+ * - The privacy policy checkbox is not checked
+ * When disabled, the button also receives a visual style through CSS.
+ */
+function validateSignUpForm() {
+  const nameInput = document.getElementById(inputIds.name);
+  const emailInput = document.getElementById(inputIds.email);
+  const passwordInput = document.getElementById(inputIds.password);
+  const confirmPasswordInput = document.getElementById(inputIds.confirmPassword);
+  const privacyPolicyCheckbox = document.getElementById("privacy_police");
+  const allInputsEmpty = !nameInput.value &amp;&amp; !emailInput.value &amp;&amp; !passwordInput.value &amp;&amp; !confirmPasswordInput.value;
+  const privacyPolicyUnchecked = !privacyPolicyCheckbox.checked;
+  signUpButton.disabled = allInputsEmpty || privacyPolicyUnchecked;
+  if (signUpButton.disabled) {
+    signUpButton.classList.add("disabled_btn");
+  } else {
+    signUpButton.classList.remove("disabled_btn");
+  }
+}
+
+// Run initial validation when page loads
+document.addEventListener("DOMContentLoaded", validateSignUpForm);
+
+// Add input event listeners to all form fields
+document.getElementById(inputIds.name).addEventListener("input", validateSignUpForm);
+document.getElementById(inputIds.email).addEventListener("input", validateSignUpForm);
+document.getElementById(inputIds.password).addEventListener("input", validateSignUpForm);
+document.getElementById(inputIds.confirmPassword).addEventListener("input", validateSignUpForm);
+document.getElementById("privacy_police").addEventListener("change", validateSignUpForm);
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-signUpEventListener.html">signUpEventListener</a></li></ul><h3>Global</h3><ul><li><a href="global.html#BASE_URL">BASE_URL</a></li><li><a href="global.html#accountImg">accountImg</a></li><li><a href="global.html#activeLink">activeLink</a></li><li><a href="global.html#addCatecory">addCatecory</a></li><li><a href="global.html#addContact">addContact</a></li><li><a href="global.html#addContactToDataBase">addContactToDataBase</a></li><li><a href="global.html#addContainerClickListeners">addContainerClickListeners</a></li><li><a href="global.html#addDataToFireBase">addDataToFireBase</a></li><li><a href="global.html#addLegalAndPolicyClickListeners">addLegalAndPolicyClickListeners</a></li><li><a href="global.html#addProfilesToCard">addProfilesToCard</a></li><li><a href="global.html#addUsersToDataBase">addUsersToDataBase</a></li><li><a href="global.html#allowDrop">allowDrop</a></li><li><a href="global.html#arrayOfContacts">arrayOfContacts</a></li><li><a href="global.html#assignNewContList">assignNewContList</a></li><li><a href="global.html#authenticateUser">authenticateUser</a></li><li><a href="global.html#borderFocus">borderFocus</a></li><li><a href="global.html#buttonLow">buttonLow</a></li><li><a href="global.html#buttonMedium">buttonMedium</a></li><li><a href="global.html#buttonUrgent">buttonUrgent</a></li><li><a href="global.html#calPercentageOfCompletedSubtasks">calPercentageOfCompletedSubtasks</a></li><li><a href="global.html#card">card</a></li><li><a href="global.html#checkIfUserExists">checkIfUserExists</a></li><li><a href="global.html#checkRequiredDate">checkRequiredDate</a></li><li><a href="global.html#checkRequiredField">checkRequiredField</a></li><li><a href="global.html#checkRequiredTitle">checkRequiredTitle</a></li><li><a href="global.html#checkRequiredcategory">checkRequiredcategory</a></li><li><a href="global.html#checkUser">checkUser</a></li><li><a href="global.html#chooseContact">chooseContact</a></li><li><a href="global.html#clearAllTasks">clearAllTasks</a></li><li><a href="global.html#clearErrorMessages">clearErrorMessages</a></li><li><a href="global.html#clearPrivacyPolicyError">clearPrivacyPolicyError</a></li><li><a href="global.html#clearSignUpErrorMessages">clearSignUpErrorMessages</a></li><li><a href="global.html#clearValueOfInputFields">clearValueOfInputFields</a></li><li><a href="global.html#clearsubtask">clearsubtask</a></li><li><a href="global.html#closeCatecoryList">closeCatecoryList</a></li><li><a href="global.html#closeContactInfoOverlay">closeContactInfoOverlay</a></li><li><a href="global.html#closeContactList">closeContactList</a></li><li><a href="global.html#closeEditSubmenu">closeEditSubmenu</a></li><li><a href="global.html#closeInputField">closeInputField</a></li><li><a href="global.html#closeMainSubmenu">closeMainSubmenu</a></li><li><a href="global.html#closeOverlayAddContact">closeOverlayAddContact</a></li><li><a href="global.html#closeOverlayContactInfoAfterDelete">closeOverlayContactInfoAfterDelete</a></li><li><a href="global.html#closeOverlayEditContact">closeOverlayEditContact</a></li><li><a href="global.html#collectDataForNewTask">collectDataForNewTask</a></li><li><a href="global.html#collectTasks">collectTasks</a></li><li><a href="global.html#collectTheContacts">collectTheContacts</a></li><li><a href="global.html#collectTheSubtasks">collectTheSubtasks</a></li><li><a href="global.html#colors">colors</a></li><li><a href="global.html#confirmEditing">confirmEditing</a></li><li><a href="global.html#contactList">contactList</a></li><li><a href="global.html#countCompletedSubtasks">countCompletedSubtasks</a></li><li><a href="global.html#countTasks">countTasks</a></li><li><a href="global.html#countTheNumberOfUrgentTasks">countTheNumberOfUrgentTasks</a></li><li><a href="global.html#creatTask">creatTask</a></li><li><a href="global.html#createTask">createTask</a></li><li><a href="global.html#dateValue">dateValue</a></li><li><a href="global.html#deleteButton">deleteButton</a></li><li><a href="global.html#deleteContactFromList">deleteContactFromList</a></li><li><a href="global.html#deleteEditingSubtask">deleteEditingSubtask</a></li><li><a href="global.html#deleteInputs">deleteInputs</a></li><li><a href="global.html#deleteSubtask">deleteSubtask</a></li><li><a href="global.html#deleteSubtaskBoardSection">deleteSubtaskBoardSection</a></li><li><a href="global.html#descriptionValue">descriptionValue</a></li><li><a href="global.html#displayCardOnBoard">displayCardOnBoard</a></li><li><a href="global.html#displayChossenContact">displayChossenContact</a></li><li><a href="global.html#displayDropDownMenuSectionAddTask">displayDropDownMenuSectionAddTask</a></li><li><a href="global.html#displayEmailError">displayEmailError</a></li><li><a href="global.html#doneCount">doneCount</a></li><li><a href="global.html#draggedElementID">draggedElementID</a></li><li><a href="global.html#dropPoint">dropPoint</a></li><li><a href="global.html#editButton">editButton</a></li><li><a href="global.html#editSubtask">editSubtask</a></li><li><a href="global.html#editSubtaskInAddTaskAreaBoard">editSubtaskInAddTaskAreaBoard</a></li><li><a href="global.html#elseContactElementContainsContactActive">elseContactElementContainsContactActive</a></li><li><a href="global.html#elseOverlayContactInfosGoOut">elseOverlayContactInfosGoOut</a></li><li><a href="global.html#email">email</a></li><li><a href="global.html#feedbackCount">feedbackCount</a></li><li><a href="global.html#fetchCardDetails">fetchCardDetails</a></li><li><a href="global.html#fetchTasks">fetchTasks</a></li><li><a href="global.html#fetchUserContacts">fetchUserContacts</a></li><li><a href="global.html#fetchUserData">fetchUserData</a></li><li><a href="global.html#findUserByEmail">findUserByEmail</a></li><li><a href="global.html#finishTaskNotification">finishTaskNotification</a></li><li><a href="global.html#focusTheField">focusTheField</a></li><li><a href="global.html#getContactDatasFromDataBase">getContactDatasFromDataBase</a></li><li><a href="global.html#getContactsFromDataBase">getContactsFromDataBase</a></li><li><a href="global.html#getContactsFromFireBase">getContactsFromFireBase</a></li><li><a href="global.html#getData">getData</a></li><li><a href="global.html#getDataFromLogin">getDataFromLogin</a></li><li><a href="global.html#getDataFromSignUp">getDataFromSignUp</a></li><li><a href="global.html#getInitials">getInitials</a></li><li><a href="global.html#getInitialsSubmenu">getInitialsSubmenu</a></li><li><a href="global.html#getRandomColor">getRandomColor</a></li><li><a href="global.html#getUpdatedContactData">getUpdatedContactData</a></li><li><a href="global.html#getUrgentTasksInfo">getUrgentTasksInfo</a></li><li><a href="global.html#getUserName">getUserName</a></li><li><a href="global.html#goBack">goBack</a></li><li><a href="global.html#handleContactOutsideClick">handleContactOutsideClick</a></li><li><a href="global.html#handleNoTasks">handleNoTasks</a></li><li><a href="global.html#handleOrientation">handleOrientation</a></li><li><a href="global.html#handleOutsideClick">handleOutsideClick</a></li><li><a href="global.html#hideOverlay">hideOverlay</a></li><li><a href="global.html#hideTaskAddedAnimation">hideTaskAddedAnimation</a></li><li><a href="global.html#hideTaskDeleteMsg">hideTaskDeleteMsg</a></li><li><a href="global.html#highlightDropPoint">highlightDropPoint</a></li><li><a href="global.html#idOfcurrentElement">idOfcurrentElement</a></li><li><a href="global.html#ifContactElementContainsContactActive">ifContactElementContainsContactActive</a></li><li><a href="global.html#ifNoTaskResizeContainer">ifNoTaskResizeContainer</a></li><li><a href="global.html#ifUserAlreadyExists">ifUserAlreadyExists</a></li><li><a href="global.html#init">init</a></li><li><a href="global.html#initialize">initialize</a></li><li><a href="global.html#initials">initials</a></li><li><a href="global.html#input">input</a></li><li><a href="global.html#invisibleCategoryPlaceholder">invisibleCategoryPlaceholder</a></li><li><a href="global.html#listOfTasks">listOfTasks</a></li><li><a href="global.html#loginInputsBehaviour">loginInputsBehaviour</a></li><li><a href="global.html#loginUser">loginUser</a></li><li><a href="global.html#logout">logout</a></li><li><a href="global.html#managenCheckBoxes">managenCheckBoxes</a></li><li><a href="global.html#managenProfilesWhenCardOpen">managenProfilesWhenCardOpen</a></li><li><a href="global.html#mimicPlaceHolder">mimicPlaceHolder</a></li><li><a href="global.html#newSubtask">newSubtask</a></li><li><a href="global.html#noTaskFound">noTaskFound</a></li><li><a href="global.html#noTaskToDo">noTaskToDo</a></li><li><a href="global.html#openCatecoryList">openCatecoryList</a></li><li><a href="global.html#openContactList">openContactList</a></li><li><a href="global.html#openEditOverlay">openEditOverlay</a></li><li><a href="global.html#openMenu">openMenu</a></li><li><a href="global.html#openMenuSectionAddTask">openMenuSectionAddTask</a></li><li><a href="global.html#openOverlayAddContact">openOverlayAddContact</a></li><li><a href="global.html#openOverlayEditContact">openOverlayEditContact</a></li><li><a href="global.html#openSignUpModal">openSignUpModal</a></li><li><a href="global.html#overlayContactSuccessfullyCreated">overlayContactSuccessfullyCreated</a></li><li><a href="global.html#overlayContactSuccessfullyDelete">overlayContactSuccessfullyDelete</a></li><li><a href="global.html#overlayContactSuccessfullyEdited">overlayContactSuccessfullyEdited</a></li><li><a href="global.html#overlayOff">overlayOff</a></li><li><a href="global.html#overlayOn">overlayOn</a></li><li><a href="global.html#password">password</a></li><li><a href="global.html#passwordInput">passwordInput</a></li><li><a href="global.html#passwordMatch">passwordMatch</a></li><li><a href="global.html#postAllData">postAllData</a></li><li><a href="global.html#processTaskStatus">processTaskStatus</a></li><li><a href="global.html#progressCount">progressCount</a></li><li><a href="global.html#pushContacts">pushContacts</a></li><li><a href="global.html#pushContactsToSelectField">pushContactsToSelectField</a></li><li><a href="global.html#queryOfClearErrorMessage">queryOfClearErrorMessage</a></li><li><a href="global.html#refCardBox">refCardBox</a></li><li><a href="global.html#refCloseBtn">refCloseBtn</a></li><li><a href="global.html#refEditButton">refEditButton</a></li><li><a href="global.html#refLoginButton">refLoginButton</a></li><li><a href="global.html#refMessage">refMessage</a></li><li><a href="global.html#refTaskDeleteMsg">refTaskDeleteMsg</a></li><li><a href="global.html#refreshPageWhenOverlayOff">refreshPageWhenOverlayOff</a></li><li><a href="global.html#removeActiveClassFromContacts">removeActiveClassFromContacts</a></li><li><a href="global.html#removeContact">removeContact</a></li><li><a href="global.html#removeContactFromAllTasks">removeContactFromAllTasks</a></li><li><a href="global.html#render">render</a></li><li><a href="global.html#renderAddTaskMenu">renderAddTaskMenu</a></li><li><a href="global.html#renderContactItem">renderContactItem</a></li><li><a href="global.html#renderContacts">renderContacts</a></li><li><a href="global.html#renderContactsToNewTask">renderContactsToNewTask</a></li><li><a href="global.html#renderInitials">renderInitials</a></li><li><a href="global.html#renderLetterTemplate">renderLetterTemplate</a></li><li><a href="global.html#renderSelectetContacts">renderSelectetContacts</a></li><li><a href="global.html#renderSubtasks">renderSubtasks</a></li><li><a href="global.html#renderTaskCard">renderTaskCard</a></li><li><a href="global.html#requiredFieldCategory">requiredFieldCategory</a></li><li><a href="global.html#requiredFieldDate">requiredFieldDate</a></li><li><a href="global.html#requiredFieldTitle">requiredFieldTitle</a></li><li><a href="global.html#resetPrioButton">resetPrioButton</a></li><li><a href="global.html#resizeTitleIfTooLong">resizeTitleIfTooLong</a></li><li><a href="global.html#returnAllData">returnAllData</a></li><li><a href="global.html#returnFirstLetter">returnFirstLetter</a></li><li><a href="global.html#searchContacts">searchContacts</a></li><li><a href="global.html#searchFiled">searchFiled</a></li><li><a href="global.html#searchFunk">searchFunk</a></li><li><a href="global.html#sendContactUpdate">sendContactUpdate</a></li><li><a href="global.html#setAccountInitialsSubmenu">setAccountInitialsSubmenu</a></li><li><a href="global.html#setCheckboxAttributes">setCheckboxAttributes</a></li><li><a href="global.html#setColorOfCategory">setColorOfCategory</a></li><li><a href="global.html#setContact">setContact</a></li><li><a href="global.html#setEditSubtask">setEditSubtask</a></li><li><a href="global.html#setEventListenerForSubtask">setEventListenerForSubtask</a></li><li><a href="global.html#setGreeting">setGreeting</a></li><li><a href="global.html#setPrio">setPrio</a></li><li><a href="global.html#setStandardButton">setStandardButton</a></li><li><a href="global.html#setSubtask">setSubtask</a></li><li><a href="global.html#setTimeoutDeleteOverlayContact">setTimeoutDeleteOverlayContact</a></li><li><a href="global.html#setTimeoutSuccessfullyOverlayAddContact">setTimeoutSuccessfullyOverlayAddContact</a></li><li><a href="global.html#setTimeoutSuccessfullyOverlayEdit">setTimeoutSuccessfullyOverlayEdit</a></li><li><a href="global.html#setdubbleButton">setdubbleButton</a></li><li><a href="global.html#setupValidationParams">setupValidationParams</a></li><li><a href="global.html#shortenContactView">shortenContactView</a></li><li><a href="global.html#showCategoryList">showCategoryList</a></li><li><a href="global.html#showContactList">showContactList</a></li><li><a href="global.html#showOverlay">showOverlay</a></li><li><a href="global.html#showPasswordMismatchError">showPasswordMismatchError</a></li><li><a href="global.html#showPrivacyPolicyError">showPrivacyPolicyError</a></li><li><a href="global.html#showTaskAddedAnimation">showTaskAddedAnimation</a></li><li><a href="global.html#showTaskDeleteMsg">showTaskDeleteMsg</a></li><li><a href="global.html#statusCounter">statusCounter</a></li><li><a href="global.html#statusOfInputFields">statusOfInputFields</a></li><li><a href="global.html#stopEventBubbel">stopEventBubbel</a></li><li><a href="global.html#submenuRef">submenuRef</a></li><li><a href="global.html#subtaskInputField">subtaskInputField</a></li><li><a href="global.html#subtasksTemplate">subtasksTemplate</a></li><li><a href="global.html#tamplate">tamplate</a></li><li><a href="global.html#taskPath">taskPath</a></li><li><a href="global.html#tasksDone">tasksDone</a></li><li><a href="global.html#tasksInBoard">tasksInBoard</a></li><li><a href="global.html#tasksInFeedback">tasksInFeedback</a></li><li><a href="global.html#tasksInProgress">tasksInProgress</a></li><li><a href="global.html#tasksInToDo">tasksInToDo</a></li><li><a href="global.html#titleValue">titleValue</a></li><li><a href="global.html#toDoCount">toDoCount</a></li><li><a href="global.html#toggleOverlayContactInfos">toggleOverlayContactInfos</a></li><li><a href="global.html#togglePassword">togglePassword</a></li><li><a href="global.html#toggleShowSubmenu">toggleShowSubmenu</a></li><li><a href="global.html#totalNumberOfTasks">totalNumberOfTasks</a></li><li><a href="global.html#tryHandlingFromAddContact">tryHandlingFromAddContact</a></li><li><a href="global.html#unselect">unselect</a></li><li><a href="global.html#updateActiveLinks">updateActiveLinks</a></li><li><a href="global.html#updateContactInDataBase">updateContactInDataBase</a></li><li><a href="global.html#updateLocalContactAndUI">updateLocalContactAndUI</a></li><li><a href="global.html#updateStatusInDB">updateStatusInDB</a></li><li><a href="global.html#updateSubtaskState">updateSubtaskState</a></li><li><a href="global.html#updateSummary">updateSummary</a></li><li><a href="global.html#updateUrgentTasksUI">updateUrgentTasksUI</a></li><li><a href="global.html#urgentTasks">urgentTasks</a></li><li><a href="global.html#userData">userData</a></li><li><a href="global.html#validateAndUpdateContact">validateAndUpdateContact</a></li><li><a href="global.html#validateContactInputs">validateContactInputs</a></li><li><a href="global.html#validateEachField">validateEachField</a></li><li><a href="global.html#validateInputs">validateInputs</a></li><li><a href="global.html#validateLoginInputs">validateLoginInputs</a></li><li><a href="global.html#validateSignUpForm">validateSignUpForm</a></li><li><a href="global.html#validateSignUpInputs">validateSignUpInputs</a></li><li><a href="global.html#validateSingleField">validateSingleField</a></li><li><a href="global.html#visibilityOfInputFields">visibilityOfInputFields</a></li><li><a href="global.html#writeSubtask">writeSubtask</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.4</a> on Thu Mar 13 2025 20:29:56 GMT+0100 (Central European Standard Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>
