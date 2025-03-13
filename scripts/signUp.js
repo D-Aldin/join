@@ -10,6 +10,7 @@ export const signUpPasswordInput = document.getElementById("signUpPassword");
 export const toggleSignUpPassword = document.getElementById("toggleSignUpPassword");
 export const signUpConfirmPasswordInput = document.getElementById("signUpConfirmPassword");
 export const toggleSignUpConfirmPassword = document.getElementById("toggleSignUpConfirmPassword");
+const signUpButton = document.getElementById("sign_btn");
 const inputIds = {
   name: "name",
   email: "signUpEmail",
@@ -49,6 +50,9 @@ export function openSignUpModal() {
 export function goBack() {
   refSignWindow.style.animation = "fadeOut 125ms forwards";
   const inputs = document.querySelectorAll("#signUp input");
+  signUpButton.disabled = true;
+  signUpButton.classList.add("disabled_btn");
+  privacy_police.checked = false;
   for (let i = 0; i < inputs.length; i++) {
     inputs[i].value = "";
   }
@@ -347,3 +351,36 @@ function hideOverlay() {
     window.location.href = "index.html";
   }, 125);
 }
+
+/**
+ * Validates the form and enables/disables the sign-up button accordingly.
+ * The button is disabled when:
+ * - All input fields are empty, OR
+ * - The privacy policy checkbox is not checked
+ * When disabled, the button also receives a visual style through CSS.
+ */
+function validateSignUpForm() {
+  const nameInput = document.getElementById(inputIds.name);
+  const emailInput = document.getElementById(inputIds.email);
+  const passwordInput = document.getElementById(inputIds.password);
+  const confirmPasswordInput = document.getElementById(inputIds.confirmPassword);
+  const privacyPolicyCheckbox = document.getElementById("privacy_police");
+  const allInputsEmpty = !nameInput.value && !emailInput.value && !passwordInput.value && !confirmPasswordInput.value;
+  const privacyPolicyUnchecked = !privacyPolicyCheckbox.checked;
+  signUpButton.disabled = allInputsEmpty || privacyPolicyUnchecked;
+  if (signUpButton.disabled) {
+    signUpButton.classList.add("disabled_btn");
+  } else {
+    signUpButton.classList.remove("disabled_btn");
+  }
+}
+
+// Run initial validation when page loads
+document.addEventListener("DOMContentLoaded", validateSignUpForm);
+
+// Add input event listeners to all form fields
+document.getElementById(inputIds.name).addEventListener("input", validateSignUpForm);
+document.getElementById(inputIds.email).addEventListener("input", validateSignUpForm);
+document.getElementById(inputIds.password).addEventListener("input", validateSignUpForm);
+document.getElementById(inputIds.confirmPassword).addEventListener("input", validateSignUpForm);
+document.getElementById("privacy_police").addEventListener("change", validateSignUpForm);
