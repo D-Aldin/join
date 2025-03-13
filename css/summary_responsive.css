@@ -272,7 +272,7 @@
 
 @media only screen and (max-height: 740px) {
   main {
-    height: 100vh;
+    height: calc(100vh + 10px);
   }
 }
 
