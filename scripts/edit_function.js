@@ -251,6 +251,8 @@ async function displaySubtasksInTheEditMenu() {
  */
 async function editSubtaskFunk(event) {
   const refSubtaskID = event.currentTarget.getAttributeNode("id_subtask").value;
+  // console.log(refSubtaskID);
+
   const refTaskElement = event.currentTarget;
   const dataFromFireBase = await fetchCardDetails(`${taskPath}/${idOfcurrentElement}/subtask/${refSubtaskID}`, idOfcurrentElement);
   refTaskElement.innerHTML = HTMLTamplateForEditSubtask(refSubtaskID);
@@ -269,10 +271,10 @@ function setupSubtaskEditing(refSubtaskID, dataFromFireBase) {
   document.querySelector(`div[id_subtask="${refSubtaskID}"]`).classList.add("under_line");
   document.querySelector(`div[id_subtask="${refSubtaskID}"]`).classList.remove("subtask_box_items");
   document.querySelector(`input[id="${refSubtaskID}"]`).addEventListener("change", (event) => {
-    saveNewSubtask(refSubtaskID, event.target.value);
+    saveEditTask(refSubtaskID, event.target.value);
   });
-  document.querySelector(".confirm").addEventListener("click", (event) => {
-    saveNewSubtask(refSubtaskID, event.target.value);
+  document.querySelector(".confirm").addEventListener("click", async (event) => {
+    await saveEditTask(refSubtaskID, inputField.value);
     document.querySelector(".subtasks_box").innerHTML = " ";
     displaySubtasksInTheEditMenu();
   });
@@ -283,7 +285,11 @@ function setupSubtaskEditing(refSubtaskID, dataFromFireBase) {
  * @param {string} subtaskID - The subtask's ID.
  * @param {string} newValue - The new value of the subtask.
  */
-async function saveNewSubtask(subtaskID, newValue) {
+async function saveEditTask(subtaskID, newValue) {
+  console.log(subtaskID);
+  console.log(newValue);
+  console.log(BASE_URL);
+
   await fetch(`${BASE_URL}/${taskPath}/${idOfcurrentElement}/subtask/${subtaskID}.json`, {
     method: "PATCH",
     body: JSON.stringify({ task: newValue }),
@@ -297,7 +303,6 @@ async function saveNewSubtask(subtaskID, newValue) {
  */
 async function deleteSubtask(event) {
   const refTrashButton = event.currentTarget.getAttribute("id_trash");
-  console.log(refTrashButton);
   await fetch(`${BASE_URL}/${taskPath}/${idOfcurrentElement}/subtask/${refTrashButton}.json`, {
     method: "DELETE",
     headers: { "Content-Type": "application/json" },
@@ -312,11 +317,9 @@ async function deleteSubtask(event) {
  */
 async function addNewSubtask() {
   let theNewTask = document.querySelector("#editSubtask").value;
-
   let newTaskObj = {
     [`subtask_${Date.now()}`]: { task: theNewTask, state: false },
   };
-
   await saveNewSubtask(newTaskObj);
   document.querySelector("#editSubtask").value = "";
   setStandardButtonInOpenCard();

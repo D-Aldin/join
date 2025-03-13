@@ -82,8 +82,6 @@ async function getData(event) {
   let id = event.currentTarget.id;
   const fetchDetails = await fetchCardDetails(taskPath, id);
   const refersToCard = fetchDetails[id];
-  console.log(refersToCard.prio);
-
   refCardBox.innerHTML = HTMLForOpenCard(refersToCard.category, refersToCard.title, refersToCard.description, refersToCard.date, refersToCard.prio, id);
   managenProfilesWhenCardOpen(id);
   renderSubtasks(id);
