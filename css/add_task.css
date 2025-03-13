@@ -71,7 +71,7 @@ textarea {
   color: red;
   font-size: 12px;
   font-weight: 400;
-  position:fixed;
+  position: fixed;
 }
 
 .display-flex {
@@ -875,10 +875,6 @@ input[type="date"]:valid {
     gap: 32px !important;
   }
 
-  .task-wrapper {
-    margin-left: 16px;
-  }
-
   .inputfield {
     width: 285px !important;
     height: 35px;
@@ -1002,8 +998,6 @@ input[type="date"]:valid {
 
 @media (min-width: 300px) and (max-width: 690px) {
   .task-wrapper {
-    margin-left: 16px;
-    margin-top: 8px;
     flex-direction: column;
     align-items: center;
     justify-content: center;
@@ -1103,7 +1097,7 @@ input[type="date"]:valid {
   .great-button {
     width: 150px;
   }
-  
+
   .great-button,
   .clear-button {
     font-size: 16px !important;
@@ -1168,4 +1162,3 @@ input[type="date"]:valid {
     margin: 0 3px 0 3px;
   }
 }
-
