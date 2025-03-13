@@ -192,6 +192,10 @@ section {
   section {
     left: 0;
   }
+
+  .contact_list_scrollbar {
+    height: calc(100vh - 291px);
+  }
 }
 
 @media only screen and (max-width: 900px) {
