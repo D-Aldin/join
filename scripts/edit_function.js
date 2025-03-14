@@ -251,8 +251,6 @@ async function displaySubtasksInTheEditMenu() {
  */
 async function editSubtaskFunk(event) {
   const refSubtaskID = event.currentTarget.getAttributeNode("id_subtask").value;
-  // console.log(refSubtaskID);
-
   const refTaskElement = event.currentTarget;
   const dataFromFireBase = await fetchCardDetails(`${taskPath}/${idOfcurrentElement}/subtask/${refSubtaskID}`, idOfcurrentElement);
   refTaskElement.innerHTML = HTMLTamplateForEditSubtask(refSubtaskID);
@@ -286,10 +284,6 @@ function setupSubtaskEditing(refSubtaskID, dataFromFireBase) {
  * @param {string} newValue - The new value of the subtask.
  */
 async function saveEditTask(subtaskID, newValue) {
-  console.log(subtaskID);
-  console.log(newValue);
-  console.log(BASE_URL);
-
   await fetch(`${BASE_URL}/${taskPath}/${idOfcurrentElement}/subtask/${subtaskID}.json`, {
     method: "PATCH",
     body: JSON.stringify({ task: newValue }),
