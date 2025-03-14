@@ -1,5 +1,5 @@
 BASE_URL = "https://dv-join-bbc2e-default-rtdb.europe-west1.firebasedatabase.app/";
-selectedButton = "";
+selectedButton = "medium";
 let subtasksList = {};
 arrayOfContacts = [];
 selectedContacts = [];
@@ -17,6 +17,7 @@ requiredCategory = false;
  */
 function render() {
   renderContacts("contacts");
+  setPrio("medium");
 }
 
 /**

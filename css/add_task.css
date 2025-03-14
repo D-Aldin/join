@@ -716,7 +716,7 @@ input[type="date"]:valid {
   flex-direction: column;
 }
 
-@media only screen and (max-width: 1200px) {
+@media only screen and (max-width: 1280px) {
   .task-wrapper {
     margin: 32px 0px 0px 24px;
   }
