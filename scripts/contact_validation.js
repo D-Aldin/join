@@ -23,11 +23,16 @@ function setupValidationParams(name, email, phone, prefix = "add_") {
 
 /**
  * Validates contact input fields and displays appropriate error messages
+ *
+ * The function performs two types of validation:
+ * 1. Basic field validation (empty check) for name, email, and phone
+ * 2. Format validation specifically for email using regex pattern
+ *
  * @param {string} name - Contact name
  * @param {string} email - Contact email
  * @param {string} phone - Contact phone number
- * @param {string} prefix - Input field ID prefix ('add_' or 'edit_')
- * @returns {boolean} True if validation failed, false otherwise
+ * @param {string} prefix - Input field ID prefix ('add_' or 'edit_') to target the correct form elements
+ * @returns {boolean} True if validation failed (has errors), false if all validations pass
  */
 function validateContactInputs(name, email, phone, prefix = "add_") {
   const { inputs, inputIds, errors } = setupValidationParams(name, email, phone, prefix);
@@ -38,7 +43,55 @@ function validateContactInputs(name, email, phone, prefix = "add_") {
       hasError = true;
     }
   }
+  if (email) {
+    const emailError = testEmailByFilter(email, prefix);
+    if (emailError) {
+      hasError = true;
+    }
+  }
   return hasError;
+}
+
+/**
+ * Validates an email address using regex pattern
+ * @param {string} email - The email address to validate
+ * @param {string} prefix - Input field ID prefix ('add_' or 'edit_')
+ * @returns {boolean} True if validation failed, false otherwise
+ */
+function testEmailByFilter(email, prefix = "add_") {
+  if (!email) {
+    email = document.getElementById(`${prefix}email`).value;
+  }
+  const emailFilter = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  const errorId = prefix === "edit_" ? "edit_email_error" : "email_error";
+  const emailErrorMessage = document.getElementById(errorId);
+  const emailInput = document.getElementById(`${prefix}email`);
+  if (!emailFilter.test(email)) {
+    errorMessageForTestEmailByFilter(emailErrorMessage, emailInput);
+    return true;
+  }
+  clearEmailErrorMessages(emailErrorMessage, emailInput);
+  return false;
+}
+
+/**
+ * Displays error message for invalid email input
+ * @param {HTMLElement} emailErrorMessage - The error message element
+ * @param {HTMLElement} emailInput - The email input field element
+ */
+function errorMessageForTestEmailByFilter(emailErrorMessage, emailInput) {
+  emailErrorMessage.innerText = "Please enter a valid email address.";
+  emailInput.style.borderColor = "red";
+}
+
+/**
+ * Clears error messages and resets styling for email input field
+ * @param {HTMLElement} emailErrorMessage - The error message element
+ * @param {HTMLElement} emailInput - The email input field element
+ */
+function clearEmailErrorMessages(emailErrorMessage, emailInput) {
+  emailErrorMessage.innerText = "";
+  emailInput.style.borderColor = "";
 }
 
 /**

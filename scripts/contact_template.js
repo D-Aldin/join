@@ -91,7 +91,7 @@ function getTemplateOfContactEdit(contact) {
       <div class="overlay_close_btn_position">
         <img onclick="closeOverlayEditContact()" src="./assets/icons/contacts/Close.svg" alt="close_button" />
       </div>
-      <form action class="form_input_fields_position" onsubmit="return validateAndUpdateContact('${contact.id}')">
+      <form novalidate class="form_input_fields_position" onsubmit="return validateAndUpdateContact('${contact.id}')">
         <input id="edit_name" type="text" placeholder="Name" value="${contact.name}"/>
         <div id="edit_name_error" class="error-message name_error_position"></div>
         <input id="edit_email" type="email" placeholder="Email" value="${contact.email}"/>

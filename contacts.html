@@ -123,7 +123,7 @@
         <div class="overlay_close_btn_position">
           <img onclick="closeOverlayAddContact()" src="./assets/icons/contacts/Close.svg" alt="close_button" />
         </div>
-        <form action class="form_input_fields_position" onsubmit="addContactToDataBase(); return false;">
+        <form novalidate class="form_input_fields_position" onsubmit="addContactToDataBase();  return false;">
           <input type="text" id="add_name" placeholder="Name" />
           <div id="name_error" class="error-message name_error_position"></div>
           <input type="email" id="add_email" placeholder="Email" />
