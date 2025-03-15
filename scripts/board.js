@@ -54,14 +54,22 @@ function highlightDropPoint(dragevent) {
  */
 function dropPoint(event) {
   event.preventDefault();
+  if (event.target.classList.contains("card")) {
+    console.log(event.currentTarget.parentElement);
+  }
+
   if (event.target.id == "toDo" || event.target.id == "progress" || event.target.id == "feedback" || event.target.id == "done") {
     let data = event.dataTransfer.getData("text");
     event.target.appendChild(document.getElementById(data));
     let newStatus = event.target.id;
+    console.log(newStatus);
+    console.log(event.target.closeset(".newTest"));
+
     let statusUpdate = {
       status: newStatus,
     };
     updateStatusInDB("tasks", cardID, statusUpdate);
+    readAndSetHeight();
   }
 }
 
@@ -143,6 +151,7 @@ async function displayCardOnBoard() {
   noTaskToDo();
   setColorOfCategory();
   shortenContactView();
+  readAndSetHeight();
 }
 
 /**
@@ -159,7 +168,7 @@ function renderTaskCard(element, subtasksCompleted, totalSubtasks) {
     done: done,
   };
   if (columnMap[element.status]) {
-    columnMap[element.status].innerHTML += renderCard(element.id, element.category, element.title, element.description, subtasksCompleted, totalSubtasks, element.prio);
+    columnMap[element.status].innerHTML += renderCard(element.id, element.category, element.title, element.description, subtasksCompleted, totalSubtasks, element.prio, element.status);
   }
 }
 
@@ -307,7 +316,7 @@ function ifNoTaskResizeContainer() {
     if (section.children.length > 0 && window.innerWidth < 1200) {
       section.style.height = "300px";
     } else {
-      section.style.height = "80px";
+      section.style.height = "100vh";
     }
   });
 }
@@ -323,4 +332,18 @@ function setColorOfCategory() {
       element.style.width = "8rem";
     }
   });
+}
+
+function readAndSetHeight() {
+  toDo.style.height = "790px";
+  progress.style.height = "790px";
+  feedback.style.height = "790px";
+  done.style.height = "790px";
+  let heights = [toDo, progress, feedback, done].map((el) => el.offsetHeight);
+  let max = Math.max(...heights);
+  toDo.style.height = max + "px";
+  progress.style.height = max + "px";
+  feedback.style.height = max + "px";
+  done.style.height = max + "px";
+  heights = [];
 }
