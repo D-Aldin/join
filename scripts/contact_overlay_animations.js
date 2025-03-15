@@ -1,4 +1,13 @@
 /**
+ * Stores the ID of the contact that is currently being edited
+ * Used to track which contact needs to be displayed after editing is complete
+ * Set when opening the edit overlay and referenced when closing to show updated info
+ *
+ * @type {string|null} - Contact ID string or null if no contact is being edited
+ */
+let lastEditedContactId;
+
+/**
  * Closes the contact information overlay after deleting a contact
  * Animates the overlay sliding out to the right and hides it
  */
@@ -29,9 +38,13 @@ function openOverlayAddContact() {
 
 /**
  * Opens the overlay for editing an existing contact
+ * Stores the contact ID for later use after editing is complete
+ * Populates the edit form with the selected contact's information
+ *
  * @param {string} contactId - The unique identifier of the contact to edit
  */
 function openOverlayEditContact(contactId) {
+  lastEditedContactId = contactId;
   let contact = arrayOfContacts.find((c) => c.id === contactId);
   let overlayRef = document.getElementById("overlay_add_contacts_background");
   let overlayEditCardRef = document.getElementById("overlay_edit_contact_card");
@@ -135,7 +148,9 @@ function setTimeoutDeleteOverlayContact() {
 
 /**
  * Closes the edit contact overlay with animation
- * Clears all validation error messages after animation completes
+ * After closing, shows success message and then automatically opens
+ * the contact info overlay displaying the updated contact information
+ * Uses the stored contactId (lastEditedContactId) to determine which contact to show
  */
 function closeOverlayEditContact() {
   let overlayRef = document.getElementById("overlay_add_contacts_background");
@@ -150,9 +165,39 @@ function closeOverlayEditContact() {
       overlayCardRef.style.animation = "";
       overlayRef.style.backgroundColor = "";
       clearErrorMessages();
+      setTimeoutSuccessfullyOverlayEdit();
+      setTimeout(() => {
+        openContactInfoAfterEdit(lastEditedContactId);
+      }, 1000);
     },
     { once: true }
   );
+}
+
+/**
+ * Opens the contact info overlay for a specific contact after editing
+ * Finds the updated contact in the contacts array, highlights it in the list,
+ * and displays its information in the overlay with a slide-in animation
+ *
+ * @param {string} contactId - The unique identifier of the contact to display
+ * @returns {void} - Returns early if no contactId is provided
+ */
+function openContactInfoAfterEdit(contactId) {
+  if (!contactId) return;
+  const contactIndex = arrayOfContacts.findIndex((contact) => contact.id === contactId);
+  if (contactIndex !== -1) {
+    const contactElement = document.getElementById(`contact_${contactIndex}`);
+    if (contactElement) {
+      removeActiveClassFromContacts();
+      let contact = arrayOfContacts[contactIndex];
+      let overlay = document.getElementById("overlay_contact_infos");
+      contactElement.classList.add("contact_active");
+      contactElement.classList.remove("hover_contact_list");
+      overlay.innerHTML = getTemplateOfContactInfo(contact);
+      overlay.classList.remove("d_none");
+      overlay.style.animation = "slideInFromRight 125ms forwards";
+    }
+  }
 }
 
 /**
