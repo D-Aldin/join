@@ -54,23 +54,23 @@ function highlightDropPoint(dragevent) {
  */
 function dropPoint(event) {
   event.preventDefault();
+  let newStatus;
+  let data = event.dataTransfer.getData("text");
+  let draggedElement = document.getElementById(data);
   if (event.target.classList.contains("card")) {
-    console.log(event.currentTarget.parentElement);
+    const valueForNewStatus = event.target.closest("section").firstElementChild.nextElementSibling.id;
+    event.target.before(draggedElement);
+    newStatus = valueForNewStatus;
   }
-
   if (event.target.id == "toDo" || event.target.id == "progress" || event.target.id == "feedback" || event.target.id == "done") {
-    let data = event.dataTransfer.getData("text");
     event.target.appendChild(document.getElementById(data));
-    let newStatus = event.target.id;
-    console.log(newStatus);
-    console.log(event.target.closeset(".newTest"));
-
-    let statusUpdate = {
-      status: newStatus,
-    };
-    updateStatusInDB("tasks", cardID, statusUpdate);
-    readAndSetHeight();
+    newStatus = event.target.id;
   }
+  let statusUpdate = {
+    status: newStatus,
+  };
+  updateStatusInDB("tasks", cardID, statusUpdate);
+  readAndSetHeight();
 }
 
 /**
