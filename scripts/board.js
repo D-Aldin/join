@@ -47,6 +47,12 @@ function highlightDropPoint(dragevent) {
   });
 }
 
+function onDragOver(event) {
+  if (!event.target.classList.contains("rotate")) {
+    console.log(event.currentTarget);
+  }
+}
+
 /**
  * Handles the drop event by appending the dragged card to the target section
  * and updating its status in the database.
@@ -60,6 +66,7 @@ function dropPoint(event) {
   if (event.target.classList.contains("card")) {
     const valueForNewStatus = event.target.closest("section").firstElementChild.nextElementSibling.id;
     event.target.before(draggedElement);
+
     newStatus = valueForNewStatus;
   }
   if (event.target.id == "toDo" || event.target.id == "progress" || event.target.id == "feedback" || event.target.id == "done") {
@@ -168,7 +175,7 @@ function renderTaskCard(element, subtasksCompleted, totalSubtasks) {
     done: done,
   };
   if (columnMap[element.status]) {
-    columnMap[element.status].innerHTML += renderCard(element.id, element.category, element.title, element.description, subtasksCompleted, totalSubtasks, element.prio, element.status);
+    columnMap[element.status].innerHTML += renderCard(element.id, element.category, element.title, element.description, subtasksCompleted, totalSubtasks, element.prio);
   }
 }
 
@@ -347,3 +354,20 @@ function readAndSetHeight() {
   done.style.height = max + "px";
   heights = [];
 }
+
+window.addEventListener("resize", () => {
+  if (window.innerWidth < 1200) {
+    let toDoColumn = document.getElementById("toDo_column");
+    let bannerToDo = document.querySelector(".banner_toDo");
+    let progressColumn = document.getElementById("progress_column");
+    let bannerProgress = document.querySelector(".banner_progress");
+    let feedbackColumn = document.getElementById("feedback_column");
+    let bannerFeedback = document.querySelector(".banner_feedback");
+    let doneColumn = document.getElementById("done_column");
+    let bannerDone = document.querySelector("#bannerDone");
+    bannerToDo.insertAdjacentElement("afterend", toDoColumn);
+    bannerProgress.insertAdjacentElement("afterend", progressColumn);
+    bannerFeedback.insertAdjacentElement("afterend", feedbackColumn);
+    bannerDone.insertAdjacentElement("afterend", doneColumn);
+  }
+});
