@@ -161,6 +161,7 @@ function checkRequiredTitle() {
   if (title.value === "") {
     document.getElementById("required-title").classList.remove("display_none");
     title.classList.add("inputfield-required");
+    document.getElementById('title-container').classList.add('margin-15px');
   } else {
     requiredTitle = true;
     document.getElementById("required-title").classList.add("display_none");
@@ -177,6 +178,7 @@ function checkRequiredDate() {
   if (date.value === "") {
     document.getElementById("required-date").classList.remove("display_none");
     date.classList.add("inputfield-required");
+    document.getElementById('date-container').classList.add('margin-15px');
   } else {
     requiredDate = true;
     document.getElementById("required-date").classList.add("display_none");
@@ -193,6 +195,7 @@ function checkRequiredcategory() {
   if (category.value === "") {
     document.getElementById("required-category").classList.remove("display_none");
     document.getElementById("catecory-input-border").classList.add("inputfield-required");
+    document.getElementById('category-container').classList.add('margin-15px');
   } else {
     requiredCategory = true;
     document.getElementById("required-category").classList.add("display_none");
