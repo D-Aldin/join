@@ -14,6 +14,11 @@ body {
   object-fit: cover;
   animation: moveShrinkFade 1s ease-in-out forwards;
   opacity: 0;
+  z-index: 3;
+}
+
+.image_container {
+  z-index: 3;
 }
 
 @keyframes moveShrinkFade {
@@ -381,24 +386,53 @@ footer {
     justify-content: center;
   }
 
+  .bg_overlay_responsive {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(42, 54, 71, 1);
+    z-index: 1;
+  }
+
   .join_image {
     animation: moveShrinkFade600 1s ease-in-out forwards;
   }
 
   @keyframes moveShrinkFade600 {
-    0% {
+    0%,
+    100% {
       transform: translate(-50%, -50%) scale(1);
       opacity: 0;
       position: absolute;
       top: 50%;
       left: 50%;
+      z-index: 3;
+      content: url("../assets/icons/logo/join_logo_white.svg");
     }
+
     100% {
       transform: translate(0, 0) scale(0.25);
       opacity: 1;
       position: absolute;
       top: -100px;
       left: -75px;
+      z-index: 3;
+    }
+  }
+
+  .join_image {
+    animation: moveShrinkFade600 1s ease-in-out forwards, changeContent 1s ease-in-out forwards;
+  }
+
+  @keyframes changeContent {
+    0%,
+    99% {
+      content: url("../assets/icons/logo/join_logo_white.svg");
+    }
+    100% {
+      content: url("../assets/icons/logo/joinLarge.png");
     }
   }
 }

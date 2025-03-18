@@ -52,6 +52,16 @@ document.addEventListener("DOMContentLoaded", function () {
   }, 1000);
 });
 
+document.addEventListener("DOMContentLoaded", function () {
+  const bgOverlay = document.querySelector(".bg_overlay_responsive");
+  setTimeout(() => {
+    bgOverlay.style.animation = "fadeOut 1s forwards";
+    setTimeout(() => {
+      bgOverlay.style.display = "none";
+    }, 800);
+  }, 1000);
+});
+
 /**
  * Authenticates the user by email.
  * @async
