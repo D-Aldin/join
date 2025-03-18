@@ -44,11 +44,11 @@ document.addEventListener("DOMContentLoaded", function () {
   const footer = document.querySelector("footer");
   setTimeout(() => {
     footer.style.display = "block";
-    footer.style.animation = "fadeIn 1s forwards";
+    footer.style.animation = "fadeIn 3s forwards";
     loginHeader.style.display = "flex";
-    loginHeader.style.animation = "fadeIn 1s forwards";
+    loginHeader.style.animation = "fadeIn 3s forwards";
     loginWindow.style.display = "inline";
-    loginWindow.style.animation = "fadeIn 1s forwards";
+    loginWindow.style.animation = "fadeIn 3s forwards";
   }, 1000);
 });
 

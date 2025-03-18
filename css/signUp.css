@@ -125,25 +125,6 @@
   width: 100%;
 }
 
-@media only screen and (max-width: 1000px) {
-  @keyframes moveShrinkFade {
-    0% {
-      transform: translate(-50%, -50%) scale(1);
-      opacity: 0;
-      position: absolute;
-      top: 50%;
-      left: 50%;
-    }
-    100% {
-      transform: translate(0, 0) scale(0.35);
-      opacity: 1;
-      position: absolute;
-      top: -80px;
-      left: -40px;
-    }
-  }
-}
-
 @media only screen and (max-width: 850px) {
   .sign_window {
     top: 55%;
@@ -181,22 +162,5 @@
 
   #signUp_privacy_error {
     top: 415px;
-  }
-
-  @keyframes moveShrinkFade {
-    0% {
-      transform: translate(-50%, -50%) scale(1);
-      opacity: 0;
-      position: absolute;
-      top: 50%;
-      left: 50%;
-    }
-    100% {
-      transform: translate(0, 0) scale(0.35);
-      opacity: 1;
-      position: absolute;
-      top: -90px;
-      left: -60px;
-    }
   }
 }
