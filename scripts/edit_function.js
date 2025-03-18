@@ -393,6 +393,4 @@ function clearEditSubtask(event) {
 function handlesToManyContacts() {
   let contactContainer = document.querySelector(".assigned_to").length;
   let test = document.querySelectorAll(".circle");
-  console.log(contactContainer.NodeList);
-  console.log(test.length);
 }

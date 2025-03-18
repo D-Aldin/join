@@ -314,83 +314,60 @@ h5 {
 }
 
 @media only screen and (max-width: 1400px) {
-  header {
-    padding: 0 40px 0 107px;
-  }
-
-  main {
-    padding: 0px;
+  .title_and_searchbar {
+    width: 900px;
   }
 
   aside {
-    bottom: 0px;
-    width: 100%;
-    height: 80px;
-    top: initial;
-    position: fixed;
-    padding: 10px 0 10px 0;
-    align-items: center;
+    width: 200px;
   }
 
   .nav_position {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    width: 100%;
-    margin-left: 24px;
-    margin-right: 24px;
+    width: 200px;
   }
 
-  .link_nav_summary,
-  .link_nav_add_task,
-  .link_nav_board,
-  .link_nav_contacts {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 0;
-    border-radius: 16px;
-    width: 120px;
-    height: 84px;
+  .nav_position a {
+    font-size: 13px;
   }
 
-  .link_nav_summary a,
-  .link_nav_add_task a,
-  .link_nav_board a,
-  .link_nav_contacts a {
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
+  .nav_position img {
+    width: 27px;
+  }
+
+  .join_logo {
+    width: 90px;
+    height: 112px;
+  }
+
+  .privacy_policy_login {
+    font-size: 13px;
+  }
+
+  .legal_notice_login {
+    font-size: 13px;
+  }
+
+  .board_container {
+    padding-left: 7px;
+  }
+
+  .board_content {
+    gap: 0px;
+  }
+
+  .card {
+    width: 200px;
   }
 
   .mobile_head {
-    display: flex;
+    display: none;
     width: 100%;
     justify-content: space-between;
-    /* margin-bottom: 22px; */
     align-items: center;
-  }
-
-  .dekstop_view {
-    display: none;
   }
 
   .add_btn {
     height: 48px;
-  }
-
-  .logo_position {
-    display: none;
-  }
-
-  .nav_position {
-    flex-direction: row !important;
-  }
-
-  .privacy_policy_login,
-  .legal_notice_login {
-    display: none;
   }
 
   .link_nav_borad a {
@@ -537,6 +514,7 @@ h5 {
 
   .card {
     min-width: 197px !important;
+    margin: 10px 0 0 10px;
   }
 
   .highlight_box {
@@ -561,6 +539,10 @@ h5 {
 
   body {
     overflow: hidden;
+  }
+
+  #done {
+    height: 460px !important;
   }
 }
 
