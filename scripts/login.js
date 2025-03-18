@@ -52,6 +52,11 @@ document.addEventListener("DOMContentLoaded", function () {
   }, 1000);
 });
 
+/**
+ * Handles the fading out and hiding of the responsive background overlay.
+ * After the DOM is loaded, it applies a fadeOut animation to the overlay and hides it.
+ * @listens {DOMContentLoaded}
+ */
 document.addEventListener("DOMContentLoaded", function () {
   const bgOverlay = document.querySelector(".bg_overlay_responsive");
   setTimeout(() => {
@@ -59,7 +64,7 @@ document.addEventListener("DOMContentLoaded", function () {
     setTimeout(() => {
       bgOverlay.style.display = "none";
     }, 800);
-  }, 1000);
+  }, 1200);
 });
 
 /**
