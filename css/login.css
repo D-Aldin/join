@@ -440,54 +440,65 @@ footer {
     content: url("../assets/icons/logo/join_logo_white.svg");
     animation: moveShrinkFade600 1s ease-in-out forwards, changeContent 1s ease-in-out forwards;
     animation-delay: 1s;
-    height: 120px;
-    width: 100px;
+    height: 140px;
+    width: auto;
   }
 
   @keyframes changeContent {
     0% {
       content: url("../assets/icons/logo/join_logo_white.svg");
+      opacity: 1;
+    }
+    25% {
+      opacity: 0.7;
+    }
+    50% {
+      opacity: 0.4;
+    }
+    75% {
+      opacity: 0.7;
     }
     100% {
       content: url("../assets/icons/logo/joinLarge.png");
+      opacity: 1;
     }
   }
-}
 
-@media only screen and (max-width: 450px) {
-  .login_window {
-    padding: 20px;
-    padding-bottom: 40px;
-    width: 85%;
-  }
-
-  .error_message {
-    left: 20px;
-  }
-
-  .email_error_position {
-    position: absolute;
-    top: 164px;
-  }
-
-  .password_error_position {
-    position: absolute;
-    top: 232px;
-  }
-
-  @keyframes moveShrinkFade {
-    0% {
-      transform: translate(-50%, -50%) scale(1);
-      position: absolute;
-      top: 50%;
-      left: 50%;
+  @media only screen and (max-width: 450px) {
+    .login_window {
+      padding: 20px;
+      padding-bottom: 40px;
+      width: 85%;
     }
 
-    100% {
-      transform: translate(0, 0) scale(0.35);
+    .error_message {
+      left: 20px;
+    }
+
+    .email_error_position {
       position: absolute;
-      top: -90px;
-      left: -60px;
+      top: 164px;
+    }
+
+    .password_error_position {
+      position: absolute;
+      top: 232px;
+    }
+
+    @keyframes moveShrinkFade {
+      0% {
+        transform: translate(-50%, -50%) scale(1);
+        position: absolute;
+        top: 50%;
+        left: 50%;
+      }
+
+      100% {
+        transform: translate(0, 0) scale(0.35);
+        position: absolute;
+        top: -90px;
+        left: -60px;
+      }
     }
   }
 }
