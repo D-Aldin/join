@@ -149,7 +149,6 @@ h5 {
   display: flex;
   flex-direction: column;
   align-items: center;
-  height: 100vh;
 }
 
 .card {
@@ -185,7 +184,10 @@ h5 {
 #feedback,
 #done {
   width: 100%;
-  height: 100vh;
+  height: auto;
+  min-height: 500px;
+  padding-bottom: 10px;
+  box-sizing: border-box;
 }
 
 .display_none {
@@ -277,6 +279,13 @@ h5 {
   .card {
     width: 245px;
   }
+
+  #toDo,
+  #progress,
+  #feedback,
+  #done {
+    height: 100vh;
+  }
 }
 
 @media only screen and (max-width: 1600px) {
@@ -310,6 +319,14 @@ h5 {
 
   .banner {
     width: 90%;
+  }
+
+  #toDo,
+  #progress,
+  #feedback,
+  #done {
+    min-height: 300px;
+    max-height: 20rem !important;
   }
 }
 

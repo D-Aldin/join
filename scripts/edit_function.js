@@ -393,7 +393,6 @@ function clearEditSubtask(event) {
 function handlesToManyContacts() {
   let xValue = 0;
   let contactContainer = document.querySelector(".assigned_to").children;
-
   if (contactContainer.length > 10) {
     Array.from(contactContainer).forEach((contact) => {
       contact.style.transform = `translateX(-${xValue}px)`;
