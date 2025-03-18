@@ -123,16 +123,15 @@
   transition: transform 0.3s;
 }
 
-@media only screen and (max-width: 1720px) {
+@media (min-width: 1600px) and (max-width: 1750px) {
   .progress_container {
-    max-width: 108px;
+    width: 120px !important;
   }
 
   .prio {
-    left: 200px;
+    left: 210px;
   }
 }
-
 @media only screen and (max-width: 1600px) {
   .progress_container {
     max-width: 80px;

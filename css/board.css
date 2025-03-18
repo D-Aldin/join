@@ -106,11 +106,8 @@ h5 {
   display: flex;
   justify-content: space-between;
   gap: 0.3rem;
-  overflow-y: scroll !important;
-  padding: 20px 0 0 10px;
-  max-height: calc(100vh - 100px);
-  min-height: 200px;
-  width: 1400px;
+  overflow-y: auto;
+  padding-left: 15px;
 }
 
 .board_content::-webkit-scrollbar {
@@ -120,7 +117,7 @@ h5 {
 .board_column {
   display: flex;
   align-items: center;
-  width: 20rem;
+  width: 21.7rem;
   white-space: nowrap;
 }
 
@@ -130,14 +127,7 @@ h5 {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: 310px;
-}
-
-.all_banners {
-  display: flex;
-  width: 103%;
-  justify-content: space-between;
-  padding-left: 10px;
+  width: 95%;
 }
 
 .plus_button {
@@ -300,9 +290,27 @@ h5 {
   align-items: center;
 }
 
-@media only screen and (max-width: 1880px) {
+@media (min-width: 1600px) and (max-width: 1750px) {
+  .title_and_searchbar {
+    width: 1210px;
+  }
+
   .board_column {
-    width: 20.5rem;
+    width: 17.7rem;
+  }
+
+  .card {
+    width: 245px;
+  }
+}
+
+@media only screen and (max-width: 1600px) {
+  .title_and_searchbar {
+    width: 1047px;
+  }
+
+  .board_column {
+    width: 15.5rem;
   }
 
   .board_content {
@@ -327,104 +335,100 @@ h5 {
   }
 
   .banner {
-    width: 240px;
-  }
-
-  .title_and_searchbar {
-    width: 1385px;
-  }
-
-  .all_banners {
-    width: 1390px;
-  }
-
-  .banner_toDo,
-  .banner_progress,
-  .banner_feedback,
-  #banner_done {
-    width: 20.5rem;
-  }
-
-  .all_banners {
-    width: 1390px;
+    width: 90%;
   }
 }
 
-@media only screen and (max-width: 1720px) {
-  .title_and_searchbar {
-    width: 1200px;
+@media only screen and (max-width: 1400px) {
+  header {
+    padding: 0 40px 0 107px;
   }
 
-  .all_banners {
-    width: 1200px;
+  main {
+    padding: 0px;
   }
 
-  .card {
-    width: 230px;
+  aside {
+    bottom: 0px;
+    width: 100%;
+    height: 80px;
+    top: initial;
+    position: fixed;
+    padding: 10px 0 10px 0;
+    align-items: center;
   }
 
-  .banner_toDo,
-  .banner_progress,
-  .banner_feedback,
-  #banner_done {
-    width: 15.8rem;
+  .nav_position {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    margin-left: 24px;
+    margin-right: 24px;
   }
 
-  .board_column {
-    width: 16.5rem;
+  .link_nav_summary,
+  .link_nav_add_task,
+  .link_nav_board,
+  .link_nav_contacts {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0;
+    border-radius: 16px;
+    width: 120px;
+    height: 84px;
   }
 
-  .board_content {
-    width: 1185px;
-    padding-right: 10px;
-  }
-}
-
-@media only screen and (max-width: 1300px) {
-  .board_container {
-    background-color: rgb(246, 247, 248);
+  .link_nav_summary a,
+  .link_nav_add_task a,
+  .link_nav_board a,
+  .link_nav_contacts a {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
   }
 
-  .board_column {
-    width: 12.5rem;
+  .mobile_head {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    /* margin-bottom: 22px; */
+    align-items: center;
+  }
+
+  .dekstop_view {
+    display: none;
   }
 
   .add_btn {
-    width: 123px;
+    height: 48px;
   }
 
-  #searchbar {
-    height: 40px;
-    width: 290px;
+  .logo_position {
+    display: none;
   }
 
-  .search_bar {
-    gap: 3rem;
+  .nav_position {
+    flex-direction: row !important;
   }
 
-  h3 {
-    font-size: 14px !important;
+  .privacy_policy_login,
+  .legal_notice_login {
+    display: none;
   }
 
-  .card {
-    width: 172px;
-    margin: 5px 5px 0 5px;
-  }
-
-  .highlight_box {
-    width: 190px;
-  }
-
-  .nav_position a {
-    font-size: 16px;
-  }
-
-  #box {
-    left: 59%;
+  .link_nav_borad a {
+    height: 80px !important;
   }
 }
 
 @media only screen and (max-width: 1200px) {
+  .title_and_searchbar {
+    width: 100%;
+  }
+
   body {
     overflow: auto;
   }
@@ -532,8 +536,7 @@ h5 {
     scrollbar-width: none;
     -ms-overflow-style: none;
     scrollbar-width: none;
-    min-height: 305px !important;
-    padding-bottom: 0px;
+    gap: 0.9rem;
   }
 
   #toDo::-webkit-scrollbar,

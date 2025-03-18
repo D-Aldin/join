@@ -216,6 +216,7 @@ async function handleNewContactAssignment(contact) {
   document.querySelector(".assigned_to").innerHTML = "";
   editFunction();
   addDataToFireBase(`${taskPath}/${idOfcurrentElement}/assigned`, newContact);
+  handlesToManyContacts();
 }
 
 /**
@@ -387,4 +388,11 @@ function writeEditSubtask() {
 function clearEditSubtask(event) {
   document.getElementById("editSubtask").value = "";
   setStandardButtonInOpenCard();
+}
+
+function handlesToManyContacts() {
+  let contactContainer = document.querySelector(".assigned_to").length;
+  let test = document.querySelectorAll(".circle");
+  console.log(contactContainer.NodeList);
+  console.log(test.length);
 }
