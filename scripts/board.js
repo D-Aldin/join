@@ -84,10 +84,7 @@ function dropPoint(event) {
     status: newStatus,
   };
   updateStatusInDB("tasks", cardID, statusUpdate);
-<<<<<<< HEAD
-  readAndSetHeight();
-=======
->>>>>>> 3022aee6b75026beee88f43de38302f04bae7699
+  resizeContainers();
 }
 
 /**
@@ -168,7 +165,7 @@ async function displayCardOnBoard() {
   noTaskToDo();
   setColorOfCategory();
   shortenContactView();
-  readAndSetHeight();
+  resizeContainers();
 }
 
 /**
@@ -351,44 +348,10 @@ function setColorOfCategory() {
   });
 }
 
-<<<<<<< HEAD
-function readAndSetHeight() {
-  toDo.style.height = "790px";
-  progress.style.height = "790px";
-  feedback.style.height = "790px";
-  done.style.height = "790px";
-  let heights = [toDo, progress, feedback, done].map((el) => el.offsetHeight);
-  let max = Math.max(...heights);
-  toDo.style.height = max + "px";
-  progress.style.height = max + "px";
-  feedback.style.height = max + "px";
-  done.style.height = max + "px";
-  heights = [];
+function resizeContainers() {
+  let sectionList = [toDo, progress, feedback, done];
+  sectionList.forEach((section) => {
+    section.style.height = `${section.children.length * 300}px`;
+    console.log(section);
+  });
 }
-
-window.addEventListener("resize", () => {
-  if (window.innerWidth < 1200) {
-    let toDoColumn = document.getElementById("toDo_column");
-    let bannerToDo = document.querySelector(".banner_toDo");
-    let progressColumn = document.getElementById("progress_column");
-    let bannerProgress = document.querySelector(".banner_progress");
-    let feedbackColumn = document.getElementById("feedback_column");
-    let bannerFeedback = document.querySelector(".banner_feedback");
-    let doneColumn = document.getElementById("done_column");
-    let bannerDone = document.querySelector("#bannerDone");
-    bannerToDo.insertAdjacentElement("afterend", toDoColumn);
-    bannerProgress.insertAdjacentElement("afterend", progressColumn);
-    bannerFeedback.insertAdjacentElement("afterend", feedbackColumn);
-    bannerDone.insertAdjacentElement("afterend", doneColumn);
-  }
-});
-=======
-// function resizeContainers() {
-//   let containeList = [toDo, progress, feedback, done];
-//   let sectionWithMostContent = [toDo.children.length, progress.children.length, feedback.children.length, done.children.length].sort().slice(-1)[0];
-//   containeList.forEach((card) => {
-//     card.style.height = `${sectionWithMostContent * 20}rem`;
-//     card.style.paddingBottom = "10px";
-//   });
-// }
->>>>>>> 3022aee6b75026beee88f43de38302f04bae7699
