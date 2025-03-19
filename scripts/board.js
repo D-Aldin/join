@@ -337,9 +337,9 @@ function setColorOfCategory() {
 
 function resizeContainers() {
   let sectionList = [toDo, progress, feedback, done];
+  let sectionWithMostCards = [toDo.children.length, progress.children.length, feedback.children.length, done.children.length].sort().slice(-1)[0];
   sectionList.forEach((section) => {
-    section.style.height = `${section.children.length * 300}px`;
-    console.log(section.id);
-    document.querySelector(`.${section.id}`).style.height = `${section.children.length * 300}px`;
+    section.style.height = `${sectionWithMostCards * 300}px`;
+    document.querySelector(`.${section.id}`).style.height = `${sectionWithMostCards * 300}px`;
   });
 }
