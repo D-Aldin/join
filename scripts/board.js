@@ -47,12 +47,6 @@ function highlightDropPoint(dragevent) {
   });
 }
 
-function onDragOver(event) {
-  if (!event.target.classList.contains("rotate")) {
-    console.log(event.currentTarget);
-  }
-}
-
 /**
  * Handles the drop event by appending the dragged card to the target section
  * and updating its status in the database.
@@ -73,18 +67,10 @@ function dropPoint(event) {
     event.target.appendChild(document.getElementById(data));
     newStatus = event.target.id;
   }
-<<<<<<< HEAD
-  if (event.target.id == "toDo" || event.target.id == "progress" || event.target.id == "feedback" || event.target.id == "done") {
-    event.target.appendChild(document.getElementById(data));
-    newStatus = event.target.id;
-  }
-=======
->>>>>>> 3022aee6b75026beee88f43de38302f04bae7699
   let statusUpdate = {
     status: newStatus,
   };
   updateStatusInDB("tasks", cardID, statusUpdate);
-  resizeContainers();
 }
 
 /**
@@ -165,7 +151,6 @@ async function displayCardOnBoard() {
   noTaskToDo();
   setColorOfCategory();
   shortenContactView();
-  resizeContainers();
 }
 
 /**
@@ -345,6 +330,15 @@ function setColorOfCategory() {
       element.style.backgroundColor = "rgb(31, 215, 193)";
       element.style.width = "8rem";
     }
+  });
+}
+
+function resizeContainers() {
+  let containeList = [toDo, progress, feedback, done];
+  let sectionWithMostContent = [toDo.children.length, progress.children.length, feedback.children.length, done.children.length].sort().slice(-1)[0];
+  containeList.forEach((section) => {
+    section.style.height = `${sectionWithMostContent * 20}rem`;
+    section.style.paddingBottom = "10px";
   });
 }
 
