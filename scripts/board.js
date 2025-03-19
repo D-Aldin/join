@@ -59,6 +59,7 @@ function onDragOver(event) {
  * @param {Event} event - The drop event.
  */
 function dropPoint(event) {
+  highlightDropPoint(event);
   event.preventDefault();
   let newStatus;
   let data = event.dataTransfer.getData("text");
@@ -70,21 +71,23 @@ function dropPoint(event) {
   }
   if (event.target.id == "toDo" || event.target.id == "progress" || event.target.id == "feedback" || event.target.id == "done") {
     event.target.appendChild(document.getElementById(data));
-    let newStatus = event.target.id;
-    let statusUpdate = {
-      status: newStatus,
-    };
-    updateStatusInDB("tasks", cardID, statusUpdate);
+    newStatus = event.target.id;
   }
+<<<<<<< HEAD
   if (event.target.id == "toDo" || event.target.id == "progress" || event.target.id == "feedback" || event.target.id == "done") {
     event.target.appendChild(document.getElementById(data));
     newStatus = event.target.id;
   }
+=======
+>>>>>>> 3022aee6b75026beee88f43de38302f04bae7699
   let statusUpdate = {
     status: newStatus,
   };
   updateStatusInDB("tasks", cardID, statusUpdate);
+<<<<<<< HEAD
   readAndSetHeight();
+=======
+>>>>>>> 3022aee6b75026beee88f43de38302f04bae7699
 }
 
 /**
@@ -256,7 +259,7 @@ function noTaskToDo() {
     feedback.lastElementChild == null ? (noTaskAwaitFeedback.classList.add("no_task"), (noTaskAwaitFeedback.innerHTML = "No Tasks Await feedback")) : (noTaskAwaitFeedback.classList.remove("no_task"), (noTaskAwaitFeedback.innerHTML = ""));
     done.lastElementChild == null ? (noTaskDone.classList.add("no_task"), (noTaskDone.innerHTML = "No Tasks Done")) : (noTaskDone.classList.remove("no_task"), (noTaskDone.innerHTML = ""));
   }, 125);
-  window.addEventListener("resize", ifNoTaskResizeContainer);
+  // window.addEventListener("resize", ifNoTaskResizeContainer);
 }
 
 /**
@@ -348,6 +351,7 @@ function setColorOfCategory() {
   });
 }
 
+<<<<<<< HEAD
 function readAndSetHeight() {
   toDo.style.height = "790px";
   progress.style.height = "790px";
@@ -378,3 +382,13 @@ window.addEventListener("resize", () => {
     bannerDone.insertAdjacentElement("afterend", doneColumn);
   }
 });
+=======
+// function resizeContainers() {
+//   let containeList = [toDo, progress, feedback, done];
+//   let sectionWithMostContent = [toDo.children.length, progress.children.length, feedback.children.length, done.children.length].sort().slice(-1)[0];
+//   containeList.forEach((card) => {
+//     card.style.height = `${sectionWithMostContent * 20}rem`;
+//     card.style.paddingBottom = "10px";
+//   });
+// }
+>>>>>>> 3022aee6b75026beee88f43de38302f04bae7699
