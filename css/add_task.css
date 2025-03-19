@@ -455,7 +455,7 @@ li {
 
 .subtask-list:hover {
   background-color: rgba(238, 238, 238, 1);
-  max-width: 440px !important;
+  width: 440px;
 }
 
 .subtask-list-button-container {
@@ -726,8 +726,16 @@ input[type="date"]:valid {
     height: 18px;
   }
 
+  .contact-wrapper,
+  .catecory-wrapper,
+  .subtask-list-by-edit,
+  .subtask-list,
   .subtask-wrapper {
-    max-width: 440px;
+    width: 340px !important;
+  }
+
+  .full_with {
+    max-inline-size: 340px;
   }
 
   .textareafield {
@@ -980,6 +988,12 @@ input[type="date"]:valid {
     width: calc(100vw - 48px) !important;
   }
 
+  .backgroundcolorurgent,
+  .urgentbutton,
+  .backgroundcolormedium {
+    font-size: 20px;
+  }
+
   .footer-container {
     gap: 16px;
   }
@@ -994,13 +1008,14 @@ input[type="date"]:valid {
     gap: 5px;
     min-height: 25px;
     padding-bottom: 20px;
-    justify-content: flex-start;
+    display: flex;
+    width: calc(100vw - 48px) !important;
   }
 
   .catecory-wrapper,
   .contact-wrapper {
+    width: calc(100vw - 48px) !important;
     font-size: 16px;
-    width: 92vw;
   }
 
   .contactlist {
