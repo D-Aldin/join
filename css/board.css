@@ -127,7 +127,7 @@ h5 {
   background-image: url(../assets/icons/board/plus_button_hover.svg);
 }
 
-.to_do {
+.toDo {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -185,6 +185,7 @@ h5 {
   display: flex;
   align-items: center;
   justify-content: center;
+  min-height: 50px;
 }
 
 #toDo,

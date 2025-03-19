@@ -71,6 +71,7 @@ function dropPoint(event) {
     status: newStatus,
   };
   updateStatusInDB("tasks", cardID, statusUpdate);
+  resizeContainers();
 }
 
 /**
@@ -151,6 +152,7 @@ async function displayCardOnBoard() {
   noTaskToDo();
   setColorOfCategory();
   shortenContactView();
+  resizeContainers();
 }
 
 /**
@@ -334,18 +336,10 @@ function setColorOfCategory() {
 }
 
 function resizeContainers() {
-  let containeList = [toDo, progress, feedback, done];
-  let sectionWithMostContent = [toDo.children.length, progress.children.length, feedback.children.length, done.children.length].sort().slice(-1)[0];
-  containeList.forEach((section) => {
-    section.style.height = `${sectionWithMostContent * 20}rem`;
-    section.style.paddingBottom = "10px";
-  });
-}
-
-function resizeContainers() {
   let sectionList = [toDo, progress, feedback, done];
   sectionList.forEach((section) => {
     section.style.height = `${section.children.length * 300}px`;
-    console.log(section);
+    console.log(section.id);
+    document.querySelector(`.${section.id}`).style.height = `${section.children.length * 300}px`;
   });
 }
