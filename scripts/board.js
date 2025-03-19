@@ -9,6 +9,7 @@ let cardID;
 let assigContacts = [];
 let windowWidth;
 let startPosition;
+let sectionList = [toDo, progress, feedback, done];
 
 /**
  * Handles the drag event by adding rotation to the dragged element.
@@ -349,7 +350,6 @@ function setColorOfCategory() {
  */
 function resizeContainers() {
   if (window.innerWidth > 1200) {
-    let sectionList = [toDo, progress, feedback, done];
     let sectionWithMostCards = [toDo.children.length, progress.children.length, feedback.children.length, done.children.length].sort().slice(-1)[0];
     sectionList.forEach((section) => {
       section.style.height = `${sectionWithMostCards * 300}px`;
@@ -357,3 +357,11 @@ function resizeContainers() {
     });
   }
 }
+
+window.addEventListener("resize", () => {
+  if (window.innerWidth < 1199) {
+    sectionList.forEach((section) => {
+      section.style.height = "300px";
+    });
+  }
+});
