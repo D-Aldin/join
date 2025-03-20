@@ -154,14 +154,6 @@ function checkRequiredField() {
 }
 
 /**
- * Check if input with required can remove required text.
- */
-function removeRequiredIfOnInput() {
-  checkRequiredTitle();
-  checkRequiredDate();
-}
-
-/**
  * Set all Required field invisible.
  */
 function setRequiredInvisible() {
@@ -183,6 +175,7 @@ function checkRequiredTitle() {
     document.getElementById("required-title").classList.remove("display_none");
     title.classList.add("inputfield-required");
     document.getElementById('title-container').classList.add('margin-15px');
+    requiredTitle = false;
   } else {
     requiredTitle = true;
     document.getElementById("required-title").classList.add("display_none");
@@ -345,11 +338,21 @@ function clearAllTasks() {
   pushContactsToSelectField();
   setPrio("medium");
   subtasksList = {};
+  setRequiredItemsFalse();
   renderSubtasks();
   selectedContacts = [];
   renderSelectetContacts();
   clearValueOfInputFields();
   setRequiredInvisible();
+}
+
+/**
+ * Set all Required Elements false.
+ */
+function setRequiredItemsFalse() {
+  requiredTitle = false;
+  requiredDate = false;
+  requiredCategory = false;
 }
 
 /**
