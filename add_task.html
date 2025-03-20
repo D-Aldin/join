@@ -94,7 +94,7 @@
                   ><p class="display-flex tasktitles">Title</p>
                   <p class="color-red tasktitles">*</p></span
                 >
-                <div class="column"><input class="inputfield" id="title" maxlength="60" placeholder="Enter a title" type="text" required /></div>
+                <div class="column"><input oninput="removeRequiredIfOnInput()" class="inputfield" id="title" maxlength="60" placeholder="Enter a title" type="text" required /></div>
                 <div id="required-title" class="required_text display_none">This field is required</div>
               </div>
               <div class="inputfield-title-container">
@@ -123,7 +123,7 @@
                   <p class="color-red tasktitles">*</p></label
                 >
                 <div class="column">
-                  <input lang="en" class="inputfield" id="date" type="date" placeholder="dd/mm/yyyy" required />
+                  <input oninput="removeRequiredIfOnInput()" lang="en" class="inputfield" id="date" type="date" placeholder="dd/mm/yyyy" required />
                   <div id="required-date" class="required_text_date display_none">This field is required</div>
                 </div>
               </div>

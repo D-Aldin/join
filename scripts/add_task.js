@@ -127,6 +127,7 @@ function addCatecory(categoryNum) {
   } else if (categoryNum === 2) {
     categoryInput.value = "User Story";
   }
+  checkRequiredcategory();
   closeCatecoryList();
   document.getElementById("required-category").classList.add("display_none");
 }
@@ -150,6 +151,26 @@ function checkRequiredField() {
   if (requiredTitle && requiredDate && requiredCategory === true) {
     creatTask();
   }
+}
+
+/**
+ * Check if input with required can remove required text.
+ */
+function removeRequiredIfOnInput() {
+  checkRequiredTitle();
+  checkRequiredDate();
+}
+
+/**
+ * Set all Required field invisible.
+ */
+function setRequiredInvisible() {
+  document.getElementById("required-title").classList.add("display_none");
+  document.getElementById("title").classList.remove("inputfield-required");
+  document.getElementById("required-date").classList.add("display_none");
+  document.getElementById("date").classList.remove("inputfield-required");
+  document.getElementById("required-category").classList.add("display_none");
+  document.getElementById("catecory-input-border").classList.remove("inputfield-required");
 }
 
 /**
@@ -322,12 +343,13 @@ function finishTaskNotification() {
  */
 function clearAllTasks() {
   pushContactsToSelectField();
-  resetPrioButton();
+  setPrio("medium");
   subtasksList = {};
   renderSubtasks();
   selectedContacts = [];
   renderSelectetContacts();
   clearValueOfInputFields();
+  setRequiredInvisible();
 }
 
 /**
