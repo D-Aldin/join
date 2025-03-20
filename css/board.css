@@ -133,6 +133,7 @@ h5 {
   align-items: center;
   height: 100vh;
   padding-bottom: 20px;
+  min-height: 330px;
 }
 
 .progress {
@@ -141,6 +142,7 @@ h5 {
   align-items: center;
   height: 100vh;
   padding-bottom: 20px;
+  min-height: 330px;
 }
 
 .feedback {
@@ -149,6 +151,7 @@ h5 {
   align-items: center;
   height: 100vh;
   padding-bottom: 20px;
+  min-height: 330px;
 }
 
 .done {
@@ -157,6 +160,7 @@ h5 {
   align-items: center;
   height: 100vh;
   padding-bottom: 20px;
+  min-height: 330px;
 }
 
 .card {
