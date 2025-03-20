@@ -47,26 +47,20 @@ function highlightDropPoint(dragevent) {
   });
 }
 
-function onDragOver(event) {
-  if (!event.target.classList.contains("rotate")) {
-    console.log(event.currentTarget);
-  }
-}
-
 /**
  * Handles the drop event by appending the dragged card to the target section
  * and updating its status in the database.
  * @param {Event} event - The drop event.
  */
 function dropPoint(event) {
+  highlightDropPoint(event);
   event.preventDefault();
   let newStatus;
   let data = event.dataTransfer.getData("text");
   let draggedElement = document.getElementById(data);
   if (event.target.classList.contains("card")) {
-    const valueForNewStatus = event.target.closest("section").firstElementChild.nextElementSibling.id;
+    const valueForNewStatus = event.target.closest("section").firstElementChild.nextElementSibling.nextElementSibling.id;
     event.target.before(draggedElement);
-
     newStatus = valueForNewStatus;
   }
   if (event.target.id == "toDo" || event.target.id == "progress" || event.target.id == "feedback" || event.target.id == "done") {
@@ -77,7 +71,7 @@ function dropPoint(event) {
     status: newStatus,
   };
   updateStatusInDB("tasks", cardID, statusUpdate);
-  readAndSetHeight();
+  resizeContainers();
 }
 
 /**
@@ -158,7 +152,7 @@ async function displayCardOnBoard() {
   noTaskToDo();
   setColorOfCategory();
   shortenContactView();
-  readAndSetHeight();
+  resizeContainers();
 }
 
 /**
@@ -249,7 +243,7 @@ function noTaskToDo() {
     feedback.lastElementChild == null ? (noTaskAwaitFeedback.classList.add("no_task"), (noTaskAwaitFeedback.innerHTML = "No Tasks Await feedback")) : (noTaskAwaitFeedback.classList.remove("no_task"), (noTaskAwaitFeedback.innerHTML = ""));
     done.lastElementChild == null ? (noTaskDone.classList.add("no_task"), (noTaskDone.innerHTML = "No Tasks Done")) : (noTaskDone.classList.remove("no_task"), (noTaskDone.innerHTML = ""));
   }, 125);
-  window.addEventListener("resize", ifNoTaskResizeContainer);
+  // window.addEventListener("resize", ifNoTaskResizeContainer);
 }
 
 /**
@@ -341,33 +335,11 @@ function setColorOfCategory() {
   });
 }
 
-function readAndSetHeight() {
-  toDo.style.height = "790px";
-  progress.style.height = "790px";
-  feedback.style.height = "790px";
-  done.style.height = "790px";
-  let heights = [toDo, progress, feedback, done].map((el) => el.offsetHeight);
-  let max = Math.max(...heights);
-  toDo.style.height = max + "px";
-  progress.style.height = max + "px";
-  feedback.style.height = max + "px";
-  done.style.height = max + "px";
-  heights = [];
+function resizeContainers() {
+  let sectionList = [toDo, progress, feedback, done];
+  sectionList.forEach((section) => {
+    section.style.height = `${section.children.length * 300}px`;
+    console.log(section.id);
+    document.querySelector(`.${section.id}`).style.height = `${section.children.length * 300}px`;
+  });
 }
-
-window.addEventListener("resize", () => {
-  if (window.innerWidth < 1200) {
-    let toDoColumn = document.getElementById("toDo_column");
-    let bannerToDo = document.querySelector(".banner_toDo");
-    let progressColumn = document.getElementById("progress_column");
-    let bannerProgress = document.querySelector(".banner_progress");
-    let feedbackColumn = document.getElementById("feedback_column");
-    let bannerFeedback = document.querySelector(".banner_feedback");
-    let doneColumn = document.getElementById("done_column");
-    let bannerDone = document.querySelector("#bannerDone");
-    bannerToDo.insertAdjacentElement("afterend", toDoColumn);
-    bannerProgress.insertAdjacentElement("afterend", progressColumn);
-    bannerFeedback.insertAdjacentElement("afterend", feedbackColumn);
-    bannerDone.insertAdjacentElement("afterend", doneColumn);
-  }
-});

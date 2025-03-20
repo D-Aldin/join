@@ -44,12 +44,27 @@ document.addEventListener("DOMContentLoaded", function () {
   const footer = document.querySelector("footer");
   setTimeout(() => {
     footer.style.display = "block";
-    footer.style.animation = "fadeIn 1s forwards";
+    footer.style.animation = "fadeIn 3s forwards";
     loginHeader.style.display = "flex";
-    loginHeader.style.animation = "fadeIn 1s forwards";
+    loginHeader.style.animation = "fadeIn 3s forwards";
     loginWindow.style.display = "inline";
-    loginWindow.style.animation = "fadeIn 1s forwards";
+    loginWindow.style.animation = "fadeIn 3s forwards";
   }, 1000);
+});
+
+/**
+ * Handles the fading out and hiding of the responsive background overlay.
+ * After the DOM is loaded, it applies a fadeOut animation to the overlay and hides it.
+ * @listens {DOMContentLoaded}
+ */
+document.addEventListener("DOMContentLoaded", function () {
+  const bgOverlay = document.querySelector(".bg_overlay_responsive");
+  setTimeout(() => {
+    bgOverlay.style.animation = "fadeOut 1s forwards";
+    setTimeout(() => {
+      bgOverlay.style.display = "none";
+    }, 800);
+  }, 1200);
 });
 
 /**

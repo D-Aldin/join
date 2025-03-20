@@ -720,14 +720,6 @@ input[type="date"]:valid {
 }
 
 @media only screen and (max-width: 1280px) {
-  .task-wrapper {
-    margin: 32px 0px 0px 24px;
-  }
-
-  .question_marker {
-    display: none;
-  }
-
   textarea {
     padding: 10px 0 0 10px;
   }
@@ -735,6 +727,75 @@ input[type="date"]:valid {
   .subtask-inputfield-button img {
     width: 18px;
     height: 18px;
+  }
+
+  .subtask-wrapper {
+    max-width: 440px;
+  }
+
+  .textareafield {
+    width: 440px;
+  }
+
+  .urgentbutton,
+  .backgroundcolormedium {
+    font-size: 12px;
+  }
+
+  .flex-container {
+    gap: 24px !important;
+    justify-content: space-around;
+  }
+
+  .inputfield,
+  .textareafield,
+  .subtask-inputfield,
+  .button-container {
+    width: 340px !important;
+  }
+
+  .inputfield-title-container {
+    width: 340px;
+  }
+
+  .footer-container {
+    width: 845px;
+  }
+}
+
+@media only screen and (max-width: 1200px) {
+  .question_marker {
+    display: none;
+  }
+
+  .task-wrapper {
+    margin: 32px 0px 0px 24px;
+  }
+
+  .urgentbutton,
+  .backgroundcolormedium {
+    font-size: 20px;
+  }
+
+  .flex-container {
+    gap: 32px !important;
+    justify-content: space-between;
+  }
+
+  .inputfield,
+  .textareafield,
+  .subtask-inputfield,
+  .button-container {
+    width: 440px !important;
+  }
+
+  .inputfield-title-container {
+    width: 440px;
+  }
+
+  .footer-container {
+    margin-top: 45px;
+    width: 945px;
   }
 
   aside {
@@ -782,221 +843,93 @@ input[type="date"]:valid {
     margin-left: 24px;
     margin-right: 24px;
   }
+}
+
+@media only screen and (max-width: 1000px) {
+  .subtask-inputfield-button img {
+    width: 18px;
+    height: 18px;
+  }
 
   .subtask-wrapper {
     max-width: 440px;
   }
 
+  .contact-wrapper,
+  .catecory-wrapper {
+    width: 340px;
+  }
+
   .textareafield {
     width: 440px;
   }
-}
 
-@media only screen and (max-width: 1060px) {
-  .task-wrapper {
-    margin: 32px 0px 0px 24px;
+  .urgentbutton,
+  .backgroundcolormedium {
+    font-size: 12px;
   }
 
-  .inputfield {
-    width: 390px !important;
-  }
-
-  .textareafield {
-    width: 390px;
-  }
-
-  .subtask-inputfield {
-    width: 390px;
-  }
-
+  .inputfield,
+  .textareafield,
+  .subtask-inputfield,
   .button-container {
-    width: 390px !important;
+    width: 340px !important;
   }
 
   .inputfield-title-container {
-    width: auto;
-  }
-  .flex-container {
-    margin-top: 17px;
+    width: 340px;
   }
 
   .footer-container {
-    margin-top: 10px;
-    width: 845px;
-  }
-
-  .subtask-list {
-    max-width: 390px;
-  }
-
-  li {
-    max-width: 250px;
-  }
-
-  .catecory-wrapper {
-    max-width: 390px;
-  }
-
-  .subtask-wrapper {
-    max-width: 390px;
-  }
-
-  .contact-wrapper {
-    max-width: 390px;
-  }
-
-  .assigned-contact-wrapper {
-    max-width: 390px;
-  }
-
-  li {
-    inline-size: 270px;
+    width: 805px;
   }
 }
 
-@media only screen and (max-width: 950px) {
-  .inputfield {
-    width: 360px;
+@media only screen and (max-width: 850px) {
+  .task-wrapper {
+    margin: 32px 24px 0px 24px;
   }
 
   .flex-container {
-    justify-content: unset;
-  }
-}
-
-@media only screen and (max-width: 900px) {
-  .task {
-    width: 100%;
     justify-content: flex-start;
   }
 
-  .tasktitles {
-    font-size: 16px;
+  .contact-wrapper,
+  .catecory-wrapper {
+    width: 300px;
   }
 
-  .flex-container {
-    gap: 32px !important;
-  }
-
-  .inputfield {
-    width: 285px !important;
-    height: 35px;
-  }
-
-  .assigned-contact-wrapper {
-    max-width: 285px;
-  }
-
-  .subtask-inputfield-text {
-    font-size: 16px;
-  }
-
-  .subtask-wrapper {
-    width: 285px;
-  }
-
-  .inputfield::placeholder {
-    font-size: 16px;
-  }
-
-  .textareafield {
-    width: 285px;
-  }
-
-  .textareafield::placeholder {
-    font-size: 16px;
-  }
-
-  .contact-wrapper {
-    width: 285px !important;
-  }
-
+  .contactlist,
   .contactlist-clicket {
     font-size: 16px;
   }
 
-  input[type="date"] {
-    font-size: 16px;
-    padding: 8px;
-    color: rgb(209, 209, 209);
+  .urgentbutton,
+  .backgroundcolormedium {
+    font-size: 12px;
   }
 
-  .subtask-inputfield {
-    width: 285px;
-  }
-
+  .inputfield,
+  .textareafield,
+  .subtask-inputfield,
   .button-container {
-    width: 285px !important;
-    gap: 4px;
-  }
-
-  .urgentbutton {
-    font-size: 16px;
-    height: 42px !important;
-  }
-
-  .urgent-img {
-    max-height: 16px;
-    max-width: 16px;
-  }
-
-  .prio_icon {
-    max-height: 16px !important;
-  }
-
-  .urgentbutton img {
-    width: 16px;
-  }
-
-  .great-button {
-    font-size: 16px;
-    height: 42px !important;
-  }
-
-  .backgroundcolorurgent,
-  .backgroundcolormedium,
-  .backgroundcolorlow {
-    font-size: 16px;
-    height: 42px !important;
-  }
-
-  .clear-button {
-    font-size: 16px !important;
-    height: 42px !important;
+    width: 300px !important;
   }
 
   .inputfield-title-container {
-    width: auto;
+    width: 300px;
   }
 
-  main {
-    justify-content: center;
-  }
-
-  .subtask-list {
-    max-width: 285px;
-  }
-
-  li {
-    inline-size: 150px;
-  }
-
-  .footer-container {
-    width: 635px;
-    padding-top: 32px;
-  }
-
-  .contactlist {
+  input {
     font-size: 16px;
   }
 
-  .catecory-wrapper {
-    width: 285px;
+  .footer-container {
+    width: 665px;
   }
+}
 
-  .contact-wrapper {
-    width: 285px;
-  }
+@media only screen and (max-width: 800px) {
 }
 
 @media (min-width: 300px) and (max-width: 690px) {
@@ -1004,17 +937,14 @@ input[type="date"]:valid {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-  }
-
-  h1 {
-    justify-self: flex-start;
+    margin: 32px 24px 0px 24px;
+    width: 92vw;
   }
 
   .flex-container {
     flex-direction: column;
     align-items: flex-start;
     justify-content: center;
-    gap: 0px !important;
     height: auto;
   }
 
@@ -1046,80 +976,21 @@ input[type="date"]:valid {
     margin-top: 10px;
   }
 
-  .tasktitles {
-    font-size: 16px;
+  .inputfield,
+  .textareafield,
+  .subtask-inputfield,
+  .button-container {
+    width: calc(100vw - 48px) !important;
   }
 
-  .inputfield {
-    width: 285px !important;
-    height: 35px;
-  }
-
-  .inputfield::placeholder {
-    font-size: 16px;
-  }
-
-  .textareafield {
-    width: 285px;
-  }
-
-  .textareafield::placeholder {
-    font-size: 16px;
-  }
-
-  .subtask-inputfield {
-    width: 285px;
-    height: 35px;
-  }
-
-  .subtask-edit-inputfield {
-    font-size: 16px;
+  .footer-container {
+    gap: 16px;
   }
 
   input[type="date"] {
     font-size: 16px;
     padding: 8px;
     color: rgb(209, 209, 209);
-  }
-
-  .button-container {
-    width: 285px !important;
-    height: 35px;
-    justify-content: space-between;
-  }
-
-  .urgentbutton {
-    font-size: 16px;
-    height: 42px !important;
-  }
-
-  .urgentbutton img {
-    width: 16px;
-  }
-
-  .great-button {
-    width: 150px;
-  }
-
-  .great-button,
-  .clear-button {
-    font-size: 16px !important;
-    height: 42px !important;
-  }
-
-  .backgroundcolorurgent,
-  .backgroundcolormedium,
-  .backgroundcolorlow {
-    font-size: 16px;
-    height: 42px !important;
-  }
-
-  .button-container-clear-creat {
-    box-sizing: border-box;
-    padding: 8px 20px 10px 0;
-    display: flex;
-    justify-content: flex-start;
-    justify-self: flex-start;
   }
 
   .subtask-wrapper {
@@ -1129,16 +1000,14 @@ input[type="date"]:valid {
     justify-content: flex-start;
   }
 
-  .catecory-wrapper {
-    width: 285px;
+  .catecory-wrapper,
+  .contact-wrapper {
+    font-size: 16px;
+    width: 92vw;
   }
 
   .contactlist {
     font-size: 16px;
-  }
-
-  .contact-wrapper {
-    width: 285px;
   }
 
   [type="date"]::-webkit-calendar-picker-indicator {

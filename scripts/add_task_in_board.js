@@ -47,6 +47,7 @@ function renderAddTaskMenu() {
   } else {
     window.location = "add_task.html";
   }
+  buttonMedium(event);
 }
 
 /**

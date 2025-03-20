@@ -1,23 +1,8 @@
-html,
-body {
-  overflow: hidden;
-}
-
 main {
-  overflow: hidden;
+  overflow: auto;
   -ms-overflow-style: none;
   scrollbar-width: none;
-  padding-left: 328px;
-  padding-top: 110px;
 }
-
-/* .highlight_box {
-  height: 40px;
-  background: rgba(0, 0, 255, 0.2);
-  border-radius: 5px;
-  margin-bottom: 5px;
-  transition: all 0.2s ease-in-out;
-} */
 
 main::-webkit-scrollbar {
   display: none;
@@ -45,8 +30,6 @@ h5 {
   align-items: center;
   justify-content: space-between;
   margin-bottom: 40px;
-  width: 1406px;
-  margin-right: 300px;
 }
 
 .search_bar {
@@ -99,18 +82,16 @@ h5 {
 .board_container {
   display: flex;
   flex-direction: column;
-  width: 1373px;
+  padding-top: 110px;
+  padding-left: 96px;
 }
 
 .board_content {
   display: flex;
   justify-content: space-between;
   gap: 0.3rem;
-  overflow-y: scroll !important;
-  padding: 20px 0 0 10px;
-  max-height: calc(100vh - 100px);
-  min-height: 200px;
-  width: 1400px;
+  overflow-y: auto;
+  padding-left: 15px;
 }
 
 .board_content::-webkit-scrollbar {
@@ -120,24 +101,15 @@ h5 {
 .board_column {
   display: flex;
   align-items: center;
-  width: 20rem;
+  width: 21.7rem;
   white-space: nowrap;
 }
 
-.banner_toDo,
-.banner_progress,
-.banner_feedback {
+.banner {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: 310px;
-}
-
-.all_banners {
-  display: flex;
-  width: 103%;
-  justify-content: space-between;
-  padding-left: 10px;
+  width: 95%;
 }
 
 .plus_button {
@@ -155,29 +127,36 @@ h5 {
   background-image: url(../assets/icons/board/plus_button_hover.svg);
 }
 
-.to_do {
+.toDo {
   display: flex;
   flex-direction: column;
   align-items: center;
+  height: 100vh;
+  padding-bottom: 20px;
 }
 
 .progress {
   display: flex;
   flex-direction: column;
   align-items: center;
+  height: 100vh;
+  padding-bottom: 20px;
 }
 
 .feedback {
   display: flex;
   flex-direction: column;
   align-items: center;
+  height: 100vh;
+  padding-bottom: 20px;
 }
 
 .done {
   display: flex;
   flex-direction: column;
   align-items: center;
-  /* height: 100vh; */
+  height: 100vh;
+  padding-bottom: 20px;
 }
 
 .card {
@@ -186,7 +165,7 @@ h5 {
   box-shadow: 1px 1px 6px #838282;
   border-radius: 18px;
   height: 15rem;
-  width: 280px;
+  width: 300px;
   padding: 18px;
   margin-bottom: 10px;
   cursor: pointer;
@@ -202,10 +181,11 @@ h5 {
   box-shadow: 0 3px 3px 0 rgba(104, 104, 104, 0.048);
   border-radius: 12px;
   height: 4rem;
-  width: 97%;
+  width: 95%;
   display: flex;
   align-items: center;
   justify-content: center;
+  min-height: 50px;
 }
 
 #toDo,
@@ -213,9 +193,10 @@ h5 {
 #feedback,
 #done {
   width: 100%;
-  flex-grow: 1;
+  height: auto;
   min-height: 500px;
-  padding-bottom: 290px;
+  padding-bottom: 10px;
+  box-sizing: border-box;
 }
 
 .display_none {
@@ -273,11 +254,6 @@ h5 {
   margin: 5px 0 5px 0;
   border-radius: 18px;
   pointer-events: none;
-  transition: all 0.2s ease-in-out;
-}
-
-.identifying {
-  cursor: grabbing;
 }
 
 .no_found,
@@ -300,14 +276,39 @@ h5 {
   align-items: center;
 }
 
-@media only screen and (max-width: 1880px) {
+@media (min-width: 1600px) and (max-width: 1750px) {
+  .title_and_searchbar {
+    width: 1210px;
+  }
+
   .board_column {
-    width: 20.5rem;
+    width: 17.7rem;
+  }
+
+  .card {
+    width: 245px;
+  }
+
+  #toDo,
+  #progress,
+  #feedback,
+  #done {
+    height: 100vh;
+  }
+}
+
+@media only screen and (max-width: 1600px) {
+  .title_and_searchbar {
+    width: 1047px;
+  }
+
+  .board_column {
+    width: 15.5rem;
   }
 
   .board_content {
     gap: 1rem;
-    width: 1385px;
+    height: 100vh;
   }
 
   .progress_container {
@@ -315,7 +316,7 @@ h5 {
   }
 
   .card {
-    width: 280px;
+    width: 206px;
   }
 
   .highlight_box {
@@ -327,104 +328,85 @@ h5 {
   }
 
   .banner {
-    width: 240px;
+    width: 90%;
   }
 
-  .title_and_searchbar {
-    width: 1385px;
-  }
-
-  .all_banners {
-    width: 1390px;
-  }
-
-  .banner_toDo,
-  .banner_progress,
-  .banner_feedback,
-  #banner_done {
-    width: 20.5rem;
-  }
-
-  .all_banners {
-    width: 1390px;
+  #toDo,
+  #progress,
+  #feedback,
+  #done {
+    min-height: 300px;
+    /* max-height: 20rem !important; */
   }
 }
 
-@media only screen and (max-width: 1720px) {
+@media only screen and (max-width: 1400px) {
   .title_and_searchbar {
-    width: 1200px;
+    width: 900px;
   }
 
-  .all_banners {
-    width: 1200px;
+  aside {
+    width: 200px;
   }
 
-  .card {
-    width: 230px;
-  }
-
-  .banner_toDo,
-  .banner_progress,
-  .banner_feedback,
-  #banner_done {
-    width: 15.8rem;
-  }
-
-  .board_column {
-    width: 16.5rem;
-  }
-
-  .board_content {
-    width: 1185px;
-    padding-right: 10px;
-  }
-}
-
-@media only screen and (max-width: 1300px) {
-  .board_container {
-    background-color: rgb(246, 247, 248);
-  }
-
-  .board_column {
-    width: 12.5rem;
-  }
-
-  .add_btn {
-    width: 123px;
-  }
-
-  #searchbar {
-    height: 40px;
-    width: 290px;
-  }
-
-  .search_bar {
-    gap: 3rem;
-  }
-
-  h3 {
-    font-size: 14px !important;
-  }
-
-  .card {
-    width: 172px;
-    margin: 5px 5px 0 5px;
-  }
-
-  .highlight_box {
-    width: 190px;
+  .nav_position {
+    width: 200px;
   }
 
   .nav_position a {
-    font-size: 16px;
+    font-size: 13px;
   }
 
-  #box {
-    left: 59%;
+  .nav_position img {
+    width: 27px;
+  }
+
+  .join_logo {
+    width: 90px;
+    height: 112px;
+  }
+
+  .privacy_policy_login {
+    font-size: 13px;
+  }
+
+  .legal_notice_login {
+    font-size: 13px;
+  }
+
+  .board_container {
+    padding-left: 7px;
+  }
+
+  .board_content {
+    gap: 0px;
+  }
+
+  .card {
+    width: 200px;
+  }
+
+  .mobile_head {
+    display: none;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .add_btn {
+    height: 48px;
+  }
+
+  .link_nav_borad a {
+    height: 80px !important;
   }
 }
 
 @media only screen and (max-width: 1200px) {
+  .title_and_searchbar {
+    width: 100%;
+  }
+
   body {
     overflow: auto;
   }
@@ -526,14 +508,14 @@ h5 {
   #progress,
   #feedback,
   #done {
+    height: 300px;
     display: flex;
     overflow-x: auto;
     white-space: nowrap;
     scrollbar-width: none;
     -ms-overflow-style: none;
     scrollbar-width: none;
-    min-height: 305px !important;
-    padding-bottom: 0px;
+    gap: 0.9rem;
   }
 
   #toDo::-webkit-scrollbar,
@@ -554,11 +536,12 @@ h5 {
   }
 
   .board_column {
-    width: 40%;
+    width: 100%;
   }
 
   .card {
     min-width: 197px !important;
+    margin: 10px 0 0 10px;
   }
 
   .highlight_box {
@@ -585,8 +568,8 @@ h5 {
     overflow: hidden;
   }
 
-  .all_banners {
-    flex-direction: column;
+  #done {
+    height: 460px !important;
   }
 }
 

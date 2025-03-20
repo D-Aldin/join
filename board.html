@@ -101,7 +101,7 @@
       <div id="overlayForAddTask" onclick="hideOverlay()">
         <div id="add_task_box" onclick="stopEventBubbel(event)"></div>
       </div>
-      <div>
+      <div class="board_container">
         <section class="title_and_searchbar">
           <h1 class="dekstop_view">Board</h1>
           <div class="mobile_head">
@@ -115,61 +115,48 @@
             <button onclick="showOverlay(event), renderAddTaskMenu()" class="add_btn transition dekstop_view">Add task</button>
           </form>
         </section>
-        <div class="board_container">
-          <div>
-            <div class="all_banners">
-              <div class="banner_toDo">
+
+        <div class="board_content">
+          <section class="toDo board_column">
+            <div class="board_column">
+              <div class="banner">
                 <h3>To do</h3>
                 <button id="addToDo" class="plus_button transition"></button>
               </div>
+            </div>
+            <div id="placeholderToDo"></div>
+            <div id="toDo" ondrop="dropPoint(event)" ondragover="allowDrop()"></div>
+          </section>
 
-              <div class="banner_progress">
+          <section class="progress board_column">
+            <div class="board_column">
+              <div class="banner">
                 <h3>In progress</h3>
                 <button id="addProgress" class="plus_button transition"></button>
               </div>
+            </div>
+            <div id="placeholderProgress"></div>
+            <div id="progress" ondrop="dropPoint(event)" ondragover="allowDrop()"></div>
+          </section>
 
-              <div class="banner_feedback">
+          <section class="feedback board_column">
+            <div class="board_column">
+              <div class="banner">
                 <h3>Await feedback</h3>
                 <button id="addFeedback" class="plus_button transition"></button>
               </div>
-
-              <div id="bannerDone" class="board_column">
-                <h3>Done</h3>
-              </div>
             </div>
-          </div>
-        </div>
-        <div class="board_content">
-          <div id="toDo_column">
-            <div class="board_column"></div>
-            <section class="to_do board_column">
-              <div id="placeholderToDo"></div>
-              <div id="toDo" ondrop="dropPoint(event)" ondragover="allowDrop()" class="newtest"></div>
-            </section>
-          </div>
+            <div id="placeholderFeedback"></div>
+            <div id="feedback" ondrop="dropPoint(event)" ondragover="allowDrop()"></div>
+          </section>
 
-          <div id="progress_column">
-            <div class="board_column"></div>
-            <section class="progress board_column">
-              <div id="placeholderProgress"></div>
-              <div id="progress" ondrop="dropPoint(event)" ondragover="allowDrop()"></div>
-            </section>
-          </div>
-
-          <div id="feedback_column">
-            <div class="board_column"></div>
-            <section class="feedback board_column">
-              <div id="placeholderFeedback"></div>
-              <div id="feedback" ondrop="dropPoint(event)" ondragover="allowDrop()"></div>
-            </section>
-          </div>
-
-          <div id="done_column">
-            <section class="done board_column">
-              <div id="placeholderDone"></div>
-              <div id="done" ondrop="dropPoint(event)" ondragover="allowDrop()"></div>
-            </section>
-          </div>
+          <section class="done board_column">
+            <div class="board_column">
+              <h3>Done</h3>
+            </div>
+            <div id="placeholderDone"></div>
+            <div id="done" ondrop="dropPoint(event)" ondragover="allowDrop()"></div>
+          </section>
         </div>
       </div>
 

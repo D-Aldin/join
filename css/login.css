@@ -11,15 +11,20 @@ body {
 }
 
 .join_image {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   object-fit: cover;
-  animation: moveShrinkFade 1s ease-in-out forwards;
-  opacity: 0;
+  animation: moveShrinkFade 0.8s ease-in-out forwards;
+  z-index: 100;
+  animation-delay: 1s;
 }
 
 @keyframes moveShrinkFade {
   0% {
     transform: translate(-50%, -50%) scale(1);
-    opacity: 0;
+    opacity: 1;
     position: absolute;
     top: 50%;
     left: 50%;
@@ -367,6 +372,24 @@ footer {
   align-items: center;
 }
 
+@media only screen and (max-width: 1000px) {
+  @keyframes moveShrinkFade {
+    0% {
+      transform: translate(-50%, -50%) scale(1);
+      position: absolute;
+      top: 50%;
+      left: 50%;
+    }
+
+    100% {
+      transform: translate(0, 0) scale(0.35);
+      position: absolute;
+      top: -80px;
+      left: -40px;
+    }
+  }
+}
+
 @media only screen and (max-width: 600px) {
   .login_window {
     width: 80%;
@@ -381,6 +404,15 @@ footer {
     justify-content: center;
   }
 
+  .bg_overlay_responsive {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(42, 54, 71, 1);
+  }
+
   .join_image {
     animation: moveShrinkFade600 1s ease-in-out forwards;
   }
@@ -388,39 +420,133 @@ footer {
   @keyframes moveShrinkFade600 {
     0% {
       transform: translate(-50%, -50%) scale(1);
-      opacity: 0;
       position: absolute;
       top: 50%;
       left: 50%;
+      z-index: 3;
+      content: url("../assets/icons/logo/join_logo_white.svg");
+    }
+
+    100% {
+      transform: translate(0, 0) scale(1);
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      z-index: 3;
+    }
+  }
+
+  .join_image {
+    content: url("../assets/icons/logo/join_logo_white.svg");
+    animation: moveShrinkFade600 1s ease-in-out forwards, changeContent 1s ease-in-out forwards;
+    animation-delay: 1s;
+    height: 140px;
+    width: auto;
+  }
+
+  @keyframes changeContent {
+    0% {
+      content: url("../assets/icons/logo/join_logo_white.svg");
+      opacity: 1;
+    }
+    5% {
+      opacity: 0.95;
+    }
+    10% {
+      opacity: 0.9;
+    }
+    15% {
+      opacity: 0.85;
+    }
+    20% {
+      opacity: 0.8;
+    }
+    25% {
+      opacity: 0.75;
+    }
+    30% {
+      opacity: 0.7;
+    }
+    35% {
+      opacity: 0.65;
+    }
+    40% {
+      opacity: 0.6;
+    }
+    45% {
+      opacity: 0.55;
+    }
+    50% {
+      opacity: 0.5;
+    }
+    55% {
+      opacity: 0.55;
+    }
+    60% {
+      opacity: 0.6;
+    }
+    65% {
+      opacity: 0.65;
+    }
+    70% {
+      opacity: 0.7;
+    }
+    75% {
+      opacity: 0.75;
+    }
+    80% {
+      opacity: 0.8;
+    }
+    85% {
+      opacity: 0.85;
+    }
+    90% {
+      opacity: 0.9;
+    }
+    95% {
+      opacity: 0.95;
     }
     100% {
-      transform: translate(0, 0) scale(0.25);
+      content: url("../assets/icons/logo/joinLarge.png");
       opacity: 1;
-      position: absolute;
-      top: -100px;
-      left: -75px;
     }
   }
-}
 
-@media only screen and (max-width: 450px) {
-  .login_window {
-    padding: 20px;
-    padding-bottom: 40px;
-    width: 85%;
-  }
+  @media only screen and (max-width: 450px) {
+    .login_window {
+      padding: 20px;
+      padding-bottom: 40px;
+      width: 85%;
+    }
 
-  .error_message {
-    left: 20px;
-  }
+    .error_message {
+      left: 20px;
+    }
 
-  .email_error_position {
-    position: absolute;
-    top: 164px;
-  }
+    .email_error_position {
+      position: absolute;
+      top: 164px;
+    }
 
-  .password_error_position {
-    position: absolute;
-    top: 232px;
+    .password_error_position {
+      position: absolute;
+      top: 232px;
+    }
+
+    @keyframes moveShrinkFade {
+      0% {
+        transform: translate(-50%, -50%) scale(1);
+        position: absolute;
+        top: 50%;
+        left: 50%;
+      }
+
+      100% {
+        transform: translate(0, 0) scale(0.35);
+        position: absolute;
+        top: -90px;
+        left: -60px;
+      }
+    }
   }
 }

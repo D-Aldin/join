@@ -52,6 +52,7 @@ async function editFunction() {
       document.querySelector(".assigned_to").innerHTML += `<div class="circle circle_profile_names spacing" style="background-color: ${color}">${profile}</div>`;
     }
   }
+  handlesToManyContacts();
 }
 
 /**
@@ -387,4 +388,17 @@ function writeEditSubtask() {
 function clearEditSubtask(event) {
   document.getElementById("editSubtask").value = "";
   setStandardButtonInOpenCard();
+}
+
+function handlesToManyContacts() {
+  let xValue = 0;
+  let contactContainer = document.querySelector(".assigned_to").children;
+  if (contactContainer.length > 10) {
+    Array.from(contactContainer).forEach((contact) => {
+      contact.style.transform = `translateX(-${xValue}px)`;
+      contact.style.width = "2rem";
+      contact.style.marginLeft = "-6px";
+      xValue += 5;
+    });
+  }
 }
