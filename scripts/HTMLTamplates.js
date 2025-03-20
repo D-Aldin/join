@@ -1,6 +1,6 @@
 function renderCard(id, category, title, discription, completedSubtasks, subtasks, prio) {
   return ` 
-              <article id=${id} onclick="overlayOn(event), getData(event)" ondragstart="draggedElementID(event)" class="card" draggable="true", ondragenter="onDragOver(event)")>
+              <article id=${id} onclick="overlayOn(event), getData(event)" ondragstart="draggedElementID(event)" class="card" draggable="true")>
                 <div class="category">${category}</div>
                 <div class="card_title">
                   <h4 id="title">${title}</h4>

@@ -507,8 +507,11 @@ footer {
       opacity: 0.95;
     }
     100% {
-      content: url("../assets/icons/logo/joinLarge.png");
+      content: url("../assets/icons/logo/joinSmall.svg");
       opacity: 1;
+      scale: 0.5;
+      left: 0;
+      top: 0;
     }
   }
 

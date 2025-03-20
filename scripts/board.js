@@ -9,6 +9,7 @@ let cardID;
 let assigContacts = [];
 let windowWidth;
 let startPosition;
+let sectionList = [toDo, progress, feedback, done];
 
 /**
  * Handles the drag event by adding rotation to the dragged element.
@@ -47,31 +48,36 @@ function highlightDropPoint(dragevent) {
   });
 }
 
-/**
- * Handles the drop event by appending the dragged card to the target section
- * and updating its status in the database.
- * @param {Event} event - The drop event.
- */
 function dropPoint(event) {
   highlightDropPoint(event);
   event.preventDefault();
-  let newStatus;
   let data = event.dataTransfer.getData("text");
   let draggedElement = document.getElementById(data);
+  let newStatus = getNewStatus(event, draggedElement);
+
+  let statusUpdate = { status: newStatus };
+  updateStatusInDB("tasks", cardID, statusUpdate);
+  resizeContainers();
+}
+
+/**
+ * Determines the new status of the dragged element and updates its position.
+ *
+ * @param {DragEvent} event - The drag event.
+ * @param {HTMLElement} draggedElement - The element being dragged.
+ * @returns {string} The new status of the dragged element.
+ */
+function getNewStatus(event, draggedElement) {
   if (event.target.classList.contains("card")) {
     const valueForNewStatus = event.target.closest("section").firstElementChild.nextElementSibling.nextElementSibling.id;
     event.target.before(draggedElement);
-    newStatus = valueForNewStatus;
+    return valueForNewStatus;
   }
-  if (event.target.id == "toDo" || event.target.id == "progress" || event.target.id == "feedback" || event.target.id == "done") {
-    event.target.appendChild(document.getElementById(data));
-    newStatus = event.target.id;
+  if (["toDo", "progress", "feedback", "done"].includes(event.target.id)) {
+    event.target.appendChild(draggedElement);
+    return event.target.id;
   }
-  let statusUpdate = {
-    status: newStatus,
-  };
-  updateStatusInDB("tasks", cardID, statusUpdate);
-  resizeContainers();
+  return "";
 }
 
 /**
@@ -335,11 +341,27 @@ function setColorOfCategory() {
   });
 }
 
+/**
+ * Adjusts the height of all sections in the Kanban board to match the section with the most cards.
+ * Each section's height is set based on the number of cards in the section with the highest count.
+ *
+ * @function resizeContainers
+ * @returns {void}
+ */
 function resizeContainers() {
-  let sectionList = [toDo, progress, feedback, done];
-  sectionList.forEach((section) => {
-    section.style.height = `${section.children.length * 300}px`;
-    console.log(section.id);
-    document.querySelector(`.${section.id}`).style.height = `${section.children.length * 300}px`;
-  });
+  if (window.innerWidth > 1200) {
+    let sectionWithMostCards = [toDo.children.length, progress.children.length, feedback.children.length, done.children.length].sort().slice(-1)[0];
+    sectionList.forEach((section) => {
+      section.style.height = `${sectionWithMostCards * 300}px`;
+      document.querySelector(`.${section.id}`).style.height = `${sectionWithMostCards * 300}px`;
+    });
+  }
 }
+
+window.addEventListener("resize", () => {
+  if (window.innerWidth < 1199) {
+    sectionList.forEach((section) => {
+      section.style.height = "300px";
+    });
+  }
+});
