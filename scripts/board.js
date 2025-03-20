@@ -51,33 +51,23 @@ function highlightDropPoint(dragevent) {
 function dropPoint(event) {
   highlightDropPoint(event);
   event.preventDefault();
+  let newStatus;
   let data = event.dataTransfer.getData("text");
   let draggedElement = document.getElementById(data);
-  let newStatus = getNewStatus(event, draggedElement);
-
-  let statusUpdate = { status: newStatus };
-  updateStatusInDB("tasks", cardID, statusUpdate);
-  resizeContainers();
-}
-
-/**
- * Determines the new status of the dragged element and updates its position.
- *
- * @param {DragEvent} event - The drag event.
- * @param {HTMLElement} draggedElement - The element being dragged.
- * @returns {string} The new status of the dragged element.
- */
-function getNewStatus(event, draggedElement) {
   if (event.target.classList.contains("card")) {
     const valueForNewStatus = event.target.closest("section").firstElementChild.nextElementSibling.nextElementSibling.id;
     event.target.before(draggedElement);
-    return valueForNewStatus;
+    newStatus = valueForNewStatus;
   }
-  if (["toDo", "progress", "feedback", "done"].includes(event.target.id)) {
-    event.target.appendChild(draggedElement);
-    return event.target.id;
+  if (event.target.id == "toDo" || event.target.id == "progress" || event.target.id == "feedback" || event.target.id == "done") {
+    event.target.appendChild(document.getElementById(data));
+    newStatus = event.target.id;
   }
-  return "";
+  let statusUpdate = {
+    status: newStatus,
+  };
+  updateStatusInDB("tasks", cardID, statusUpdate);
+  resizeContainers();
 }
 
 /**
