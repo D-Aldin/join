@@ -67,11 +67,30 @@ textarea {
   color: red;
 }
 
-.required-text {
+.required_text,
+.required_text_date,
+.required_text_category {
   color: red;
   font-size: 12px;
   font-weight: 400;
-  position: fixed;
+}
+
+.required_text {
+  position: absolute;
+  top: 405px;
+  left: 328px;
+}
+
+.required_text_date {
+  position: absolute;
+  top: 405px;
+  left: 834px;
+}
+
+.required_text_category {
+  position: absolute;
+  top: 620px;
+  left: 834px;
 }
 
 .display-flex {
@@ -766,6 +785,15 @@ input[type="date"]:valid {
   .footer-container {
     width: 845px;
   }
+
+  .required_text {
+    left: 347px;
+  }
+
+  .required_text_date,
+  .required_text_category {
+    left: 814px;
+  }
 }
 
 @media only screen and (max-width: 1200px) {
@@ -801,6 +829,21 @@ input[type="date"]:valid {
   .footer-container {
     margin-top: 45px;
     width: 945px;
+  }
+
+  .required_text {
+    left: auto;
+    top: 324px;
+  }
+
+  .required_text_date {
+    top: 324px;
+    left: auto;
+  }
+
+  .required_text_category {
+    top: auto;
+    left: auto;
   }
 
   aside {
@@ -1002,6 +1045,21 @@ input[type="date"]:valid {
     font-size: 16px;
     padding: 8px;
     color: rgb(209, 209, 209);
+  }
+
+  .required_text {
+    left: auto;
+    top: 334px;
+  }
+
+  .required_text_date {
+    top: 750px;
+    left: auto;
+  }
+
+  .required_text_category {
+    top: auto;
+    left: auto;
   }
 
   .subtask-wrapper {
