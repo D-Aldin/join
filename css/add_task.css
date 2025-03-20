@@ -977,10 +977,7 @@ input[type="date"]:valid {
   }
 }
 
-@media only screen and (max-width: 800px) {
-}
-
-@media (min-width: 300px) and (max-width: 690px) {
+@media (max-width: 690px) {
   .task-wrapper {
     flex-direction: column;
     align-items: center;
@@ -1102,5 +1099,35 @@ input[type="date"]:valid {
 
   .pixelbar-subtask {
     margin: 0 3px 0 3px;
+  }
+}
+
+@media only screen and (max-width: 400px) {
+  .urgentbutton,
+  .backgroundcolormedium {
+    font-size: 12px;
+  }
+
+  .button-container-clear-creat {
+    gap: 8px;
+    width: calc(100vw - 48px);
+  }
+
+  .clear-button,
+  .great-button {
+    font-size: 12px;
+  }
+
+  .clear-button {
+    width: 80px;
+  }
+
+  .great-button {
+    width: 120px;
+  }
+
+  .prio_icon {
+    width: 16px;
+    height: auto;
   }
 }
