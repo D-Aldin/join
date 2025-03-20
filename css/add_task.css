@@ -291,7 +291,7 @@ p {
 
 .footer-container {
   margin-top: 75px;
-  padding-bottom: 120px;
+  padding-bottom: 16px;
   display: flex;
   align-items: flex-end;
   justify-content: space-between;
