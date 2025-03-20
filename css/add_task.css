@@ -446,6 +446,7 @@ p {
   overflow: auto;
   scrollbar-width: 24px;
   scrollbar-color: rgba(168, 168, 168, 1) transparent;
+  overflow-x: hidden;
 }
 
 .subtask-list {
@@ -464,7 +465,7 @@ p {
 
 .full_with {
   flex: 1;
-  max-inline-size: 440px;
+  max-inline-size: auto;
   overflow-wrap: break-word;
 }
 
@@ -565,7 +566,8 @@ ul {
   height: auto;
   width: 440px;
   gap: 0px !important;
-  border-radius: 10px;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -762,7 +764,9 @@ input[type="date"]:valid {
   }
 
   .urgentbutton,
-  .backgroundcolormedium {
+  .backgroundcolormedium,
+  .backgroundcolorlow,
+  .backgroundcolorurgent {
     font-size: 12px;
   }
 
@@ -780,6 +784,14 @@ input[type="date"]:valid {
 
   .inputfield-title-container {
     width: 340px;
+  }
+
+  .assigned-contact-wrapper {
+    width: 340px;
+  }
+
+  li {
+    width: 200px;
   }
 
   .footer-container {
@@ -806,7 +818,9 @@ input[type="date"]:valid {
   }
 
   .urgentbutton,
-  .backgroundcolormedium {
+  .backgroundcolormedium,
+  .backgroundcolorlow,
+  .backgroundcolorurgent {
     font-size: 20px;
   }
 
@@ -826,9 +840,38 @@ input[type="date"]:valid {
     width: 440px;
   }
 
+  .contact-wrapper.visible {
+    width: 440px !important;
+  }
+
+  .subtask-wrapper {
+    width: 440px !important;
+  }
+
+  .subtask-list {
+    width: 440px !important;
+  }
+
+  .subtask-list-by-edit {
+    width: 440px !important;
+  }
+
+  .assigned-contact-wrapper {
+    width: 440px;
+  }
+
+  ul {
+    max-width: 360px !important;
+  }
+
+  li {
+    width: 260px;
+  }
+
   .footer-container {
-    margin-top: 45px;
+    margin-top: 20px;
     width: 945px;
+    padding-bottom: 120px;
   }
 
   .required_text {
@@ -900,20 +943,38 @@ input[type="date"]:valid {
   }
 
   .subtask-wrapper {
-    max-width: 440px;
+    max-width: 340px;
   }
 
   .contact-wrapper,
   .catecory-wrapper {
-    width: 340px;
+    max-width: 340px !important;
   }
 
   .textareafield {
-    width: 440px;
+    width: 340px;
+  }
+
+  .assigned-contact-wrapper {
+    width: 340px;
+  }
+
+  ul {
+    max-width: 340px;
+  }
+
+  li {
+    width: 200px;
+  }
+
+  .subtask-list {
+    max-width: 340px !important;
   }
 
   .urgentbutton,
-  .backgroundcolormedium {
+  .backgroundcolormedium,
+  .backgroundcolorlow,
+  .backgroundcolorurgent {
     font-size: 12px;
   }
 
@@ -942,18 +1003,41 @@ input[type="date"]:valid {
     justify-content: flex-start;
   }
 
-  .contact-wrapper,
+  .contact-wrapper.visible,
   .catecory-wrapper {
+    width: 300px !important;
+  }
+
+  .assigned-contact-wrapper {
     width: 300px;
+  }
+
+  .subtask-wrapper {
+    width: 300px !important;
+  }
+
+  .subtask-list {
+    max-width: 300px !important;
+  }
+
+  .subtask-list-by-edit {
+    max-width: 300px !important;
+  }
+
+  li {
+    max-width: 160px;
   }
 
   .contactlist,
   .contactlist-clicket {
     font-size: 16px;
+    max-width: 300px;
   }
 
   .urgentbutton,
-  .backgroundcolormedium {
+  .backgroundcolormedium,
+  .backgroundcolorlow,
+  .backgroundcolorurgent {
     font-size: 12px;
   }
 
@@ -1023,13 +1107,21 @@ input[type="date"]:valid {
   .inputfield,
   .textareafield,
   .subtask-inputfield,
-  .button-container {
+  .button-container,
+  .contact-wrapper.visible,
+  .subtask-wrapper,
+  .contactlist {
+    width: calc(100vw - 48px) !important;
+  }
+
+  .contactlist:hover {
     width: calc(100vw - 48px) !important;
   }
 
   .backgroundcolorurgent,
   .urgentbutton,
-  .backgroundcolormedium {
+  .backgroundcolormedium,
+  .backgroundcolorlow {
     font-size: 20px;
   }
 
@@ -1103,7 +1195,9 @@ input[type="date"]:valid {
 
 @media only screen and (max-width: 400px) {
   .urgentbutton,
-  .backgroundcolormedium {
+  .backgroundcolormedium,
+  .backgroundcolorlow,
+  .backgroundcolorurgent {
     font-size: 12px;
   }
 
