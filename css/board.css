@@ -516,6 +516,7 @@ h5 {
     -ms-overflow-style: none;
     scrollbar-width: none;
     gap: 0.9rem;
+    padding-right: 10px;
   }
 
   #toDo::-webkit-scrollbar,

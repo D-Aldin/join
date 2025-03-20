@@ -116,6 +116,7 @@ async function displayChossenContact(id) {
   let name = initials(dataFromFireBase.name);
   let color = dataFromFireBase.color;
   profileContainer.innerHTML += contactTamplateForAddTaskSectionInBoard(name, color, id);
+  handlesToManyContacts(profileContainer.children);
 }
 
 /**
