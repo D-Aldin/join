@@ -983,7 +983,6 @@ input[type="date"]:valid {
     align-items: center;
     justify-content: center;
     margin: 32px 24px 0px 24px;
-    width: 92vw;
   }
 
   .flex-container {
