@@ -16,15 +16,34 @@ let sectionList = [toDo, progress, feedback, done];
  * @param {Event} event - The drag event.
  */
 function draggedElementID(event) {
-  highlightDropPoint(event);
-  event.target.classList.add("rotate");
-  event.target.addEventListener("dragend", () => {
-    event.target.classList.remove("rotate");
-    let highlightBox = document.querySelector(".highlight_box");
-    if (highlightBox) highlightBox.remove();
-  });
+  // Only process if we're dragging a card
+  if (!event.target.classList.contains("card")) return;
+
+  // Store the original position and ID
+  startPosition = event.target.parentNode;
   event.dataTransfer.setData("text", event.target.id);
   cardID = event.target.id;
+
+  // Add visual effects to the dragged element
+  event.target.classList.add("rotate");
+  event.target.style.opacity = "0.7";
+
+  // Setup cleanup on drag end
+  event.target.addEventListener(
+    "dragend",
+    () => {
+      event.target.classList.remove("rotate");
+      event.target.style.opacity = "";
+
+      // Remove all highlight boxes
+      document.querySelectorAll(".highlight_box").forEach((box) => box.remove());
+      document.querySelectorAll(".section-highlight").forEach((section) => section.classList.remove("section-highlight"));
+    },
+    { once: true }
+  );
+
+  // Initialize highlight for drop zones
+  initializeDropZoneHighlights(event);
 }
 
 /**
@@ -49,32 +68,81 @@ function highlightDropPoint(dragevent) {
 }
 
 function dropPoint(event) {
-  highlightDropPoint(event);
   event.preventDefault();
-  let newStatus;
-  let data = event.dataTransfer.getData("text");
-  let draggedElement = document.getElementById(data);
-  if (event.target.classList.contains("card")) {
-    const valueForNewStatus = event.target.closest("section").firstElementChild.nextElementSibling.nextElementSibling.id;
-    event.target.before(draggedElement);
-    newStatus = valueForNewStatus;
+
+  // Get the dragged element
+  const data = event.dataTransfer.getData("text");
+  const draggedElement = document.getElementById(data);
+  if (!draggedElement) return;
+
+  // Cleanup all highlights
+  document.querySelectorAll(".highlight_box").forEach((box) => box.remove());
+  document.querySelectorAll(".section-highlight").forEach((section) => section.classList.remove("section-highlight"));
+
+  let targetSection = null;
+  let insertionPoint = null;
+
+  // Determine the target section and insertion point
+  if (event.target.classList.contains("insertion-point")) {
+    // Insert at the highlight position
+    insertionPoint = event.target;
+    targetSection = event.target.closest("section");
+  } else if (event.target.classList.contains("card")) {
+    // Insert before or after the card based on mouse position
+    const targetCard = event.target;
+    targetSection = targetCard.closest("section");
+
+    const cardRect = targetCard.getBoundingClientRect();
+    const mouseY = event.clientY;
+    if (mouseY < cardRect.top + cardRect.height / 2) {
+      // Insert before the card
+      insertionPoint = targetCard;
+    } else {
+      // Insert after the card
+      insertionPoint = targetCard.nextSibling;
+    }
+  } else if (event.target.classList.contains("highlight_box")) {
+    // Insert at the end of the section
+    targetSection = event.target.closest("section");
+    const container = targetSection.querySelector("#toDo, #progress, #feedback, #done");
+    if (container) {
+      insertionPoint = null; // Append to the end
+    }
+  } else {
+    // Try to find a valid container
+    const container = event.target.closest("#toDo, #progress, #feedback, #done");
+    if (container) {
+      targetSection = container.closest("section");
+      insertionPoint = null; // Append to the end
+    }
   }
-  if (event.target.id == "toDo" || event.target.id == "progress" || event.target.id == "feedback" || event.target.id == "done") {
-    event.target.appendChild(document.getElementById(data));
-    newStatus = event.target.id;
+
+  // Perform the insertion if we have a valid target
+  if (targetSection) {
+    const container = targetSection.querySelector("#toDo, #progress, #feedback, #done");
+    if (container) {
+      if (insertionPoint) {
+        container.insertBefore(draggedElement, insertionPoint);
+      } else {
+        container.appendChild(draggedElement);
+      }
+
+      // Update status in database
+      const statusUpdate = {
+        status: container.id,
+      };
+      updateStatusInDB("tasks", data, statusUpdate);
+      resizeContainers();
+    }
   }
-  let statusUpdate = {
-    status: newStatus,
-  };
-  updateStatusInDB("tasks", cardID, statusUpdate);
-  resizeContainers();
 }
 
 /**
  * Prevents the default behavior for the drop event.
  */
-function allowDrop() {
+function allowDrop(event) {
   event.preventDefault();
+  event.dataTransfer.dropEffect = "move";
 }
 
 /**
@@ -355,3 +423,91 @@ window.addEventListener("resize", () => {
     });
   }
 });
+
+function initializeDropZoneHighlights(dragEvent) {
+  // Remove existing listeners to avoid duplicates
+  dropZones.forEach((zone) => {
+    zone.removeEventListener("dragenter", handleDragEnter);
+    zone.removeEventListener("dragleave", handleDragLeave);
+    zone.removeEventListener("dragover", handleDragOver);
+
+    // Add fresh event listeners
+    zone.addEventListener("dragenter", handleDragEnter);
+    zone.addEventListener("dragleave", handleDragLeave);
+    zone.addEventListener("dragover", handleDragOver);
+  });
+}
+
+function handleDragEnter(event) {
+  // Find the actual drop target section
+  const section = event.currentTarget;
+
+  // Don't highlight if we're dragging within the same zone
+  if ((section.contains(document.getElementById(cardID)) && !event.relatedTarget) || section.contains(event.relatedTarget)) {
+    return;
+  }
+
+  // Add a section highlight
+  section.classList.add("section-highlight");
+
+  // Clear any existing highlight boxes
+  section.querySelectorAll(".highlight_box").forEach((box) => box.remove());
+
+  // Create a new highlight box in the target section
+  const targetContainer = section.querySelector("#toDo, #progress, #feedback, #done");
+  if (targetContainer) {
+    const box = document.createElement("div");
+    box.classList.add("highlight_box");
+    box.setAttribute("dragover", "allowDrop(event)");
+    targetContainer.appendChild(box);
+  }
+}
+
+function handleDragLeave(event) {
+  const section = event.currentTarget;
+
+  // Only remove highlight if actually leaving the section
+  if (!section.contains(event.relatedTarget)) {
+    section.classList.remove("section-highlight");
+    section.querySelectorAll(".highlight_box").forEach((box) => box.remove());
+  }
+}
+
+function handleDragOver(event) {
+  event.preventDefault();
+  event.dataTransfer.dropEffect = "move";
+
+  const section = event.currentTarget;
+  const container = section.querySelector("#toDo, #progress, #feedback, #done");
+
+  // If we're over a card that's not the dragged card, show insertion point
+  if (event.target.classList.contains("card") && event.target.id !== cardID) {
+    adjustHighlightForCards(event, container);
+  }
+}
+
+function adjustHighlightForCards(event, container) {
+  // Remove existing highlight boxes
+  document.querySelectorAll(".highlight_box").forEach((box) => box.remove());
+
+  const targetCard = event.target.closest(".card");
+  if (!targetCard) return;
+
+  // Determine if we're in the upper or lower half of the card
+  const cardRect = targetCard.getBoundingClientRect();
+  const mouseY = event.clientY;
+  const isAboveMiddle = mouseY < cardRect.top + cardRect.height / 2;
+
+  // Create a slimmer highlight box for insertion point
+  const box = document.createElement("div");
+  box.classList.add("highlight_box", "insertion-point");
+  box.style.height = "10px";
+
+  if (isAboveMiddle) {
+    targetCard.parentNode.insertBefore(box, targetCard);
+  } else if (targetCard.nextSibling) {
+    targetCard.parentNode.insertBefore(box, targetCard.nextSibling);
+  } else {
+    targetCard.parentNode.appendChild(box);
+  }
+}
