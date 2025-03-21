@@ -60,6 +60,8 @@ function overlayOff() {
   const cardContent = document.getElementById("box");
   overlay.style.animation = "fadeOut 125ms ease-in-out forwards";
   cardContent.style.animation = "slideOutToRight 125ms ease-in-out forwards";
+  document.querySelector("header").style.zIndex = "1";
+  document.querySelector("aside").style.zIndex = "1";
   setTimeout(() => {
     overlay.style.display = "none";
     refreshPageWhenOverlayOff();
