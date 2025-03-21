@@ -751,7 +751,7 @@ input[type="date"]:valid {
   .backgroundcolormedium,
   .backgroundcolorlow,
   .backgroundcolorurgent {
-    font-size: 12px;
+    font-size: 20px;
   }
 
   .flex-container {
@@ -931,10 +931,7 @@ input[type="date"]:valid {
     max-width: 340px !important;
   }
 
-  .urgentbutton,
-  .backgroundcolormedium,
-  .backgroundcolorlow,
-  .backgroundcolorurgent {
+  button {
     font-size: 12px;
   }
 
@@ -994,11 +991,13 @@ input[type="date"]:valid {
     max-width: 300px;
   }
 
-  .urgentbutton,
-  .backgroundcolormedium,
-  .backgroundcolorlow,
-  .backgroundcolorurgent {
-    font-size: 12px;
+  .inputfield,
+  .textareafield {
+    font-size: 16px;
+  }
+
+  button {
+    font-size: 12px !important;
   }
 
   .inputfield,
@@ -1078,11 +1077,8 @@ input[type="date"]:valid {
     width: calc(100vw - 48px) !important;
   }
 
-  .backgroundcolorurgent,
-  .urgentbutton,
-  .backgroundcolormedium,
-  .backgroundcolorlow {
-    font-size: 20px;
+  button {
+    font-size: 16px !important;
   }
 
   .footer-container {
@@ -1161,7 +1157,7 @@ input[type="date"]:valid {
   }
 
   .great-button {
-    width: 120px;
+    width: 140px;
   }
 
   .prio_icon {
