@@ -354,6 +354,30 @@ h5 {
     width: 900px;
   }
 
+<<<<<<< HEAD
+=======
+  aside {
+    width: 200px;
+  }
+
+  .nav_position {
+    width: 200px;
+  }
+
+  .join_logo {
+    width: 90px;
+    height: 112px;
+  }
+
+  .privacy_policy_login {
+    font-size: 13px;
+  }
+
+  .legal_notice_login {
+    font-size: 13px;
+  }
+
+>>>>>>> bba6cc4f1e90770c0e75c7248dc13674a55e3c18
   .board_container {
     padding-left: 7px;
   }

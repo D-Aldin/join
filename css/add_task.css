@@ -67,30 +67,14 @@ textarea {
   color: red;
 }
 
-.required_text,
-.required_text_date,
-.required_text_category {
+.required_text {
   color: red;
   font-size: 12px;
   font-weight: 400;
 }
 
-.required_text {
-  position: absolute;
-  top: 405px;
-  left: 328px;
-}
-
-.required_text_date {
-  position: absolute;
-  top: 405px;
-  left: 834px;
-}
-
-.required_text_category {
-  position: absolute;
-  top: 620px;
-  left: 834px;
+.margin-15px {
+  margin-bottom: 1px !important;
 }
 
 .display-flex {
@@ -470,7 +454,7 @@ p {
 }
 
 li {
-  inline-size: 300px;
+  inline-size: auto;
 }
 
 .subtask-list:hover {
@@ -767,7 +751,7 @@ input[type="date"]:valid {
   .backgroundcolormedium,
   .backgroundcolorlow,
   .backgroundcolorurgent {
-    font-size: 12px;
+    font-size: 20px;
   }
 
   .flex-container {
@@ -796,15 +780,6 @@ input[type="date"]:valid {
 
   .footer-container {
     width: 845px;
-  }
-
-  .required_text {
-    left: 347px;
-  }
-
-  .required_text_date,
-  .required_text_category {
-    left: 814px;
   }
 }
 
@@ -872,21 +847,6 @@ input[type="date"]:valid {
     margin-top: 20px;
     width: 945px;
     padding-bottom: 120px;
-  }
-
-  .required_text {
-    left: auto;
-    top: 324px;
-  }
-
-  .required_text_date {
-    top: 324px;
-    left: auto;
-  }
-
-  .required_text_category {
-    top: auto;
-    left: auto;
   }
 
   aside {
@@ -971,10 +931,7 @@ input[type="date"]:valid {
     max-width: 340px !important;
   }
 
-  .urgentbutton,
-  .backgroundcolormedium,
-  .backgroundcolorlow,
-  .backgroundcolorurgent {
+  button {
     font-size: 12px;
   }
 
@@ -1034,11 +991,13 @@ input[type="date"]:valid {
     max-width: 300px;
   }
 
-  .urgentbutton,
-  .backgroundcolormedium,
-  .backgroundcolorlow,
-  .backgroundcolorurgent {
-    font-size: 12px;
+  .inputfield,
+  .textareafield {
+    font-size: 16px;
+  }
+
+  button {
+    font-size: 12px !important;
   }
 
   .inputfield,
@@ -1105,11 +1064,11 @@ input[type="date"]:valid {
   }
 
   .inputfield,
+  .inputfield-title-container,
   .textareafield,
   .subtask-inputfield,
   .button-container,
   .contact-wrapper.visible,
-  .subtask-wrapper,
   .contactlist {
     width: calc(100vw - 48px) !important;
   }
@@ -1118,11 +1077,8 @@ input[type="date"]:valid {
     width: calc(100vw - 48px) !important;
   }
 
-  .backgroundcolorurgent,
-  .urgentbutton,
-  .backgroundcolormedium,
-  .backgroundcolorlow {
-    font-size: 20px;
+  button {
+    font-size: 16px !important;
   }
 
   .footer-container {
@@ -1135,21 +1091,6 @@ input[type="date"]:valid {
     color: rgb(209, 209, 209);
   }
 
-  .required_text {
-    left: auto;
-    top: 334px;
-  }
-
-  .required_text_date {
-    top: 750px;
-    left: auto;
-  }
-
-  .required_text_category {
-    top: auto;
-    left: auto;
-  }
-
   .subtask-wrapper {
     gap: 5px;
     min-height: 25px;
@@ -1160,7 +1101,7 @@ input[type="date"]:valid {
 
   .catecory-wrapper,
   .contact-wrapper {
-    width: calc(100vw - 48px) !important;
+    width: 100% !important;
     font-size: 16px;
   }
 
@@ -1216,7 +1157,7 @@ input[type="date"]:valid {
   }
 
   .great-button {
-    width: 120px;
+    width: 140px;
   }
 
   .prio_icon {

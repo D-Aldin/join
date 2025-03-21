@@ -344,6 +344,16 @@ function clearAllTasks() {
   renderSelectetContacts();
   clearValueOfInputFields();
   setRequiredInvisible();
+  removeClassForRequiredMargin15px();
+}
+
+/**
+ * set margin back with removing classlist.
+ */
+function removeClassForRequiredMargin15px() {
+  document.getElementById('title-container').classList.remove('margin-15px');
+  document.getElementById('date-container').classList.remove('margin-15px');
+  document.getElementById('category-container').classList.remove('margin-15px');
 }
 
 /**
