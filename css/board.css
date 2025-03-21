@@ -201,6 +201,7 @@ h5 {
   min-height: 500px;
   padding-bottom: 10px;
   box-sizing: border-box;
+  min-height: 330px;
 }
 
 .display_none {
@@ -299,6 +300,10 @@ h5 {
   #done {
     height: 100vh;
   }
+
+  .highlight_box {
+    width: 245px;
+  }
 }
 
 @media only screen and (max-width: 1600px) {
@@ -347,35 +352,6 @@ h5 {
 @media only screen and (max-width: 1400px) {
   .title_and_searchbar {
     width: 900px;
-  }
-
-  aside {
-    width: 200px;
-  }
-
-  .nav_position {
-    width: 200px;
-  }
-
-  .nav_position a {
-    font-size: 13px;
-  }
-
-  .nav_position img {
-    width: 27px;
-  }
-
-  .join_logo {
-    width: 90px;
-    height: 112px;
-  }
-
-  .privacy_policy_login {
-    font-size: 13px;
-  }
-
-  .legal_notice_login {
-    font-size: 13px;
   }
 
   .board_container {
