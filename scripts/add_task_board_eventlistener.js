@@ -39,10 +39,13 @@ window.addEventListener("resize", () => {
  */
 function setEventListenerForSubtask() {
   const refSubtaskInput = document.querySelector("#subtask");
+  const inputFiled = document.querySelector("#subtask");
   refSubtaskInput.addEventListener("keypress", function (event) {
     if (event.key === "Enter") {
       event.preventDefault();
-      newSubtask();
+      if (inputFiled.value != "") {
+        newSubtask();
+      }
     }
   });
 }

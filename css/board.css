@@ -208,6 +208,7 @@ h5 {
   min-height: 500px;
   padding-bottom: 10px;
   box-sizing: border-box;
+  min-height: 330px;
 }
 
 .display_none {
@@ -319,6 +320,10 @@ h5 {
   #feedback,
   #done {
     height: 100vh;
+  }
+
+  .highlight_box {
+    width: 245px;
   }
 }
 

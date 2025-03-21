@@ -370,7 +370,7 @@ function validateInputs() {
  */
 function showTaskAddedAnimation() {
   const taskAdded = document.querySelector(".task_added");
-  taskAdded.classList.remove("d_none");
+  taskAdded.classList.remove("msg_d_none");
   taskAdded.style.animation = "slideInFromRight 125ms ease forwards";
 }
 
