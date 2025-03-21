@@ -32,6 +32,7 @@ function hideOverlay() {
   const taskBox = document.querySelector("#add_task_box");
   overlay.style.backgroundColor = "rgba(0, 0, 0, 0)";
   taskBox.style.animation = "slideOutToRight 125ms ease forwards";
+  selectedContactIds = [];
   setTimeout(() => {
     overlay.style.display = "none";
   }, 125);
