@@ -1,11 +1,11 @@
 /**
- * Toggles the visibility of the content menu. If the menu is currently displayed inline,
- * it will be hidden; otherwise, it will be shown. It also updates the arrow icon accordingly.
- *
- * @function openMenu
+ * Toggles the visibility of the menu.
+ * If visible, clicking outside will close it.
  */
+
 function openMenu() {
   const contentMenu = document.querySelector(".content");
+  const contentWindow = document.querySelector("#box");
   if (contentMenu.style.display === "inline") {
     contentMenu.style.display = "none";
     document.querySelector("#arrow").src = "./assets/icons/board/arrow_drop_down.svg";
@@ -13,27 +13,21 @@ function openMenu() {
     contentMenu.style.display === "none";
     contentMenu.style.display = "inline";
     document.querySelector("#arrow").src = "./assets/icons/board/arrow_drop_down_up.svg";
-    document.addEventListener(
-      "click",
-      function handleClickOutside(event) {
-        if (!event.target.hasAttribute("id_value") && event.target.classList.contains("dropdown_button") === false) {
-          contentMenu.style.display = "none";
-          document.removeEventListener("click", handleClickOutside);
-        }
-      },
-      { once: true }
-    );
+    contentWindow.addEventListener("click", function (event) {
+      if (!event.target.hasAttribute("id_value") && event.target.classList.contains("dropdown_button") === false) {
+        contentMenu.style.display = "none";
+      }
+    });
   }
 }
 
 /**
- * Toggles the visibility of the "contentSectionAddTask" menu. If the menu is currently displayed inline,
- * it will be hidden; otherwise, it will be shown. It also updates the arrow icon accordingly.
- *
- * @function openMenuSectionAddTask
+ * Toggles the visibility of the add task menu.
+ * If visible, clicking outside will close it.
  */
 function openMenuSectionAddTask() {
   const contentMenu = document.querySelector(".contentSectionAddTask");
+  const addTaskWindow = document.querySelector("#add_task_box");
   if (contentMenu.style.display === "inline") {
     contentMenu.style.display = "none";
     document.querySelector("#arrow").src = "./assets/icons/board/arrow_drop_down.svg";
@@ -41,15 +35,10 @@ function openMenuSectionAddTask() {
     contentMenu.style.display === "none";
     contentMenu.style.display = "inline";
     document.querySelector("#arrow").src = "./assets/icons/board/arrow_drop_down_up.svg";
-    document.addEventListener(
-      "click",
-      function handleClickOutside(event) {
-        if (!event.target.hasAttribute("id_value") && event.target.classList.contains("dropdown_button") === false) {
-          contentMenu.style.display = "none";
-          document.removeEventListener("click", handleClickOutside);
-        }
-      },
-      { once: true }
-    );
+    addTaskWindow.addEventListener("click", function (event) {
+      if (!event.target.hasAttribute("id_value") && event.target.classList.contains("dropdown_button") === false) {
+        contentMenu.style.display = "none";
+      }
+    });
   }
 }
