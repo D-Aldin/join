@@ -416,6 +416,10 @@ function resizeContainers() {
   }
 }
 
+/**
+ * Adjusts section height when window is resized to smaller screens.
+ * Sets a fixed height of 300px for all sections when viewport width is below 1199px.
+ */
 window.addEventListener("resize", () => {
   if (window.innerWidth < 1199) {
     sectionList.forEach((section) => {
@@ -424,36 +428,36 @@ window.addEventListener("resize", () => {
   }
 });
 
+/**
+ * Sets up event listeners for drag and drop operations on all drop zones.
+ * Clears any existing listeners before adding new ones to prevent duplicates.
+ *
+ * @param {DragEvent} dragEvent - The initial drag event that triggered this setup
+ */
 function initializeDropZoneHighlights(dragEvent) {
-  // Remove existing listeners to avoid duplicates
   dropZones.forEach((zone) => {
     zone.removeEventListener("dragenter", handleDragEnter);
     zone.removeEventListener("dragleave", handleDragLeave);
     zone.removeEventListener("dragover", handleDragOver);
-
-    // Add fresh event listeners
     zone.addEventListener("dragenter", handleDragEnter);
     zone.addEventListener("dragleave", handleDragLeave);
     zone.addEventListener("dragover", handleDragOver);
   });
 }
 
+/**
+ * Handles the dragenter event when a card is dragged over a section.
+ * Adds visual highlighting to indicate a valid drop zone.
+ *
+ * @param {DragEvent} event - The dragenter event object
+ */
 function handleDragEnter(event) {
-  // Find the actual drop target section
   const section = event.currentTarget;
-
-  // Don't highlight if we're dragging within the same zone
   if ((section.contains(document.getElementById(cardID)) && !event.relatedTarget) || section.contains(event.relatedTarget)) {
     return;
   }
-
-  // Add a section highlight
   section.classList.add("section-highlight");
-
-  // Clear any existing highlight boxes
   section.querySelectorAll(".highlight_box").forEach((box) => box.remove());
-
-  // Create a new highlight box in the target section
   const targetContainer = section.querySelector("#toDo, #progress, #feedback, #done");
   if (targetContainer) {
     const box = document.createElement("div");
@@ -463,46 +467,53 @@ function handleDragEnter(event) {
   }
 }
 
+/**
+ * Handles the dragleave event when a card leaves a potential drop zone.
+ * Removes highlighting if the dragged element has fully left the section.
+ *
+ * @param {DragEvent} event - The dragleave event object
+ */
 function handleDragLeave(event) {
   const section = event.currentTarget;
-
-  // Only remove highlight if actually leaving the section
   if (!section.contains(event.relatedTarget)) {
     section.classList.remove("section-highlight");
     section.querySelectorAll(".highlight_box").forEach((box) => box.remove());
   }
 }
 
+/**
+ * Processes dragover events to enable dropping and update visual indicators.
+ * Prevents default behavior and sets the drag effect to "move".
+ *
+ * @param {DragEvent} event - The dragover event object
+ */
 function handleDragOver(event) {
   event.preventDefault();
   event.dataTransfer.dropEffect = "move";
-
   const section = event.currentTarget;
   const container = section.querySelector("#toDo, #progress, #feedback, #done");
-
-  // If we're over a card that's not the dragged card, show insertion point
   if (event.target.classList.contains("card") && event.target.id !== cardID) {
     adjustHighlightForCards(event, container);
   }
 }
 
+/**
+ * Creates and positions highlight elements to indicate where a card will be inserted.
+ * Places visual indicators above or below target cards based on mouse position.
+ *
+ * @param {DragEvent} event - The current drag event
+ * @param {HTMLElement} container - The container element where cards are displayed
+ */
 function adjustHighlightForCards(event, container) {
-  // Remove existing highlight boxes
   document.querySelectorAll(".highlight_box").forEach((box) => box.remove());
-
   const targetCard = event.target.closest(".card");
   if (!targetCard) return;
-
-  // Determine if we're in the upper or lower half of the card
   const cardRect = targetCard.getBoundingClientRect();
   const mouseY = event.clientY;
   const isAboveMiddle = mouseY < cardRect.top + cardRect.height / 2;
-
-  // Create a slimmer highlight box for insertion point
   const box = document.createElement("div");
   box.classList.add("highlight_box", "insertion-point");
   box.style.height = "10px";
-
   if (isAboveMiddle) {
     targetCard.parentNode.insertBefore(box, targetCard);
   } else if (targetCard.nextSibling) {
