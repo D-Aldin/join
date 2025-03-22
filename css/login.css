@@ -390,38 +390,13 @@ footer {
   }
 }
 
-@media only screen and (max-width: 600px) {
-  .login_window {
-    width: 80%;
-    top: 45%;
+@media (max-height: 800px) {
+  footer {
+    margin-bottom: 9px !important;
   }
+}
 
-  .login_header {
-    position: fixed;
-    bottom: 90px;
-    width: 100%;
-    display: flex;
-    justify-content: center;
-  }
-
-  .bg_overlay_responsive {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(42, 54, 71, 1);
-  }
-  }
-
-  @media (max-height: 800px) {
-    footer {
-      margin-bottom: 9px !important;
-    }
-
-  }
-
-
+@media only screen and (max-width: 800px) {
   .join_image {
     animation: moveShrinkFade600 1s ease-in-out forwards;
   }
@@ -523,42 +498,66 @@ footer {
       top: 0;
     }
   }
+}
 
-  @media only screen and (max-width: 450px) {
-    .login_window {
-      padding: 20px;
-      padding-bottom: 40px;
-      width: 85%;
-    }
+@media only screen and (max-width: 600px) {
+  .login_window {
+    width: 80%;
+    top: 45%;
+  }
 
-    .error_message {
-      left: 20px;
-    }
+  .login_header {
+    position: fixed;
+    bottom: 90px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
 
-    .email_error_position {
+  .bg_overlay_responsive {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(42, 54, 71, 1);
+  }
+}
+
+@media only screen and (max-width: 450px) {
+  .login_window {
+    padding: 20px;
+    padding-bottom: 40px;
+    width: 85%;
+  }
+
+  .error_message {
+    left: 20px;
+  }
+
+  .email_error_position {
+    position: absolute;
+    top: 164px;
+  }
+
+  .password_error_position {
+    position: absolute;
+    top: 232px;
+  }
+
+  @keyframes moveShrinkFade {
+    0% {
+      transform: translate(-50%, -50%) scale(1);
       position: absolute;
-      top: 164px;
+      top: 50%;
+      left: 50%;
     }
 
-    .password_error_position {
+    100% {
+      transform: translate(0, 0) scale(0.35);
       position: absolute;
-      top: 232px;
-    }
-
-    @keyframes moveShrinkFade {
-      0% {
-        transform: translate(-50%, -50%) scale(1);
-        position: absolute;
-        top: 50%;
-        left: 50%;
-      }
-
-      100% {
-        transform: translate(0, 0) scale(0.35);
-        position: absolute;
-        top: -90px;
-        left: -60px;
-      }
+      top: -90px;
+      left: -60px;
     }
   }
 }
