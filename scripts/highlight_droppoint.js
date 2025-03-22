@@ -6,16 +6,23 @@
  */
 function initializeDropZoneHighlights(dragEvent) {
   dropZones.forEach((zone) => {
-    zone.removeEventListener("dragenter", handleDragEnter);
-    zone.removeEventListener("dragleave", handleDragLeave);
-    zone.removeEventListener("dragover", handleDragOver);
-    zone.removeEventListener("drop", dropPoint);
-
-    zone.addEventListener("dragenter", handleDragEnter);
-    zone.addEventListener("dragleave", handleDragLeave);
-    zone.addEventListener("dragover", handleDragOver);
-    zone.addEventListener("drop", dropPoint);
+    removeDropZoneListeners(zone);
+    addDropZoneListeners(zone);
   });
+}
+
+function removeDropZoneListeners(zone) {
+  zone.removeEventListener("dragenter", handleDragEnter);
+  zone.removeEventListener("dragleave", handleDragLeave);
+  zone.removeEventListener("dragover", handleDragOver);
+  zone.removeEventListener("drop", dropPoint);
+}
+
+function addDropZoneListeners(zone) {
+  zone.addEventListener("dragenter", handleDragEnter);
+  zone.addEventListener("dragleave", handleDragLeave);
+  zone.addEventListener("dragover", handleDragOver);
+  zone.addEventListener("drop", dropPoint);
 }
 
 /**
@@ -26,10 +33,20 @@ function initializeDropZoneHighlights(dragEvent) {
  */
 function handleDragEnter(event) {
   const section = event.currentTarget;
-  if ((section.contains(document.getElementById(cardID)) && !event.relatedTarget) || section.contains(event.relatedTarget)) {
-    return;
-  }
+  if (isEventInsideSection(section, event)) return;
+  highlightSection(section);
+  addHighlightBox(section);
+}
+
+function isEventInsideSection(section, event) {
+  return (section.contains(document.getElementById(cardID)) && !event.relatedTarget) || section.contains(event.relatedTarget);
+}
+
+function highlightSection(section) {
   section.classList.add("section-highlight");
+}
+
+function addHighlightBox(section) {
   section.querySelectorAll(".highlight_box").forEach((box) => box.remove());
   const targetContainer = section.querySelector("#toDo, #progress, #feedback, #done");
   if (targetContainer) {
@@ -79,8 +96,12 @@ function handleDragOver(event) {
  */
 function adjustHighlightForCards(event, container) {
   document.querySelectorAll(".highlight_box").forEach((box) => box.remove());
-  const targetCard = event.target.closest(".card");
+  const targetCard = event.target.closest("card");
   if (!targetCard) return;
+  insertHighlightBox(event, targetCard);
+}
+
+function insertHighlightBox(event, targetCard) {
   const cardRect = targetCard.getBoundingClientRect();
   const mouseY = event.clientY;
   const isAboveMiddle = mouseY < cardRect.top + cardRect.height / 2;
@@ -89,32 +110,9 @@ function adjustHighlightForCards(event, container) {
   box.style.height = "10px";
   if (isAboveMiddle) {
     targetCard.parentNode.insertBefore(box, targetCard);
-  } else if (targetCard.nextSibling) {
-    targetCard.parentNode.insertBefore(box, targetCard.nextSibling);
   } else {
-    targetCard.parentNode.appendChild(box);
+    targetCard.parentNode.insertBefore(box, targetCard.nextSibling || null);
   }
-}
-
-/**
- * Highlights the drop point while dragging.
- * @param {Event} dragevent - The drag event.
- */
-function highlightDropPoint(dragevent) {
-  dropZones.forEach((zone) => {
-    zone.addEventListener("dragenter", function () {
-      if (!zone.contains(dragevent.target) && !zone.contains(document.querySelector(".highlight_box"))) {
-        let box = document.createElement("div");
-        box.classList.add("highlight_box");
-        box.addEventListener("dragover", allowDrop);
-        zone.lastElementChild.appendChild(box);
-      }
-    });
-    zone.addEventListener("dragleave", function () {
-      let refBox = document.querySelector(".highlight_box");
-      if (refBox) refBox.remove();
-    });
-  });
 }
 
 function cleanupDropUI() {
@@ -129,30 +127,29 @@ function cleanupDropUI() {
  * @returns {Object} Object containing targetSection and insertionPoint
  */
 function determineDropTarget(event) {
-  let targetSection = null;
-  let insertionPoint = null;
   if (event.target.classList.contains("insertion-point")) {
-    insertionPoint = event.target;
-    targetSection = event.target.closest("section");
+    return handleInsertionPoint(event.target);
   } else if (event.target.classList.contains("card")) {
-    const targetCard = event.target;
-    targetSection = targetCard.closest("section");
-    const cardRect = targetCard.getBoundingClientRect();
-    const mouseY = event.clientY;
-    if (mouseY < cardRect.top + cardRect.height / 2) {
-      insertionPoint = targetCard;
-    } else {
-      insertionPoint = targetCard.nextSibling;
-    }
+    return handleCardDrop(event);
   } else if (event.target.classList.contains("highlight_box")) {
-    targetSection = event.target.closest("section");
-    insertionPoint = null;
-  } else {
-    const container = event.target.closest("#toDo, #progress, #feedback, #done");
-    if (container) {
-      targetSection = container.closest("section");
-      insertionPoint = null;
-    }
+    return { targetSection: event.target.closest("section"), insertionPoint: null };
   }
+  return handleContainerDrop(event.target);
+}
+
+function handleInsertionPoint(target) {
+  return { targetSection: target.closest("section"), insertionPoint: target };
+}
+
+function handleCardDrop(event) {
+  const targetCard = event.target;
+  const targetSection = targetCard.closest("section");
+  const cardRect = targetCard.getBoundingClientRect();
+  const insertionPoint = event.clientY < cardRect.top + cardRect.height / 2 ? targetCard : targetCard.nextSibling;
   return { targetSection, insertionPoint };
+}
+
+function handleContainerDrop(target) {
+  const container = target.closest("#toDo, #progress, #feedback, #done");
+  return { targetSection: container ? container.closest("section") : null, insertionPoint: null };
 }
