@@ -16,33 +16,22 @@ let sectionList = [toDo, progress, feedback, done];
  * @param {Event} event - The drag event.
  */
 function draggedElementID(event) {
-  // Only process if we're dragging a card
   if (!event.target.classList.contains("card")) return;
-
-  // Store the original position and ID
   startPosition = event.target.parentNode;
   event.dataTransfer.setData("text", event.target.id);
   cardID = event.target.id;
-
-  // Add visual effects to the dragged element
   event.target.classList.add("rotate");
   event.target.style.opacity = "0.7";
-
-  // Setup cleanup on drag end
   event.target.addEventListener(
     "dragend",
     () => {
       event.target.classList.remove("rotate");
       event.target.style.opacity = "";
-
-      // Remove all highlight boxes
       document.querySelectorAll(".highlight_box").forEach((box) => box.remove());
       document.querySelectorAll(".section-highlight").forEach((section) => section.classList.remove("section-highlight"));
     },
     { once: true }
   );
-
-  // Initialize highlight for drop zones
   initializeDropZoneHighlights(event);
 }
 
@@ -56,7 +45,7 @@ function highlightDropPoint(dragevent) {
       if (!zone.contains(dragevent.target) && !zone.contains(document.querySelector(".highlight_box"))) {
         let box = document.createElement("div");
         box.classList.add("highlight_box");
-        box.setAttribute("dragover", "allowDrop(event)");
+        box.addEventListener("dragover", allowDrop);
         zone.lastElementChild.appendChild(box);
       }
     });
@@ -67,74 +56,98 @@ function highlightDropPoint(dragevent) {
   });
 }
 
+/**
+ * Handles the drop event for drag and drop operations in the Kanban board.
+ * Determines drop target, moves the element, and updates task status.
+ *
+ * @param {DragEvent} event - The drop event object
+ */
 function dropPoint(event) {
   event.preventDefault();
-
-  // Get the dragged element
   const data = event.dataTransfer.getData("text");
   const draggedElement = document.getElementById(data);
   if (!draggedElement) return;
+  cleanupDropUI();
+  const { targetSection, insertionPoint } = determineDropTarget(event);
+  if (targetSection) {
+    moveElementToTargetSection(draggedElement, targetSection, insertionPoint);
+    updateTaskStatus(data, targetSection.querySelector("#toDo, #progress, #feedback, #done").id);
+    resizeContainers();
+  }
+}
 
-  // Cleanup all highlights
+/**
+ * Cleans up UI elements after a drop operation.
+ */
+function cleanupDropUI() {
   document.querySelectorAll(".highlight_box").forEach((box) => box.remove());
   document.querySelectorAll(".section-highlight").forEach((section) => section.classList.remove("section-highlight"));
+}
 
+/**
+ * Determines the target section and insertion point for the dropped element.
+ *
+ * @param {DragEvent} event - The drop event
+ * @returns {Object} Object containing targetSection and insertionPoint
+ */
+function determineDropTarget(event) {
   let targetSection = null;
   let insertionPoint = null;
-
-  // Determine the target section and insertion point
   if (event.target.classList.contains("insertion-point")) {
-    // Insert at the highlight position
     insertionPoint = event.target;
     targetSection = event.target.closest("section");
   } else if (event.target.classList.contains("card")) {
-    // Insert before or after the card based on mouse position
     const targetCard = event.target;
     targetSection = targetCard.closest("section");
-
     const cardRect = targetCard.getBoundingClientRect();
     const mouseY = event.clientY;
     if (mouseY < cardRect.top + cardRect.height / 2) {
-      // Insert before the card
       insertionPoint = targetCard;
     } else {
-      // Insert after the card
       insertionPoint = targetCard.nextSibling;
     }
   } else if (event.target.classList.contains("highlight_box")) {
-    // Insert at the end of the section
     targetSection = event.target.closest("section");
-    const container = targetSection.querySelector("#toDo, #progress, #feedback, #done");
-    if (container) {
-      insertionPoint = null; // Append to the end
-    }
+    insertionPoint = null;
   } else {
-    // Try to find a valid container
     const container = event.target.closest("#toDo, #progress, #feedback, #done");
     if (container) {
       targetSection = container.closest("section");
-      insertionPoint = null; // Append to the end
+      insertionPoint = null;
     }
   }
+  return { targetSection, insertionPoint };
+}
 
-  // Perform the insertion if we have a valid target
-  if (targetSection) {
-    const container = targetSection.querySelector("#toDo, #progress, #feedback, #done");
-    if (container) {
-      if (insertionPoint) {
-        container.insertBefore(draggedElement, insertionPoint);
-      } else {
-        container.appendChild(draggedElement);
-      }
-
-      // Update status in database
-      const statusUpdate = {
-        status: container.id,
-      };
-      updateStatusInDB("tasks", data, statusUpdate);
-      resizeContainers();
+/**
+ * Moves the dragged element to the target section.
+ *
+ * @param {HTMLElement} draggedElement - The element being dragged
+ * @param {HTMLElement} targetSection - The section where the element will be dropped
+ * @param {HTMLElement|null} insertionPoint - The point before which to insert the element
+ */
+function moveElementToTargetSection(draggedElement, targetSection, insertionPoint) {
+  const container = targetSection.querySelector("#toDo, #progress, #feedback, #done");
+  if (container) {
+    if (insertionPoint) {
+      container.insertBefore(draggedElement, insertionPoint);
+    } else {
+      container.appendChild(draggedElement);
     }
   }
+}
+
+/**
+ * Updates the status of a task in the database.
+ *
+ * @param {string} taskId - The ID of the task
+ * @param {string} newStatus - The new status of the task
+ */
+function updateTaskStatus(taskId, newStatus) {
+  const statusUpdate = {
+    status: newStatus,
+  };
+  updateStatusInDB("tasks", taskId, statusUpdate);
 }
 
 /**
@@ -439,9 +452,12 @@ function initializeDropZoneHighlights(dragEvent) {
     zone.removeEventListener("dragenter", handleDragEnter);
     zone.removeEventListener("dragleave", handleDragLeave);
     zone.removeEventListener("dragover", handleDragOver);
+    zone.removeEventListener("drop", dropPoint);
+
     zone.addEventListener("dragenter", handleDragEnter);
     zone.addEventListener("dragleave", handleDragLeave);
     zone.addEventListener("dragover", handleDragOver);
+    zone.addEventListener("drop", dropPoint);
   });
 }
 
@@ -462,7 +478,7 @@ function handleDragEnter(event) {
   if (targetContainer) {
     const box = document.createElement("div");
     box.classList.add("highlight_box");
-    box.setAttribute("dragover", "allowDrop(event)");
+    box.addEventListener("dragover", allowDrop);
     targetContainer.appendChild(box);
   }
 }
