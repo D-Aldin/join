@@ -138,7 +138,54 @@ function validateSingleField(key, value) {
   };
   const inputElement = document.getElementById(inputIds[key]);
   const errorElement = document.getElementById(`signUp_${key}_error`);
+  if (key === "email" && value) {
+    if (testEmailByFilter(value, "signUp")) {
+      return true;
+    }
+  }
   return visibilityOfInputFields(key, value, inputElement, errorElement, errors);
+}
+
+/**
+ * Tests if an email address matches a valid format using regex.
+ * @param {string} email - The email address to validate.
+ * @param {string} prefix - The prefix used for element IDs.
+ * @returns {boolean} Returns true if the email is invalid.
+ */
+function testEmailByFilter(email, prefix = "signUp") {
+  if (!email) {
+    email = document.getElementById(`${prefix}Email`).value;
+  }
+  const emailFilter = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  const errorId = `${prefix}_email_error`;
+  const emailErrorMessage = document.getElementById(errorId);
+  const emailInput = document.getElementById(`${prefix}Email`);
+  if (!emailFilter.test(email)) {
+    errorMessageForTestEmailByFilter(emailErrorMessage, emailInput);
+    return true;
+  }
+  clearEmailErrorMessages(emailErrorMessage, emailInput);
+  return false;
+}
+
+/**
+ * Displays an error message for invalid email format.
+ * @param {HTMLElement} errorElement - The element to display the error message.
+ * @param {HTMLElement} inputElement - The input element to style.
+ */
+function errorMessageForTestEmailByFilter(errorElement, inputElement) {
+  errorElement.innerText = "Please enter a valid email address.";
+  inputElement.style.borderColor = "red";
+}
+
+/**
+ * Clears email validation error messages.
+ * @param {HTMLElement} errorElement - The error message element to clear.
+ * @param {HTMLElement} inputElement - The input element to reset style.
+ */
+function clearEmailErrorMessages(errorElement, inputElement) {
+  errorElement.innerText = "";
+  inputElement.style.borderColor = "";
 }
 
 /**
