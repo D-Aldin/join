@@ -137,6 +137,12 @@
   }
 }
 
+@media (max-height: 800px) {
+  .sign_window {
+    height: 430px;
+  }
+}
+
 @media only screen and (max-width: 450px) {
   .sign_window {
     padding: 20px;

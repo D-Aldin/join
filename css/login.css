@@ -412,6 +412,15 @@ footer {
     height: 100%;
     background: rgba(42, 54, 71, 1);
   }
+  }
+
+  @media (max-height: 800px) {
+    footer {
+      margin-bottom: 9px !important;
+    }
+
+  }
+
 
   .join_image {
     animation: moveShrinkFade600 1s ease-in-out forwards;
