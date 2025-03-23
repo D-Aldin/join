@@ -398,7 +398,6 @@ function resizeContainers() {
 }
 
 /**
- * Adjusts section height when window is resized to smaller screens.
  * Sets a fixed height of 300px for all sections when viewport width is below 1199px.
  */
 window.addEventListener("resize", () => {

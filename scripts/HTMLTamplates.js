@@ -147,7 +147,7 @@ function HTMLTamplateForTheEditFunk() {
 }
 
 function HTMLTamplateForDropdownProfiles(key, color, initials, name) {
-  return `<div onclick="assignNewContacts(event)" class="align_items" id_value=${key}>
+  return `<div onclick="assignNewContacts(event), stopEventBubbel(event)" class="align_items" id_value=${key}>
             <div class="icon_name_container">
             <div class="circle circle_profile_names spacing" style="background-color: ${color}">${initials}</div>${name}</div>
             <div>
