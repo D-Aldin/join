@@ -1,7 +1,7 @@
 const refUrgentBtn = document.getElementById("urgent");
 const refMediumBtn = document.getElementById("medium");
 const refLowBtn = document.getElementById("low");
-const title = document.querySelector(".open_card_title");
+let newNew;
 
 /**
  *
@@ -363,6 +363,9 @@ async function okBtnFunk() {
   refCardBox.innerHTML = HTMLForOpenCard(refersToCard.category, refersToCard.title, refersToCard.description, refersToCard.date, refersToCard.prio, id);
   managenProfilesWhenCardOpen(id);
   renderSubtasks(id);
+  titleValue = refersToCard.title;
+  descriptionValue = refersToCard.description;
+  dateValue = refersToCard.date;
 }
 
 /**
