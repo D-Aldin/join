@@ -248,7 +248,7 @@ function shortenContactView() {
       profile.removeChild(profile.lastChild);
     }
     if (profile.children.length === 4) {
-      profile.innerHTML += contactTamplate(`+${totalLength}`, "rgba(230, 23, 8, 0.85)", 140);
+      profile.innerHTML += contactTamplate(`+${totalLength}`, "rgba(230, 23, 8)", 140);
     }
   });
 }
