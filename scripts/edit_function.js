@@ -214,8 +214,7 @@ async function handleNewContactAssignment(contact) {
   let clickedElement = document.querySelector(`[id_value="${contact}"]`);
   clickedElement.classList.add("selected_contact");
   clickedElement.lastElementChild.lastElementChild.src = "./assets/icons/checkbox/check_white.svg";
-  document.querySelector(".assigned_to").innerHTML = "";
-  editFunction();
+  document.querySelector(".assigned_to").innerHTML += `<div class="circle circle_profile_names spacing" style="background-color: ${newContact[contact].color}">${initials(newContact[contact].name)}</div>`;
   addDataToFireBase(`${taskPath}/${idOfcurrentElement}/assigned`, newContact);
 }
 
