@@ -89,6 +89,7 @@ function renderContactItem(key, profile) {
  * @param {Event} event - The event triggering the contact selection.
  */
 function chooseContact(event) {
+  event.stopPropagation();
   const profile = event.currentTarget,
     contactID = profile.getAttributeNode("id_value").value,
     checkbox = profile.lastElementChild.lastElementChild,
