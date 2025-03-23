@@ -558,6 +558,10 @@ input[type="search"]::-webkit-search-results-decoration {
     gap: 0.9rem;
     padding-right: 10px;
   }
+  
+  .done {
+    margin-bottom: 150px;
+  }
 
   #toDo::-webkit-scrollbar,
   #progress::-webkit-scrollbar,

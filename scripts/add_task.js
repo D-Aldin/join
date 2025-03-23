@@ -251,15 +251,14 @@ function returnAllData() {
  * @returns {void}
  */
 function renderContactsToNewTask() {
-  assignedContacts = [];
+  assignedContacts = {};
   for (let index = 0; index < selectedContacts.length; index++) {
     const contactNumber = selectedContacts[index];
     const contact = arrayOfContacts[contactNumber];
-    assignedContacts.push({
-      id: contact.id,
+    assignedContacts[contact.id] = {
       color: contact.color,
       name: contact.name,
-    });
+    }
   }
 }
 
