@@ -385,11 +385,14 @@ function setColorOfCategory() {
  * @returns {void}
  */
 function resizeContainers() {
+  let check = false;
   if (window.innerWidth > 1200) {
-    let sectionWithMostCards = [toDo.children.length, progress.children.length, feedback.children.length, done.children.length].sort().slice(-1)[0];
+    let sectionWithMostCards = Math.max(toDo.children.length, progress.children.length, feedback.children.length, done.children.length);
     sectionList.forEach((section) => {
-      section.style.height = `${sectionWithMostCards * 300}px`;
-      document.querySelector(`.${section.id}`).style.height = `${sectionWithMostCards * 300}px`;
+      if (section.children.length === 1) check = true;
+      let height = check ? "600px" : `${sectionWithMostCards * 300}px`;
+      section.style.height = height;
+      document.querySelector(`.${section.id}`).style.height = height;
     });
   }
 }
