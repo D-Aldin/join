@@ -49,3 +49,15 @@ function setEventListenerForSubtask() {
     }
   });
 }
+
+/**
+ * Prevents the Enter key from submitting the form when typing in the search bar.
+ *
+ * @event keydown - Listens for keydown events on the search bar input.
+ * @param {KeyboardEvent} event - The keyboard event triggered by user input.
+ */
+document.getElementById("searchbar").addEventListener("keydown", function (event) {
+  if (event.key === "Enter") {
+    event.preventDefault();
+  }
+});
