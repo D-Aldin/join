@@ -63,7 +63,7 @@ function searchFunk() {
     let userInput = searchFiled.value.toLowerCase();
     statusCounter = 0;
     listOfTasks.forEach((element) => {
-      let isVisible = element.title.toLowerCase().includes(userInput);
+      let isVisible = element.title.toLowerCase().includes(userInput) || element.description.toLowerCase().includes(userInput);
       element.card.classList.toggle("hide", !isVisible);
       if (!isVisible) {
         statusCounter += 1;
