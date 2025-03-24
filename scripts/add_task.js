@@ -174,7 +174,7 @@ function checkRequiredTitle() {
   if (title.value === "") {
     document.getElementById("required-title").classList.remove("display_none");
     title.classList.add("inputfield-required");
-    document.getElementById('title-container').classList.add('margin-15px');
+    document.getElementById("title-container").classList.add("margin-15px");
     requiredTitle = false;
   } else {
     requiredTitle = true;
@@ -192,7 +192,7 @@ function checkRequiredDate() {
   if (date.value === "") {
     document.getElementById("required-date").classList.remove("display_none");
     date.classList.add("inputfield-required");
-    document.getElementById('date-container').classList.add('margin-15px');
+    document.getElementById("date-container").classList.add("margin-15px");
   } else {
     requiredDate = true;
     document.getElementById("required-date").classList.add("display_none");
@@ -209,7 +209,7 @@ function checkRequiredcategory() {
   if (category.value === "") {
     document.getElementById("required-category").classList.remove("display_none");
     document.getElementById("catecory-input-border").classList.add("inputfield-required");
-    document.getElementById('category-container').classList.add('margin-15px');
+    document.getElementById("category-container").classList.add("margin-15px");
   } else {
     requiredCategory = true;
     document.getElementById("required-category").classList.add("display_none");
@@ -258,7 +258,7 @@ function renderContactsToNewTask() {
     assignedContacts[contact.id] = {
       color: contact.color,
       name: contact.name,
-    }
+    };
   }
 }
 
@@ -350,9 +350,9 @@ function clearAllTasks() {
  * set margin back with removing classlist.
  */
 function removeClassForRequiredMargin15px() {
-  document.getElementById('title-container').classList.remove('margin-15px');
-  document.getElementById('date-container').classList.remove('margin-15px');
-  document.getElementById('category-container').classList.remove('margin-15px');
+  document.getElementById("title-container").classList.remove("margin-15px");
+  document.getElementById("date-container").classList.remove("margin-15px");
+  document.getElementById("category-container").classList.remove("margin-15px");
 }
 
 /**
@@ -391,3 +391,10 @@ function borderFocus() {
     }
   });
 }
+
+function disablePast() {
+  const today = new Date().toISOString().split("T")[0];
+  document.querySelector("#date").setAttribute("min", today);
+}
+
+disablePast();

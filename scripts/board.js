@@ -358,14 +358,6 @@ async function getContactsFromFireBase(list) {
 }
 
 /**
- * Initializes the task board by displaying tasks.
- * @async
- */
-async function initialize() {
-  displayCardOnBoard();
-}
-
-/**
  * Resizes the sections if there are no tasks.
  */
 function ifNoTaskResizeContainer() {
@@ -421,3 +413,11 @@ window.addEventListener("resize", () => {
     });
   }
 });
+
+/**
+ * Initializes the task board by displaying tasks.
+ * @async
+ */
+async function initialize() {
+  displayCardOnBoard();
+}

@@ -49,6 +49,7 @@ function renderAddTaskMenu() {
     window.location = "add_task.html";
   }
   buttonMedium(event);
+  disablePastDates("dateBoard");
 }
 
 /**
@@ -387,4 +388,9 @@ function hideTaskAddedAnimation() {
       window.location = "board.html";
     }, 125);
   }, 1000);
+}
+
+function disablePastDates(element) {
+  const today = new Date().toISOString().split("T")[0];
+  document.querySelector(`#${element}`).setAttribute("min", today);
 }

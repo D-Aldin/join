@@ -28,7 +28,7 @@
 
     <title>Add Task</title>
   </head>
-  <body onload="render(), setAccountInitialsSubmenu(), checkUser()">
+  <body onload="render(), setAccountInitialsSubmenu(), checkUser(), disablePast();">
     <header>
       <div>
         <img class="mobile_logo" src="./assets/icons/logo/JoinLogoMobile.svg" alt="" />
@@ -94,9 +94,10 @@
                   ><p class="display-flex tasktitles">Title</p>
                   <p class="color-red tasktitles">*</p></span
                 >
-                <div class="column"><input oninput="checkRequiredTitle()" class="inputfield" id="title" maxlength="60" placeholder="Enter a title" type="text" required />
-                <div id="required-title" class="required_text display_none">This field is required</div>
-              </div>
+                <div class="column">
+                  <input oninput="checkRequiredTitle()" class="inputfield" id="title" maxlength="60" placeholder="Enter a title" type="text" required />
+                  <div id="required-title" class="required_text display_none">This field is required</div>
+                </div>
               </div>
               <div class="inputfield-title-container">
                 <p class="tasktitles">Description</p>
