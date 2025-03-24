@@ -59,7 +59,6 @@ function highlightDropPoint(dragevent) {
 /**
  * Handles the drop event for drag and drop operations in the Kanban board.
  * Determines drop target, moves the element, and updates task status.
- *
  * @param {DragEvent} event - The drop event object
  */
 function dropPoint(event) {
@@ -86,7 +85,6 @@ function cleanupDropUI() {
 
 /**
  * Moves the dragged element to the target section.
- *
  * @param {HTMLElement} draggedElement - The element being dragged
  * @param {HTMLElement} targetSection - The section where the element will be dropped
  * @param {HTMLElement|null} insertionPoint - The point before which to insert the element
@@ -104,7 +102,6 @@ function moveElementToTargetSection(draggedElement, targetSection, insertionPoin
 
 /**
  * Updates the status of a task in the database.
- *
  * @param {string} taskId - The ID of the task
  * @param {string} newStatus - The new status of the task
  */
@@ -243,9 +240,7 @@ function addProfilesToCard(id, obj) {
 }
 
 /**
- * Shortens the contact view by removing all child elements after the first four.
- * It then adds a new element indicating how many contacts are hidden.
- *
+ * Shortens the contact view by keeping only the first four elements and adding a note on hidden contacts.
  * @function shortenContactView
  * @returns {void}
  */
@@ -294,7 +289,6 @@ function noTaskToDo() {
     feedback.lastElementChild == null ? (noTaskAwaitFeedback.classList.add("no_task"), (noTaskAwaitFeedback.innerHTML = "No Tasks Await feedback")) : (noTaskAwaitFeedback.classList.remove("no_task"), (noTaskAwaitFeedback.innerHTML = ""));
     done.lastElementChild == null ? (noTaskDone.classList.add("no_task"), (noTaskDone.innerHTML = "No Tasks Done")) : (noTaskDone.classList.remove("no_task"), (noTaskDone.innerHTML = ""));
   }, 125);
-  // window.addEventListener("resize", ifNoTaskResizeContainer);
 }
 
 /**
@@ -386,7 +380,6 @@ function setColorOfCategory() {
 /**
  * Adjusts the height of all sections in the Kanban board to match the section with the most cards.
  * Each section's height is set based on the number of cards in the section with the highest count.
- *
  * @function resizeContainers
  * @returns {void}
  */
@@ -413,11 +406,3 @@ window.addEventListener("resize", () => {
     });
   }
 });
-
-/**
- * Initializes the task board by displaying tasks.
- * @async
- */
-async function initialize() {
-  displayCardOnBoard();
-}
