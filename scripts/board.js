@@ -216,6 +216,15 @@ function renderTaskCard(element, subtasksCompleted, totalSubtasks) {
 }
 
 /**
+ * Checks if the progress indicator should be displayed for a task
+ * @param {number} totalSubtasks - The total number of subtasks
+ * @returns {boolean} Whether to show the progress indicator
+ */
+function shouldShowProgressIndicator(totalSubtasks) {
+  return totalSubtasks > 0;
+}
+
+/**
  * Adds assigned profiles to the task card.
  * @param {string} id - The task ID.
  * @param {Object} obj - The assigned contacts object.
@@ -311,14 +320,19 @@ async function countCompletedSubtasks(subtask) {
 }
 
 /**
- * Calculates the percentage of completed subtasks.
+ * Calculates the percentage of completed subtasks and updates progress bar.
  * @param {number} numberOfSubtasks - The total number of subtasks.
  * @param {number} completedSubtasks - The number of completed subtasks.
  * @param {string} id - The task ID.
  */
 function calPercentageOfCompletedSubtasks(numberOfSubtasks, completedSubtasks, id) {
-  const result = (completedSubtasks / numberOfSubtasks) * 100;
-  document.getElementById("progress_bar" + id).style.width = `${result}%`;
+  if (numberOfSubtasks > 0) {
+    const progressBar = document.getElementById(`progress_bar${id}`);
+    if (progressBar) {
+      const percentage = (completedSubtasks / numberOfSubtasks) * 100;
+      progressBar.style.width = `${percentage}%`;
+    }
+  }
 }
 
 /**

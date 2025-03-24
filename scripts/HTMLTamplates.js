@@ -1,28 +1,32 @@
 function renderCard(id, category, title, discription, completedSubtasks, subtasks, prio) {
+  let progressIndicatorHTML = "";
+  if (subtasks > 0) {
+    progressIndicatorHTML = `
+      <div class="progress_indicator">
+        <div class="progress_container">
+          <div id="progress_bar${id}" class="progress_bar" style="width: 0%"></div>
+        </div>
+        <span id="subtasks${id}">${completedSubtasks}/${subtasks} Subtasks</span>
+      </div>`;
+  }
   return ` 
-              <article id=${id} onclick="overlayOn(event), getData(event)" ondragstart="draggedElementID(event)" class="card" draggable="true")>
-                <div class="category">${category}</div>
-                <div class="card_title">
-                  <h4 id="title">${title}</h4>
-                </div>
-                <div class="discription">
-                  <h5 id="discription">${discription}</h5>
-                </div>
-                <div class="progress_indicator">
-                  <div class="progress_container">
-                    <div id="progress_bar${id}" class="progress_bar" style="width: 0%"></div>
-                  </div>
-                  <span id="subtasks${id}">${completedSubtasks}/${subtasks} Subtasks</span>
-                </div>
-                <div class="profile_prio_container">
-                  <div class="profile">
-                  </div>
-                  <div class="prio">
-                    <img src="./assets/icons/board/${prio}.svg" alt="" />
-                  </div>
-                </div>
-              </article>
-      `;
+    <article id=${id} onclick="overlayOn(event), getData(event)" ondragstart="draggedElementID(event)" class="card" draggable="true")>
+      <div class="category">${category}</div>
+      <div class="card_title">
+        <h4 id="title">${title}</h4>
+      </div>
+      <div class="discription">
+        <h5 id="discription">${discription}</h5>
+      </div>
+      ${progressIndicatorHTML}
+      <div class="profile_prio_container">
+        <div class="profile">
+        </div>
+        <div class="prio">
+          <img src="./assets/icons/board/${prio}.svg" alt="" />
+        </div>
+      </div>
+    </article>`;
 }
 
 function contactTamplate(contact, color, translateX) {
