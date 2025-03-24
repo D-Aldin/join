@@ -112,6 +112,7 @@ select {
 .subtasks_box {
   display: flex;
   flex-direction: column;
+  text-align: start;
 }
 
 .subtasks_box input {
@@ -245,8 +246,11 @@ select {
   }
 
   #okBtn {
-    width: 76px;
-    height: 50px;
+    width: 70px;
+    height: 40px;
+    font-size: 14px;
+    bottom: 13px;
+    right: 30px;
   }
 
   #editTitle,
@@ -265,11 +269,6 @@ select {
     width: 120px;
     height: 50px;
     font-size: 13px;
-  }
-
-  #okBtn {
-    width: 89px;
-    height: 56px;
   }
 
   #editTitle,

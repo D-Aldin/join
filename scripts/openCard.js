@@ -48,8 +48,8 @@ function overlayOn(event) {
   overlay.style.animation = "fadeIn 125ms ease-in-out forwards";
   cardContent.style.animation = "slideInFromRight 125ms ease-in-out forwards";
   idOfcurrentElement = event.currentTarget.id;
-  document.querySelector("header").style.zIndex = "0";
-  document.querySelector("aside").style.zIndex = "0";
+  document.querySelector("header").style.zIndex = "1";
+  document.querySelector("aside").style.zIndex = "1";
 }
 
 /**

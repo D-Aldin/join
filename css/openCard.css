@@ -229,6 +229,7 @@ td {
 .check_box {
   display: flex;
   align-items: center;
+  text-align: start;
 }
 
 .check_box:hover {
@@ -249,7 +250,6 @@ input[type="checkbox"] {
   background-image: url(../assets/icons/checkbox/openCardRectangle.svg);
   background-repeat: no-repeat;
   background-position: center;
-  margin-left: 18px;
 }
 
 input[type="checkbox"]:checked {
