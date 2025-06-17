@@ -1,1 +1,5 @@
+# Build output
+out/
+
+# Personal scripts
 up.bat
